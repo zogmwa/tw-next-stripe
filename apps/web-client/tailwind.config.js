@@ -1,12 +1,25 @@
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind')
 const { resolve } = require('path')
+const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   mode: 'jit',
   purge: [resolve(__dirname, './src/**/*.{ts,tsx}'), ...createGlobPatternsForDependencies(__dirname)],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        gray: colors.coolGray,
+        primary: colors.blue['500'],
+        secondary: colors.blue['50'],
+        success: '#5DD393',
+        error: '#E16A6A',
+      },
+    },
   },
   variants: {
     extend: {},
