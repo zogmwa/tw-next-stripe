@@ -28,19 +28,19 @@ function ButtonComponent(
   return (
     <button
       className={clsx(
-        'px-4 py-2 rounded-md text-sm border',
+        'px-4 py-2 rounded-md text-sm border inline-flex space-x-4 items-center justify-center',
         (() => {
           if (error) {
             if (buttonType === 'default') {
               return 'border-error text-error'
             }
-            return 'bg-error text-white'
+            return 'bg-error text-white border-error'
           }
 
           if (buttonType === 'default') {
             return 'border-primary text-primary'
           }
-          return 'bg-primary text-white'
+          return 'bg-primary text-white border-primary'
         })(),
         className,
       )}
@@ -48,7 +48,9 @@ function ButtonComponent(
       {...restProps}
       ref={ref}
     >
+      {iconPlacement === 'left' ? icon : null}
       <span>{children}</span>
+      {iconPlacement === 'right' ? icon : null}
     </button>
   )
 }
