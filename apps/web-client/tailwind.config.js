@@ -1,5 +1,5 @@
-const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind')
 const { resolve } = require('path')
+const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind')
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 

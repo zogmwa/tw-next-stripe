@@ -72,32 +72,6 @@
           }
         }
       }
-    },
-    "web-client-e2e": {
-      "root": "apps/web-client-e2e",
-      "sourceRoot": "apps/web-client-e2e/src",
-      "projectType": "application",
-      "targets": {
-        "e2e": {
-          "executor": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/web-client-e2e/cypress.json",
-            "tsConfig": "apps/web-client-e2e/tsconfig.e2e.json",
-            "devServerTarget": "web-client:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "web-client:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/web-client-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
     }
   },
   "cli": {

@@ -17,11 +17,11 @@ const validationSchema = yup.object().shape({
 
 export function Home() {
   return (
-    <div className="w-screen h-screen flex items-center justify-center space-x-20">
-      <Image src={require('../images/signup.svg')} alt="Sign up to Taggedweb" className="max-w-3xl w-full" />
-      <div className="max-w-md p-6 rounded-md my-10 border">
-        <h1 className="text-3xl mb-3 font-semibold text-gray-700">Welcome to Taggedweb</h1>
-        <h3 className="text-gray-500 mb-8">
+    <div className="flex items-center justify-center w-screen h-screen space-x-20">
+      <Image src={require('../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
+      <div className="max-w-md p-6 my-10 border rounded-md">
+        <h1 className="mb-3 text-3xl font-semibold text-gray-700">Welcome to Taggedweb</h1>
+        <h3 className="mb-8 text-gray-500">
           Signup to experience a world of web services and find out best for you...
         </h3>
         <Button
@@ -40,19 +40,20 @@ export function Home() {
         >
           Sign in with Google
         </Button>
-        <div className="text-xs text-gray-500 relative w-full flex items-center justify-center before:w-full before:absolute before:border-b before:border-gray-200 mb-8">
-          <div className="bg-white px-4 inline-block mx-auto relative z-1">OR</div>
+        <div className="relative flex items-center justify-center w-full mb-8 text-xs text-gray-500 before:w-full before:absolute before:border-b before:border-gray-200">
+          <div className="relative inline-block px-4 mx-auto bg-white z-1">OR</div>
         </div>
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
           onSubmit={(data) => {
+            // eslint-disable-next-line no-console
             console.log(data)
           }}
         >
           {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
             <form onSubmit={handleSubmit}>
-              <label className="text-sm text-gray-700 mb-2 block" htmlFor="email">
+              <label className="block mb-2 text-sm text-gray-700" htmlFor="email">
                 Email
               </label>
               <Input
@@ -65,7 +66,7 @@ export function Home() {
                 errorMessage={touched.email ? errors.email : undefined}
                 success={touched.email && !errors.email}
               />
-              <label className="text-sm text-gray-700 mb-2 block" htmlFor="email">
+              <label className="block mb-2 text-sm text-gray-700" htmlFor="email">
                 Password
               </label>
               <Input

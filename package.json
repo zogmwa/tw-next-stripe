@@ -47,7 +47,6 @@
   "devDependencies": {
     "@nrwl/cli": "12.7.2",
     "@nrwl/cypress": "12.7.2",
-    "@nrwl/eslint-plugin-nx": "12.7.2",
     "@nrwl/jest": "12.7.2",
     "@nrwl/linter": "12.7.2",
     "@nrwl/react": "12.7.2",
@@ -68,9 +67,12 @@
     "eslint": "7.22.0",
     "eslint-config-next": "11.1.0",
     "eslint-config-prettier": "8.1.0",
+    "eslint-config-standard": "^16.0.3",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "7.23.1",
     "eslint-plugin-react-hooks": "4.2.0",
     "husky": ">=6",
@@ -87,7 +89,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": "eslint --cache --fix",
-    "*.format:write": "yarn format"
+    "*.{js,ts,tsx}": [
+      "yarn format",
+      "yarn lint --lintFilePatterns"
+    ]
   }
 }

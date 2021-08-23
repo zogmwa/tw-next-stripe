@@ -1,35 +1,57 @@
 {
-  "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "ElectronApi": true,
+    "NodeJS": true,
+    "NodeRequire": true,
+    "DOMHighResTimeStamp": true,
+    "GLSLX": true
+  },
+  "extends": ["plugin:react/recommended", "standard", "plugin:react-hooks/recommended", "plugin:import/typescript"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
-      "rules": {}
+    "react": {
+      "version": "17.0.2"
     }
-  ]
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "func-call-spacing": "off",
+    "import/no-absolute-path": "off",
+    "import/order": ["error", { "groups": ["builtin", "external", "internal"] }],
+    "import/un-resolved": "off",
+    "indent": "off",
+    "multiline-ternary": "off",
+    "no-console": "warn",
+    "no-unused-expressions": "off",
+    "no-unused-vars": "off",
+    "no-use-before-define": "off",
+    "no-useless-constructor": "off",
+    "no-useless-escape": "off",
+    "prefer-regex-literals": "off",
+    "react/no-unknown-property": "error",
+    "react/prop-types": "off",
+    "react/self-closing-comp": ["error", { "component": true, "html": true }],
+    "space-before-function-paren": "off"
+  }
 }

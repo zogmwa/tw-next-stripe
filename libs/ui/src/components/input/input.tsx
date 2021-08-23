@@ -39,10 +39,10 @@ function InputComponent(
         type={isPasswordInput ? (passwordVisible ? 'text' : 'password') : type}
         {...restProps}
       />
-      {showErrorIcon ? <HiX size={16} className="text-error absolute top-3 right-3 pointer-events-none" /> : null}
-      {errorMessage ? <div className="text-xs text-error mt-1">{errorMessage}</div> : null}
+      {showErrorIcon ? <HiX size={16} className="absolute pointer-events-none text-error top-3 right-3" /> : null}
+      {errorMessage ? <div className="mt-1 text-xs text-error">{errorMessage}</div> : null}
       {showSuccessIcon ? (
-        <HiCheck size={16} className="text-success absolute top-3 right-3 pointer-events-none" />
+        <HiCheck size={16} className="absolute pointer-events-none text-success top-3 right-3" />
       ) : null}
       {isPasswordInput ? (
         <button
