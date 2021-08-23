@@ -1,90 +1,58 @@
-# Taggedweb
+# Taggedweb Frontend
 
-This project was generated using [Nx](https://nx.dev).
+It is a monorepo containing
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+- `apps/web-client` - `nextjs` codebase for [taggedweb](https://taggedweb.com)
+- `libs/ui` - codebase containing the `ui` components used in the app
 
-🔎 **Smart, Extensible Build Framework**
+## Setup
 
-## Adding capabilities to your workspace
+To install dependencies run
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+```sh
+yarn install
+```
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Please use `yarn` instead of `npm` for this codebase.
 
-Below are our core plugins:
+## Scripts
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+- `yarn start` - Runs the nextjs application
+- `yarn format --all` - Formats the entire codebase using the prettier. _Make sure to run this command before commiting any changes_
+- `yarn format <project-name>` - Formats code for only particular project (such as _web-client_ or _ui_)
+- `yarn lint` - Lint the entire codebase using `eslint`.
+- `yarn cz` - To commit the changes using [commitizen](https://github.com/commitizen/cz-cli)
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+**Make sure to install eslint and prettier plugin for your favorite IDE to catch errors before commiting**.
 
-## Generate an application
+## Git Conventions
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+We are using [git flow](https://nvie.com/posts/a-successful-git-branching-model/) for this repository. Please go through the [doc](https://nvie.com/posts/a-successful-git-branching-model/) before working on anything.
 
-> You can use any of the plugins above to generate applications as well.
+We use [gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for managing git. It is recommended to use [gitflow](https://github.com/nvie/gitflow/wiki/Installation) plugin.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+The overall flow of Gitflow is:
 
-## Generate a library
+- A develop branch is created from master
+- A release branch is created from develop
+- Feature branches are created from develop
+- When a feature is complete it is merged into the develop branch
+- When the release branch is done it is merged into develop and master
+- If an issue in master is detected a hotfix branch is created from master
+- Once the hotfix is complete it is merged to both develop and master
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+#### Feature branch
 
-> You can also use any of the plugins above to generate libraries as well.
+Create a feature branch when you are working on a feature such as implementation of a new UI component.
 
-Libraries are shareable across libraries and applications. They can be imported from `@taggedweb/mylib`.
+```sh
+git flow feature start feature_branch
+```
 
-## Development server
+#### Hotfix branch
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Maintenance or “hotfix” branches are used to quickly patch production releases.
 
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+```sh
+git flow hotfix start hotfix_branch
+```
