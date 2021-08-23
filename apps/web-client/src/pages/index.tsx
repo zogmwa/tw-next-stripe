@@ -1,5 +1,5 @@
 import React from 'react'
-import { AiFillLinkedin } from 'react-icons/ai'
+import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Formik } from 'formik'
@@ -28,9 +28,17 @@ export function Home() {
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"
           iconPlacement="right"
-          className="w-full !bg-[#0077B5] !flex mb-8"
+          className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
         >
           Sign in with LinkedIn
+        </Button>
+        <Button
+          icon={<AiFillGoogleSquare size={20} />}
+          buttonType="primary"
+          iconPlacement="right"
+          className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
+        >
+          Sign in with Google
         </Button>
         <div className="text-xs text-gray-500 relative w-full flex items-center justify-center before:w-full before:absolute before:border-b before:border-gray-200 mb-8">
           <div className="bg-white px-4 inline-block mx-auto relative z-1">OR</div>
@@ -55,6 +63,7 @@ export function Home() {
                 onBlur={handleBlur('email')}
                 value={values.email}
                 errorMessage={touched.email ? errors.email : undefined}
+                success={touched.email && !errors.email}
               />
               <label className="text-sm text-gray-700 mb-2 block" htmlFor="email">
                 Password
@@ -68,6 +77,7 @@ export function Home() {
                 onBlur={handleBlur('password')}
                 value={values.password}
                 errorMessage={touched.password ? errors.password : undefined}
+                success={touched.password && !errors.password}
               />
               <div className="flex items-center space-x-4">
                 <Button buttonType="primary">Sign Up with Email</Button>

@@ -55,5 +55,4 @@ function ButtonComponent(
   )
 }
 
-const Button = forwardRef(ButtonComponent)
-export default Button
+export const Button = forwardRef(ButtonComponent)

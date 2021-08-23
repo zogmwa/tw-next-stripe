@@ -1,16 +1,23 @@
 import clsx from 'clsx'
-import React, { forwardRef } from 'react'
-import { HiX, HiCheck } from 'react-icons/hi'
+import React, { forwardRef, useState } from 'react'
+import { HiX, HiCheck, HiEye, HiEyeOff } from 'react-icons/hi'
 
-type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+export type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   errorMessage?: string
   success?: boolean
 }
 
 function InputComponent(
-  { errorMessage, success, className, style, ...restProps }: InputProps,
+  { errorMessage, success, type, className, style, ...restProps }: InputProps,
   ref: React.Ref<HTMLInputElement>,
 ) {
+  const isPasswordInput = type === 'password'
+  const showIcon = !isPasswordInput
+  const showErrorIcon = showIcon && !!errorMessage
+  const showSuccessIcon = showIcon && success && !errorMessage
+
+  const [passwordVisible, setPasswordVisible] = useState(false)
+
   return (
     <div className={clsx('relative', className)} style={style}>
       <input
@@ -29,20 +36,27 @@ function InputComponent(
           })(),
         )}
         ref={ref}
+        type={isPasswordInput ? (passwordVisible ? 'text' : 'password') : type}
         {...restProps}
       />
-      {errorMessage && (
-        <>
-          <div className="text-xs text-error mt-1">{errorMessage}</div>
-          <HiX size={16} className="text-error absolute top-3 right-3 pointer-events-none" />
-        </>
-      )}
-      {success && !errorMessage ? (
+      {showErrorIcon ? <HiX size={16} className="text-error absolute top-3 right-3 pointer-events-none" /> : null}
+      {errorMessage ? <div className="text-xs text-error mt-1">{errorMessage}</div> : null}
+      {showSuccessIcon ? (
         <HiCheck size={16} className="text-success absolute top-3 right-3 pointer-events-none" />
+      ) : null}
+      {isPasswordInput ? (
+        <button
+          className="absolute top-2.5 right-2.5 p-0.5 rounded text-gray-500"
+          type="button"
+          onClick={() => {
+            setPasswordVisible((prevState) => !prevState)
+          }}
+        >
+          {passwordVisible ? <HiEye /> : <HiEyeOff />}
+        </button>
       ) : null}
     </div>
   )
 }
 
-const Input = forwardRef(InputComponent)
-export default Input
+export const Input = forwardRef(InputComponent)
