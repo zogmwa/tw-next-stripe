@@ -1,11 +1,10 @@
 const { resolve } = require('path')
-const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind')
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   mode: 'jit',
-  purge: [resolve(__dirname, './src/**/*.{ts,tsx}'), ...createGlobPatternsForDependencies(__dirname)],
+  purge: [resolve(__dirname, './src/**/*.{ts,tsx}'), resolve(__dirname, '../../libs/ui/src/**/*.{ts,tsx}')],
   darkMode: false,
   theme: {
     extend: {
