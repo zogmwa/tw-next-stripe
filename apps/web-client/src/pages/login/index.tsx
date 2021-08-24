@@ -15,22 +15,20 @@ const validationSchema = yup.object().shape({
     .required('Please enter a password'),
 })
 
-export default function Signup() {
+export default function Login() {
   return (
     <div className="flex flex-col md:flex-row mt-10 items-center justify-center w-screen h-full md:space-x-20">
-      <Image src={require('../../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
+      <Image src={require('../../images/login.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
       <div className="max-w-md p-6 my-10 mx-4 border rounded-md">
-        <h1 className="mb-3 text-3xl font-semibold text-gray-700">Welcome to Taggedweb</h1>
-        <h3 className="mb-8 text-gray-500">
-          Signup to experience a world of web services and find out best for you...
-        </h3>
+        <h1 className="mb-3 text-3xl font-semibold text-gray-700">Welcome Back....</h1>
+        <h3 className="mb-8 text-gray-500">Login to continue surfing among the ocean of web services</h3>
         <Button
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
         >
-          Sign in with LinkedIn
+          Login with LinkedIn
         </Button>
         <Button
           icon={<AiFillGoogleSquare size={20} />}
@@ -38,7 +36,7 @@ export default function Signup() {
           iconPlacement="right"
           className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
         >
-          Sign in with Google
+          Login with Google
         </Button>
         <div className="relative flex items-center justify-center w-full mb-8 text-xs text-gray-500 before:w-full before:absolute before:border-b before:border-gray-200">
           <div className="relative inline-block px-4 mx-auto bg-white z-1">OR</div>
@@ -81,11 +79,11 @@ export default function Signup() {
                 success={touched.password && !errors.password}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary">Sign Up with Email</Button>
+                <Button buttonType="primary">Login</Button>
                 <div className="text-sm text-gray-600">
-                  Already a member!{' '}
-                  <Link href="/login">
-                    <a href="">Sign in</a>
+                  Don&apos;t have an account?{' '}
+                  <Link href="/signup">
+                    <a href="">Create One</a>
                   </Link>
                 </div>
               </div>
