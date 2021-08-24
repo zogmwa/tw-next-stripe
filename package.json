@@ -24,7 +24,8 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "nx run ui:storybook"
   },
   "private": true,
   "dependencies": {
@@ -57,6 +58,7 @@
     "@nrwl/web": "12.7.2",
     "@nrwl/workspace": "12.7.2",
     "@storybook/addon-essentials": "~6.3.0",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "~6.3.0",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/react": "11.2.6",

@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Input } from './input'
+import { Button } from '../button'
 
 export default {
   title: 'General/Input',
@@ -34,7 +35,9 @@ export function PasswordInput() {
             value={values.password}
             onChange={handleChange('password')}
             onBlur={handleBlur('password')}
+            className="mb-4"
           />
+          <Button buttonType="primary">Login</Button>
         </form>
       )}
     </Formik>
