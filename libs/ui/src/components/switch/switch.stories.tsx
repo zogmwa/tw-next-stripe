@@ -12,3 +12,14 @@ export function SimpleSwitch() {
 
   return <Switch enabled={enabled} setEnabled={setEnabled} />
 }
+
+export function SwitchWithLabel() {
+  const [enabled, setEnabled] = useState(false)
+
+  return (
+    <Switch.Group>
+      <Switch enabled={enabled} setEnabled={setEnabled} />
+      <Switch.Label>Turbo Mode</Switch.Label>
+    </Switch.Group>
+  )
+}

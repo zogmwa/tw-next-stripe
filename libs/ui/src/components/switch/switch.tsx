@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Switch as HeadlessSwitch } from '@headlessui/react'
 import clsx, { ClassValue } from 'clsx'
+import { SwitchLabel } from './switch-label'
+import { SwitchGroup } from './switch-group'
 
 type SwitchProps = {
   className?: ClassValue
@@ -8,7 +10,7 @@ type SwitchProps = {
   setEnabled?: (enabled: boolean) => void
 }
 
-export function Switch({ className, enabled: outerEnabled, setEnabled: setOuterEnabled }: SwitchProps) {
+function SwitchComponent({ className, enabled: outerEnabled, setEnabled: setOuterEnabled }: SwitchProps) {
   const [innerEnabled, setInnerEnabled] = useState(false)
   const isControlled = outerEnabled !== undefined
   const enabled = outerEnabled ?? innerEnabled
@@ -40,3 +42,8 @@ export function Switch({ className, enabled: outerEnabled, setEnabled: setOuterE
     </HeadlessSwitch>
   )
 }
+
+export const Switch = Object.assign(SwitchComponent, {
+  Group: SwitchGroup,
+  Label: SwitchLabel,
+})
