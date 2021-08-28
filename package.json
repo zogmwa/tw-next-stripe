@@ -100,7 +100,6 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "yarn format",
       "yarn lint --lintFilePatterns"
     ]
   }
