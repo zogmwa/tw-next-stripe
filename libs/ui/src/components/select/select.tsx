@@ -1,78 +1,78 @@
-import React, { Children, isValidElement, cloneElement, ReactNode, ReactElement } from 'react'
+import React, { Children, isValidElement, cloneElement, ReactNode, ReactElement, useMemo } from 'react'
 import { useSelect, UseSelectProps } from 'downshift'
 import { HiChevronDown } from 'react-icons/hi'
 import clsx, { ClassValue } from 'clsx'
-import { SelectOption, SelectOptionProps } from './select-option'
+import { SelectOption, SelectOptionInternalProps, SelectOptionProps } from './select-option'
 
-type SelectProps<T> = {
-  items: T[]
-  placeholder?: ReactNode
-  renderItem: (item: T) => ReactNode
-  disabled?: boolean
+interface SelectProps<Item>
+  extends Pick<UseSelectProps<Item>, 'items' | 'selectedItem' | 'onSelectedItemChange' | 'initialSelectedItem'> {
+  children: ReactNode
   className?: ClassValue
-  containerClassName?: ClassValue
-  children: ReactElement<SelectOptionProps<T>>[]
-} & Pick<UseSelectProps<T>, 'selectedItem' | 'onSelectedItemChange'>
+  buttonClassName?: ClassValue
+  renderSelectedItem: (selectedItem: Item | null) => ReactNode
+  disabled?: boolean
+}
 
-function SelectComponent<T>({
-  placeholder = 'Select',
-  items,
-  selectedItem = undefined,
-  onSelectedItemChange,
-  renderItem,
-  disabled = false,
-  className,
-  containerClassName,
+function SelectComponent<Item>({
   children,
-}: SelectProps<T>) {
-  const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect<T>({
-    items,
-    selectedItem,
-    onSelectedItemChange,
-  })
+  className,
+  buttonClassName,
+  renderSelectedItem,
+  disabled = false,
+  ...rest
+}: SelectProps<Item>) {
+  const { isOpen, highlightedIndex, getToggleButtonProps, getMenuProps, getItemProps, selectedItem } = useSelect(rest)
+
+  const options = useMemo(() => {
+    // To maintain index of only "Select.Option" components
+    let optionIndex = -1
+
+    return Children.map(children, (child) => {
+      if (isValidElement(child) && child.type === SelectOption) {
+        // When "Select.Option" component is found increment index by one
+        optionIndex += 1
+        const optionElement = child as ReactElement<SelectOptionProps<Item> & SelectOptionInternalProps<Item>>
+        // Forward item prop getter and index needed by getter
+        // along with highlighted and selected status for option
+        return cloneElement(optionElement, {
+          index: optionIndex,
+          highlighted: highlightedIndex === optionIndex,
+          selected: selectedItem === optionElement.props.item,
+          getItemProps,
+        })
+      }
+      return child
+    })
+  }, [children, getItemProps, highlightedIndex, selectedItem])
 
   return (
-    <div className={clsx('relative w-full', containerClassName)}>
+    <div className={clsx('relative w-full', className)}>
       <button
-        type="button"
         className={clsx(
-          'flex items-center justify-between w-full px-4 py-3 space-x-3 bg-white border rounded-lg focus-visible:ring-primary/75 focus-visible:ring-2 focus-visible:ring-offset-2',
-          disabled ? 'text-gray-400 border-gray-100 cursor-not-allowed' : 'text-gray-600 border-gray-200',
-          className,
+          'flex items-center w-full px-4 py-3 space-x-2 text-gray-600 bg-white border border-gray-200 rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/75 focus:outline-none group disabled:text-gray-400',
+          buttonClassName,
         )}
         disabled={disabled}
         {...getToggleButtonProps()}
       >
-        <span className="truncate">{selectedItem ? renderItem(selectedItem) : placeholder}</span>
+        {renderSelectedItem(selectedItem)}
         <HiChevronDown
-          className={clsx('text-xl pointer-events-none text-gray-400', disabled ? 'text-gray-200' : 'text-gray-400')}
+          className={clsx(
+            'ml-auto text-lg text-gray-400 group-disabled:text-gray-200',
+            isOpen ? 'rotate-180' : 'rotate-0',
+          )}
           aria-hidden="true"
         />
       </button>
 
       <ul
         className={clsx(
-          'absolute z-10 w-full overflow-auto bg-white rounded-lg max-h-60 focus:outline-none',
-          isOpen && 'py-1 mt-1 border border-gray-200 shadow-sm',
+          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-sm max-h-60 focus:outline-none',
+          isOpen ? 'block' : 'hidden',
         )}
         {...getMenuProps()}
       >
-        {isOpen &&
-          Children.map(children, (child, index) => {
-            if (isValidElement(child)) {
-              const { item, disabled } = child.props
-              const itemProps = getItemProps({ item, index, disabled, refKey: '_ref' })
-              const _highlighted = highlightedIndex === index
-              const _selected = selectedItem === item
-
-              return cloneElement<SelectOptionProps<T>>(child, {
-                ...itemProps,
-                _highlighted,
-                _selected,
-              })
-            }
-            return child
-          })}
+        {isOpen && options}
       </ul>
     </div>
   )

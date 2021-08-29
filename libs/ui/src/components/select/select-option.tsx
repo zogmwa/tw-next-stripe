@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref } from 'react'
+import React, { forwardRef, ReactNode, Ref } from 'react'
 import clsx, { ClassValue } from 'clsx'
 import { UseSelectGetItemPropsOptions } from 'downshift'
 
@@ -19,33 +19,52 @@ function getClassNamesByStatus({
   return 'bg-white text-gray-600'
 }
 
-export type SelectOptionProps<T> = {
+export interface SelectOptionProps<Item> {
+  item: Item
+  children: ReactNode
   className?: ClassValue
-  children?: ReactNode
-  _highlighted?: boolean
-  _selected?: boolean
-  _ref?: Ref<HTMLLIElement>
-} & Omit<UseSelectGetItemPropsOptions<T>, 'ref'>
+  disabled?: boolean
+}
 
-export function SelectOption<T>({
-  _highlighted = false,
-  _selected = false,
-  children,
-  className,
-  _ref,
-  ...rest
-}: SelectOptionProps<T>) {
+export interface SelectOptionInternalProps<Item> {
+  highlighted: boolean
+  selected: boolean
+  index: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getItemProps: (options: UseSelectGetItemPropsOptions<Item>) => any
+}
+
+function SelectOptionComponent<Item>(props: SelectOptionProps<Item>, ref: Ref<HTMLLIElement>) {
+  const {
+    children,
+    className,
+    disabled = false,
+    // Internal props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    item,
+    index,
+    highlighted,
+    selected,
+    getItemProps,
+  } = props as SelectOptionProps<Item> & SelectOptionInternalProps<Item>
+
   return (
     <li
-      ref={_ref}
+      ref={ref}
       className={clsx(
-        'px-4 py-2 truncate select-none',
-        getClassNamesByStatus({ highlighted: _highlighted, selected: _selected, disabled: Boolean(rest.disabled) }),
+        'px-4 py-3 truncate select-none',
+        getClassNamesByStatus({
+          highlighted,
+          selected,
+          disabled,
+        }),
         className,
       )}
-      {...rest}
+      {...getItemProps({ index, item, disabled })}
     >
       {children}
     </li>
   )
 }
+
+export const SelectOption = forwardRef(SelectOptionComponent)

@@ -9,7 +9,6 @@ export default {
 
 const items = [
   { id: '1', text: '🌊 Wave', disabled: false },
-  { id: '2', text: '🌸 Flower', disabled: false },
   { id: '3', text: '🐶 Dog', disabled: false },
   { id: '4', text: '🦄 Unicorn', disabled: true },
   { id: '5', text: '💎 Diamond', disabled: false },
@@ -22,14 +21,14 @@ export function SimpleSelect() {
 
   return (
     <Select
-      containerClassName="max-w-[296px]"
       items={items}
+      className="max-w-[296px]"
       selectedItem={selectedItem}
-      renderItem={(value) => value.text}
       onSelectedItemChange={({ selectedItem }) => setSelectedItem(selectedItem)}
+      renderSelectedItem={(item) => item?.text ?? 'Select'}
     >
       {items.map((item) => (
-        <Select.Option key={item.id} item={item}>
+        <Select.Option item={item} key={item.id}>
           {item.text}
         </Select.Option>
       ))}
@@ -38,19 +37,10 @@ export function SimpleSelect() {
 }
 
 export function SelectWithDisabledOption() {
-  const [selectedItem, setSelectedItem] = useState<Item | null | undefined>(null)
-
   return (
-    <Select
-      placeholder="✨ Select Emoji"
-      containerClassName="max-w-[296px]"
-      items={items}
-      selectedItem={selectedItem}
-      renderItem={(value) => value.text}
-      onSelectedItemChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-    >
+    <Select items={items} className="max-w-[296px]" renderSelectedItem={(item) => item?.text ?? '✨ Select an Emoji'}>
       {items.map((item) => (
-        <Select.Option key={item.id} item={item} disabled={item.disabled}>
+        <Select.Option item={item} key={item.id} disabled={item.disabled}>
           {item.text}
         </Select.Option>
       ))}
@@ -59,15 +49,12 @@ export function SelectWithDisabledOption() {
 }
 
 export function SelectDisabled() {
-  const [selectedItem, setSelectedItem] = useState<Item | null | undefined>(items[3])
-
   return (
     <Select
-      containerClassName="max-w-[296px]"
       items={items}
-      renderItem={(value) => value.text}
-      selectedItem={selectedItem}
-      onSelectedItemChange={({ selectedItem }) => setSelectedItem(selectedItem)}
+      className="max-w-[296px]"
+      initialSelectedItem={items[2]}
+      renderSelectedItem={(item) => item?.text ?? '✨ Select an Emoji'}
       disabled={true}
     >
       {items.map((item) => (
