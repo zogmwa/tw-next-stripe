@@ -29,6 +29,7 @@
   },
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "@nrwl/next": "12.7.2",
     "autoprefixer": "^10.3.2",
     "clsx": "^1.1.1",
@@ -100,7 +101,6 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "yarn format",
       "yarn lint --lintFilePatterns"
     ]
   }
