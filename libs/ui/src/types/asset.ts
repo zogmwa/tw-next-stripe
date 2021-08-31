@@ -15,4 +15,8 @@ export type Asset = {
   price_plans?: Plan[]
   upvotes_count?: number
   id: number
+  has_free_trial?: string
+  reviews_count?: number
+  avg_rating?: string | number
+  users_count?: number // not in backend yet
 }
