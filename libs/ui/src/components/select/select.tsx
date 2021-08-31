@@ -49,10 +49,11 @@ function SelectComponent<Item>({
     <div className={clsx('relative w-full', className)}>
       <button
         className={clsx(
-          'flex items-center w-full px-4 py-3 space-x-2 text-gray-600 bg-white border border-gray-200 rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/75 focus:outline-none group disabled:text-gray-400',
+          'flex items-center w-full px-4 py-3 space-x-2 text-gray-600 bg-white border border-gray-200 rounded-lg group disabled:text-gray-400',
           buttonClassName,
         )}
         disabled={disabled}
+        type="button"
         {...getToggleButtonProps()}
       >
         {renderSelectedItem(selectedItem)}
