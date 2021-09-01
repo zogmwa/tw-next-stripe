@@ -15,7 +15,7 @@ export default {
 
 const SimpleTemplate: Story<React.ComponentProps<typeof Checkbox>> = (args) => {
   const [checked, setChecked] = useState(true)
-  return <Checkbox checked={checked} onChange={setChecked} {...args} />
+  return <Checkbox checked={checked} onChange={(e) => setChecked(e.target.checked)} {...args} />
 }
 
 export const SimpleCheckbox = SimpleTemplate.bind({})

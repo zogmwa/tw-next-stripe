@@ -11,18 +11,14 @@ const SIZES = {
 type CheckboxProps = {
   size?: keyof typeof SIZES
   className?: ClassValue
-  onChange?: (value: boolean) => void
-} & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'size'>
+} & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'size'>
 
-function CheckboxComponent({ className, onChange, size = 'sm', ...rest }: CheckboxProps, ref: Ref<HTMLInputElement>) {
+function CheckboxComponent({ className, size = 'sm', ...rest }: CheckboxProps, ref: Ref<HTMLInputElement>) {
   return (
     <label className={clsx('relative inline-block flex-shrink', SIZES[size], className)}>
       <input
         className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none peer focus:ring-0"
         type="checkbox"
-        onChange={(e) => {
-          onChange && onChange(e.target.checked)
-        }}
         {...rest}
         ref={ref}
       />
