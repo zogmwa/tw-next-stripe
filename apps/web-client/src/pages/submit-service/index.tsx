@@ -11,8 +11,9 @@ import {
   DetailedInformationFormValues,
   detailedInformationSchema,
 } from '../../components/submit-serivce/detailed-information-form'
+import { FAQForm, FAQFormValues, faqSchema } from '../../components/submit-serivce/faq-form'
 
-type FormValues = BasicInformationFormValues & DetailedInformationFormValues
+type FormValues = BasicInformationFormValues & DetailedInformationFormValues & FAQFormValues
 
 const initialValues: FormValues = {
   // basic info
@@ -24,6 +25,8 @@ const initialValues: FormValues = {
   detailedDescription: '',
   highlights: ['', ''],
   videoURL: '',
+  // faq
+  questions: [{ question: '', answer: '' }],
 }
 
 const steps = [
@@ -31,12 +34,18 @@ const steps = [
     heading: 'Basic Information',
     validationSchema: basicInformationSchema,
     Form: BasicInformationForm,
-    skippable: false,
+    skippable: true,
   },
   {
     heading: 'Detailed information',
     validationSchema: detailedInformationSchema,
     Form: DetailedInformationForm,
+    skippable: true,
+  },
+  {
+    heading: 'FAQs',
+    validationSchema: faqSchema,
+    Form: FAQForm,
     skippable: true,
   },
 ]
@@ -50,7 +59,12 @@ export default function SubmitService() {
   }
 
   function handleOnSubmit(values: FormValues) {
-    nextStep()
+    const isLastStep = currentStep === steps.length - 1
+    if (isLastStep) {
+      // @TODO: Make api request
+    } else {
+      nextStep()
+    }
     // eslint-disable-next-line no-console
     console.log(values)
   }
@@ -61,7 +75,7 @@ export default function SubmitService() {
         {(formik) => (
           <>
             <div className="px-4 py-6 mb-4 bg-white border border-gray-200 rounded-lg sm:border-none sm:bg-transparent">
-              <h4 className="text-lg tex-gray-800">{heading}</h4>
+              <h4 className="text-lg font-medium tex-gray-800">{heading}</h4>
               <p className="mb-6 text-sm text-gray-400">
                 This information will be displayed publicly so be careful what you share.
               </p>

@@ -49,41 +49,52 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
       <label className="block mb-2 font-medium text-gray-800">Key Highlights</label>
       <FieldArray
         name="highlights"
-        render={({ push, remove }) => (
-          <>
-            {values.highlights.map((highlight, index) => {
-              const isLastHighlightField = index + 1 === values.highlights.length
+        render={({ push, remove }) => {
+          function addHighlight() {
+            push('')
+          }
 
-              function handleOnKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-                if (event.key === 'Enter' && highlight !== '' && isLastHighlightField) {
-                  push('')
-                }
-                if (event.key === 'Delete' && highlight === '' && index !== 0) {
-                  remove(index)
-                }
-              }
+          return (
+            <>
+              {values.highlights.map((highlight, index) => {
+                const isLastHighlightField = index + 1 === values.highlights.length
 
-              return (
-                <Field
-                  className="max-w-sm mb-3"
-                  key={index}
-                  name={`highlights.${index}`}
-                  placeholder={`Highlight ${index + 1}`}
-                  as={Input}
-                  onKeyDown={handleOnKeyDown}
+                function handleOnKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+                  if (event.key === 'Enter' && highlight !== '' && isLastHighlightField) {
+                    addHighlight()
+                  }
+                  if (event.key === 'Delete' && highlight === '' && index !== 0) {
+                    remove(index)
+                  }
+                }
+
+                return (
+                  <Field
+                    className="max-w-sm mb-3"
+                    key={index}
+                    name={`highlights.${index}`}
+                    placeholder={`Highlight ${index + 1}`}
+                    as={Input}
+                    onKeyDown={handleOnKeyDown}
+                  />
+                )
+              })}
+              <div className="flex items-center mb-8 space-x-4">
+                <Button
+                  type="button"
+                  className="!space-x-0 !p-1"
+                  icon={<BiPlus className="text-xl" />}
+                  onClick={addHighlight}
                 />
-              )
-            })}
-            <div className="flex items-center mb-8 space-x-4">
-              <Button type="button" className="!space-x-0 !p-1" icon={<BiPlus className="text-xl" />} />
-              <p className="text-xs font-normal text-gray-400">
-                Pressing Enter
-                <HiOutlineLogout className="inline mx-1 text-base text-primary" />
-                will also add a new row
-              </p>
-            </div>
-          </>
-        )}
+                <p className="text-xs font-normal text-gray-400">
+                  Pressing Enter
+                  <HiOutlineLogout className="inline mx-1 text-base text-primary" />
+                  will also add a new row
+                </p>
+              </div>
+            </>
+          )
+        }}
       />
 
       <label className="block mb-2 font-medium text-gray-800">Screenshots</label>
