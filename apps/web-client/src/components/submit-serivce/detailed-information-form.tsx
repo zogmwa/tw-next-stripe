@@ -63,7 +63,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
                   if (event.key === 'Enter' && highlight !== '' && isLastHighlightField) {
                     addHighlight()
                   }
-                  if (event.key === 'Delete' && highlight === '' && index !== 0) {
+                  if (event.key === 'Delete' && highlight === '' && values.highlights.length > 1) {
                     remove(index)
                   }
                 }

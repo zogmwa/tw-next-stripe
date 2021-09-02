@@ -12,8 +12,9 @@ import {
   detailedInformationSchema,
 } from '../../components/submit-serivce/detailed-information-form'
 import { FAQForm, FAQFormValues, faqSchema } from '../../components/submit-serivce/faq-form'
+import { PricingForm, PricingFormValues, pricingSchema } from '../../components/submit-serivce/pricing-form'
 
-type FormValues = BasicInformationFormValues & DetailedInformationFormValues & FAQFormValues
+type FormValues = BasicInformationFormValues & DetailedInformationFormValues & PricingFormValues & FAQFormValues
 
 const initialValues: FormValues = {
   // basic info
@@ -25,6 +26,8 @@ const initialValues: FormValues = {
   detailedDescription: '',
   highlights: ['', ''],
   videoURL: '',
+  // pricing
+  plans: [{ name: '', hasFreeTrial: false }],
   // faq
   questions: [{ question: '', answer: '' }],
 }
@@ -40,6 +43,12 @@ const steps = [
     heading: 'Detailed information',
     validationSchema: detailedInformationSchema,
     Form: DetailedInformationForm,
+    skippable: true,
+  },
+  {
+    heading: 'Pricing',
+    validationSchema: pricingSchema,
+    Form: PricingForm,
     skippable: true,
   },
   {
@@ -70,7 +79,7 @@ export default function SubmitService() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen pt-12 bg-gray-50">
+    <div className="flex flex-col min-h-screen pt-6 bg-gray-50">
       <Formik initialValues={initialValues} onSubmit={handleOnSubmit} validationSchema={validationSchema}>
         {(formik) => (
           <>
