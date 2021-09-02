@@ -124,7 +124,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         id="videoURL"
         className="mb-8"
         name="videoURL"
-        placeholder="https://example.com/vidoe.mp4"
+        placeholder="https://example.com/video.mp4"
         as={Input}
         errorMessage={touched.videoURL ? errors.videoURL : undefined}
         success={touched.videoURL && !errors.videoURL}

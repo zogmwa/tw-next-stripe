@@ -27,7 +27,14 @@ const initialValues: FormValues = {
   highlights: ['', ''],
   videoURL: '',
   // pricing
-  plans: [{ name: '', hasFreeTrial: false }],
+  plans: [
+    {
+      name: '',
+      hasFreeTrial: false,
+      features: [''],
+      pricings: [{ perUnit: 'month', per: 1, amount: '', currency: 'INR' }],
+    },
+  ],
   // faq
   questions: [{ question: '', answer: '' }],
 }
@@ -79,7 +86,9 @@ export default function SubmitService() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen pt-6 bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="h-16 mb-12 bg-white border-b border-gray-200" />
+
       <Formik initialValues={initialValues} onSubmit={handleOnSubmit} validationSchema={validationSchema}>
         {(formik) => (
           <>
