@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useImperativeHandle, useState, forwardRef, Ref, useEffect, ReactNode } from 'react'
+import React, { useImperativeHandle, useState, forwardRef, Ref, useCallback, ReactNode } from 'react'
 import { DropzoneOptions, DropzoneState, useDropzone } from 'react-dropzone'
 import { HiX } from 'react-icons/hi'
 
@@ -10,6 +10,10 @@ export type FilesDropzoneProps = {
   cardClassName?: string
   placeholderClassName?: string
   children?: ((state: DropzoneState) => ReactNode) | ReactNode
+  previewType?: 'picture-card' | 'none'
+  limit?: number
+  files?: File[]
+  onFilesChange?: (files: File[]) => void
 } & DropzoneOptions
 
 function getClassNames({ isFileDialogActive, isDragAccept, isDragReject, isFocused }: DropzoneState) {
@@ -37,69 +41,103 @@ function getFilePreview(file: File) {
 }
 
 function FilesDropzoneComponent(
-  { className, cardClassName, placeholderClassName, children, ...dzOptions }: FilesDropzoneProps,
+  {
+    className,
+    cardClassName,
+    placeholderClassName,
+    children,
+    previewType = 'picture-card',
+    limit: incomingLimit = Infinity,
+    files: outerFiles,
+    onFilesChange,
+    onDrop,
+    ...dzOptions
+  }: FilesDropzoneProps,
   ref: Ref<FilesDropzoneRef>,
 ) {
-  const dz = useDropzone(dzOptions)
-  const [files, setFiles] = useState<File[]>(dz.acceptedFiles)
+  const [innerFiles, setInnerFiles] = useState<File[]>([])
+  const files = outerFiles ?? innerFiles
+  const isControlled = outerFiles !== undefined
+  const limit = Math.max(1, incomingLimit)
+  const showDropzone = files.length < limit || previewType === 'none'
 
-  useEffect(() => {
-    setFiles((prev) => [...prev, ...dz.acceptedFiles])
-  }, [dz.acceptedFiles])
+  const setFiles = useCallback(
+    (files: File[]) => {
+      if (!isControlled) {
+        setInnerFiles(files)
+      }
+      onFilesChange && onFilesChange(files)
+    },
+    [isControlled, onFilesChange],
+  )
+
+  const handleOnDrop = useCallback(
+    (acceptedFiles, rejectedFiles, event) => {
+      onDrop && onDrop(acceptedFiles, rejectedFiles, event)
+      setFiles([...files, ...acceptedFiles.slice(0, Math.max(0, limit - files.length))])
+    },
+    [files, limit, onDrop, setFiles],
+  )
+  const dz = useDropzone({ onDrop: handleOnDrop, ...dzOptions })
 
   useImperativeHandle(ref, () => dz)
 
   function removeFile(index: number) {
-    setFiles((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)])
+    setFiles([...files.slice(0, index), ...files.slice(index + 1)])
   }
 
   return (
     <div className={clsx('grid grid-cols-2 sm:flex items-start sm:flex-wrap gap-4', className)}>
-      {files.map((file, index) => {
-        const preview = getFilePreview(file)
-
-        return (
-          <div className="aspect-h-1 aspect-w-1 sm:aspect-none" key={`${file.name}-${index}`}>
+      {previewType === 'picture-card' &&
+        files.map((file, index) => {
+          const preview = getFilePreview(file)
+          return (
             <div
-              className={clsx(
-                'sm:relative flex-shrink-0 sm:w-32 sm:h-32 h-full w-full rounded-lg bg-cover bg-center bg-gray-50',
-                cardClassName,
-              )}
+              className="aspect-h-1 aspect-w-1 sm:aspect-none"
+              key={`${file.name}-${file.size}-${file.lastModified}`}
             >
-              <button
-                className="absolute p-1 text-xs text-red-600 bg-white rounded opacity-50 top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => removeFile(index)}
+              <div
+                className={clsx(
+                  'sm:relative flex-shrink-0 sm:w-32 sm:h-32 h-full w-full rounded-lg bg-cover bg-center bg-gray-50',
+                  cardClassName,
+                )}
               >
-                <HiX />
-              </button>
-              {preview && <img className="object-cover w-full h-full rounded-[inherit]" src={preview} />}
-              {preview === null && (
-                <div className="flex items-center w-full h-full border-2 text-xs text-gray-400 border-gray-100 rounded-[inherit] p-2 justify-center">
-                  <span className="line-clamp-5">{file.name}</span>
-                </div>
-              )}
+                <button
+                  className="absolute p-1 text-xs text-red-600 bg-white rounded opacity-50 top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => removeFile(index)}
+                >
+                  <HiX />
+                </button>
+                {preview && <img className="object-cover w-full h-full rounded-[inherit]" src={preview} />}
+                {preview === null && (
+                  <div className="flex items-center w-full h-full border-2 text-xs text-gray-400 border-gray-100 rounded-[inherit] p-2 justify-center">
+                    <span className="line-clamp-5">{file.name}</span>
+                  </div>
+                )}
+              </div>
             </div>
+          )
+        })}
+      {showDropzone && (
+        <div className="aspect-h-1 aspect-w-1 sm:aspect-none">
+          <div
+            className={clsx(
+              'sm:w-32 sm:h-32 h-full w-full flex-shrink-0 rounded-lg border-dashed transition-all ease-in duration-75 border-2',
+              getClassNames(dz),
+              placeholderClassName,
+            )}
+            {...dz.getRootProps()}
+          >
+            {children === undefined && (
+              <div className="flex items-center justify-center w-full h-full p-4 text-xs text-center">
+                <span>Drag file(s) to upload</span>
+              </div>
+            )}
+            {typeof children === 'function' ? children(dz) : children}
+            <input {...dz.getInputProps()} />
           </div>
-        )
-      })}
-      <div className="aspect-h-1 aspect-w-1 sm:aspect-none">
-        <div
-          className={clsx(
-            'sm:w-32 sm:h-32 h-full w-full flex-shrink-0 rounded-lg border-dashed transition-all ease-in duration-75 border-2',
-            getClassNames(dz),
-            placeholderClassName,
-          )}
-          {...dz.getRootProps()}
-        >
-          {children === undefined && (
-            <div className="flex items-center justify-center w-full h-full p-4 text-xs text-center">
-              <span>Drag file(s) to upload</span>
-            </div>
-          )}
-          {typeof children === 'function' ? children(dz) : children}
-          <input {...dz.getInputProps()} />
         </div>
-      </div>
+      )}
     </div>
   )
 }
