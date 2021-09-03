@@ -52,7 +52,7 @@ function CarouselComponent({
   }
 
   return (
-    <div className={clsx('space-y-6 text-gray-600', className)}>
+    <div className={clsx('space-y-6 w-full text-gray-600', className)}>
       <div className="flex items-center space-x-4">
         {buttonsShown && (
           <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={prevImage}>
