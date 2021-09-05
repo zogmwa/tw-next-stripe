@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { Children, useState, ReactNode } from 'react'
+import React, { Children, useState, ReactNode, SetStateAction } from 'react'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { FaCircle } from 'react-icons/fa'
 import { CarouselItem } from './carousel-item'
@@ -36,26 +36,27 @@ function CarouselComponent({
   const items = Children.toArray(children)
   const currentItem = items[currentIndex]
 
-  function setCurrentIndex(index: number) {
+  function setCurrentIndex(action: SetStateAction<number> | number) {
     if (!isControlled) {
-      setInnerIndex(index)
+      setInnerIndex(action)
     }
-    onCurrentIndexChange && onCurrentIndexChange(index)
+    const updatedIndex = typeof action === 'function' ? action(currentIndex) : action
+    onCurrentIndexChange && onCurrentIndexChange(updatedIndex)
   }
 
-  function nextImage() {
-    setCurrentIndex((currentIndex + 1) % items.length)
+  function nextItem() {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
   }
 
-  function prevImage() {
-    setCurrentIndex(currentIndex - 1 < 0 ? items.length - 1 : currentIndex - 1)
+  function prevItem() {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 < 0 ? items.length - 1 : prevIndex - 1))
   }
 
   return (
     <div className={clsx('space-y-6 w-full text-gray-600', className)}>
       <div className="flex items-center space-x-4">
         {buttonsShown && (
-          <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={prevImage}>
+          <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={prevItem}>
             <HiChevronLeft />
           </button>
         )}
@@ -68,7 +69,7 @@ function CarouselComponent({
           {currentItem}
         </div>
         {buttonsShown && (
-          <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={nextImage}>
+          <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={nextItem}>
             <HiChevronRight />
           </button>
         )}
@@ -84,7 +85,9 @@ function CarouselComponent({
                   index === currentIndex ? 'text-gray-700' : 'text-gray-300',
                 )}
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  setCurrentIndex(index)
+                }}
               >
                 <FaCircle />
               </button>
