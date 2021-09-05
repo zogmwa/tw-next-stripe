@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useImperativeHandle, useState, forwardRef, Ref, useCallback, ReactNode } from 'react'
+import React, { useImperativeHandle, useState, forwardRef, Ref, useCallback, ReactNode, SetStateAction } from 'react'
 import { DropzoneOptions, DropzoneState, useDropzone } from 'react-dropzone'
 import { HiX } from 'react-icons/hi'
 
@@ -62,28 +62,29 @@ function FilesDropzoneComponent(
   const showDropzone = files.length < limit || previewType === 'none'
 
   const setFiles = useCallback(
-    (files: File[]) => {
+    (action: SetStateAction<File[]> | File[]) => {
       if (!isControlled) {
-        setInnerFiles(files)
+        setInnerFiles(action)
       }
-      onFilesChange && onFilesChange(files)
+      const updatedFiles = typeof action === 'function' ? action(files) : action
+      onFilesChange && onFilesChange(updatedFiles)
     },
-    [isControlled, onFilesChange],
+    [files, isControlled, onFilesChange],
   )
 
   const handleOnDrop = useCallback(
     (acceptedFiles, rejectedFiles, event) => {
       onDrop && onDrop(acceptedFiles, rejectedFiles, event)
-      setFiles([...files, ...acceptedFiles.slice(0, Math.max(0, limit - files.length))])
+      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles.slice(0, Math.max(0, limit - prevFiles.length))])
     },
-    [files, limit, onDrop, setFiles],
+    [limit, onDrop, setFiles],
   )
   const dz = useDropzone({ onDrop: handleOnDrop, ...dzOptions })
 
   useImperativeHandle(ref, () => dz)
 
   function removeFile(index: number) {
-    setFiles([...files.slice(0, index), ...files.slice(index + 1)])
+    setFiles((prevFiles) => [...prevFiles.slice(0, index), ...prevFiles.slice(index + 1)])
   }
 
   return (
@@ -104,7 +105,9 @@ function FilesDropzoneComponent(
               >
                 <button
                   className="absolute p-1 text-xs text-red-600 bg-white rounded opacity-50 top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
-                  onClick={() => removeFile(index)}
+                  onClick={() => {
+                    removeFile(index)
+                  }}
                 >
                   <HiX />
                 </button>
