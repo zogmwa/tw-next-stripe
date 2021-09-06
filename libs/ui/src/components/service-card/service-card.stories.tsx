@@ -61,6 +61,7 @@ export function DefaultCard() {
         <ServiceCard
           service={asset1}
           onToggleCompare={(isCompared) => {
+            // eslint-disable-next-line no-console
             console.log(isCompared)
           }}
         />
