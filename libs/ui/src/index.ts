@@ -1,4 +1,5 @@
 export { Button } from './components/button'
+export { Carousel } from './components/carousel'
 export { Checkbox } from './components/checkbox'
 export { Combobox } from './components/combobox'
 export { Input } from './components/input'
