@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
+import clsx from 'clsx'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
-import { Button } from '../button'
+import { MAX_DESCRIPTION_LENGTH } from '../../utils/constants'
 
 type TruncatedDescriptionProps = {
   description: string
+  maxLength?: number
+  className?: string
+  style?: React.CSSProperties
 }
 
-export function TruncatedDescription({ description }: TruncatedDescriptionProps) {
+export function TruncatedDescription({
+  description,
+  maxLength = MAX_DESCRIPTION_LENGTH,
+  className,
+  style,
+}: TruncatedDescriptionProps) {
   const [renderFull, setRenderFull] = useState(false)
+
   return (
-    <div className="flex flex-col items-start">
-      {renderFull === false ? (
-        <p>
-          {description.substring(0, 170)}
-          {'... '}
-        </p>
-      ) : (
-        <p>
-          <ReactMarkdown remarkPlugins={[gfm]}>{description}</ReactMarkdown>
-        </p>
-      )}
-      <Button
+    <div className={clsx(renderFull ? 'space-y-2' : 'space-x-2', className)} style={style}>
+      <ReactMarkdown remarkPlugins={[gfm]} className={clsx(renderFull ? 'space-y-2' : 'inline-block')}>
+        {renderFull ? description : description.substring(0, maxLength)}
+      </ReactMarkdown>
+      <button
         onClick={() => {
-          if (renderFull === false) {
-            setRenderFull(true)
-          } else {
-            setRenderFull(false)
-          }
+          setRenderFull((prevState) => !prevState)
         }}
+        className="text-xs text-gray-300 cursor-pointer"
       >
-        {renderFull === false ? 'See More' : 'See Less'}
-      </Button>
+        {renderFull === false ? 'See More...' : 'See Less'}
+      </button>
     </div>
   )
 }

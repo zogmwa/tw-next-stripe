@@ -10,19 +10,16 @@ export default {
 export function DefaultServiceReviewCard() {
   const review = {
     userPic: 'http://logo.clearbit.com/mailchimp.com',
-    userName: 'Mailchimp',
-    userPost: 'positon_at_company',
-    reviewHead: 'Good quality video and rich features',
+    userName: 'Becky Howard',
+    userPost: 'Product Manger',
+    userCompany: 'XYZABC Corp.',
+    reviewTitle: 'Good quality video and rich features',
     reviewBody:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     timestamp: '2021-08-27T16:34:08.984019Z',
     helpedPeopleCount: '10',
-    rating: '8'
+    rating: '8',
   }
 
-  return (
-    <div className="px-2 py-2 border rounded-md">
-      <ReviewCard review={review} />
-    </div>
-  )
+  return <ReviewCard review={review} />
 }
