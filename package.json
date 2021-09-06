@@ -94,7 +94,6 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "husky": ">=6",
     "jest": "27.0.3",
-    "lint-staged": ">=10",
     "prettier": "^2.3.1",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
@@ -105,10 +104,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "yarn lint --lintFilePatterns"
-    ]
   }
 }
