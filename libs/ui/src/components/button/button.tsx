@@ -6,7 +6,7 @@ export type ButtonProps = Omit<
   'children'
 > & {
   children?: string
-  buttonType?: 'default' | 'primary'
+  buttonType?: 'default' | 'primary' | 'tag'
   error?: boolean
   icon?: React.ReactNode
   iconPlacement?: 'left' | 'right'
@@ -39,6 +39,9 @@ function ButtonComponent(
 
           if (buttonType === 'default') {
             return 'border-primary text-primary'
+          }
+          if (buttonType === 'tag') {
+            return 'bg-gray-100 text-gray-500'
           }
           return 'bg-primary text-white border-primary'
         })(),
