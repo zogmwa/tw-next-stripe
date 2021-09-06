@@ -5,5 +5,5 @@ import clsx from 'clsx'
 type SwitchLabelProps = ComponentProps<typeof HeadlessSwitch.Label>
 
 export function SwitchLabel({ className, ...rest }: SwitchLabelProps) {
-  return <HeadlessSwitch.Label className={clsx('text-gray-600', className)} {...rest} />
+  return <HeadlessSwitch.Label className={clsx('text-text-secondary', className)} {...rest} />
 }

@@ -14,7 +14,7 @@ function TextareaComponent(
     <div className={clsx('relative', className)} style={style}>
       <textarea
         className={clsx(
-          'border w-full text-sm rounded-md px-4 py-2 text-gray-700',
+          'border w-full text-sm rounded-md px-4 py-2 text-text-primary',
           success && 'border-success',
           errorMessage && 'border-error text-error',
         )}

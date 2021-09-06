@@ -17,7 +17,7 @@ type CarouselProps = {
 }
 
 const defaultButtonClassName =
-  'self-center p-0.5 text-2xl bg-gray-100 rounded-full active:scale-95 transition-all hover:bg-gray-200'
+  'self-center p-0.5 text-2xl bg-background-default rounded-full active:scale-95 transition-all hover:bg-background-dark'
 
 function CarouselComponent({
   className,
@@ -53,7 +53,7 @@ function CarouselComponent({
   }
 
   return (
-    <div className={clsx('space-y-6 w-full text-gray-600', className)}>
+    <div className={clsx('space-y-6 w-full text-text-secondary', className)}>
       <div className="flex items-center space-x-4">
         {buttonsShown && (
           <button className={clsx(defaultButtonClassName, buttonClassName)} onClick={prevItem}>
@@ -62,7 +62,7 @@ function CarouselComponent({
         )}
         <div
           className={clsx(
-            'w-full overflow-hidden border border-gray-200 rounded-lg bg-gray-50',
+            'w-full overflow-hidden border border-border-default rounded-lg bg-background-light',
             itemsContainerClassName,
           )}
         >
@@ -82,7 +82,7 @@ function CarouselComponent({
               <button
                 className={clsx(
                   'text-[8px] rounded-full transition-colors',
-                  index === currentIndex ? 'text-gray-700' : 'text-gray-300',
+                  index === currentIndex ? 'text-text-primary' : 'text-text-tertiary',
                 )}
                 key={index}
                 onClick={() => {

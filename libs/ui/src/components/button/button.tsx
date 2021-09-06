@@ -10,6 +10,7 @@ export type ButtonProps = Omit<
   error?: boolean
   icon?: React.ReactNode
   iconPlacement?: 'left' | 'right'
+  size?: 'small' | 'default'
 }
 
 function ButtonComponent(
@@ -18,6 +19,7 @@ function ButtonComponent(
     buttonType = 'default',
     icon,
     iconPlacement = 'left',
+    size = 'default',
     error,
     className,
     style,
@@ -28,7 +30,17 @@ function ButtonComponent(
   return (
     <button
       className={clsx(
-        'px-4 py-2 rounded-md text-sm border inline-flex space-x-4 items-center justify-center',
+        (() => {
+          switch (size) {
+            case 'small': {
+              return 'px-3 py-1 rounded space-x-2 text-xs'
+            }
+            default: {
+              return 'px-4 py-2 rounded-md space-x-4 text-sm'
+            }
+          }
+        })(),
+        'border inline-flex items-center justify-center',
         (() => {
           if (error) {
             if (buttonType === 'default') {
@@ -41,7 +53,7 @@ function ButtonComponent(
             return 'border-primary text-primary'
           }
           if (buttonType === 'tag') {
-            return 'bg-gray-100 text-gray-500'
+            return 'bg-background-default text-text-tertiary border-background-default'
           }
           return 'bg-primary text-white border-primary'
         })(),
@@ -52,7 +64,7 @@ function ButtonComponent(
       ref={ref}
     >
       {iconPlacement === 'left' ? icon : null}
-      <span>{children}</span>
+      <span className="font-medium">{children}</span>
       {iconPlacement === 'right' ? icon : null}
     </button>
   )

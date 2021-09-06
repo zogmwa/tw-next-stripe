@@ -2,11 +2,10 @@ import React, { useMemo } from 'react'
 import { BsChevronUp } from 'react-icons/bs'
 import { AiFillStar, AiOutlineCheckCircle } from 'react-icons/ai'
 import { FiUsers } from 'react-icons/fi'
-import { TruncatedDescription } from '../tuncated-description'
+import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
-import { MAX_DESCRIPTION_LENGTH } from '../../utils/constants'
-// import { string } from 'yup/lib/locale'
+import { Checkbox } from '../checkbox'
 
 type ServiceCardProps = {
   service: Asset
@@ -20,14 +19,6 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
     }
   }
 
-  const description = useMemo(() => {
-    const _description = service.short_description || service.description
-    if (_description.length > MAX_DESCRIPTION_LENGTH) {
-      return <TruncatedDescription description={_description} />
-    }
-    return _description
-  }, [service.description, service.short_description])
-
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -37,59 +28,52 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
   }, [service.avg_rating])
 
   return (
-    <div className="flex flex-col w-full px-4 py-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0">
-      <div className="flex items-start justify-start space-x-4">
-        <div className="flex flex-col items-center justify-start w-20 space-y-2 md:w-28">
-          <img src={service.logo_url} alt="Web Service" className="object-contain w-full max-w-2xl rounded-md" />
+    <div className="flex flex-col px-4 py-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0">
+      <div className="flex items-start justify-start w-full space-x-8">
+        <div className="flex flex-col items-center justify-start space-y-3">
+          <img src={service.logo_url} alt="Web Service" className="object-contain h-[72px] w-[72px] rounded-md" />
           <div className="flex items-center space-x-2">
-            <input type="checkbox" id={service.id.toString()} onChange={onCompare} />
-            <p>Compare</p>
+            <Checkbox onChange={onCompare} />
+            <div className="text-xs text-text-tertiary uppercase">Compare</div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 justify-left md:hidden">
-          <h1 className="text-xl font-bold">{service.name}</h1>
-          <div className="text-base text-gray-600 dark:text-gray-200">{description}</div>
-        </div>
-      </div>
-      <div className="flex flex-col flex-1 justify-left">
-        <div className="flex-col hidden md:flex justify-left">
-          <h1 className="text-xl md:font-bold">{service.name}</h1>
-          <div className="text-gray-600 md:text-base">{description}</div>
-        </div>
-        <div className="flex flex-row flex-wrap mb-3">
-          {service.tags.map((tag) => {
-            return (
-              <Button key={tag.slug} buttonType="tag" className="mt-2 mr-2">
-                {tag.name}
-              </Button>
-            )
-          })}
-        </div>
-        <div className="flex items-center justify-between md:justify-start md:space-x-6">
-          <div className="items-center hidden space-x-1 md:flex">
-            <BsChevronUp className="text-primary" />
-            <p className="text-gray-500">{service.upvotes_count}</p>
+        <div className="flex-1">
+          <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+          <TruncatedDescription description={service.description} className="mb-2" />
+          <div className="flex flex-row flex-wrap mb-5 space-x-2">
+            {service.tags.map((tag) => {
+              return (
+                <Button key={tag.slug} buttonType="tag" size="small">
+                  {tag.name}
+                </Button>
+              )
+            })}
           </div>
-          <div className="flex items-center space-x-1">
-            <FiUsers className="text-primary" />
-            <p className="pl-0.5 text-gray-500">{service.users_count} Users</p>
-          </div>
-          {service.has_free_trial === 'true' && (
-            <div className="flex items-center space-x-1">
-              <AiOutlineCheckCircle className="text-primary" />
-              <p className="pl-0.5 text-gray-500">Free Trial</p>
+          <div className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center space-x-2">
+              <BsChevronUp className="text-primary" />
+              <p className="text-text-secondary">{service.upvotes_count}</p>
             </div>
-          )}
+            <div className="flex items-center space-x-2">
+              <FiUsers className="text-primary" />
+              <p className="text-text-secondary">{service.users_count} Users</p>
+            </div>
+            {service.has_free_trial === 'true' && (
+              <div className="flex items-center space-x-2">
+                <AiOutlineCheckCircle className="text-primary" />
+                <p className="text-text-secondary">Free Trial</p>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="flex items-start justify-between md:flex-col md:space-y-2 md:items-center md:justify-center">
-        <div className="flex items-center space-x-2">
-          <AiFillStar className="text-primary" />
-          <p className="pl-0.5">
-            <span className="text-xl font-bold">{rating}</span> /10
-          </p>
+        <div className="flex items-start justify-between md:flex-col md:space-y-2 md:items-center md:justify-center">
+          <div className="flex items-center space-x-2">
+            <AiFillStar className="text-primary" />
+            <span className="mr-1 text-2xl font-bold">{rating}</span>
+            <span>/ 10</span>
+          </div>
+          <p className="text-sm text-text-secondary">{service.reviews_count} Reviews</p>
         </div>
-        <p className="text-gray-500">{service.reviews_count} Reviews</p>
       </div>
     </div>
   )

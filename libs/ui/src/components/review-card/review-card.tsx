@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { FaThumbsUp } from 'react-icons/fa'
-import { TruncatedDescription } from '../tuncated-description'
+import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceReview } from '../../types/service-review'
 
@@ -21,31 +21,31 @@ function ReviewCardComponent({ review }: ReviewCardProps) {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="flex items-center justify-start space-x-4">
-        <img src={review.userPic} alt="user" className="w-20 rounded-md" />
-        <div className="flex flex-col">
-          <h3 className="text-lg font-bold">{review.userName}</h3>
-          <p className="Text-gray-500">{review.userPost}</p>
+      <div className="flex items-center justify-start mb-2 space-x-4">
+        <img src={review.userPic} alt="user" className="object-cover rounded-md w-9 h-9" />
+        <div className="text-sm">
+          <h3 className="font-medium text-text-primary">{review.userName}</h3>
+          <p className="text-xs text-text-secondary">{review.userPost}</p>
         </div>
       </div>
-      <div className="flex flex-col mt-2 space-y-2 md:flex-row md:space-x-4">
-        <h2 className="text-xl font-bold">{review.reviewHead}</h2>
+      <div className="flex flex-col mb-2 space-y-2 md:space-y-0 md:flex-row md:space-x-4 md:items-center">
+        <h2 className="font-medium">{review.reviewHead}</h2>
         <div className="flex space-x-2">
-          {Array.from({ length: 5 }).map((_, index) => <AiFillStar key={index} className={index <= rating - 1 ? 'text-yellow-400' : 'text-gray-200' } />)}
+          {Array.from({ length: 5 }).map((_, index) => (
+            <AiFillStar
+              key={index}
+              className={index <= rating - 1 ? 'text-yellow-400' : 'text-text-tertiary opacity-25'}
+            />
+          ))}
         </div>
       </div>
-      <div className="hidden my-4 md:flex">
-        <p>{review.reviewBody}</p>
-      </div>
-      <div className="my-3 md:hidden">
-        <TruncatedDescription description={review.reviewBody}/>
-      </div>
-      <div className="flex items-center space-x-8">
-        <Button icon={<FaThumbsUp/>}>Helpful</Button>
-        <div className="text-lg font-semibold text-gray-400">{review.helpedPeopleCount} people found this question helpful</div>
-        <div className="hidden md:flex">
-          <div className="text-lg font-semibold text-gray-400">{time}</div>
-        </div>
+      <TruncatedDescription description={review.reviewBody} className="mb-4 text-text-secondary" />
+      <div className="flex items-center space-x-4 text-xs font-medium text-text-tertiary">
+        <Button icon={<FaThumbsUp />} size="small">
+          Helpful
+        </Button>
+        <div>{review.helpedPeopleCount} people found this question helpful</div>
+        <div className="hidden md:flex">{time}</div>
       </div>
     </div>
   )
