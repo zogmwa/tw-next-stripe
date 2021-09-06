@@ -29,14 +29,14 @@ function SwitchComponent({ className, enabled: outerEnabled, setEnabled: setOute
       onChange={setEnabled}
       className={clsx(
         'relative inline-flex items-center h-3.5 rounded-full w-7 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/75 border-2 box-content',
-        enabled ? 'bg-blue-100 border-blue-100' : 'bg-gray-100 border-gray-100',
+        enabled ? 'bg-blue-100 border-blue-100' : 'bg-background-default border-border-light',
         className,
       )}
     >
       <span
         className={clsx(
           'inline-block w-3.5 h-3.5 transform rounded-full transition-all',
-          enabled ? 'translate-x-3.5 bg-primary' : 'translate-x-0 bg-gray-500',
+          enabled ? 'translate-x-3.5 bg-primary' : 'translate-x-0 bg-background-dark',
         )}
       />
     </HeadlessSwitch>

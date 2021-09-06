@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { TruncatedDescription } from './tuncated-description'
+import { TruncatedDescription } from './truncated-description'
 
 export default {
   title: 'General/TruncatedDescription',

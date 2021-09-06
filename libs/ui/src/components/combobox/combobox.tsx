@@ -26,7 +26,7 @@ function getComboboxClassNames({ success, errorMessage }: Pick<ComboboxProps, 's
   if (errorMessage) {
     return 'border-error text-error'
   }
-  return 'border-gray-200'
+  return 'border-border-default'
 }
 
 export function Combobox({
@@ -71,7 +71,7 @@ export function Combobox({
   })
 
   return (
-    <div className={clsx('relative w-full text-sm text-gray-600', className)}>
+    <div className={clsx('relative w-full text-sm text-text-secondary', className)}>
       <div
         className={clsx(
           'flex w-full border rounded-lg',
@@ -88,7 +88,7 @@ export function Combobox({
           })}
         />
         <button
-          className={clsx('rounded-r-[inherit] p-2 text-lg text-gray-400', buttonClassName)}
+          className={clsx('rounded-r-[inherit] p-2 text-lg text-text-tertiary', buttonClassName)}
           {...getToggleButtonProps()}
         >
           <HiChevronDown className={isOpen ? 'rotate-180' : 'rotate-0'} aria-hidden="true" />
@@ -97,7 +97,7 @@ export function Combobox({
       {errorMessage && isOpen === false ? <div className="mt-1 text-xs text-error">{errorMessage}</div> : null}
       <ul
         className={clsx(
-          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-sm max-h-60 focus:outline-none',
+          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none',
           isOpen && inputItems.length ? 'block' : 'hidden',
         )}
         {...getMenuProps()}
@@ -110,7 +110,7 @@ export function Combobox({
               <li
                 key={`${item}${index}`}
                 {...getItemProps({ item, index })}
-                className={clsx('px-3 py-2', highlighted ? 'bg-gray-100 text-gray-700' : 'bg-white')}
+                className={clsx('px-3 py-2', highlighted ? 'bg-background-default text-text-primary' : 'bg-white')}
               >
                 {item}
               </li>

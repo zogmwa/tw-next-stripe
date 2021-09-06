@@ -20,7 +20,10 @@ export function TruncatedDescription({
   const [renderFull, setRenderFull] = useState(false)
 
   return (
-    <div className={clsx(renderFull ? 'space-y-2' : 'space-x-2', className)} style={style}>
+    <div
+      className={clsx(renderFull ? 'space-y-2' : 'space-x-2', 'text-sm text-text-secondary', className)}
+      style={style}
+    >
       <ReactMarkdown remarkPlugins={[gfm]} className={clsx(renderFull ? 'space-y-2' : 'inline-block')}>
         {renderFull ? description : description.substring(0, maxLength)}
       </ReactMarkdown>
@@ -28,7 +31,7 @@ export function TruncatedDescription({
         onClick={() => {
           setRenderFull((prevState) => !prevState)
         }}
-        className="text-xs text-gray-300 cursor-pointer"
+        className="text-xs cursor-pointer text-text-tertiary"
       >
         {renderFull === false ? 'See More...' : 'See Less'}
       </button>

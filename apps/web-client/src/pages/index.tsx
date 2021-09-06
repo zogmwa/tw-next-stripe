@@ -20,8 +20,8 @@ export function Home() {
     <div className="flex items-center justify-center w-screen h-screen space-x-20">
       <Image src={require('../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
       <div className="max-w-md p-6 my-10 border rounded-md">
-        <h1 className="mb-3 text-3xl font-semibold text-gray-700">Welcome to Taggedweb</h1>
-        <h3 className="mb-8 text-gray-500">
+        <h1 className="mb-3 text-3xl font-semibold text-text-primary">Welcome to Taggedweb</h1>
+        <h3 className="mb-8 text-text-secondary">
           Signup to experience a world of web services and find out best for you...
         </h3>
         <Button
@@ -40,7 +40,7 @@ export function Home() {
         >
           Sign in with Google
         </Button>
-        <div className="relative flex items-center justify-center w-full mb-8 text-xs text-gray-500 before:w-full before:absolute before:border-b before:border-gray-200">
+        <div className="relative flex items-center justify-center w-full mb-8 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
           <div className="relative inline-block px-4 mx-auto bg-white z-1">OR</div>
         </div>
         <Formik
@@ -53,7 +53,7 @@ export function Home() {
         >
           {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
             <form onSubmit={handleSubmit}>
-              <label className="block mb-2 text-sm text-gray-700" htmlFor="email">
+              <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
                 Email
               </label>
               <Input
@@ -66,7 +66,7 @@ export function Home() {
                 errorMessage={touched.email ? errors.email : undefined}
                 success={touched.email && !errors.email}
               />
-              <label className="block mb-2 text-sm text-gray-700" htmlFor="email">
+              <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
                 Password
               </label>
               <Input
@@ -82,7 +82,7 @@ export function Home() {
               />
               <div className="flex items-center space-x-4">
                 <Button buttonType="primary">Sign Up with Email</Button>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-text-secondary">
                   Already a member{' '}
                   <Link href="#">
                     <a href="">Sign in</a>

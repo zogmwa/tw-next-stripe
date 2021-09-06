@@ -18,7 +18,7 @@ export type FilesDropzoneProps = {
 
 function getClassNames({ isFileDialogActive, isDragAccept, isDragReject, isFocused }: DropzoneState) {
   if (isFileDialogActive) {
-    return 'border-gray-300 bg-gray-50 text-gray-500'
+    return 'border-border-default bg-background-light text-text-secondary'
   }
   if (isDragAccept) {
     return 'border-primary bg-secondary text-primary'
@@ -29,7 +29,7 @@ function getClassNames({ isFileDialogActive, isDragAccept, isDragReject, isFocus
   if (isFocused) {
     return 'ring-2 ring-offset-1 ring-primary/70 outline-none text-primary'
   }
-  return 'border-gray-200 hover:border-primary hover:text-primary text-gray-400'
+  return 'border-border-default hover:border-primary hover:text-primary text-text-tertiary'
 }
 
 function getFilePreview(file: File) {
@@ -99,7 +99,7 @@ function FilesDropzoneComponent(
             >
               <div
                 className={clsx(
-                  'sm:relative flex-shrink-0 sm:w-32 sm:h-32 h-full w-full rounded-lg bg-cover bg-center bg-gray-50',
+                  'sm:relative flex-shrink-0 sm:w-32 sm:h-32 h-full w-full rounded-lg bg-cover bg-center bg-background-light',
                   cardClassName,
                 )}
               >
@@ -113,7 +113,7 @@ function FilesDropzoneComponent(
                 </button>
                 {preview && <img className="object-cover w-full h-full rounded-[inherit]" src={preview} />}
                 {preview === null && (
-                  <div className="flex items-center w-full h-full border-2 text-xs text-gray-400 border-gray-100 rounded-[inherit] p-2 justify-center">
+                  <div className="flex items-center w-full h-full border-2 text-xs text-text-tertiary border-border-light rounded-[inherit] p-2 justify-center">
                     <span className="line-clamp-5">{file.name}</span>
                   </div>
                 )}
