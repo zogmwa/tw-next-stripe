@@ -1,5 +1,6 @@
 import { Tag } from './tag'
 import { Plan } from './price-plan'
+import { ServiceQuestion } from './service-question'
 
 export type Asset = {
   slug?: string
@@ -19,4 +20,5 @@ export type Asset = {
   reviews_count?: number
   avg_rating?: string | number
   users_count?: number // not in backend yet
+  questions?: ServiceQuestion[]
 }
