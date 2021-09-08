@@ -16,17 +16,30 @@ const validationSchema = yup.object().shape({
 })
 
 export default function Login() {
+  function handleLinkedInLogin() {
+    const redirectUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000/login-with-linkedin'
+        : 'https://taggedweb.com/login-with-linkedin'
+    window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.LINKEDIN_OAUTH_STATE}&scope=r_liteprofile,r_emailaddress`
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-full mt-10 md:flex-row md:space-x-20">
-      <Image src={require('../../images/login.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
+    <div className="flex flex-col items-center justify-center w-screen h-screen lg:flex-row lg:space-x-20">
+      <div className="hidden w-full md:block md:max-w-xs lg:max-w-3xl">
+        <Image src={require('../images/login.svg')} alt="Login to Taggedweb" className="w-full" />
+      </div>
       <div className="max-w-md p-6 mx-4 my-10 border rounded-md">
-        <h1 className="mb-3 text-3xl font-semibold text-text-primary">Welcome Back....</h1>
-        <h3 className="mb-8 text-text-secondary">Login to continue surfing among the ocean of web services</h3>
+        <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome Back....</h1>
+        <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
+          Login to continue surfing among the ocean of web services
+        </h3>
         <Button
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
+          onClick={handleLinkedInLogin}
         >
           Login with LinkedIn
         </Button>
@@ -80,7 +93,7 @@ export default function Login() {
               />
               <div className="flex items-center space-x-4">
                 <Button buttonType="primary">Login</Button>
-                <div className="text-sm text-text-secondary">
+                <div className="text-xs lg:text-sm text-text-secondary">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup">
                     <a href="">Create One</a>

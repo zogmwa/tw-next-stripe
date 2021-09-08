@@ -73,7 +73,8 @@
           "executor": "@nrwl/next:server",
           "options": {
             "buildTarget": "web-client:build",
-            "dev": true
+            "dev": true,
+            "port": 3000
           },
           "configurations": {
             "production": {
