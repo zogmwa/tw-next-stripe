@@ -2,6 +2,7 @@ import React from 'react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import '../styles/styles.css'
+import { UserProvider } from '../hooks/use-user'
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,7 +10,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Taggedweb</title>
       </Head>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </>
   )
 }
