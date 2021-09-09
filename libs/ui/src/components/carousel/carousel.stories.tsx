@@ -42,7 +42,7 @@ export function ControlledCarousel() {
       {colors.map((color, index) => (
         <Carousel.Item className="!aspect-w-1 !aspect-h-1" key={color}>
           <div className={clsx('flex items-center justify-center', color)}>
-            <span className="text-5xl font-bold text-white">{index + 1}</span>
+            <span className="text-5xl font-bold text-text-on-surface">{index + 1}</span>
           </div>
         </Carousel.Item>
       ))}

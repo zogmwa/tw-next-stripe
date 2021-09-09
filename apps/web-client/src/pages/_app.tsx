@@ -12,9 +12,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Taggedweb</title>
       </Head>
       <UserProvider>
-        <NavBar className="fixed top-0 left-0 right-0 z-10" />
-        <div className="w-full h-screen pt-12 overflow-auto">
-          <Component {...pageProps} />
+        <div suppressHydrationWarning={true}>
+          <NavBar className="fixed top-0 left-0 right-0 z-10" />
+          <div className="w-full h-screen overflow-auto pt-14">
+            <Component {...pageProps} />
+          </div>
         </div>
       </UserProvider>
     </>

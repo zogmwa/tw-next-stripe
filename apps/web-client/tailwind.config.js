@@ -26,6 +26,7 @@ module.exports = {
           primary: gray['700'],
           secondary: gray['500'],
           tertiary: gray['400'],
+          'on-surface': colors.white,
         },
 
         border: {
@@ -37,6 +38,7 @@ module.exports = {
           default: gray['100'],
           light: gray['50'],
           dark: gray['200'],
+          surface: colors.white,
         },
       },
     },

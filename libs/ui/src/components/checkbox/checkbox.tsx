@@ -22,8 +22,8 @@ function CheckboxComponent({ className, size = 'sm', ...rest }: CheckboxProps, r
         {...rest}
         ref={ref}
       />
-      <div className="min-w-full min-h-full bg-white border border-border-default rounded-[inherit] peer-checked:border-primary peer-checked:bg-primary transition-colors duration-75 peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-primary/75" />
-      <HiCheck className="absolute inset-0 m-auto text-transparent transition-transform duration-75 ease-in scale-50 peer-checked:text-white peer-checked:scale-100" />
+      <div className="min-w-full min-h-full bg-background-surface border border-border-default rounded-[inherit] peer-checked:border-primary peer-checked:bg-primary transition-colors duration-75 peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-primary/75" />
+      <HiCheck className="absolute inset-0 m-auto text-transparent transition-transform duration-75 ease-in scale-50 peer-checked:text-text-on-surface peer-checked:scale-100" />
     </label>
   )
 }

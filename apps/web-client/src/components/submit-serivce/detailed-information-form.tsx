@@ -1,13 +1,10 @@
 import React, { KeyboardEvent } from 'react'
 import { Field, FieldArray, Form, FormikProps } from 'formik'
-import { Button, Input, Textarea } from '@taggedweb/ui'
-import { BiImageAdd, BiPlus } from 'react-icons/bi'
+import { Button, FilesDropzone, Input, Textarea } from '@taggedweb/ui'
+import { BiPlus } from 'react-icons/bi'
 import * as yup from 'yup'
 import clsx, { ClassValue } from 'clsx'
 import { HiOutlineLogout } from 'react-icons/hi'
-
-const VALID_LOGO_TYPES = ['png', 'jpg', 'gif'] as const
-const MAX_IMAGE_SIZE = 2e6 // in bytes
 
 export type DetailedInformationFormValues = {
   detailedDescription: string
@@ -33,7 +30,7 @@ type DetailedInformationFormProps = {
 export function DetailedInformationForm({ className, touched, errors, values }: DetailedInformationFormProps) {
   return (
     <Form className={clsx(className)}>
-      <label className="block mb-2 font-medium text-text-primary" htmlFor="detailedDescription">
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="detailedDescription">
         Detailed Description
       </label>
       <Field
@@ -46,7 +43,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         success={touched.detailedDescription && !errors.detailedDescription}
       />
 
-      <label className="block mb-2 font-medium text-text-primary">Key Highlights</label>
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Key Highlights</label>
       <FieldArray
         name="highlights"
         render={({ push, remove }) => {
@@ -97,27 +94,12 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         }}
       />
 
-      <label className="block mb-2 font-medium text-text-primary">Screenshots</label>
-      {/* @TODO Build drag & drop upload component */}
-      <div className="grid grid-cols-2 gap-4 mb-3 sm:flex">
-        {[1, 2].map((preview) => (
-          <div
-            key={preview}
-            className="flex items-center justify-center flex-shrink-0 border border-dashed rounded-lg border-border-default sm:w-24 sm:h-24 aspect-w-1 aspect-h-1 sm:aspect-none"
-          >
-            <BiImageAdd className="w-1/4 m-auto text-text-secondary sm:text-3xl h-1/4" />
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center mb-8 space-x-4">
-        <Button type="button" className="!space-x-0 !p-1" icon={<BiPlus className="text-xl" />} />
-        <p className="text-xs max-w-[200px] text-text-tertiary font-normal">
-          <span className="font-medium text-primary">Upload a file</span> or drag and drop{' '}
-          <span className="uppercase">{VALID_LOGO_TYPES.join(', ')}</span> up to {(MAX_IMAGE_SIZE / 1e6).toFixed(0)}mb
-        </p>
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Screenshots</label>
+      <div className="mb-8">
+        <FilesDropzone />
       </div>
 
-      <label className="block mb-2 font-medium text-text-primary" htmlFor="detailedDescription">
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="detailedDescription">
         Video URL
       </label>
       <Field

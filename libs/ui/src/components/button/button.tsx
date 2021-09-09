@@ -46,7 +46,7 @@ function ButtonComponent(
             if (buttonType === 'default') {
               return 'border-error text-error'
             }
-            return 'bg-error text-white border-error'
+            return 'bg-error text-text-on-surface border-error'
           }
 
           if (buttonType === 'default') {
@@ -55,7 +55,7 @@ function ButtonComponent(
           if (buttonType === 'tag') {
             return 'bg-background-default text-text-tertiary border-background-default'
           }
-          return 'bg-primary text-white border-primary'
+          return 'bg-primary text-text-on-surface border-primary'
         })(),
         className,
       )}

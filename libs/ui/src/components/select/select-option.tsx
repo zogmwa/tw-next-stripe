@@ -8,7 +8,7 @@ function getClassNamesByStatus({
   disabled,
 }: Record<'highlighted' | 'selected' | 'disabled', boolean>) {
   if (disabled) {
-    return 'bg-white cursor-not-allowed text-text-tertiary'
+    return 'bg-background-surface cursor-not-allowed text-text-tertiary'
   }
   if (selected) {
     return 'font-semibold text-text-primary bg-secondary'
@@ -16,7 +16,7 @@ function getClassNamesByStatus({
   if (highlighted) {
     return 'bg-background-default text-text-primary'
   }
-  return 'bg-white text-text-secondary'
+  return 'bg-background-surface text-text-secondary'
 }
 
 export interface SelectOptionProps<Item> {

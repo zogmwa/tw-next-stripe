@@ -57,7 +57,7 @@ export function DefaultCard() {
   }
   return (
     <ul className="flex flex-col justify-start pb-8 divide-y divide">
-      <li className="max-w-full transition duration-500 ease-in-out bg-white hover:bg-background-light">
+      <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
         <ServiceCard
           service={asset1}
           onToggleCompare={(isCompared) => {
@@ -66,7 +66,7 @@ export function DefaultCard() {
           }}
         />
       </li>
-      <li className="max-w-full transition duration-500 ease-in-out bg-white hover:bg-background-light">
+      <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
         <ServiceCard
           service={asset2}
           onToggleCompare={(isCompared) => {

@@ -41,7 +41,7 @@ export default function Signup() {
           Sign in with Google
         </Button>
         <div className="relative flex items-center justify-center w-full mb-8 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
-          <div className="relative inline-block px-4 mx-auto bg-white z-1">OR</div>
+          <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
         </div>
         <Formik
           initialValues={{ email: '', password: '' }}

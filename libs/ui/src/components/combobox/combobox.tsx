@@ -97,7 +97,7 @@ export function Combobox({
       {errorMessage && isOpen === false ? <div className="mt-1 text-xs text-error">{errorMessage}</div> : null}
       <ul
         className={clsx(
-          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none',
+          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-background-surface border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none',
           isOpen && inputItems.length ? 'block' : 'hidden',
         )}
         {...getMenuProps()}
@@ -110,7 +110,10 @@ export function Combobox({
               <li
                 key={`${item}${index}`}
                 {...getItemProps({ item, index })}
-                className={clsx('px-3 py-2', highlighted ? 'bg-background-default text-text-primary' : 'bg-white')}
+                className={clsx(
+                  'px-3 py-2',
+                  highlighted ? 'bg-background-default text-text-primary' : 'bg-background-surface',
+                )}
               >
                 {item}
               </li>
