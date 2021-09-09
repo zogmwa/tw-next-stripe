@@ -27,7 +27,7 @@ export function CheckboxWithLabel() {
   return (
     <div className="flex items-center space-x-1.5">
       <Checkbox size="md" id="checkbox" />
-      <label htmlFor="checkbox" className="text-text-secondary">
+      <label htmlFor="checkbox" className="text-sm text-text-secondary">
         Completed
       </label>
     </div>

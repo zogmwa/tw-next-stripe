@@ -35,7 +35,7 @@ function SwitchComponent({
       onChange={setEnabled}
       className={clsx(
         'relative inline-flex items-center h-3.5 rounded-full w-7 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/75 border-2 box-content',
-        enabled ? 'bg-blue-100 border-blue-100' : 'bg-background-default border-border-light',
+        enabled ? 'bg-secondary border-secondary' : 'bg-background-default border-border-light',
         className,
       )}
     >
