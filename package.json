@@ -7,7 +7,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "lint": "nx workspace-lint && nx lint",
+    "lint": "nx lint",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -32,18 +32,25 @@
     "@headlessui/react": "^1.4.0",
     "@nrwl/next": "12.7.2",
     "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.3.2",
+    "axios": "^0.21.4",
     "clsx": "^1.1.1",
+    "constate": "^3.3.0",
     "core-js": "^3.6.5",
     "cz-conventional-changelog": "^3.3.0",
     "downshift": "^6.1.7",
     "formik": "^2.2.9",
-    "next": "11.1.0",
+    "next": "11.1.2",
     "postcss": "^8.3.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-dropzone": "^11.3.4",
     "react-icons": "^4.2.0",
+    "react-markdown": "^7.0.1",
     "regenerator-runtime": "0.13.7",
+    "remark-gfm": "^2.0.0",
     "tailwindcss": "^2.2.7",
     "tslib": "^2.0.0",
     "yup": "^0.32.9"
@@ -89,7 +96,6 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "husky": ">=6",
     "jest": "27.0.3",
-    "lint-staged": ">=10",
     "prettier": "^2.3.1",
     "ts-jest": "27.0.3",
     "ts-node": "~9.1.1",
@@ -100,10 +106,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "yarn lint --lintFilePatterns"
-    ]
   }
 }

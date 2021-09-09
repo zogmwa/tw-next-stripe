@@ -10,6 +10,13 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  env: {
+    API_BASE_URL: 'https://api.taggedweb.com',
+    ACCESS_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-access-token',
+    REFRESH_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-refresh-token',
+    LINKEDIN_CLIENT_ID: '86a9kyhpahci31',
+    LINKEDIN_OAUTH_STATE: 'bku19h5hfb',
+  },
 }
 
 module.exports = withNx(nextConfig)

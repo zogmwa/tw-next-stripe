@@ -8,15 +8,15 @@ function getClassNamesByStatus({
   disabled,
 }: Record<'highlighted' | 'selected' | 'disabled', boolean>) {
   if (disabled) {
-    return 'bg-white cursor-not-allowed text-gray-400'
+    return 'bg-white cursor-not-allowed text-text-tertiary'
   }
   if (selected) {
-    return 'font-semibold text-gray-700 bg-secondary'
+    return 'font-semibold text-text-primary bg-secondary'
   }
   if (highlighted) {
-    return 'bg-gray-100 text-gray-700'
+    return 'bg-background-default text-text-primary'
   }
-  return 'bg-white text-gray-600'
+  return 'bg-white text-text-secondary'
 }
 
 export interface SelectOptionProps<Item> {

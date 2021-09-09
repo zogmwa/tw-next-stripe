@@ -17,11 +17,30 @@ module.exports = {
         secondary: colors.blue['50'],
         success: '#5DD393',
         error: '#E16A6A',
+        text: {
+          primary: colors.gray['800'],
+          secondary: colors.gray['500'],
+          tertiary: colors.gray['400'],
+        },
+        border: {
+          default: colors.gray['200'],
+          light: colors.gray['100'],
+        },
+        background: {
+          default: colors.gray['100'],
+          light: colors.gray['50'],
+          dark: colors.gray['200'],
+        },
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/aspect-ratio')],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

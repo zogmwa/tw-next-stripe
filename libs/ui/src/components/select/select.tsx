@@ -49,7 +49,7 @@ function SelectComponent<Item>({
     <div className={clsx('relative w-full', className)}>
       <button
         className={clsx(
-          'flex items-center w-full px-4 py-3 space-x-2 text-gray-600 bg-white border border-gray-200 rounded-lg group disabled:text-gray-400',
+          'flex items-center w-full px-4 py-3 space-x-2 text-text-secondary bg-white border border-border-default rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/75 focus:outline-none group disabled:text-text-tertiary text-sm',
           buttonClassName,
         )}
         disabled={disabled}
@@ -59,7 +59,7 @@ function SelectComponent<Item>({
         {renderSelectedItem(selectedItem)}
         <HiChevronDown
           className={clsx(
-            'ml-auto text-lg text-gray-400 group-disabled:text-gray-200',
+            'ml-auto text-lg text-text-tertiary group-disabled:opacity-50',
             isOpen ? 'rotate-180' : 'rotate-0',
           )}
           aria-hidden="true"
@@ -68,7 +68,7 @@ function SelectComponent<Item>({
 
       <ul
         className={clsx(
-          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-sm max-h-60 focus:outline-none',
+          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none text-sm',
           isOpen ? 'block' : 'hidden',
         )}
         {...getMenuProps()}

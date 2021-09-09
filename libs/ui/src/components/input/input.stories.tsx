@@ -23,7 +23,7 @@ export function PasswordInput() {
     <Formik initialValues={{ password: '' }} onSubmit={() => {}} validationSchema={passwordValidationSchema}>
       {({ handleBlur, handleChange, handleSubmit, values, errors, touched }) => (
         <form onSubmit={handleSubmit}>
-          <label className="block mb-2 text-sm text-gray-700" htmlFor="password">
+          <label className="block mb-2 text-sm text-text-primary" htmlFor="password">
             Password
           </label>
           <Input

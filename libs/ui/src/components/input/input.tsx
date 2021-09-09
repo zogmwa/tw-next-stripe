@@ -23,7 +23,7 @@ function InputComponent(
     <div className={clsx('relative rounded-md', className)} style={style}>
       <input
         className={clsx(
-          'border w-full text-sm px-4 rounded-md py-2 text-gray-700',
+          'border w-full text-sm rounded-md px-4 py-2 text-text-primary',
           (() => {
             if (success) {
               return 'border-success'
@@ -47,7 +47,7 @@ function InputComponent(
       ) : null}
       {isPasswordInput ? (
         <button
-          className="absolute top-2.5 right-2.5 p-0.5 rounded text-gray-500"
+          className="absolute top-2.5 right-2.5 p-0.5 rounded text-text-secondary"
           type="button"
           onClick={() => {
             setPasswordVisible((prevState) => !prevState)
