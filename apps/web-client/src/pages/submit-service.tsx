@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import { Button, Stepper } from '@taggedweb/ui'
+import { useMutation, useQueryClient } from 'react-query'
+import { useRouter } from 'next/router'
+import { toast } from 'react-hot-toast'
 import {
   BasicInformationForm,
   BasicInformationFormValues,
@@ -11,6 +14,8 @@ import {
   DetailedInformationFormValues,
   detailedInformationSchema,
 } from '../components/submit-serivce/detailed-information-form'
+import { createService, CreateServiceInput } from '../queries/service'
+import { Service } from '../types/service'
 
 type FormValues = BasicInformationFormValues & DetailedInformationFormValues
 
@@ -19,9 +24,10 @@ const initialValues: FormValues = {
   name: '',
   url: '',
   protocol: 'https',
-  description: '',
+  shortDescription: '',
+
   // detailed info
-  detailedDescription: '',
+  description: '',
   highlights: ['', ''],
   videoURL: '',
 }
@@ -51,6 +57,21 @@ export default function SubmitService() {
   const [currentStep, setCurrentStep] = useState(0)
   const { heading, description, validationSchema, Form, skippable } = steps[currentStep]
 
+  const { push } = useRouter()
+  const queryClient = useQueryClient()
+  const { isLoading, mutate } = useMutation((service: CreateServiceInput) => createService(service), {
+    onSuccess: (serviceCreated: Service) => {
+      queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
+      push('/services', { query: { slug: serviceCreated.slug } })
+    },
+    onError: (error: any) => {
+      // @TODO: get error message from server
+      const errorMessage = error?.data?.response?.messages?.[0]?.message ?? 'Something went wrong'
+      toast.error(errorMessage)
+      // @TODO: show toast error message
+    },
+  })
+
   function nextStep() {
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1))
   }
@@ -58,12 +79,16 @@ export default function SubmitService() {
   function handleOnSubmit(values: FormValues) {
     const isLastStep = currentStep === steps.length - 1
     if (isLastStep) {
-      // @TODO: Make api request
+      mutate({
+        name: values.name,
+        website: `${values.protocol}${values.url}`,
+        description: values.description,
+        shortDescription: values.shortDescription,
+        // @TODO: Add logo url
+      })
     } else {
       nextStep()
     }
-    // eslint-disable-next-line no-console
-    console.log(values)
   }
 
   return (
@@ -102,7 +127,7 @@ export default function SubmitService() {
                     Skip
                   </Button>
                 ) : null}
-                <Button buttonType="primary" onClick={formik.submitForm}>
+                <Button buttonType="primary" onClick={formik.submitForm} type="submit" loading={isLoading}>
                   {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
                 </Button>
               </div>

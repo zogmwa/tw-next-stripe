@@ -10,7 +10,7 @@ export type BasicInformationFormValues = {
   name: string
   url: string
   protocol: typeof URL_PROTOCOLS[number]
-  description: string
+  shortDescription: string
 }
 
 // @TODO: Update min max limits according to api
@@ -31,7 +31,7 @@ export const basicInformationSchema = yup.object().shape({
       'Please enter a valid url',
     )
     .required('Please enter the service url'),
-  description: yup
+  shortDescription: yup
     .string()
     .min(12, 'Description should be atleast 12 chars long')
     .max(40, 'Description should be less than 40 chars')
@@ -109,12 +109,12 @@ export function BasicInformationForm({
         Short Description
       </label>
       <Field
-        id="description"
-        name="description"
+        id="shortDescription"
+        name="shortDescription"
         placeholder="Add a short description..."
         as={Textarea}
-        errorMessage={touched.description ? errors.description : undefined}
-        success={touched.description && !errors.description}
+        errorMessage={touched.shortDescription ? errors.shortDescription : undefined}
+        success={touched.shortDescription && !errors.shortDescription}
       />
     </Form>
   )

@@ -7,20 +7,16 @@ import clsx, { ClassValue } from 'clsx'
 import { HiOutlineLogout } from 'react-icons/hi'
 
 export type DetailedInformationFormValues = {
-  detailedDescription: string
+  description: string
   highlights: string[]
   videoURL: string | undefined
 }
 
 // @TODO: Update min max limits according to api
 export const detailedInformationSchema = yup.object().shape({
-  detailedDescription: yup
-    .string()
-    .min(20, 'Description should be atleast 20 chars long')
-    .max(75, 'Description should be less than 75 chars')
-    .required('Please enter a description'),
+  description: yup.string().optional(),
   highlights: yup.array().of(yup.string()),
-  videoURL: yup.string().url().label('Video URL'),
+  videoURL: yup.string().optional().url('Please enter a valid url'),
 })
 
 type DetailedInformationFormProps = {
@@ -30,17 +26,17 @@ type DetailedInformationFormProps = {
 export function DetailedInformationForm({ className, touched, errors, values }: DetailedInformationFormProps) {
   return (
     <Form className={clsx(className)}>
-      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="detailedDescription">
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
         Detailed Description
       </label>
       <Field
-        id="detailedDescription"
+        id="description"
         className="mb-8"
-        name="detailedDescription"
+        name="description"
         placeholder="Write detailed description..."
         as={Textarea}
-        errorMessage={touched.detailedDescription ? errors.detailedDescription : undefined}
-        success={touched.detailedDescription && !errors.detailedDescription}
+        errorMessage={touched.description ? errors.description : undefined}
+        success={touched.description && !errors.description}
       />
 
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Key Highlights</label>
@@ -99,7 +95,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         <FilesDropzone />
       </div>
 
-      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="detailedDescription">
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
         Video URL
       </label>
       <Field
