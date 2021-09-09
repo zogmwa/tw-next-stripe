@@ -24,8 +24,13 @@ export const basicInformationSchema = yup.object().shape({
     .string()
     .oneOf([...URL_PROTOCOLS])
     .required(),
-  // @TODO: Find regex without protocol requirement to be valid
-  url: yup.string().url('Please enter a valid url').required('Please enter the service url'),
+  url: yup
+    .string()
+    .matches(
+      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/i,
+      'Please enter a valid url',
+    )
+    .required('Please enter the service url'),
   description: yup
     .string()
     .min(12, 'Description should be atleast 12 chars long')
