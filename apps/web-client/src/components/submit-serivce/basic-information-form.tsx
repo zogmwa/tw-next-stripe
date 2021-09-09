@@ -15,27 +15,23 @@ export type BasicInformationFormValues = {
 
 // @TODO: Update min max limits according to api
 export const basicInformationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(3, 'Name should be atleast 3 chars long')
-    .max(50, 'Name should be less than 50 chars')
-    .required('Please enter the name'),
-  protocol: yup
-    .string()
-    .oneOf([...URL_PROTOCOLS])
-    .required(),
+  name: yup.string(),
+  // .min(3, 'Name should be atleast 3 chars long')
+  // .max(50, 'Name should be less than 50 chars')
+  // .required('Please enter the name'),
+  protocol: yup.string().oneOf([...URL_PROTOCOLS]),
+  // .required(),
   url: yup
     .string()
     .matches(
       /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/i,
       'Please enter a valid url',
-    )
-    .required('Please enter the service url'),
-  shortDescription: yup
-    .string()
-    .min(12, 'Description should be atleast 12 chars long')
-    .max(40, 'Description should be less than 40 chars')
-    .required('Please enter a description'),
+    ),
+  // .required('Please enter the service url'),
+  shortDescription: yup.string(),
+  // .min(12, 'Description should be atleast 12 chars long')
+  // .max(40, 'Description should be less than 40 chars')
+  // .required('Please enter a description'),
 })
 
 type BasicInformationFormProps = {

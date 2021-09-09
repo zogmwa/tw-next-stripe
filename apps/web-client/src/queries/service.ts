@@ -24,3 +24,8 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
   })
   return data
 }
+
+export async function fetchService(slug: string): Promise<Service> {
+  const { data } = await client.get<Service>(`/assets/${slug}`)
+  return data
+}

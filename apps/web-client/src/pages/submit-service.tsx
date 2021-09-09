@@ -58,11 +58,12 @@ export default function SubmitService() {
   const { heading, description, validationSchema, Form, skippable } = steps[currentStep]
 
   const { push } = useRouter()
+
   const queryClient = useQueryClient()
   const { isLoading, mutate } = useMutation((service: CreateServiceInput) => createService(service), {
     onSuccess: (serviceCreated: Service) => {
       queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
-      push('/services', { query: { slug: serviceCreated.slug } })
+      push(`/services/${serviceCreated.slug}`)
     },
     onError: (error: any) => {
       // @TODO: get error message from server
@@ -81,7 +82,7 @@ export default function SubmitService() {
     if (isLastStep) {
       mutate({
         name: values.name,
-        website: `${values.protocol}${values.url}`,
+        website: `${values.protocol}://${values.url}`,
         description: values.description,
         shortDescription: values.shortDescription,
         // @TODO: Add logo url
