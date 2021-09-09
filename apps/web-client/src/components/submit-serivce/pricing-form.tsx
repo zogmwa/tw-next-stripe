@@ -139,7 +139,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
 
                 return (
                   <Fragment key={`${planKey}`}>
-                    <label className="block mb-2 font-medium text-gray-800" htmlFor={`${planKey}.name`}>
+                    <label className="block mb-2 font-medium text-text-primary" htmlFor={`${planKey}.name`}>
                       Plan Name
                     </label>
                     <Field
@@ -187,7 +187,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
                                 <div key={pricingKey} className="flex mb-3 space-x-4">
                                   <div className="flex-1">
                                     <label
-                                      className="block mb-2 font-medium text-gray-800"
+                                      className="block mb-2 font-medium text-text-primary"
                                       htmlFor={`${pricingKey}.amount`}
                                     >
                                       Price
@@ -202,7 +202,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
                                             setFieldValue(`${pricingKey}.currency`, selectedItem)
                                           }
                                           className="flex-shrink-0 text-sm w-14"
-                                          buttonClassName="!px-3 !py-2 rounded-l-md rounded-r-none bg-gray-100 border-r-gray-300"
+                                          buttonClassName="!px-3 !py-2 rounded-l-md rounded-r-none bg-background-default border-r-border-default"
                                         >
                                           {getKeys(CURRENCIES).map((currency) => (
                                             <Select.Option item={currency} key={currency} className="!px-3 !py-2">
@@ -228,10 +228,13 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
 
                                   <div className="flex-1">
                                     <div className="flex items-center justify-between mb-2 ">
-                                      <label className="block font-medium text-gray-800" htmlFor={`${pricingKey}.per`}>
+                                      <label
+                                        className="block font-medium text-text-primary"
+                                        htmlFor={`${pricingKey}.per`}
+                                      >
                                         Per
                                       </label>
-                                      <div className="flex items-center space-x-2 text-sm text-gray-400">
+                                      <div className="flex items-center space-x-2 text-sm text-text-tertiary">
                                         <span
                                           className={clsx(
                                             'min-w-[60px] text-right',
@@ -308,7 +311,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
                       }}
                     />
 
-                    <label className="block mb-2 font-medium text-gray-800">Plan Features</label>
+                    <label className="block mb-2 font-medium text-text-primary">Plan Features</label>
                     <FieldArray
                       name={`${planKey}.features`}
                       render={({ push: pushFeature, remove: removeFeature }) => {
@@ -358,7 +361,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
                                 icon={<BiPlus className="text-xl" />}
                                 onClick={addFeature}
                               />
-                              <p className="text-xs font-normal text-gray-400">
+                              <p className="text-xs font-normal text-text-tertiary">
                                 Pressing Enter
                                 <HiOutlineLogout className="inline mx-1 text-base text-primary" />
                                 will also add a new row
@@ -376,7 +379,7 @@ export function PricingForm({ className, touched, errors, values, setFieldValue 
                         placeholder="Write something..."
                         as={Checkbox}
                       />
-                      <label className="text-sm text-gray-600 " htmlFor={`${planKey}.hasFreeTrial`}>
+                      <label className="text-sm text-text-secondary " htmlFor={`${planKey}.hasFreeTrial`}>
                         This plan has a free trial.
                       </label>
                     </div>

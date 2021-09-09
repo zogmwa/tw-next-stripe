@@ -69,7 +69,7 @@ export function FAQForm({ className, touched, errors, values }: FAQFormProps) {
 
                 return (
                   <Fragment key={`question-${index}`}>
-                    <label className="block mb-2 font-medium text-gray-800" htmlFor={`question-${index}`}>
+                    <label className="block mb-2 font-medium text-text-primary" htmlFor={`question-${index}`}>
                       Question
                     </label>
                     <Field
@@ -82,7 +82,7 @@ export function FAQForm({ className, touched, errors, values }: FAQFormProps) {
                       errorMessage={fieldTouched.question ? fieldErrors.question : undefined}
                     />
 
-                    <label className="block mb-2 font-medium text-gray-800" htmlFor={`answer-${index}`}>
+                    <label className="block mb-2 font-medium text-text-primary" htmlFor={`answer-${index}`}>
                       Answer
                     </label>
                     <Field

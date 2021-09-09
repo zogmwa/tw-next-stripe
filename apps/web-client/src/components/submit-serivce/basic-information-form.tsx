@@ -51,7 +51,7 @@ export function BasicInformationForm({
 }: BasicInformationFormProps) {
   return (
     <Form className={clsx(className)}>
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="name">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="name">
         Name
       </label>
       <Field
@@ -64,7 +64,7 @@ export function BasicInformationForm({
         success={touched.name && !errors.name}
       />
 
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="url">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="url">
         URL
       </label>
       <div className="flex w-full mb-8">
@@ -74,7 +74,7 @@ export function BasicInformationForm({
           onSelectedItemChange={({ selectedItem }) => setFieldValue('protocol', selectedItem, true)}
           renderSelectedItem={(protocol) => `${protocol}://`}
           className="w-24 text-sm"
-          buttonClassName="!px-3 !py-2 rounded-l-md rounded-r-none bg-gray-100 border-r-gray-300"
+          buttonClassName="!px-3 !py-2 rounded-l-md rounded-r-none bg-background-default border-r-border-default"
         >
           {URL_PROTOCOLS.map((protocol) => (
             <Select.Option item={protocol} key={protocol} className="!px-3 !py-2">
@@ -96,20 +96,20 @@ export function BasicInformationForm({
       </div>
 
       {/* @TODO Build drag & drop upload component */}
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="logo">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="logo">
         Logo
       </label>
       <div className="flex items-center mb-8 space-x-6 text-xs">
-        <div className="flex items-center justify-center flex-shrink-0 w-24 h-24 text-3xl text-gray-500 border border-gray-200 border-dashed rounded-lg">
+        <div className="flex items-center justify-center flex-shrink-0 w-24 h-24 text-3xl border border-dashed rounded-lg border-border-default text-text-secondary">
           <BiImageAdd />
         </div>
-        <p className="max-w-[180px] text-gray-400 font-normal">
+        <p className="max-w-[180px] text-text-tertiary font-normal">
           <span className="font-medium text-primary">Upload a file</span> or drag and drop{' '}
           <span className="uppercase">{VALID_LOGO_TYPES.join(', ')}</span> up to {(MAX_IMAGE_SIZE / 1e6).toFixed(0)}mb
         </p>
       </div>
 
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="description">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="description">
         Short Description
       </label>
       <Field

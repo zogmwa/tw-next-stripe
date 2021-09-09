@@ -5,14 +5,14 @@ import {
   BasicInformationForm,
   BasicInformationFormValues,
   basicInformationSchema,
-} from '../../components/submit-serivce/basic-information-form'
+} from '../components/submit-serivce/basic-information-form'
 import {
   DetailedInformationForm,
   DetailedInformationFormValues,
   detailedInformationSchema,
-} from '../../components/submit-serivce/detailed-information-form'
-import { FAQForm, FAQFormValues, faqSchema } from '../../components/submit-serivce/faq-form'
-import { PricingForm, PricingFormValues, pricingSchema } from '../../components/submit-serivce/pricing-form'
+} from '../components/submit-serivce/detailed-information-form'
+import { FAQForm, FAQFormValues, faqSchema } from '../components/submit-serivce/faq-form'
+import { PricingForm, PricingFormValues, pricingSchema } from '../components/submit-serivce/pricing-form'
 
 type FormValues = BasicInformationFormValues & DetailedInformationFormValues & PricingFormValues & FAQFormValues
 
@@ -86,24 +86,22 @@ export default function SubmitService() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <div className="h-16 mb-12 bg-white border-b border-gray-200" />
-
+    <div className="min-h-full p-4 bg-background-light">
       <Formik initialValues={initialValues} onSubmit={handleOnSubmit} validationSchema={validationSchema}>
         {(formik) => (
           <>
-            <div className="px-4 py-6 mb-4 bg-white border border-gray-200 rounded-lg sm:border-none sm:bg-transparent">
-              <h4 className="text-lg font-medium tex-gray-800">{heading}</h4>
-              <p className="mb-6 text-sm text-gray-400">
+            <div>
+              <h4 className="text-lg font-medium text-text-primary">{heading}</h4>
+              <p className="mb-6 text-sm text-text-primary">
                 This information will be displayed publicly so be careful what you share.
               </p>
 
-              <div className="sm:bg-white sm:rounded-lg sm:border sm:border-gray-200 sm:p-6">
+              <div className="sm:bg-white sm:rounded-lg sm:border sm:border-border-default sm:p-6">
                 <Form className="md:max-w-lg" {...formik} />
               </div>
             </div>
 
-            <div className="flex justify-end px-4 py-3 mt-auto space-x-4 bg-white border-t border-gray-200 rounded-t-lg sm:bg-transparent sm:border-none">
+            <div className="flex justify-end px-4 py-3 mt-auto space-x-4 bg-white border-t rounded-t-lg border-border-default sm:bg-transparent sm:border-none">
               {skippable && (
                 <Button type="button" onClick={nextStep}>
                   Skip

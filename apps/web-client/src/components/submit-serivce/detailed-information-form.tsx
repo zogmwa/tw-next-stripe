@@ -33,7 +33,7 @@ type DetailedInformationFormProps = {
 export function DetailedInformationForm({ className, touched, errors, values }: DetailedInformationFormProps) {
   return (
     <Form className={clsx(className)}>
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="detailedDescription">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="detailedDescription">
         Detailed Description
       </label>
       <Field
@@ -46,7 +46,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         success={touched.detailedDescription && !errors.detailedDescription}
       />
 
-      <label className="block mb-2 font-medium text-gray-800">Key Highlights</label>
+      <label className="block mb-2 font-medium text-text-primary">Key Highlights</label>
       <FieldArray
         name="highlights"
         render={({ push, remove }) => {
@@ -86,7 +86,7 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
                   icon={<BiPlus className="text-xl" />}
                   onClick={addHighlight}
                 />
-                <p className="text-xs font-normal text-gray-400">
+                <p className="text-xs font-normal text-text-tertiary">
                   Pressing Enter
                   <HiOutlineLogout className="inline mx-1 text-base text-primary" />
                   will also add a new row
@@ -97,27 +97,27 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         }}
       />
 
-      <label className="block mb-2 font-medium text-gray-800">Screenshots</label>
+      <label className="block mb-2 font-medium text-text-primary">Screenshots</label>
       {/* @TODO Build drag & drop upload component */}
       <div className="grid grid-cols-2 gap-4 mb-3 sm:flex">
         {[1, 2].map((preview) => (
           <div
             key={preview}
-            className="flex items-center justify-center flex-shrink-0 border border-gray-200 border-dashed rounded-lg sm:w-24 sm:h-24 aspect-w-1 aspect-h-1 sm:aspect-none"
+            className="flex items-center justify-center flex-shrink-0 border border-dashed rounded-lg border-border-default sm:w-24 sm:h-24 aspect-w-1 aspect-h-1 sm:aspect-none"
           >
-            <BiImageAdd className="w-1/4 m-auto text-gray-500 sm:text-3xl h-1/4" />
+            <BiImageAdd className="w-1/4 m-auto text-text-secondary sm:text-3xl h-1/4" />
           </div>
         ))}
       </div>
       <div className="flex items-center mb-8 space-x-4">
         <Button type="button" className="!space-x-0 !p-1" icon={<BiPlus className="text-xl" />} />
-        <p className="text-xs max-w-[200px] text-gray-400 font-normal">
+        <p className="text-xs max-w-[200px] text-text-tertiary font-normal">
           <span className="font-medium text-primary">Upload a file</span> or drag and drop{' '}
           <span className="uppercase">{VALID_LOGO_TYPES.join(', ')}</span> up to {(MAX_IMAGE_SIZE / 1e6).toFixed(0)}mb
         </p>
       </div>
 
-      <label className="block mb-2 font-medium text-gray-800" htmlFor="detailedDescription">
+      <label className="block mb-2 font-medium text-text-primary" htmlFor="detailedDescription">
         Video URL
       </label>
       <Field

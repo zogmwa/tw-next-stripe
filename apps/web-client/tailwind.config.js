@@ -2,6 +2,8 @@ const { resolve } = require('path')
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+const gray = colors.blueGray
+
 module.exports = {
   mode: 'jit',
   purge: [resolve(__dirname, './src/**/*.{ts,tsx}'), resolve(__dirname, '../../libs/ui/src/**/*.{ts,tsx}')],
@@ -12,7 +14,7 @@ module.exports = {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        gray: colors.coolGray,
+        gray,
 
         primary: colors.blue['500'],
         secondary: colors.blue['100'],
@@ -21,20 +23,20 @@ module.exports = {
         error: colors.red['500'],
 
         text: {
-          primary: colors.gray['800'],
-          secondary: colors.gray['500'],
-          tertiary: colors.gray['400'],
+          primary: gray['700'],
+          secondary: gray['500'],
+          tertiary: gray['400'],
         },
 
         border: {
-          default: colors.gray['200'],
-          light: colors.gray['100'],
+          default: gray['200'],
+          light: gray['100'],
         },
 
         background: {
-          default: colors.gray['100'],
-          light: colors.gray['50'],
-          dark: colors.gray['200'],
+          default: gray['100'],
+          light: gray['50'],
+          dark: gray['200'],
         },
       },
     },
