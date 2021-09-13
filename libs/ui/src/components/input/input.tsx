@@ -3,12 +3,13 @@ import React, { forwardRef, useState } from 'react'
 import { HiX, HiCheck, HiEye, HiEyeOff } from 'react-icons/hi'
 
 export type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+  inputClassName?: string
   errorMessage?: string
   success?: boolean
 }
 
 function InputComponent(
-  { errorMessage, success, type, className, style, ...restProps }: InputProps,
+  { errorMessage, success, type, className, inputClassName, style, ...restProps }: InputProps,
   ref: React.Ref<HTMLInputElement>,
 ) {
   const isPasswordInput = type === 'password'
@@ -19,7 +20,7 @@ function InputComponent(
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   return (
-    <div className={clsx('relative', className)} style={style}>
+    <div className={clsx('relative rounded-md', className)} style={style}>
       <input
         className={clsx(
           'border w-full text-sm rounded-md px-4 py-2 text-text-primary',
@@ -31,9 +32,9 @@ function InputComponent(
             if (errorMessage) {
               return 'border-error text-error'
             }
-
             return undefined
           })(),
+          inputClassName,
         )}
         ref={ref}
         type={isPasswordInput ? (passwordVisible ? 'text' : 'password') : type}

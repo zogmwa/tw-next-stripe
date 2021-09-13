@@ -49,10 +49,11 @@ function SelectComponent<Item>({
     <div className={clsx('relative w-full', className)}>
       <button
         className={clsx(
-          'flex items-center w-full px-4 py-3 space-x-2 text-text-secondary bg-white border border-border-default rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/75 focus:outline-none group disabled:text-text-tertiary text-sm',
+          'flex items-center w-full px-4 py-3 space-x-2 text-text-secondary bg-background-surface border border-border-default rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/75 focus:outline-none group disabled:text-text-tertiary text-sm',
           buttonClassName,
         )}
         disabled={disabled}
+        type="button"
         {...getToggleButtonProps()}
       >
         {renderSelectedItem(selectedItem)}
@@ -67,7 +68,7 @@ function SelectComponent<Item>({
 
       <ul
         className={clsx(
-          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-white border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none text-sm',
+          'absolute z-10 w-full py-1 mt-1 overflow-y-auto bg-background-surface border border-border-default rounded-lg shadow-sm max-h-60 focus:outline-none text-sm',
           isOpen ? 'block' : 'hidden',
         )}
         {...getMenuProps()}

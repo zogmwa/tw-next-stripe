@@ -6,16 +6,19 @@ import { useUserContext } from '../hooks/use-user'
 
 export default function LoginWithLinkedin() {
   const { query, push } = useRouter()
+  // created nonEmptyCheck because in the first render it might happen that query is empty
+  // and we don't want to redirect user to /login in the first render itself
+  const nonEmptyQuery = Object.keys(query).length > 0
   const { code, state } = query as { code: string; state: string }
   const { setToken } = useUserContext()
 
   useEffect(
     function redirectToLoginPageOnInvalidCode() {
-      if (!code || state !== process.env.LINKEDIN_OAUTH_STATE) {
+      if (nonEmptyQuery && (!code || state !== process.env.LINKEDIN_OAUTH_STATE)) {
         push('/login')
       }
     },
-    [code, state, push],
+    [nonEmptyQuery, code, state, push],
   )
 
   useEffect(
@@ -44,16 +47,12 @@ export default function LoginWithLinkedin() {
               client_id: process.env.LINKEDIN_CLIENT_ID,
             })
             setToken(access_token, refresh_token)
-
             // redirect user to home page
             push('/')
           } catch (error) {
             // if any error redirect user to login page again
             push('/login')
           }
-        } else {
-          // if tokens are not available redirect user to login page again
-          push('/login')
         }
       }
       login()

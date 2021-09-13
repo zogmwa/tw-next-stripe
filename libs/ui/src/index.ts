@@ -10,5 +10,6 @@ export { ServiceCard } from './components/service-card'
 export { Switch } from './components/switch'
 export { Textarea } from './components/textarea'
 export { Spinner } from './components/spinner'
+export { Stepper } from './components/stepper'
 
 export { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect'

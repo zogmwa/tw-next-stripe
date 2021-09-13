@@ -1,10 +1,12 @@
 import React, { forwardRef } from 'react'
 import clsx from 'clsx'
+import { Spinner } from '@taggedweb/ui'
 
 export type ButtonProps = Omit<
   React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
   'children'
 > & {
+  loading?: boolean
   children?: string
   buttonType?: 'default' | 'primary' | 'tag'
   error?: boolean
@@ -21,6 +23,7 @@ function ButtonComponent(
     iconPlacement = 'left',
     size = 'default',
     error,
+    loading,
     className,
     style,
     ...restProps
@@ -46,7 +49,7 @@ function ButtonComponent(
             if (buttonType === 'default') {
               return 'border-error text-error'
             }
-            return 'bg-error text-white border-error'
+            return 'bg-error text-text-on-surface border-error'
           }
 
           if (buttonType === 'default') {
@@ -55,7 +58,7 @@ function ButtonComponent(
           if (buttonType === 'tag') {
             return 'bg-background-default text-text-tertiary border-background-default'
           }
-          return 'bg-primary text-white border-primary'
+          return 'bg-primary text-text-on-surface border-primary'
         })(),
         className,
       )}
@@ -63,6 +66,7 @@ function ButtonComponent(
       {...restProps}
       ref={ref}
     >
+      {loading ? <Spinner className="!text-text-on-surface" /> : null}
       {iconPlacement === 'left' ? icon : null}
       <span className="font-medium">{children}</span>
       {iconPlacement === 'right' ? icon : null}
