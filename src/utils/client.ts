@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
+import axios from 'axios'
+import createAuthRefreshInterceptor from 'axios-auth-refresh'
 
-export const client = axios.create({
+const client = axios.create({
   baseURL: process.env.API_BASE_URL,
 })
 
@@ -9,7 +9,7 @@ export const client = axios.create({
  * Add token to request header
  */
 client.interceptors.request.use((config) => {
-  if (!/\/dj-rest-auth\//i.exec(config.url)) {
+  if (!/\/dj-rest-auth\//i.exec(config.url) && !/\/token\/refresh\//i.exec(config.url)) {
     const accessToken = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
     config.headers = {
       ...config.headers,
@@ -19,16 +19,17 @@ client.interceptors.request.use((config) => {
   return config
 })
 
-/**
- * Redirect user to login page if the token is not valid
- */
-client.interceptors.response.use(undefined, function onError(error) {
-  const response = error.response as AxiosResponse
-  const { status } = response
-
-  if (status === 401) {
-    toast.error('You are not authorized to perform this action.')
-    window.location.replace('/login')
-  }
-  return Promise.reject(error)
+createAuthRefreshInterceptor(client, async (failedResponse) => {
+  const refreshToken = localStorage.getItem(process.env.REFRESH_TOKEN_LOCAL_STORAGE_KEY)
+  const {
+    data: { access, refresh },
+  } = await axios.post<{ refresh: string; access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
+    refresh: refreshToken,
+  })
+  localStorage.setItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY, access)
+  localStorage.setItem(process.env.REFRESH_TOKEN_LOCAL_STORAGE_KEY, refresh)
+  failedResponse.config.headers.Authorization = `Bearer ${access}`
+  return Promise.resolve()
 })
+
+export { client }
