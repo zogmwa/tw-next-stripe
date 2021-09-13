@@ -70,7 +70,6 @@ export default function SubmitService() {
       // @TODO: get error message from server
       const errorMessage = error?.data?.response?.messages?.[0]?.message ?? 'Something went wrong'
       toast.error(errorMessage)
-      // @TODO: show toast error message
     },
   })
 
