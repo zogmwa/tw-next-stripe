@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --no-error-on-unmatched-pattern --fix *.js ./src/**/*.{ts,tsx,js}",
-    "format": "prettier --no-error-on-unmatched-pattern *.js ./src/**/*.{ts,tsx,js}"
+    "format": "prettier --no-error-on-unmatched-pattern *.js ./src/**/*.{ts,tsx,js}",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "private": true,
   "dependencies": {

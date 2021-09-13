@@ -1,11 +1,14 @@
 module.exports = {
-  stories: [],
-  addons: ['@storybook/addon-essentials'],
-  // uncomment the property below if you want to apply some webpack config globally
-  // webpackFinal: async (config, { configType }) => {
-  //   // Make whatever fine-grained changes you need that should apply to all storybook configs
-
-  //   // Return the altered config
-  //   return config;
-  // },
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: [
+    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
+  ],
 }
