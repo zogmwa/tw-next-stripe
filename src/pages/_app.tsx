@@ -13,7 +13,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Taggedweb</title>
+        <title>TaggedWeb: Find Web Software, Services and Applications</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <UserProvider>

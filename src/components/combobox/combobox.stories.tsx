@@ -46,7 +46,7 @@ export function ComboboxWithValidation() {
             value={values.input}
             onValueChange={(value) => setFieldValue('input', value)}
             className="max-w-[240px]"
-            errorMessage={touched.input && errors.input ? errors.input : undefined}
+            errorMessage={touched.input && errors.input ? errors.input.toLocaleString() : undefined}
             success={touched.input && !errors.input}
             inputProps={{ onBlur: handleBlur('input') }}
           />

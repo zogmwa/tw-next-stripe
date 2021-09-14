@@ -19,7 +19,7 @@ const validationSchema = yup.object().shape({
 export default function Signup() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-full mt-10 md:flex-row md:space-x-20">
-      <Image src={require('../../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
+      <Image src={require('../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
       <div className="max-w-md p-6 mx-4 my-10 border rounded-md">
         <h1 className="mb-3 text-3xl font-semibold text-text-primary">Welcome to Taggedweb</h1>
         <h3 className="mb-8 text-text-secondary">
