@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useCombobox, UseComboboxGetInputPropsOptions, UseComboboxProps } from 'downshift'
 import clsx from 'clsx'
 import { HiChevronDown } from 'react-icons/hi'
+import { FormikErrors } from 'formik'
 
 type ComboboxProps = {
   placeholder?: string
   success?: boolean
-  errorMessage?: string
+  errorMessage?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   value?: string
   onValueChange?: (value: string) => void
   className?: string
