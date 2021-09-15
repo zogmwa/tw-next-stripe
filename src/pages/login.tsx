@@ -1,7 +1,6 @@
 import React from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Button } from '../components/button'
@@ -26,11 +25,8 @@ export default function Login() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen lg:flex-row lg:space-x-20">
-      <div className="hidden w-full md:block md:max-w-xs lg:max-w-3xl">
-        <Image src={require('../images/login.svg')} alt="Login to Taggedweb" className="w-full" />
-      </div>
-      <div className="max-w-md p-6 mx-4 my-10 border rounded-md">
+    <div className="flex items-center justify-center w-screen h-screen">
+      <div className="max-w-md p-0 mx-4 rounded-md lg:p-6 lg:border">
         <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome Back....</h1>
         <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Login to continue surfing among the ocean of web services

@@ -1,7 +1,6 @@
 import React from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Button } from '../components/button'
@@ -18,11 +17,10 @@ const validationSchema = yup.object().shape({
 
 export default function Signup() {
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-full mt-10 md:flex-row md:space-x-20">
-      <Image src={require('../images/signup.svg')} alt="Sign up to Taggedweb" className="w-full max-w-3xl" />
-      <div className="max-w-md p-6 mx-4 my-10 border rounded-md">
-        <h1 className="mb-3 text-3xl font-semibold text-text-primary">Welcome to Taggedweb</h1>
-        <h3 className="mb-8 text-text-secondary">
+    <div className="flex flex-col items-center justify-center w-screen h-full p-4">
+      <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
+        <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to Taggedweb</h1>
+        <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Signup to experience a world of web services and find out best for you...
         </h3>
         <Button
@@ -82,7 +80,7 @@ export default function Signup() {
                 success={touched.password && !errors.password}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary">Sign Up with Email</Button>
+                <Button buttonType="primary">Sign Up</Button>
                 <div className="text-sm text-text-secondary">
                   Already a member!{' '}
                   <Link href="/login">

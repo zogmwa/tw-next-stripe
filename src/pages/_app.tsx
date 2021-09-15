@@ -1,15 +1,20 @@
 import React from 'react'
+import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
-import '../styles/styles.css'
+import { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import '../styles/styles.css'
 import { UserProvider } from '../hooks/use-user'
 import { NavBar } from '../components/nav-bar'
 
 const queryClient = new QueryClient()
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter()
+  const renderNavBar = pathname !== '/login' && pathname !== '/signup'
+
   return (
     <>
       <Head>
@@ -18,8 +23,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <div suppressHydrationWarning={true}>
-            <NavBar className="fixed top-0 left-0 right-0 z-10" />
-            <div className="w-full h-screen overflow-auto pt-14">
+            {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
+            <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
               <Component {...pageProps} />
             </div>
             <Toaster
