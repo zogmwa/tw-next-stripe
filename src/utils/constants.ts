@@ -1,1 +1,2 @@
 export const MAX_DESCRIPTION_LENGTH = 75
+export const MAX_PRIMARY_ANS_LENGTH = 150
