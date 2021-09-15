@@ -104,7 +104,7 @@ function FilesDropzoneComponent(
                 )}
               >
                 <button
-                  className="absolute p-1 text-xs text-red-600 bg-background-surface rounded opacity-50 top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
+                  className="absolute p-1 text-xs text-red-600 rounded opacity-50 bg-background-surface top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
                   onClick={() => {
                     removeFile(index)
                   }}

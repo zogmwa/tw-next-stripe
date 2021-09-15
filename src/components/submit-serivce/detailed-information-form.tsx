@@ -1,32 +1,36 @@
-import React, { KeyboardEvent } from 'react'
-import { Field, FieldArray, Form, FormikProps } from 'formik'
-import { BiPlus } from 'react-icons/bi'
+import React from 'react'
+import { Field, Form, FormikProps } from 'formik'
 import * as yup from 'yup'
 import clsx, { ClassValue } from 'clsx'
-import { HiOutlineLogout } from 'react-icons/hi'
 import { Textarea } from '../textarea'
-import { Button } from '../button'
 import { Input } from '../input'
-import { FilesDropzone } from '../files-dropzone'
+import { ImageUploader } from '../image-uploader'
 
 export type DetailedInformationFormValues = {
   description: string
-  highlights: string[]
-  videoURL: string | undefined
+  promoVideo: string | undefined
+  snapshots: string[]
 }
 
 // @TODO: Update min max limits according to api
 export const detailedInformationSchema = yup.object().shape({
   description: yup.string().optional(),
-  highlights: yup.array().of(yup.string()),
-  videoURL: yup.string().optional().url('Please enter a valid url'),
+  snapshots: yup.array().of(yup.string()).min(1).max(5).optional(),
+  promoVideo: yup.string().optional().url('Please enter a valid url'),
 })
 
 type DetailedInformationFormProps = {
   className?: ClassValue
+  onUploading?: (uploading?: boolean) => void
 } & FormikProps<DetailedInformationFormValues>
 
-export function DetailedInformationForm({ className, touched, errors, values }: DetailedInformationFormProps) {
+export function DetailedInformationForm({
+  className,
+  touched,
+  errors,
+  setFieldValue,
+  onUploading,
+}: DetailedInformationFormProps) {
   return (
     <Form className={clsx(className)}>
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
@@ -42,7 +46,10 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
         success={touched.description && !errors.description}
       />
 
-      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Key Highlights</label>
+      {/* @TODO: Before deleting the uncommented code, we should move it to a separate component that can be used later
+          Key highlights is removed from the initial form, but we should keep it be used on the asset detail page
+      */}
+      {/* <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Key Highlights</label>
       <FieldArray
         name="highlights"
         render={({ push, remove }) => {
@@ -91,24 +98,30 @@ export function DetailedInformationForm({ className, touched, errors, values }: 
             </>
           )
         }}
-      />
+      /> */}
 
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Screenshots</label>
       <div className="mb-8">
-        <FilesDropzone />
+        <ImageUploader
+          limit={5}
+          onUploading={onUploading}
+          onChange={(urls) => {
+            setFieldValue('snapshots', urls)
+          }}
+        />
       </div>
 
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
         Video URL
       </label>
       <Field
-        id="videoURL"
+        id="promoVideo"
         className="mb-8"
-        name="videoURL"
+        name="promoVideo"
         placeholder="https://example.com/video.mp4"
         as={Input}
-        errorMessage={touched.videoURL ? errors.videoURL : undefined}
-        success={touched.videoURL && !errors.videoURL}
+        errorMessage={touched.promoVideo ? errors.promoVideo : undefined}
+        success={touched.promoVideo && !errors.promoVideo}
       />
     </Form>
   )

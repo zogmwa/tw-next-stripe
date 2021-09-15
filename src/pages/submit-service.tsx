@@ -25,13 +25,14 @@ const initialValues: FormValues = {
   name: '',
   url: '',
   slug: '',
+  logoUrl: '',
   protocol: 'https',
   shortDescription: '',
 
   // detailed info
   description: '',
-  highlights: ['', ''],
-  videoURL: '',
+  promoVideo: '',
+  snapshots: [],
 }
 
 const steps = [
@@ -61,6 +62,8 @@ export default function SubmitService() {
 
   const { push } = useRouter()
 
+  const [uploadingImages, setUploadingImages] = useState(false)
+
   const queryClient = useQueryClient()
   const { isLoading, mutate } = useMutation((service: CreateServiceInput) => createService(service), {
     onSuccess: (serviceCreated: Service) => {
@@ -83,10 +86,12 @@ export default function SubmitService() {
     if (isLastStep) {
       mutate({
         name: values.name,
+        slug: values.slug,
         website: `${values.protocol}://${values.url}`,
         description: values.description,
         shortDescription: values.shortDescription,
-        // @TODO: Add logo url
+        logoUrl: values.logoUrl,
+        snapshots: values.snapshots,
       })
     } else {
       nextStep()
@@ -109,7 +114,7 @@ export default function SubmitService() {
                 <p className="mb-6 text-xs lg:text-sm text-text-tertiary">{description}</p>
 
                 <div className="sm:bg-background-surface sm:rounded-lg sm:border sm:border-border-default sm:p-6">
-                  <Form className="md:max-w-lg" {...formik} />
+                  <Form className="md:max-w-lg" {...formik} onUploading={setUploadingImages} />
                 </div>
               </div>
 
@@ -129,7 +134,13 @@ export default function SubmitService() {
                     Skip
                   </Button>
                 ) : null}
-                <Button buttonType="primary" onClick={formik.submitForm} type="submit" loading={isLoading}>
+                <Button
+                  buttonType="primary"
+                  onClick={formik.submitForm}
+                  type="submit"
+                  loading={isLoading}
+                  disabled={uploadingImages}
+                >
                   {currentStep === steps.length - 1 ? 'Submit' : 'Next'}
                 </Button>
               </div>

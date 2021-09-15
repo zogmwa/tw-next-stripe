@@ -5,8 +5,8 @@ import slugify from 'slugify'
 import clsx, { ClassValue } from 'clsx'
 import { Input } from '../input'
 import { Select } from '../select'
-import { FilesDropzone } from '../files-dropzone'
 import { Textarea } from '../textarea'
+import { ImageUploader } from '../image-uploader'
 
 const URL_PROTOCOLS = ['https', 'http'] as const
 
@@ -14,6 +14,7 @@ export type BasicInformationFormValues = {
   name: string
   url: string
   slug: string
+  logoUrl: string
   protocol: typeof URL_PROTOCOLS[number]
   shortDescription: string
 }
@@ -46,6 +47,7 @@ export const basicInformationSchema = yup.object().shape({
 
 type BasicInformationFormProps = {
   className?: ClassValue
+  onUploading?: (uploading?: boolean) => void
 } & FormikProps<BasicInformationFormValues>
 
 export function BasicInformationForm({
@@ -56,6 +58,7 @@ export function BasicInformationForm({
   handleBlur,
   handleChange,
   setFieldValue,
+  onUploading,
 }: BasicInformationFormProps) {
   return (
     <Form className={clsx(className)}>
@@ -126,7 +129,13 @@ export function BasicInformationForm({
         Logo
       </label>
       <div className="flex items-center mb-8 space-x-6 text-xs">
-        <FilesDropzone />
+        <ImageUploader
+          limit={1}
+          onChange={(urls) => {
+            setFieldValue('logoUrl', urls[0])
+          }}
+          onUploading={onUploading}
+        />
       </div>
 
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
