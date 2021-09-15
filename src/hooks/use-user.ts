@@ -1,5 +1,8 @@
 import constate from 'constate'
 import { useCallback, useEffect, useReducer } from 'react'
+import { toast } from 'react-hot-toast'
+import { User } from '../types/user'
+import { client } from '../utils/client'
 
 type State = {
   authVerified: boolean
@@ -69,11 +72,29 @@ function useUser() {
     })
   }, [])
 
+  const signInWithEmailAndPassword = useCallback(
+    async (email: string, password: string): Promise<boolean> => {
+      try {
+        const { data } = await client.post<{ access_token: string; refresh_token: string; user: User }>(
+          '/dj-rest-auth/login/',
+          { email, password },
+        )
+        setToken(data.access_token, data.refresh_token)
+        return true
+      } catch (error) {
+        toast.error('Invalid username and password')
+        return false
+      }
+    },
+    [setToken],
+  )
+
   return {
     authVerified: state.authVerified,
     accessToken: state.accessToken,
     refreshToken: state.refreshToken,
     setToken,
+    signInWithEmailAndPassword,
   }
 }
 

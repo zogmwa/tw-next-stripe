@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, Form, FormikProps } from 'formik'
 import * as yup from 'yup'
+import slugify from 'slugify'
 import clsx, { ClassValue } from 'clsx'
 import { Input } from '../input'
 import { Select } from '../select'
@@ -12,6 +13,7 @@ const URL_PROTOCOLS = ['https', 'http'] as const
 export type BasicInformationFormValues = {
   name: string
   url: string
+  slug: string
   protocol: typeof URL_PROTOCOLS[number]
   shortDescription: string
 }
@@ -23,6 +25,7 @@ export const basicInformationSchema = yup.object().shape({
     .min(3, 'Name should be atleast 3 chars long')
     .max(50, 'Name should be less than 50 chars')
     .required('Please enter the name'),
+  slug: yup.string().required('Please enter the slug'),
   protocol: yup
     .string()
     .oneOf([...URL_PROTOCOLS])
@@ -59,14 +62,32 @@ export function BasicInformationForm({
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="name">
         Name
       </label>
-      <Field
+      <Input
         id="name"
         className="mb-8"
         name="name"
         placeholder="Write name"
-        as={Input}
         errorMessage={touched.name ? errors.name : undefined}
         success={touched.name && !errors.name}
+        onChange={(event) => {
+          const value = event.target.value
+          const slug = slugify(value).toLowerCase()
+          handleChange('name')(value)
+          setFieldValue('slug', slug)
+        }}
+      />
+
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="name">
+        Slug
+      </label>
+      <Field
+        id="name"
+        className="mb-8"
+        name="slug"
+        placeholder="Enter slug"
+        as={Input}
+        errorMessage={touched.slug ? errors.slug : undefined}
+        success={touched.slug && !errors.slug}
       />
 
       <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="url">

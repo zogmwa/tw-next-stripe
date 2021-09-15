@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
+import { useUserContext } from '../hooks/use-user'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -23,6 +25,11 @@ export default function Login() {
         : 'https://taggedweb.com/login-with-linkedin'
     window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.LINKEDIN_OAUTH_STATE}&scope=r_liteprofile,r_emailaddress`
   }
+
+  const [signingIn, setSigningIn] = useState(false)
+  const { signInWithEmailAndPassword } = useUserContext()
+
+  const router = useRouter()
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
@@ -54,9 +61,13 @@ export default function Login() {
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
-          onSubmit={(data) => {
-            // eslint-disable-next-line no-console
-            console.log(data)
+          onSubmit={async ({ email, password }) => {
+            setSigningIn(true)
+            const success = await signInWithEmailAndPassword(email, password)
+            setSigningIn(false)
+            if (success) {
+              router.push('/')
+            }
           }}
         >
           {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
@@ -89,7 +100,9 @@ export default function Login() {
                 success={touched.password && !errors.password}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary">Login</Button>
+                <Button buttonType="primary" loading={signingIn}>
+                  Login
+                </Button>
                 <div className="text-xs lg:text-sm text-text-secondary">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup">

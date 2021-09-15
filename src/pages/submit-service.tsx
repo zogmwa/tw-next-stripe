@@ -24,6 +24,7 @@ const initialValues: FormValues = {
   // basic info
   name: '',
   url: '',
+  slug: '',
   protocol: 'https',
   shortDescription: '',
 
