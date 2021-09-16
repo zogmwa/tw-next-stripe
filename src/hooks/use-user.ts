@@ -89,12 +89,33 @@ function useUser() {
     [setToken],
   )
 
+  const signUpWithEmailAndPassword = useCallback(
+    async (email: string, password1: string, password2: string): Promise<boolean> => {
+      try {
+        const { data } = await client.post<{ access_token: string; refresh_token: string; user: User }>(
+          '/dj-rest-auth/registration/',
+          { email, password1, password2 },
+        )
+        setToken(data.access_token, data.refresh_token)
+        return true
+      } catch (error) {
+        if (error.response.data) {
+          const obj = error.response.data
+          toast.error(obj[Object.keys(obj)[0]])
+        }
+        return false
+      }
+    },
+    [setToken],
+  )
+
   return {
     authVerified: state.authVerified,
     accessToken: state.accessToken,
     refreshToken: state.refreshToken,
     setToken,
     signInWithEmailAndPassword,
+    signUpWithEmailAndPassword,
   }
 }
 

@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
+import { useUserContext } from '../hooks/use-user'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
-  password: yup
+  password1: yup
     .string()
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
     .required('Please enter a password'),
+  password2: yup
+  .string()
+  .min(8, 'Password is too short - should be 8 chars minimum.')
+  .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+  .required('Please Re-enter the password')
+  .oneOf([yup.ref('password1'), null], 'Passwords must match'),
 })
 
 export default function Signup() {
+  const [signingUp, setSigningUp] = useState(false)
+  const { signUpWithEmailAndPassword } = useUserContext()
+
+  const router = useRouter()
   return (
     <div className="flex flex-col items-center justify-center w-screen h-full p-4">
       <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
@@ -43,11 +55,15 @@ export default function Signup() {
           <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
         </div>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ email: '', password1: '', password2: '' }}
           validationSchema={validationSchema}
-          onSubmit={(data) => {
-            // eslint-disable-next-line no-console
-            console.log(data)
+          onSubmit={async ({ email, password1, password2 }) => {
+            setSigningUp(true)
+            const success = await signUpWithEmailAndPassword(email, password1, password2)
+            setSigningUp(false)
+            if (success) {
+              router.push('/')
+            }
           }}
         >
           {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
@@ -70,17 +86,31 @@ export default function Signup() {
               </label>
               <Input
                 placeholder="Enter password"
-                id="password"
+                id="password1"
                 className="mb-8"
                 type="password"
-                onChange={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                errorMessage={touched.password ? errors.password : undefined}
-                success={touched.password && !errors.password}
+                onChange={handleChange('password1')}
+                onBlur={handleBlur('password1')}
+                value={values.password1}
+                errorMessage={touched.password1 ? errors.password1 : undefined}
+                success={touched.password1 && !errors.password1}
+              />
+              <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                Confirm Password
+              </label>
+              <Input
+                placeholder="Re-enter password"
+                id="password2"
+                className="mb-8"
+                type="password"
+                onChange={handleChange('password2')}
+                onBlur={handleBlur('password2')}
+                value={values.password2}
+                errorMessage={touched.password2 ? errors.password2 : undefined}
+                success={touched.password2 && !errors.password2}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary">Sign Up</Button>
+                <Button buttonType="primary" loading={signingUp}>Sign Up</Button>
                 <div className="text-sm text-text-secondary">
                   Already a member!{' '}
                   <Link href="/login">
