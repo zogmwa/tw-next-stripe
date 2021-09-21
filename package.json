@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev-windows": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --no-error-on-unmatched-pattern --fix *.js ./src/**/*.{ts,tsx,js}",
@@ -74,6 +75,7 @@
     "babel-jest": "27.0.6",
     "babel-loader": "8.1.0",
     "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
     "cypress": "^7.3.0",
     "dotenv": "~10.0.0",
     "eslint": "7.22.0",
