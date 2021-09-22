@@ -27,7 +27,7 @@ export default function Login() {
   }
 
   const { query } = useRouter()
-  const { linkedInError } = query as { error: string }
+  const { linkedInError } = query as { linkedInError: string }
   const [signingIn, setSigningIn] = useState(false)
   const { signInWithEmailAndPassword } = useUserContext()
 

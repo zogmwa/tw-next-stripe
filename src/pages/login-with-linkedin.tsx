@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 import { client } from '../utils/client'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
@@ -17,6 +18,27 @@ export default function LoginWithLinkedin() {
   const { code, state } = query as { code: string; state: string }
   const { setToken } = useUserContext()
 
+  async function connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code) {
+    try {
+      // Use LinkedIn access token to get TaggedWeb access token and Taggedweb user object
+      const {
+        data: { access_token, refresh_token },
+      } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/connect/', {
+        access_token: linkedin_access_token,
+        code,
+        client_id: process.env.LINKEDIN_CLIENT_ID,
+      })
+      setToken(access_token, refresh_token)
+
+      toast.success('Login Successful and LinkedIn Account Connected')
+
+      // Redirect user to home page on successfully connecting
+      push('/')
+    } catch (error) {
+      push(`/login?linkedInError=${error.response.data.detail}`)
+    }
+  }
+
   useEffect(
     function redirectToLoginPageOnInvalidCode() {
       if (nonEmptyQuery && (!code || state !== process.env.LINKEDIN_OAUTH_STATE)) {
@@ -27,7 +49,7 @@ export default function LoginWithLinkedin() {
   )
 
   useEffect(
-    function loginWithCode() {
+    function loginWithLinkedInAuthCode() {
       async function login() {
         if (code && state === process.env.LINKEDIN_OAUTH_STATE) {
           try {
@@ -43,28 +65,39 @@ export default function LoginWithLinkedin() {
               `/tweb-auth/linkedin/authtoken-from-code?code=${code}&redirect_uri=${redirectUrl}`,
             )
 
-            // Use LinkedIn auth token to get TaggedWeb access token and user
-            const {
-              data: { access_token, refresh_token },
-            } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/', {
-              access_token: linkedin_access_token,
-              code,
-              client_id: process.env.LINKEDIN_CLIENT_ID,
-            })
-            setToken(access_token, refresh_token)
+            try {
+              // Use LinkedIn auth token to get TaggedWeb access token and user
+              const {
+                data: { access_token: tweb_access_token, refresh_token: tweb_refresh_token },
+              } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/', {
+                access_token: linkedin_access_token,
+                code,
+                client_id: process.env.LINKEDIN_CLIENT_ID,
+              })
+              setToken(tweb_access_token, tweb_refresh_token)
 
-            // Redirect user to home page
-            push('/')
-          } catch (error) {
-            const nonFieldErrors = error.response.data.non_field_errors
-            // if any error redirect user to login page (preferably showing an appropriate error message)
-            if (nonFieldErrors?.[0] === 'User is already registered with this e-mail address.') {
-              // TODO: If the user is logged in, attempt to connect the LinkedIn account first
-              // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
-              push('/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account')
-            } else {
-              push('/login')
+              toast.success('Login Successful')
+
+              // Redirect user to home page
+              push('/')
+            } catch (error) {
+              const nonFieldErrors = error.response.data.non_field_errors
+              const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+              if (
+                nonFieldErrors?.[0] === 'User is already registered with this e-mail address.' &&
+                // Everything is stored as a string in localStorage even nulls
+                taggedweb_access_token !== 'null'
+              ) {
+                // If the linkedin login fails due to the email already existing attempt a linkedin connect (but the user should be logged in for this flow)
+                connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code)
+              } else {
+                // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
+                push('/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account')
+              }
             }
+          } catch (error) {
+            // If it isn't redirected to a page yet then it is likely an error case
+            push('/login')
           }
         }
       }
