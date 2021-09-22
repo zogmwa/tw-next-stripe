@@ -9,11 +9,20 @@ const client = axios.create({
  * Add token to request header
  */
 client.interceptors.request.use((config) => {
-  if (!/\/dj-rest-auth\//i.exec(config.url) && !/\/token\/refresh\//i.exec(config.url)) {
-    const accessToken = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+  const accessToken = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
+  const tokenType = 'Bearer'
+
+  // We don't want to send tokens in the headers for certain endpoints
+  if (!(config.url.startsWith('/dj-rest-auth') || config.url.startsWith('/token/refresh'))) {
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `${tokenType} ${accessToken}`,
+    }
+  } else if (config.url.startsWith('/dj-rest-auth/linkedin/connect')) {
+    // For social account connects we will require the user to be logged in first
+    config.headers = {
+      ...config.headers,
+      Authorization: `${tokenType} ${accessToken}`,
     }
   }
   return config

@@ -26,6 +26,8 @@ export default function Login() {
     window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.LINKEDIN_OAUTH_STATE}&scope=r_liteprofile,r_emailaddress`
   }
 
+  const { query } = useRouter()
+  const { linkedInError } = query as { error: string }
   const [signingIn, setSigningIn] = useState(false)
   const { signInWithEmailAndPassword } = useUserContext()
 
@@ -38,6 +40,7 @@ export default function Login() {
         <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Login to continue surfing among the ocean of web services
         </h3>
+        <p className='text-xs text-center text-error'>{linkedInError}</p>
         <Button
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"

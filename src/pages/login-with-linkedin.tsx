@@ -4,11 +4,16 @@ import { client } from '../utils/client'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
 
+/**
+ * This is a basic component that handles the callback from LinkedIn, after a login.
+ */
 export default function LoginWithLinkedin() {
   const { query, push } = useRouter()
   // created nonEmptyCheck because in the first render it might happen that query is empty
   // and we don't want to redirect user to /login in the first render itself
   const nonEmptyQuery = Object.keys(query).length > 0
+
+  // code is the LinkedIn auth code extracted from the callback url GET args
   const { code, state } = query as { code: string; state: string }
   const { setToken } = useUserContext()
 
@@ -31,14 +36,14 @@ export default function LoginWithLinkedin() {
                 ? 'http://localhost:3000/login-with-linkedin'
                 : 'https://taggedweb.com/login-with-linkedin'
 
-            // get linkedin access token
+            // Exchange LinkedIn auth code for LinkedIn authtoken
             const {
               data: { access_token: linkedin_access_token },
             } = await client.get<{ access_token: string }>(
               `/tweb-auth/linkedin/authtoken-from-code?code=${code}&redirect_uri=${redirectUrl}`,
             )
 
-            // get taggedweb access token
+            // Use LinkedIn auth token to get TaggedWeb access token and user
             const {
               data: { access_token, refresh_token },
             } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/', {
@@ -47,11 +52,19 @@ export default function LoginWithLinkedin() {
               client_id: process.env.LINKEDIN_CLIENT_ID,
             })
             setToken(access_token, refresh_token)
-            // redirect user to home page
+
+            // Redirect user to home page
             push('/')
           } catch (error) {
-            // if any error redirect user to login page again
-            push('/login')
+            const nonFieldErrors = error.response.data.non_field_errors
+            // if any error redirect user to login page (preferably showing an appropriate error message)
+            if (nonFieldErrors?.[0] === 'User is already registered with this e-mail address.') {
+              // TODO: If the user is logged in, attempt to connect the LinkedIn account first
+              // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
+              push('/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account')
+            } else {
+              push('/login')
+            }
           }
         }
       }
