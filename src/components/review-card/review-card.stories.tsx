@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { ReviewCard } from './review-card'
 
 export default {
-  title: 'General/review-card',
+  title: 'General/ReviewCard',
   component: ReviewCard,
 } as Meta
 
