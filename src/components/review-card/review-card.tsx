@@ -28,20 +28,23 @@ function ReviewCardComponent({ review }: ReviewCardProps) {
           <p className="text-xs text-text-secondary">{review.userPost}</p>
         </div>
       </div>
-      <div className="flex space-x-2">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <AiFillStar
-            key={index}
-            className={index <= rating - 1 ? 'text-yellow-400' : 'text-text-tertiary opacity-25'}
-          />
-        ))}
+      <div className="flex justify-between">
+        <div className="flex space-x-2">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <AiFillStar
+              key={index}
+              className={index <= rating - 1 ? 'text-yellow-400' : 'text-text-tertiary opacity-25'}
+            />
+          ))}
+        </div>
+        <div className="md:hidden  font-medium text-text-tertiary text-xs">{time}</div>
       </div>
       <TruncatedDescription description={review.reviewBody} className="mb-4 text-text-secondary" />
       <div className="flex items-center space-x-4 text-xs font-medium text-text-tertiary">
         <Button icon={<FaThumbsUp />} size="small">
           Helpful
         </Button>
-        <div>{review.helpedPeopleCount} people found this question helpful</div>
+        <div>{review.helpedPeopleCount} people found this helpful</div>
         <div className="hidden md:flex">{time}</div>
       </div>
     </div>

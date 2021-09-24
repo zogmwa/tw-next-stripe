@@ -92,7 +92,9 @@ export default function LoginWithLinkedin() {
                 connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code)
               } else {
                 // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
-                push('/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account')
+                push(
+                  '/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account',
+                )
               }
             }
           } catch (error) {

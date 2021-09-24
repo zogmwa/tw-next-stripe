@@ -16,11 +16,11 @@ const validationSchema = yup.object().shape({
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
     .required('Please enter a password'),
   password2: yup
-  .string()
-  .min(8, 'Password is too short - should be 8 chars minimum.')
-  .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
-  .required('Please Re-enter the password')
-  .oneOf([yup.ref('password1'), null], 'Passwords must match'),
+    .string()
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+    .required('Please Re-enter the password')
+    .oneOf([yup.ref('password1'), null], 'Passwords must match'),
 })
 
 export default function Signup() {
@@ -110,7 +110,9 @@ export default function Signup() {
                 success={touched.password2 && !errors.password2}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary" loading={signingUp}>Sign Up</Button>
+                <Button buttonType="primary" loading={signingUp}>
+                  Sign Up
+                </Button>
                 <div className="text-sm text-text-secondary">
                   Already a member!{' '}
                   <Link href="/login">

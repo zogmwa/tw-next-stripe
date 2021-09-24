@@ -40,7 +40,7 @@ export default function Login() {
         <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Login to continue surfing among the ocean of web services
         </h3>
-        <p className='text-xs text-center text-error'>{linkedInError}</p>
+        <p className="text-xs text-center text-error">{linkedInError}</p>
         <Button
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"
