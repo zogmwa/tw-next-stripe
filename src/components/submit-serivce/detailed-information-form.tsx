@@ -15,7 +15,7 @@ export type DetailedInformationFormValues = {
 // @TODO: Update min max limits according to api
 export const detailedInformationSchema = yup.object().shape({
   description: yup.string().optional(),
-  snapshots: yup.array().of(yup.string()).min(1).max(5).optional(),
+  snapshots: yup.array().of(yup.string()).min(0).max(5).optional(),
   promoVideo: yup.string().optional().url('Please enter a valid url'),
 })
 
