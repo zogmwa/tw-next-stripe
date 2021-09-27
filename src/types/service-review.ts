@@ -6,5 +6,6 @@ export type ServiceReview = {
   rating: string
   timestamp: string
   helpedPeopleCount?: string
+  videoUrl?: string
 }
 // this could later change depending on the backend
