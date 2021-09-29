@@ -27,3 +27,13 @@
 .service-detail-card .gr-primary path {
   stroke: rgb(59, 130, 246);
 }
+
+/* Hide scrollbar in Tablist in mobile view */
+.tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.tablist {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
