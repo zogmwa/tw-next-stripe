@@ -24,7 +24,6 @@ const validationSchema = yup.object().shape({
 })
 
 export default function Signup() {
-  const [signingUp, setSigningUp] = useState(false)
   const { signUpWithEmailAndPassword } = useUserContext()
 
   const router = useRouter()
@@ -58,15 +57,13 @@ export default function Signup() {
           initialValues={{ email: '', password1: '', password2: '' }}
           validationSchema={validationSchema}
           onSubmit={async ({ email, password1, password2 }) => {
-            setSigningUp(true)
             const success = await signUpWithEmailAndPassword(email, password1, password2)
-            setSigningUp(false)
             if (success) {
               router.push('/')
             }
           }}
         >
-          {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
+          {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
                 Email
@@ -110,7 +107,7 @@ export default function Signup() {
                 success={touched.password2 && !errors.password2}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary" loading={signingUp}>
+                <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                   Sign Up
                 </Button>
                 <div className="text-sm text-text-secondary">

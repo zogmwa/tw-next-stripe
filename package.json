@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --no-error-on-unmatched-pattern --fix *.js ./src/**/*.{ts,tsx,js}",
-    "format": "prettier --no-error-on-unmatched-pattern *.js ./src/**/*.{ts,tsx,js}",
+    "format": "prettier --write --no-error-on-unmatched-pattern src/**/*.{js,ts,tsx,css,json} *.{js,json}",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -40,6 +40,7 @@
     "react-markdown": "^7.0.1",
     "react-query": "^3.23.1",
     "react-scroll": "^1.8.4",
+    "react-select": "^4.3.1",
     "regenerator-runtime": "0.13.7",
     "remark-gfm": "^2.0.0",
     "sha1": "^1.1.1",

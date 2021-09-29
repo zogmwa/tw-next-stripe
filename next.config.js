@@ -14,6 +14,9 @@ const nextConfig = {
     LINKEDIN_CLIENT_ID: '86a9kyhpahci31',
     LINKEDIN_OAUTH_STATE: 'bku19h5hfb',
 
+    GOOGLE_CLIENT_ID: '638599930121-73t33tmtfr4ggr9jsv3m7pb4lv53skp8.apps.googleusercontent.com',
+    GOOGLE_OAUTH_STATE: 'GZublByuSS',
+
     CLOUDINARY_CLOUD_NAME: 'dgfmcs1yy',
     CLOUDINARY_PRESET_NAME: 'ml_default',
     CLOUDINARY_API_KEY: '241677845793131',
