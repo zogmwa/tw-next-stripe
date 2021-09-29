@@ -16,9 +16,9 @@ export default function Service() {
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
         <ServiceDetailCard service={data as Asset} />
-        <pre>
+        {/* <pre>
           <code className="text-xs whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</code>
-        </pre>
+        </pre> */}
       </div>
     </div>
   )
