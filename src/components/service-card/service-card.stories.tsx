@@ -35,7 +35,7 @@ const asset1 = {
   reviews_count: 1000,
   avg_rating: '8.1000',
   users_count: 1100,
-  website: "http://mailchimp.com/"
+  website: 'http://mailchimp.com/',
 }
 const asset2 = {
   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
@@ -82,15 +82,14 @@ export function DefaultCard() {
   )
 }
 
-
 export function DetailCard() {
   return (
     <ul className="flex flex-col justify-start pb-8 divide-y divide">
       <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
-        <ServiceDetailCard service={asset1}/>
+        <ServiceDetailCard service={asset1} />
       </li>
       <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light mt-2">
-        <ServiceDetailCard service={asset2}/>
+        <ServiceDetailCard service={asset2} />
       </li>
     </ul>
   )
