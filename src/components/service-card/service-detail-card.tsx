@@ -28,7 +28,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
         <div className="flex-1">
           <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
           <TruncatedDescription description={service.description} />
-          <div className="flex space-x-2 text-sm mt-2 sm:space-x-4">
+          <div className="flex space-x-2 text-sm mt-2 sm:space-x-4 md:divide-x">
             <div className="flex items-end space-x-2">
               <AiOutlineStar className="text-primary self-center" />
               <span>{rating}</span>
@@ -36,7 +36,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
                 {numeral(service.reviews_count).format('0.[0]a')} Reviews
               </span>
             </div>
-            <div className="flex items-end space-x-2">
+            <div className="flex items-end space-x-2 md:pl-4">
               <BsChevronUp className="text-primary self-center" />
               <span className="">{service.upvotes_count}</span>
               <span className="text-text-secondary text-xs">{numeral(service.users_count).format('0.[0]a')} Users</span>
