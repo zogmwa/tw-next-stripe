@@ -18,7 +18,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
     if (typeof _rating === 'string') {
       _rating = Number.parseFloat(_rating)
     }
-    return _rating?.toFixed(1)
+    return numeral(_rating ?? 0).format('0.[0]')
   }, [service.avg_rating])
 
   return (
