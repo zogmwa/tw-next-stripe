@@ -11,6 +11,8 @@ type ServiceDetailCardProps = {
 }
 
 function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
+  if (typeof service === 'undefined') return null
+
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -20,7 +22,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
   }, [service.avg_rating])
 
   return (
-    <div className="flex flex-col space-y-3 md:flex-row pt-4 md:px-4 md:py-4 md:space-x-8 md:space-y-0">
+    <div className="flex flex-col space-y-3 md:flex-row pt-4 md:space-x-8 md:space-y-0">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
           <img src={service.logo_url} alt="Web Service" className="object-contain h-[72px] w-[72px] rounded-md" />
