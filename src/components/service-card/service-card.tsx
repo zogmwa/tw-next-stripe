@@ -58,7 +58,7 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
               <FiUsers className="text-primary" />
               <p className="text-text-secondary">{service.users_count} Users</p>
             </div>
-            {service.has_free_trial === 'true' && (
+            {service.has_free_trial === true && (
               <div className="flex items-center space-x-2">
                 <AiOutlineCheckCircle className="text-primary" />
                 <p className="text-text-secondary">Free Trial</p>

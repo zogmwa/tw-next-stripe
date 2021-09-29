@@ -1,3 +1,5 @@
+import { Tag } from './tag'
+
 export type Service = {
   id: number
   slug: string
@@ -10,13 +12,13 @@ export type Service = {
   short_description: string
   description?: string
   promo_video?: string
-  tags?: string
+  tags?: Tag[]
   // @TODO: Update attributes types
   attributes?: string
   // @TODO: Update tweb_url
   tweb_url: null
   upvotes_count: number
-  og_image_url: string
+  og_image_url?: string
   // @TODO: Update price plan types
   price_plans: []
   // @TODO: Update questions type
