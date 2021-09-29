@@ -41,7 +41,7 @@ function ServiceDetailTabComponent() {
     <div className="bg-white">
       <HeadlessuiTab.Group as="div" className="mt-2">
         <div className="border-b border-gray-200">
-          <HeadlessuiTab.List className="-mb-px flex px-4 space-x-8">
+          <HeadlessuiTab.List className="flex px-4 -mb-px space-x-8">
             {navigation.categories.map((category) => (
               <HeadlessuiTab
                 key={category.name}
@@ -63,7 +63,7 @@ function ServiceDetailTabComponent() {
         </div>
         <HeadlessuiTab.Panels as={Fragment}>
           {navigation.categories.map((category) => (
-            <HeadlessuiTab.Panel key={category.name} className="pt-10 pb-8 px-4 space-y-10">
+            <HeadlessuiTab.Panel key={category.name} className="px-4 pt-10 pb-8 space-y-10">
               <div key={category.name}>
                 {category.content}
               </div>
