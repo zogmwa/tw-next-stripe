@@ -16,3 +16,14 @@
     @apply text-primary;
   }
 }
+
+
+/* Service Detail Card */
+.service-detail-card .gr-icon-share {
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.service-detail-card .gr-primary path {
+  stroke: rgb(59, 130, 246);
+}

@@ -35,6 +35,7 @@ const asset1 = {
   reviews_count: 1000,
   avg_rating: '8.1000',
   users_count: 1100,
+  website: "http://mailchimp.com/"
 }
 const asset2 = {
   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
