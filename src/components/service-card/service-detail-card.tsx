@@ -46,7 +46,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
               <span className="text-primary text-xs">Own this Service?</span>
             </div>
           </div>
-          <TruncatedDescription description={service.description} />
+          {service.short_description ? <TruncatedDescription description={service.short_description} /> : null}
           <div className="flex space-x-2 text-sm mt-2 sm:space-x-4 md:divide-x">
             <div className="flex items-end space-x-2">
               <AiOutlineStar className="text-primary self-center" />
