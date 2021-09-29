@@ -21,7 +21,7 @@ export default function Service() {
   const { isLoading, data, error } = useQuery(['services', slug], () => fetchService(slug))
   const elements = [
     {
-      id: 'products',
+      id: 'products-information',
       name: 'Product Information',
       content: (
         <ProductContent />
@@ -56,8 +56,8 @@ export default function Service() {
       )
     },
     {
-      id: 'related',
-      name: 'Related',
+      id: 'related-products',
+      name: 'Related Products',
       content: (
         <RelatedContent />
       )

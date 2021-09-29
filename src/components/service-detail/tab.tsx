@@ -19,7 +19,7 @@ function ServiceDetailTabComponent({ elements }) {
                       return 'text-gray-900 border-transparent';
                     }
                   })(),
-                  'flex-1 whitespace-nowrap py-2 px-1 border-b-2 text-base font-medium focus:outline-none focus:ring-0 focus:ring-offset-0'
+                  'flex-1 whitespace-nowrap py-2 px-1 border-b-2 text-sm font-medium focus:outline-none focus:ring-0 focus:ring-offset-0'
                 )}
               >
                 {item.name}

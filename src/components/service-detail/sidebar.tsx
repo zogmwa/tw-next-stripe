@@ -4,7 +4,7 @@ function ServiceDetailSidebarComponent({ elements }) {
   return (
     <div className="hidden md:flex">
       <div className="flex w-48">
-        <nav className="sticky top-0 w-48 h-48 p-2 bg-white border border-solid rounded-md shadow border-grey-200">
+        <nav className="sticky top-0 w-48 p-2 bg-white border border-solid rounded-md shadow h-44 border-grey-200">
           {elements.map(item => (
             <ScrollableLink 
               href={`#scrollable-${item.id}`}
@@ -12,7 +12,7 @@ function ServiceDetailSidebarComponent({ elements }) {
               activeClassName={'bg-secondary text-primary border-secondary font-semibold rounded-sm'}
             >
               <a
-                className="block mx-1 my-0.5 px-1 py-0.5 text-text-secondary font-sm cursor-pointer focus:ring-0 focus:ring-offset-0" 
+                className="block mx-1 my-0.5 px-1 py-0.5 text-sm text-text-secondary font-sm cursor-pointer focus:ring-0 focus:ring-offset-0" 
                 href={`#scrollable-${item.id}`}>
                   {item.name}
               </a>
