@@ -28,7 +28,6 @@ export default function Login() {
 
   const { query } = useRouter()
   const { linkedInError } = query as { linkedInError: string }
-  const [signingIn, setSigningIn] = useState(false)
   const { signInWithEmailAndPassword } = useUserContext()
 
   const router = useRouter()
@@ -65,15 +64,13 @@ export default function Login() {
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
           onSubmit={async ({ email, password }) => {
-            setSigningIn(true)
             const success = await signInWithEmailAndPassword(email, password)
-            setSigningIn(false)
             if (success) {
               router.push('/')
             }
           }}
         >
-          {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
+          {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
                 Email
@@ -103,7 +100,7 @@ export default function Login() {
                 success={touched.password && !errors.password}
               />
               <div className="flex items-center space-x-4">
-                <Button buttonType="primary" loading={signingIn}>
+                <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                   Login
                 </Button>
                 <div className="text-xs lg:text-sm text-text-secondary">
