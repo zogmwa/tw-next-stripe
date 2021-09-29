@@ -32,7 +32,6 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
           <div className="flex justify-start space-x-2">
             <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
             <a href={service.website ?? '#'} target={service.website ? '_blank': ''} className="self-center">
-              <GrShare className="gr-primary gr-icon-share md:hidden" />
               <Button
                 className="hidden md:inline-flex"
                 size="small"
@@ -57,7 +56,7 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
             </div>
             <div className="flex items-end space-x-2 md:pl-4">
               <BsChevronUp className="text-primary self-center" />
-              <span className="">{service.upvotes_count}</span>
+              <span>{service.upvotes_count}</span>
               <span className="text-text-secondary text-xs">{numeral(service.users_count).format('0.[0]a')} Users</span>
             </div>
           </div>
@@ -72,12 +71,30 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
           </div>
         </div>
       </div>
+      <div className="flex justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
+        <a href={service.website ?? '#'} target={service.website ? '_blank': ''} className="self-center">
+          <Button
+            className="inline-flex w-40 md:hidden"
+            size="small"
+            icon={<GrShare className="gr-primary gr-icon-share"/>}
+          >
+            Visit Website
+          </Button>
+        </a>
+        <div className="flex justify-center items-center cursor-pointer space-x-2 w-40 md:hidden">
+          <AiOutlineInfoCircle className="text-primary" />
+          <span className="text-primary text-xs">Own this Service?</span>
+        </div>
+      </div>
       <div className="flex flex-row justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
-        <Button className="w-40 space-x-2" icon={<AiOutlineInfoCircle className="text-primary" />}>
-          Claim this page
+        <Button className="w-40 inline-flex md:hidden">
+          I've used this
         </Button>
-        <Button className="w-40" buttonType="primary">
-          I have used this
+        <Button className="w-40 space-x-2" buttonType="primary" icon={<BsChevronUp className="text-white self-center" />}>
+          {`Upvote ${service.upvotes_count}`}
+        </Button>
+        <Button className="w-40 hidden md:inline-flex">
+          I've used this
         </Button>
       </div>
     </div>
