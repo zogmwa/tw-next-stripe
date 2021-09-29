@@ -4,6 +4,7 @@ import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
+import numeral from 'numeral'
 
 type ServiceDetailCardProps = {
   service: Asset
@@ -32,13 +33,13 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
               <AiOutlineStar className="text-primary self-center" />
               <span>{rating}</span>
               <span className="text-text-secondary text-xs">
-                {service.reviews_count} Reviews
+                {numeral(service.reviews_count).format('0.[0]a')} Reviews
               </span>
             </div>
             <div className="flex items-end space-x-2">
               <BsChevronUp className="text-primary self-center" />
               <span className="">{service.upvotes_count}</span>
-              <span className="text-text-secondary text-xs">{service.users_count} Users</span>
+              <span className="text-text-secondary text-xs">{numeral(service.users_count).format('0.[0]a')} Users</span>
             </div>
           </div>
           <div className="flex flex-row flex-wrap mb-5">

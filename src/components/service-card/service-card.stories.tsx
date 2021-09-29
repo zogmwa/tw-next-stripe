@@ -34,7 +34,7 @@ const asset1 = {
   has_free_trial: 'true',
   reviews_count: 1000,
   avg_rating: '8.1000',
-  users_count: 1000,
+  users_count: 1100,
 }
 const asset2 = {
   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
@@ -51,9 +51,9 @@ const asset2 = {
   slug: 'campaign-monitor',
   id: 2,
   has_free_trial: 'false',
-  reviews_count: 1000,
+  reviews_count: 457,
   avg_rating: '10.000',
-  users_count: 1000,
+  users_count: 102,
 }
 
 export function DefaultCard() {
