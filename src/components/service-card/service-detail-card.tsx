@@ -12,6 +12,8 @@ type ServiceDetailCardProps = {
 }
 
 function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
+  if (typeof service === 'undefined') return null
+  
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -20,7 +22,6 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
     return numeral(_rating ?? 0).format('0.[0]')
   }, [service.avg_rating])
 
-  if (typeof service === 'undefined') return null
 
   return (
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
