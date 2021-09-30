@@ -30,7 +30,8 @@
 /* Remove cursor border in Search Component */
 #react-select-true-input {
   box-shadow: none;
-  
+}
+
 /* Hide scrollbar in Tablist in mobile view */
 .tablist::-webkit-scrollbar {
   display: none;
