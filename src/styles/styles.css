@@ -27,12 +27,17 @@
   stroke: rgb(59, 130, 246);
 }
 
+/* Remove cursor border in Search Component */
+#react-select-true-input {
+  box-shadow: none;
+}
+
 /* Hide scrollbar in Tablist in mobile view */
 .tablist::-webkit-scrollbar {
   display: none;
 }
 
 .tablist {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

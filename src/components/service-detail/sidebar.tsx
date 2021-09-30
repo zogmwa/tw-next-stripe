@@ -1,3 +1,4 @@
+import React from 'react'
 import ScrollableLink from './scrollable-link'
 
 function ServiceDetailSidebarComponent({ elements }) {

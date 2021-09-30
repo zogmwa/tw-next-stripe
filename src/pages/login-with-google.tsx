@@ -11,13 +11,13 @@ import { Spinner } from '../components/spinner'
 export default function LoginWithGoogle() {
   const { push } = useRouter()
 
-  var params = {}
+  const params = {}
   // Parse Hash part of URL
   if (typeof document !== 'undefined') {
-    var fragmentString = location.hash.substring(1)
+    const fragmentString = location.hash.substring(1)
     // Parse query string to see if page request is coming from OAuth 2.0 server.
-    var regex = /([^&=]+)=([^&]*)/g,
-      m
+    const regex = /([^&=]+)=([^&]*)/g
+    let m
     while ((m = regex.exec(fragmentString))) {
       params[decodeURIComponent(m[1])] = decodeURIComponent(m[2])
     }

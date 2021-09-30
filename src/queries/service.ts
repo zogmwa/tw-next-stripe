@@ -9,7 +9,7 @@ export type CreateServiceInput = {
   website: string
   logoUrl?: string
   promoVideo?: string
-  snapshots?: string[]
+  snapshots?: { asset: number, url: string }[]
 }
 
 export async function createService(createServiceInput: CreateServiceInput): Promise<Service> {

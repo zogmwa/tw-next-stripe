@@ -1,3 +1,4 @@
+import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { ServiceDetailSidebar } from './service-detail-sidebar'
 
@@ -7,7 +8,5 @@ export default {
 } as Meta
 
 export function DefaultServiceDetailSidebar() {
-  return (
-    <ServiceDetailSidebar />
-  )
+  return <ServiceDetailSidebar />
 }

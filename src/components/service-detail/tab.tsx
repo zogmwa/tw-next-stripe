@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Tab as HeadlessuiTab } from '@headlessui/react'
 import clsx from 'clsx'
 
@@ -11,16 +11,18 @@ function ServiceDetailTabComponent({ elements }) {
             {elements.map((item) => (
               <HeadlessuiTab
                 key={`service-detail-tablist-${item.id}`}
-                className={({ selected }) => clsx(
-                  (() => {
-                    if (selected) {
-                      return 'text-primary border-primary';
-                    } else {
-                      return 'text-gray-900 border-transparent';
-                    }
-                  })(),
-                  'flex-1 whitespace-nowrap py-2 px-1 border-b-2 text-sm font-medium focus:outline-none focus:ring-0 focus:ring-offset-0'
-                )}
+                className={({ selected }) =>
+                  clsx(
+                    (() => {
+                      if (selected) {
+                        return 'text-primary border-primary'
+                      } else {
+                        return 'text-gray-900 border-transparent'
+                      }
+                    })(),
+                    'flex-1 whitespace-nowrap py-2 px-1 border-b-2 text-sm font-medium focus:outline-none focus:ring-0 focus:ring-offset-0',
+                  )
+                }
               >
                 {item.name}
               </HeadlessuiTab>
@@ -30,9 +32,7 @@ function ServiceDetailTabComponent({ elements }) {
         <HeadlessuiTab.Panels as={Fragment}>
           {elements.map((item) => (
             <HeadlessuiTab.Panel key={`service-detail-tabpanel-${item.id}`} className="px-4 pt-10 pb-8 space-y-10">
-              <div>
-                {item.content}
-              </div>
+              <div>{item.content}</div>
             </HeadlessuiTab.Panel>
           ))}
         </HeadlessuiTab.Panels>

@@ -7,15 +7,10 @@ const ScrollableLink = ({ children, activeClassName, href }) => {
   const { asPath } = useRouter()
   const child = Children.only(children)
   const childClassName = child.props.className || ''
-  const className =
-    asPath.endsWith(href)
-      ? `${childClassName} ${activeClassName}`.trim()
-      : childClassName
+  const className = asPath.endsWith(href) ? `${childClassName} ${activeClassName}`.trim() : childClassName
 
   return (
-    <NextLink 
-      href={href}
-    >
+    <NextLink href={href}>
       {React.cloneElement(child, {
         className: className || null,
       })}

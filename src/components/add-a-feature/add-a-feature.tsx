@@ -13,13 +13,14 @@ function AddAFeatureComponent() {
   return (
     <div>
       <div className="flex">
-        <div className="font-bold flex-grow">Add a Feature</div>
+        <div className="flex-grow font-bold">Add a Feature</div>
         <div>
           Con
           <Switch
             className="ml-4 mr-4"
             enabled={enabled}
             setEnabled={(isEnabled: boolean) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const featureType = isEnabled ? 'pro' : 'con'
               setEnabled(isEnabled)
             }}
@@ -27,7 +28,7 @@ function AddAFeatureComponent() {
           Pro
         </div>
       </div>
-      <Textarea className="w-full mb-4 mt-4" placeholder="Write something..." />
+      <Textarea className="w-full mt-4 mb-4" placeholder="Write something..." />
       <div className="flex flex-row-reverse">
         <Button className="ml-4" buttonType="primary" type="submit">
           Add
