@@ -23,44 +23,32 @@ export default function Service() {
     {
       id: 'products-information',
       name: 'Product Information',
-      content: (
-        <ProductContent />
-      )
+      content: <ProductContent service={data as Asset} />,
     },
     {
       id: 'features',
       name: 'Features',
-      content: (
-        <FeaturesContent />
-      )
+      content: <FeaturesContent />,
     },
     {
       id: 'pricing',
       name: 'Pricing',
-      content: (
-        <PricingContent />
-      )
+      content: <PricingContent />,
     },
     {
       id: 'qa',
       name: 'Q & A',
-      content: (
-        <QaContent />
-      )
+      content: <QaContent />,
     },
     {
       id: 'reviews',
       name: 'Reviews',
-      content: (
-        <ReviewsContent />
-      )
+      content: <ReviewsContent />,
     },
     {
       id: 'related-products',
       name: 'Related Products',
-      content: (
-        <RelatedContent />
-      )
+      content: <RelatedContent />,
     },
   ]
 
