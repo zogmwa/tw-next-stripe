@@ -86,10 +86,22 @@ export function DetailCard() {
   return (
     <ul className="flex flex-col justify-start pb-8 divide-y divide">
       <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
-        <ServiceDetailCard service={asset1} />
+        <ServiceDetailCard
+          service={asset1}
+          onToggleCompare={(isCompared) => {
+            // eslint-disable-next-line no-console
+            console.log(isCompared)
+          }}
+        />
       </li>
-      <li className="max-w-full transition duration-500 ease-in-out bg-background-surface hover:bg-background-light mt-2">
-        <ServiceDetailCard service={asset2} />
+      <li className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
+        <ServiceDetailCard
+          service={asset2}
+          onToggleCompare={(isCompared) => {
+            // eslint-disable-next-line no-console
+            console.log(isCompared)
+          }}
+        />
       </li>
     </ul>
   )
