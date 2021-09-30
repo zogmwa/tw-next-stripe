@@ -13,12 +13,15 @@ client.interceptors.request.use((config) => {
   const tokenType = 'Bearer'
 
   // We don't want to send tokens in the headers for certain endpoints
-  if (config.url.startsWith('/dj-rest-auth/linkedin/connect') || !(config.url.startsWith('/dj-rest-auth') || config.url.startsWith('/token/refresh'))) {
+  if (!(config.url.startsWith('/dj-rest-auth') || config.url.startsWith('/token/refresh'))) {
     config.headers = {
       ...config.headers,
       Authorization: `${tokenType} ${accessToken}`,
     }
-  } else if (config.url.startsWith('/dj-rest-auth/linkedin/connect')) {
+  } else if (
+    config.url.startsWith('/dj-rest-auth/linkedin/connect') ||
+    config.url.startsWith('/dj-rest-auth/google/connect')
+  ) {
     // For social account connects we will require the user to be logged in first
     config.headers = {
       ...config.headers,
