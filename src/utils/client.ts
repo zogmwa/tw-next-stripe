@@ -13,7 +13,7 @@ client.interceptors.request.use((config) => {
   const tokenType = 'Bearer'
 
   // We don't want to send tokens in the headers for certain endpoints
-  if (!(config.url.startsWith('/dj-rest-auth') || config.url.startsWith('/token/refresh'))) {
+  if (!(config.url.startsWith('/dj-rest-auth') || config.url.startsWith('/token/refresh') || (config.method === 'get' && config.url.startsWith('/assets')))) {
     config.headers = {
       ...config.headers,
       Authorization: `${tokenType} ${accessToken}`,
