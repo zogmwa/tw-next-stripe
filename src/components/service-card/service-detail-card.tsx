@@ -19,16 +19,10 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
       onToggleCompare((event.target as HTMLInputElement).checked)
     }
   }
-
-  const rating = useMemo(() => {
-    let _rating = service.avg_rating
-    if (typeof _rating === 'string') {
-      _rating = Number.parseFloat(_rating)
-    }
-    return numeral(_rating ?? 0).format('0.[0]')
-  }, [service.avg_rating])
-
+  
   if (typeof service === 'undefined') return null
+
+  const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
 
   return (
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">

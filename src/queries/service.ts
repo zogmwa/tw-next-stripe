@@ -1,4 +1,4 @@
-import { Service } from '../types/service'
+import { Asset } from '../types/asset'
 import { client } from '../utils/client'
 
 export type CreateServiceInput = {
@@ -9,11 +9,11 @@ export type CreateServiceInput = {
   website: string
   logoUrl?: string
   promoVideo?: string
-  snapshots?: string[]
+  snapshots?: { asset: number, url: string }[]
 }
 
-export async function createService(createServiceInput: CreateServiceInput): Promise<Service> {
-  const { data } = await client.post<Service>('/assets/', {
+export async function createService(createServiceInput: CreateServiceInput): Promise<Asset> {
+  const { data } = await client.post<Asset>('/assets/', {
     slug: createServiceInput.slug,
     name: createServiceInput.name,
     short_description: createServiceInput.shortDescription,
@@ -26,7 +26,7 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
   return data
 }
 
-export async function fetchService(slug: string): Promise<Service> {
-  const { data } = await client.get<Service>(`/assets/${slug}`)
+export async function fetchService(slug: string): Promise<Asset> {
+  const { data } = await client.get<Asset>(`/assets/${slug}`)
   return data
 }

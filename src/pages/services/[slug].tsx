@@ -23,7 +23,7 @@ export default function Service() {
     {
       id: 'products-information',
       name: 'Product Information',
-      content: <ProductContent />,
+      content: <ProductContent service={data as Asset} />,
     },
     {
       id: 'features',
