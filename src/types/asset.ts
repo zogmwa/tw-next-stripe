@@ -21,5 +21,5 @@ export type Asset = {
   avg_rating?: string | number
   users_count?: number // not in backend yet
   questions?: ServiceQuestion[]
-  snapshots?: { asset: number, url: string }[]
+  snapshots?: { asset: number; url: string }[]
 }

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { BsChevronUp } from 'react-icons/bs'
 import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
@@ -19,7 +19,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
       onToggleCompare((event.target as HTMLInputElement).checked)
     }
   }
-  
+
   if (typeof service === 'undefined') return null
 
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')

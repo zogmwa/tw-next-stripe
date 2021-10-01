@@ -1,3 +1,4 @@
+import React from 'react'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
 
@@ -20,7 +21,7 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
           {promo_video !== '' && (
             <Carousel.Item>
               <video className="object-contain">
-                <source src={promo_video}></source>
+                <source src={promo_video} />
               </video>
             </Carousel.Item>
           )}

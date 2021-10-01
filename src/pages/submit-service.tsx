@@ -14,7 +14,7 @@ import {
   detailedInformationSchema,
 } from '../components/submit-serivce/detailed-information-form'
 import { createService, CreateServiceInput } from '../queries/service'
-import { Service } from '../types/service'
+import { Asset } from '../types/asset'
 import { Stepper } from '../components/stepper'
 import { Button } from '../components/button'
 
@@ -65,8 +65,8 @@ export default function SubmitService() {
   const [uploadingImages, setUploadingImages] = useState(false)
 
   const queryClient = useQueryClient()
-  const { isLoading, mutate } = useMutation((service: CreateServiceInput) => createService(service), {
-    onSuccess: (serviceCreated: Service) => {
+  const { isLoading, mutate } = useMutation((Asset: CreateServiceInput) => createService(Asset), {
+    onSuccess: (serviceCreated: Asset) => {
       queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
       push(`/services/${serviceCreated.slug}`)
     },
