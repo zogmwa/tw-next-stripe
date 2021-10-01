@@ -26,7 +26,7 @@ module.exports = {
           secondary: gray['500'],
           tertiary: gray['400'],
           'on-surface': colors.white,
-          error: colors.red['500']
+          error: colors.red['500'],
         },
 
         border: {
