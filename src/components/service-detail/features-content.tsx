@@ -22,10 +22,8 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
   const attributes = service.attributes ?? []
 
   let tempAttributes = attributes
-  if (!isCon)
-    tempAttributes = attributes.filter(attribute => attribute.is_con === isCon)
-  if (!viewMore)
-    tempAttributes = tempAttributes.slice(0, 10)
+  if (!isCon) tempAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
+  if (!viewMore) tempAttributes = tempAttributes.slice(0, 10)
 
   return (
     <div className="ml-3 md:mt-10">
@@ -47,7 +45,7 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
       </div>
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
-          {tempAttributes.map(attribute => {
+          {tempAttributes.map((attribute) => {
             if (isCon)
               return (
                 <div className="mt-2" key={attribute.name}>
@@ -98,10 +96,11 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
                   <span className="ml-2 text-sm text-black">{attribute.name}</span>
                 </div>
               )
-          })
-          }
+          })}
         </div>
-        {tempAttributes.length > 0 && ((attributes.length != defaultShowCount) && (tempAttributes.length >= defaultShowCount)) ? (
+        {tempAttributes.length > 0 &&
+        attributes.length != defaultShowCount &&
+        tempAttributes.length >= defaultShowCount ? (
           viewMore ? (
             <div
               className="flex self-start w-24 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
