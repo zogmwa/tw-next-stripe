@@ -76,7 +76,7 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
-                  <span className="ml-2 text-sm text-black">{attribute.name}</span>
+                  <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                 </div>
               )
             else
@@ -87,13 +87,14 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
                     className={
                       isVoted
                         ? 'self-start text-background-light bg-primary'
-                        : 'self-start text-black border-text-tertiary'
+                        : 'self-start text-text-secondary border-text-tertiary'
                     }
-                    icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-black'} />}
+                    textClassName="text-text-secondary"
+                    icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-text-secondary'} />}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
-                  <span className="ml-2 text-sm text-black">{attribute.name}</span>
+                  <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                 </div>
               )
           })}
@@ -118,9 +119,7 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
               <HiChevronDown className="self-center ml-2 text-text-tertiary" />
             </div>
           )
-        ) : (
-          ''
-        )}
+        ) : null}
       </div>
       <div className="mt-6 md:mt-4">
         <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
