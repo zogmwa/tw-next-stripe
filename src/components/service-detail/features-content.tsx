@@ -21,6 +21,12 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
   const logoUrl = service.logo_url ?? ''
   const attributes = service.attributes ?? []
 
+  let tempAttributes = attributes
+  if (!isCon)
+    tempAttributes = attributes.filter(attribute => attribute.is_con === isCon)
+  if (!viewMore)
+    tempAttributes = tempAttributes.slice(0, 10)
+
   return (
     <div className="ml-3 md:mt-10">
       <div className="flex justify-between">
@@ -41,119 +47,61 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
       </div>
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
-          {attributes.length > 0 &&
-            attributes.map((attribute) => {
-              if (viewMore) {
-                if (isCon)
-                  return (
-                    <div className="mt-2" key={attribute.name}>
-                      <Button
-                        size="small"
+          {tempAttributes.map(attribute => {
+            if (isCon)
+              return (
+                <div className="mt-2" key={attribute.name}>
+                  <Button
+                    size="small"
+                    className={
+                      attribute.is_con
+                        ? isVoted
+                          ? 'self-start text-background-light bg-text-error border-text-error'
+                          : 'self-start text-text-error border-text-error'
+                        : isVoted
+                        ? 'self-start text-background-light bg-success border-success'
+                        : 'self-start text-success border-success'
+                    }
+                    icon={
+                      <HiChevronUp
                         className={
                           attribute.is_con
                             ? isVoted
-                              ? 'self-start text-background-light bg-text-error border-text-error'
-                              : 'self-start text-text-error border-text-error'
+                              ? 'text-background-light'
+                              : 'text-text-error'
                             : isVoted
-                            ? 'self-start text-background-light bg-success border-success'
-                            : 'self-start text-success border-success'
+                            ? 'text-background-light'
+                            : 'text-success'
                         }
-                        icon={
-                          <HiChevronUp
-                            className={
-                              attribute.is_con
-                                ? isVoted
-                                  ? 'text-background-light'
-                                  : 'text-text-error'
-                                : isVoted
-                                ? 'text-background-light'
-                                : 'text-success'
-                            }
-                          />
-                        }
-                      >
-                        {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
-                      </Button>
-                      <span className="ml-2 text-sm text-black">{attribute.name}</span>
-                    </div>
-                  )
-                else if (!attribute.is_con)
-                  return (
-                    <div className="mt-2" key={attribute.name}>
-                      <Button
-                        size="small"
-                        className={
-                          isVoted
-                            ? 'self-start text-background-light bg-primary'
-                            : 'self-start text-black border-text-tertiary'
-                        }
-                        icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-black'} />}
-                      >
-                        {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
-                      </Button>
-                      <span className="ml-2 text-sm text-black">{attribute.name}</span>
-                    </div>
-                  )
-              } else {
-                if (showedCount < defaultShowCount) {
-                  if (isCon) {
-                    showedCount++
-                    return (
-                      <div className="mt-2" key={attribute.name}>
-                        <Button
-                          size="small"
-                          className={
-                            attribute.is_con
-                              ? isVoted
-                                ? 'self-start text-background-light bg-text-error border-text-error'
-                                : 'self-start text-text-error border-text-error'
-                              : isVoted
-                              ? 'self-start text-background-light bg-success border-success'
-                              : 'self-start text-success border-success'
-                          }
-                          icon={
-                            <HiChevronUp
-                              className={
-                                attribute.is_con
-                                  ? isVoted
-                                    ? 'text-background-light'
-                                    : 'text-text-error'
-                                  : isVoted
-                                  ? 'text-background-light'
-                                  : 'text-success'
-                              }
-                            />
-                          }
-                        >
-                          {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
-                        </Button>
-                        <span className="ml-2 text-sm text-black">{attribute.name}</span>
-                      </div>
-                    )
-                  } else if (!attribute.is_con) {
-                    showedCount++
-                    return (
-                      <div className="mt-2" key={attribute.name}>
-                        <Button
-                          size="small"
-                          className={
-                            isVoted
-                              ? 'self-start text-background-light bg-primary'
-                              : 'self-start text-black border-text-tertiary'
-                          }
-                          icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-black'} />}
-                        >
-                          {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
-                        </Button>
-                        <span className="ml-2 text-sm text-black">{attribute.name}</span>
-                      </div>
-                    )
-                  }
-                }
-              }
-            })}
+                      />
+                    }
+                  >
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
+                  </Button>
+                  <span className="ml-2 text-sm text-black">{attribute.name}</span>
+                </div>
+              )
+            else
+              return (
+                <div className="mt-2" key={attribute.name}>
+                  <Button
+                    size="small"
+                    className={
+                      isVoted
+                        ? 'self-start text-background-light bg-primary'
+                        : 'self-start text-black border-text-tertiary'
+                    }
+                    icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-black'} />}
+                  >
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
+                  </Button>
+                  <span className="ml-2 text-sm text-black">{attribute.name}</span>
+                </div>
+              )
+          })
+          }
         </div>
-        {attributes.length > 0 && (showedCount === 0 || showedCount >= defaultShowCount) ? (
+        {tempAttributes.length > 0 && ((attributes.length != defaultShowCount) && (tempAttributes.length >= defaultShowCount)) ? (
           viewMore ? (
             <div
               className="flex self-start w-24 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
