@@ -22,4 +22,5 @@ export type Asset = {
   users_count?: number // not in backend yet
   questions?: ServiceQuestion[]
   snapshots?: { asset: number, url: string }[]
+  attributes?: { name: string, is_con: boolean, upvotes_count: string | number }[]
 }
