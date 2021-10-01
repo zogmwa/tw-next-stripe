@@ -70,7 +70,7 @@ function ButtonComponent(
     >
       {loading ? <Spinner className="!text-text-on-surface" /> : null}
       {iconPlacement === 'left' ? icon : null}
-      <span className={clsx("font-medium", textClassName)}>{children}</span>
+      <span className={clsx('font-medium', textClassName)}>{children}</span>
       {iconPlacement === 'right' ? icon : null}
     </button>
   )
