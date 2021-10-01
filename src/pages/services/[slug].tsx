@@ -18,7 +18,7 @@ export default function Service() {
   const { slug } = query as { slug: string }
   // @TODO: Use isLoading, error
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isLoading, data, error } = useQuery(['services', slug], () => fetchService(slug))
+  const { isLoading, data, error } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`))
   const elements = [
     {
       id: 'products-information',
@@ -28,7 +28,7 @@ export default function Service() {
     {
       id: 'features',
       name: 'Features',
-      content: <FeaturesContent />,
+      content: <FeaturesContent service={data as Asset} />,
     },
     {
       id: 'pricing',

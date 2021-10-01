@@ -7,7 +7,7 @@ export type ButtonProps = Omit<
   'children'
 > & {
   loading?: boolean
-  children?: string
+  children?: string | number
   buttonType?: 'default' | 'primary' | 'tag'
   error?: boolean
   icon?: React.ReactNode
