@@ -7,12 +7,13 @@ export type ButtonProps = Omit<
   'children'
 > & {
   loading?: boolean
-  children?: string
+  children?: string | number
   buttonType?: 'default' | 'primary' | 'tag'
   error?: boolean
   icon?: React.ReactNode
   iconPlacement?: 'left' | 'right'
   size?: 'small' | 'default'
+  textClassName?: string
 }
 
 function ButtonComponent(
@@ -26,6 +27,7 @@ function ButtonComponent(
     loading,
     className,
     style,
+    textClassName,
     ...restProps
   }: ButtonProps,
   ref: React.Ref<HTMLButtonElement>,
@@ -68,7 +70,7 @@ function ButtonComponent(
     >
       {loading ? <Spinner className="!text-text-on-surface" /> : null}
       {iconPlacement === 'left' ? icon : null}
-      <span className="font-medium">{children}</span>
+      <span className={clsx('font-medium', textClassName)}>{children}</span>
       {iconPlacement === 'right' ? icon : null}
     </button>
   )
