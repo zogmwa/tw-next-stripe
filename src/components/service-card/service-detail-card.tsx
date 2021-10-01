@@ -6,14 +6,20 @@ import numeral from 'numeral'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
+import { Checkbox } from '../checkbox'
 
 type ServiceDetailCardProps = {
   service: Asset
+  onToggleCompare?: (bool: any) => void
 }
 
-function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
-  if (typeof service === 'undefined') return null
-  
+function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailCardProps) {
+  const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (onToggleCompare) {
+      onToggleCompare((event.target as HTMLInputElement).checked)
+    }
+  }
+
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -22,12 +28,17 @@ function ServiceDetailCardComponent({ service }: ServiceDetailCardProps) {
     return numeral(_rating ?? 0).format('0.[0]')
   }, [service.avg_rating])
 
+  if (typeof service === 'undefined') return null
 
   return (
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
           <img src={service.logo_url} alt="Web Service" className="object-contain h-[72px] w-[72px] rounded-md" />
+          <div className="flex items-center space-x-2">
+            <Checkbox onChange={onCompare} />
+            <div className="text-xs uppercase text-text-tertiary">Compare</div>
+          </div>
         </div>
         <div className="flex-1">
           <div className="flex justify-start space-x-2">

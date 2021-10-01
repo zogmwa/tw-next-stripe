@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
