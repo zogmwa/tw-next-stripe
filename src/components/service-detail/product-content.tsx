@@ -1,3 +1,4 @@
+import React from 'react'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
 
@@ -15,12 +16,12 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
     <div className="ml-3">
       <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
       <p className="space-y-2 text-sm text-text-secondary">Screenshots</p>
-      {promo_video !== '' && images.length > 0 && (
+      {(promo_video !== '' || images.length > 0) && (
         <Carousel className="mt-2">
           {promo_video !== '' && (
             <Carousel.Item>
               <video className="object-contain">
-                <source src={promo_video}></source>
+                <source src={promo_video} />
               </video>
             </Carousel.Item>
           )}

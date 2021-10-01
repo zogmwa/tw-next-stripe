@@ -9,7 +9,7 @@ import { ImageUploader } from '../image-uploader'
 export type DetailedInformationFormValues = {
   description: string
   promoVideo: string | undefined
-  snapshots: string[]
+  snapshots: { asset: number; url: string }[]
 }
 
 // @TODO: Update min max limits according to api
