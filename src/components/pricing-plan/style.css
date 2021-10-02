@@ -1,0 +1,20 @@
+.rec.rec-arrow {
+  color: #e5e7eb;
+  box-shadow: none;
+  font-size: 1rem;
+  border: none;
+
+  /* padding: 0; */
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  line-height: 20px;
+}
+.rec.rec-arrow:hover {
+  background-color: #e5e7eb;
+  color: white;
+}
+.rec.rec-arrow:focus {
+  background-color: #e5e7eb;
+  color: white;
+}

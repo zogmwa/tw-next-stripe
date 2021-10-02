@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Switch } from '../switch'
-import { Button } from '../button'
+import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { Switch } from '../switch'
+import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
 
@@ -11,13 +11,13 @@ type ServiceDetailFeatureProps = {
 }
 
 function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
-  if (typeof service === 'undefined') return null
-
-  let showedCount = 0
-  const isVoted = false // upvoted status for testing without api.
-  const defaultShowCount = 10
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
+  if (typeof service === 'undefined') return null
+
+  const isVoted = false // upvoted status for testing without api.
+  const defaultShowCount = 10
+
   const logoUrl = service.logo_url ?? ''
   const attributes = service.attributes ?? []
 
@@ -46,7 +46,7 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
           {tempAttributes.map((attribute) => {
-            if (isCon)
+            if (isCon) {
               return (
                 <div className="mt-2" key={attribute.name}>
                   <Button
@@ -79,7 +79,7 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                 </div>
               )
-            else
+            } else {
               return (
                 <div className="mt-2" key={attribute.name}>
                   <Button
@@ -97,10 +97,11 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                 </div>
               )
+            }
           })}
         </div>
         {tempAttributes.length > 0 &&
-        attributes.length != defaultShowCount &&
+        attributes.length !== defaultShowCount &&
         tempAttributes.length >= defaultShowCount ? (
           viewMore ? (
             <div
