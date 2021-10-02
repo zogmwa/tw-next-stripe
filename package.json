@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint --no-error-on-unmatched-pattern --fix *.js ./src/**/*.{ts,tsx,js}",
     "format": "prettier --write --no-error-on-unmatched-pattern src/**/*.{js,ts,tsx,css,json} *.{js,json}",
+    "validate-format": "prettier --check --no-error-on-unmatched-pattern src/**/*.{js,ts,tsx,css,json} *.{js,json}",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
