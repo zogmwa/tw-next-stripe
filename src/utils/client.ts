@@ -16,7 +16,7 @@ client.interceptors.request.use((config) => {
   if (
     !(
       config.url.startsWith('/dj-rest-auth') ||
-      config.url.startsWith('/token/refresh') ||
+      config.url.startsWith('/api/token/refresh') ||
       (config.method === 'get' && config.url.startsWith('/assets'))
     )
   ) {
@@ -26,9 +26,12 @@ client.interceptors.request.use((config) => {
     }
   } else if (
     config.url.startsWith('/dj-rest-auth/linkedin/connect') ||
-    config.url.startsWith('/dj-rest-auth/google/connect')
+    config.url.startsWith('/dj-rest-auth/google/connect') ||
+    config.url.startsWith('/dj-rest-auth/user/') ||
+    config.url.startsWith('/dj-rest-auth/logout/')
   ) {
     // For social account connects we will require the user to be logged in first
+    // For fetching user detail also we will require the user to be logged in
     config.headers = {
       ...config.headers,
       Authorization: `${tokenType} ${accessToken}`,
@@ -37,15 +40,26 @@ client.interceptors.request.use((config) => {
   return config
 })
 
+// Uncomment below code for logging all responses success/error for all requests. Might be useful for debugging
+// client.interceptors.response.use(
+//   function (response) {
+//     console.log('Request Success', response)
+//     return response
+//   },
+//   function (error) {
+//     console.log('Request Error', error)
+//     return Promise.reject(error)
+//   },
+// )
+
 createAuthRefreshInterceptor(client, async (failedResponse) => {
   const refreshToken = localStorage.getItem(process.env.REFRESH_TOKEN_LOCAL_STORAGE_KEY)
   const {
-    data: { access, refresh },
-  } = await axios.post<{ refresh: string; access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
+    data: { access },
+  } = await axios.post<{ access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
     refresh: refreshToken,
   })
   localStorage.setItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY, access)
-  localStorage.setItem(process.env.REFRESH_TOKEN_LOCAL_STORAGE_KEY, refresh)
   failedResponse.config.headers.Authorization = `Bearer ${access}`
   return Promise.resolve()
 })
