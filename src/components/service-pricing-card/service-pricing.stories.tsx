@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState, useRef } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { ServicePricingCard } from './service-pricing-card'
 import { PricingSelectNameMobile } from './pricing-select-name-mobile'
+import { PricingSelectNameDesktop } from './pricing-select-name-desktop'
 
 const plans = [
   {
@@ -40,11 +41,18 @@ export default {
 
 export function DefaultPricingCard() {
   const [selectedItem, setSelectedItem] = useState(0)
+  const carouselSlider = useRef(null)
+
+  const handleSelectedSlideItem = (index) => {
+    setSelectedItem(index)
+    carouselSlider.current.slickGoTo(index)
+  }
 
   return (
-    <>
-      <PricingSelectNameMobile pricePlans={plans} selected={selectedItem} onSelected={setSelectedItem} />
-      <ServicePricingCard pricePlans={plans} selected={selectedItem} onSelected={setSelectedItem} />
-    </>
+    <div className="w-full md:flex">
+      <PricingSelectNameDesktop pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} />
+      <PricingSelectNameMobile pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} />
+      <ServicePricingCard pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} carousel={carouselSlider} />
+    </div>
   )
 }

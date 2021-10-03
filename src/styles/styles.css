@@ -41,3 +41,13 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Change react slice next button view */
+.slick-prev, .slick-next {
+  font-size: 20px !important;
+}
+
+/* Change react slice prev button view */
+.slick-prev:before, .slick-next:before  {
+  content: '' !important;
+}

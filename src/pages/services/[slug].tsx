@@ -35,7 +35,7 @@ export default function Service() {
     {
       id: 'pricing',
       name: 'Pricing',
-      content: <PricingContent />,
+      content: <PricingContent service={data as Asset} />,
     },
     {
       id: 'qa',
