@@ -1,8 +1,8 @@
 import React from 'react'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { Button } from '../button'
 import { useUserContext } from '../../hooks/use-user'
-import Link from 'next/link'
 import Avatar from './avatar'
 
 type NavBarProps = {

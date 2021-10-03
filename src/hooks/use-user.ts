@@ -1,11 +1,11 @@
 import constate from 'constate'
 import { useCallback, useEffect, useReducer, useMemo } from 'react'
 import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/router'
 import { fetchUserDetail } from '../queries/user'
 import { User } from '../types/user'
 import { client } from '../utils/client'
 import { UserContextType } from '../types/user-context-type'
-import { useRouter } from 'next/router'
 
 type State = {
   authVerified: boolean
@@ -211,7 +211,7 @@ function useUser(): UserContextType {
             return
           }
           console.log('LOGGING OUT')
-          //revoke token access
+          // revoke token access
           await client.post('/dj-rest-auth/logout/')
           // delete tokens from localStorage
           window.localStorage.removeItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)

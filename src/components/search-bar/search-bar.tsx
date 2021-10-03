@@ -16,7 +16,7 @@ type SearchByTagsProps = {
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
-    <div className="hidden md:flex" style={{ lineHeight: '16px ' }}>
+    <div className="hidden md:flex leading-none">
       Start by typing tags of interest, e.g. investing, artificial-intelligence
     </div>
     <div className="md:hidden">Enter tags of interest</div>
