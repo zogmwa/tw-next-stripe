@@ -68,8 +68,16 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
                 Visit Website
               </Button>
             </a>
+            <Link href={`/services/${service.slug}/`}>
+              <div className="flex-1 cursor-pointer" />
+            </Link>
           </div>
-          {service.short_description ? <TruncatedDescription description={service.short_description} /> : null}
+          <div className="flex-1">
+            {service.short_description ? <TruncatedDescription description={service.short_description} /> : null}
+            <Link href={`/services/${service.slug}/`}>
+              <div className="flex-1 cursor-pointer" />
+            </Link>
+          </div>
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
@@ -90,37 +98,50 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
                 </Button>
               )
             })}
+            <Link href={`/services/${service.slug}/`}>
+              <div className="flex-1 cursor-pointer" />
+            </Link>
           </div>
-          <div className="flex items-center space-x-6 text-sm">
-            <div className="flex items-center space-x-2">
-              <BsChevronUp className="text-primary" />
-              <p className="text-text-secondary">{numeral(service.upvotes_count).format('0.[0]a')}</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <FiUsers className="text-primary" />
-              <p className="text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</p>
-            </div>
-            {service.has_free_trial === true && (
+          <Link href={`/services/${service.slug}/`}>
+            <div className="flex items-center space-x-6 text-sm cursor-pointer">
               <div className="flex items-center space-x-2">
-                <AiOutlineCheckCircle className="text-primary" />
-                <p className="text-text-secondary">Free Trial</p>
+                <BsChevronUp className="text-primary" />
+                <p className="text-text-secondary">{numeral(service.upvotes_count).format('0.[0]a')}</p>
               </div>
-            )}
+              <div className="flex items-center space-x-2">
+                <FiUsers className="text-primary" />
+                <p className="text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</p>
+              </div>
+              {service.has_free_trial === true && (
+                <>
+                  <div>|</div>
+                  <div className="flex items-center space-x-2">
+                    <AiOutlineCheckCircle className="text-primary" />
+                    <p className="text-text-secondary">Free Trial</p>
+                  </div>
+                </>
+              )}
+            </div>
+          </Link>
+        </div>
+      </div>
+      <Link href={`/services/${service.slug}/`}>
+        <div className="flex flex-row items-center justify-center space-x-4 cursor-pointer md:flex-col md:space-x-0 md:space-y-2">
+          <div className="flex items-center space-x-2 md:hidden">
+            <AiFillStar className="text-primary" />
+            <span className="mr-1 text-2xl font-bold">{rating}</span>
+            <span>/ 10</span>
+          </div>
+          <div className="items-center hidden space-x-2 md:flex md:flex-row">
+            <AiFillStar className="text-primary" />
+            <div className="flex mr-1 text-2xl font-bold">{rating}</div>
+            <div className="text-text-secondary">/10</div>
+          </div>
+          <div className="flex items-center justify-center text-sm text-text-secondary">
+            {service.reviews_count} Reviews
           </div>
         </div>
-      </div>
-      <div className="flex flex-row justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
-        <div className="flex inline-flex items-center w-40 space-x-2 md:hidden">
-          <AiFillStar className="text-primary" />
-          <span className="mr-1 text-2xl font-bold">{rating}</span>
-          <span>/ 10</span>
-        </div>
-        <div className="items-center hidden space-x-1 md:inline-flex">
-          <AiFillStar className="text-primary" />
-          <div className="flex mr-1 text-2xl font-bold">{rating}</div>
-        </div>
-        <p className="inline-flex text-sm text-text-secondary">{service.reviews_count} Reviews</p>
-      </div>
+      </Link>
     </div>
   )
 }
