@@ -16,7 +16,9 @@ type SearchByTagsProps = {
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
-    <div className="hidden md:flex">Start by typing tags of interest, e.g. investing, artificial-intelligence</div>
+    <div className="hidden md:flex" style={{ lineHeight: '16px ' }}>
+      Start by typing tags of interest, e.g. investing, artificial-intelligence
+    </div>
     <div className="md:hidden">Enter tags of interest</div>
   </div>
 )
@@ -83,7 +85,7 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
         defaultValue={defaultTags}
         isMulti
         name="tags"
-        components={{ DropdownIndicator: () => null }}
+        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
         instanceId
