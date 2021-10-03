@@ -9,7 +9,7 @@ type ServicePricingProps = {
 
 function PricingSelectNameDesktopComponent({ pricePlans, selected, onSelected }: ServicePricingProps) {
   return (
-    <div className="hidden md:px-2 md:flex md:flex-col md:w-44">
+    <div className="hidden md:px-4 md:flex md:flex-col md:w-48 md:justify-center">
       {pricePlans.map((item, index) => (
         <div
           className={
