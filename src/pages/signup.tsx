@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
 import { useUserContext } from '../hooks/use-user'
+import { handleGoogleLogin, handleLinkedInLogin } from '../utils/login'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -24,6 +25,8 @@ const validationSchema = yup.object().shape({
 })
 
 export default function Signup() {
+  const { query } = useRouter()
+  const { linkedInError, googleError } = query as { linkedInError: string; googleError: string }
   const { signUpWithEmailAndPassword } = useUserContext()
 
   const router = useRouter()
@@ -34,19 +37,23 @@ export default function Signup() {
         <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Signup to experience a world of web services and find out best for you...
         </h3>
+        <p className="text-xs text-center text-error">{linkedInError}</p>
         <Button
           icon={<AiFillLinkedin size={20} />}
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
+          onClick={handleLinkedInLogin}
         >
           Sign in with LinkedIn
         </Button>
+        <p className="text-xs text-center text-error">{googleError}</p>
         <Button
           icon={<AiFillGoogleSquare size={20} />}
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
+          onClick={handleGoogleLogin}
         >
           Sign in with Google
         </Button>

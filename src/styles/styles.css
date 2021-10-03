@@ -17,6 +17,12 @@
   }
 }
 
+/* Slick width fix */
+* {
+  min-width: 0;
+  min-height: 0;
+}
+
 /* Service Detail Card */
 .service-detail-card .gr-icon-share {
   font-size: 0.75rem;
@@ -40,4 +46,16 @@
 .tablist {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Change react slick next button view */
+.slick-prev,
+.slick-next {
+  font-size: 20px !important;
+}
+
+/* Change react slick prev button view */
+.slick-prev:before,
+.slick-next:before {
+  content: '' !important;
 }
