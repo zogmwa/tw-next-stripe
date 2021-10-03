@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { client } from '../utils/client'
 
-type TagOption = {
+type QuestionOption = {
   value: string
   // eslint-disable-next-line no-undef
   label: JSX.Element
@@ -16,7 +16,7 @@ type AssetOption = {
 
 type GroupOption = {
   label: string
-  options: TagOption[] | AssetOption[]
+  options: QuestionOption[] | AssetOption[]
 }
 
 const labelComponent = (input: string) => (
@@ -29,13 +29,13 @@ const labelComponent = (input: string) => (
 export async function searchSuggestions(searchInput: string): Promise<GroupOption[]> {
   if (searchInput.length >= 3) {
     try {
-      const { data } = await client.get<{ tags: string[]; assets: string[] }>(
-        `/autocomplete-tags-and-assets/?q=${searchInput}`,
+      const { data } = await client.get<{ questions: string[]; assets: string[] }>(
+        `/?q=${searchInput}`, // TODO: Will be implement with API later.
       )
-      const tagResults = data.tags.map((val) => ({ value: val, label: labelComponent(val) }))
+      const questionResults = data.questions.map((val) => ({ value: val, label: labelComponent(val) }))
       const assetResults = data.assets.map((val) => ({ value: val, label: labelComponent(val) }))
       return [
-        { label: 'Tags', options: tagResults },
+        { label: 'Questions', options: questionResults },
         { label: 'Web Services', options: assetResults },
         { label: 'Others', options: [{ value: searchInput, label: labelComponent(searchInput) }] },
       ]

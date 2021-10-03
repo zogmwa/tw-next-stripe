@@ -31,13 +31,13 @@ const placeholderComponent = (
 
 function QaContentComponent({ service }: ServiceDetailQAProps) {
   const [isAnswered, setIsAnswered] = useState(true)
-  const [defaultShowCount, setDefaultShowCount] = useState(2)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState<any>('')
   if (typeof service === 'undefined') return null
 
+  const defaultShowCount = 2
   let tempQuestions = service.questions
-  if (!isAnswered) {
+  if (isAnswered) {
     tempQuestions = service.questions.filter((item) => item.primary_answer !== '')
   } else {
     tempQuestions = service.questions.filter((item) => item.primary_answer === '')
@@ -61,32 +61,32 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       <div className="flex justify-around w-full px-1 py-1 mt-2 rounded-md bg-background-default md:w-6/12">
         <div
           className={
-            !isAnswered
-              ? 'bg-white rounded-md text-sm text-center cursor-pointer px-1'
-              : 'cursor-pointer text-center text-sm px-1'
-          }
-          onClick={() => setIsAnswered(false)}
-        >
-          Answered Questions
-        </div>
-        <div
-          className={
             isAnswered
               ? 'bg-white rounded-md text-sm text-center cursor-pointer px-1'
               : 'cursor-pointer text-center text-sm px-1'
           }
           onClick={() => setIsAnswered(true)}
         >
+          Answered Questions
+        </div>
+        <div
+          className={
+            !isAnswered
+              ? 'bg-white rounded-md text-sm text-center cursor-pointer px-1'
+              : 'cursor-pointer text-center text-sm px-1'
+          }
+          onClick={() => setIsAnswered(false)}
+        >
           Unanswered Questions
         </div>
       </div>
-      {!isAnswered &&
+      {isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
             <ServiceQuestionCard question={item} />
           </div>
         ))}
-      {isAnswered &&
+      {!isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
             <div className="font-medium text-text-primary">{item.title}</div>
@@ -105,7 +105,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
             </Button>
           </div>
         ))}
-      {questions.length > defaultShowCount ? (
+      {tempQuestions.length > defaultShowCount ? (
         viewMore ? (
           <div
             className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
