@@ -65,3 +65,7 @@ createAuthRefreshInterceptor(client, async (failedResponse) => {
 })
 
 export { client }
+
+export const noAuthClient = axios.create({
+  baseURL: process.env.API_BASE_URL,
+})

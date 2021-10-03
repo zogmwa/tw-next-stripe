@@ -10,7 +10,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-1/2">
           <SearchBar
             onSubmit={(selectedTag) => {
-              router.push(`/tags/${selectedTag}`)
+              router.push(`/search/${selectedTag}`)
             }}
           />
         </div>

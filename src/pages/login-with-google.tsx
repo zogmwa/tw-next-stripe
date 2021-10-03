@@ -99,6 +99,7 @@ export default function LoginWithGoogle() {
       }
       login()
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [google_access_token, state, push, setToken],
   )
 
