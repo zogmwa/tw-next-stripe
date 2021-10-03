@@ -6,7 +6,7 @@ import { convertToRaw } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html'
 import { Button } from '../button'
-import { SearchBar } from './search-bar'
+import { SearchQuestionBar } from './search-question-bar'
 import { Asset } from '../../types/asset'
 import { ServiceQuestionCard } from '../service-question-card'
 
@@ -50,10 +50,10 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
   return (
     <div className="md:mt-10 md:ml-3">
       <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
-      <SearchBar
+      <SearchQuestionBar
         className="mt-2"
-        onSubmit={(selectedTag) => {
-          console.log(selectedTag)
+        onSubmit={(selectedQuestion) => {
+          console.log(selectedQuestion)
         }}
         isButtonShow={false}
         placeholder={placeholderComponent}

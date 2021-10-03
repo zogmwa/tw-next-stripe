@@ -6,11 +6,11 @@ import toast from 'react-hot-toast'
 import { searchSuggestions } from '../../queries/question'
 import { Button } from '../button'
 
-type SearchByTagsProps = {
+type SearchByQuestionsProps = {
   onSubmit?: (query: string) => void
   className?: string
   style?: React.CSSProperties
-  tagsArr?: { value: string; label: string }[]
+  questionsArr?: { value: string; label: string }[]
   isButtonShow?: boolean
   placeholder?: any
 }
@@ -18,31 +18,31 @@ type SearchByTagsProps = {
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
-    <div className="hidden md:flex">Start by typing tags of interest, e.g. investing, artificial-intelligence</div>
-    <div className="md:hidden">Enter tags of interest</div>
+    <div className="hidden md:flex">Start by typing questions of interest, e.g. investing, artificial-intelligence</div>
+    <div className="md:hidden">Enter questions of interest</div>
   </div>
 )
 
-export function SearchBar({
+export function SearchQuestionBar({
   onSubmit,
   className,
   style,
-  tagsArr,
+  questionsArr,
   isButtonShow = true,
   placeholder = placeholderComponent,
-}: SearchByTagsProps) {
-  const [tags, setTags] = useState<string[]>([])
+}: SearchByQuestionsProps) {
+  const [questions, setQuestions] = useState<string[]>([])
   const [, setError] = useState<string>('')
-  const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
+  const [defaultQuestions, setDefaultQuestions] = useState<{ value: string; label: string }[]>(questionsArr)
 
   useEffect(() => {
-    if (tagsArr) {
-      setDefaultTags(tagsArr)
-      const tags = tagsArr.map((tag) => tag.value)
-      setTags(tags)
+    if (questionsArr) {
+      setDefaultQuestions(questionsArr)
+      const questions = questionsArr.map((question) => question.value)
+      setQuestions(questions)
     }
     // eslint-disable-next-line
-  }, [defaultTags])
+  }, [defaultQuestions])
 
   /**
    * Handler function called when the user is searching.
@@ -51,13 +51,13 @@ export function SearchBar({
    */
 
   const handleChange = (value: { value: string; label: string }[]) => {
-    const tags = value.map((tag) => tag.value)
-    if (tags.length > 5) {
-      setError('A maximum of 5 tags are allowed.')
-      toast.error('A maximum of 5 tags are allowed.')
+    const questions = value.map((question) => question.value)
+    if (questions.length > 5) {
+      setError('A maximum of 5 questions are allowed.')
+      toast.error('A maximum of 5 questions are allowed.')
     } else {
       setError('')
-      setTags(tags)
+      setQuestions(questions)
     }
   }
 
@@ -69,15 +69,15 @@ export function SearchBar({
     // as onSubmit is optional, first check if the field is required
     // or not before proceeding
     event.preventDefault()
-    if (tags.length === 0) {
-      setError('Please enter a tag')
-      toast.error('Please enter a tag')
+    if (questions.length === 0) {
+      setError('Please enter a question')
+      toast.error('Please enter a question')
     } else {
       setError('')
       if (onSubmit) {
         // form.getFieldValue(fieldName) would return the value of the field
-        const tagsSelected = tags.join(',')
-        onSubmit(tagsSelected)
+        const questionsSelected = questions.join(',')
+        onSubmit(questionsSelected)
       }
     }
   }
@@ -89,9 +89,9 @@ export function SearchBar({
       onSubmit={handleSubmit}
     >
       <AsyncSelect
-        defaultValue={defaultTags}
+        defaultValue={defaultQuestions}
         isMulti
-        name="tags"
+        name="questions"
         components={{ DropdownIndicator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
