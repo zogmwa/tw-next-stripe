@@ -53,7 +53,7 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
   }
 
   return (
-    <div className="px-2 md:border md:border-solid md:rounded-md md:border-text-tertiary md:w-full">
+    <div className="px-2 md:border md:border-solid md:rounded-md md:border-border-default md:w-full">
       <Slider afterChange={(nextIndex) => onSelected(nextIndex)} ref={carousel} {...settings} className="mx-6">
         {pricePlans.map((item, index) => {
           return (
