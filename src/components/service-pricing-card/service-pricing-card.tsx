@@ -58,7 +58,13 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
         {pricePlans.map((item, index) => {
           return (
             <div key={index} className="relative flex justify-center w-full mx-2 mt-8 text-center">
-              <div className={((typeof item?.most_popular === 'boolean') && (item?.most_popular)) ? 'flex w-full pb-8' : 'flex w-full mb-8'}>
+              <div
+                className={
+                  typeof item?.most_popular === 'boolean' && item?.most_popular
+                    ? 'flex w-full pb-8'
+                    : 'flex w-full mb-8'
+                }
+              >
                 <div className="flex flex-col self-center w-full">
                   <div className="flex items-center content-center justify-center mb-4">
                     <BiDollar className="text-xl text-text-secondary" />
@@ -67,7 +73,7 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
                   <div className="flex items-center justify-center text-text-secondary">per {item.per}</div>
                 </div>
               </div>
-              {((typeof item?.most_popular === 'boolean') && (item?.most_popular)) && (
+              {typeof item?.most_popular === 'boolean' && item?.most_popular && (
                 <div className="absolute bottom-0 w-full">
                   <span className="px-2 text-sm border border-solid rounded-2xl bg-secondary text-primary">
                     Most Popular
