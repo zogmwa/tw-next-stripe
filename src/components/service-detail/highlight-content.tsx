@@ -10,7 +10,7 @@ type ServiceDetailFeatureProps = {
   service: Asset
 }
 
-function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
+function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
   if (typeof service === 'undefined') return null
@@ -147,4 +147,4 @@ function FeaturesContentComponent({ service }: ServiceDetailFeatureProps) {
   )
 }
 
-export const FeaturesContent = FeaturesContentComponent
+export const HighlightContent = HighlightContentComponent

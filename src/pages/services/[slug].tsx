@@ -5,7 +5,7 @@ import { fetchService } from '../../queries/service'
 import { ServiceDetailCard } from '../../components/service-card'
 import { ServiceDetailSidebar } from '../../components/service-detail/sidebar'
 import { ServiceDetailTab } from '../../components/service-detail/tab'
-import { FeaturesContent } from '../../components/service-detail/features-content'
+import { HighlightContent } from '../../components/service-detail/highlight-content'
 import { PricingContent } from '../../components/service-detail/pricing-content'
 import { ProductContent } from '../../components/service-detail/product-content'
 import { QaContent } from '../../components/service-detail/qa-content'
@@ -28,9 +28,9 @@ export default function Service() {
       content: <ProductContent service={data as Asset} />,
     },
     {
-      id: 'highlights',
-      name: 'Highlights',
-      content: <FeaturesContent service={data as Asset} />,
+      id: 'features',
+      name: 'Features',
+      content: <HighlightContent service={data as Asset} />,
     },
     {
       id: 'pricing',
