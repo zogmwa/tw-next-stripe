@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { BsChevronUp } from 'react-icons/bs'
 import { AiOutlineCheckCircle, AiFillStar } from 'react-icons/ai'
 import { FiUsers } from 'react-icons/fi'
@@ -15,6 +17,8 @@ type ServiceCardProps = {
 }
 
 function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
+  const router = useRouter()
+  const { search_query } = router.query as { search_query: string }
   const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onToggleCompare) {
       onToggleCompare((event.target as HTMLInputElement).checked)
@@ -33,7 +37,13 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <img src={service.logo_url} alt="Web Service" className="object-contain h-[72px] w-[72px] rounded-md" />
+          <Link href={`/services/${service.slug}/`}>
+            <img
+              src={service.logo_url}
+              alt="Web Service"
+              className="object-contain h-[72px] w-[72px] rounded-md cursor-pointer"
+            />
+          </Link>
           <div className="flex items-center space-x-2">
             <Checkbox onChange={onCompare} />
             <div className="text-xs uppercase text-text-tertiary">Compare</div>
@@ -41,7 +51,9 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
         </div>
         <div className="flex-1">
           <div className="flex justify-start space-x-2">
-            <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+            <Link href={`/services/${service.slug}/`}>
+              <h1 className="text-base font-medium cursor-pointer text-text-primary">{service.name}</h1>
+            </Link>
             <a
               href={service.website ?? '#'}
               target={service.website ? '_blank' : ''}
@@ -61,7 +73,19 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
-                <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                <Button
+                  key={tag.slug}
+                  buttonType="tag"
+                  size="small"
+                  className="mt-2 mr-2"
+                  onClick={() => {
+                    if (search_query.indexOf(tag.slug) === -1) {
+                      router.push(`${search_query},${tag.slug}`)
+                    } else {
+                      router.push(`/search/${tag.slug}`)
+                    }
+                  }}
+                >
                   {tag.name}
                 </Button>
               )

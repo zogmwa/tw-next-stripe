@@ -15,6 +15,7 @@ const queryClient = new QueryClient()
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
+  const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
 
   return (
@@ -28,7 +29,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
               <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
-                <Component {...pageProps} />
+                <Component {...pageProps} key={router.asPath} />
               </div>
               <Toaster
                 toastOptions={{
