@@ -17,7 +17,11 @@ export function NavBar({ className, style }: NavBarProps) {
     <div className={clsx('w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
       <div className="flex items-center h-full max-w-screen-lg mx-auto">
         <div className="w-10 h-10 mr-2 bg-opacity-25 rounded-md bg-primary" />
-        <div className="text-base font-medium tracking-wide text-opacity-50 text-primary">taggedweb</div>
+        <Link href="/">
+          <div className="text-base font-medium tracking-wide text-opacity-50 cursor-pointer text-primary">
+            taggedweb
+          </div>
+        </Link>
         <div className="flex-1" />
         {authVerified ? (
           <>

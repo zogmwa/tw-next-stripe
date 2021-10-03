@@ -3,15 +3,21 @@ import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import '../styles/styles.css'
+import 'nprogress/nprogress.css'
+import nProgress from 'nprogress'
 import { UserProvider } from '../hooks/use-user'
 import { ProfileProvider } from '../hooks/use-profile'
 import { NavBar } from '../components/nav-bar'
 import { ToastWithDismiss } from '../components/toast-with-dismiss'
 
 const queryClient = new QueryClient()
+
+Router.events.on('routeChangeStart', nProgress.start)
+Router.events.on('routeChangeError', nProgress.done)
+Router.events.on('routeChangeComplete', nProgress.done)
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
