@@ -1,10 +1,27 @@
 import React from 'react'
-import { ScrollSpy } from '../scrollspy'
+import ScrollableLink from '../scrollspy/scrollable-link'
 
 function ServiceDetailSidebarComponent({ elements }) {
   return (
     <div className="hidden md:flex">
-      <ScrollSpy elements={elements} />
+      <div className="flex w-52">
+        <nav className="sticky top-0 w-48 p-2 bg-white border border-solid rounded-md shadow h-44 border-grey-200">
+          {elements.map((item) => (
+            <ScrollableLink
+              href={`#scrollable-${item.id}`}
+              key={item.id}
+              activeClassName={'bg-secondary text-primary border-secondary font-semibold rounded-sm'}
+            >
+              <a
+                className="block mx-1 my-0.5 px-1 py-0.5 text-sm text-text-secondary font-sm cursor-pointer focus:ring-0 focus:ring-offset-0"
+                href={`#scrollable-${item.id}`}
+              >
+                {item.name}
+              </a>
+            </ScrollableLink>
+          ))}
+        </nav>
+      </div>
       <div className="w-full ml-4">
         <div id="scroll-element" className="my-2 ml-4">
           {elements.map((item) => (
