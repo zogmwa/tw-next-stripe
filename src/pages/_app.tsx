@@ -9,6 +9,7 @@ import '../styles/styles.css'
 import { UserProvider } from '../hooks/use-user'
 import { ProfileProvider } from '../hooks/use-profile'
 import { NavBar } from '../components/nav-bar'
+import { ToastWithDismiss } from '../components/toast-with-dismiss'
 
 const queryClient = new QueryClient()
 
@@ -32,8 +33,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
               <Toaster
                 toastOptions={{
                   className: 'text-sm !text-text-primary',
+                  duration: 2000,
                 }}
-              />
+              >
+                {ToastWithDismiss}
+              </Toaster>
             </div>
           </ProfileProvider>
         </UserProvider>
