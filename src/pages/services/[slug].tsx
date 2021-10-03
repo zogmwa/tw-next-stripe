@@ -28,8 +28,8 @@ export default function Service() {
       content: <ProductContent service={data as Asset} />,
     },
     {
-      id: 'features',
-      name: 'Features',
+      id: 'highlights',
+      name: 'Highlights',
       content: <FeaturesContent service={data as Asset} />,
     },
     {
@@ -40,7 +40,7 @@ export default function Service() {
     {
       id: 'qa',
       name: 'Q & A',
-      content: <QaContent />,
+      content: <QaContent service={data as Asset} />,
     },
     {
       id: 'reviews',
