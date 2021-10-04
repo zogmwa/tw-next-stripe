@@ -11,7 +11,7 @@ export function DefaultVideoReview() {
   const review = {
     userName: 'Yolanda Hanson',
     reviewBody: '"Very easy to use"',
-    timestamp: '2021-08-27T16:34:08.984019Z',
+    created_at: '2021-08-27T16:34:08.984019Z',
     rating: '4',
     videoUrl: 'https://www.youtube.com/embed/cb1LWdUHxHs',
   }
