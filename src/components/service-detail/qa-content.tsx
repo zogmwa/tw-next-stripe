@@ -12,10 +12,7 @@ import { Asset } from '../../types/asset'
 import { ServiceQuestionCard } from '../service-question-card'
 
 // https://github.com/jpuri/react-draft-wysiwyg/issues/893
-const Editor = dynamic<EditorProps>(
-  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-  { ssr: false }
-)
+const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mod) => mod.Editor), { ssr: false })
 
 type ServiceDetailQAProps = {
   service: Asset
