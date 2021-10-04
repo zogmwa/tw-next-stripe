@@ -106,30 +106,6 @@ function useUser(): UserContextType {
     [accessToken, refreshToken],
   )
 
-  // useQuery setup for fetching User Details
-  /*
-  const {
-    data,
-    error,
-    refetch: refetchUserDetails,
-  } = useQuery(['user', state.authVerified, refreshToken], () => fetchUserDetail(), {
-    enabled: refreshToken && typeof refreshToken === 'string' && state.authVerified && refreshToken !== 'undefined',
-  })
-
-  useEffect(() => {
-    if (error) {
-      toast.error('Could not fetch user details')
-    }
-  }, [error])
-
-  useEffect(() => {
-    if (data) {
-      dispatch({ type: 'setUserDetail', payload: data })
-    }
-  }, [data])
-
-*/
-
   // useEffect setup for fetching User Details
   useEffect(
     function setUserDetailsAfterLogin() {
@@ -210,9 +186,13 @@ function useUser(): UserContextType {
             toast.error('You are not logged in')
             return
           }
-          console.log('LOGGING OUT')
-          // revoke token access
-          await client.post('/dj-rest-auth/logout/')
+
+          try {
+            await client.post('/dj-rest-auth/logout/')
+          } catch (error) {
+            if (error.response.status !== 401) throw error
+          }
+
           // delete tokens from localStorage
           window.localStorage.removeItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
           window.localStorage.removeItem(process.env.REFRESH_TOKEN_LOCAL_STORAGE_KEY)
@@ -220,12 +200,11 @@ function useUser(): UserContextType {
           dispatch({ type: 'logout' })
           push('/')
         } catch (error) {
-          console.dir('LOGGING OUT ERROR', error)
           toast.error('Could Not Logout')
         }
       }
     },
-    [state.authVerified],
+    [state.authVerified, push],
   )
 
   const contextValue = useMemo(

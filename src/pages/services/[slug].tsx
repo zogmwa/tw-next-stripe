@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
+import { GetServerSideProps } from 'next'
+import Error from 'next/error'
 import { fetchService } from '../../queries/service'
 import { ServiceDetailCard } from '../../components/service-card'
 import { ServiceDetailSidebar } from '../../components/service-detail/sidebar'
@@ -12,15 +14,28 @@ import { QaContent } from '../../components/service-detail/qa-content'
 import { RelatedContent } from '../../components/service-detail/related-content'
 import { ReviewsContent } from '../../components/service-detail/reviews-content'
 import { Asset } from '../../types/asset'
+import { server } from '../../utils/server'
 
-export default function Service() {
+export default function Service({ errorCode, initialData }: { errorCode?: number; initialData?: Asset }) {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
+  const [data, setData] = useState(initialData)
   // @TODO: Use isLoading, error
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isLoading, data, error } = useQuery(['services', `${slug}?asset=${slug}`], () =>
-    fetchService(`${slug}?asset=${slug}`),
-  )
+
+  const {
+    isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
+    data: queryData,
+    error, // eslint-disable-line @typescript-eslint/no-unused-vars
+  } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`), {
+    enabled: !errorCode,
+  })
+
+  useEffect(() => {
+    if (queryData) {
+      setData(queryData)
+    }
+  }, [queryData])
+
   const elements = [
     {
       id: 'products-information',
@@ -54,6 +69,10 @@ export default function Service() {
     },
   ]
 
+  if (errorCode) {
+    return <Error statusCode={errorCode} />
+  }
+
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
@@ -69,4 +88,24 @@ export default function Service() {
       </div>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context
+
+  try {
+    const { data } = await server.get<Asset>(`/assets/${params.slug}`)
+    return {
+      props: {
+        initialData: data,
+      },
+    }
+  } catch (error) {
+    const errorCode = error?.response?.status
+    return {
+      props: {
+        errorCode: errorCode ?? 503,
+      },
+    }
+  }
 }
