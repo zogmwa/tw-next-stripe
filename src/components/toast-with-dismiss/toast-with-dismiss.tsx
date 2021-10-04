@@ -1,14 +1,15 @@
-import { toast, ToastBar } from 'react-hot-toast'
+import React from 'react'
+import { toast, ToastBar, Toast } from 'react-hot-toast'
 
-export function ToastWithDismiss(t) {
+export function ToastWithDismiss(toastArg: Toast) {
   return (
-    <ToastBar toast={t}>
+    <ToastBar toast={toastArg}>
       {({ icon, message }) => (
         <>
           {icon}
           {message}
-          {t.type !== 'loading' && (
-            <button className="p-2 bg-gray-200 rounded-md" onClick={() => toast.dismiss(t.id)}>
+          {toastArg.type !== 'loading' && (
+            <button className="p-2 bg-gray-200 rounded-md" onClick={() => toast.dismiss(toastArg.id)}>
               Dismiss
             </button>
           )}

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 // import { ScrollSpy } from '../components/scrollspy'
+import { Link, Element } from 'react-scroll'
 import { useProfileContext } from '../hooks/use-profile'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
@@ -7,7 +8,6 @@ import { ProfileAsset, ProfileCard } from '../components/profile'
 import { UserContextType } from '../types/user-context-type'
 import { ProfileContextType } from '../types/profile-context-type'
 import { Asset } from '../types/asset'
-import { Link, Element } from 'react-scroll'
 
 function ScrollSpy({ elements }) {
   return (
@@ -100,7 +100,9 @@ const asset2 = {
 } as Asset
 
 // TODO: change functions to filter published and pending assets
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isPublished: (asset: Asset) => boolean = (asset) => true
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isPending: (asset: Asset) => boolean = (asset) => true
 
 export default function Profile() {
@@ -114,13 +116,14 @@ export default function Profile() {
   const publishedAssets: Asset[] = [asset1, asset2]
   const pendingAssets: Asset[] = [asset1, asset2]
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex flex-col items-center justify-center w-screen h-screen space-y-4">
         <Spinner className="w-8 h-8 !text-text-secondary" />
         <div className="text-sm text-text-tertiary">Loading Profile</div>
       </div>
     )
+  }
 
   return (
     <div className="min-h-full p-4 bg-background-light">

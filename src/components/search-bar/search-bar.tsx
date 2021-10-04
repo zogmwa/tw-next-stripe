@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch, AiOutlinePlusCircle } from 'react-icons/ai'
+import { GrShare } from 'react-icons/gr'
 import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
+import { components } from 'react-select'
+import Link from 'next/link'
 import { searchSuggestions } from '../../queries/search'
 import { Button } from '../button'
 
@@ -16,10 +19,51 @@ type SearchByTagsProps = {
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
-    <div className="hidden md:flex">Start by typing tags of interest, e.g. investing, artificial-intelligence</div>
+    <div className="hidden leading-none md:flex">
+      Start by typing tags of interest, e.g. investing, artificial-intelligence
+    </div>
     <div className="md:hidden">Enter tags of interest</div>
   </div>
 )
+
+const TagSearchResultComponent = ({ input }: { input: string }) => (
+  <div className="flex items-center justify-between ml-2 space-x-1 group">
+    <div>{input}</div>
+    <AiOutlinePlusCircle className="hidden text-text-secondary group-hover:flex" />
+  </div>
+)
+
+const AssetSearchResultComponent = ({ input, slug }: { input: string; slug: string }) => (
+  <Link href={`/services/${slug}`}>
+    <div className="flex items-center justify-between ml-2 space-x-1 group !text-black">
+      <div>{input}</div>
+      <GrShare className="hidden text-text-secondary group-hover:flex" />
+    </div>
+  </Link>
+)
+
+const OptionComponent = (props) => {
+  const { label, value, options } = props
+  if (options.length === 3 && options?.[0].options) {
+    // If there are 3 groups of options
+    const values = options[1].options.map((option) => option.value)
+    // Get an array of value of all web services
+    if (values.includes(value)) {
+      // Check if current option is a webservice
+      return (
+        <components.Option {...props}>
+          <AssetSearchResultComponent input={label} slug={value} />
+        </components.Option>
+      )
+    }
+  }
+
+  return (
+    <components.Option {...props}>
+      <TagSearchResultComponent input={label} />
+    </components.Option>
+  )
+}
 
 export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsProps) {
   const [tags, setTags] = useState<string[]>([])
@@ -83,7 +127,7 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
         defaultValue={defaultTags}
         isMulti
         name="tags"
-        components={{ DropdownIndicator: () => null }}
+        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
         instanceId

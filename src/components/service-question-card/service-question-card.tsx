@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
-import moment from 'moment'
+import { format as dateFormat } from 'date-fns'
+import { BsDot } from 'react-icons/bs'
 import { ServiceQuestion } from '../../types/service-question'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
@@ -24,7 +25,10 @@ function ServiceQuestionCardComponent({ question }: ServiceQuestionCardProps) {
           Helpful
         </Button>
         <div>{question.upvotes_count} people found this question helpful</div>
-        <div className="hidden md:flex">{question.created && moment(question.created).format('D MMM, YYYY')}</div>
+        <div className="hidden md:flex md:space-x-3">
+          <BsDot className="self-center" />
+          <span>{question.created && dateFormat(new Date(question.created), 'd MMMM, yyyy')}</span>
+        </div>
       </div>
     </div>
   )

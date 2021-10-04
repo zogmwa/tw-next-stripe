@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
 import { useUserContext } from '../hooks/use-user'
+import { handleGoogleLogin, handleLinkedInLogin } from '../utils/login'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -18,23 +19,6 @@ const validationSchema = yup.object().shape({
 })
 
 export default function Login() {
-  function handleLinkedInLogin() {
-    const redirectUrl =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/login-with-linkedin'
-        : 'https://taggedweb.com/login-with-linkedin'
-    window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.LINKEDIN_OAUTH_STATE}&scope=r_liteprofile,r_emailaddress`
-  }
-
-  function handleGoogleLogin() {
-    const redirectUrl =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/login-with-google'
-        : 'https://taggedweb.com/login-with-google'
-    const scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?response_type=token&include_granted_scopes=true&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.GOOGLE_OAUTH_STATE}&scope=${scope}`
-  }
-
   const { query } = useRouter()
   const { linkedInError, googleError } = query as { linkedInError: string; googleError: string }
   const { signInWithEmailAndPassword } = useUserContext()
