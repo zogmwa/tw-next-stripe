@@ -45,7 +45,7 @@ export default function Service() {
     {
       id: 'reviews',
       name: 'Reviews',
-      content: <ReviewsContent />,
+      content: <ReviewsContent service={data as Asset} />,
     },
     {
       id: 'related-products',
