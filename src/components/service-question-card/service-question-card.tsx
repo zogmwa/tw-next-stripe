@@ -1,5 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
+import { format as dateFormat } from 'date-fns'
+import { BsDot } from 'react-icons/bs'
 import { ServiceQuestion } from '../../types/service-question'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
@@ -10,12 +12,6 @@ type ServiceQuestionCardProps = {
 }
 
 function ServiceQuestionCardComponent({ question }: ServiceQuestionCardProps) {
-  const time = useMemo(() => {
-    const date = new Date(question.timestamp)
-    const month = date.toLocaleString('default', { month: 'short' })
-    return `${date.getDate()} ${month}, ${date.getFullYear()}`
-  }, [question.timestamp])
-
   return (
     <div className="flex flex-col w-full space-y-3">
       <div className="font-medium text-text-primary">{question.title}</div>
@@ -29,7 +25,10 @@ function ServiceQuestionCardComponent({ question }: ServiceQuestionCardProps) {
           Helpful
         </Button>
         <div>{question.upvotes_count} people found this question helpful</div>
-        <div className="hidden md:flex">{time}</div>
+        <div className="hidden md:flex md:space-x-3">
+          <BsDot className="self-center" />
+          <span>{question.created && dateFormat(new Date(question.created), 'd MMMM, yyyy')}</span>
+        </div>
       </div>
     </div>
   )

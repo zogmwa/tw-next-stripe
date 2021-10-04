@@ -14,8 +14,8 @@ function PricingSelectNameDesktopComponent({ pricePlans, selected, onSelected }:
         <div
           className={
             index === selected
-              ? 'py-1 my-1 pl-4 bg-primary rounded-md text-border-default cursor-pointer'
-              : 'py-1 my-1 pl-4 cursor-pointer'
+              ? 'py-1 my-1 pl-4 bg-primary rounded-md text-white cursor-pointer'
+              : 'py-1 my-1 pl-4 cursor-pointer text-text-tertiary'
           }
           key={item.name}
           onClick={() => onSelected(index)}

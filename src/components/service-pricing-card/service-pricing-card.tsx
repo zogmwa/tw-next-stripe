@@ -32,7 +32,6 @@ const NextArrow = (props) => {
 }
 
 function ServicePricingCardComponent({ pricePlans, selected, onSelected, carousel }: ServicePricingProps) {
-  const isMostPopular = 2 // mockup popular data.
   const settings = {
     dots: false,
     infinite: true,
@@ -53,12 +52,18 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
   }
 
   return (
-    <div className="px-2 md:border md:border-solid md:rounded-md md:border-text-tertiary md:w-full">
+    <div className="px-2 md:border md:border-solid md:rounded-md md:border-border-default md:w-full">
       <Slider afterChange={(nextIndex) => onSelected(nextIndex)} ref={carousel} {...settings} className="mx-6">
         {pricePlans.map((item, index) => {
           return (
             <div key={index} className="relative flex justify-center w-full mx-2 mt-8 text-center">
-              <div className={index === isMostPopular - 1 ? 'flex w-full pb-8' : 'flex w-full mb-8'}>
+              <div
+                className={
+                  typeof item?.most_popular === 'boolean' && item?.most_popular
+                    ? 'flex w-full pb-8'
+                    : 'flex w-full mb-8'
+                }
+              >
                 <div className="flex flex-col self-center w-full">
                   <div className="flex items-center content-center justify-center mb-4">
                     <BiDollar className="text-xl text-text-secondary" />
@@ -67,7 +72,7 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
                   <div className="flex items-center justify-center text-text-secondary">per {item.per}</div>
                 </div>
               </div>
-              {index === isMostPopular - 1 && (
+              {typeof item?.most_popular === 'boolean' && item?.most_popular && (
                 <div className="absolute bottom-0 w-full">
                   <span className="px-2 text-sm border border-solid rounded-2xl bg-secondary text-primary">
                     Most Popular

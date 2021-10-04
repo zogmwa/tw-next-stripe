@@ -3,5 +3,5 @@ export type ServiceQuestion = {
   title: string
   primary_answer: string
   upvotes_count: number
-  timestamp: string
+  created: string
 }
