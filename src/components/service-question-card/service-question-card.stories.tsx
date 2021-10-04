@@ -14,7 +14,7 @@ export function DefaultServiceQuestionCard() {
     primary_answer:
       'Proin id vestibulum mi. Maecenas interdum ligula ac nunc laoreet rhoncus. Morbi eleifend sodales elit vitae ornare. Pellentesque consequat velit id orci accumsan, pretium porta nisi fringilla.',
     upvotes_count: 10,
-    timestamp: '2021-08-27T16:34:08.984019Z',
+    created: '2021-08-27T16:34:08.984019Z',
   }
 
   return <ServiceQuestionCard question={question} />
