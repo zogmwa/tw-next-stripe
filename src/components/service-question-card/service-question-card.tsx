@@ -14,7 +14,7 @@ type ServiceQuestionCardProps = {
 function ServiceQuestionCardComponent({ question }: ServiceQuestionCardProps) {
   return (
     <div className="flex flex-col w-full space-y-3">
-      <div className="font-medium text-text-primary">{question.title}</div>
+      <div className="text-sm font-medium text-text-primary">{question.title}</div>
       <TruncatedDescription
         description={question.primary_answer}
         maxLength={MAX_PRIMARY_ANS_LENGTH}

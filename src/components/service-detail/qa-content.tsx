@@ -85,7 +85,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       {!isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
-            <div className="font-medium text-text-primary">{item.title}</div>
+            <div className="text-sm font-medium text-text-primary">{item.title}</div>
             <Editor
               editorState={editor}
               toolbarClassName="bg-primary"
