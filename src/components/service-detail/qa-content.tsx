@@ -121,7 +121,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
         )
       ) : null}
       <div className="w-full px-2 py-4 mt-4 text-center rounded-md bg-background-default md:flex md:justify-center">
-        <div className="text-sm text-primary">Don't you see the answer you're looking for?</div>
+        <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
         <Button className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8" size="small">
           Post your question
         </Button>
