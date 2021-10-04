@@ -32,7 +32,6 @@ const NextArrow = (props) => {
 }
 
 function ServicePricingCardComponent({ pricePlans, selected, onSelected, carousel }: ServicePricingProps) {
-  const isMostPopular = 2 // mockup popular data.
   const settings = {
     dots: false,
     infinite: true,
