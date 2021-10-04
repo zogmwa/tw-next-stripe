@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import dynamic from 'next/dynamic'
+import { EditorProps } from 'react-draft-wysiwyg'
 import { convertToRaw } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html'
@@ -10,12 +11,10 @@ import { SearchQuestionBar } from './search-question-bar'
 import { Asset } from '../../types/asset'
 import { ServiceQuestionCard } from '../service-question-card'
 
-// https://github.com/jpuri/react-draft-wysiwyg/issues/660
-const Editor = dynamic(
-  () => {
-    return import('react-draft-wysiwyg').then((mod) => mod.Editor)
-  },
-  { loading: () => null, ssr: false },
+// https://github.com/jpuri/react-draft-wysiwyg/issues/893
+const Editor = dynamic<EditorProps>(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+  { ssr: false }
 )
 
 type ServiceDetailQAProps = {
@@ -32,7 +31,7 @@ const placeholderComponent = (
 function QaContentComponent({ service }: ServiceDetailQAProps) {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
-  const [editor, setEditor] = useState<any>('')
+  const [editor, setEditor] = useState(null)
   if (typeof service === 'undefined') return null
 
   const defaultShowCount = 2
