@@ -3,9 +3,11 @@ import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Toaster } from 'react-hot-toast'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import '../styles/styles.css'
+import 'nprogress/nprogress.css'
+import nProgress from 'nprogress'
 import { UserProvider } from '../hooks/use-user'
 import { ProfileProvider } from '../hooks/use-profile'
 import { NavBar } from '../components/nav-bar'
@@ -13,8 +15,13 @@ import { ToastWithDismiss } from '../components/toast-with-dismiss'
 
 const queryClient = new QueryClient()
 
+Router.events.on('routeChangeStart', nProgress.start)
+Router.events.on('routeChangeError', nProgress.done)
+Router.events.on('routeChangeComplete', nProgress.done)
+
 function CustomApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
+  const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
 
   return (
@@ -28,7 +35,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
               <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
-                <Component {...pageProps} />
+                <Component {...pageProps} key={router.asPath} />
               </div>
               <Toaster
                 toastOptions={{

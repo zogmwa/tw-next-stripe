@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button } from '../button'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
+import { Button } from '../button'
 import { UserContextType } from '../../types/user-context-type'
 import { ProfileContextType } from '../../types/profile-context-type'
 
