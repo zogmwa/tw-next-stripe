@@ -60,7 +60,7 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
     {
       id: 'reviews',
       name: 'Reviews',
-      content: <ReviewsContent />,
+      content: <ReviewsContent service={data as Asset} />,
     },
     {
       id: 'related-products',

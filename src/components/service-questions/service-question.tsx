@@ -7,16 +7,11 @@ import { convertToRaw } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html'
 import { Button } from '../button'
-import { SearchQuestionBar } from './search-question-bar'
-import { Asset } from '../../types/asset'
+import { SearchQuestionBar } from '../service-detail/search-question-bar'
 import { ServiceQuestionCard } from '../service-question-card'
 
 // https://github.com/jpuri/react-draft-wysiwyg/issues/893
 const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mod) => mod.Editor), { ssr: false })
-
-type ServiceDetailQAProps = {
-  service: Asset
-}
 
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2 text-sm">
@@ -25,18 +20,49 @@ const placeholderComponent = (
   </div>
 )
 
-function QaContentComponent({ service }: ServiceDetailQAProps) {
+const mockupQuestions = [
+  {
+    asset: 2,
+    title: 'Does this allow creating landing pages and capturing email leads?',
+    created: '2021-10-03T21:03:56.582362Z',
+    primary_answer: 'Yes',
+    upvotes_count: 0,
+  },
+  {
+    asset: 2,
+    title: 'How much does membership cost?',
+    created: '2021-10-03T21:03:56.582362Z',
+    primary_answer:
+      'Nothing! Join Mailchimp & Co for free with any Mailchimp marketing plan, even our free plan. If you have a paid Mailchimp marketing plan, there is no additional cost. Just stay current on your existing plan to maintain access to Mailchimp & Co.',
+    upvotes_count: 1,
+  },
+  {
+    asset: 2,
+    title: 'Is support free mailchimp in this site?',
+    created: '2021-10-03T21:03:56.582362Z',
+    primary_answer: '',
+    upvotes_count: 0,
+  },
+  {
+    asset: 2,
+    title: 'Is this popular?',
+    created: '2021-10-03T23:17:58.718531Z',
+    primary_answer: 'Yes, of course.',
+    upvotes_count: 1,
+  },
+]
+
+function ServiceQuestionComponent() {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState(null)
-  if (typeof service === 'undefined') return null
 
   const defaultShowCount = 2
-  let tempQuestions = service.questions
+  let tempQuestions = mockupQuestions
   if (isAnswered) {
-    tempQuestions = service.questions.filter((item) => item.primary_answer !== '')
+    tempQuestions = mockupQuestions.filter((item) => item.primary_answer !== '')
   } else {
-    tempQuestions = service.questions.filter((item) => item.primary_answer === '')
+    tempQuestions = mockupQuestions.filter((item) => item.primary_answer === '')
   }
   let questions = tempQuestions
   if (!viewMore) {
@@ -85,7 +111,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       {!isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
-            <div className="text-sm font-medium text-text-primary">{item.title}</div>
+            <div className="font-medium text-text-primary">{item.title}</div>
             <Editor
               editorState={editor}
               toolbarClassName="bg-primary"
@@ -130,4 +156,4 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
   )
 }
 
-export const QaContent = QaContentComponent
+export const ServiceQuestion = ServiceQuestionComponent

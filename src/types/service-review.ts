@@ -1,10 +1,12 @@
 export type ServiceReview = {
   userPic?: string
+  reviewTitle?: string
   userName: string
   userPost?: string
+  userCompany?: string
   reviewBody: string
   rating: string
-  timestamp: string
+  created_at: string
   helpedPeopleCount?: string
   videoUrl?: string
 }

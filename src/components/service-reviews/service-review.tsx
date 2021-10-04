@@ -4,16 +4,10 @@ import { StyledStarRating } from '../styled-star-rating'
 import { MarkProgress } from '../styled-mark-progress'
 import { ReviewInput } from '../review-input'
 import { ReviewCard } from '../review-card'
-import { Asset } from '../../types/asset'
 
-type ServiceDetailReviewsProps = {
-  service: Asset
-}
-
-function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
+function ServiceReviewComponent() {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
-  if (typeof service === 'undefined') return null
 
   const reviews = [
     {
@@ -89,7 +83,6 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
 
   return (
     <>
-      <h1 className="text-base font-medium text-text-primary">Reviews</h1>
       <div className="flex flex-col items-center">
         <StyledStarRating
           name="default"
@@ -172,4 +165,4 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
   )
 }
 
-export const ReviewsContent = ReviewsContentComponent
+export const ServiceReview = ServiceReviewComponent
