@@ -19,6 +19,10 @@ type styledRatingStarType = {
   onChangeActive?: any
   value?: number
   readOnly?: boolean
+  fillColor?: string
+  emptyColor?: string
+  fillStyle?: any
+  emptyStyle?: any
 }
 
 function StyledStarRatingComponent({
@@ -38,15 +42,21 @@ function StyledStarRatingComponent({
   onChangeActive,
   value,
   readOnly = false,
+  fillColor = '#FFE103',
+  emptyColor = '#FFFBE0',
+  fillStyle,
+  emptyStyle,
 }: styledRatingStarType) {
   const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-      color: '#FFE103',
+      color: fillColor,
       fontSize: size,
+      ...fillStyle,
     },
     '& .MuiRating-iconEmpty': {
-      color: '#FFFBE0',
+      color: emptyColor,
       fontSize: size,
+      ...emptyStyle,
     },
   })
 
