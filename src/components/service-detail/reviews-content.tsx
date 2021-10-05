@@ -48,7 +48,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
     }
   })
   let viewReviews = reviews
-  let totalVideoReviews = reviews.filter(review => {
+  let totalVideoReviews = reviews.filter((review) => {
     let tempUrl = review?.video_url ?? ''
     if (tempUrl.length > 0) return true
     else return false
