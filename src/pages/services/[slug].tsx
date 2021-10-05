@@ -12,7 +12,7 @@ import { PricingContent } from '../../components/service-detail/pricing-content'
 import { ProductContent } from '../../components/service-detail/product-content'
 import { QaContent } from '../../components/service-detail/qa-content'
 import { RelatedContent } from '../../components/service-detail/related-content'
-import { ReviewsContent } from '../../components/service-detail/reviews-content'
+import { ReviewsContainer } from '../../components/service-detail/get-reviews'
 import { Asset } from '../../types/asset'
 import { server } from '../../utils/server'
 
@@ -60,7 +60,7 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
     {
       id: 'reviews',
       name: 'Reviews',
-      content: <ReviewsContent service={data as Asset} />,
+      content: <ReviewsContainer />,
     },
     {
       id: 'related-products',

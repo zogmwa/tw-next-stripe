@@ -17,7 +17,8 @@ client.interceptors.request.use((config) => {
     !(
       config.url.startsWith('/dj-rest-auth') ||
       config.url.startsWith('/api/token/refresh') ||
-      (config.method === 'get' && config.url.startsWith('/assets'))
+      (config.method === 'get' && config.url.startsWith('/assets')) ||
+      (config.method === 'get' && config.url.startsWith('/asset_reviews'))
     )
   ) {
     config.headers = {

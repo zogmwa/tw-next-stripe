@@ -4,57 +4,38 @@ import { StyledStarRating } from '../styled-star-rating'
 import { MarkProgress } from '../styled-mark-progress'
 import { ReviewInput } from '../review-input'
 import { ReviewCard } from '../review-card'
-import { Asset } from '../../types/asset'
+import { ServiceReview } from '../../types/service-review'
+import { VideoReviewCard } from '../video-review'
 
 type ServiceDetailReviewsProps = {
-  service: Asset
+  reviews: ServiceReview[]
 }
 
-function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
+function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
-  if (typeof service === 'undefined') return null
+  const [viewVideoMore, setViewVideoMore] = useState(false)
+  if (typeof reviews === 'undefined' || !reviews) return null
 
-  const reviews = [
-    {
-      userPic: 'http://logo.clearbit.com/mailchimp.com',
-      userName: 'Becky Howard',
-      userPost: 'Product Manger',
-      userCompany: 'XYZABC Corp.',
-      reviewTitle: 'Good quality video and rich features',
-      reviewBody:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      created_at: '2021-08-27T16:34:08.984019Z',
-      helpedPeopleCount: '10',
-      rating: '8',
-    },
-    {
-      userPic: 'http://logo.clearbit.com/mailchimp.com',
-      userName: 'Leah Andreson',
-      userPost: 'Product Manger',
-      userCompany: 'XYZABC Corp.',
-      reviewTitle: 'Good quality video and rich features',
-      reviewBody:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      created_at: '2021-08-29T16:34:08.984019Z',
-      helpedPeopleCount: '10',
-      rating: '7',
-    },
-    {
-      userPic: 'http://logo.clearbit.com/mailchimp.com',
-      userName: 'Test account',
-      userPost: 'Product Manger',
-      userCompany: 'XYZABC Corp.',
-      reviewTitle: 'Good quality video and rich features',
-      reviewBody:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      created_at: '2021-08-28T16:34:08.984019Z',
-      helpedPeopleCount: '10',
-      rating: '9',
-    },
-  ]
+  reviews.sort((reviewA, reviewB) => {
+    if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
+    if (sortType === 'RECENT_REVIEWS') {
+      let dateA = new Date(reviewA.created)
+      let dateB = new Date(reviewB.created)
+      return (dateA.getTime() - dateB.getTime()) * -1
+    }
+  })
+  let viewReviews = reviews
+  let viewVideoReviews = reviews
+  if (!viewMore) {
+    viewReviews = reviews.slice(0, 2)
+  }
+  if (!viewVideoMore) {
+    viewVideoReviews = reviews.slice(0, 4)
+  }
   const defaultShowCount = 2
-  const reviewMark = 8.1
+  const defaultVideoShowCount = 4
+  const reviewMark = 3.5
   const totalReviews = 3400
   const marks = [
     {
@@ -74,18 +55,6 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
       mark: 4.1,
     },
   ]
-  reviews.sort((reviewA, reviewB) => {
-    if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
-    if (sortType === 'RECENT_REVIEWS') {
-      let dateA = new Date(reviewA.created_at)
-      let dateB = new Date(reviewB.created_at)
-      return (dateA.getTime() - dateB.getTime()) * -1
-    }
-  })
-  let viewReviews = reviews
-  if (!viewMore) {
-    viewReviews = reviews.slice(0, 2)
-  }
 
   return (
     <>
@@ -93,9 +62,10 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
       <div className="flex flex-col items-center">
         <StyledStarRating
           name="default"
+          className="space-x-2"
           defaultValue={Math.ceil(reviewMark) / 2}
           precision={0.5}
-          size="3rem"
+          size="2.5rem"
           readOnly={true}
         />
         <div className="flex items-end mt-2">
@@ -118,7 +88,7 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
             markClassName="md:min-w-min w-20"
             mark={item.mark}
             topMark={5}
-            height={15}
+            height={12}
             label={item.name}
           />
         ))}
@@ -150,24 +120,51 @@ function ReviewsContentComponent({ service }: ServiceDetailReviewsProps) {
       {viewReviews.map((review, index) => (
         <ReviewCard key={index} className="mt-2" review={review} />
       ))}
-      {viewReviews.length > defaultShowCount && viewMore ? (
-        <div
-          className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
-          onClick={() => setViewMore(false)}
-        >
-          Load Less Answered questions
-          <HiChevronUp className="self-center ml-2 text-text-tertiary" />
-        </div>
-      ) : (
-        <div
-          className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
-          onClick={() => setViewMore(true)}
-        >
-          Load More Answered questions
-          <HiChevronDown className="self-center ml-2 text-text-tertiary" />
-        </div>
-      )}
+      {reviews.length > defaultShowCount ? (
+        viewMore ? (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setViewMore(false)}
+          >
+            Load Less reviews
+            <HiChevronUp className="self-center ml-2 text-text-tertiary" />
+          </div>
+        ) : (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setViewMore(true)}
+          >
+            Load More reviews
+            <HiChevronDown className="self-center ml-2 text-text-tertiary" />
+          </div>
+        )
+      ) : null}
       <ReviewInput serviceName="Zoom" onSubmit={(event) => console.log('onSubmit Event:', event)} />
+      <h1 className="mt-2 text-base font-medium text-text-primary">Video Reviews</h1>
+      <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        {viewVideoReviews.map((review, index) => (
+          <VideoReviewCard review={review} className="mt-1 mr-1" key={index} />
+        ))}
+      </div>
+      {reviews.length > defaultVideoShowCount ? (
+        viewVideoMore ? (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setViewVideoMore(false)}
+          >
+            Load Less Video Reviews
+            <HiChevronUp className="self-center ml-2 text-text-tertiary" />
+          </div>
+        ) : (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setViewVideoMore(true)}
+          >
+            Load More Video Reviews
+            <HiChevronDown className="self-center ml-2 text-text-tertiary" />
+          </div>
+        )
+      ) : null}
     </>
   )
 }

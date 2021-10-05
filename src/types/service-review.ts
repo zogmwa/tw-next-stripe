@@ -1,13 +1,14 @@
 export type ServiceReview = {
-  userPic?: string
-  reviewTitle?: string
-  userName: string
-  userPost?: string
-  userCompany?: string
-  reviewBody: string
-  rating: string
-  created_at: string
-  helpedPeopleCount?: string
-  videoUrl?: string
+  user: {
+    username: string
+    avatar: string
+    organization: {
+      name: string
+    }
+  }
+  content: string
+  rating: number
+  created: string
+  video_url: string
+  upvotes_count?: number
 }
-// this could later change depending on the backend
