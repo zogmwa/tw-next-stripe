@@ -18,7 +18,7 @@ export function TruncatedDescription({
   style,
 }: TruncatedDescriptionProps) {
   const [renderFull, setRenderFull] = useState(false)
-
+  const isOverFlowingText = description?.length >= maxLength
   return (
     <div
       className={clsx(renderFull ? 'space-y-2' : 'space-x-2', 'text-sm text-text-secondary', className)}
@@ -33,7 +33,7 @@ export function TruncatedDescription({
         }}
         className="text-xs cursor-pointer text-text-tertiary"
       >
-        {renderFull === false ? 'See More...' : 'See Less'}
+        {isOverFlowingText ? (renderFull === false ? 'See More...' : 'See Less') : ''}
       </button>
     </div>
   )
