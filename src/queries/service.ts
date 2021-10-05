@@ -30,3 +30,8 @@ export async function fetchService(slug: string): Promise<Asset> {
   const { data } = await client.get<Asset>(`/assets/${slug}`)
   return data
 }
+
+export async function fetchVote(slug: string): Promise<Asset> {
+  const { data } = await client.get<Asset>(`/${slug}`)
+  return data
+}
