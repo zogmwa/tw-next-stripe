@@ -113,6 +113,7 @@ function ServiceReviewComponent() {
       const dateB = new Date(reviewB.created)
       return (dateA.getTime() - dateB.getTime()) * -1
     }
+    return 0
   })
   let viewReviews = reviews
   const totalVideoReviews = reviews.filter((review) => {

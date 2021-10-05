@@ -90,7 +90,7 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
                   className="mt-2 mr-2"
                   onClick={() => {
                     if (search_query.indexOf(tag.slug) === -1) {
-                      router.push(`${search_query},${tag.slug}`)
+                      router.push(`/search/${search_query},${tag.slug}`)
                     } else {
                       router.push(`/search/${tag.slug}`)
                     }
