@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
-import { StarRating } from '../star-rating'
+import { StyledStarRating } from '../styled-star-rating'
 import { Button } from '../button'
 import { Input } from '../input'
 import { Textarea } from '../textarea'
@@ -59,14 +59,22 @@ function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
     >
       {({ handleSubmit, values, handleChange, handleBlur, touched, errors, setFieldValue }) => (
         <form onSubmit={handleSubmit}>
-          <div className="mb-4 font-medium text-text-primary">
+          <div className="my-2 font-medium text-text-primary">
             Did you use {serviceName}? What do you think of this product?
           </div>
           <div className="flex flex-col mb-4 space-y-4">
             {items.map((item, index) => (
               <div className="flex justify-between w-full md:w-2/5" key={index}>
-                <div className="text-text-secondary">{item.name}</div>
-                <StarRating onRatingChange={(rating) => setFieldValue(item.slug, rating)} />
+                <div className="text-sm text-text-secondary">{item.name}</div>
+                <StyledStarRating
+                  name={item.name}
+                  defaultValue={0}
+                  className="space-x-1"
+                  precision={0.5}
+                  emptyColor="#E5E7EB"
+                  size="1.5rem"
+                  onChange={(event) => console.log(item.name, event.target.value * 2)}
+                />
               </div>
             ))}
           </div>
