@@ -35,3 +35,8 @@ export async function fetchVote(slug: string): Promise<Asset> {
   const { data } = await client.get<Asset>(`/${slug}`)
   return data
 }
+
+export async function toggleUsedByStatus(slug: string, status: boolean): Promise<boolean> {
+  const { data } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${status}`)
+  return data
+}

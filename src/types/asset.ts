@@ -23,4 +23,5 @@ export type Asset = {
   questions?: ServiceQuestion[]
   snapshots?: { asset: number; url: string }[]
   attributes?: { name: string; is_con: boolean; upvotes_count: string | number }[]
+  used_by_me?: boolean
 }

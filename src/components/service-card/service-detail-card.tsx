@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsChevronUp } from 'react-icons/bs'
+import { useRouter } from 'next/router'
 import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
+import { toggleUsedByStatus } from '../../queries/service'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
@@ -22,7 +24,17 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
 
   if (typeof service === 'undefined') return null
 
+  const [isLoading, setIsLoading] = useState(false)
+  const { query } = useRouter()
+  const { slug } = query as { slug: string }
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
+  const usedByMe = service?.used_by_me ?? false
+
+  const setToggleUsedState = async (usedByMeValue) => {
+    setIsLoading(true)
+    const success = await toggleUsedByStatus(slug, !usedByMeValue)
+    if (success) setIsLoading(false)
+  }
 
   return (
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
@@ -103,7 +115,14 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         </div>
       </div>
       <div className="flex flex-row justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
-        <Button className="inline-flex w-40 md:hidden">I&apos;ve used this</Button>
+        <Button
+          className="inline-flex w-40 md:hidden"
+          loading={isLoading}
+          buttonType={usedByMe ? 'primary' : 'default'}
+          onClick={(usedByMe) => setToggleUsedState(usedByMe)}
+        >
+          I&apos;ve used this
+        </Button>
         <Button
           className="w-40 space-x-2"
           buttonType="primary"
@@ -111,7 +130,14 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         >
           {`Upvote ${service.upvotes_count}`}
         </Button>
-        <Button className="hidden w-40 md:inline-flex">I&apos;ve used this</Button>
+        <Button
+          className="hidden w-40 md:inline-flex"
+          loading={isLoading}
+          buttonType={usedByMe ? 'primary' : 'default'}
+          onClick={(usedByMe) => setToggleUsedState(usedByMe)}
+        >
+          I&apos;ve used this
+        </Button>
       </div>
     </div>
   )
