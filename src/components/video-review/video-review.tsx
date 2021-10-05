@@ -1,37 +1,40 @@
 import React from 'react'
-import { AiFillStar } from 'react-icons/ai'
+import gfm from 'remark-gfm'
+import ReactMarkdown from 'react-markdown'
 import { ServiceReview } from '../../types/service-review'
+import { StyledStarRating } from '../styled-star-rating'
 
 type VideoCardProps = {
   review: ServiceReview
+  className?: string
 }
 
-function VideoReviewComponent({ review }: VideoCardProps) {
-  const rating = Number.parseInt(review.rating)
-
+function VideoReviewComponent({ review, className }: VideoCardProps) {
   return (
-    <div className="h-56 w-56 border-2 rounded shadow-sm">
+    <div className={`flex flex-col h-56 border-2 rounded shadow-sm ${className}`}>
       <iframe
         className="w-full mb-2 rounded max-h-32"
-        src={review.videoUrl}
+        src={review.video_url}
         title="Video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         loading="lazy"
       />
-      <div className="m-2">
-        <div className="font-bold">{review.userName}</div>
-        <div className="mt-2 mb-2 flex space-x-2">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <AiFillStar
-              key={index}
-              className={index <= rating - 1 ? 'text-yellow-400' : 'text-text-tertiary opacity-25'}
-            />
-          ))}
-        </div>
-        <div className="text-sm text-gray-500">{review.reviewBody}</div>
+      <div className="mx-2">
+        <div className="font-bold">{review.user.username}</div>
+        <StyledStarRating
+          name={review.video_url}
+          className="mt-1 space-x-1"
+          defaultValue={Math.ceil(Number(review.rating)) / 2}
+          precision={0.5}
+          size="1rem"
+          readOnly={true}
+        />
       </div>
+      <ReactMarkdown remarkPlugins={[gfm]} className="inline-block ml-2 text-sm text-gray-500">
+        {`"${review.content.substring(0, 15)}..."`}
+      </ReactMarkdown>
     </div>
   )
 }
