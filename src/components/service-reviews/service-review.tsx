@@ -32,7 +32,7 @@ function ServiceReviewComponent() {
         username: 'Leah Andreson',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
         organization: {
-          name: 'XYZABC Corp.',
+          name: null,
         },
       },
       content:
@@ -46,24 +46,19 @@ function ServiceReviewComponent() {
       user: {
         username: 'Test account',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
-        organization: {
-          name: 'XYZABC Corp.',
-        },
+        organization: null,
       },
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       rating: 9,
       created: '2021-08-28T16:34:08.984019Z',
-      video_url: 'https://www.youtube.com/embed/cb1LWdUHxHs',
+      video_url: 'http://logo.clearbit.com/mailchimp.com',
       upvotes_count: 1,
     },
     {
       user: {
         username: 'Test account2',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
-        organization: {
-          name: 'XYZABC Corp.',
-        },
       },
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -119,12 +114,17 @@ function ServiceReviewComponent() {
     }
   })
   let viewReviews = reviews
-  let viewVideoReviews = reviews
+  let totalVideoReviews = reviews.filter(review => {
+    let tempUrl = review?.video_url ?? ''
+    if (tempUrl.length > 0) return true
+    else return false
+  })
+  let viewVideoReviews = totalVideoReviews
   if (!viewMore) {
     viewReviews = reviews.slice(0, 2)
   }
   if (!viewVideoMore) {
-    viewVideoReviews = reviews.slice(0, 4)
+    viewVideoReviews = totalVideoReviews.slice(0, 4)
   }
 
   return (
@@ -193,7 +193,7 @@ function ServiceReviewComponent() {
       {reviews.length > defaultShowCount ? (
         viewMore ? (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start px-0 mt-2 text-sm border-0 cursor-pointer w-44 text-text-tertiary"
             onClick={() => setViewMore(false)}
           >
             Load Less reviews
@@ -201,7 +201,7 @@ function ServiceReviewComponent() {
           </div>
         ) : (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start px-0 mt-2 text-sm border-0 cursor-pointer w-44 text-text-tertiary"
             onClick={() => setViewMore(true)}
           >
             Load More reviews
@@ -216,10 +216,10 @@ function ServiceReviewComponent() {
           <VideoReviewCard review={review} className="mt-1 mr-1" key={index} />
         ))}
       </div>
-      {reviews.length > defaultVideoShowCount ? (
+      {totalVideoReviews.length > defaultVideoShowCount ? (
         viewVideoMore ? (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
             onClick={() => setViewVideoMore(false)}
           >
             Load Less Video Reviews
@@ -227,7 +227,7 @@ function ServiceReviewComponent() {
           </div>
         ) : (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
             onClick={() => setViewVideoMore(true)}
           >
             Load More Video Reviews

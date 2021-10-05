@@ -17,25 +17,9 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
   const [viewVideoMore, setViewVideoMore] = useState(false)
   if (typeof reviews === 'undefined' || !reviews) return null
 
-  reviews.sort((reviewA, reviewB) => {
-    if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
-    if (sortType === 'RECENT_REVIEWS') {
-      let dateA = new Date(reviewA.created)
-      let dateB = new Date(reviewB.created)
-      return (dateA.getTime() - dateB.getTime()) * -1
-    }
-  })
-  let viewReviews = reviews
-  let viewVideoReviews = reviews
-  if (!viewMore) {
-    viewReviews = reviews.slice(0, 2)
-  }
-  if (!viewVideoMore) {
-    viewVideoReviews = reviews.slice(0, 4)
-  }
   const defaultShowCount = 2
   const defaultVideoShowCount = 4
-  const reviewMark = 3.5
+  const reviewMark = 8.1
   const totalReviews = 3400
   const marks = [
     {
@@ -55,6 +39,27 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
       mark: 4.1,
     },
   ]
+  reviews.sort((reviewA, reviewB) => {
+    if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
+    if (sortType === 'RECENT_REVIEWS') {
+      let dateA = new Date(reviewA.created)
+      let dateB = new Date(reviewB.created)
+      return (dateA.getTime() - dateB.getTime()) * -1
+    }
+  })
+  let viewReviews = reviews
+  let totalVideoReviews = reviews.filter(review => {
+    let tempUrl = review?.video_url ?? ''
+    if (tempUrl.length > 0) return true
+    else return false
+  })
+  let viewVideoReviews = totalVideoReviews
+  if (!viewMore) {
+    viewReviews = reviews.slice(0, 2)
+  }
+  if (!viewVideoMore) {
+    viewVideoReviews = totalVideoReviews.slice(0, 4)
+  }
 
   return (
     <>
@@ -123,7 +128,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
       {reviews.length > defaultShowCount ? (
         viewMore ? (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start px-0 mt-2 text-sm border-0 cursor-pointer w-44 text-text-tertiary"
             onClick={() => setViewMore(false)}
           >
             Load Less reviews
@@ -131,7 +136,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
           </div>
         ) : (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start px-0 mt-2 text-sm border-0 cursor-pointer w-44 text-text-tertiary"
             onClick={() => setViewMore(true)}
           >
             Load More reviews
@@ -146,10 +151,10 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
           <VideoReviewCard review={review} className="mt-1 mr-1" key={index} />
         ))}
       </div>
-      {reviews.length > defaultVideoShowCount ? (
+      {totalVideoReviews.length > defaultVideoShowCount ? (
         viewVideoMore ? (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
             onClick={() => setViewVideoMore(false)}
           >
             Load Less Video Reviews
@@ -157,7 +162,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
           </div>
         ) : (
           <div
-            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
             onClick={() => setViewVideoMore(true)}
           >
             Load More Video Reviews
