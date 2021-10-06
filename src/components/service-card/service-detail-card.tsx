@@ -25,15 +25,20 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
   if (typeof service === 'undefined') return null
 
   const [isLoading, setIsLoading] = useState(false)
+  const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
   const { query } = useRouter()
   const { slug } = query as { slug: string }
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
-  const usedByMe = service?.used_by_me ?? false
 
-  const setToggleUsedState = async (usedByMeValue) => {
+  const setToggleUsedState = async () => {
     setIsLoading(true)
-    const success = await toggleUsedByStatus(slug, !usedByMeValue)
-    if (success) setIsLoading(false)
+    const value = await toggleUsedByStatus(slug, !usedByMe)
+    setIsLoading(false)
+    if (value !== null) {
+      setUsedByMe(value)
+    } else {
+      console.log('error')
+    }
   }
 
   return (
@@ -118,8 +123,9 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         <Button
           className="inline-flex w-40 md:hidden"
           loading={isLoading}
+          loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={(usedByMe) => setToggleUsedState(usedByMe)}
+          onClick={() => setToggleUsedState()}
         >
           I&apos;ve used this
         </Button>
@@ -133,8 +139,9 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         <Button
           className="hidden w-40 md:inline-flex"
           loading={isLoading}
+          loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={(usedByMe) => setToggleUsedState(usedByMe)}
+          onClick={() => setToggleUsedState()}
         >
           I&apos;ve used this
         </Button>

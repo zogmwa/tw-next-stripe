@@ -36,7 +36,9 @@ export async function fetchVote(slug: string): Promise<Asset> {
   return data
 }
 
-export async function toggleUsedByStatus(slug: string, status: boolean): Promise<boolean> {
-  const { data } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${status}`)
-  return data
+export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean): Promise<boolean | null> {
+  const { status } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${usedByMeStatus}`)
+  if (status === 201) return true
+  else if (status === 204) return false
+  else return null
 }
