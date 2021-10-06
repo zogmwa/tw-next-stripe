@@ -6,6 +6,7 @@ export type Asset = {
   slug?: string
   name?: string
   logo_url?: string
+  logo?: string
   website?: string
   affiliate_link?: string
   description: string
@@ -20,6 +21,8 @@ export type Asset = {
   reviews_count?: number
   avg_rating?: string | number
   users_count?: number // not in backend yet
+  og_image_url?: string
+  customer_organizations?: { name?: string }[]
   questions?: ServiceQuestion[]
   snapshots?: { asset: number; url: string }[]
   attributes?: { name: string; is_con: boolean; upvotes_count: string | number }[]
