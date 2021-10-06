@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
+import { fetchVotedAttributes, fetchUpVoteAttributes } from '../../queries/service'
 
 type ServiceDetailFeatureProps = {
   service: Asset
@@ -13,11 +14,41 @@ type ServiceDetailFeatureProps = {
 function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
+  const [votedAttributesList, setVotedAttributesList] = useState([])
   if (typeof service === 'undefined') return null
 
-  const isVoted = false // upvoted status for testing without api.
-  const defaultShowCount = 10
+  useEffect(() => {
+    async function getVotedAttribute() {
+      const data = await fetchVotedAttributes()
+      let upVotedAttributes = data.filter(item => item.asset === service.id)
 
+      setVotedAttributesList(upVotedAttributes.filter(item => item.is_upvote === true))
+    }
+    
+    getVotedAttribute()
+  }, [])
+
+  const upvoteAttribute = async (attribute) => {
+    let data = null;
+    const selectedAttribute = votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id)
+    let upvotedAttributesList = votedAttributesList
+    if (typeof selectedAttribute === 'undefined' || !selectedAttribute.is_upvote)
+      data = await fetchUpVoteAttributes(service.id, attribute.id, true)
+    
+    if (data.is_upvote) {
+      upvotedAttributesList.push(data)
+    } else {
+      votedAttributesList.map((votedattribute, index) => {
+        if (votedattribute.id === attribute.id) {
+          upvotedAttributesList.splice(index, 1)
+        }
+      })
+    }
+
+    setVotedAttributesList(upvotedAttributesList)
+  }
+
+  const defaultShowCount = 10
   const logoUrl = service.logo_url ?? ''
   const attributes = service.attributes ?? []
 
@@ -53,10 +84,10 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                     size="small"
                     className={
                       attribute.is_con
-                        ? isVoted
+                        ? (typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined')
                           ? 'self-start text-background-light bg-text-error border-text-error'
                           : 'self-start text-text-error border-text-error'
-                        : isVoted
+                        : (typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined')
                         ? 'self-start text-background-light bg-success border-success'
                         : 'self-start text-success border-success'
                     }
@@ -64,15 +95,16 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                       <HiChevronUp
                         className={
                           attribute.is_con
-                            ? isVoted
+                            ? (typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined')
                               ? 'text-background-light'
                               : 'text-text-error'
-                            : isVoted
+                            : (typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined')
                             ? 'text-background-light'
                             : 'text-success'
                         }
                       />
                     }
+                    onClick={() => upvoteAttribute(attribute)}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
@@ -85,12 +117,14 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                   <Button
                     size="small"
                     className={
-                      isVoted
+                      (typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined')
                         ? 'self-start text-background-light bg-primary'
                         : 'self-start text-text-secondary border-text-tertiary'
                     }
-                    textClassName="text-text-secondary"
-                    icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-text-secondary'} />}
+                    textClassName={(typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined') ? "text-background-light" : "text-text-secondary"}
+                    icon={<HiChevronUp 
+                      className={(typeof votedAttributesList.find(upVotedAttribute => upVotedAttribute.attribute === attribute.id) !== 'undefined') ? 'text-background-light' : 'text-text-secondary'} />}
+                    onClick={() => upvoteAttribute(attribute)}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>

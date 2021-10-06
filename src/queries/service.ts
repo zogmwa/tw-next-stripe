@@ -1,5 +1,6 @@
 import { Asset } from '../types/asset'
 import { client } from '../utils/client'
+import { voteAttribute } from '../types/vote_attribute'
 
 export type CreateServiceInput = {
   name: string
@@ -41,4 +42,18 @@ export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean):
   if (status === 201) return true
   else if (status === 204) return false
   else return null
+}
+
+export async function fetchVotedAttributes(): Promise<voteAttribute> {
+  const { data } = await client.get<voteAttribute>('/asset_attribute_votes/')
+  return data
+}
+
+export async function fetchUpVoteAttributes(assetId: number, attributeId: number, isUpvote: boolean): Promise<any> {
+  const { data } = await client.post('/asset_attribute_votes/', {
+    asset: assetId,
+    attribute: attributeId,
+    is_upvote: isUpvote,
+  })
+  return data
 }
