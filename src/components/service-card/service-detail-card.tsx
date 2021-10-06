@@ -41,8 +41,6 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
     setIsLoading(false)
     if (resultStatus !== null) {
       setUsedByMe(resultStatus)
-    } else {
-      console.log('error')
     }
   }
 
