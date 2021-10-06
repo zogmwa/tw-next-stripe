@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
-import { GetServerSideProps } from 'next'
 import Error from 'next/error'
 import { fetchService } from '../../queries/service'
 import { ServiceDetailCard } from '../../components/service-card'
@@ -14,27 +13,18 @@ import { QaContent } from '../../components/service-detail/qa-content'
 import { RelatedContent } from '../../components/service-detail/related-content'
 import { ReviewsContainer } from '../../components/service-detail/get-reviews'
 import { Asset } from '../../types/asset'
-import { server } from '../../utils/server'
 
 export default function Service({ errorCode, initialData }: { errorCode?: number; initialData?: Asset }) {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
-  const [data, setData] = useState(initialData)
-  // @TODO: Use isLoading, error
 
   const {
     isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
-    data: queryData,
+    data,
     error, // eslint-disable-line @typescript-eslint/no-unused-vars
   } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`), {
     enabled: !errorCode,
   })
-
-  useEffect(() => {
-    if (queryData) {
-      setData(queryData)
-    }
-  }, [queryData])
 
   const elements = [
     {
@@ -81,31 +71,7 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
         <ServiceDetailSidebar elements={elements} />
         {/* Tab will be rendered in Mobile */}
         <ServiceDetailTab elements={elements} />
-
-        {/* <pre>
-          <code className="text-xs whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</code>
-        </pre> */}
       </div>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { params } = context
-
-  try {
-    const { data } = await server.get<Asset>(`/assets/${params.slug}`)
-    return {
-      props: {
-        initialData: data,
-      },
-    }
-  } catch (error) {
-    const errorCode = error?.response?.status
-    return {
-      props: {
-        errorCode: errorCode ?? 503,
-      },
-    }
-  }
 }
