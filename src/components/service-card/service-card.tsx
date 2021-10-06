@@ -17,13 +17,15 @@ type ServiceCardProps = {
 }
 
 function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
-  const router = useRouter()
-  const { search_query } = router.query as { search_query: string }
   const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onToggleCompare) {
       onToggleCompare((event.target as HTMLInputElement).checked)
     }
   }
+  const router = useRouter()
+  const { search_query } = router
+    ? (router.query as { search_query: string })
+    : ('' as unknown as { search_query: string })
 
   const rating = useMemo(() => {
     let _rating = service.avg_rating
