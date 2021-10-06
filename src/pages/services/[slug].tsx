@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 import Error from 'next/error'
+import { useUserContext } from '../../hooks/use-user'
 import { fetchService } from '../../queries/service'
 import { ServiceDetailCard } from '../../components/service-card'
 import { ServiceDetailSidebar } from '../../components/service-detail/sidebar'
@@ -17,12 +18,12 @@ import { Asset } from '../../types/asset'
 export default function Service({ errorCode, initialData }: { errorCode?: number; initialData?: Asset }) {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
-
+  const { authVerified } = useUserContext()
   const {
     isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
     data,
     error, // eslint-disable-line @typescript-eslint/no-unused-vars
-  } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`), {
+  } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`, authVerified), {
     enabled: !errorCode,
   })
 

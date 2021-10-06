@@ -1,5 +1,5 @@
 import { Asset } from '../types/asset'
-import { client } from '../utils/client'
+import { client, noAuthClient } from '../utils/client'
 
 export type CreateServiceInput = {
   name: string
@@ -26,8 +26,9 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
   return data
 }
 
-export async function fetchService(slug: string): Promise<Asset> {
-  const { data } = await client.get<Asset>(`/assets/${slug}`)
+export async function fetchService(slug: string, authVerified: boolean): Promise<Asset> {
+  const apiClient = authVerified ? client : noAuthClient
+  const { data } = await apiClient.get<Asset>(`/assets/${slug}`)
   return data
 }
 
