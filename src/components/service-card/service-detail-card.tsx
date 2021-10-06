@@ -35,7 +35,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
 
   const setToggleUsedByState = async () => {
     if (!authVerified) return
-    
+
     setIsLoading(true)
     const resultStatus = await toggleUsedByStatus(slug, !usedByMe)
     setIsLoading(false)
