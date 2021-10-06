@@ -28,8 +28,13 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
 
 export async function fetchService(slug: string, authVerified: boolean): Promise<Asset> {
   const apiClient = authVerified ? client : noAuthClient
-  const { data } = await apiClient.get<Asset>(`/assets/${slug}`)
-  return data
+  try {
+    const { data } = await apiClient.get<Asset>(`/assets/${slug}`)
+    return data
+  } catch (error) {
+    console.log('Failed to get service detail', error)
+    return null
+  }
 }
 
 export async function fetchVote(slug: string): Promise<Asset> {
