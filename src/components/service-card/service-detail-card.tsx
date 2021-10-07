@@ -129,6 +129,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
+          disabled={isLoading}
         >
           I&apos;ve used this
         </Button>
@@ -145,6 +146,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
+          disabled={isLoading}
         >
           I&apos;ve used this
         </Button>

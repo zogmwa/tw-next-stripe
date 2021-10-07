@@ -30,6 +30,7 @@ function ButtonComponent(
     style,
     textClassName,
     loadingClassName = '!text-text-on-surface',
+    disabled = false,
     ...restProps
   }: ButtonProps,
   ref: React.Ref<HTMLButtonElement>,
@@ -69,6 +70,7 @@ function ButtonComponent(
       style={style}
       {...restProps}
       ref={ref}
+      disabled={disabled}
     >
       {loading ? <Spinner className={loadingClassName} /> : null}
       {iconPlacement === 'left' ? icon : null}
