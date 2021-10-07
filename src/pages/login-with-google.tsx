@@ -9,7 +9,7 @@ import { Spinner } from '../components/spinner'
  * This is a component to handle the callback from Google for OAuth flow.
  */
 export default function LoginWithGoogle() {
-  const { push } = useRouter()
+  const { replace } = useRouter()
 
   const params = {}
   // Parse Hash part of URL
@@ -44,19 +44,19 @@ export default function LoginWithGoogle() {
       toast.success('Login Successful and Google Account Connected')
 
       // Redirect user to home page on successfully connecting
-      push('/')
+      replace('/')
     } catch (error) {
-      push(`/login?googleError=${error.response.data.detail}`)
+      replace(`/login?googleError=${error.response.data.detail}`)
     }
   }
 
   useEffect(
     function redirectToLoginPageOnInvalidToken() {
       if (nonEmptyQuery && (!google_access_token || state !== process.env.GOOGLE_OAUTH_STATE)) {
-        push('/login')
+        replace('/login')
       }
     },
-    [nonEmptyQuery, google_access_token, state, push],
+    [nonEmptyQuery, google_access_token, state, replace],
   )
 
   useEffect(
@@ -76,7 +76,7 @@ export default function LoginWithGoogle() {
             toast.success('Login Successful')
 
             // Redirect user to home page
-            push('/')
+            replace('/')
           } catch (error) {
             const nonFieldErrors = error.response.data.non_field_errors
             const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
@@ -86,13 +86,13 @@ export default function LoginWithGoogle() {
                 // If the Google login fails due to the email already existing attempt a Google connect (but the user should be logged in for this flow)
                 connectGoogleAccountToExistingTaggedWebAccount(google_access_token)
               } else {
-                push(
+                replace(
                   '/login?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account',
                 )
               }
             } else {
               // If it isn't redirected to a page yet then it is likely an error case
-              push('/login')
+              replace('/login')
             }
           }
         }
@@ -100,7 +100,7 @@ export default function LoginWithGoogle() {
       login()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [google_access_token, state, push, setToken],
+    [google_access_token, state, replace, setToken],
   )
 
   return (
