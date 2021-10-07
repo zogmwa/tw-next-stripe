@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import { Asset } from '../types/asset'
 import { voteAttribute } from '../types/vote_attribute'
 import { client, noAuthClient } from '../utils/client'
@@ -33,33 +34,68 @@ export async function fetchService(slug: string, authVerified: boolean): Promise
     const { data } = await apiClient.get<Asset>(`/assets/${slug}`)
     return data
   } catch (error) {
+    // TODO: error handling
     console.log('Failed to get service detail', error)
     return null
   }
 }
 
-export async function fetchVote(slug: string): Promise<Asset> {
-  const { data } = await client.get<Asset>(`/${slug}`)
-  return data
+export async function fetchVote(slug: string): Promise<Asset | null> {
+  try {
+    const { data } = await client.get<Asset>(`/${slug}`)
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('Something went wrong')
+    return null
+  }
 }
 
 export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean): Promise<boolean | null> {
-  const { status } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${usedByMeStatus}`)
-  if (status === 201) return true
-  else if (status === 204) return false
-  else return null
+  try {
+    const { status } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${usedByMeStatus}`)
+    if (status === 201) return true
+    else if (status === 204) return false
+  } catch (error) {
+    // TODO: error handling
+    toast.error('Something went wrong')
+    return null
+  }
 }
 
 export async function fetchVotedAttributes(): Promise<voteAttribute> {
-  const { data } = await client.get<voteAttribute>('/asset_attribute_votes/')
-  return data
+  try {
+    const { data } = await client.get<voteAttribute>('/asset_attribute_votes/')
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('Something went wrong')
+    return null
+  }
 }
 
-export async function fetchUpVoteAttributes(assetId: number, attributeId: number, isUpvote: boolean): Promise<any> {
-  const { data } = await client.post('/asset_attribute_votes/', {
-    asset: assetId,
-    attribute: attributeId,
-    is_upvote: isUpvote,
-  })
-  return data
+export async function fetchUpVoteAttribute(assetId: number, attributeId: number, isUpvote: boolean): Promise<any> {
+  try {
+    const { data } = await client.post('/asset_attribute_votes/', {
+      asset: assetId,
+      attribute: attributeId,
+      is_upvote: isUpvote,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('Something went wrong')
+    return null
+  }
+}
+
+export async function fetchDownVoteAttribute(attributeId: number): Promise<number | null> {
+  try {
+    const { status } = await client.delete(`/asset_attribute_votes/${attributeId}/`)
+    return status
+  } catch (error) {
+    // TODO: error handling
+    toast.error('Something went wrong')
+    return null
+  }
 }
