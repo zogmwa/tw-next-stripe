@@ -63,7 +63,7 @@ export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean):
   }
 }
 
-export async function fetchVotedAttributes(): Promise<voteAttribute> {
+export async function fetchAttributeVotes(): Promise<voteAttribute> {
   try {
     const { data } = await client.get<voteAttribute>('/asset_attribute_votes/')
     return data
@@ -74,12 +74,12 @@ export async function fetchVotedAttributes(): Promise<voteAttribute> {
   }
 }
 
-export async function fetchUpVoteAttribute(assetId: number, attributeId: number, isUpvote: boolean): Promise<any> {
+export async function toggleUpVoteAttribute(assetId: number, attributeId: number): Promise<any> {
   try {
     const { data } = await client.post('/asset_attribute_votes/', {
       asset: assetId,
       attribute: attributeId,
-      is_upvote: isUpvote,
+      is_upvote: true,
     })
     return data
   } catch (error) {
@@ -89,7 +89,7 @@ export async function fetchUpVoteAttribute(assetId: number, attributeId: number,
   }
 }
 
-export async function fetchDownVoteAttribute(attributeId: number): Promise<number | null> {
+export async function toggleDownVoteAttribute(attributeId: number): Promise<number | null> {
   try {
     const { status } = await client.delete(`/asset_attribute_votes/${attributeId}/`)
     return status

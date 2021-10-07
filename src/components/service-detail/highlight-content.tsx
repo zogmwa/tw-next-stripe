@@ -6,7 +6,12 @@ import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
-import { fetchService, fetchVotedAttributes, fetchUpVoteAttribute, fetchDownVoteAttribute } from '../../queries/service'
+import {
+  fetchService,
+  fetchAttributeVotes,
+  toggleUpVoteAttribute,
+  toggleDownVoteAttribute,
+} from '../../queries/service'
 
 type ServiceDetailFeatureProps = {
   service: Asset
@@ -16,7 +21,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
-  const [votedAttributesList, setVotedAttributesList] = useState([])
+  const [attributeVotesList, setAttributeVotesList] = useState([])
   const { authVerified } = useUserContext()
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
@@ -24,10 +29,10 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
 
   useEffect(() => {
     async function getVotedAttribute() {
-      const data = await fetchVotedAttributes()
-      if (data) {
-        let upVotedAttributes = data.filter((item) => item.asset === service.id)
-        setVotedAttributesList(upVotedAttributes.filter((item) => item.is_upvote === true))
+      const attributeVotes = await fetchAttributeVotes()
+      if (attributeVotes) {
+        let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
+        setAttributeVotesList(upVotedAttributes.filter((item) => item.is_upvote === true))
       }
     }
 
@@ -38,20 +43,20 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     setClickedAttribute(attribute.id)
     setIsLoading(true)
     let data = null
-    const selectedAttribute = votedAttributesList.find(
+    const selectedAttributeVote = attributeVotesList.find(
       (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
     )
 
-    if (typeof selectedAttribute === 'undefined' || !selectedAttribute.is_upvote)
-      data = await fetchUpVoteAttribute(service.id, attribute.id, true)
-    else data = await fetchDownVoteAttribute(selectedAttribute.id)
+    if (typeof selectedAttributeVote === 'undefined' || !selectedAttributeVote.is_upvote)
+      data = await toggleUpVoteAttribute(service.id, attribute.id)
+    else data = await toggleDownVoteAttribute(selectedAttributeVote.id)
 
-    if (typeof data !== 'undefined') {
+    if (data) {
       const updatedService = await fetchService(`${service.slug}?asset=${service.slug}`, authVerified)
-      if (typeof service !== 'undefined') {
+      if (updatedService) {
         setAttributes(updatedService.attributes ?? [])
-        const updatedVotedAttributes = await fetchVotedAttributes()
-        if (updatedVotedAttributes) setVotedAttributesList(updatedVotedAttributes)
+        const updatedAttributeVotes = await fetchAttributeVotes()
+        if (updatedAttributeVotes) setAttributeVotesList(updatedAttributeVotes)
       }
     }
     setClickedAttribute(0)
@@ -93,12 +98,12 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                     size="small"
                     className={
                       attribute.is_con
-                        ? typeof votedAttributesList.find(
+                        ? typeof attributeVotesList.find(
                             (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                           ) !== 'undefined'
                           ? 'self-start text-background-light bg-text-error border-text-error'
                           : 'self-start text-text-error border-text-error'
-                        : typeof votedAttributesList.find(
+                        : typeof attributeVotesList.find(
                             (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                           ) !== 'undefined'
                         ? 'self-start text-background-light bg-success border-success'
@@ -108,12 +113,12 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                       <HiChevronUp
                         className={
                           attribute.is_con
-                            ? typeof votedAttributesList.find(
+                            ? typeof attributeVotesList.find(
                                 (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                               ) !== 'undefined'
                               ? 'text-background-light'
                               : 'text-text-error'
-                            : typeof votedAttributesList.find(
+                            : typeof attributeVotesList.find(
                                 (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                               ) !== 'undefined'
                             ? 'text-background-light'
@@ -123,7 +128,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                     }
                     loading={isLoading && clickedAttribute === attribute.id}
                     loadingClassName={
-                      typeof votedAttributesList.find(
+                      typeof attributeVotesList.find(
                         (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                       ) !== 'undefined'
                         ? 'text-background-light w-3 h-3'
@@ -143,14 +148,14 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                   <Button
                     size="small"
                     className={
-                      typeof votedAttributesList.find(
+                      typeof attributeVotesList.find(
                         (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                       ) !== 'undefined'
                         ? 'self-start text-background-light bg-primary'
                         : 'self-start text-text-secondary border-text-tertiary'
                     }
                     textClassName={
-                      typeof votedAttributesList.find(
+                      typeof attributeVotesList.find(
                         (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                       ) !== 'undefined'
                         ? 'text-background-light'
@@ -159,7 +164,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                     icon={
                       <HiChevronUp
                         className={
-                          typeof votedAttributesList.find(
+                          typeof attributeVotesList.find(
                             (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                           ) !== 'undefined'
                             ? 'text-background-light'
@@ -169,7 +174,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
                     }
                     loading={isLoading && clickedAttribute === attribute.id}
                     loadingClassName={
-                      typeof votedAttributesList.find(
+                      typeof attributeVotesList.find(
                         (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
                       ) !== 'undefined'
                         ? 'text-background-light w-3 h-3'
