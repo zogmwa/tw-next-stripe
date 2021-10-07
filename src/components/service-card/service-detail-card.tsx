@@ -83,9 +83,8 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
               <span>{rating}</span>
               <span className="text-xs text-text-secondary">
                 {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
-                  ? 'No '
-                  : numeral(service.reviews_count).format('0.[0]a')}{' '}
-                Reviews
+                  ? 'No Review'
+                  : `${numeral(service.reviews_count).format('0.[0]a')} Reviews`}
               </span>
             </div>
             <div className="flex items-end space-x-2 md:pl-4">
