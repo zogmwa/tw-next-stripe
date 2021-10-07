@@ -1,4 +1,4 @@
-export type attributeVote = {
+export type AttributeVote = {
   id?: number
   asset?: number
   attribute?: number

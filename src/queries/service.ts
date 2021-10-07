@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { Asset } from '../types/asset'
-import { attributeVote } from '../types/attribute_vote'
+import { AttributeVote } from '../types/attribute_vote'
 import { client, noAuthClient } from '../utils/client'
 
 export type CreateServiceInput = {
@@ -63,9 +63,9 @@ export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean):
   }
 }
 
-export async function fetchAttributeVotes(): Promise<attributeVote> {
+export async function fetchAttributeVotes(): Promise<AttributeVote> {
   try {
-    const { data } = await client.get<attributeVote>('/asset_attribute_votes/')
+    const { data } = await client.get<AttributeVote>('/asset_attribute_votes/')
     return data
   } catch (error) {
     // TODO: error handling
