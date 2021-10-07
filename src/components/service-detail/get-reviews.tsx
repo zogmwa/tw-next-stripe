@@ -17,7 +17,7 @@ function GetReviewsComponent() {
     enabled: true,
   })
   useEffect(() => {
-    if (typeof queryData === 'undefined') {
+    if (queryData) {
       setData(queryData)
     }
   }, [queryData])
