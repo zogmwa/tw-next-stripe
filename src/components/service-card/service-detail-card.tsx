@@ -27,8 +27,8 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
 
   const [isLoading, setIsLoading] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
-  const { query } = useRouter()
-  const { slug } = query as { slug: string }
+  const router = useRouter()
+  const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
   const user = useUserContext()
   const { authVerified } = user

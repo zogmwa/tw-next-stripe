@@ -9,10 +9,10 @@ import Link from 'next/link'
 function AuthenticationPopupComponent() {
   let [isOpen, setIsOpen] = useState(true)
 
-  const { query } = useRouter()
-  const { linkedInError, googleError } = query as { linkedInError: string; googleError: string }
-
   const router = useRouter()
+  const { linkedInError, googleError } = router?.query
+    ? (router?.query as { linkedInError: string; googleError: string })
+    : (['', ''] as unknown as { linkedInError: string; googleError: string })
 
   function closeModal() {
     setIsOpen(false)
