@@ -29,7 +29,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
   const { query } = useRouter()
   const { slug } = query as { slug: string }
-  const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
+  const rating = numeral(Number(service?.avg_rating ?? 0)).format('0.[0]')
   const user = useUserContext()
   const { authVerified } = user
 
@@ -82,7 +82,10 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
               <AiOutlineStar className="self-center text-primary" />
               <span>{rating}</span>
               <span className="text-xs text-text-secondary">
-                {numeral(service.reviews_count).format('0.[0]a')} Reviews
+                {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
+                  ? 'No '
+                  : numeral(service.reviews_count).format('0.[0]a')}{' '}
+                Reviews
               </span>
             </div>
             <div className="flex items-end space-x-2 md:pl-4">
