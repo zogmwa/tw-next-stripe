@@ -1,6 +1,6 @@
 import { Asset } from '../types/asset'
-import { client } from '../utils/client'
 import { voteAttribute } from '../types/vote_attribute'
+import { client, noAuthClient } from '../utils/client'
 
 export type CreateServiceInput = {
   name: string
@@ -27,9 +27,15 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
   return data
 }
 
-export async function fetchService(slug: string): Promise<Asset> {
-  const { data } = await client.get<Asset>(`/assets/${slug}`)
-  return data
+export async function fetchService(slug: string, authVerified: boolean): Promise<Asset> {
+  const apiClient = authVerified ? client : noAuthClient
+  try {
+    const { data } = await apiClient.get<Asset>(`/assets/${slug}`)
+    return data
+  } catch (error) {
+    console.log('Failed to get service detail', error)
+    return null
+  }
 }
 
 export async function fetchVote(slug: string): Promise<Asset> {

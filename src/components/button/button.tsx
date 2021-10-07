@@ -72,7 +72,7 @@ function ButtonComponent(
       ref={ref}
       disabled={disabled}
     >
-      {loading ? <Spinner className={`${loadingClassName}`} /> : null}
+      {loading ? <Spinner className={loadingClassName} /> : null}
       {iconPlacement === 'left' ? icon : null}
       <span className={clsx('font-medium', textClassName)}>{children}</span>
       {iconPlacement === 'right' ? icon : null}

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
+import { useUserContext } from '../../hooks/use-user'
 import { toggleUsedByStatus } from '../../queries/service'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
@@ -29,15 +30,17 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
   const { query } = useRouter()
   const { slug } = query as { slug: string }
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
+  const user = useUserContext()
+  const { authVerified } = user
 
-  const setToggleUsedState = async () => {
+  const setToggleUsedByState = async () => {
+    if (!authVerified) return
+
     setIsLoading(true)
-    const value = await toggleUsedByStatus(slug, !usedByMe)
+    const resultStatus = await toggleUsedByStatus(slug, !usedByMe)
     setIsLoading(false)
-    if (value !== null) {
-      setUsedByMe(value)
-    } else {
-      console.log('error')
+    if (resultStatus !== null) {
+      setUsedByMe(resultStatus)
     }
   }
 
@@ -125,7 +128,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loading={isLoading}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={() => setToggleUsedState()}
+          onClick={() => setToggleUsedByState()}
           disabled={isLoading}
         >
           I&apos;ve used this
@@ -142,7 +145,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loading={isLoading}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={() => setToggleUsedState()}
+          onClick={() => setToggleUsedByState()}
           disabled={isLoading}
         >
           I&apos;ve used this
