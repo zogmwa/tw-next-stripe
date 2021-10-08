@@ -1,1 +1,1 @@
-export { RelatedProductCard } from "./related-product-card";
+export { RelatedProductCard } from './related-product-card'

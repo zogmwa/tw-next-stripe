@@ -7,7 +7,6 @@ export default {
   component: RelatedProductCard,
 } as Meta
 
-
 export function DefaultServicePricingCard() {
   const relatedProductMockupData = [
     {
@@ -15,35 +14,36 @@ export function DefaultServicePricingCard() {
       imageUrl: 'http://logo.clearbit.com/mailchimp.com',
       title: 'Stripe Payment Link1',
       content: 'Create a link. Sell anywhere',
-      isCompare: false
+      isCompare: false,
     },
     {
       id: 2,
       imageUrl: 'http://logo.clearbit.com/mailchimp.com',
       title: 'Slack',
       content: 'Provides interactive video sharing to work',
-      isCompare: false
+      isCompare: false,
     },
     {
       id: 3,
       imageUrl: 'http://logo.clearbit.com/mailchimp.com',
       title: 'Stripe Payment Link3',
       content: 'Create a link. Sell anywhere',
-      isCompare: false
+      isCompare: false,
     },
     {
       id: 4,
       imageUrl: 'http://logo.clearbit.com/mailchimp.com',
       title: 'Stripe Payment Link4',
       content: 'Create a link. Sell anywhere',
-      isCompare: false
-    }
+      isCompare: false,
+    },
   ]
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4">
-      {relatedProductMockupData.map((relatedProduct, index) => 
+      {relatedProductMockupData.map((relatedProduct, index) => (
         <RelatedProductCard relatedProduct={relatedProduct} key={index} />
-      )}
+      ))}
     </div>
   )
 }
