@@ -82,7 +82,9 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
               <AiOutlineStar className="self-center text-primary" />
               <span>{rating}</span>
               <span className="text-xs text-text-secondary">
-                {numeral(service.reviews_count).format('0.[0]a')} Reviews
+                {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
+                  ? 'No Review'
+                  : `${numeral(service.reviews_count).format('0.[0]a')} Reviews`}
               </span>
             </div>
             <div className="flex items-end space-x-2 md:pl-4">
@@ -129,6 +131,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
+          disabled={isLoading}
         >
           I&apos;ve used this
         </Button>
@@ -145,6 +148,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
+          disabled={isLoading}
         >
           I&apos;ve used this
         </Button>

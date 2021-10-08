@@ -9,7 +9,7 @@ import { Spinner } from '../components/spinner'
  * This is a basic component that handles the callback from LinkedIn, after a login.
  */
 export default function LoginWithLinkedin() {
-  const { query, push } = useRouter()
+  const { query, replace } = useRouter()
   // created nonEmptyCheck because in the first render it might happen that query is empty
   // and we don't want to redirect user to /login in the first render itself
   const nonEmptyQuery = Object.keys(query).length > 0
@@ -33,19 +33,19 @@ export default function LoginWithLinkedin() {
       toast.success('Login Successful and LinkedIn Account Connected')
 
       // Redirect user to home page on successfully connecting
-      push('/')
+      replace('/')
     } catch (error) {
-      push(`/login?linkedInError=${error.response.data.detail}`)
+      replace(`/login?linkedInError=${error.response.data.detail}`)
     }
   }
 
   useEffect(
     function redirectToLoginPageOnInvalidCode() {
       if (nonEmptyQuery && (!code || state !== process.env.LINKEDIN_OAUTH_STATE)) {
-        push('/login')
+        replace('/login')
       }
     },
-    [nonEmptyQuery, code, state, push],
+    [nonEmptyQuery, code, state, replace],
   )
 
   useEffect(
@@ -79,7 +79,7 @@ export default function LoginWithLinkedin() {
               toast.success('Login Successful')
 
               // Redirect user to home page
-              push('/')
+              replace('/')
             } catch (error) {
               const nonFieldErrors = error.response.data.non_field_errors
               const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
@@ -92,20 +92,21 @@ export default function LoginWithLinkedin() {
                 connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code)
               } else {
                 // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
-                push(
+                replace(
                   '/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account',
                 )
               }
             }
           } catch (error) {
             // If it isn't redirected to a page yet then it is likely an error case
-            push('/login')
+            replace('/login')
           }
         }
       }
       login()
     },
-    [code, state, push, setToken],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [code, state, replace, setToken],
   )
 
   return (
