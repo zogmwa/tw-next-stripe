@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
@@ -26,10 +26,15 @@ const validationSchema = yup.object().shape({
 
 export default function Signup() {
   const { query } = useRouter()
-  const { linkedInError, googleError } = query as { linkedInError: string; googleError: string }
-  const { signUpWithEmailAndPassword } = useUserContext()
+  const { linkedInError, googleError, next } = query as { linkedInError: string; googleError: string; next: string }
+  const { signUpWithEmailAndPassword, setNextPageUrl, nextPageRedirect } = useUserContext()
 
-  const router = useRouter()
+  useEffect(() => {
+    if (next) {
+      setNextPageUrl(next)
+    }
+  }, [next, setNextPageUrl])
+
   return (
     <div className="flex flex-col items-center justify-center w-screen h-full p-4">
       <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
@@ -66,7 +71,7 @@ export default function Signup() {
           onSubmit={async ({ email, password1, password2 }) => {
             const success = await signUpWithEmailAndPassword(email, password1, password2)
             if (success) {
-              router.push('/')
+              nextPageRedirect()
             }
           }}
         >
@@ -117,11 +122,8 @@ export default function Signup() {
                 <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                   Sign Up
                 </Button>
-                <div className="text-sm text-text-secondary">
-                  Already a member!{' '}
-                  <Link href="/login">
-                    <a href="">Sign in</a>
-                  </Link>
+                <div className="text-xs lg:text-sm text-text-secondary">
+                  Already a member! <Link href="/login">Sign in</Link>
                 </div>
               </div>
             </form>

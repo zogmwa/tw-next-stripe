@@ -3,11 +3,14 @@ import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
 import { handleGoogleLogin, handleLinkedInLogin } from '../utils/login'
 import { useUserContext } from '../hooks/use-user'
+import { PasswordReset } from '../components/password-reset'
+import { client } from '../utils/client'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -90,7 +93,7 @@ export default function Login() {
               <Input
                 placeholder="Enter password"
                 id="password"
-                className="mb-8"
+                className="mb-4"
                 type="password"
                 onChange={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -98,15 +101,24 @@ export default function Login() {
                 errorMessage={touched.password ? errors.password : undefined}
                 success={touched.password && !errors.password}
               />
+              <PasswordReset
+                onEmailSubmit={async ({ email }) => {
+                  try {
+                    await client.post('/dj-rest-auth/password/reset/', { email })
+                    toast.success('Sent Reset Link')
+                    return true
+                  } catch (error) {
+                    toast.error('An error occurred')
+                    return false
+                  }
+                }}
+              />
               <div className="flex items-center space-x-4">
                 <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                   Login
                 </Button>
                 <div className="text-xs lg:text-sm text-text-secondary">
-                  Don&apos;t have an account?{' '}
-                  <Link href="/signup">
-                    <a href="">Sign Up</a>
-                  </Link>
+                  Don&apos;t have an account? <Link href="/signup">Create One</Link>
                 </div>
               </div>
             </form>
