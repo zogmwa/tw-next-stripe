@@ -1,13 +1,13 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { ServiceCard } from '../../components/service-card'
-import { noAuthClient } from '../../utils/client'
+import { clientWithRetries } from '../../utils/clientWithRetries'
 import { SearchBar } from '../../components/search-bar'
 import { Asset } from '../../types/asset'
 
 export const getServerSideProps = async (context: { query: { search_query: string } }) => {
   const tags = context.query.search_query
-  const { data } = await noAuthClient.get<{ results: Asset[] }>(`/assets/?q=${tags}`)
+  const { data } = await clientWithRetries.get<{ results: Asset[] }>(`/assets/?q=${tags}`)
   const defaultArr = tags.split(',').map((tag) => ({ value: tag, label: tag }))
   return {
     props: { services: data.results, defaultArr },

@@ -35,6 +35,7 @@ export async function fetchService(slug: string, authVerified: boolean): Promise
     return data
   } catch (error) {
     // TODO: error handling
+    // eslint-disable-next-line no-console
     console.log('Failed to get service detail', error)
     return null
   }

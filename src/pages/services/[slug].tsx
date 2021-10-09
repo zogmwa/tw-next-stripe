@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
+import { GetServerSideProps } from 'next'
 import Error from 'next/error'
 import { useUserContext } from '../../hooks/use-user'
+import { clientWithRetries } from '../../utils/clientWithRetries'
 import { fetchService } from '../../queries/service'
 import { ServiceDetailCard } from '../../components/service-card'
 import { ServiceDetailSidebar } from '../../components/service-detail/sidebar'
@@ -18,14 +20,23 @@ import { Asset } from '../../types/asset'
 export default function Service({ errorCode, initialData }: { errorCode?: number; initialData?: Asset }) {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
+  const [data, setData] = useState(initialData)
   const { authVerified } = useUserContext()
+  // @TODO: Use isLoading, error
+
   const {
     isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
-    data,
+    data: queryData,
     error, // eslint-disable-line @typescript-eslint/no-unused-vars
   } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`, authVerified), {
     enabled: !errorCode,
   })
+
+  useEffect(() => {
+    if (queryData) {
+      setData(queryData)
+    }
+  }, [queryData])
 
   const elements = [
     {
@@ -75,4 +86,24 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
       </div>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context
+
+  try {
+    const { data } = await clientWithRetries.get<Asset>(`/assets/${params.slug}`)
+    return {
+      props: {
+        initialData: data,
+      },
+    }
+  } catch (error) {
+    const errorCode = error?.response?.status
+    return {
+      props: {
+        errorCode: errorCode ?? 503,
+      },
+    }
+  }
 }
