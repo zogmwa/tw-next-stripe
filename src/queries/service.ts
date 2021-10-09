@@ -99,3 +99,29 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
     return null
   }
 }
+
+export async function toggleUpVoteAsset(assetId: number) {
+  try {
+    const { data } = await client.post('/upvotes/', {
+      asset: assetId,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function toggleDownVoteAsset(voteId: number, slug: string) {
+  try {
+    const { status } = await client.delete(`/upvotes/${voteId}/`, {
+      data: { asset: slug },
+    })
+    return status
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}

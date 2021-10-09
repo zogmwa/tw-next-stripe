@@ -5,7 +5,7 @@ import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
 import { useUserContext } from '../../hooks/use-user'
-import { toggleUsedByStatus } from '../../queries/service'
+import { toggleUsedByStatus, toggleUpVoteAsset, toggleDownVoteAsset } from '../../queries/service'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
@@ -27,6 +27,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
 
   const [isLoading, setIsLoading] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
+  const [votedByMe, setVotedByMe] = useState(service?.voted_by_me)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
@@ -41,6 +42,15 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
     setIsLoading(false)
     if (resultStatus !== null) {
       setUsedByMe(resultStatus)
+    }
+  }
+
+  const setToggleUpvotedByMe = async () => {
+    if (votedByMe) {
+      const votedByMeStatus = await toggleDownVoteAsset(votedByMe, service?.slug)
+    } else {
+      const votedByMeStatus = await toggleUpVoteAsset(service?.id)
+      console.log('votedByMeStatus:', votedByMeStatus)
     }
   }
 
@@ -137,8 +147,9 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         </Button>
         <Button
           className="w-40 space-x-2"
-          buttonType="primary"
-          icon={<BsChevronUp className="self-center text-white" />}
+          buttonType={votedByMe ? 'primary' : 'default'}
+          icon={<BsChevronUp className={votedByMe ? 'self-center text-white' : 'self-center text-primary'} />}
+          onClick={() => setToggleUpvotedByMe()}
         >
           {`Upvote ${service.upvotes_count}`}
         </Button>
