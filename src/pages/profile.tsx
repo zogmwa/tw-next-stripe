@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 // import { ScrollSpy } from '../components/scrollspy'
+import { useRouter } from 'next/router'
 import { Link, Element } from 'react-scroll'
-import { useProfileContext } from '../hooks/use-profile'
+import toast from 'react-hot-toast'
+import { useProfile } from '../hooks/use-profile'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
 import { ProfileCard } from '../components/profile-card'
@@ -108,16 +110,33 @@ const isPending: (asset: Asset) => boolean = (asset) => true
 
 export default function Profile() {
   const user = useUserContext()
-  const profile = useProfileContext()
+  const profile = useProfile()
+  const router = useRouter()
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
-  const loading: boolean = !user.userFetched || !profile.profileFetched
 
   // const publishedAssets: Asset[] = data.submittedAssets.filter(isPublished)
   // const pendingAssets: Asset[] = data.submittedAssets.filter(isPending)
   const publishedAssets: Asset[] = [asset1, asset2]
   const pendingAssets: Asset[] = [asset1, asset2]
 
-  if (loading) {
+  // eslint-disable-next-line no-console
+  console.log(data, profile)
+
+  useEffect(() => {
+    if (!user.isLoggedIn()) {
+      router.push('/login')
+      toast.error('You need to login to view profile.')
+    }
+  }, [router, user])
+
+  useEffect(() => {
+    const { error } = profile
+    if (error) {
+      console.log(error)
+    }
+  }, [profile])
+
+  if (profile.isLoading) {
     return (
       <div className="flex flex-col items-center justify-center w-screen h-screen space-y-4">
         <Spinner className="w-8 h-8 !text-text-secondary" />

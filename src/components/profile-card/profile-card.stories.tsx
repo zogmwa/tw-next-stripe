@@ -1,6 +1,7 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { ProfileCard } from './index'
+import { User } from '../../types/user'
 import { UserContextType } from '../../types/user-context-type'
 import { ProfileContextType } from '../../types/profile-context-type'
 
@@ -14,21 +15,25 @@ const Template = (args) => <ProfileCard {...args} />
 export const ProfileCardComponent = Template.bind({})
 
 const userContextValue: UserContextType = {
-  userFetched: true,
+  isLoggedIn: () => {
+    return true
+  },
   authVerified: true,
   pk: 76,
   username: 'pranjal',
   email: 'mittal.pranjal@gmail.com',
   first_name: 'Pranjal',
   last_name: 'Mittal',
-  setToken: (l, m) => {}, //eslint-disable-line
   signInWithEmailAndPassword: (x, y) => Promise.resolve(true), //eslint-disable-line
   signUpWithEmailAndPassword: (x, y, z) => Promise.resolve(true), //eslint-disable-line
   logout: () => Promise.resolve(),
+  mutateUser: (x: User & { authVerified: boolean }) => Promise.resolve(x),
 }
 
 const profileContextValue: ProfileContextType = {
   profileFetched: true,
+  isLoading: false,
+  error: null,
   id: 2,
   username: 'pranjal',
   avatar: null,

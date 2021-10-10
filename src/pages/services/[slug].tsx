@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-query'
-import { GetServerSideProps } from 'next'
-import Error from 'next/error'
-import { useUserContext } from '../../hooks/use-user'
-import { clientWithRetries } from '../../utils/clientWithRetries'
-import { fetchService } from '../../queries/service'
+import useSWR from 'swr'
 import { ServiceDetailCard } from '../../components/service-card'
 import { ServiceDetailSidebar } from '../../components/service-detail/sidebar'
 import { ServiceDetailTab } from '../../components/service-detail/tab'
@@ -16,27 +11,16 @@ import { QaContent } from '../../components/service-detail/qa-content'
 import { RelatedContent } from '../../components/service-detail/related-content'
 import { ReviewsContainer } from '../../components/service-detail/get-reviews'
 import { Asset } from '../../types/asset'
+import { withSessionSSR } from '../../utils/session'
+import { fetchServiceServer } from '../../server-queries/fetch-service'
 
-export default function Service({ errorCode, initialData }: { errorCode?: number; initialData?: Asset }) {
+export default function Service() {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
-  const [data, setData] = useState(initialData)
-  const { authVerified } = useUserContext()
   // @TODO: Use isLoading, error
 
-  const {
-    isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
-    data: queryData,
-    error, // eslint-disable-line @typescript-eslint/no-unused-vars
-  } = useQuery(['services', `${slug}?asset=${slug}`], () => fetchService(`${slug}?asset=${slug}`, authVerified), {
-    enabled: !errorCode,
-  })
-
-  useEffect(() => {
-    if (queryData) {
-      setData(queryData)
-    }
-  }, [queryData])
+  // eslint-disable-next-line
+  const { data, error } = useSWR(`/api/assets/${slug}`)
 
   const elements = [
     {
@@ -71,10 +55,6 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
     },
   ]
 
-  if (errorCode) {
-    return <Error statusCode={errorCode} />
-  }
-
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
@@ -88,14 +68,18 @@ export default function Service({ errorCode, initialData }: { errorCode?: number
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { params } = context
+export const getServerSideProps = withSessionSSR(async (context) => {
+  const {
+    params: { slug },
+  } = context
 
   try {
-    const { data } = await clientWithRetries.get<Asset>(`/assets/${params.slug}`)
+    const data = await fetchServiceServer(context.req.session, slug)
     return {
       props: {
-        initialData: data,
+        fallback: {
+          [`/api/assets/${slug}`]: data,
+        },
       },
     }
   } catch (error) {
@@ -106,4 +90,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }
   }
-}
+})

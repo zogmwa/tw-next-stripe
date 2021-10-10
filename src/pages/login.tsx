@@ -6,8 +6,8 @@ import * as yup from 'yup'
 import { useRouter } from 'next/router'
 import { Button } from '../components/button'
 import { Input } from '../components/input'
-import { useUserContext } from '../hooks/use-user'
 import { handleGoogleLogin, handleLinkedInLogin } from '../utils/login'
+import { useUserContext } from '../hooks/use-user'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),

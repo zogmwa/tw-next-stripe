@@ -15,7 +15,7 @@ type ServiceDetailFeatureProps = {
 
 function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
-
+  
   const [attributeVotesList, setAttributeVotesList] = useState([])
   const { authVerified } = useUserContext()
   const [attributes, setAttributes] = useState(service.attributes ?? [])
@@ -24,12 +24,12 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
 
   useEffect(() => {
     async function getVotedAttribute() {
-    if (!authVerified) return
+      if (!authVerified) return
 
-    const attributeVotes = await fetchAttributeVotes()
-      if (attributeVotes) {
-        let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
-        setAttributeVotesList(upVotedAttributes)
+      const attributeVotes = await fetchAttributeVotes()
+        if (attributeVotes) {
+          let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
+          setAttributeVotesList(upVotedAttributes)
       }
     }
 

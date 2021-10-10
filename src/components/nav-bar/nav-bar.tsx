@@ -11,7 +11,8 @@ type NavBarProps = {
 }
 
 export function NavBar({ className, style }: NavBarProps) {
-  const { authVerified } = useUserContext()
+  const session = useUserContext()
+  const { authVerified } = session
 
   return (
     <div className={clsx('w-full h-14 bg-background-surface border-b px-4', className)} style={style}>

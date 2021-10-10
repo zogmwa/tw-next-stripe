@@ -30,7 +30,7 @@ export async function searchSuggestions(searchInput: string): Promise<GroupOptio
   if (searchInput.length >= 3) {
     try {
       const { data } = await client.get<{ questions: string[]; assets: string[] }>(
-        `/?q=${searchInput}`, // TODO: Will be implement with API later.
+        `/?q=${searchInput}`, // TODO: Will be implement with API later
       )
       const questionResults = data.questions.map((val) => ({ value: val, label: labelComponent(val) }))
       const assetResults = data.assets.map((val) => ({ value: val, label: labelComponent(val) }))

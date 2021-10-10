@@ -21,6 +21,8 @@ const nextConfig = {
     CLOUDINARY_PRESET_NAME: 'ml_default',
     CLOUDINARY_API_KEY: '241677845793131',
     CLOUDINARY_API_SECRET: '3DQQEO7VRHMo4WNp_JKOYxGMTtg',
+
+    SECRET_COOKIE_PASSWORD: 'cklvnmwhdfklsdfjasdkfajskdnfjkxcvyiuwerbkashkdjf',
   },
 }
 
