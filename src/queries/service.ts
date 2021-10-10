@@ -101,7 +101,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
   }
 }
 
-export async function toggleUpVoteAsset(assetId: number) {
+export async function toggleUpVoteAsset(assetId: number): Promise<AttributeVote | null> {
   try {
     const { data } = await client.post('/asset_votes/', {
       asset: assetId,
@@ -114,12 +114,23 @@ export async function toggleUpVoteAsset(assetId: number) {
   }
 }
 
-export async function toggleDownVoteAsset(voteId: number, slug: string) {
+export async function toggleDownVoteAsset(voteId: number, slug: string): Promise<number | null> {
   try {
     const { status } = await client.delete(`/asset_votes/${voteId}/`, {
       data: { asset: slug },
     })
     return status
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function fetchUpvotedAttributes(slug: string): Promise<any | null> {
+  try {
+    const { data } = await client.get(`/asset_attributes/?asset__slug=${slug}&asset=${slug}`)
+    return data
   } catch (error) {
     // TODO: error handling
     toast.error('something went wrong')

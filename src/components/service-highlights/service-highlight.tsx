@@ -4,83 +4,32 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
+import { Asset } from '../../types/asset'
+import { AddAHighlight } from '../add-a-highlight'
+import { Modal } from '../Modal'
 
-function ServiceHighlightComponent() {
+type ServiceDetailFeatureProps = {
+  service: Asset
+}
+
+function HighlightContentComponent({
+  attributeVotesList,
+  attributes,
+  isLoading,
+  clickedAttribute,
+  upvoteAttribute,
+  logoUrl,
+}) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
-  const isVoted = false // upvoted status for testing without api.
+  const handleUpvoteAttribute = (attribute) => {
+    if (typeof upvoteAttribute === 'function')
+      upvoteAttribute(attribute)
+  }
+
   const defaultShowCount = 10
-
-  const logoUrl = 'http://logo.clearbit.com/mailchimp.com'
-  const attributes = [
-    {
-      id: 1,
-      name: 'Realtime collaboration on designs',
-      is_con: false,
-      upvotes_count: 2,
-    },
-    {
-      id: 34,
-      name: 'Contact Management',
-      is_con: false,
-      upvotes_count: 1,
-    },
-    {
-      id: 35,
-      name: 'Presentation Tool',
-      is_con: false,
-      upvotes_count: 0,
-    },
-    {
-      id: 36,
-      name: 'On-Demand Webcasting',
-      is_con: false,
-      upvotes_count: 0,
-    },
-    {
-      id: 37,
-      name: 'Two-way Audio & Video',
-      is_con: false,
-      upvotes_count: 0,
-    },
-    {
-      id: 38,
-      name: 'Invitation Management',
-      is_con: false,
-      upvotes_count: 0,
-    },
-    {
-      id: 39,
-      name: 'Scheduling',
-      is_con: false,
-      upvotes_count: 0,
-    },
-    {
-      id: 42,
-      name: 'Video Lagg on weak internet',
-      is_con: true,
-      upvotes_count: 0,
-    },
-    {
-      id: 43,
-      name: 'Screen Sharing Accessibility',
-      is_con: true,
-      upvotes_count: 0,
-    },
-    {
-      id: 44,
-      name: 'Poor Streaming',
-      is_con: true,
-      upvotes_count: 0,
-    },
-    {
-      id: 45,
-      name: 'Meeting Room Booking',
-      is_con: false,
-      upvotes_count: 0,
-    },
-  ]
 
   let tempAttributes = attributes
   if (!isCon) tempAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
@@ -100,9 +49,13 @@ function ServiceHighlightComponent() {
           size="small"
           className="self-start text-white bg-primary"
           icon={<AiOutlinePlus className="text-white" />}
+          onClick={() => setIsOpen(!isOpen)}
         >
-          Add Highlight
+          Add a Highlight
         </Button>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          <AddAHighlight setIsOpen={setIsOpen} />
+        </Modal>
       </div>
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
@@ -114,10 +67,14 @@ function ServiceHighlightComponent() {
                     size="small"
                     className={
                       attribute.is_con
-                        ? isVoted
+                        ? typeof attributeVotesList.find(
+                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                          ) !== 'undefined'
                           ? 'self-start text-background-light bg-text-error border-text-error'
                           : 'self-start text-text-error border-text-error'
-                        : isVoted
+                        : typeof attributeVotesList.find(
+                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                          ) !== 'undefined'
                         ? 'self-start text-background-light bg-success border-success'
                         : 'self-start text-success border-success'
                     }
@@ -125,15 +82,29 @@ function ServiceHighlightComponent() {
                       <HiChevronUp
                         className={
                           attribute.is_con
-                            ? isVoted
+                            ? typeof attributeVotesList.find(
+                                (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                              ) !== 'undefined'
                               ? 'text-background-light'
                               : 'text-text-error'
-                            : isVoted
+                            : typeof attributeVotesList.find(
+                                (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                              ) !== 'undefined'
                             ? 'text-background-light'
                             : 'text-success'
                         }
                       />
                     }
+                    loading={isLoading && clickedAttribute === attribute.id}
+                    loadingClassName={
+                      typeof attributeVotesList.find(
+                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                      ) !== 'undefined'
+                        ? 'text-background-light w-3 h-3'
+                        : 'text-primary w-3 h-3'
+                    }
+                    onClick={() => handleUpvoteAttribute(attribute)}
+                    disabled={isLoading}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
@@ -146,12 +117,40 @@ function ServiceHighlightComponent() {
                   <Button
                     size="small"
                     className={
-                      isVoted
+                      typeof attributeVotesList.find(
+                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                      ) !== 'undefined'
                         ? 'self-start text-background-light bg-primary'
                         : 'self-start text-text-secondary border-text-tertiary'
                     }
-                    textClassName="text-text-secondary"
-                    icon={<HiChevronUp className={isVoted ? 'text-background-light' : 'text-text-secondary'} />}
+                    textClassName={
+                      typeof attributeVotesList.find(
+                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                      ) !== 'undefined'
+                        ? 'text-background-light'
+                        : 'text-text-secondary'
+                    }
+                    icon={
+                      <HiChevronUp
+                        className={
+                          typeof attributeVotesList.find(
+                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                          ) !== 'undefined'
+                            ? 'text-background-light'
+                            : 'text-text-secondary'
+                        }
+                      />
+                    }
+                    loading={isLoading && clickedAttribute === attribute.id}
+                    loadingClassName={
+                      typeof attributeVotesList.find(
+                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
+                      ) !== 'undefined'
+                        ? 'text-background-light w-3 h-3'
+                        : 'text-primary w-3 h-3'
+                    }
+                    onClick={() => handleUpvoteAttribute(attribute)}
+                    disabled={isLoading}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
@@ -208,4 +207,4 @@ function ServiceHighlightComponent() {
   )
 }
 
-export const ServiceHighlight = ServiceHighlightComponent
+export const HighlightContent = HighlightContentComponent
