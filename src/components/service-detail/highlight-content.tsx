@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useUserContext } from '../../hooks/use-user'
 import { Asset } from '../../types/asset'
 import {
   fetchAttributeVotes,
@@ -17,15 +16,12 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
   
   const [attributeVotesList, setAttributeVotesList] = useState([])
-  const { authVerified } = useUserContext()
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
 
   useEffect(() => {
     async function getVotedAttribute() {
-      if (!authVerified) return
-
       const attributeVotes = await fetchAttributeVotes()
         if (attributeVotes) {
           let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
@@ -37,8 +33,6 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   }, [])
 
   const upvoteAttribute = async (attribute) => {
-    if (!authVerified) return
-
     setClickedAttribute(attribute.id)
     setIsLoading(true)
     let data = null
