@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
 
 function RelatedContentComponent() {
@@ -49,7 +50,12 @@ function RelatedContentComponent() {
 
   return (
     <>
-      <h1 className="my-2 text-base font-medium text-text-primary">Related Products</h1>
+      <div className="flex justify-between">
+        <h1 className="my-2 text-base font-medium text-text-primary">Related Products</h1>
+        <Button buttonType="primary" className="self-start text-white bg-primary">
+          Compare
+        </Button>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4">
         {viewRelatedProducts.map((relatedProduct, index) => (
           <RelatedProductCard relatedProduct={relatedProduct} key={index} />

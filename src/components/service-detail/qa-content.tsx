@@ -6,10 +6,14 @@ import { EditorProps } from 'react-draft-wysiwyg'
 import { convertToRaw } from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html'
+import { Dialog } from '@headlessui/react'
+import clsx from 'clsx'
 import { Button } from '../button'
 import { SearchQuestionBar } from './search-question-bar'
 import { Asset } from '../../types/asset'
 import { ServiceQuestionCard } from '../service-question-card'
+import { AddAQuestion } from '../add-a-question'
+import { Modal } from '../Modal'
 
 // https://github.com/jpuri/react-draft-wysiwyg/issues/893
 const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mod) => mod.Editor), { ssr: false })
@@ -29,6 +33,8 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
+
   if (typeof service === 'undefined') return null
 
   const defaultShowCount = 2
@@ -122,9 +128,16 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       ) : null}
       <div className="w-full px-2 py-4 mt-4 text-center rounded-md bg-background-default md:flex md:justify-center">
         <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
-        <Button className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8" size="small">
+        <Button
+          onClick={() => setIsOpen(!isOpen)}
+          className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8"
+          size="small"
+        >
           Post your question
         </Button>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          <AddAQuestion setIsOpen={setIsOpen} />
+        </Modal>
       </div>
     </div>
   )

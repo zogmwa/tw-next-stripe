@@ -12,6 +12,8 @@ import {
   toggleUpVoteAttribute,
   toggleDownVoteAttribute,
 } from '../../queries/service'
+import { AddAHighlight } from '../add-a-highlight'
+import { Modal } from '../Modal'
 
 type ServiceDetailFeatureProps = {
   service: Asset
@@ -26,6 +28,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     async function getVotedAttribute() {
@@ -84,9 +87,13 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
           size="small"
           className="self-start text-white bg-primary"
           icon={<AiOutlinePlus className="text-white" />}
+          onClick={() => setIsOpen(!isOpen)}
         >
-          Add Highlight
+          Add a Highlight
         </Button>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          <AddAHighlight setIsOpen={setIsOpen} />
+        </Modal>
       </div>
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
