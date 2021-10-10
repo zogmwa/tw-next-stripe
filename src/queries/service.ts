@@ -102,7 +102,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
 
 export async function toggleUpVoteAsset(assetId: number) {
   try {
-    const { data } = await client.post('/upvotes/', {
+    const { data } = await client.post('/asset_votes/', {
       asset: assetId,
     })
     return data
@@ -115,7 +115,7 @@ export async function toggleUpVoteAsset(assetId: number) {
 
 export async function toggleDownVoteAsset(voteId: number, slug: string) {
   try {
-    const { status } = await client.delete(`/upvotes/${voteId}/`, {
+    const { status } = await client.delete(`/asset_votes/${voteId}/`, {
       data: { asset: slug },
     })
     return status
