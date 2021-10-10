@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
-import { client } from '../utils/client'
-import { useUserContext } from '../hooks/use-user'
+import axios from 'axios'
 import { Spinner } from '../components/spinner'
 
 /**
@@ -10,6 +10,7 @@ import { Spinner } from '../components/spinner'
  */
 export default function LoginWithGoogle() {
   const { replace } = useRouter()
+  const { mutate } = useSWRConfig()
 
   const params = {}
   // Parse Hash part of URL
@@ -28,19 +29,14 @@ export default function LoginWithGoogle() {
   const nonEmptyQuery = Object.keys(params).length > 0
 
   const { access_token: google_access_token, state } = params as { access_token: string; state: string }
-  const { setToken } = useUserContext()
 
   async function connectGoogleAccountToExistingTaggedWebAccount(google_access_token) {
     try {
-      // Use Google access token to get TaggedWeb access token and Taggedweb user object
-      const {
-        data: { access_token, refresh_token },
-      } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/google/connect/', {
+      await axios.post('/api/social/google-connect/', {
         access_token: google_access_token,
-        client_id: process.env.GOOGLE_CLIENT_ID,
       })
-      setToken(access_token, refresh_token)
 
+      await mutate('/api/user')
       toast.success('Login Successful and Google Account Connected')
 
       // Redirect user to home page on successfully connecting
@@ -64,15 +60,11 @@ export default function LoginWithGoogle() {
       async function login() {
         if (google_access_token && state === process.env.GOOGLE_OAUTH_STATE) {
           try {
-            // Use Google auth token to get TaggedWeb access token and user
-            const {
-              data: { access_token: tweb_access_token, refresh_token: tweb_refresh_token },
-            } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/google/', {
+            await axios.post('/api/social/google/', {
               access_token: google_access_token,
-              client_id: process.env.GOOGLE_CLIENT_ID,
             })
-            setToken(tweb_access_token, tweb_refresh_token)
 
+            await mutate('/api/user')
             toast.success('Login Successful')
 
             // Redirect user to home page
@@ -100,7 +92,7 @@ export default function LoginWithGoogle() {
       login()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [google_access_token, state, replace, setToken],
+    [google_access_token, state, replace],
   )
 
   return (

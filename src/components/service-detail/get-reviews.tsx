@@ -13,7 +13,7 @@ function GetReviewsComponent() {
     isLoading, // eslint-disable-line @typescript-eslint/no-unused-vars
     data: queryData,
     error, // eslint-disable-line @typescript-eslint/no-unused-vars
-  } = useQuery(['services', `asset_reviews?asset=${slug}`], () => fetchVote(`asset_reviews?asset__slug=${slug}`), {
+  } = useQuery(['services', `asset_reviews?asset=${slug}`], () => fetchVote(slug), {
     enabled: true,
   })
   useEffect(() => {

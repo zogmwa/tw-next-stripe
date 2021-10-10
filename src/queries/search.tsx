@@ -1,4 +1,4 @@
-import { client } from '../utils/client'
+import axios from 'axios'
 
 type GroupOption = {
   label: string
@@ -13,8 +13,8 @@ type Option = {
 export async function searchSuggestions(searchInput: string): Promise<GroupOption[]> {
   if (searchInput.length >= 3) {
     try {
-      const { data } = await client.get<{ tags: string[]; assets: string[]; asset_slugs: string[] }>(
-        `/autocomplete-tags-and-assets/?q=${searchInput}`,
+      const { data } = await axios.get<{ tags: string[]; assets: string[]; asset_slugs: string[] }>(
+        `/api/autocomplete/${searchInput}`,
       )
       const tagResults = data.tags.map((val) => ({ value: val, label: val }))
       const len = Math.min(data.assets.length, data.asset_slugs.length)

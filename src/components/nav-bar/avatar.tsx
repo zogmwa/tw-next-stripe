@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
-
 import { useRouter } from 'next/router'
 import { useUserContext } from '../../hooks/use-user'
 
@@ -9,8 +8,7 @@ const menuIconClassNames = (active) =>
   `${active ? 'bg-primary text-white' : 'text-gray-900'} group flex rounded-md items-center px-2 py-2 w-full text-sm`
 
 export default function Avatar() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { authVerified, userFetched, first_name, last_name, logout } = useUserContext()
+  const { authVerified, first_name, last_name, logout } = useUserContext()
   const { push } = useRouter()
 
   return (
@@ -19,7 +17,7 @@ export default function Avatar() {
         className="flex items-center justify-center w-10 h-10 ml-3 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
         style={{ boxShadow: 'none !important' }}
       >
-        {userFetched ? <p>{first_name[0] + last_name[0]}</p> : <BsPersonFill size={22} color="gray" />}
+        {authVerified ? <p>{first_name[0] + last_name[0]}</p> : <BsPersonFill size={22} color="gray" />}
       </Menu.Button>
       <Transition
         as={Fragment}

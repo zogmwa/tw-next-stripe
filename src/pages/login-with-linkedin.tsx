@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 import { client } from '../utils/client'
-import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
 
 /**
@@ -10,25 +11,22 @@ import { Spinner } from '../components/spinner'
  */
 export default function LoginWithLinkedin() {
   const { query, replace } = useRouter()
+  const { mutate } = useSWRConfig()
   // created nonEmptyCheck because in the first render it might happen that query is empty
   // and we don't want to redirect user to /login in the first render itself
   const nonEmptyQuery = Object.keys(query).length > 0
 
   // code is the LinkedIn auth code extracted from the callback url GET args
   const { code, state } = query as { code: string; state: string }
-  const { setToken } = useUserContext()
 
   async function connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code) {
     try {
       // Use LinkedIn access token to get TaggedWeb access token and Taggedweb user object
-      const {
-        data: { access_token, refresh_token },
-      } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/connect/', {
+      await axios.post<{ access_token: string; refresh_token: string }>('/api/social/linkedin-connect/', {
         access_token: linkedin_access_token,
         code,
-        client_id: process.env.LINKEDIN_CLIENT_ID,
       })
-      setToken(access_token, refresh_token)
+      await mutate('/api/user')
 
       toast.success('Login Successful and LinkedIn Account Connected')
 
@@ -67,14 +65,11 @@ export default function LoginWithLinkedin() {
 
             try {
               // Use LinkedIn auth token to get TaggedWeb access token and user
-              const {
-                data: { access_token: tweb_access_token, refresh_token: tweb_refresh_token },
-              } = await client.post<{ access_token: string; refresh_token: string }>('/dj-rest-auth/linkedin/', {
+              await axios.post<{ access_token: string; refresh_token: string }>('/api/social/linkedin/', {
                 access_token: linkedin_access_token,
                 code,
-                client_id: process.env.LINKEDIN_CLIENT_ID,
               })
-              setToken(tweb_access_token, tweb_refresh_token)
+              await mutate('/api/user')
 
               toast.success('Login Successful')
 
@@ -106,7 +101,7 @@ export default function LoginWithLinkedin() {
       login()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [code, state, replace, setToken],
+    [code, state, replace],
   )
 
   return (

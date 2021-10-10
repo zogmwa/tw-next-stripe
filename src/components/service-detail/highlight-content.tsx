@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
-import { useUserContext } from '../../hooks/use-user'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -20,11 +19,9 @@ type ServiceDetailFeatureProps = {
 }
 
 function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
-  if (typeof service === 'undefined') return null
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
   const [attributeVotesList, setAttributeVotesList] = useState([])
-  const { authVerified } = useUserContext()
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
@@ -34,13 +31,15 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     async function getVotedAttribute() {
       const attributeVotes = await fetchAttributeVotes()
       if (attributeVotes) {
-        let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
+        const upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
         setAttributeVotesList(upVotedAttributes.filter((item) => item.is_upvote === true))
       }
     }
 
     getVotedAttribute()
-  }, [])
+  }, [service.id])
+
+  if (typeof service === 'undefined') return null
 
   const upvoteAttribute = async (attribute) => {
     setClickedAttribute(attribute.id)
@@ -50,12 +49,14 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
       (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
     )
 
-    if (typeof selectedAttributeVote === 'undefined' || !selectedAttributeVote.is_upvote)
+    if (typeof selectedAttributeVote === 'undefined' || !selectedAttributeVote.is_upvote) {
       data = await toggleUpVoteAttribute(service.id, attribute.id)
-    else data = await toggleDownVoteAttribute(selectedAttributeVote.id)
+    } else {
+      data = await toggleDownVoteAttribute(selectedAttributeVote.id)
+    }
 
     if (data) {
-      const updatedService = await fetchService(`${service.slug}?asset=${service.slug}`, authVerified)
+      const updatedService = await fetchService(service.slug)
       if (updatedService) {
         setAttributes(updatedService.attributes ?? [])
         const updatedAttributeVotes = await fetchAttributeVotes()
@@ -72,6 +73,8 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   let tempAttributes = attributes
   if (!isCon) tempAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
   if (!viewMore) tempAttributes = tempAttributes.slice(0, 10)
+
+  if (typeof service === 'undefined') return null
 
   return (
     <div className="ml-3 md:mt-10">
