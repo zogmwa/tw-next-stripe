@@ -36,6 +36,7 @@ const asset1 = {
   avg_rating: '8.1000',
   users_count: 1100,
   website: 'http://mailchimp.com/',
+  voted_by_me: null,
 }
 const asset2 = {
   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
@@ -55,6 +56,7 @@ const asset2 = {
   reviews_count: 457,
   avg_rating: '10.000',
   users_count: 102,
+  voted_by_me: null,
 }
 
 export function DefaultCard() {

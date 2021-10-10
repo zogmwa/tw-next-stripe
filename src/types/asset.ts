@@ -27,4 +27,5 @@ export type Asset = {
   snapshots?: { asset: number; url: string }[]
   attributes?: { id?: number | string; name: string; is_con: boolean; upvotes_count: string | number }[]
   used_by_me?: boolean
+  voted_by_me?: number | null
 }

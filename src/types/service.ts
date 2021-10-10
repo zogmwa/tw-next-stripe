@@ -31,4 +31,5 @@ export type Service = {
   // @TODO: Update snapshots types
   snapshots: string[]
   users_count: number
+  voted_by_me?: number | null
 }

@@ -5,7 +5,7 @@ import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
 import { useUserContext } from '../../hooks/use-user'
-import { toggleUsedByStatus } from '../../queries/service'
+import { toggleUsedByStatus, toggleUpVoteAsset, toggleDownVoteAsset } from '../../queries/service'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
@@ -25,8 +25,11 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
 
   if (typeof service === 'undefined') return null
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingUsedByMe, setIsLoadingUsedByMe] = useState(false)
+  const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
+  const [votedByMe, setVotedByMe] = useState(service?.voted_by_me)
+  const [upvotesCount, setUpvotesCount] = useState(service?.upvotes_count)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
@@ -36,12 +39,33 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
   const setToggleUsedByState = async () => {
     if (!authVerified) return
 
-    setIsLoading(true)
+    setIsLoadingUsedByMe(true)
     const resultStatus = await toggleUsedByStatus(slug, !usedByMe)
-    setIsLoading(false)
+    setIsLoadingUsedByMe(false)
     if (resultStatus !== null) {
       setUsedByMe(resultStatus)
     }
+  }
+
+  const setToggleUpvotedByMe = async () => {
+    if (!authVerified) return
+
+    setIsLoadingUpvote(true)
+    const upvotesCounts = upvotesCount
+    if (votedByMe) {
+      const votedByMeStatus = await toggleDownVoteAsset(votedByMe, service?.slug)
+      if (votedByMeStatus) {
+        setVotedByMe(null)
+        setUpvotesCount(upvotesCounts - 1) // TODO: we need to get the accurate upvote count from API
+      }
+    } else {
+      const votedByMeStatus = await toggleUpVoteAsset(service?.id)
+      if (votedByMeStatus) {
+        setVotedByMe(votedByMeStatus.id)
+        setUpvotesCount(upvotesCounts + 1) // TODO: we need to get the accurate upvote count from API
+      }
+    }
+    setIsLoadingUpvote(false)
   }
 
   return (
@@ -127,28 +151,31 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
       <div className="flex flex-row justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
         <Button
           className="inline-flex w-40 md:hidden"
-          loading={isLoading}
+          loading={isLoadingUsedByMe}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
-          disabled={isLoading}
+          disabled={isLoadingUsedByMe}
         >
           I&apos;ve used this
         </Button>
         <Button
           className="w-40 space-x-2"
-          buttonType="primary"
-          icon={<BsChevronUp className="self-center text-white" />}
+          buttonType={votedByMe ? 'primary' : 'default'}
+          icon={<BsChevronUp className={votedByMe ? 'self-center text-white' : 'self-center text-primary'} />}
+          loading={isLoadingUpvote}
+          loadingClassName={votedByMe ? 'text-white' : 'text-primary'}
+          onClick={() => setToggleUpvotedByMe()}
         >
-          {`Upvote ${service.upvotes_count}`}
+          {`Upvote ${upvotesCount}`}
         </Button>
         <Button
           className="hidden w-40 md:inline-flex"
-          loading={isLoading}
+          loading={isLoadingUsedByMe}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
-          disabled={isLoading}
+          disabled={isLoadingUsedByMe}
         >
           I&apos;ve used this
         </Button>
