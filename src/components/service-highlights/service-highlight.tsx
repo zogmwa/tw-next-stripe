@@ -25,8 +25,7 @@ function HighlightContentComponent({
   const [isOpen, setIsOpen] = useState(false)
 
   const handleUpvoteAttribute = (attribute) => {
-    if (typeof upvoteAttribute === 'function')
-      upvoteAttribute(attribute)
+    if (typeof upvoteAttribute === 'function') upvoteAttribute(attribute)
   }
 
   const defaultShowCount = 10

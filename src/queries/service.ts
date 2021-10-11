@@ -1,6 +1,6 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Asset } from '../types/asset'
+import { Asset, AssetVote } from '../types/asset'
 import { AttributeVote } from '../types/attribute_vote'
 
 export type CreateServiceInput = {
@@ -103,7 +103,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
   }
 }
 
-export async function toggleUpVoteAsset(assetId: number): Promise<AttributeVote | null> {
+export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | null> {
   try {
     const { data } = await axios.post('/api/asset_votes/', {
       asset: assetId,
@@ -129,9 +129,10 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
   }
 }
 
+// TODO: Will fix in next branch.
 export async function fetchUpvotedAttributes(slug: string): Promise<any | null> {
   try {
-    const { data } = await client.get(`/asset_attributes/?asset__slug=${slug}&asset=${slug}`)
+    const { data } = await axios.get(`/asset_attributes/?asset__slug=${slug}&asset=${slug}`)
     return data
   } catch (error) {
     // TODO: error handling

@@ -14,7 +14,7 @@ type ServiceDetailFeatureProps = {
 
 function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
-  
+
   const [attributeVotesList, setAttributeVotesList] = useState([])
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
@@ -23,9 +23,9 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   useEffect(() => {
     async function getVotedAttribute() {
       const attributeVotes = await fetchAttributeVotes()
-        if (attributeVotes) {
-          let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
-          setAttributeVotesList(upVotedAttributes)
+      if (attributeVotes) {
+        let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
+        setAttributeVotesList(upVotedAttributes)
       }
     }
 
@@ -40,15 +40,15 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
       (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
     )
 
-    if (typeof selectedAttributeVote === 'undefined')
-      data = await toggleUpVoteAttribute(service.id, attribute.id)
+    if (typeof selectedAttributeVote === 'undefined') data = await toggleUpVoteAttribute(service.id, attribute.id)
     else data = await toggleDownVoteAttribute(selectedAttributeVote.id)
-
+    
+    // TODO: Will fix in next branch.
     if (data) {
       const updatedAttributes = await fetchUpvotedAttributes(service?.slug)
       let updatedAssetAttributes = []
       let updatedUpvotedAttributes = []
-      updatedAttributes.map(item => {
+      updatedAttributes.map((item) => {
         updatedAssetAttributes.push({
           id: item.id,
           asset: service?.id,
@@ -74,7 +74,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
 
   return (
     <>
-      <HighlightContent 
+      <HighlightContent
         attributeVotesList={attributeVotesList}
         attributes={attributes}
         isLoading={isLoading}
