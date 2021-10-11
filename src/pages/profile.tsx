@@ -119,9 +119,6 @@ export default function Profile() {
   const publishedAssets: Asset[] = [asset1, asset2]
   const pendingAssets: Asset[] = [asset1, asset2]
 
-  // eslint-disable-next-line no-console
-  console.log(data, profile)
-
   useEffect(() => {
     if (!user.isLoggedIn()) {
       router.push('/login')
@@ -132,6 +129,7 @@ export default function Profile() {
   useEffect(() => {
     const { error } = profile
     if (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
   }, [profile])
