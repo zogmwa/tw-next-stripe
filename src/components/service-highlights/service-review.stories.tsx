@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { HighlightContent } from './service-highlight'
 
@@ -8,6 +8,10 @@ export default {
 } as Meta
 
 export function DefaultStarRating() {
+  const [addAttributeName, setAddAttributeName] = useState('')
+  const [addAttributeCon, setAddAttributeCon] = useState(false)
+  const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
+
   const attributes = [
     {
       id: 1,
@@ -71,6 +75,16 @@ export function DefaultStarRating() {
     },
   ]
 
+  const addAttributeAction = () => {
+    if (addAttributeName === '') {
+      setAddAttributeNameErrorMessage('This field is valid')
+    } else {
+      setAddAttributeNameErrorMessage('')
+      setAddAttributeName('')
+      setAddAttributeCon(false)
+    }
+  }
+
   return (
     <HighlightContent
       attributeVotesList={attributeVotesList}
@@ -79,6 +93,12 @@ export function DefaultStarRating() {
       clickedAttribute={0}
       upvoteAttribute={null}
       logoUrl={''}
+      addAttributeName={addAttributeName}
+      setAddAttributeName={setAddAttributeName}
+      addAttributeCon={addAttributeCon}
+      setAddAttributeCon={setAddAttributeCon}
+      addAttributeAction={addAttributeAction}
+      addAttributeNameErrorMessage={addAttributeNameErrorMessage}
     />
   )
 }

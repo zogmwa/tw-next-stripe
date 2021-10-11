@@ -4,13 +4,8 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
-import { Asset } from '../../types/asset'
 import { AddAHighlight } from '../add-a-highlight'
 import { Modal } from '../Modal'
-
-type ServiceDetailFeatureProps = {
-  service: Asset
-}
 
 function HighlightContentComponent({
   attributeVotesList,
@@ -19,6 +14,12 @@ function HighlightContentComponent({
   clickedAttribute,
   upvoteAttribute,
   logoUrl,
+  addAttributeName,
+  setAddAttributeName,
+  addAttributeCon,
+  setAddAttributeCon,
+  addAttributeAction,
+  addAttributeNameErrorMessage,
 }) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
@@ -53,7 +54,15 @@ function HighlightContentComponent({
           Add a Highlight
         </Button>
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-          <AddAHighlight setIsOpen={setIsOpen} />
+          <AddAHighlight
+            setIsOpen={setIsOpen}
+            addAttributeName={addAttributeName}
+            setAddAttributeName={setAddAttributeName}
+            addAttributeCon={addAttributeCon}
+            setAddAttributeCon={setAddAttributeCon}
+            addAttributeAction={addAttributeAction}
+            addAttributeNameErrorMessage={addAttributeNameErrorMessage}
+          />
         </Modal>
       </div>
       <div className="mt-6 md:mt-2">
