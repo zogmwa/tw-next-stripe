@@ -9,6 +9,8 @@ import draftToHtml from 'draftjs-to-html'
 import { Button } from '../button'
 import { SearchQuestionBar } from '../service-detail/search-question-bar'
 import { ServiceQuestionCard } from '../service-question-card'
+import { AddAQuestion } from '../add-a-question'
+import { Modal } from '../Modal'
 
 // https://github.com/jpuri/react-draft-wysiwyg/issues/893
 const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mod) => mod.Editor), { ssr: false })
@@ -20,49 +22,18 @@ const placeholderComponent = (
   </div>
 )
 
-const mockupQuestions = [
-  {
-    asset: 2,
-    title: 'Does this allow creating landing pages and capturing email leads?',
-    created: '2021-10-03T21:03:56.582362Z',
-    primary_answer: 'Yes',
-    upvotes_count: 0,
-  },
-  {
-    asset: 2,
-    title: 'How much does membership cost?',
-    created: '2021-10-03T21:03:56.582362Z',
-    primary_answer:
-      'Nothing! Join Mailchimp & Co for free with any Mailchimp marketing plan, even our free plan. If you have a paid Mailchimp marketing plan, there is no additional cost. Just stay current on your existing plan to maintain access to Mailchimp & Co.',
-    upvotes_count: 1,
-  },
-  {
-    asset: 2,
-    title: 'Is support free mailchimp in this site?',
-    created: '2021-10-03T21:03:56.582362Z',
-    primary_answer: '',
-    upvotes_count: 0,
-  },
-  {
-    asset: 2,
-    title: 'Is this popular?',
-    created: '2021-10-03T23:17:58.718531Z',
-    primary_answer: 'Yes, of course.',
-    upvotes_count: 1,
-  },
-]
-
-function ServiceQuestionComponent() {
+function ServiceQuestionComponent({ serviceQuestions }) {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
 
   const defaultShowCount = 2
-  let tempQuestions = mockupQuestions
+  let tempQuestions = serviceQuestions
   if (isAnswered) {
-    tempQuestions = mockupQuestions.filter((item) => item.primary_answer !== '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== '')
   } else {
-    tempQuestions = mockupQuestions.filter((item) => item.primary_answer === '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer === '')
   }
   let questions = tempQuestions
   if (!viewMore) {
@@ -111,7 +82,7 @@ function ServiceQuestionComponent() {
       {!isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
-            <div className="font-medium text-text-primary">{item.title}</div>
+            <div className="text-sm font-medium text-text-primary">{item.title}</div>
             <Editor
               editorState={editor}
               toolbarClassName="bg-primary"
@@ -148,9 +119,16 @@ function ServiceQuestionComponent() {
       ) : null}
       <div className="w-full px-2 py-4 mt-4 text-center rounded-md bg-background-default md:flex md:justify-center">
         <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
-        <Button className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8" size="small">
+        <Button
+          onClick={() => setIsOpen(!isOpen)}
+          className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8"
+          size="small"
+        >
           Post your question
         </Button>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          <AddAQuestion setIsOpen={setIsOpen} />
+        </Modal>
       </div>
     </div>
   )

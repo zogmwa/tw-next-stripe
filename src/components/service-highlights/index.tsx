@@ -1,1 +1,1 @@
-export { ServiceHighlight } from './service-highlight'
+export { HighlightContent } from './service-highlight'

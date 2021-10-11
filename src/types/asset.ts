@@ -29,3 +29,9 @@ export type Asset = {
   used_by_me?: boolean
   voted_by_me?: number | null
 }
+
+export type AssetVote = {
+  id?: number
+  asset?: number
+  is_upvote?: boolean
+}
