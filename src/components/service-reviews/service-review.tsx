@@ -105,17 +105,18 @@ function ServiceReviewComponent() {
       mark: 4.1,
     },
   ]
+  // eslint-disable-next-line array-callback-return
   reviews.sort((reviewA, reviewB) => {
     if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
     if (sortType === 'RECENT_REVIEWS') {
-      let dateA = new Date(reviewA.created)
-      let dateB = new Date(reviewB.created)
+      const dateA = new Date(reviewA.created)
+      const dateB = new Date(reviewB.created)
       return (dateA.getTime() - dateB.getTime()) * -1
     }
   })
   let viewReviews = reviews
-  let totalVideoReviews = reviews.filter((review) => {
-    let tempUrl = review?.video_url ?? ''
+  const totalVideoReviews = reviews.filter((review) => {
+    const tempUrl = review?.video_url ?? ''
     if (tempUrl.length > 0) return true
     else return false
   })
