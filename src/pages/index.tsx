@@ -11,7 +11,9 @@ export default function Home() {
     <div>
       <div className="max-w-screen-lg pl-2 mx-auto">
         <div className="flex flex-col items-start justify-start my-12 space-y-8">
-          <div className="text-4xl font-semibold">Discover web services that fit your needs!</div>
+          <div className="text-4xl font-semibold">
+            Discover and Evaluate SaaS services. Find Web Services that best fit your needs..
+          </div>
           <SearchBar
             onSubmit={(selectedTag) => {
               router.push(`/search/${selectedTag}`)
@@ -24,9 +26,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-start px-2 md:px-0 md:flex-row">
             <div className="flex flex-col items-start justify-center mb-2 md:w-7/12">
               <div className="mb-6 text-4xl font-semibold text-white">Web Service Owner? Connect with more users</div>
-              <div className="mb-4 text-2xl text-gray-300">
-                Help people discover your web service and it’s function.
-              </div>
+              <div className="mb-4 text-2xl text-gray-300">Help people discover your web service and it’s function</div>
               <Button
                 buttonType="primary"
                 className="mt-2 mr-2"

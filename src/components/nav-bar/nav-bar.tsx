@@ -20,20 +20,20 @@ export function NavBar({ className, style }: NavBarProps) {
         <div className="w-10 h-10 mr-2 bg-opacity-25 rounded-md bg-primary" />
         <Link href="/">
           <div className="text-base font-medium tracking-wide text-opacity-50 cursor-pointer text-primary">
-            taggedweb
+            TaggedWeb
           </div>
         </Link>
         <div className="flex-1" />
         {authVerified ? (
           <>
             <Link href="/submit-service">
-              <Button>Submit Service</Button>
+              <Button>Submit a Web Service</Button>
             </Link>
             <Avatar />
           </>
         ) : (
           <Link href="/login">
-            <Button>Login</Button>
+            <Button> Sign Up | Login </Button>
           </Link>
         )}
       </div>

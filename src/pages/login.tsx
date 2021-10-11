@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <div className="max-w-md p-0 mx-4 rounded-md lg:p-6 lg:border">
-        <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome Back....</h1>
+        <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to TaggedWeb!</h1>
         <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
           Login to continue surfing among the ocean of web services
         </h3>
@@ -101,7 +101,7 @@ export default function Login() {
                 <div className="text-xs lg:text-sm text-text-secondary">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup">
-                    <a href="">Create One</a>
+                    <a href="">Sign Up</a>
                   </Link>
                 </div>
               </div>
