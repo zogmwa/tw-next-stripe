@@ -8,6 +8,7 @@ import { Asset } from '../../types/asset'
 import { AddAHighlight } from '../add-a-highlight'
 import { Modal } from '../Modal'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ServiceDetailFeatureProps = {
   service: Asset
 }
