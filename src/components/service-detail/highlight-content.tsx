@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { Asset } from '../../types/asset'
@@ -29,7 +30,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     async function getVotedAttribute() {
       const attributeVotes = await fetchAttributeVotes()
       if (attributeVotes) {
-        let upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
+        const upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
         setAttributeVotesList(upVotedAttributes)
       }
     }
@@ -50,8 +51,9 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
 
     if (data) {
       const updatedAttributes = await fetchUpvotedAttributes(service?.slug)
-      let updatedAssetAttributes = []
-      let updatedUpvotedAttributes = []
+      const updatedAssetAttributes = []
+      const updatedUpvotedAttributes = []
+      // eslint-disable-next-line array-callback-return
       updatedAttributes.map((item) => {
         updatedAssetAttributes.push({
           id: item.id,
@@ -60,12 +62,13 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
           upvotes_count: item.upvotes_count,
           is_con: item.is_con,
         })
-        if (item.my_asset_attribute_vote)
+        if (item.my_asset_attribute_vote) {
           updatedUpvotedAttributes.push({
             id: item.my_asset_attribute_vote,
             attribute: item.id,
             asset: service?.id,
           })
+        }
       })
       setAttributes(updatedAssetAttributes)
       setAttributeVotesList(updatedUpvotedAttributes)

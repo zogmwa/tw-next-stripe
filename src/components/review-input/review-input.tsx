@@ -57,7 +57,7 @@ function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
         onSubmit(data)
       }}
     >
-      {({ handleSubmit, values, handleChange, handleBlur, touched, errors, setFieldValue }) => (
+      {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
         <form onSubmit={handleSubmit}>
           <div className="my-2 font-medium text-text-primary">
             Did you use {serviceName}? What do you think of this product?
@@ -73,6 +73,7 @@ function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
                   precision={0.5}
                   emptyColor="#E5E7EB"
                   size="1.5rem"
+                  // eslint-disable-next-line no-console
                   onChange={(event) => console.log(item.name, event.target.value * 2)}
                 />
               </div>
