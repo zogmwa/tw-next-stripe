@@ -9,7 +9,7 @@ export default withSessionApi(async (req, res) => {
   if (req.method === 'GET') {
     const { slug } = req.query
     const access = await getAccessToken(req.session)
-    const { data } = await client.get(`/asset_attributes/?asset__slug=${slug}&asset=${slug}`, {
+    const { data } = await client.get(`/asset_attributes/?assets__slug=${slug}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
