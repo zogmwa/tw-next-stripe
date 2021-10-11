@@ -16,8 +16,6 @@ export function DefaultAddAHighlight() {
     if (addAttributeName === '') {
       setAddAttributeNameErrorMessage('This field is valid')
     } else {
-      console.log(addAttributeName)
-      console.log(addAttributeCon)
       setAddAttributeNameErrorMessage('')
       setAddAttributeName('')
       setAddAttributeCon(false)
