@@ -11,7 +11,7 @@ type VideoCardProps = {
 
 function VideoReviewComponent({ review, className }: VideoCardProps) {
   return (
-    <div className={`flex flex-col h-56 border-2 rounded shadow-sm ${className}`}>
+    <div className={`flex flex-col h-56 w-72 border-2 rounded shadow-sm ${className}`}>
       <iframe
         className="w-full mb-2 rounded max-h-32"
         src={review.video_url}
