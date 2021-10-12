@@ -22,12 +22,7 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
           {promo_video !== '' && (
             <Carousel.Item>
               <div className="promo-video-wrapper">
-                <ReactPlayer
-                  className="promo-video"
-                  url={promo_video}
-                  width="100%"
-                  height="100%"
-                />
+                <ReactPlayer className="promo-video" url={promo_video} width="100%" height="100%" />
               </div>
             </Carousel.Item>
           )}
