@@ -9,7 +9,8 @@
     "NodeJS": true,
     "NodeRequire": true,
     "DOMHighResTimeStamp": true,
-    "GLSLX": true
+    "GLSLX": true,
+    "JSX": true
   },
   "extends": ["plugin:react/recommended", "standard", "plugin:react-hooks/recommended", "plugin:import/typescript"],
   "parser": "@typescript-eslint/parser",

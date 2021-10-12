@@ -12,7 +12,7 @@ type NavBarProps = {
 
 export function NavBar({ className, style }: NavBarProps) {
   const session = useUserContext()
-  const { authVerified } = session
+  const { isLoggedIn } = session
 
   return (
     <div className={clsx('w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
@@ -24,11 +24,11 @@ export function NavBar({ className, style }: NavBarProps) {
           </div>
         </Link>
         <div className="flex-1" />
-        {authVerified ? (
+        <Link href="/submit-service">
+          <Button className="mr-4">Submit A Web Service</Button>
+        </Link>
+        {isLoggedIn() ? (
           <>
-            <Link href="/submit-service">
-              <Button>Submit a Web Service</Button>
-            </Link>
             <Avatar />
           </>
         ) : (

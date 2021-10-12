@@ -31,7 +31,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     }
 
     getVotedAttribute()
-  }, [])
+  }, [service.id])
 
   const upvoteAttribute = async (attribute) => {
     setClickedAttribute(attribute.id)
@@ -44,6 +44,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     if (typeof selectedAttributeVote === 'undefined') data = await toggleUpVoteAttribute(service.id, attribute.id)
     else data = await toggleDownVoteAttribute(selectedAttributeVote.id)
 
+    // TODO: Will fix in next branch.
     if (data) {
       const updatedAttributes = await fetchUpvotedAttributes(service?.slug)
       const updatedAssetAttributes = []

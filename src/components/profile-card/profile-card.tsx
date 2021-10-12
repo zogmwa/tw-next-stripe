@@ -1,10 +1,10 @@
 import React from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import { Button } from '../button'
-import { ProfileContextType } from '../../types/profile-context-type'
-import { UserContextType } from '../../types/user-context-type'
+import { Profile } from '../../types/profile'
+import { User } from '../../types/user'
 
-type ProfileCardProps = { data: Partial<UserContextType & ProfileContextType> }
+type ProfileCardProps = { data: Partial<User & Profile> }
 
 function ProfileCardComponent({ data }: ProfileCardProps) {
   return (

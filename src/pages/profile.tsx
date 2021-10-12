@@ -1,8 +1,5 @@
 import React, { useMemo, useEffect } from 'react'
-// import { ScrollSpy } from '../components/scrollspy'
-import { useRouter } from 'next/router'
 import { Link, Element } from 'react-scroll'
-import toast from 'react-hot-toast'
 import { useProfile } from '../hooks/use-profile'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
@@ -11,6 +8,7 @@ import { ProfileAsset } from '../components/profile-asset'
 import { UserContextType } from '../types/user-context-type'
 import { ProfileContextType } from '../types/profile-context-type'
 import { Asset } from '../types/asset'
+import { withPageAuthRequired } from '../utils/auth-wrappers'
 
 function ScrollSpy({ elements }) {
   return (
@@ -108,10 +106,9 @@ const isPublished: (asset: Asset) => boolean = (asset) => true
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isPending: (asset: Asset) => boolean = (asset) => true
 
-export default function Profile() {
+function ProfilePage() {
   const user = useUserContext()
   const profile = useProfile()
-  const router = useRouter()
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
 
   // const publishedAssets: Asset[] = data.submittedAssets.filter(isPublished)
@@ -120,15 +117,9 @@ export default function Profile() {
   const pendingAssets: Asset[] = [asset1, asset2]
 
   useEffect(() => {
-    if (!user.isLoggedIn()) {
-      router.push('/login')
-      toast.error('You need to login to view profile.')
-    }
-  }, [router, user])
-
-  useEffect(() => {
     const { error } = profile
     if (error) {
+      // TODO: error handling
       // eslint-disable-next-line no-console
       console.log(error)
     }
@@ -180,3 +171,5 @@ export default function Profile() {
     </div>
   )
 }
+
+export default withPageAuthRequired(ProfilePage, { message: 'You need to login to view profile.' })

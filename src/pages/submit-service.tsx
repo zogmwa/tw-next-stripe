@@ -14,6 +14,7 @@ import {
   detailedInformationSchema,
 } from '../components/submit-serivce/detailed-information-form'
 import { createService, CreateServiceInput } from '../queries/service'
+import { withPageAuthRequired } from '../utils/auth-wrappers'
 import { Asset } from '../types/asset'
 import { Stepper } from '../components/stepper'
 import { Button } from '../components/button'
@@ -56,7 +57,7 @@ const steps = [
   },
 ]
 
-export default function SubmitService() {
+function SubmitService() {
   const [currentStep, setCurrentStep] = useState(0)
   const { heading, description, validationSchema, Form, skippable } = steps[currentStep]
 
@@ -151,3 +152,5 @@ export default function SubmitService() {
     </div>
   )
 }
+
+export default withPageAuthRequired(SubmitService, { message: 'You need to login to submit a service.' })

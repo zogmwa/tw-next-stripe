@@ -1,7 +1,7 @@
-import { withSessionApi } from '../../../utils/session'
 import { client } from '../../../utils/client'
 import { getAccessToken } from '../../../utils/token'
 import { Asset } from '../../../types/asset'
+import { withSessionApi } from '../../../utils/session'
 
 /**
  * API Route handler for getting asset_review
@@ -9,10 +9,13 @@ import { Asset } from '../../../types/asset'
 export default withSessionApi(async (req, res) => {
   const { asset } = req.query
   const access = await getAccessToken(req.session)
-  const { data } = await client.get<Asset>(`/asset_reviews?asset=${asset}`, {
-    headers: {
-      Authorization: `Bearer ${access}`,
-    },
-  })
+  const config = access
+    ? {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      }
+    : null
+  const { data } = await client.get<Asset>(`/asset_reviews?asset=${asset}`, config)
   res.json(data)
 })

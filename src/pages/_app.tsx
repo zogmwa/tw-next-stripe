@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import Router, { useRouter } from 'next/router'
 import Error from 'next/error'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -12,6 +12,7 @@ import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
 import { UserProvider } from '../hooks/use-user'
 import { NavBar } from '../components/nav-bar'
+import { Spinner } from '../components/spinner'
 import { ToastWithDismiss } from '../components/toast-with-dismiss'
 import { fetcher } from '../queries/fetchJson'
 
@@ -21,6 +22,13 @@ Router.events.on('routeChangeStart', nProgress.start)
 Router.events.on('routeChangeError', nProgress.done)
 Router.events.on('routeChangeComplete', nProgress.done)
 
+const RedirectSpinner = () => (
+  <div className="flex flex-col items-center justify-center w-screen h-screen space-y-4">
+    <Spinner className="w-8 h-8 !text-text-secondary" />
+    <div className="text-sm text-text-tertiary">Redirecting...</div>
+  </div>
+)
+
 function CustomApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
   const router = useRouter()
@@ -28,7 +36,19 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
-  const { fallback = {}, errorCode } = pageProps
+  const { fallback = {}, errorCode, errorToast, redirectTo, ...restProps } = pageProps
+
+  useEffect(() => {
+    if (errorToast) {
+      toast.error(errorToast)
+    }
+  }, [errorToast])
+
+  useEffect(() => {
+    if (redirectTo) {
+      Router.push(redirectTo)
+    }
+  }, [redirectTo])
 
   return (
     <>
@@ -44,11 +64,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
               <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
-                {errorCode ? (
+                {redirectTo ? (
+                  <RedirectSpinner />
+                ) : errorCode ? (
                   // if errorCode is in pageProps then show error page.
                   <Error statusCode={errorCode} key={router.asPath} />
                 ) : (
-                  <Component {...pageProps} key={router.asPath} />
+                  <Component {...restProps} key={router.asPath} />
                 )}
               </div>
               <Toaster

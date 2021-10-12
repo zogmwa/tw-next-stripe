@@ -72,22 +72,12 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-
-  try {
-    const data = await fetchServiceServer(context.req.session, slug)
-    return {
-      props: {
-        fallback: {
-          [`/api/assets/${slug}`]: data,
-        },
+  const data = await fetchServiceServer(context.req.session, slug)
+  return {
+    props: {
+      fallback: {
+        [`/api/assets/${slug}`]: data,
       },
-    }
-  } catch (error) {
-    const errorCode = error?.response?.status
-    return {
-      props: {
-        errorCode: errorCode ?? 503,
-      },
-    }
+    },
   }
 })

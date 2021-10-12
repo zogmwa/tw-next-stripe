@@ -14,7 +14,7 @@ export default function Avatar() {
   return (
     <Menu as="div" className="relative">
       <Menu.Button
-        className="flex items-center justify-center w-10 h-10 ml-3 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
         style={{ boxShadow: 'none !important' }}
       >
         {authVerified ? <p>{first_name[0] + last_name[0]}</p> : <BsPersonFill size={22} color="gray" />}
