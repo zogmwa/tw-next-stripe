@@ -90,7 +90,8 @@ function ServiceQuestionComponent({ serviceQuestions }) {
               onEditorStateChange={(editorState) => setEditor(editorState)}
             />
             <Button
-              className="inline-flex mt-1 text-white bg-primary"
+              className="inline-flex mt-1 bg-primary"
+              textClassName="text-white"
               size="small"
               onClick={() => console.log(draftToHtml(convertToRaw(editor.getCurrentContent())))}
             >
@@ -121,7 +122,8 @@ function ServiceQuestionComponent({ serviceQuestions }) {
         <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8"
+          className="inline-flex mt-2 bg-primary md:mt-0 md:ml-8"
+          textClassName="text-white"
           size="small"
         >
           Post your question

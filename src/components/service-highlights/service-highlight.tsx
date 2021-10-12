@@ -47,7 +47,8 @@ function HighlightContentComponent({
         </div>
         <Button
           size="small"
-          className="self-start text-white bg-primary"
+          className="self-start bg-primary"
+          textClassName="text-white"
           icon={<AiOutlinePlus className="text-white" />}
           onClick={() => setIsOpen(!isOpen)}
         >
