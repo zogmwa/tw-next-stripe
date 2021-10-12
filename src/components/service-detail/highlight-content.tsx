@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { Asset } from '../../types/asset'
 import {
   fetchAttributeVotes,
   toggleUpVoteAttribute,
   toggleDownVoteAttribute,
   fetchUpvotedAttributes,
+  toggleAddAttribute,
 } from '../../queries/service'
 import { HighlightContent } from '../service-highlights'
 
@@ -20,6 +22,9 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
+  const [addAttributeName, setAddAttributeName] = useState('')
+  const [addAttributeCon, setAddAttributeCon] = useState(false)
+  const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
 
   useEffect(() => {
     async function getVotedAttribute() {
@@ -73,6 +78,20 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     setIsLoading(false)
   }
 
+  const addAttributeAction = async () => {
+    if (addAttributeName === '') {
+      setAddAttributeNameErrorMessage('This field is valid')
+    } else {
+      const addedAttribute = await toggleAddAttribute(addAttributeName, addAttributeCon)
+      if (addedAttribute) {
+        toast.success(`Added ${addedAttribute.name} successfully.`)
+        setAddAttributeNameErrorMessage('')
+        setAddAttributeName('')
+        setAddAttributeCon(false)
+      }
+    }
+  }
+
   const logoUrl = service.logo_url ?? ''
 
   return (
@@ -84,6 +103,12 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
         clickedAttribute={clickedAttribute}
         upvoteAttribute={upvoteAttribute}
         logoUrl={logoUrl}
+        addAttributeName={addAttributeName}
+        setAddAttributeName={setAddAttributeName}
+        addAttributeCon={addAttributeCon}
+        setAddAttributeCon={setAddAttributeCon}
+        addAttributeAction={addAttributeAction}
+        addAttributeNameErrorMessage={addAttributeNameErrorMessage}
       />
     </>
   )

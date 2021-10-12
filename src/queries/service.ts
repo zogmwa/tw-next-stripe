@@ -139,3 +139,17 @@ export async function fetchUpvotedAttributes(slug: string): Promise<VotedAttribu
     return null
   }
 }
+
+export async function toggleAddAttribute(name: string, isCon: boolean): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/asset_attributes/', {
+      name: name,
+      is_con: isCon,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
