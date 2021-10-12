@@ -1,5 +1,6 @@
 import React from 'react'
 import { toast, ToastBar, Toast } from 'react-hot-toast'
+import { AiOutlineClose } from 'react-icons/ai'
 
 export function ToastWithDismiss(toastArg: Toast) {
   return (
@@ -9,8 +10,11 @@ export function ToastWithDismiss(toastArg: Toast) {
           {icon}
           {message}
           {toastArg.type !== 'loading' && (
-            <button className="p-2 bg-gray-200 rounded-md" onClick={() => toast.dismiss(toastArg.id)}>
-              Dismiss
+            <button
+              className="text-text-primary font-semibold focus:outline-none focus:ring-white"
+              onClick={() => toast.dismiss(toastArg.id)}
+            >
+              <AiOutlineClose />
             </button>
           )}
         </>
