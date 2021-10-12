@@ -30,7 +30,7 @@ function AddAHighlightComponent({
       <div className="flex">
         <div className="flex-grow font-bold">Add a Feature</div>
         <div>
-          Con
+          Pro
           <Switch
             className="ml-4 mr-4"
             enabled={addAttributeCon}
@@ -40,7 +40,7 @@ function AddAHighlightComponent({
               setAddAttributeCon(isEnabled)
             }}
           />
-          Pro
+          Con
         </div>
       </div>
       <Textarea
