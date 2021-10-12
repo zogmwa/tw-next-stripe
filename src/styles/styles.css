@@ -59,3 +59,16 @@
 .slick-next:before {
   content: '' !important;
 }
+
+/* Responsive promo video in product section */
+.promo-video-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  margin-bottom: -56.25%;
+}
+
+.promo-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
