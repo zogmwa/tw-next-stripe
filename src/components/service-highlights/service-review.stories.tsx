@@ -77,7 +77,7 @@ export function DefaultStarRating() {
 
   const addAttributeAction = () => {
     if (addAttributeName === '') {
-      setAddAttributeNameErrorMessage('This field is valid')
+      setAddAttributeNameErrorMessage('This field is not valid')
     } else {
       setAddAttributeNameErrorMessage('')
       setAddAttributeName('')

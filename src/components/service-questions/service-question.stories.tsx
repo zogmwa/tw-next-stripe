@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { ServiceQuestion } from './service-question'
 
@@ -27,7 +27,7 @@ const mockupQuestions = [
     asset: 2,
     title: 'Is support free mailchimp in this site?',
     created: '2021-10-03T21:03:56.582362Z',
-    primary_answer: '',
+    primary_answer: null,
     upvotes_count: 0,
   },
   {
@@ -40,5 +40,27 @@ const mockupQuestions = [
 ]
 
 export function DefaultServiceQuestion() {
-  return <ServiceQuestion serviceQuestions={mockupQuestions} />
+  const [addQuestionName, setAddQuestionName] = useState('')
+  const [addQuestionNameErrorMessage, setAddQuestionNameErrorMessage] = useState('')
+
+  const addQuestionAction = async () => {
+    if (addQuestionName === '') {
+      setAddQuestionNameErrorMessage('This field is not valid')
+    } else {
+      setAddQuestionNameErrorMessage('')
+      setAddQuestionName('')
+    }
+  }
+
+  return (
+    <>
+      <ServiceQuestion
+        serviceQuestions={mockupQuestions}
+        addQuestionName={addQuestionName}
+        setAddQuestionName={setAddQuestionName}
+        addQuestionNameErrorMessage={addQuestionNameErrorMessage}
+        addQuestionAction={addQuestionAction}
+      />
+    </>
+  )
 }

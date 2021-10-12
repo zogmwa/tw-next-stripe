@@ -22,7 +22,13 @@ const placeholderComponent = (
   </div>
 )
 
-function ServiceQuestionComponent({ serviceQuestions }) {
+function ServiceQuestionComponent({
+  serviceQuestions,
+  addQuestionName,
+  setAddQuestionName,
+  addQuestionNameErrorMessage,
+  addQuestionAction,
+}) {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState(null)
@@ -31,9 +37,9 @@ function ServiceQuestionComponent({ serviceQuestions }) {
   const defaultShowCount = 2
   let tempQuestions = serviceQuestions
   if (isAnswered) {
-    tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== null)
   } else {
-    tempQuestions = serviceQuestions.filter((item) => item.primary_answer === '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer === null)
   }
   let questions = tempQuestions
   if (!viewMore) {
@@ -129,7 +135,13 @@ function ServiceQuestionComponent({ serviceQuestions }) {
           Post your question
         </Button>
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-          <AddAQuestion setIsOpen={setIsOpen} />
+          <AddAQuestion
+            setIsOpen={setIsOpen}
+            addQuestionName={addQuestionName}
+            setAddQuestionName={setAddQuestionName}
+            addQuestionNameErrorMessage={addQuestionNameErrorMessage}
+            addQuestionAction={addQuestionAction}
+          />
         </Modal>
       </div>
     </div>

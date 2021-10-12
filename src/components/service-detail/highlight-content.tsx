@@ -80,11 +80,11 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
 
   const addAttributeAction = async () => {
     if (addAttributeName === '') {
-      setAddAttributeNameErrorMessage('This field is valid')
+      setAddAttributeNameErrorMessage('This field is not valid')
     } else {
       const addedAttribute = await toggleAddAttribute(addAttributeName, addAttributeCon)
       if (addedAttribute) {
-        toast.success(`Added ${addedAttribute.name} successfully.`)
+        toast.success(`Added an attribute successfully.`)
         setAddAttributeNameErrorMessage('')
         setAddAttributeName('')
         setAddAttributeCon(false)
