@@ -9,6 +9,10 @@ type SwitchProps = {
   circleClassname?: ClassValue
   enabled?: boolean
   setEnabled?: (enabled: boolean) => void
+  disabledStateBackgroundColor?: String
+  enabledStateBackgroundColor?: String
+  disabledStateCircleColor?: String
+  enabledStateCircleColor?: String
 }
 
 function SwitchComponent({
@@ -16,6 +20,10 @@ function SwitchComponent({
   circleClassname,
   enabled: outerEnabled,
   setEnabled: setOuterEnabled,
+  disabledStateBackgroundColor,
+  enabledStateBackgroundColor,
+  disabledStateCircleColor,
+  enabledStateCircleColor,
 }: SwitchProps) {
   const [innerEnabled, setInnerEnabled] = useState(false)
   const isControlled = outerEnabled !== undefined
@@ -29,20 +37,46 @@ function SwitchComponent({
     }
   }
 
+  function getDisabledStateBackgroundColor(): String {
+    const backgroundColor =
+      disabledStateBackgroundColor != null ? disabledStateBackgroundColor : 'bg-background-default border-border-light'
+    return backgroundColor
+  }
+
+  function getEnabledStateBackgroundColor(): String {
+    const backgroundColor =
+      enabledStateBackgroundColor != null ? enabledStateBackgroundColor : 'bg-secondary border-secondary'
+    return backgroundColor
+  }
+
+  function getDisabledStateCircleColor(): String {
+    const circleColor =
+      disabledStateCircleColor != null
+        ? `translate-x-0 ${disabledStateCircleColor}`
+        : 'translate-x-0 bg-background-dark'
+    return circleColor
+  }
+
+  function getEnabledStateCircleColor(): String {
+    const circleColor =
+      enabledStateCircleColor != null ? `translate-x-3.5 ${enabledStateCircleColor}` : 'translate-x-3.5 bg-primary'
+    return circleColor
+  }
+
   return (
     <HeadlessSwitch
       checked={enabled}
       onChange={setEnabled}
       className={clsx(
         'relative inline-flex items-center h-3.5 rounded-full w-7 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/75 border-2 box-content',
-        enabled ? 'bg-secondary border-secondary' : 'bg-background-default border-border-light',
+        enabled ? getEnabledStateBackgroundColor() : getDisabledStateBackgroundColor(),
         className,
       )}
     >
       <span
         className={clsx(
           'inline-block w-3.5 h-3.5 transform rounded-full transition-all',
-          enabled ? 'translate-x-3.5 bg-primary' : 'translate-x-0 bg-background-dark',
+          enabled ? getEnabledStateCircleColor() : getDisabledStateCircleColor(),
           circleClassname,
         )}
       />
