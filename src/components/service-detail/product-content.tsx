@@ -20,11 +20,15 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
       {(promo_video !== '' || images.length > 0) && (
         <Carousel className="mt-2">
           {promo_video !== '' && (
-            <Carousel.Item className="promo-video-wrapper">
-              <ReactPlayer 
-                url={promo_video}
-                className="promo-video"
-              />
+            <Carousel.Item>
+              <div className="promo-video-wrapper">
+                <ReactPlayer
+                  className="promo-video"
+                  url={promo_video}
+                  width="100%"
+                  height="100%"
+                />
+              </div>
             </Carousel.Item>
           )}
           {images.map((image) => (
