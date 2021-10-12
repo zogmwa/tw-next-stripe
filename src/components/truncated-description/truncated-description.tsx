@@ -25,7 +25,7 @@ export function TruncatedDescription({
       style={style}
     >
       <ReactMarkdown remarkPlugins={[gfm]} className={clsx(renderFull ? 'space-y-2' : 'inline-block')}>
-        {renderFull ? description : description.substring(0, maxLength)}
+        {renderFull ? description : description?.substring(0, maxLength)}
       </ReactMarkdown>
       <button
         onClick={() => {

@@ -28,19 +28,22 @@ function AddAHighlightComponent({
   return (
     <div>
       <div className="flex">
-        <div className="flex-grow font-bold">Add a Feature</div>
+        <div className="flex-grow font-bold">Add a Highlight</div>
         <div>
-          Pro
+          <span className={addAttributeCon ? 'text-gray-400' : 'text-green-600'}>Pro</span>
           <Switch
             className="ml-4 mr-4"
             enabled={addAttributeCon}
             setEnabled={(isEnabled: boolean) => {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const featureType = isEnabled ? 'pro' : 'con'
               setAddAttributeCon(isEnabled)
             }}
+            disabledStateBackgroundColor="bg-green-200 border-green-100"
+            enabledStateBackgroundColor="bg-red-200 border-red-100"
+            disabledStateCircleColor="bg-green-600"
+            enabledStateCircleColor="bg-red-600"
           />
-          Con
+          <span className={addAttributeCon ? 'text-red-600' : 'text-gray-400'}>Con</span>
         </div>
       </div>
       <Textarea
