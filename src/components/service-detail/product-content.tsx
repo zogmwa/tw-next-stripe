@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactPlayer from 'react-player'
 import { Carousel } from '../carousel/carousel'
 import { Asset } from '../../types/asset'
 
@@ -20,9 +21,7 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
         <Carousel className="mt-2">
           {promo_video !== '' && (
             <Carousel.Item>
-              <video className="object-contain">
-                <source src={promo_video} />
-              </video>
+              <ReactPlayer url={promo_video} />
             </Carousel.Item>
           )}
           {images.map((image) => (
