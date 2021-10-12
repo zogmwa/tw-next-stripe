@@ -12,6 +12,8 @@ export function withApiErrorHandling(handler: NextIronHandler | NextApiHandler) 
     try {
       await handler(req, res)
     } catch (error) {
+      // eslint-disable-next-line
+      console.dir(error)
       const { response } = error
       res.status(response?.status || 500).json(error.data)
     }

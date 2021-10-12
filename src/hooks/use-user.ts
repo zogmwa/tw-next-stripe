@@ -1,6 +1,6 @@
 import constate from 'constate'
-import { useEffect, useCallback } from 'react'
-import Router from 'next/router'
+import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -12,18 +12,18 @@ import { User } from '../types/user'
  * @param config
  * @returns userContext
  */
-export function useSessionUser({ redirectTo = '', redirectIfFound = false } = {}): UserContextType {
+export function useSessionUser(): UserContextType {
   const { data: user, mutate: mutateUser, error } = useSWR<User & { authVerified: boolean }>('/api/user')
+  const router = useRouter()
+  const [nextPageUrl, setNextPageUrlState] = useState('/')
 
   const signInWithEmailAndPassword = useCallback(
     async (email: string, password: string): Promise<boolean> => {
       try {
         const { data } = await axios.post('/api/login', { email, password })
-        mutateUser(data)
+        await mutateUser(data)
         return true
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.dir(error)
         toast.error('Invalid username and password')
         return false
       }
@@ -71,6 +71,27 @@ export function useSessionUser({ redirectTo = '', redirectIfFound = false } = {}
     [user?.authVerified, mutateUser],
   )
 
+  useEffect(() => {
+    const url = localStorage.getItem('next_page_url')
+    if (url && url !== 'undefined' && url !== nextPageUrl) {
+      localStorage.removeItem('next_page_url')
+      setNextPageUrlState(url)
+    }
+  }, [setNextPageUrlState, nextPageUrl])
+
+  const setNextPageUrl = useCallback((url: string = '/') => {
+    setNextPageUrlState(url)
+    localStorage.setItem('next_page_url', url)
+  }, [])
+
+  const nextPageRedirect = useCallback(() => {
+    localStorage.removeItem('next_page_url')
+    if (router.pathname === '/login-with-google' || router.pathname === '/login-with-linkedin') {
+      return router.replace(nextPageUrl)
+    }
+    return router.push(nextPageUrl)
+  }, [nextPageUrl, router])
+
   const isLoggedIn = useCallback(() => {
     if ((user || error) && user?.authVerified === false) {
       return false
@@ -78,21 +99,6 @@ export function useSessionUser({ redirectTo = '', redirectIfFound = false } = {}
       return true
     }
   }, [user, error])
-
-  useEffect(() => {
-    // if no redirect needed, just return (example: already on /dashboard)
-    // if user data not yet there (fetch in progress, logged in or not) then don't do anything yet
-    if (!redirectTo || !user) return
-
-    if (
-      // If redirectTo is set, redirect if the user was not found.
-      (redirectTo && !redirectIfFound && !isLoggedIn()) ||
-      // If redirectIfFound is also set, redirect if the user was found
-      (redirectIfFound && isLoggedIn())
-    ) {
-      Router.push(redirectTo)
-    }
-  }, [user, redirectIfFound, redirectTo, isLoggedIn])
 
   return {
     ...user,
@@ -102,6 +108,8 @@ export function useSessionUser({ redirectTo = '', redirectIfFound = false } = {}
     signInWithEmailAndPassword,
     signUpWithEmailAndPassword,
     logout,
+    setNextPageUrl,
+    nextPageRedirect,
     mutateUser,
   }
 }

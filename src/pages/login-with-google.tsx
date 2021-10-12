@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Spinner } from '../components/spinner'
+import { useUserContext } from '../hooks/use-user'
 
 /**
  * This is a component to handle the callback from Google for OAuth flow.
@@ -11,6 +12,15 @@ import { Spinner } from '../components/spinner'
 export default function LoginWithGoogle() {
   const { replace } = useRouter()
   const { mutate } = useSWRConfig()
+  const { nextPageRedirect } = useUserContext()
+  const [loginRequestSent, setLoginRequestSent] = useState(false)
+  const [shouldNextPageRedirect, setShouldNextPageRedirect] = useState(false)
+
+  useEffect(() => {
+    if (shouldNextPageRedirect) {
+      nextPageRedirect()
+    }
+  }, [shouldNextPageRedirect, nextPageRedirect])
 
   const params = {}
   // Parse Hash part of URL
@@ -30,21 +40,23 @@ export default function LoginWithGoogle() {
 
   const { access_token: google_access_token, state } = params as { access_token: string; state: string }
 
-  async function connectGoogleAccountToExistingTaggedWebAccount(google_access_token) {
-    try {
-      await axios.post('/api/social/google-connect/', {
-        access_token: google_access_token,
-      })
+  const connectGoogleAccountToExistingTaggedWebAccount = useCallback(
+    async (google_access_token) => {
+      try {
+        await axios.post('/api/social/google-connect/', {
+          access_token: google_access_token,
+        })
 
-      await mutate('/api/user')
-      toast.success('Login Successful and Google Account Connected')
+        await mutate('/api/user')
+        toast.success('Login Successful and Google Account Connected')
 
-      // Redirect user to home page on successfully connecting
-      replace('/')
-    } catch (error) {
-      replace(`/login?googleError=${error.response.data.detail}`)
-    }
-  }
+        setShouldNextPageRedirect(true)
+      } catch (error) {
+        replace(`/login?googleError=${error.response.data.detail}`)
+      }
+    },
+    [replace, mutate],
+  )
 
   useEffect(
     function redirectToLoginPageOnInvalidToken() {
@@ -57,18 +69,21 @@ export default function LoginWithGoogle() {
 
   useEffect(
     function loginWithGoogleAuthToken() {
+      console.log('Running login with google auth token')
       async function login() {
         if (google_access_token && state === process.env.GOOGLE_OAUTH_STATE) {
           try {
-            await axios.post('/api/social/google/', {
-              access_token: google_access_token,
-            })
+            if (!loginRequestSent) {
+              setLoginRequestSent(true)
+              await axios.post('/api/social/google/', {
+                access_token: google_access_token,
+              })
 
-            await mutate('/api/user')
-            toast.success('Login Successful')
+              await mutate('/api/user')
+              toast.success('Login Successful')
 
-            // Redirect user to home page
-            replace('/')
+              setShouldNextPageRedirect(true)
+            }
           } catch (error) {
             const nonFieldErrors = error.response.data.non_field_errors
             const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
@@ -91,8 +106,7 @@ export default function LoginWithGoogle() {
       }
       login()
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [google_access_token, state, replace],
+    [google_access_token, state, replace, mutate, loginRequestSent, connectGoogleAccountToExistingTaggedWebAccount],
   )
 
   return (
