@@ -2,12 +2,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AiFillLinkedin, AiFillGoogleSquare, AiOutlineClose } from 'react-icons/ai'
+import Link from 'next/link'
 import { Button } from '../button'
 import { handleGoogleLogin, handleLinkedInLogin } from '../../utils/login'
-import Link from 'next/link'
 
 function AuthenticationPopupComponent() {
-  let [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true)
 
   const router = useRouter()
   const { linkedInError, googleError } = router?.query

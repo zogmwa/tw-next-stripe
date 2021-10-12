@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ServiceQuestion } from '../service-questions'
 import { Asset } from '../../types/asset'
 
@@ -9,7 +9,7 @@ type ServiceDetailQAProps = {
 function QaContentComponent({ service }: ServiceDetailQAProps) {
   if (typeof service === 'undefined') return null
 
-  let serviceQuestions = service.questions
+  const serviceQuestions = service.questions
 
   return <ServiceQuestion serviceQuestions={serviceQuestions} />
 }

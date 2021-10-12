@@ -61,7 +61,7 @@ function ButtonComponent(
             return 'border-primary text-primary'
           }
           if (buttonType === 'tag') {
-            return 'bg-background-default text-text-tertiary border-background-default'
+            return 'bg-background-default text-text-tertiary border-background-dark'
           }
           return 'bg-primary text-text-on-surface border-primary'
         })(),

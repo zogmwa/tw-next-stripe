@@ -1,6 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
+import { topTags } from '../utils/top-tags'
 
 function Page404() {
+  const length = topTags.length
+
   return (
     <>
       <div className="py-20 flex flex-col md:flex-col">
@@ -11,36 +15,37 @@ function Page404() {
         </p>
         <div className="flex flex-row list-none font-semibold p-4 grid grid-cols-2 gap-20 justify-items-stretch ">
           <div className="flex-1 px-6 justify-self-end">
-            <li>Email Marketing</li>
-            <li>Marketplace</li>
-            <li>Affiliate Marketing</li>
-            <li>Marketing</li>
-            <li>Marketing Automation</li>
-            <li>Communication</li>
-            <li>Community</li>
-            <li>Compliance</li>
-            <li>E commerce</li>
-            <li>Compute</li>
+            {topTags.slice(0, length / 2 + 1).map((tag) => {
+              return (
+                <li key={tag.slug}>
+                  <Link href={`/search/${tag.slug}`} passHref>
+                    <a
+                      href="/#"
+                      className="text-black hover:underline focus:ring-white focus:outline-none focus:border-white"
+                    >
+                      {tag.value}
+                    </a>
+                  </Link>
+                </li>
+              )
+            })}
           </div>
           <div className="flex-1 px-6 justify-self-start">
-            <li>Environmental Compliance</li>
-            <li>Comission Free</li>
-            <li>Investing</li>
-            <li>Video Conferencing</li>
-            <li>Video Streaming</li>
-            <li>Png</li>
-            <li>Image Search</li>
-            <li>Images</li>
-            <li>NFT</li>
+            {topTags.slice(length / 2 + 1, length).map((tag) => {
+              return (
+                <li key={tag.slug}>
+                  <Link href={`/search/${tag.slug}`} passHref>
+                    <a
+                      href="/#"
+                      className="text-black hover:underline focus:ring-white focus:outline-none focus:border-white"
+                    >
+                      {tag.value}
+                    </a>
+                  </Link>
+                </li>
+              )
+            })}
           </div>
-          {/* <div className="flex-0 px-6">
-            <li>Video-conferencing</li>
-            <li>Video-streaming</li>
-            <li>Png</li>
-            <li>Image-search</li>
-            <li>Image</li>
-            <li>Nft</li>
-          </div> */}
         </div>
       </div>
     </>

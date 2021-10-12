@@ -9,16 +9,17 @@ export default withSessionApi(async (req, res) => {
   const user = req.session.get('user')
   if (user) {
     const access = await getAccessToken(req.session)
-
-    await client.post(
-      '/dj-rest-auth/logout/',
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${access}`,
+    if (access) {
+      await client.post(
+        '/dj-rest-auth/logout/',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${access}`,
+          },
         },
-      },
-    )
+      )
+    }
     req.session.destroy()
     return res.json({ authVerified: false })
   } else {

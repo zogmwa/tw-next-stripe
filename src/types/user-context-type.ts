@@ -9,6 +9,7 @@ export type UserContextType = {
   first_name?: string
   last_name?: string
   error?: any
+  isLoading: boolean
   isLoggedIn: () => boolean
   signInWithEmailAndPassword: (email: string, password: string) => Promise<boolean>
   signUpWithEmailAndPassword: (email: string, password1: string, password2: string) => Promise<boolean>

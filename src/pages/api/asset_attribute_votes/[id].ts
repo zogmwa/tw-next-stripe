@@ -1,4 +1,4 @@
-import { withSessionApi } from '../../../utils/session'
+import { withApiAuthRequired } from '../../../utils/auth-wrappers'
 import { client } from '../../../utils/client'
 import { getAccessToken } from '../../../utils/token'
 import { AttributeVote } from '../../../types/attribute_vote'
@@ -6,7 +6,7 @@ import { AttributeVote } from '../../../types/attribute_vote'
 /**
  * API Route handler for deleting asset_attribute_votes.
  */
-export default withSessionApi(async (req, res) => {
+export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'DELETE') {
     const { id } = req.query
     const access = await getAccessToken(req.session)

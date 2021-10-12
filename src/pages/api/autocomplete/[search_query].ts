@@ -1,7 +1,7 @@
 import { client } from '../../../utils/client'
-import { withErrorHandling } from '../../../utils/handleApiError'
+import { withApiErrorHandling } from '../../../utils/error-handling'
 
-export default withErrorHandling(async (req, res) => {
+export default withApiErrorHandling(async (req, res) => {
   const search_query = req.query.search_query
   const { data } = await client.get(`/autocomplete-tags-and-assets/?q=${search_query}`)
   res.json(data)
