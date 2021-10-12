@@ -153,3 +153,17 @@ export async function toggleAddAttribute(name: string, isCon: boolean): Promise<
     return null
   }
 }
+
+export async function toggleAddQuestion(assetId: number, title: string): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/asset_questions', {
+      asset: assetId,
+      title: title,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
