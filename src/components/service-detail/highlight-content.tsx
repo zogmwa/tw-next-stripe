@@ -82,8 +82,16 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     if (addAttributeName === '') {
       setAddAttributeNameErrorMessage('This field is not valid')
     } else {
-      const addedAttribute = await toggleAddAttribute(addAttributeName, addAttributeCon)
+      const addedAttribute = await toggleAddAttribute(service?.id, addAttributeName, addAttributeCon)
       if (addedAttribute) {
+        let updatedAttributes = attributes
+        updatedAttributes.push({
+          id: addedAttribute.id,
+          name: addedAttribute.name,
+          is_con: addedAttribute.is_con,
+          upvotes_count: addedAttribute.upvotes_count,
+        })
+        setAttributes(updatedAttributes)
         toast.success(`Added an attribute successfully.`)
         setAddAttributeNameErrorMessage('')
         setAddAttributeName('')

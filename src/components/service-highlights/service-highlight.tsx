@@ -32,8 +32,9 @@ function HighlightContentComponent({
   const defaultShowCount = 10
 
   let tempAttributes = attributes
-  if (!isCon) tempAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
-  if (!viewMore) tempAttributes = tempAttributes.slice(0, 10)
+  let tempConAttributes = attributes
+  if (!isCon) tempConAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
+  if (!viewMore) tempAttributes = tempConAttributes.slice(0, 10)
 
   return (
     <div className="ml-3 md:mt-10">
@@ -171,7 +172,7 @@ function HighlightContentComponent({
         </div>
         {tempAttributes.length > 0 &&
         attributes.length !== defaultShowCount &&
-        tempAttributes.length >= defaultShowCount ? (
+        tempConAttributes.length > defaultShowCount ? (
           viewMore ? (
             <div
               className="flex self-start w-24 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"

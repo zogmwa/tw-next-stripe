@@ -140,9 +140,10 @@ export async function fetchUpvotedAttributes(slug: string): Promise<VotedAttribu
   }
 }
 
-export async function toggleAddAttribute(name: string, isCon: boolean): Promise<any | null> {
+export async function toggleAddAttribute(assetId: number, name: string, isCon: boolean): Promise<any | null> {
   try {
     const { data } = await axios.post('/api/asset_attributes/', {
+      asset: assetId,
       name: name,
       is_con: isCon,
     })
