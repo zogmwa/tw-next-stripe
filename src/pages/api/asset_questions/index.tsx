@@ -3,7 +3,7 @@ import { client } from '../../../utils/client'
 import { getAccessToken } from '../../../utils/token'
 
 /**
- * API Route handler for upvoting on an asset.
+ * API Route handler for creating question.
  */
 export default withSessionApi(async (req, res) => {
   if (req.method === 'POST') {

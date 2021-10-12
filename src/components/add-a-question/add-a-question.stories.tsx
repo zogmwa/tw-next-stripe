@@ -13,7 +13,7 @@ export function DefaultAddAHighlight() {
 
   const addQuestionAction = async () => {
     if (addQuestionName === '') {
-      setAddQuestionNameErrorMessage('This field is valid')
+      setAddQuestionNameErrorMessage('This field is not valid')
     } else {
       setAddQuestionNameErrorMessage('')
       setAddQuestionName('')

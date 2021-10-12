@@ -17,14 +17,14 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
 
   const addQuestionAction = async () => {
     if (addQuestionName === '') {
-      setAddQuestionNameErrorMessage('This field is valid')
+      setAddQuestionNameErrorMessage('This field is not valid')
     } else {
       const addedQuestion = await toggleAddQuestion(service?.id, addQuestionName)
       if (addedQuestion) {
         let questions = serviceQuestions
         questions.push(addedQuestion)
         setServiceQuestions(questions)
-        toast.success(`Added ${addedQuestion.title} successfully.`)
+        toast.success(`Added a question successfully.`)
         setAddQuestionNameErrorMessage('')
         setAddQuestionName('')
       }
