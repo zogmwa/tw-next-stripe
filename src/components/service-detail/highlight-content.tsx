@@ -10,6 +10,7 @@ import {
   toggleAddAttribute,
 } from '../../queries/service'
 import { HighlightContent } from '../service-highlights'
+import { useUserContext } from '../../hooks/use-user'
 
 type ServiceDetailFeatureProps = {
   service: Asset
@@ -25,6 +26,8 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [addAttributeName, setAddAttributeName] = useState('')
   const [addAttributeCon, setAddAttributeCon] = useState(false)
   const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
+  const user = useUserContext()
+  const { authVerified } = user
 
   useEffect(() => {
     async function getVotedAttribute() {
@@ -39,6 +42,10 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   }, [service.id])
 
   const upvoteAttribute = async (attribute) => {
+    if (!authVerified) {
+      toast.error('Please login to upvote.')
+      return
+    }
     setClickedAttribute(attribute.id)
     setIsLoading(true)
     let data = null
