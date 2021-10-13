@@ -101,7 +101,11 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
               <span className="text-xs text-primary">Own this Service?</span>
             </div>
           </div>
-          {service.short_description ? <TruncatedDescription description={service.short_description} /> : null}
+          {service.short_description ? (
+            <TruncatedDescription description={service.short_description} />
+          ) : service.description ? (
+            <TruncatedDescription description={service.description.substring(0, 200)} />
+          ) : null}
           <div className="flex mt-2 space-x-2 text-sm sm:space-x-4 md:divide-x">
             <div className="flex items-end space-x-2">
               <AiOutlineStar className="self-center text-primary" />

@@ -11,7 +11,7 @@ export function ToastWithDismiss(toastArg: Toast) {
           {message}
           {toastArg.type !== 'loading' && (
             <button
-              className="text-text-primary font-semibold focus:outline-none focus:ring-white"
+              className="hover:bg-gray-200 rounded-full p-1 focus:outline-none focus:ring-white"
               onClick={() => toast.dismiss(toastArg.id)}
             >
               <AiOutlineClose />

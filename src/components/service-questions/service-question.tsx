@@ -22,7 +22,13 @@ const placeholderComponent = (
   </div>
 )
 
-function ServiceQuestionComponent({ serviceQuestions }) {
+function ServiceQuestionComponent({
+  serviceQuestions,
+  addQuestionName,
+  setAddQuestionName,
+  addQuestionNameErrorMessage,
+  addQuestionAction,
+}) {
   const [isAnswered, setIsAnswered] = useState(true)
   const [viewMore, setViewMore] = useState(false)
   const [editor, setEditor] = useState(null)
@@ -31,9 +37,9 @@ function ServiceQuestionComponent({ serviceQuestions }) {
   const defaultShowCount = 2
   let tempQuestions = serviceQuestions
   if (isAnswered) {
-    tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== null)
   } else {
-    tempQuestions = serviceQuestions.filter((item) => item.primary_answer === '')
+    tempQuestions = serviceQuestions.filter((item) => item.primary_answer === null)
   }
   let questions = tempQuestions
   if (!viewMore) {
@@ -90,7 +96,8 @@ function ServiceQuestionComponent({ serviceQuestions }) {
               onEditorStateChange={(editorState) => setEditor(editorState)}
             />
             <Button
-              className="inline-flex mt-1 text-white bg-primary"
+              className="inline-flex mt-1 bg-primary"
+              textClassName="text-white"
               size="small"
               onClick={() => console.log(draftToHtml(convertToRaw(editor.getCurrentContent())))}
             >
@@ -121,13 +128,20 @@ function ServiceQuestionComponent({ serviceQuestions }) {
         <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex mt-2 text-white bg-primary md:mt-0 md:ml-8"
+          className="inline-flex mt-2 bg-primary md:mt-0 md:ml-8"
+          textClassName="text-white"
           size="small"
         >
           Post your question
         </Button>
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-          <AddAQuestion setIsOpen={setIsOpen} />
+          <AddAQuestion
+            setIsOpen={setIsOpen}
+            addQuestionName={addQuestionName}
+            setAddQuestionName={setAddQuestionName}
+            addQuestionNameErrorMessage={addQuestionNameErrorMessage}
+            addQuestionAction={addQuestionAction}
+          />
         </Modal>
       </div>
     </div>

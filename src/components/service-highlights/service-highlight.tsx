@@ -4,14 +4,8 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
-import { Asset } from '../../types/asset'
 import { AddAHighlight } from '../add-a-highlight'
 import { Modal } from '../Modal'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type ServiceDetailFeatureProps = {
-  service: Asset
-}
 
 function HighlightContentComponent({
   attributeVotesList,
@@ -20,6 +14,12 @@ function HighlightContentComponent({
   clickedAttribute,
   upvoteAttribute,
   logoUrl,
+  addAttributeName,
+  setAddAttributeName,
+  addAttributeCon,
+  setAddAttributeCon,
+  addAttributeAction,
+  addAttributeNameErrorMessage,
 }) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
@@ -32,8 +32,9 @@ function HighlightContentComponent({
   const defaultShowCount = 10
 
   let tempAttributes = attributes
-  if (!isCon) tempAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
-  if (!viewMore) tempAttributes = tempAttributes.slice(0, 10)
+  let tempConAttributes = attributes
+  if (!isCon) tempConAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
+  if (!viewMore) tempAttributes = tempConAttributes.slice(0, 10)
 
   return (
     <div className="ml-3 md:mt-10">
@@ -47,14 +48,23 @@ function HighlightContentComponent({
         </div>
         <Button
           size="small"
-          className="self-start text-white bg-primary"
+          className="self-start bg-primary"
+          textClassName="text-white"
           icon={<AiOutlinePlus className="text-white" />}
           onClick={() => setIsOpen(!isOpen)}
         >
           Add a Highlight
         </Button>
         <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-          <AddAHighlight setIsOpen={setIsOpen} />
+          <AddAHighlight
+            setIsOpen={setIsOpen}
+            addAttributeName={addAttributeName}
+            setAddAttributeName={setAddAttributeName}
+            addAttributeCon={addAttributeCon}
+            setAddAttributeCon={setAddAttributeCon}
+            addAttributeAction={addAttributeAction}
+            addAttributeNameErrorMessage={addAttributeNameErrorMessage}
+          />
         </Modal>
       </div>
       <div className="mt-6 md:mt-2">
@@ -162,7 +172,7 @@ function HighlightContentComponent({
         </div>
         {tempAttributes.length > 0 &&
         attributes.length !== defaultShowCount &&
-        tempAttributes.length >= defaultShowCount ? (
+        tempConAttributes.length > defaultShowCount ? (
           viewMore ? (
             <div
               className="flex self-start w-24 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
