@@ -38,7 +38,7 @@ const asset: Asset = {
   has_free_trial: false,
   snapshots: [],
   users_count: 0,
-  voted_by_me: null,
+  my_asset_vote: null,
 }
 
 const Template = (args) => <ProfileAsset {...args} />

@@ -30,7 +30,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
   const [isLoadingUsedByMe, setIsLoadingUsedByMe] = useState(false)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
-  const [votedByMe, setVotedByMe] = useState(service?.voted_by_me)
+  const [votedByMe, setVotedByMe] = useState(service?.my_asset_vote)
   const [upvotesCount, setUpvotesCount] = useState(service?.upvotes_count)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })

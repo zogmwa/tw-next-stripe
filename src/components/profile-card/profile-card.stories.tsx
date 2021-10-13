@@ -59,7 +59,7 @@ const profileContextValue: Profile = {
       has_free_trial: false,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
     {
       id: 3223,
@@ -85,7 +85,7 @@ const profileContextValue: Profile = {
       has_free_trial: false,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
     {
       id: 3225,
@@ -113,7 +113,7 @@ const profileContextValue: Profile = {
       has_free_trial: true,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
     {
       id: 3222,
@@ -149,7 +149,7 @@ const profileContextValue: Profile = {
       has_free_trial: true,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
     {
       id: 2458,
@@ -185,7 +185,7 @@ const profileContextValue: Profile = {
       has_free_trial: false,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
     {
       id: 3191,
@@ -225,7 +225,7 @@ const profileContextValue: Profile = {
       has_free_trial: false,
       snapshots: [],
       users_count: 0,
-      voted_by_me: null,
+      my_asset_vote: null,
     },
   ],
 }
