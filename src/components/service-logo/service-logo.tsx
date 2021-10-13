@@ -10,7 +10,7 @@ type ServiceLogo = {
   fontClassName?: string
 }
 
-function ServiceLogoComponent({ 
+function ServiceLogoComponent({
   logoUrl,
   owned = false,
   className = '',
@@ -19,16 +19,12 @@ function ServiceLogoComponent({
 }) {
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
-      <img 
-        src={logoUrl} 
-        alt="Web Service" 
-        className={`object-contain rounded-md ${imageClassName}`}
-      />
-      {((owned !== null) && owned) ? (
-        <Tooltip title={"Verified"}>
+      <img src={logoUrl} alt="Web Service" className={`object-contain rounded-md ${imageClassName}`} />
+      {owned !== null && owned ? (
+        <Tooltip title={'Verified'}>
           <MdVerified className={`absolute right-[3px] bottom-[3px] text-xl ${fontClassName}`} />
         </Tooltip>
-        ) : null }
+      ) : null}
     </div>
   )
 }

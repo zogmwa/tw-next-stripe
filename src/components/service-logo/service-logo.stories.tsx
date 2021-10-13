@@ -23,11 +23,7 @@ export function DefaultCard() {
     <>
       {serviceLogoMockupDataList.map((service, index) => (
         <div>
-          <ServiceLogo 
-            key={index}
-            logoUrl={service.logo}
-            owned={service.owned}
-          />
+          <ServiceLogo key={index} logoUrl={service.logo} owned={service.owned} />
         </div>
       ))}
     </>
