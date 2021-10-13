@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import toast from 'react-hot-toast'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
 import { AddAHighlight } from '../add-a-highlight'
 import { Modal } from '../Modal'
+import { useUserContext } from '../../hooks/use-user'
 
 function HighlightContentComponent({
   attributeVotesList,
@@ -24,6 +26,16 @@ function HighlightContentComponent({
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const user = useUserContext()
+  const { authVerified } = user
+
+  function authCheck() {
+    if (!authVerified) {
+      toast.error('Please login to Add a Highlight.')
+    } else {
+      setIsOpen(!isOpen)
+    }
+  }
 
   const handleUpvoteAttribute = (attribute) => {
     if (typeof upvoteAttribute === 'function') upvoteAttribute(attribute)
@@ -51,7 +63,7 @@ function HighlightContentComponent({
           className="self-start bg-primary"
           textClassName="text-white"
           icon={<AiOutlinePlus className="text-white" />}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={authCheck}
         >
           Add a Highlight
         </Button>

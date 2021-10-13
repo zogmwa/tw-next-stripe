@@ -37,8 +37,11 @@ const withSSRAuthRequired: WithSSRAuthRequired = (
   handler?: GetIronServerSideProps,
   options: { redirectTo?: string; message?: string; showMessage?: boolean } = {},
 ) => {
-  const { redirectTo = '/login', message = 'You need to be loggedin to view this page.', showMessage = true } = options
+  let { redirectTo, message = 'You need to login to view this page.', showMessage = true } = options
   return withSessionSSR(async (context) => {
+    if (!redirectTo) {
+      redirectTo = `/login?next=${context.req.url}`
+    }
     const access = await getAccessToken(context.req.session)
     if (access) {
       if (handler) {
@@ -76,10 +79,13 @@ const withSSRAuthRequired: WithSSRAuthRequired = (
  * @returns newApiHandler
  */
 const withPageAuthRequired: WithPageAuthRequired = (Component, options = {}) => {
-  const { redirectTo = '/login', message = 'You need to login to view this page.' } = options
+  let { redirectTo, message = 'You need to login to view this page.' } = options
   return function WrappedComponent(props): JSX.Element {
     const user = useUserContext()
     const router = useRouter()
+    if (!redirectTo) {
+      redirectTo = `/login?next=${router.pathname}`
+    }
 
     useEffect(() => {
       if (!user.isLoggedIn()) {

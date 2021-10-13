@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
@@ -20,10 +20,14 @@ const validationSchema = yup.object().shape({
 
 export default function Login() {
   const { query } = useRouter()
-  const { linkedInError, googleError } = query as { linkedInError: string; googleError: string }
-  const { signInWithEmailAndPassword } = useUserContext()
+  const { linkedInError, googleError, next } = query as { linkedInError: string; googleError: string; next: string }
+  const { signInWithEmailAndPassword, setNextPageUrl, nextPageRedirect } = useUserContext()
 
-  const router = useRouter()
+  useEffect(() => {
+    if (next) {
+      setNextPageUrl(next)
+    }
+  }, [next, setNextPageUrl])
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
@@ -61,7 +65,7 @@ export default function Login() {
           onSubmit={async ({ email, password }) => {
             const success = await signInWithEmailAndPassword(email, password)
             if (success) {
-              router.push('/')
+              nextPageRedirect()
             }
           }}
         >

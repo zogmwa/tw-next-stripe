@@ -3,6 +3,7 @@ import { GrShare } from 'react-icons/gr'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
+import { ServiceLogo } from '../service-logo'
 
 type ProfileCardProps = {
   asset: Asset
@@ -13,7 +14,12 @@ function ProfileCardComponent({ asset }: ProfileCardProps) {
     <div className="flex flex-col px-4 py-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0">
       <div className="flex items-start justify-start w-full space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <img src={asset.logo_url} alt="Web Service" className="object-contain h-[72px] w-[72px] rounded-md" />
+          <ServiceLogo
+            serviceName={asset?.name}
+            serviceId={asset.id}
+            logoUrl={asset.logo_url}
+            owned={asset?.is_owned ?? false}
+          />
         </div>
         <div className="flex-1">
           <div className="flex justify-start space-x-2">
