@@ -28,6 +28,7 @@ export type Asset = {
   attributes?: { id?: number | string; name: string; is_con: boolean; upvotes_count: string | number }[]
   used_by_me?: boolean
   voted_by_me?: number | null
+  is_owned?: boolean
 }
 
 export type AssetVote = {

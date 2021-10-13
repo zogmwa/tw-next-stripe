@@ -10,6 +10,7 @@ import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
 import { Checkbox } from '../checkbox'
+import { ServiceLogo } from '../service-logo'
 
 type ServiceCardProps = {
   service: Asset
@@ -40,10 +41,11 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
           <Link href={`/services/${service.slug}/`}>
-            <img
-              src={service.logo_url}
-              alt="Web Service"
-              className="object-contain h-[72px] w-[72px] rounded-md cursor-pointer"
+            <ServiceLogo
+              serviceName={service?.name}
+              serviceId={service.id}
+              logoUrl={service.logo_url}
+              owned={service?.is_owned ?? false}
             />
           </Link>
           <div className="flex items-center space-x-2">
