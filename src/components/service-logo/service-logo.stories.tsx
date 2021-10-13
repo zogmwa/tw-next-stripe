@@ -7,23 +7,33 @@ export default {
   component: ServiceLogo,
 } as Meta
 
-export function DefaultCard() {
+export function DefaultLogo() {
   const serviceLogoMockupDataList = [
     {
+      id: 1,
+      name: 'server name 1',
       logo: 'http://logo.clearbit.com/campaignmonitor.com',
-      owned: true,
+      is_owned: true,
     },
     {
+      id: 2,
+      name: 'server name 2',
       logo: 'http://logo.clearbit.com/campaignmonitor.com',
-      owned: false,
+      is_owned: false,
     },
   ]
 
   return (
     <>
-      {serviceLogoMockupDataList.map((service, index) => (
+      {serviceLogoMockupDataList.map((service) => (
         <div>
-          <ServiceLogo key={index} logoUrl={service.logo} owned={service.owned} />
+          <ServiceLogo
+            serviceName={service.name}
+            key={service.id}
+            serviceId={service.id}
+            logoUrl={service.logo}
+            owned={service.is_owned}
+          />
         </div>
       ))}
     </>

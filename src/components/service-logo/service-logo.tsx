@@ -1,8 +1,10 @@
 import React from 'react'
 import { MdVerified } from 'react-icons/md'
-import Tooltip from '@mui/material/Tooltip'
+import ReactTooltip from 'react-tooltip'
 
 type ServiceLogo = {
+  serviceId: number
+  serviceName?: string
   logoUrl: string | null
   owned?: boolean | null
   className?: string
@@ -11,6 +13,8 @@ type ServiceLogo = {
 }
 
 function ServiceLogoComponent({
+  serviceId,
+  serviceName = '',
   logoUrl,
   owned = false,
   className = '',
@@ -19,11 +23,16 @@ function ServiceLogoComponent({
 }) {
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
-      <img src={logoUrl} alt="Web Service" className={`object-contain rounded-md ${imageClassName}`} />
+      <img src={logoUrl} alt={`Logo for ${serviceName}`} className={`object-contain rounded-md ${imageClassName}`} />
       {owned !== null && owned ? (
-        <Tooltip title={'Verified'}>
-          <MdVerified className={`absolute right-[3px] bottom-[3px] text-xl ${fontClassName}`} />
-        </Tooltip>
+        <>
+          <div className="absolute right-[3px] bottom-[3px] cursor-pointer" data-for={`tooltip${serviceId}`} data-tip>
+            <MdVerified className={`text-xl ${fontClassName}`} />
+          </div>
+          <ReactTooltip id={`tooltip${serviceId}`} type="light" place="right" border={true} borderColor="text-grey-200">
+            Verified Owner
+          </ReactTooltip>
+        </>
       ) : null}
     </div>
   )

@@ -74,7 +74,12 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <ServiceLogo logoUrl={service.logo_url} owned={service?.owned ?? false} />
+          <ServiceLogo
+            serviceName={service?.name}
+            serviceId={service.id}
+            logoUrl={service.logo_url}
+            owned={service?.is_owned ?? false}
+          />
           <div className="flex items-center space-x-2">
             <Checkbox onChange={onCompare} />
             <div className="text-xs uppercase text-text-tertiary">Compare</div>
