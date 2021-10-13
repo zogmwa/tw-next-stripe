@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdVerified } from 'react-icons/md'
 import ReactTooltip from 'react-tooltip'
+import Image from 'next/image'
 
 type ServiceLogo = {
   serviceId: number
@@ -16,14 +17,24 @@ function ServiceLogoComponent({
   serviceId,
   serviceName = '',
   logoUrl,
-  owned = false,
+  owned,
   className = '',
   imageClassName = '',
   fontClassName = 'text-success',
 }) {
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
-      <img src={logoUrl} alt={`Logo for ${serviceName}`} className={`object-contain rounded-md ${imageClassName}`} />
+      {logoUrl ? (
+        <img src={logoUrl} alt={`Logo for ${serviceName}`} className={`object-contain rounded-md ${imageClassName}`} />
+      ) : (
+        <Image
+          src="/images/default_logo.png"
+          alt="Service Logo"
+          className={`object-contain rounded-md ${imageClassName}`}
+          width="72"
+          height="72"
+        />
+      )}
       {owned !== null && owned ? (
         <>
           <div className="absolute right-[3px] bottom-[3px] cursor-pointer" data-for={`tooltip${serviceId}`} data-tip>
