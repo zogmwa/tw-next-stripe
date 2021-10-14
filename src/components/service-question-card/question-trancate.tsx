@@ -21,21 +21,8 @@ export function QuestionTruncated({
   return (
     <div className={clsx(renderFull ? 'space-y-1' : '', 'text-sm text-text-secondary', className)} style={style}>
       <div className="text-sm text-text-secondary" dangerouslySetInnerHTML={{ __html: description }} />
-      {/* {renderFull ? (
-      ) : (
-        <Truncate
-          className="text-sm text-text-secondary"
-          lines={1}
-          dangerouslySetInnerHTML={{
-          __html: description
-          }} />
-      )} */}
-      <button
-        onClick={() => {
-          // setRenderFull((prevState) => !prevState)
-        }}
-        className="text-xs cursor-pointer text-text-tertiary"
-      >
+      {/** TODO: Render truncated html which keeping styles */}
+      <button className="text-xs cursor-pointer text-text-tertiary">
         {isOverFlowingText ? (renderFull === false ? 'See More...' : 'See Less') : ''}
       </button>
     </div>

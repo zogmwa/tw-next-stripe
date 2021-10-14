@@ -75,8 +75,6 @@ export function DefaultServiceQuestion() {
   }
 
   const answerQuestionAction = async (answerQuestion, questionId) => {
-    console.log(answerQuestion)
-    console.log(questionId)
     setIsAnswered(true)
   }
 
