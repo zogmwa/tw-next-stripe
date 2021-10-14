@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
-import dynamic from 'next/dynamic'
-import { EditorProps } from 'react-draft-wysiwyg'
-import { convertToRaw } from 'draft-js'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import draftToHtml from 'draftjs-to-html'
 import toast from 'react-hot-toast'
 import { Button } from '../button'
 import { SearchQuestionBar } from '../service-detail/search-question-bar'
@@ -13,9 +8,7 @@ import { ServiceQuestionCard } from '../service-question-card'
 import { AddAQuestion } from '../add-a-question'
 import { Modal } from '../Modal'
 import { useUserContext } from '../../hooks/use-user'
-
-// https://github.com/jpuri/react-draft-wysiwyg/issues/893
-const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mod) => mod.Editor), { ssr: false })
+import { QuestionEditor } from './question-editor'
 
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2 text-sm">
@@ -25,15 +18,16 @@ const placeholderComponent = (
 )
 
 function ServiceQuestionComponent({
+  isShowAnswered,
   serviceQuestions,
   addQuestionName,
   setAddQuestionName,
   addQuestionNameErrorMessage,
   addQuestionAction,
+  answerQuestionAction,
 }) {
-  const [isAnswered, setIsAnswered] = useState(true)
+  const [isAnswered, setIsAnswered] = useState(isShowAnswered)
   const [viewMore, setViewMore] = useState(false)
-  const [editor, setEditor] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
   const user = useUserContext()
   const { authVerified } = user
@@ -48,6 +42,11 @@ function ServiceQuestionComponent({
 
   const defaultShowCount = 2
   let tempQuestions = serviceQuestions
+  tempQuestions.sort((questionA, questionB) => {
+    const dateA = new Date(questionA.created)
+    const dateB = new Date(questionB.created)
+    return (dateA.getTime() - dateB.getTime()) * -1
+  })
   if (isAnswered) {
     tempQuestions = serviceQuestions.filter((item) => item.primary_answer !== null)
   } else {
@@ -101,20 +100,7 @@ function ServiceQuestionComponent({
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
             <div className="text-sm font-medium text-text-primary">{item.title}</div>
-            <Editor
-              editorState={editor}
-              toolbarClassName="bg-primary"
-              editorClassName="bg-white"
-              onEditorStateChange={(editorState) => setEditor(editorState)}
-            />
-            <Button
-              className="inline-flex mt-1 bg-primary"
-              textClassName="text-white"
-              size="small"
-              onClick={() => console.log(draftToHtml(convertToRaw(editor.getCurrentContent())))}
-            >
-              Post Answer
-            </Button>
+            <QuestionEditor questionId={item.id} answerQuestionAction={answerQuestionAction} />
           </div>
         ))}
       {tempQuestions.length > defaultShowCount ? (

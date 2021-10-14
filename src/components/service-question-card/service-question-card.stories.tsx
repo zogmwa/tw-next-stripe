@@ -9,6 +9,7 @@ export default {
 
 export function DefaultServiceQuestionCard() {
   const question = {
+    id: 1,
     asset: 2,
     title: 'Is this better than the one Dinesh was working on while at Pied Piper?',
     primary_answer:
