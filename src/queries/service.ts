@@ -2,6 +2,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Asset, AssetVote } from '../types/asset'
 import { AttributeVote, VotedAttribute } from '../types/attribute_vote'
+import { ServiceQuestion } from '../types/service-question'
 
 export type CreateServiceInput = {
   name: string
@@ -161,6 +162,30 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
       asset: assetId,
       title: title,
     })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQuestion | null> {
+  try {
+    const { data } = await axios.patch(`/api/asset_questions/${questionId}`, {
+      primary_answer: answer,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function fetchQuestions(slug): Promise<any | null> {
+  try {
+    const { data } = await axios.get(`/api/asset_questions/${slug}`)
     return data
   } catch (error) {
     // TODO: error handling
