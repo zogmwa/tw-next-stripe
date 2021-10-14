@@ -19,6 +19,9 @@ function QuestionEditorComponent({ questionId, answerQuestionAction }) {
         toolbarClassName="bg-primary"
         editorClassName="bg-white"
         onEditorStateChange={(editorState) => setEditor(editorState)}
+        toolbar={{
+          options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history'],
+        }}
       />
       <Button
         className="inline-flex mt-1 bg-primary"

@@ -2,10 +2,10 @@ import React from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { format as dateFormat } from 'date-fns'
 import { BsDot } from 'react-icons/bs'
-import { ServiceQuestion } from '../../types/service-question'
 import { TruncatedDescription } from '../truncated-description'
+import { QuestionTruncated } from './question-trancate'
+import { ServiceQuestion } from '../../types/service-question'
 import { Button } from '../button'
-import { MAX_PRIMARY_ANS_LENGTH } from '../../utils/constants'
 
 type ServiceQuestionCardProps = {
   question: ServiceQuestion
@@ -15,10 +15,8 @@ function ServiceQuestionCardComponent({ question }: ServiceQuestionCardProps) {
   return (
     <div className="flex flex-col w-full space-y-3">
       <div className="text-sm font-medium text-text-primary">{question.title}</div>
-      <TruncatedDescription
+      <QuestionTruncated
         description={question.primary_answer}
-        maxLength={MAX_PRIMARY_ANS_LENGTH}
-        className="text-text-secondary"
       />
       <div className="flex items-center space-x-4 text-xs font-medium text-text-tertiary">
         <Button icon={<FaThumbsUp />} size="small">
