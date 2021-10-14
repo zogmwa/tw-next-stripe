@@ -91,7 +91,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     } else {
       const addedAttribute = await toggleAddAttribute(service?.id, addAttributeName, addAttributeCon)
       if (addedAttribute) {
-        let updatedAttributes = attributes
+        const updatedAttributes = attributes
         updatedAttributes.push({
           id: addedAttribute.id,
           name: addedAttribute.name,
@@ -99,7 +99,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
           upvotes_count: addedAttribute.upvotes_count,
         })
         setAttributes(updatedAttributes)
-        toast.success(`Added an attribute successfully.`)
+        toast.success('Added an attribute successfully.')
         setAddAttributeNameErrorMessage('')
         setAddAttributeName('')
         setAddAttributeCon(false)

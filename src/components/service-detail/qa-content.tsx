@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ServiceQuestion } from '../service-questions'
@@ -21,10 +22,10 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
     } else {
       const addedQuestion = await toggleAddQuestion(service?.id, addQuestionName)
       if (addedQuestion) {
-        let questions = serviceQuestions
+        const questions = serviceQuestions
         questions.push(addedQuestion)
         setServiceQuestions(questions)
-        toast.success(`Added a question successfully.`)
+        toast.success('Added a question successfully.')
         setAddQuestionNameErrorMessage('')
         setAddQuestionName('')
       }
