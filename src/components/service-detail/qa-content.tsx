@@ -36,7 +36,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
 
   const answerQuestionAction = async (answerQuestion, questionId) => {
     const confirmQuestion = answerQuestion.replace(/\s/g, '').replace(/\n/g, '')
-    if ((confirmQuestion !== '') && (confirmQuestion !== '<p></p>')) {
+    if (confirmQuestion !== '' && confirmQuestion !== '<p></p>') {
       const data = await toggleAnswerQuestion(questionId, answerQuestion)
       if (data) {
         const questions = await fetchQuestions(service.slug)
