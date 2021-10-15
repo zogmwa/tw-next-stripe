@@ -11,31 +11,27 @@ export function DefaultServicePricingCard() {
   const relatedProductMockupData = [
     {
       id: 1,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link1',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link1',
+      description: 'Create a link. Sell anywhere',
     },
     {
       id: 2,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Slack',
-      content: 'Provides interactive video sharing to work',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Slack',
+      description: 'Provides interactive video sharing to work',
     },
     {
       id: 3,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link3',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link3',
+      description: 'Create a link. Sell anywhere',
     },
     {
       id: 4,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link4',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link4',
+      description: 'Create a link. Sell anywhere',
     },
   ]
 
