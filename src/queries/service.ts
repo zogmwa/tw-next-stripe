@@ -193,3 +193,38 @@ export async function fetchQuestions(slug): Promise<any | null> {
     return null
   }
 }
+
+export async function fetchVotedQuestions(slug): Promise<any | null> {
+  try {
+    const { data } = await axios.get(`/api/asset_question_votes/${slug}`)
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function toggleDownVoteQuestion(upvotedQuestionId): Promise<any | null> {
+  try {
+    const { status } = await axios.delete(`/api/asset_question_votes/${upvotedQuestionId}`)
+    return status
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function toggleUpVoteQuestion(questionId): Promise<any | null> {
+  try {
+    const { data } = await axios.post(`/api/asset_question_votes/`, {
+      question: questionId,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
