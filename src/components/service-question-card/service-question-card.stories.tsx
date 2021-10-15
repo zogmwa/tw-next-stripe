@@ -25,12 +25,14 @@ export function DefaultServiceQuestionCard() {
     toast.success(`Voted successfully.`)
   }
 
-  return <ServiceQuestionCard 
-    question={question}
-    votedQuestions={votedQuestionList}
-    upvoteQuestion={upvoteQuestion}
-    isLoading={false}
-    clickedQuestionId={clickedQuestionId}
-    setClickedQuestionId={setClickedQuestionId}
-  />
+  return (
+    <ServiceQuestionCard
+      question={question}
+      votedQuestions={votedQuestionList}
+      upvoteQuestion={upvoteQuestion}
+      isLoading={false}
+      clickedQuestionId={clickedQuestionId}
+      setClickedQuestionId={setClickedQuestionId}
+    />
+  )
 }
