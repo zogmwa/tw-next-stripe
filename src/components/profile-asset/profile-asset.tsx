@@ -25,8 +25,8 @@ function ProfileCardComponent({ asset }: ProfileCardProps) {
           <div className="flex justify-start space-x-2">
             <h1 className="text-base font-medium text-text-primary">{asset.name}</h1>
             <a
-              href={asset.website ?? '#'}
-              target={asset.website ? '_blank' : ''}
+              href={asset.affiliate_link ? asset.affiliate_link : asset.website ?? '#'}
+              target={asset.affiliate_link || asset.website ? '_blank' : ''}
               className="self-center"
               rel="noreferrer"
             >

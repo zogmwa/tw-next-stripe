@@ -37,6 +37,7 @@ const asset1 = {
   users_count: 1100,
   website: 'http://mailchimp.com/',
   my_asset_vote: null,
+  affiliate_link: 'https://google.com/search?q=mail-chimp',
 }
 const asset2 = {
   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',

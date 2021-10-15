@@ -10,6 +10,7 @@ import '../styles/styles.css'
 import 'nprogress/nprogress.css'
 import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
+import { FcHighPriority, FcInfo } from 'react-icons/fc'
 import { UserProvider } from '../hooks/use-user'
 import { NavBar } from '../components/nav-bar'
 import { Spinner } from '../components/spinner'
@@ -77,6 +78,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
                 toastOptions={{
                   className: 'text-sm !text-text-primary',
                   duration: 2000,
+                  error: {
+                    icon: <FcHighPriority className="text-2xl" />,
+                  },
+                  custom: {
+                    icon: <FcInfo className="text-2xl" />,
+                  },
                 }}
               >
                 {ToastWithDismiss}

@@ -59,8 +59,8 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
               <h1 className="text-base font-medium cursor-pointer text-text-primary">{service.name}</h1>
             </Link>
             <a
-              href={service.website ?? '#'}
-              target={service.website ? '_blank' : ''}
+              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center"
               rel="noreferrer"
             >

@@ -15,7 +15,7 @@ const asset: Asset = {
   logo_url: 'https://logo.clearbit.com/liveramp.com',
   logo: null,
   website: 'https://liveramp.com/',
-  affiliate_link: null,
+  affiliate_link: 'https://google.com/search?q=liveramp',
   short_description: null,
   description:
     'Our data connectivity platform gives companies and their partners the power to connect, control, and activate data to transform customer experiences and generate more valuable business outcomes.',

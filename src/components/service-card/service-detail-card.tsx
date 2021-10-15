@@ -89,8 +89,8 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           <div className="flex justify-start space-x-2">
             <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
             <a
-              href={service.website ?? '#'}
-              target={service.website ? '_blank' : ''}
+              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center"
               rel="noreferrer"
             >
