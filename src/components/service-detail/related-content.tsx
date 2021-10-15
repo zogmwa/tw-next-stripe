@@ -17,7 +17,6 @@ function RelatedContentComponent({ name }: RelateName) {
       const assetSimilarList = await fetchAssetSimilar(name)
       if (assetSimilarList) {
         setRelatedProductsList(assetSimilarList.slice(1))
-        console.log(assetSimilarList.slice(1))
       } else {
         setRelatedProductsList([])
       }
