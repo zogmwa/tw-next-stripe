@@ -1,5 +1,5 @@
 import { withApiAuthRequired } from '../../../../utils/auth-wrappers'
-import { client } from '../../../../utils/client'
+import { clientWithRetries } from '../../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../../utils/token'
 
 /**
@@ -10,7 +10,7 @@ export default withApiAuthRequired(async (req, res) => {
     const { slug, used_by_me } = req.query
     const access = await getAccessToken(req.session)
     // const { status } = await client.post<boolean>(`/assets/${slug}/used_by_me/?used_by_me=${usedByMeStatus}`)
-    const { status } = await client.post<boolean>(
+    const { status } = await clientWithRetries.post<boolean>(
       `/assets/${slug}/used_by_me/?used_by_me=${used_by_me}`,
       {},
       {

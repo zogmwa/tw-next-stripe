@@ -1,4 +1,4 @@
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 import { withApiAuthRequired } from '../../../utils/auth-wrappers'
 
@@ -9,7 +9,7 @@ export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'DELETE') {
     const { id } = req.query
     const access = await getAccessToken(req.session)
-    const { data } = await client.delete(`/asset_votes/${id}`, {
+    const { data } = await clientWithRetries.delete(`/asset_votes/${id}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },

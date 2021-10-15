@@ -163,7 +163,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         <Button
           className="inline-flex w-40 md:hidden"
           loading={isLoadingUsedByMe}
-          loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
+          loadingClassName={!usedByMe ? 'text-primary' : 'text-background-light'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
           disabled={isLoadingUsedByMe}
@@ -175,7 +175,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
           buttonType={votedByMe ? 'primary' : 'default'}
           icon={<BsChevronUp className={votedByMe ? 'self-center text-white' : 'self-center text-primary'} />}
           loading={isLoadingUpvote}
-          loadingClassName={votedByMe ? 'text-white' : 'text-primary'}
+          loadingClassName={votedByMe ? 'text-background-light' : 'text-primary'}
           onClick={() => setToggleUpvotedByMe()}
         >
           {`Upvote ${upvotesCount}`}
@@ -183,7 +183,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
         <Button
           className="hidden w-40 md:inline-flex"
           loading={isLoadingUsedByMe}
-          loadingClassName={!usedByMe ? 'text-primary' : 'text-white'}
+          loadingClassName={!usedByMe ? 'text-primary' : 'text-background-light'}
           buttonType={usedByMe ? 'primary' : 'default'}
           onClick={() => setToggleUsedByState()}
           disabled={isLoadingUsedByMe}

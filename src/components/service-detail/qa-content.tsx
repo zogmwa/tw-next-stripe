@@ -61,11 +61,11 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       if (data) {
         const questions = await fetchQuestions(service.slug)
         setServiceQuestions(questions)
-        toast.success(`Answered successfully.`)
+        toast.success('Answered successfully.')
         setIsAnswered(true)
       }
     } else {
-      toast.error(`Please enter your answer.`)
+      toast.error('Please enter your answer.')
     }
     setIsLoading(false)
     setClickedQuestionId(0)
@@ -93,9 +93,8 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
         }
       })
       setVotedQuestions(votedQuestionList)
-      toast.success(`Done successfully.`)
     } else {
-      toast.error(`Please try again later.`)
+      toast.error('Please try again later.')
     }
     setIsLoading(false)
     setClickedQuestionId(0)
