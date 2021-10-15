@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
+import toast from 'react-hot-toast'
 import { ServiceQuestion } from './service-question'
 
 export default {
@@ -63,6 +64,9 @@ export function DefaultServiceQuestion() {
   const [isAnswered, setIsAnswered] = useState(true)
   const [addQuestionName, setAddQuestionName] = useState('')
   const [addQuestionNameErrorMessage, setAddQuestionNameErrorMessage] = useState('')
+  const [votedQuestions, setVotedQuestions] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [clickedQuestionId, setClickedQuestionId] = useState(0)
 
   const addQuestionAction = async () => {
     if (addQuestionName === '') {
@@ -75,7 +79,11 @@ export function DefaultServiceQuestion() {
   }
 
   const answerQuestionAction = async (answerQuestion, questionId) => {
-    setIsAnswered(true)
+    toast.success(`Answered successfully.`)
+  }
+
+  const upvoteQuestion = async (id, isAddVote) => {
+    toast.success(`Voted successfully.`)
   }
 
   return (
@@ -88,6 +96,11 @@ export function DefaultServiceQuestion() {
         addQuestionNameErrorMessage={addQuestionNameErrorMessage}
         addQuestionAction={addQuestionAction}
         answerQuestionAction={answerQuestionAction}
+        votedQuestions={votedQuestions}
+        upvoteQuestion={upvoteQuestion}
+        isLoading={isLoading}
+        setClickedQuestionId={setClickedQuestionId}
+        clickedQuestionId={clickedQuestionId}
       />
     </>
   )

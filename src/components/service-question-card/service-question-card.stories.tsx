@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
+import toast from 'react-hot-toast'
 import { ServiceQuestionCard } from './service-question-card'
 
 export default {
@@ -8,6 +9,8 @@ export default {
 } as Meta
 
 export function DefaultServiceQuestionCard() {
+  const [clickedQuestionId, setClickedQuestionId] = useState(0)
+
   const question = {
     id: 1,
     asset: 2,
@@ -17,6 +20,17 @@ export function DefaultServiceQuestionCard() {
     upvotes_count: 10,
     created: '2021-08-27T16:34:08.984019Z',
   }
+  const votedQuestionList = []
+  const upvoteQuestion = (questionId, status) => {
+    toast.success(`Voted successfully.`)
+  }
 
-  return <ServiceQuestionCard question={question} />
+  return <ServiceQuestionCard 
+    question={question}
+    votedQuestions={votedQuestionList}
+    upvoteQuestion={upvoteQuestion}
+    isLoading={false}
+    clickedQuestionId={clickedQuestionId}
+    setClickedQuestionId={setClickedQuestionId}
+  />
 }
