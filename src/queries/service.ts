@@ -218,10 +218,22 @@ export async function toggleDownVoteQuestion(upvotedQuestionId): Promise<any | n
 
 export async function toggleUpVoteQuestion(questionId): Promise<any | null> {
   try {
-    const { data } = await axios.post(`/api/asset_question_votes/`, {
+    const { data } = await axios.post('/api/asset_question_votes/', {
       question: questionId,
     })
     return data
+  } catch (error) {
+    // TODO: error handling
+    toast.error('something went wrong')
+    return null
+  }
+}
+
+export async function fetchAssetSimilar(name): Promise<Asset[] | null> {
+  try {
+    const { data } = await axios.get(`/api/assets/similar/${name}`)
+    if (data.results) return data.results
+    else return null
   } catch (error) {
     // TODO: error handling
     toast.error('something went wrong')

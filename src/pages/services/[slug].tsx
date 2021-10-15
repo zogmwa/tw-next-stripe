@@ -51,7 +51,7 @@ export default function Service() {
     {
       id: 'related-products',
       name: 'Related Products',
-      content: <RelatedContent />,
+      content: <RelatedContent name={data.name} />,
     },
   ]
 

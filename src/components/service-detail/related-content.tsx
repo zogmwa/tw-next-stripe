@@ -1,51 +1,67 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { fetchAssetSimilar } from '../../queries/service'
 import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
 
-function RelatedContentComponent() {
+type RelateName = {
+  name: string
+}
+function RelatedContentComponent({ name }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
+  const [relatedProductsList, setRelatedProductsList] = useState([])
   const defaultShowCount = 4
+
+  useEffect(() => {
+    async function getAssetSimilarList() {
+      console.log('a')
+      const assetSimilarList = await fetchAssetSimilar(name)
+      console.log(assetSimilarList)
+      if (assetSimilarList) {
+        setRelatedProductsList(assetSimilarList.slice(1))
+        console.log(assetSimilarList.slice(1))
+      } else {
+        setRelatedProductsList([])
+      }
+    }
+
+    getAssetSimilarList()
+  }, [])
   const relatedProductMockupData = [
     {
       id: 1,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link1',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link1',
+      description: 'Create a link. Sell anywhere',
     },
     {
       id: 2,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Slack',
-      content: 'Provides interactive video sharing to work',
-      isCompare: true,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Slack',
+      description: 'Provides interactive video sharing to work',
     },
     {
       id: 3,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link3',
-      content: 'Create a link. Sell anywhere',
-      isCompare: true,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link3',
+      description: 'Create a link. Sell anywhere',
     },
     {
       id: 4,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link4',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link4',
+      description: 'Create a link. Sell anywhere',
     },
     {
       id: 5,
-      imageUrl: 'http://logo.clearbit.com/mailchimp.com',
-      title: 'Stripe Payment Link5',
-      content: 'Create a link. Sell anywhere',
-      isCompare: false,
+      logo_url: 'http://logo.clearbit.com/mailchimp.com',
+      name: 'Stripe Payment Link5',
+      description: 'Create a link. Sell anywhere',
     },
   ]
-  let viewRelatedProducts = relatedProductMockupData
+  let viewRelatedProducts = relatedProductsList
   if (!viewMore) {
-    viewRelatedProducts = relatedProductMockupData.slice(0, 4)
+    viewRelatedProducts = relatedProductsList.slice(0, 4)
   }
 
   return (
