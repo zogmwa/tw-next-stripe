@@ -25,12 +25,18 @@ function ServiceQuestionComponent({
   addQuestionNameErrorMessage,
   addQuestionAction,
   answerQuestionAction,
+  votedQuestions,
+  upvoteQuestion,
+  isLoading,
+  clickedQuestionId,
+  setClickedQuestionId,
 }) {
   const [isAnswered, setIsAnswered] = useState(isShowAnswered)
   const [viewMore, setViewMore] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const user = useUserContext()
   const { authVerified } = user
+  const votedQuestionList = votedQuestions ?? []
 
   function authCheck() {
     if (!authVerified) {
@@ -91,16 +97,30 @@ function ServiceQuestionComponent({
         </div>
       </div>
       {isAnswered &&
-        questions.map((item, index) => (
-          <div className="mt-4" key={`${item.title}${index}`}>
-            <ServiceQuestionCard question={item} />
-          </div>
-        ))}
+        questions.map((item, index) => {
+          return (
+            <div className="mt-4" key={`${item.title}${index}`}>
+              <ServiceQuestionCard
+                question={item}
+                votedQuestions={votedQuestionList}
+                upvoteQuestion={upvoteQuestion}
+                isLoading={isLoading}
+                clickedQuestionId={clickedQuestionId}
+                setClickedQuestionId={setClickedQuestionId}
+              />
+            </div>
+          )
+        })}
       {!isAnswered &&
         questions.map((item, index) => (
           <div className="mt-4" key={`${item.title}${index}`}>
             <div className="text-sm font-medium text-text-primary">{item.title}</div>
-            <QuestionEditor questionId={item.id} answerQuestionAction={answerQuestionAction} />
+            <QuestionEditor
+              questionId={item.id}
+              answerQuestionAction={answerQuestionAction}
+              clickedQuestionId={clickedQuestionId}
+              isLoading={isLoading}
+            />
           </div>
         ))}
       {tempQuestions.length > defaultShowCount ? (
