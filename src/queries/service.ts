@@ -236,7 +236,8 @@ export async function fetchAssetSimilar(name): Promise<Asset[] | null> {
     else return null
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not fetch similar services')
     return null
   }
 }
