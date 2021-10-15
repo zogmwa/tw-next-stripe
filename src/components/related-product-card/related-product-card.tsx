@@ -7,15 +7,7 @@ function RelatedProductCardComponent({ relatedProduct }) {
 
   return (
     <div className="flex flex-col items-center p-4 mt-2 mr-2 border border-solid border-border-default">
-      {relatedProduct.logo_url ? (
-        <img
-          src={relatedProduct.logo_url}
-          alt={`${relatedProduct.name}`}
-          className="object-cover w-16 h-16 rounded-md"
-        />
-      ) : (
-        <div className="object-cover w-16 h-16 rounded-md" />
-      )}
+      <img src={relatedProduct.logo_url} alt={`${relatedProduct.name}`} className="object-cover w-16 h-16 rounded-md" />
       <span className="mt-4 text-sm text-center text-bold">{relatedProduct.name}</span>
       <span className="mt-4 text-sm text-center text-text-tertiary">
         {relatedProduct?.description.length < MAX_RELATEDCARDCONTENT_LENGTH
