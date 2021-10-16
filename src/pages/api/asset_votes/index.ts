@@ -1,5 +1,5 @@
 import { withApiAuthRequired } from '../../../utils/auth-wrappers'
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 
 /**
@@ -8,7 +8,7 @@ import { getAccessToken } from '../../../utils/token'
 export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'POST') {
     const access = await getAccessToken(req.session)
-    const { data } = await client.post('/asset_votes/', req.body, {
+    const { data } = await clientWithRetries.post('/asset_votes/', req.body, {
       headers: {
         Authorization: `Bearer ${access}`,
       },

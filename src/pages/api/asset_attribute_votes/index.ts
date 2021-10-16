@@ -1,4 +1,4 @@
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 import { AttributeVote } from '../../../types/attribute_vote'
 import { withApiAuthRequired } from '../../../utils/auth-wrappers'
@@ -9,7 +9,7 @@ import { withApiAuthRequired } from '../../../utils/auth-wrappers'
 export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'POST') {
     const access = await getAccessToken(req.session)
-    const { data } = await client.post<AttributeVote>('/asset_attribute_votes/', req.body, {
+    const { data } = await clientWithRetries.post<AttributeVote>('/asset_attribute_votes/', req.body, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
@@ -17,7 +17,7 @@ export default withApiAuthRequired(async (req, res) => {
     res.json(data)
   } else {
     const access = await getAccessToken(req.session)
-    const { data } = await client.get<AttributeVote>('/asset_attribute_votes/', {
+    const { data } = await clientWithRetries.get<AttributeVote>('/asset_attribute_votes/', {
       headers: {
         Authorization: `Bearer ${access}`,
       },

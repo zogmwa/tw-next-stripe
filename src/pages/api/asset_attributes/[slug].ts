@@ -1,5 +1,5 @@
 import { withSessionApi } from '../../../utils/session'
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 
 /**
@@ -9,7 +9,7 @@ export default withSessionApi(async (req, res) => {
   if (req.method === 'GET') {
     const { slug } = req.query
     const access = await getAccessToken(req.session)
-    const { data } = await client.get(`/asset_attributes/?assets__slug=${slug}&asset=${slug}`, {
+    const { data } = await clientWithRetries.get(`/asset_attributes/?assets__slug=${slug}&asset=${slug}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },

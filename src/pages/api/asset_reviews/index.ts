@@ -1,4 +1,4 @@
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 import { Asset } from '../../../types/asset'
 import { withSessionApi } from '../../../utils/session'
@@ -16,6 +16,6 @@ export default withSessionApi(async (req, res) => {
         },
       }
     : null
-  const { data } = await client.get<Asset>(`/asset_reviews?asset=${asset}`, config)
+  const { data } = await clientWithRetries.get<Asset>(`/asset_reviews?asset=${asset}`, config)
   res.json(data)
 })

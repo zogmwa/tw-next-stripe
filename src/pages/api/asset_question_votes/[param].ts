@@ -1,5 +1,5 @@
 import { withApiAuthRequired } from '../../../utils/auth-wrappers'
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 
 export default withApiAuthRequired(async (req, res) => {
@@ -9,7 +9,7 @@ export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'GET') {
     const { param } = req.query
     const access = await getAccessToken(req.session)
-    const { data } = await client.get(`/question_votes/?question__asset__slug=${param}`, {
+    const { data } = await clientWithRetries.get(`/question_votes/?question__asset__slug=${param}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
@@ -22,7 +22,7 @@ export default withApiAuthRequired(async (req, res) => {
   if (req.method === 'DELETE') {
     const { param } = req.query
     const access = await getAccessToken(req.session)
-    const { status } = await client.delete(`/question_votes/${param}/`, {
+    const { status } = await clientWithRetries.delete(`/question_votes/${param}/`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },

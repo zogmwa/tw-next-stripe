@@ -1,5 +1,4 @@
 import axios from 'axios'
-import toast from 'react-hot-toast'
 import { Asset, AssetVote } from '../types/asset'
 import { AttributeVote, VotedAttribute } from '../types/attribute_vote'
 import { ServiceQuestion } from '../types/service-question'
@@ -48,7 +47,8 @@ export async function fetchVote(slug: string): Promise<Asset | null> {
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('Something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not fetch asset votes.')
     return null
   }
 }
@@ -60,7 +60,8 @@ export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean):
     else if (status === 204) return false
   } catch (error) {
     // TODO: error handling
-    toast.error('Something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not get used by me.')
     return null
   }
 }
@@ -71,7 +72,8 @@ export async function fetchAttributeVotes(): Promise<AttributeVote | null> {
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('Something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not fetch a attribute votes.')
     return null
   }
 }
@@ -87,7 +89,8 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('Something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not vote a attribute.')
     return null
   }
 }
@@ -99,7 +102,8 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
     return status
   } catch (error) {
     // TODO: error handling
-    toast.error('Something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not destroy a attribute vote.')
     return null
   }
 }
@@ -112,7 +116,8 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not vote a asset.')
     return null
   }
 }
@@ -125,7 +130,8 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
     return status
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not destroy a asset vote.')
     return null
   }
 }
@@ -136,7 +142,8 @@ export async function fetchUpvotedAttributes(slug: string): Promise<VotedAttribu
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not vote a attribute.')
     return null
   }
 }
@@ -151,7 +158,8 @@ export async function toggleAddAttribute(assetId: number, name: string, isCon: b
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not add a attribute.')
     return null
   }
 }
@@ -165,7 +173,8 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not add a question.')
     return null
   }
 }
@@ -178,7 +187,8 @@ export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQ
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not answer a question.')
     return null
   }
 }
@@ -189,7 +199,8 @@ export async function fetchQuestions(slug): Promise<any | null> {
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not fetch questions.')
     return null
   }
 }
@@ -200,7 +211,8 @@ export async function fetchVotedQuestions(slug): Promise<any | null> {
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not fetch voted questions.')
     return null
   }
 }
@@ -211,7 +223,8 @@ export async function toggleDownVoteQuestion(upvotedQuestionId): Promise<any | n
     return status
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not destroy a question vote.')
     return null
   }
 }
@@ -224,7 +237,8 @@ export async function toggleUpVoteQuestion(questionId): Promise<any | null> {
     return data
   } catch (error) {
     // TODO: error handling
-    toast.error('something went wrong')
+    // eslint-disable-next-line
+    console.log('Could not vote a question.')
     return null
   }
 }
@@ -237,7 +251,7 @@ export async function fetchAssetSimilar(name): Promise<Asset[] | null> {
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not fetch similar services')
+    console.log('Could not fetch similar services.')
     return null
   }
 }

@@ -1,5 +1,5 @@
 import { withSessionApi } from '../../../utils/session'
-import { client } from '../../../utils/client'
+import { clientWithRetries } from '../../../utils/clientWithRetries'
 import { getAccessToken } from '../../../utils/token'
 
 /**
@@ -8,7 +8,7 @@ import { getAccessToken } from '../../../utils/token'
 export default withSessionApi(async (req, res) => {
   if (req.method === 'POST') {
     const access = await getAccessToken(req.session)
-    const { data } = await client.post('/questions/', req.body, {
+    const { data } = await clientWithRetries.post('/questions/', req.body, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
