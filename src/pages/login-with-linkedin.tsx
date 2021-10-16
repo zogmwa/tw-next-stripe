@@ -16,6 +16,11 @@ export default function LoginWithLinkedin() {
   const { nextPageRedirect } = useUserContext()
   const [loginRequestSent, setLoginRequestSent] = useState(false)
   const [shouldNextPageRedirect, setShouldNextPageRedirect] = useState(false)
+  const [failureRedirect, setFailureRedirect] = useState('/login')
+
+  useEffect(() => {
+    setFailureRedirect(localStorage.getItem('failure_redirect'))
+  }, [])
 
   useEffect(() => {
     if (shouldNextPageRedirect) {
@@ -44,19 +49,19 @@ export default function LoginWithLinkedin() {
 
         setShouldNextPageRedirect(true)
       } catch (error) {
-        replace(`/login?linkedInError=${error.response.data.detail}`)
+        replace(`${failureRedirect}?linkedInError=${error.response.data.detail}`)
       }
     },
-    [mutate, replace],
+    [mutate, replace, failureRedirect],
   )
 
   useEffect(
     function redirectToLoginPageOnInvalidCode() {
       if (nonEmptyQuery && (!code || state !== process.env.LINKEDIN_OAUTH_STATE)) {
-        replace('/login')
+        replace(failureRedirect)
       }
     },
-    [nonEmptyQuery, code, state, replace],
+    [nonEmptyQuery, code, state, replace, failureRedirect],
   )
 
   useEffect(
@@ -102,20 +107,20 @@ export default function LoginWithLinkedin() {
                 } else {
                   // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
                   replace(
-                    '/login?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account',
+                    `${failureRedirect}?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account`,
                   )
                 }
               }
             }
           } catch (error) {
             // If it isn't redirected to a page yet then it is likely an error case
-            replace('/login')
+            replace(failureRedirect)
           }
         }
       }
       login()
     },
-    [code, state, replace, mutate, loginRequestSent, connectLinkedInAccountToExistingTaggedWebAccount],
+    [code, state, replace, mutate, loginRequestSent, failureRedirect, connectLinkedInAccountToExistingTaggedWebAccount],
   )
 
   return (

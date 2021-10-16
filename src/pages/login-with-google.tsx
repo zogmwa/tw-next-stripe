@@ -15,6 +15,11 @@ export default function LoginWithGoogle() {
   const { nextPageRedirect } = useUserContext()
   const [loginRequestSent, setLoginRequestSent] = useState(false)
   const [shouldNextPageRedirect, setShouldNextPageRedirect] = useState(false)
+  const [failureRedirect, setFailureRedirect] = useState('/login')
+
+  useEffect(() => {
+    setFailureRedirect(localStorage.getItem('failure_redirect'))
+  }, [])
 
   useEffect(() => {
     if (shouldNextPageRedirect) {
@@ -52,24 +57,23 @@ export default function LoginWithGoogle() {
 
         setShouldNextPageRedirect(true)
       } catch (error) {
-        replace(`/login?googleError=${error.response.data.detail}`)
+        replace(`${failureRedirect}?googleError=${error.response.data.detail}`)
       }
     },
-    [replace, mutate],
+    [replace, mutate, failureRedirect],
   )
 
   useEffect(
     function redirectToLoginPageOnInvalidToken() {
       if (nonEmptyQuery && (!google_access_token || state !== process.env.GOOGLE_OAUTH_STATE)) {
-        replace('/login')
+        replace(failureRedirect)
       }
     },
-    [nonEmptyQuery, google_access_token, state, replace],
+    [nonEmptyQuery, google_access_token, state, replace, failureRedirect],
   )
 
   useEffect(
     function loginWithGoogleAuthToken() {
-      console.log('Running login with google auth token')
       async function login() {
         if (google_access_token && state === process.env.GOOGLE_OAUTH_STATE) {
           try {
@@ -94,19 +98,27 @@ export default function LoginWithGoogle() {
                 connectGoogleAccountToExistingTaggedWebAccount(google_access_token)
               } else {
                 replace(
-                  '/login?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account',
+                  `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account`,
                 )
               }
             } else {
               // If it isn't redirected to a page yet then it is likely an error case
-              replace('/login')
+              replace(`${failureRedirect}`)
             }
           }
         }
       }
       login()
     },
-    [google_access_token, state, replace, mutate, loginRequestSent, connectGoogleAccountToExistingTaggedWebAccount],
+    [
+      google_access_token,
+      state,
+      replace,
+      mutate,
+      loginRequestSent,
+      connectGoogleAccountToExistingTaggedWebAccount,
+      failureRedirect,
+    ],
   )
 
   return (

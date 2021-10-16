@@ -89,7 +89,7 @@ const withPageAuthRequired: WithPageAuthRequired = (Component, options = {}) => 
 
     useEffect(() => {
       if (!user.isLoggedIn()) {
-        router.push(redirectTo)
+        router.replace(redirectTo)
         toast.error(message)
       }
     }, [user, router])
