@@ -28,6 +28,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
   const user = useUserContext()
   const { authVerified } = user
+  const customerOrganizations = service?.customer_organizations ?? []
 
   useEffect(() => {
     async function getVotedAttribute() {
@@ -107,8 +108,6 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
     }
   }
 
-  const logoUrl = service.logo_url ?? ''
-
   return (
     <>
       <HighlightContent
@@ -117,13 +116,13 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
         isLoading={isLoading}
         clickedAttribute={clickedAttribute}
         upvoteAttribute={upvoteAttribute}
-        logoUrl={logoUrl}
         addAttributeName={addAttributeName}
         setAddAttributeName={setAddAttributeName}
         addAttributeCon={addAttributeCon}
         setAddAttributeCon={setAddAttributeCon}
         addAttributeAction={addAttributeAction}
         addAttributeNameErrorMessage={addAttributeNameErrorMessage}
+        customerOrganizations={customerOrganizations}
       />
     </>
   )
