@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import toast from 'react-hot-toast'
+import { TiImageOutline } from 'react-icons/ti'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -15,13 +16,13 @@ function HighlightContentComponent({
   isLoading,
   clickedAttribute,
   upvoteAttribute,
-  logoUrl,
   addAttributeName,
   setAddAttributeName,
   addAttributeCon,
   setAddAttributeCon,
   addAttributeAction,
   addAttributeNameErrorMessage,
+  customerOrganizations,
 }) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
@@ -47,6 +48,17 @@ function HighlightContentComponent({
   let tempConAttributes = attributes
   if (!isCon) tempConAttributes = attributes.filter((attribute) => attribute.is_con === isCon)
   if (!viewMore) tempAttributes = tempConAttributes.slice(0, 10)
+
+  const coustmerLength = Math.ceil(customerOrganizations.length / 4)
+  let showCustomers = []
+  for (let i = 0; i < coustmerLength; i++) {
+    showCustomers.push([])
+    for (let j = 0; j < 4; j++) {
+      if (customerOrganizations[i * 4 + j]) {
+        showCustomers[i].push(customerOrganizations[i * 4 + j])
+      }
+    }
+  }
 
   return (
     <div className="ml-3 md:mt-10">
@@ -207,22 +219,28 @@ function HighlightContentComponent({
       <div className="mt-6 md:mt-4">
         <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
         <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
-          <Carousel.Item className="aspect-h-16 md:aspect-h-3">
-            <div className="grid content-center grid-cols-2 md:grid-cols-4 justify-items-center">
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-            </div>
-          </Carousel.Item>
-          <Carousel.Item className="aspect-h-16 md:aspect-h-3">
-            <div className="grid content-center grid-cols-2 md:grid-cols-4 justify-items-center">
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-              <img src={logoUrl} className="m-2" />
-            </div>
-          </Carousel.Item>
+          {showCustomers.map((showCustomer) => (
+            <Carousel.Item className="aspect-h-8 md:aspect-h-3">
+              <div className="grid content-around w-full h-full grid-cols-2 md:content-center md:grid-cols-4 justify-items-center">
+                {showCustomer.map((item) => {
+                  if (item.logo_url) {
+                    return (
+                      <div className="flex items-center justify-center w-full h-full m-2" title={item.name}>
+                        <img src={item.logo_url} alt={item.name} />
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div className="flex items-center justify-around w-full h-full m-2" title={item.name}>
+                        <TiImageOutline className="text-4xl" />
+                        <span className="text-2xl italic tracking-wide text-text-secondary">{item.name}</span>
+                      </div>
+                    )
+                  }
+                })}
+              </div>
+            </Carousel.Item>
+          ))}
         </Carousel>
       </div>
     </div>
