@@ -75,6 +75,29 @@ export function DefaultStarRating() {
     },
   ]
 
+  const customerOrganizations = [
+    {
+      name: 'Shapeways',
+      website: 'https://www.shapeways.com/',
+      logo_url: 'https://www.shapeways.com/rrstatic/img/dms-assets/ShapewaysLogo_RGB_Red.svg',
+    },
+    {
+      name: 'Company 1',
+      website: 'https://www.shapeways.com/',
+      logo_url: '',
+    },
+    {
+      name: 'Company 2',
+      website: 'https://www.shapeways.com/',
+      logo_url: '',
+    },
+    {
+      name: 'Company 3',
+      website: 'https://www.shapeways.com/',
+      logo_url: null,
+    },
+  ]
+
   const addAttributeAction = () => {
     if (addAttributeName === '') {
       setAddAttributeNameErrorMessage('This field is not valid')
@@ -92,13 +115,13 @@ export function DefaultStarRating() {
       isLoading={false}
       clickedAttribute={0}
       upvoteAttribute={null}
-      logoUrl={''}
       addAttributeName={addAttributeName}
       setAddAttributeName={setAddAttributeName}
       addAttributeCon={addAttributeCon}
       setAddAttributeCon={setAddAttributeCon}
       addAttributeAction={addAttributeAction}
       addAttributeNameErrorMessage={addAttributeNameErrorMessage}
+      customerOrganizations={customerOrganizations}
     />
   )
 }

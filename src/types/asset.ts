@@ -1,6 +1,8 @@
 import { Tag } from './tag'
 import { Plan } from './price-plan'
 import { ServiceQuestion } from './service-question'
+import { CustomerOrganization } from './customer_organization'
+import { AttributeType } from './attribute'
 
 export type Asset = {
   slug?: string
@@ -22,10 +24,10 @@ export type Asset = {
   avg_rating?: string | number
   users_count?: number // not in backend yet
   og_image_url?: string
-  customer_organizations?: { name?: string }[]
+  customer_organizations?: CustomerOrganization[]
   questions?: ServiceQuestion[]
   snapshots?: { asset: number; url: string }[]
-  attributes?: { id?: number | string; name: string; is_con: boolean; upvotes_count: string | number }[]
+  attributes?: AttributeType[]
   used_by_me?: boolean
   my_asset_vote?: number | null
   is_owned?: boolean
