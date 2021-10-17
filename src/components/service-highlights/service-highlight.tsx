@@ -225,13 +225,13 @@ function HighlightContentComponent({
                 {showCustomer.map((item) => {
                   if (item.logo_url) {
                     return (
-                      <div className="flex items-center justify-center w-full h-full m-2" title={item.name}>
+                      <div className="flex items-center justify-center w-full h-full p-2" title={item.name}>
                         <img src={item.logo_url} alt={item.name} />
                       </div>
                     )
                   } else {
                     return (
-                      <div className="flex items-center justify-around w-full h-full m-2" title={item.name}>
+                      <div className="flex items-center justify-around w-full h-full p-2" title={item.name}>
                         <TiImageOutline className="text-4xl" />
                         <span className="text-2xl italic tracking-wide text-text-secondary">{item.name}</span>
                       </div>
