@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdVerified } from 'react-icons/md'
 import ReactTooltip from 'react-tooltip'
-import Image from 'next/image'
+import styled from 'styled-components'
 
+const Image = styled.img`
+   {
+    content: attr(alt);
+    display: block;
+    font-size: 16px;
+    font-style: normal;
+    font-family: FontAwesome;
+    color: rgb(100, 100, 100);
+
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: inherit;
+    word-wrap: normal;
+    text-align: center;
+  }
+`
 type ServiceLogo = {
   serviceId: number
   serviceName?: string
@@ -22,14 +39,24 @@ function ServiceLogoComponent({
   imageClassName = '',
   fontClassName = 'text-success',
 }) {
+  const [imgSrc, setImgSrc] = useState<string | undefined>(logoUrl)
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
-      {logoUrl ? (
-        <img src={logoUrl} alt={`Logo for ${serviceName}`} className={`object-contain rounded-md ${imageClassName}`} />
+      {imgSrc ? (
+        <Image
+          src={imgSrc}
+          onError={(e) => {
+            e.currentTarget.onerror = null
+            e.currentTarget.src = imgSrc
+            setImgSrc('')
+          }}
+          alt={`${serviceName}`}
+          className={`object-contain rounded-md ${imageClassName}`}
+        />
       ) : (
         <Image
-          src="/images/default_logo.png"
-          alt="Service Logo"
+          src="/public/images/default_logo.png"
+          alt={`${serviceName}`}
           className={`object-contain rounded-md ${imageClassName}`}
           width="72"
           height="72"

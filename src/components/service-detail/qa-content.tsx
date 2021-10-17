@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { ServiceQuestion } from '../service-questions'
 import { Asset } from '../../types/asset'
-import { toggleAddQuestion } from '../../queries/service'
 import {
+  toggleAddQuestion,
   toggleAnswerQuestion,
   fetchQuestions,
   fetchVotedQuestions,
@@ -83,7 +83,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
     if (data) {
       const questions = await fetchQuestions(service.slug)
       setServiceQuestions(questions)
-      let votedQuestionList = []
+      const votedQuestionList = []
       questions.map((question) => {
         if (question.my_asset_question_vote) {
           votedQuestionList.push({

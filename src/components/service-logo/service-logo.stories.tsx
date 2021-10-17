@@ -21,15 +21,20 @@ export function DefaultLogo() {
       logo: 'http://logo.clearbit.com/campaignmonitor.com',
       is_owned: false,
     },
+    {
+      id: 3,
+      name: 'server name 2',
+      logo: 'https://logo.clearbit.com/businesshangouts.jetvideo.io',
+      is_owned: false,
+    },
   ]
 
   return (
     <>
       {serviceLogoMockupDataList.map((service) => (
-        <div>
+        <div key={service.id}>
           <ServiceLogo
             serviceName={service.name}
-            key={service.id}
             serviceId={service.id}
             logoUrl={service.logo}
             owned={service.is_owned}

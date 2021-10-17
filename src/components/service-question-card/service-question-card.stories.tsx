@@ -22,7 +22,7 @@ export function DefaultServiceQuestionCard() {
   }
   const votedQuestionList = []
   const upvoteQuestion = (questionId, status) => {
-    toast.success(`Voted successfully.`)
+    toast.success('Voted successfully.')
   }
 
   return (

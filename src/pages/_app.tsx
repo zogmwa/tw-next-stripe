@@ -10,7 +10,8 @@ import '../styles/styles.css'
 import 'nprogress/nprogress.css'
 import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
-import { FcHighPriority, FcInfo } from 'react-icons/fc'
+import { FcInfo } from 'react-icons/fc'
+import { MdOutlineError } from 'react-icons/md'
 import { UserProvider } from '../hooks/use-user'
 import { NavBar } from '../components/nav-bar'
 import { Spinner } from '../components/spinner'
@@ -79,7 +80,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
                   className: 'text-sm !text-text-primary',
                   duration: 2000,
                   error: {
-                    icon: <FcHighPriority className="text-2xl" />,
+                    icon: <MdOutlineError className=" text-red-600 text-2xl" />,
                   },
                   custom: {
                     icon: <FcInfo className="text-2xl" />,
