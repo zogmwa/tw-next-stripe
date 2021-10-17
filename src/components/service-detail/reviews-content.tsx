@@ -1,44 +1,62 @@
 import React, { useState } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import numeral from 'numeral'
+import toast from 'react-hot-toast'
 import { StyledStarRating } from '../styled-star-rating'
-import { MarkProgress } from '../styled-mark-progress'
+// import { MarkProgress } from '../styled-mark-progress'
 import { ReviewInput } from '../review-input'
 import { ReviewCard } from '../review-card'
 import { ServiceReview } from '../../types/service-review'
 import { VideoReviewCard } from '../video-review'
+import { addAssetReview } from '../../queries/service'
 
 type ServiceDetailReviewsProps = {
+  assetId: number
   reviews: ServiceReview[]
+  avgRating: number
+  reviewsCount: number
 }
 
-function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
+function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: ServiceDetailReviewsProps) {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
   const [viewVideoMore, setViewVideoMore] = useState(false)
   if (typeof reviews === 'undefined' || !reviews) return null
 
+  const addReview = async (addData) => {
+    const data = await addAssetReview({
+      asset: assetId,
+      content: addData.review,
+      video_url: addData.videoUrl,
+      rating: addData.avarageRate * 2,
+    })
+    if (data) {
+      toast.success('Added an asset review successfully.')
+    }
+  }
+
   const defaultShowCount = 2
   const defaultVideoShowCount = 4
-  const reviewMark = 8.1
-  const totalReviews = 3400
-  const marks = [
-    {
-      name: 'Features',
-      mark: 4.6,
-    },
-    {
-      name: 'Ease of Use',
-      mark: 4.5,
-    },
-    {
-      name: 'Value for Mone',
-      mark: 4.1,
-    },
-    {
-      name: 'Coustomer Support',
-      mark: 4.1,
-    },
-  ]
+  const reviewMark = numeral(Number(avgRating ?? 0)).format('0.[0]')
+  const totalReviews = reviewsCount
+  // const marks = [
+  //   {
+  //     name: 'Features',
+  //     mark: 4.6,
+  //   },
+  //   {
+  //     name: 'Ease of Use',
+  //     mark: 4.5,
+  //   },
+  //   {
+  //     name: 'Value for Mone',
+  //     mark: 4.1,
+  //   },
+  //   {
+  //     name: 'Coustomer Support',
+  //     mark: 4.1,
+  //   },
+  // ]
   // eslint-disable-next-line array-callback-return
   reviews.sort((reviewA, reviewB) => {
     if (sortType === 'TOP_REVIEWS') return (Number(reviewA.rating) - Number(reviewB.rating)) * -1
@@ -85,7 +103,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
           <span className="px-2 text-text-tertiary">reviews</span>
         </div>
       </div>
-      <div className="flex flex-col md:items-center">
+      {/* <div className="flex flex-col md:items-center">
         {marks.map((item, index) => (
           <MarkProgress
             key={index}
@@ -99,7 +117,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
             label={item.name}
           />
         ))}
-      </div>
+      </div> */}
       <div className="flex justify-center mt-2 md:justify-start">
         <div className="flex px-1 py-1 rounded-md bg-background-default">
           <div
@@ -146,7 +164,7 @@ function ReviewsContentComponent({ reviews }: ServiceDetailReviewsProps) {
           </div>
         )
       ) : null}
-      <ReviewInput serviceName="Zoom" onSubmit={(event) => console.log('onSubmit Event:', event)} />
+      <ReviewInput serviceName="Zoom" handleSubmit={(data) => addReview(data)} />
       <h1 className="mt-2 text-base font-medium text-text-primary">Video Reviews</h1>
       <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {viewVideoReviews.map((review, index) => (

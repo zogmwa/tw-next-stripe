@@ -46,7 +46,13 @@ export default function Service() {
     {
       id: 'reviews',
       name: 'Reviews',
-      content: <ReviewsContainer />,
+      content: (
+        <ReviewsContainer
+          assetId={data?.id}
+          avgRating={data?.avg_rating ?? 0}
+          reviewsCount={data?.reviews_count ?? 0}
+        />
+      ),
     },
     {
       id: 'related-products',

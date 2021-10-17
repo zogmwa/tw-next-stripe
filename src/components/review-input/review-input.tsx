@@ -8,11 +8,15 @@ import { Textarea } from '../textarea'
 
 type ReviewInputProps = {
   serviceName: string
-  onSubmit: (arg0: object) => void
+  handleSubmit: Function
 }
 
 const validationSchema = yup.object().shape({
-  overall: yup.number().required('Please enter an overall rating'),
+  avarageRate: yup
+    .number()
+    .positive()
+    .min(0.1, 'Please enter an overall rating')
+    .required('Please enter an overall rating'),
   review: yup.string(),
   videoUrl: yup.string(),
 })
@@ -22,39 +26,35 @@ const items = [
     slug: 'overall',
     name: 'Overall',
   },
-  {
-    slug: 'features',
-    name: 'Features',
-  },
-  {
-    slug: 'easeOfUse',
-    name: 'Ease of Use',
-  },
-  {
-    slug: 'valueForMoney',
-    name: 'Value for Money',
-  },
-  {
-    slug: 'customerSupport',
-    name: 'Customer Support',
-  },
+  // {
+  //   slug: 'features',
+  //   name: 'Features',
+  // },
+  // {
+  //   slug: 'easeOfUse',
+  //   name: 'Ease of Use',
+  // },
+  // {
+  //   slug: 'valueForMoney',
+  //   name: 'Value for Money',
+  // },
+  // {
+  //   slug: 'customerSupport',
+  //   name: 'Customer Support',
+  // },
 ]
 
-function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
+function ReviewInputComponent({ serviceName, handleSubmit }: ReviewInputProps) {
   return (
     <Formik
       initialValues={{
         review: '',
         videoUrl: '',
-        overall: '',
-        features: '',
-        easeOfUse: '',
-        valueForMoney: '',
-        customerSupport: '',
+        avarageRate: 0,
       }}
       validationSchema={validationSchema}
       onSubmit={(data) => {
-        onSubmit(data)
+        handleSubmit(data)
       }}
     >
       {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
@@ -66,16 +66,21 @@ function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
             {items.map((item, index) => (
               <div className="flex justify-between w-full md:w-2/5" key={index}>
                 <div className="text-sm text-text-secondary">{item.name}</div>
-                <StyledStarRating
-                  name={item.name}
-                  defaultValue={0}
-                  className="space-x-1"
-                  precision={0.5}
-                  emptyColor="#E5E7EB"
-                  size="1.5rem"
-                  // eslint-disable-next-line no-console
-                  onChange={(event) => console.log(item.name, event.target.value * 2)}
-                />
+                <div>
+                  <StyledStarRating
+                    name={item.name}
+                    value={Number(values.avarageRate)}
+                    className="space-x-1"
+                    precision={0.5}
+                    emptyColor="#E5E7EB"
+                    size="1.5rem"
+                    // eslint-disable-next-line no-console
+                    onChange={handleChange('avarageRate')}
+                  />
+                  {touched.avarageRate && errors.avarageRate && (
+                    <div className="mb-2 text-xs text-red-500">{errors.avarageRate}</div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -96,7 +101,6 @@ function ReviewInputComponent({ serviceName, onSubmit }: ReviewInputProps) {
             value={values.videoUrl}
             errorMessage={touched.videoUrl ? errors.videoUrl : undefined}
           />
-          {touched.overall && errors.overall && <div className="mb-4 text-red-500">{errors.overall}</div>}
           <Button buttonType="primary" type="submit">
             Post Your Review
           </Button>

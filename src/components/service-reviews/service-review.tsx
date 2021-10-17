@@ -211,7 +211,7 @@ function ServiceReviewComponent() {
           </div>
         )
       ) : null}
-      <ReviewInput serviceName="Zoom" onSubmit={(event) => console.log('onSubmit Event:', event)} />
+      <ReviewInput serviceName="Zoom" handleSubmit={(event) => console.log('onSubmit Event:', event)} />
       <h1 className="mt-2 text-base font-medium text-text-primary">Video Reviews</h1>
       <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {viewVideoReviews.map((review, index) => (

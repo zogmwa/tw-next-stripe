@@ -11,7 +11,7 @@ export function DefaultReviewInputComponent() {
   return (
     <ReviewInput
       serviceName={'Zoom'}
-      onSubmit={(data) => {
+      handleSubmit={(data) => {
         // eslint-disable-next-line no-console
         console.log(data)
       }}

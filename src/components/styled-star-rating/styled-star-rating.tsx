@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles'
 
 type styledRatingStarType = {
   className?: string
-  defaultValue: number
+  defaultValue?: number
   precision: number
   size: string
   emptyIcon?: any

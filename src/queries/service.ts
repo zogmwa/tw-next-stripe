@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toast from 'react-hot-toast'
 import { Asset, AssetVote } from '../types/asset'
 import { AttributeVote, VotedAttribute } from '../types/attribute_vote'
 import { ServiceQuestion } from '../types/service-question'
@@ -90,7 +91,7 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not vote a attribute.')
+    toast.error('Could not vote a attribute.')
     return null
   }
 }
@@ -103,7 +104,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not destroy a attribute vote.')
+    toast.error('Could not destroy a attribute vote.')
     return null
   }
 }
@@ -117,7 +118,7 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not vote a asset.')
+    toast.error('Could not vote a asset.')
     return null
   }
 }
@@ -131,7 +132,7 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not destroy a asset vote.')
+    toast.error('Could not destroy a asset vote.')
     return null
   }
 }
@@ -143,7 +144,7 @@ export async function fetchUpvotedAttributes(slug: string): Promise<VotedAttribu
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not vote a attribute.')
+    console.log('Could not get voted attributes.')
     return null
   }
 }
@@ -159,7 +160,7 @@ export async function toggleAddAttribute(assetId: number, name: string, isCon: b
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not add a attribute.')
+    toast.error('Could not add a attribute.')
     return null
   }
 }
@@ -174,7 +175,7 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not add a question.')
+    toast.error('Could not add a question.')
     return null
   }
 }
@@ -188,7 +189,7 @@ export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQ
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log('Could not answer a question.')
+    toast.error('Could not answer a question.')
     return null
   }
 }
@@ -252,6 +253,18 @@ export async function fetchAssetSimilar(name): Promise<Asset[] | null> {
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch similar services.')
+    return null
+  }
+}
+
+export async function addAssetReview(sendData): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/asset_reviews/', sendData)
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not add an asset review.')
     return null
   }
 }
