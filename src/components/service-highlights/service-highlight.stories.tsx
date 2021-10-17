@@ -94,7 +94,7 @@ export function DefaultStarRating() {
     {
       name: 'Company 3',
       website: 'https://www.shapeways.com/',
-      logo_url: '',
+      logo_url: null,
     },
   ]
 
