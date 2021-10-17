@@ -22,7 +22,7 @@ export type Asset = {
   avg_rating?: string | number
   users_count?: number // not in backend yet
   og_image_url?: string
-  customer_organizations?: { name?: string }[]
+  customer_organizations?: { name?: string; website?: string | null; logo_url?: string | null }[]
   questions?: ServiceQuestion[]
   snapshots?: { asset: number; url: string }[]
   attributes?: { id?: number | string; name: string; is_con: boolean; upvotes_count: string | number }[]
