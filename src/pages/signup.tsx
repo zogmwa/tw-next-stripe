@@ -27,13 +27,24 @@ const validationSchema = yup.object().shape({
 export default function Signup() {
   const { query } = useRouter()
   const { linkedInError, googleError, next } = query as { linkedInError: string; googleError: string; next: string }
-  const { signUpWithEmailAndPassword, setNextPageUrl, nextPageRedirect } = useUserContext()
+  const { signUpWithEmailAndPassword, setNextPageUrl, nextPageRedirect, isLoading, isLoggedIn } = useUserContext()
 
   useEffect(() => {
     if (next) {
       setNextPageUrl(next)
     }
   }, [next, setNextPageUrl])
+
+  useEffect(() => {
+    // Checks if this code is run from the auth popup window
+    if (typeof window !== 'undefined' && window.opener && window.opener !== window) {
+      if (!isLoading && isLoggedIn()) {
+        const targetWindow = window.opener as Window
+        targetWindow.postMessage({ popupAuthResponse: true }, '*')
+        window.close()
+      }
+    }
+  }, [isLoading, isLoggedIn])
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-full p-4">

@@ -18,7 +18,7 @@ export default function LoginWithGoogle() {
   const [failureRedirect, setFailureRedirect] = useState('/login')
 
   useEffect(() => {
-    setFailureRedirect(localStorage.getItem('failure_redirect'))
+    setFailureRedirect(localStorage.getItem(process.env.FAILURE_PAGE_URL_LOCAL_STORAGE_KEY))
   }, [])
 
   useEffect(() => {
@@ -57,6 +57,11 @@ export default function LoginWithGoogle() {
 
         setShouldNextPageRedirect(true)
       } catch (error) {
+        if (error?.response?.status === 401) {
+          return replace(
+            `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account`,
+          )
+        }
         replace(`${failureRedirect}?googleError=${error.response.data.detail}`)
       }
     },
@@ -90,17 +95,8 @@ export default function LoginWithGoogle() {
             }
           } catch (error) {
             const nonFieldErrors = error.response.data.non_field_errors
-            const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
             if (nonFieldErrors?.[0] === 'User is already registered with this e-mail address.') {
-              // Everything is stored as a string in localStorage even nulls
-              if (taggedweb_access_token !== 'null' && taggedweb_access_token !== null) {
-                // If the Google login fails due to the email already existing attempt a Google connect (but the user should be logged in for this flow)
-                connectGoogleAccountToExistingTaggedWebAccount(google_access_token)
-              } else {
-                replace(
-                  `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account`,
-                )
-              }
+              connectGoogleAccountToExistingTaggedWebAccount(google_access_token)
             } else {
               // If it isn't redirected to a page yet then it is likely an error case
               replace(`${failureRedirect}`)

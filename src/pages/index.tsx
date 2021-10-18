@@ -3,9 +3,10 @@ import { useRouter } from 'next/router'
 import { SearchBar } from '../components/search-bar'
 import { Button } from '../components/button'
 import { topTags } from '../utils/top-tags'
-
+import { useRequireLogin } from '../hooks/use-require-login'
 export default function Home() {
   const router = useRouter()
+  const { requireLoginBeforeAction } = useRequireLogin()
 
   return (
     <div>
@@ -30,9 +31,9 @@ export default function Home() {
               <Button
                 buttonType="primary"
                 className="mt-2 mr-2"
-                onClick={() => {
+                onClick={requireLoginBeforeAction(() => {
                   router.push('/submit-service')
-                }}
+                })}
               >
                 Add your web service
               </Button>

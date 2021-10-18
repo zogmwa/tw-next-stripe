@@ -19,7 +19,7 @@ export default function LoginWithLinkedin() {
   const [failureRedirect, setFailureRedirect] = useState('/login')
 
   useEffect(() => {
-    setFailureRedirect(localStorage.getItem('failure_redirect'))
+    setFailureRedirect(localStorage.getItem(process.env.FAILURE_PAGE_URL_LOCAL_STORAGE_KEY))
   }, [])
 
   useEffect(() => {
@@ -49,6 +49,11 @@ export default function LoginWithLinkedin() {
 
         setShouldNextPageRedirect(true)
       } catch (error) {
+        if (error?.response?.status === 401) {
+          replace(
+            `${failureRedirect}?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account`,
+          )
+        }
         replace(`${failureRedirect}?linkedInError=${error.response.data.detail}`)
       }
     },
@@ -96,19 +101,11 @@ export default function LoginWithLinkedin() {
                 setShouldNextPageRedirect(true)
               } catch (error) {
                 const nonFieldErrors = error.response.data.non_field_errors
-                const taggedweb_access_token = localStorage.getItem(process.env.ACCESS_TOKEN_LOCAL_STORAGE_KEY)
-                if (
-                  nonFieldErrors?.[0] === 'User is already registered with this e-mail address.' &&
-                  // Everything is stored as a string in localStorage even nulls
-                  taggedweb_access_token !== 'null'
-                ) {
-                  // If the linkedin login fails due to the email already existing attempt a linkedin connect (but the user should be logged in for this flow)
+                if (nonFieldErrors?.[0] === 'User is already registered with this e-mail address.') {
                   connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code)
                 } else {
-                  // TODO: Using GET params to pass state between pages, find out if there is a better way, if-not, remove this todo comment
-                  replace(
-                    `${failureRedirect}?linkedInError=Your email already has an associated account. Login in via email/password first to be able to connect your LinkedIn account`,
-                  )
+                  // If it isn't redirected to a page yet then it is likely an error case
+                  replace(`${failureRedirect}`)
                 }
               }
             }

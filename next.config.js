@@ -23,6 +23,11 @@ const nextConfig = {
     CLOUDINARY_API_SECRET: '3DQQEO7VRHMo4WNp_JKOYxGMTtg',
 
     SECRET_COOKIE_PASSWORD: 'cklvnmwhdfklsdfjasdkfajskdnfjkxcvyiuwerbkashkdjf',
+
+    LOGIN_AUTH_POPUP_NAME: 'taggedweb_login_auth_popup',
+
+    NEXT_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-next-page-redirect',
+    FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
   },
 }
 
