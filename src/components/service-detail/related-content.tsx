@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { fetchAssetSimilar } from '../../queries/service'
 import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
+import { MAX_COMPARE_COUNT } from '../../utils/constants'
 
 type RelateName = {
   name: string
@@ -34,8 +35,8 @@ function RelatedContentComponent({ name }: RelateName) {
     if (compareList.length < 1) {
       toast.error('You should check at least 1 service.')
       return
-    } else if (compareList.length > 2) {
-      toast.error('You should check less than 3 services.')
+    } else if (compareList.length > MAX_COMPARE_COUNT) {
+      toast.error('You can compare at most 3 services.')
       return
     } else {
       const services = compareList

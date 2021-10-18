@@ -1,3 +1,4 @@
 export const MAX_DESCRIPTION_LENGTH = 75
 export const MAX_PRIMARY_ANS_LENGTH = 150
 export const MAX_RELATEDCARDCONTENT_LENGTH = 40
+export const MAX_COMPARE_COUNT = 2
