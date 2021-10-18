@@ -17,7 +17,12 @@ type ServiceDetailReviewsProps = {
   reviewsCount: number
 }
 
-function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount: initReviewsCount }: ServiceDetailReviewsProps) {
+function ReviewsContentComponent({
+  assetId,
+  reviews,
+  avgRating,
+  reviewsCount: initReviewsCount,
+}: ServiceDetailReviewsProps) {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
   const [viewVideoMore, setViewVideoMore] = useState(false)
