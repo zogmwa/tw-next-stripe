@@ -17,12 +17,12 @@ type ServiceDetailReviewsProps = {
   reviewsCount: number
 }
 
-function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: ServiceDetailReviewsProps) {
+function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount: initReviewsCount }: ServiceDetailReviewsProps) {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
   const [viewVideoMore, setViewVideoMore] = useState(false)
   const [reviewMark, setReviewMark] = useState(numeral(Number(avgRating ?? 0)).format('0.[0]'))
-  const [totalReviews, setTotalReviews] = useState(reviewsCount)
+  const [reviewsCount, setReviewsCount] = useState(initReviewsCount)
   if (typeof reviews === 'undefined' || !reviews) return null
 
   const addReview = async (addData) => {
@@ -35,7 +35,7 @@ function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: 
     if (data) {
       toast.success('Added an asset review successfully.')
       setReviewMark(numeral(Number(data.asset_avg_rating ?? 0)).format('0.[0]'))
-      setTotalReviews(data.asset_reviews_count)
+      setReviewsCount(data.asset_reviews_count)
     }
   }
 
@@ -101,7 +101,7 @@ function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: 
           <span className="text-text-tertiary">10</span>
         </div>
         <div className="flex items-end mt-2">
-          <span className="text-lg text-primary">{totalReviews.toLocaleString()}</span>
+          <span className="text-lg text-primary">{reviewsCount.toLocaleString()}</span>
           <span className="px-2 text-text-tertiary">reviews</span>
         </div>
       </div>
