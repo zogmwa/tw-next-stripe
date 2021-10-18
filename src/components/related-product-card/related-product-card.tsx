@@ -29,7 +29,7 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
           size="md"
           id={relatedProduct.id}
           checked={checked}
-          onChange={(e) => handleCheckedChange(e.target.checked, relatedProduct.name)}
+          onChange={(e) => handleCheckedChange(e.target.checked, relatedProduct.slug)}
         />
         <label htmlFor={relatedProduct.id} className="text-xs text-text-secondary">
           COMPARE

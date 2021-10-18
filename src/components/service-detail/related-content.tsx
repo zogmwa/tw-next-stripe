@@ -9,8 +9,9 @@ import { MAX_COMPARE_COUNT } from '../../utils/constants'
 
 type RelateName = {
   name: string
+  slug: string
 }
-function RelatedContentComponent({ name }: RelateName) {
+function RelatedContentComponent({ name, slug }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
   const [relatedProductsList, setRelatedProductsList] = useState([])
   const [compareRelatedList, setCompareRelatedList] = useState([])
@@ -40,7 +41,7 @@ function RelatedContentComponent({ name }: RelateName) {
       return
     } else {
       const services = compareList
-      services.unshift(name)
+      services.unshift(slug)
       router.push(
         {
           pathname: '/compare',
@@ -56,13 +57,13 @@ function RelatedContentComponent({ name }: RelateName) {
     }
   }
 
-  const handleChecked = (value, serviceName) => {
+  const handleChecked = (value, serviceSlug) => {
     let checkedRelatedList = compareRelatedList
     if (value) {
-      checkedRelatedList.push(serviceName)
+      checkedRelatedList.push(serviceSlug)
       setCompareRelatedList(checkedRelatedList)
     } else {
-      setCompareRelatedList(checkedRelatedList.filter((related) => related !== serviceName))
+      setCompareRelatedList(checkedRelatedList.filter((related) => related !== serviceSlug))
     }
   }
 
