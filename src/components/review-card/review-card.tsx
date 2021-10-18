@@ -6,6 +6,7 @@ import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceReview } from '../../types/service-review'
 import { StyledStarRating } from '../styled-star-rating'
+import { UserAvatar } from '../user-avatar'
 
 type ReviewCardProps = {
   className?: string
@@ -16,7 +17,7 @@ function ReviewCardComponent({ className, review }: ReviewCardProps) {
   return (
     <div className={`flex flex-col w-full ${className}`}>
       <div className="flex items-center justify-start mb-2 space-x-4">
-        <img src={review.user.avatar} alt="user" className="object-cover rounded-md w-9 h-9" />
+        <UserAvatar avatarUrl={review.user.avatar} size={10} />
         <div className="text-md">
           <h3 className="font-medium text-text-primary">
             {review.user.username}
