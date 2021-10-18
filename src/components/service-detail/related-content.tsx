@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 import { fetchAssetSimilar } from '../../queries/service'
 import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
@@ -10,6 +12,8 @@ type RelateName = {
 function RelatedContentComponent({ name }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
   const [relatedProductsList, setRelatedProductsList] = useState([])
+  const [compareRelatedList, setCompareRelatedList] = useState([])
+  const router = useRouter()
   const defaultShowCount = 4
 
   useEffect(() => {
@@ -24,38 +28,43 @@ function RelatedContentComponent({ name }: RelateName) {
 
     getAssetSimilarList()
   }, [])
-  const relatedProductMockupData = [
-    {
-      id: 1,
-      logo_url: 'http://logo.clearbit.com/mailchimp.com',
-      name: 'Stripe Payment Link1',
-      description: 'Create a link. Sell anywhere',
-    },
-    {
-      id: 2,
-      logo_url: 'http://logo.clearbit.com/mailchimp.com',
-      name: 'Slack',
-      description: 'Provides interactive video sharing to work',
-    },
-    {
-      id: 3,
-      logo_url: 'http://logo.clearbit.com/mailchimp.com',
-      name: 'Stripe Payment Link3',
-      description: 'Create a link. Sell anywhere',
-    },
-    {
-      id: 4,
-      logo_url: 'http://logo.clearbit.com/mailchimp.com',
-      name: 'Stripe Payment Link4',
-      description: 'Create a link. Sell anywhere',
-    },
-    {
-      id: 5,
-      logo_url: 'http://logo.clearbit.com/mailchimp.com',
-      name: 'Stripe Payment Link5',
-      description: 'Create a link. Sell anywhere',
-    },
-  ]
+
+  const handleCompare = () => {
+    const compareList = compareRelatedList
+    if (compareList.length < 1) {
+      toast.error('You should check at least 1 service.')
+      return
+    } else if (compareList.length > 2) {
+      toast.error('You should check less than 3 services.')
+      return
+    } else {
+      const services = compareList
+      services.unshift(name)
+      router.push(
+        {
+          pathname: '/compare',
+          query: {
+            services,
+          },
+        },
+        undefined,
+        {
+          shallow: true,
+        },
+      )
+    }
+  }
+
+  const handleChecked = (value, serviceName) => {
+    let checkedRelatedList = compareRelatedList
+    if (value) {
+      checkedRelatedList.push(serviceName)
+      setCompareRelatedList(checkedRelatedList)
+    } else {
+      setCompareRelatedList(checkedRelatedList.filter((related) => related !== serviceName))
+    }
+  }
+
   let viewRelatedProducts = relatedProductsList
   if (!viewMore) {
     viewRelatedProducts = relatedProductsList.slice(0, 4)
@@ -65,16 +74,16 @@ function RelatedContentComponent({ name }: RelateName) {
     <>
       <div className="flex justify-between">
         <h1 className="my-2 text-base font-medium text-text-primary">Related Products</h1>
-        <Button buttonType="primary" className="self-start text-white bg-primary">
+        <Button buttonType="primary" className="self-start text-white bg-primary" onClick={() => handleCompare()}>
           Compare
         </Button>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4">
         {viewRelatedProducts.map((relatedProduct, index) => (
-          <RelatedProductCard relatedProduct={relatedProduct} key={index} />
+          <RelatedProductCard relatedProduct={relatedProduct} key={index} handleChecked={handleChecked} />
         ))}
       </div>
-      {relatedProductMockupData.length > defaultShowCount ? (
+      {relatedProductsList.length > defaultShowCount ? (
         viewMore ? (
           <div
             className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
