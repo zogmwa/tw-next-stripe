@@ -93,10 +93,10 @@ function HighlightContentComponent({
       </div>
       <div className="mt-6 md:mt-2">
         <div className="md:grid md:grid-cols-2">
-          {tempAttributes.map((attribute) => {
+          {tempAttributes.map((attribute, index) => {
             if (isCon) {
               return (
-                <div className="mt-2" key={attribute.name}>
+                <div className="mt-2" key={index}>
                   <Button
                     size="small"
                     className={
@@ -219,19 +219,27 @@ function HighlightContentComponent({
       <div className="mt-6 md:mt-4">
         <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
         <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
-          {showCustomers.map((showCustomer) => (
-            <Carousel.Item className="aspect-h-8 md:aspect-h-3">
+          {showCustomers.map((showCustomer, index) => (
+            <Carousel.Item className="aspect-h-8 md:aspect-h-3" key={index}>
               <div className="grid content-around w-full h-full grid-cols-2 md:content-center md:grid-cols-4 justify-items-center">
                 {showCustomer.map((item) => {
                   if (item.logo_url) {
                     return (
-                      <div className="flex items-center justify-center w-full h-full p-2" title={item.name}>
+                      <div
+                        className="flex items-center justify-center w-full h-full p-2"
+                        title={item.name}
+                        key={item.name}
+                      >
                         <img src={item.logo_url} alt={item.name} />
                       </div>
                     )
                   } else {
                     return (
-                      <div className="flex items-center justify-around w-full h-full p-2" title={item.name}>
+                      <div
+                        className="flex items-center justify-around w-full h-full p-2"
+                        title={item.name}
+                        key={item.name}
+                      >
                         <TiImageOutline className="text-4xl" />
                         <span className="text-2xl italic tracking-wide text-text-secondary">{item.name}</span>
                       </div>

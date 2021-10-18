@@ -40,9 +40,10 @@ function ServiceQuestionCardComponent({
   )
   votedQuestions
     .filter((votedQuestion) => votedQuestion?.question === question.id)
-    .map((showQuestion) => {
+    .map((showQuestion, index) => {
       renderButton = (
         <Button
+          key={index}
           icon={<FaThumbsUp className="text-white" />}
           size="small"
           className="bg-primary"

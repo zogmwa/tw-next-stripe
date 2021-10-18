@@ -11,6 +11,8 @@ export function DefaultServiceReviewCard() {
   const review = {
     user: {
       username: 'Test account2',
+      first_name: 'Admin',
+      last_name: 'admin',
       avatar: 'http://logo.clearbit.com/mailchimp.com',
       organization: {
         name: 'XYZABC Corp.',
