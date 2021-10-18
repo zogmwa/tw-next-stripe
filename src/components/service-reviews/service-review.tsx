@@ -15,6 +15,8 @@ function ServiceReviewComponent() {
     {
       user: {
         username: 'Becky Howard',
+        first_name: 'Becky',
+        last_name: 'Howard',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
         organization: {
           name: 'XYZABC Corp.',
@@ -30,6 +32,8 @@ function ServiceReviewComponent() {
     {
       user: {
         username: 'Leah Andreson',
+        first_name: 'Leah',
+        last_name: 'Andreson',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
         organization: {
           name: null,
@@ -45,6 +49,8 @@ function ServiceReviewComponent() {
     {
       user: {
         username: 'Test account',
+        first_name: 'Test',
+        last_name: 'account',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
         organization: null,
       },
@@ -58,6 +64,8 @@ function ServiceReviewComponent() {
     {
       user: {
         username: 'Test account2',
+        first_name: 'Test',
+        last_name: 'account2',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
       },
       content:
@@ -70,6 +78,8 @@ function ServiceReviewComponent() {
     {
       user: {
         username: 'Test account3',
+        first_name: 'Test',
+        last_name: 'account3',
         avatar: 'http://logo.clearbit.com/mailchimp.com',
         organization: {
           name: 'XYZABC Corp.',

@@ -11,6 +11,8 @@ export function DefaultVideoReview() {
   const review = {
     user: {
       username: 'Leah Andreson',
+      first_name: 'Leah',
+      last_name: 'Andreson',
       avatar: 'http://logo.clearbit.com/mailchimp.com',
       organization: {
         name: 'XYZABC Corp.',
