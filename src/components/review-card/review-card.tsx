@@ -17,7 +17,7 @@ function ReviewCardComponent({ className, review }: ReviewCardProps) {
   return (
     <div className={`flex flex-col w-full ${className}`}>
       <div className="flex items-center justify-start mb-2 space-x-4">
-        <UserAvatar avatarUrl={review.user.avatar} size={10} />
+        <UserAvatar user={review.user} size={10} />
         <div className="text-md">
           <h3 className="font-medium text-text-primary">
             {review.user.username}
