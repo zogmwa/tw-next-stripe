@@ -21,6 +21,8 @@ function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: 
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
   const [viewVideoMore, setViewVideoMore] = useState(false)
+  const [reviewMark, setReviewMark] = useState(numeral(Number(avgRating ?? 0)).format('0.[0]'))
+  const [totalReviews, setTotalReviews] = useState(reviewsCount)
   if (typeof reviews === 'undefined' || !reviews) return null
 
   const addReview = async (addData) => {
@@ -32,13 +34,13 @@ function ReviewsContentComponent({ assetId, reviews, avgRating, reviewsCount }: 
     })
     if (data) {
       toast.success('Added an asset review successfully.')
+      setReviewMark(numeral(Number(data.asset_avg_rating ?? 0)).format('0.[0]'))
+      setTotalReviews(data.asset_reviews_count)
     }
   }
 
-  const defaultShowCount = 2
   const defaultVideoShowCount = 4
-  const reviewMark = numeral(Number(avgRating ?? 0)).format('0.[0]')
-  const totalReviews = reviewsCount
+  const defaultShowCount = 2
   // const marks = [
   //   {
   //     name: 'Features',
