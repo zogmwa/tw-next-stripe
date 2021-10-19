@@ -27,7 +27,7 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
       <div className="flex flex-col items-center p-2">
         <ServiceLogo serviceName={service.name} serviceId={service.id} logoUrl={service.logo_url} owned={null} />
         <div className="flex items-center mt-4">
-          <span className="w-20 text-center text-md text-semibold md:w-full">{service.name}</span>
+          <span className="w-20 text-sm text-center text-semibold md:w-full">{service.name}</span>
           <RiShareBoxLine className="w-5 h-5 text-primary md:ml-2" />
         </div>
       </div>
@@ -35,14 +35,14 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
         <div className="flex flex-col items-center pr-1">
           <MdStar className="text-primary" />
           <span className="text-md text-text-primary text-bold">{numeral(Number(service.avg_rating ?? 0)).format('0.[0]')}</span>
-          <span className="text-sm text-text-secondary">
+          <span className="text-xs text-text-secondary">
             {service.reviews_count ? kFormater(service.reviews_count) : 'No'} reviews
           </span>
         </div>
         <div className="flex flex-col items-center pl-1">
           <IoIosArrowUp className="text-primary" />
           <span className="text-md text-text-primary text-bold">{service?.upvotes_count ?? 0}</span>
-          <span className="text-sm text-text-secondary">
+          <span className="text-xs text-text-secondary">
             {service.users_count ? kFormater(service.users_count) : 'No'} users
           </span>
         </div>
