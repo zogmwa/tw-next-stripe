@@ -28,7 +28,7 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
         <ServiceLogo serviceName={service.name} serviceId={service.id} logoUrl={service.logo_url} owned={null} />
         <div className="flex items-center mt-4">
           <span className="w-20 text-sm text-center text-semibold md:w-full">{service.name}</span>
-          <RiShareBoxLine className="w-5 h-5 text-primary md:ml-2" />
+          <RiShareBoxLine className="text-sm md:w-5 md:h-5 text-primary md:ml-2" />
         </div>
       </div>
       <div className="grid items-center grid-cols-2 divide-x divide-solid divide-border-default md:py-4">
