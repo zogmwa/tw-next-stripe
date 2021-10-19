@@ -7,7 +7,6 @@ import { StyledStarRating } from '../styled-star-rating'
 import { ReviewInput } from '../review-input'
 import { ReviewCard } from '../review-card'
 import { ServiceReview } from '../../types/service-review'
-import { VideoReviewCard } from '../video-review'
 import { addAssetReview } from '../../queries/service'
 
 type ServiceDetailReviewsProps = {
@@ -174,31 +173,6 @@ function ReviewsContentComponent({
         )
       ) : null}
       <ReviewInput serviceName={assetName} handleSubmit={(data) => addReview(data)} />
-      <h1 className="mt-2 text-base font-medium text-text-primary">Video Reviews</h1>
-      <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-        {viewVideoReviews.map((review, index) => (
-          <VideoReviewCard review={review} className="mt-1 mr-1" key={index} />
-        ))}
-      </div>
-      {totalVideoReviews.length > defaultVideoShowCount ? (
-        viewVideoMore ? (
-          <div
-            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
-            onClick={() => setViewVideoMore(false)}
-          >
-            Load Less Video Reviews
-            <HiChevronUp className="self-center ml-2 text-text-tertiary" />
-          </div>
-        ) : (
-          <div
-            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
-            onClick={() => setViewVideoMore(true)}
-          >
-            Load More Video Reviews
-            <HiChevronDown className="self-center ml-2 text-text-tertiary" />
-          </div>
-        )
-      ) : null}
     </>
   )
 }

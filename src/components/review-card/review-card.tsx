@@ -14,6 +14,16 @@ type ReviewCardProps = {
 }
 
 function ReviewCardComponent({ className, review }: ReviewCardProps) {
+  const isUrlHealthy = (url: string) => {
+    let isHealthy = false
+
+    if (url && url.length > 0 && url !== 'http://' && url !== 'https://') {
+      isHealthy = true
+    }
+
+    return isHealthy
+  }
+
   return (
     <div className={`flex flex-col w-full ${className}`}>
       <div className="flex items-center justify-start mb-2 space-x-4">
@@ -38,6 +48,18 @@ function ReviewCardComponent({ className, review }: ReviewCardProps) {
           />
         </div>
       </div>
+      {isUrlHealthy(review.video_url) && (
+        <iframe
+          className="w-auto mb-4 rounded"
+          style={{ width: '25vh', height: '25vh' }}
+          src={review.video_url}
+          title="Video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+        />
+      )}
       <TruncatedDescription description={review.content} className="mb-4 text-text-secondary" />
       <div className="flex items-center text-xs font-medium text-text-tertiary">
         <Button icon={<FaThumbsUp />} size="small">
