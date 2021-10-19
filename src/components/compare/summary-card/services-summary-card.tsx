@@ -7,7 +7,7 @@ type CompareCard = {
 }
 
 function CompareCardComponent({ services }: CompareCard) {
-  const serivceCount = services.length
+  const serviceCount = services.length
 
   return (
     <>
@@ -16,7 +16,7 @@ function CompareCardComponent({ services }: CompareCard) {
           <CompareCardDetail service={service} key={service.id} />
         ))}
       </div>
-      <div className={`hidden md:grid md:grid-cols-${serivceCount}`}>
+      <div className={`hidden md:grid md:grid-cols-${serviceCount}`}>
         {services.map((service) => (
           <CompareCardDetail service={service} key={service.id} />
         ))}

@@ -59,26 +59,6 @@ const mockupServices = [
     users_count: 102,
     my_asset_vote: null,
   },
-  {
-    logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
-    description:
-      'Campaign Monitor is an email marketing tool that enables marketers to send beautiful and personalized emails, creating a reliable channel to grow engagement with subscribers and promote loyal readership and conversions.\r\n\r\n* Email templates\r\n* Drag-and-drop builder\r\n* Engagement-based segmentation (Allows digital marketers to deliver targeted content to lists of subscribers without any technical expertise)',
-    tags: [
-      {
-        slug: 'email-marketing',
-        name: 'Email Marketing',
-      },
-    ],
-    upvotes_count: 10,
-    name: 'Test Service',
-    slug: 'campaign-monitor',
-    id: 2,
-    has_free_trial: false,
-    reviews_count: 457,
-    avg_rating: '10.000',
-    users_count: 102,
-    my_asset_vote: null,
-  },
 ]
 
 export function DefaultServiceCompare() {
