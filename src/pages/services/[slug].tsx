@@ -49,6 +49,7 @@ export default function Service() {
       content: (
         <ReviewsContainer
           assetId={data?.id}
+          assetName={data?.name}
           avgRating={data?.avg_rating ?? 0}
           reviewsCount={data?.reviews_count ?? 0}
         />

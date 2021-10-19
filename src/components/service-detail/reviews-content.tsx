@@ -12,6 +12,7 @@ import { addAssetReview } from '../../queries/service'
 
 type ServiceDetailReviewsProps = {
   assetId: number
+  assetName: string
   reviews: ServiceReview[]
   avgRating: number
   reviewsCount: number
@@ -19,6 +20,7 @@ type ServiceDetailReviewsProps = {
 
 function ReviewsContentComponent({
   assetId,
+  assetName,
   reviews,
   avgRating,
   reviewsCount: initReviewsCount,
@@ -171,7 +173,7 @@ function ReviewsContentComponent({
           </div>
         )
       ) : null}
-      <ReviewInput serviceName="Zoom" handleSubmit={(data) => addReview(data)} />
+      <ReviewInput serviceName={assetName} handleSubmit={(data) => addReview(data)} />
       <h1 className="mt-2 text-base font-medium text-text-primary">Video Reviews</h1>
       <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
         {viewVideoReviews.map((review, index) => (
