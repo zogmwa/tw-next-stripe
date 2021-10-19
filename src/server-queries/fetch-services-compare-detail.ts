@@ -1,10 +1,9 @@
 import { clientWithRetries } from '../utils/clientWithRetries'
 
 /**
- * Utility to fetch Asset/Service on Server Side. Can be used in Api route handler or getServerSideProps for service detail page.
- * @param session The session from req.session
- * @param slug The slug for asset
- * @returns profileData
+ * Utility to fetch Asset/Services on Server Side. Can be used in Api route handler or getServerSideProps for services compare page.
+ * @param url The url for fetch services
+ * @returns Services Data
  */
 export async function fetchServicesDetailCompareServer(url) {
   const { data } = await clientWithRetries.get(`/assets/compare/${url}`)
