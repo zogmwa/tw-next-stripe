@@ -7,7 +7,7 @@ import { fetchServicesDetailCompareServer } from '../server-queries/fetch-servic
 export const getServerSideProps = async ({ query }) => {
   /*
    ** https://github.com/vercel/next.js/discussions/13301
-   ** Because of this I added favicon to /public
+   ** Added favicon to /public
    */
   const { services: serviceSlugs } = query
   const servicesUrl = '?asset__slugs=' + serviceSlugs.join('&asset__slugs=')
