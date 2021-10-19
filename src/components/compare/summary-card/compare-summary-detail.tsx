@@ -34,7 +34,9 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
       <div className="grid items-center grid-cols-2 divide-x divide-solid divide-border-default md:py-4">
         <div className="flex flex-col items-center pr-1">
           <MdStar className="text-primary" />
-          <span className="text-md text-text-primary text-bold">{numeral(Number(service.avg_rating ?? 0)).format('0.[0]')}</span>
+          <span className="text-md text-text-primary text-bold">
+            {numeral(Number(service.avg_rating ?? 0)).format('0.[0]')}
+          </span>
           <span className="text-xs text-text-secondary">
             {service.reviews_count ? kFormater(service.reviews_count) : 'No'} reviews
           </span>
