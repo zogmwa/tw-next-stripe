@@ -14,7 +14,7 @@ function ServicesCompareCardComponent({ services }: ServicesCompareCard) {
       <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-end">
           {services.map((service, index) => (
-            <div key={index}>
+            <div className="flex items-end" key={index}>
               <h2>{service.name}</h2>
               {serivceCount - 1 !== index && <span className="px-4 text-sm text-text-secondary">Vs</span>}
             </div>
