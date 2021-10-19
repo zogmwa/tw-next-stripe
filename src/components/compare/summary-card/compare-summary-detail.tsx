@@ -1,6 +1,7 @@
 import React from 'react'
 import { RiShareBoxLine } from 'react-icons/ri'
 import { MdStar } from 'react-icons/md'
+import numeral from 'numeral'
 import { IoIosArrowUp } from 'react-icons/io'
 import { Asset } from '../../../types/asset'
 import { ServiceLogo } from '../../service-logo'
@@ -33,14 +34,14 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
       <div className="grid items-center grid-cols-2 divide-x divide-solid divide-border-default md:py-4">
         <div className="flex flex-col items-center pr-1">
           <MdStar className="text-primary" />
-          <span className="text-md text-text-primary text-bold">{service.avg_rating}</span>
+          <span className="text-md text-text-primary text-bold">{numeral(Number(service.avg_rating ?? 0)).format('0.[0]')}</span>
           <span className="text-sm text-text-secondary">
             {service.reviews_count ? kFormater(service.reviews_count) : 'No'} reviews
           </span>
         </div>
         <div className="flex flex-col items-center pl-1">
           <IoIosArrowUp className="text-primary" />
-          <span className="text-md text-text-primary text-bold">{Math.ceil(Number(service.avg_rating))}</span>
+          <span className="text-md text-text-primary text-bold">{service?.upvotes_count ?? 0}</span>
           <span className="text-sm text-text-secondary">
             {service.users_count ? kFormater(service.users_count) : 'No'} users
           </span>
