@@ -14,10 +14,10 @@ function ServicesCompareCardComponent({ services }: ServicesCompareCard) {
       <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
         <div className="flex items-end">
           {services.map((service, index) => (
-            <>
+            <div key={index}>
               <h2>{service.name}</h2>
               {serivceCount - 1 !== index && <span className="px-4 text-sm text-text-secondary">Vs</span>}
-            </>
+            </div>
           ))}
         </div>
         <Button buttonType="primary" textClassName="text-background-light" className="mt-2 md:mt-0">
@@ -26,16 +26,16 @@ function ServicesCompareCardComponent({ services }: ServicesCompareCard) {
       </div>
       <div className="flex items-end mt-4">
         {services.map((service, index) => (
-          <>
+          <div key={index}>
             <span className="text-sm text-text-secondary">{service.name}</span>
             {serivceCount - 1 !== index && <span className="px-1 text-sm text-text-secondary">vs</span>}
             {serivceCount - 1 === index && <span className="pr-1 text-sm text-text-secondary">:</span>}
-          </>
+          </div>
         ))}
         <span className="text-sm text-text-secondary">What are the differences?</span>
       </div>
-      {services.map((service) => (
-        <div className="mt-2">
+      {services.map((service, index) => (
+        <div className="mt-2" key={index}>
           <span className="pr-1 text-sm font-semibold">What is {service.name}?</span>
           <span className="text-sm text-text-secondary">{service.description}</span>
         </div>
