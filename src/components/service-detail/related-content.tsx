@@ -20,7 +20,7 @@ function RelatedContentComponent({ name, slug }: RelateName) {
 
   useEffect(() => {
     async function getAssetSimilarList() {
-      const assetSimilarList = await fetchAssetSimilar(name)
+      const assetSimilarList = await fetchAssetSimilar(slug)
       if (assetSimilarList) {
         setRelatedProductsList(assetSimilarList.slice(1))
       } else {
