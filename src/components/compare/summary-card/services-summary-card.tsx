@@ -16,7 +16,7 @@ function CompareSummaryCardComponent({ services }: CompareCard) {
           <SummaryCompareCardDetail service={service} key={service.id} />
         ))}
       </div>
-      <div className={`hidden md:grid md:grid-cols-${serviceCount}`}>
+      <div className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount}`}>
         {services.map((service) => (
           <SummaryCompareCardDetail service={service} key={service.id} />
         ))}
