@@ -244,9 +244,9 @@ export async function toggleUpVoteQuestion(questionId): Promise<any | null> {
   }
 }
 
-export async function fetchAssetSimilar(name): Promise<Asset[] | null> {
+export async function fetchAssetSimilar(slug): Promise<Asset[] | null> {
   try {
-    const { data } = await axios.get(`/api/assets/similar/${name}`)
+    const { data } = await axios.get(`/api/assets/similar/${slug}`)
     if (data.results) return data.results
     else return null
   } catch (error) {
