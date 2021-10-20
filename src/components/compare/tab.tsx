@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Tab as HeadlessuiTab } from '@headlessui/react'
 import clsx from 'clsx'
 
-function ServiceCompareTabComponent({ elements }) {
+function CompareServiceTabComponent({ elements }) {
   return (
     <div className="mt-8">
       <HeadlessuiTab.Group as="div" className="mt-2">
@@ -41,4 +41,4 @@ function ServiceCompareTabComponent({ elements }) {
   )
 }
 
-export const ServiceCompareTab = ServiceCompareTabComponent
+export const CompareServiceTab = CompareServiceTabComponent

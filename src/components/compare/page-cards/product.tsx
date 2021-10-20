@@ -4,11 +4,11 @@ import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { Button } from '../../button'
 
-type CompareProduct = {
+type CompareServiceProduct = {
   services: Asset[]
 }
 
-function CompareProductComponent({ services }) {
+function CompareServiceProductComponent({ services }) {
   const router = useRouter()
   const serviceCount = services.length
 
@@ -70,4 +70,4 @@ function CompareProductComponent({ services }) {
   )
 }
 
-export const CompareProduct = CompareProductComponent
+export const CompareServiceProduct = CompareServiceProductComponent

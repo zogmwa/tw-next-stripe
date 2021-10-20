@@ -1,1 +1,1 @@
-export { ServicesCompareCard } from './services-compare-card'
+export { CompareServiceCard } from './services-compare-card'

@@ -1,9 +1,9 @@
 import React from 'react'
-import { ServicesCompareCard } from '../components/compare/services-detail'
-import { ServiceCompareTab } from '../components/compare/tab'
-import { CompareSummaryCard } from '../components/compare/summary-card'
+import { CompareServiceCard } from '../components/compare/services-detail'
+import { CompareServiceTab } from '../components/compare/tab'
+import { CompareServiceSummaryCard } from '../components/compare/summary-card'
 import { fetchServicesDetailCompareServer } from '../server-queries/fetch-services-compare-detail'
-import { CompareProduct } from '../components/compare/page-cards/product'
+import { CompareServiceProduct } from '../components/compare/page-cards/product'
 
 export const getServerSideProps = async ({ query }) => {
   /*
@@ -25,8 +25,8 @@ export default function CompareList({ services }) {
       name: 'Product Information',
       content: (
         <>
-          <CompareSummaryCard services={services} />
-          <CompareProduct services={services} />
+          <CompareServiceSummaryCard services={services} />
+          <CompareServiceProduct services={services} />
         </>
       ),
     },
@@ -60,8 +60,8 @@ export default function CompareList({ services }) {
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
-        <ServicesCompareCard services={services} />
-        <ServiceCompareTab elements={elements} />
+        <CompareServiceCard services={services} />
+        <CompareServiceTab elements={elements} />
       </div>
     </div>
   )

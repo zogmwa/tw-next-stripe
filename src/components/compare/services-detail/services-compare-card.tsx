@@ -2,11 +2,11 @@ import React from 'react'
 import { Asset } from '../../../types/asset'
 import { Button } from '../../button'
 
-type ServicesCompareCard = {
+type CompareServiceCard = {
   services: Asset[]
 }
 
-function ServicesCompareCardComponent({ services }: ServicesCompareCard) {
+function CompareServiceCardComponent({ services }: CompareServiceCard) {
   const serivceCount = services.length
 
   return (
@@ -51,4 +51,4 @@ function ServicesCompareCardComponent({ services }: ServicesCompareCard) {
   )
 }
 
-export const ServicesCompareCard = ServicesCompareCardComponent
+export const CompareServiceCard = CompareServiceCardComponent
