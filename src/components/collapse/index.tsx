@@ -1,1 +1,1 @@
-import { ServiceCollapse } from './collapse'
+export { ServiceCollapse } from './collapse'

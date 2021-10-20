@@ -6,11 +6,11 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { Asset } from '../../../types/asset'
 import { ServiceLogo } from '../../service-logo'
 
-type SummaryCompareCardDetail = {
+type CompareServiceSummaryCardDetail = {
   service: Asset
 }
 
-function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail) {
+function CompareServiceSummaryCardDetailComponent({ service }: CompareServiceSummaryCardDetail) {
   var unitlist = ['', 'K', 'M', 'G']
   function kFormater(number) {
     let sign = Math.sign(number)
@@ -53,4 +53,4 @@ function SummaryCompareCardDetailComponent({ service }: SummaryCompareCardDetail
   )
 }
 
-export const SummaryCompareCardDetail = SummaryCompareCardDetailComponent
+export const CompareServiceSummaryCardDetail = CompareServiceSummaryCardDetailComponent

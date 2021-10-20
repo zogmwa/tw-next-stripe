@@ -1,10 +1,10 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { ServicesCompareCard } from './services-compare-card'
+import { CompareServiceCard } from './services-compare-card'
 
 export default {
   title: 'General/ServiceCompareCard',
-  component: ServicesCompareCard,
+  component: CompareServiceCard,
 } as Meta
 
 const mockupServices = [
@@ -62,5 +62,5 @@ const mockupServices = [
 ]
 
 export function DefaultServicesCard() {
-  return <ServicesCompareCard services={mockupServices} />
+  return <CompareServiceCard services={mockupServices} />
 }

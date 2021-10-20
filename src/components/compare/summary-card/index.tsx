@@ -1,1 +1,1 @@
-export { CompareSummaryCard } from './services-summary-card'
+export { CompareServiceSummaryCard } from './services-summary-card'

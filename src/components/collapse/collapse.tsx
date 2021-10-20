@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactNode } from 'react'
 import { styled } from '@mui/material/styles'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
@@ -50,7 +50,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 type ServiceCollapseType = {
   title: string
-  children: ReactElement
+  children: ReactNode
 }
 
 export default function ServiceCollapseComponent({ title, children }: ServiceCollapseType) {
