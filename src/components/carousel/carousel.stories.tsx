@@ -30,6 +30,7 @@ const AssetImages = [
     url: 'https://eep.io/images/yzco4xsimv0y/2N9sFG6PG9HDHwJ4mtvS7k/19f56d3cdae2403d604e65f4b3db3ce7/00_-_Hero.png',
   },
 ]
+
 export function SimpleImageCarousel() {
   return (
     <Carousel>

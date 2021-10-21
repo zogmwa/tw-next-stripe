@@ -104,4 +104,5 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
     </div>
   )
 }
+
 export const CarouselPaging = CarouselPagingComponent
