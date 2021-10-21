@@ -11,7 +11,7 @@ type CarouselPaging = {
 const PrevArrow = (props) => {
   const { className, onClick } = props
   return (
-    <div className={`flex items-center rounded-md ${className}`} onClick={onClick}>
+    <div className={`flex items-center rounded-md cursor-pointer ${className}`} onClick={onClick}>
       <HiChevronLeft className="text-3xl rounded-md text-text-secondary bg-border-default hover:text-black" />
     </div>
   )
@@ -19,7 +19,7 @@ const PrevArrow = (props) => {
 const NextArrow = (props) => {
   const { className, onClick } = props
   return (
-    <div className={`flex items-center rounded-md ${className}`} onClick={onClick}>
+    <div className={`flex items-center rounded-md cursor-pointer ${className}`} onClick={onClick}>
       <HiChevronRight className="text-3xl rounded-md text-text-secondary bg-border-default hover:text-black" />
     </div>
   )
@@ -51,6 +51,7 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
     centerMode: true,
     swipeToSlide: true,
     focusOnSelect: true,
+    arrows: false,
     centerPadding: '30px',
     responsive: [
       {
@@ -78,27 +79,31 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
           </Slider>
         </div>
         <div className="flex justify-between thumbnail-slider-wrap">
-          <PrevArrow
-            onClick={() => {
-              mainSlider.slickNext()
-              thumbSlider.slickNext()
-            }}
-          />
+          {images.length > 0 && (
+            <PrevArrow
+              onClick={() => {
+                mainSlider.slickNext()
+                thumbSlider.slickNext()
+              }}
+            />
+          )}
           <Slider {...settingsThumbs} asNavFor={sliderNav} ref={(slider) => setThumbSlider(slider)} className="w-9/12">
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
-                <div className="flex items-center justify-center px-2 overflow-hidden md:px-6">
+                <div className="flex items-center justify-center px-2 overflow-hidden">
                   <img className="w-full h-full border rounded-lg border-border-default" src={image.url} />
                 </div>
               </div>
             ))}
           </Slider>
-          <NextArrow
-            onClick={() => {
-              mainSlider.slickPrev()
-              thumbSlider.slickPrev()
-            }}
-          />
+          {images.length > 0 && (
+            <NextArrow
+              onClick={() => {
+                mainSlider.slickPrev()
+                thumbSlider.slickPrev()
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
