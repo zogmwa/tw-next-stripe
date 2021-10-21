@@ -15,8 +15,8 @@ function CompareServiceProductComponent({ services }) {
   return (
     <ServiceCollapse title="Product Description">
       <div className="grid grid-cols-1 p-1 divide-y md:hidden divide-border-default justify-items-around divide-solid">
-        {services.map((service) => (
-          <div className="flex flex-col p-2">
+        {services.map((service, index) => (
+          <div className="flex flex-col p-2" key={index}>
             <h2 className="text-black text-md text-semibold">{service.name}</h2>
             <span className="mt-2 text-sm text-text-secondary">{service.description}</span>
             <div>
@@ -42,8 +42,8 @@ function CompareServiceProductComponent({ services }) {
       <div
         className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`}
       >
-        {services.map((service) => (
-          <div className="flex flex-col pt-6 pb-4 pl-4 pr-4">
+        {services.map((service, index) => (
+          <div className="flex flex-col pt-6 pb-4 pl-4 pr-4" key={index}>
             <h2 className="text-black text-md text-semibold">{service.name}</h2>
             <span className="mt-2 text-sm text-text-secondary">{service.description}</span>
             <div>
