@@ -79,13 +79,14 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
           </Slider>
         </div>
         <div className="flex justify-between thumbnail-slider-wrap">
-          {images.length > 0 && 
+          {images.length > 0 && (
             <PrevArrow
               onClick={() => {
                 mainSlider.slickNext()
                 thumbSlider.slickNext()
               }}
-            />}
+            />
+          )}
           <Slider {...settingsThumbs} asNavFor={sliderNav} ref={(slider) => setThumbSlider(slider)} className="w-9/12">
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
@@ -95,13 +96,14 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
               </div>
             ))}
           </Slider>
-          {images.length > 0 && 
+          {images.length > 0 && (
             <NextArrow
               onClick={() => {
                 mainSlider.slickPrev()
                 thumbSlider.slickPrev()
               }}
-            />}
+            />
+          )}
         </div>
       </div>
     </div>

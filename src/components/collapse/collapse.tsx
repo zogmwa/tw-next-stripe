@@ -59,9 +59,7 @@ export default function ServiceCollapseComponent({ title, children }: ServiceCol
       <AccordionSummary>
         <Typography>{title}</Typography>
       </AccordionSummary>
-      <AccordionDetails>
-        {children}
-      </AccordionDetails>
+      <AccordionDetails>{children}</AccordionDetails>
     </Accordion>
   )
 }
