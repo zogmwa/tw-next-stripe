@@ -66,7 +66,7 @@ export function AddPorsConsBar({
    */
   function handleSubmit(event: React.SyntheticEvent) {
     // TODO: This will complete with API
-    // event.preventDefault()
+    event.preventDefault()
     // if (attributes.length === 0) {
     //   setError('Please enter a attribute')
     //   toast.error('Please enter a attribute')
