@@ -5,6 +5,7 @@ import { CompareServiceSummaryCard } from '../components/compare/summary-card'
 import { fetchServicesDetailCompareServer } from '../server-queries/fetch-services-compare-detail'
 import { CompareServiceProduct } from '../components/compare/page-cards/product'
 import { CompareServiceCarousel } from '../components/compare/page-cards/carousel'
+import { CompareServiceProsCons } from '../components/compare/page-cards/pros-cons/pros-cons'
 
 export const getServerSideProps = async ({ query }) => {
   /*
@@ -35,7 +36,7 @@ export default function CompareList({ services }) {
     {
       id: 'features',
       name: 'Features',
-      content: <div />,
+      content: <CompareServiceProsCons services={services} />,
     },
     {
       id: 'pricing',
