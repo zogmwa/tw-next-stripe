@@ -10,5 +10,5 @@ export type VotedAttribute = {
   name: string
   upvotes_count: number
   is_con: boolean
-  my_asset_attribute_vote: number | null
+  my_asset_attribute_vote?: number | null
 }[]
