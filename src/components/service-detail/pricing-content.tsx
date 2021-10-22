@@ -22,7 +22,7 @@ export function PricingContentComponent({ service }: ServiceDetailPricingProps) 
 
   return (
     <>
-      <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
+      <h1 className="text-base font-medium text-text-primary md:mt-2 md:mb-4">Pricing</h1>
       {plans.length > 0 && (
         <div className="grid grid-cols-1 md:flex md:justify-start">
           <PricingSelectNameDesktop pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} />
