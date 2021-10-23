@@ -8,16 +8,16 @@ import { ConsCard } from './cons-card'
 import { AddPorsConsBar } from './proscons-add-bar'
 import { useUserContext } from '../../../../hooks/use-user'
 
-type CompareServiceProsCons = {
+type CompareServiceProsConsProps = {
   services: Asset[]
 }
 
-function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
+function CompareServiceProsConsComponent({ services }: CompareServiceProsConsProps) {
   const { authVerified } = useUserContext()
   const [attributesList, setAttributesList] = useState([])
 
   useEffect(() => {
-    let tempAttributesList = []
+    const tempAttributesList = []
 
     for (let i = 0; i < services.length; i++) {
       const attributes = services[i].attributes

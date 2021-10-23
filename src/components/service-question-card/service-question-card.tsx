@@ -40,6 +40,7 @@ function ServiceQuestionCardComponent({
   )
   votedQuestions
     .filter((votedQuestion) => votedQuestion?.question === question.id)
+    // eslint-disable-next-line array-callback-return
     .map((showQuestion, index) => {
       renderButton = (
         <Button

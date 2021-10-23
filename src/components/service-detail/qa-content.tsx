@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { ServiceQuestion } from '../service-questions'
@@ -84,6 +85,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
       const questions = await fetchQuestions(service.slug)
       setServiceQuestions(questions)
       const votedQuestionList = []
+      // eslint-disable-next-line array-callback-return
       questions.map((question) => {
         if (question.my_asset_question_vote) {
           votedQuestionList.push({

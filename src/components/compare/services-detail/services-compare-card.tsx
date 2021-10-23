@@ -2,11 +2,11 @@ import React from 'react'
 import { Asset } from '../../../types/asset'
 import { Button } from '../../button'
 
-type CompareServiceCard = {
+type CompareServiceCardProps = {
   services: Asset[]
 }
 
-function CompareServiceCardComponent({ services }: CompareServiceCard) {
+function CompareServiceCardComponent({ services }: CompareServiceCardProps) {
   const serivceCount = services.length
 
   return (

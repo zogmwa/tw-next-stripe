@@ -4,11 +4,11 @@ import { ServiceCollapse } from '../../collapse'
 import { CarouselPaging } from '../../carousel/carousel-paging'
 import clsx from 'clsx'
 
-type CompareServiceCarousel = {
+type CompareServiceCarouselProps = {
   services: Asset[]
 }
 
-function CompareServiceCarouselComponent({ services }: CompareServiceCarousel) {
+function CompareServiceCarouselComponent({ services }: CompareServiceCarouselProps) {
   const serviceCount = services.length
 
   return (

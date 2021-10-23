@@ -21,6 +21,7 @@ export function DefaultServiceQuestionCard() {
     created: '2021-08-27T16:34:08.984019Z',
   }
   const votedQuestionList = []
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const upvoteQuestion = (questionId, status) => {
     toast.success('Voted successfully.')
   }

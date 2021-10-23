@@ -11,6 +11,7 @@ type RelateName = {
   name: string
   slug: string
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function RelatedContentComponent({ name, slug }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
   const [relatedProductsList, setRelatedProductsList] = useState([])
@@ -35,10 +36,8 @@ function RelatedContentComponent({ name, slug }: RelateName) {
     const compareList = compareRelatedList
     if (compareList.length < 1) {
       toast.error('You should check at least 1 service.')
-      return
     } else if (compareList.length > MAX_COMPARE_COUNT) {
       toast.error('You can compare at most 3 services.')
-      return
     } else {
       const services = compareList
       services.unshift(slug)
@@ -58,7 +57,7 @@ function RelatedContentComponent({ name, slug }: RelateName) {
   }
 
   const handleChecked = (value, serviceSlug) => {
-    let checkedRelatedList = compareRelatedList
+    const checkedRelatedList = compareRelatedList
     if (value) {
       checkedRelatedList.push(serviceSlug)
       setCompareRelatedList(checkedRelatedList)

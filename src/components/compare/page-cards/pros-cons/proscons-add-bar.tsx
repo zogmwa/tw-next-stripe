@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
+import toast from 'react-hot-toast'
 import { Input } from '../../../input'
 import { Button } from '../../../button'
 import { toggleAddAttribute } from '../../../../queries/service'
-import toast from 'react-hot-toast'
 
 type AddPorsConsBarProps = {
   className?: string
@@ -50,7 +50,7 @@ export function AddPorsConsBar({
         placeholder={placeholder}
         onChange={(e) => setAttribute(e.target.value)}
         value={attribute}
-        errorMessage={error ? error : undefined}
+        errorMessage={error || undefined}
       />
       {isButtonShow && (
         <Button type="submit" buttonType="primary" className="max-h-10" disabled={!authVerified}>

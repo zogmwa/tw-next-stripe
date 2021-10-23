@@ -5,11 +5,11 @@ import { ServiceCollapse } from '../../collapse'
 import { Button } from '../../button'
 import clsx from 'clsx'
 
-type CompareServiceProduct = {
+type CompareServiceProductProps = {
   services: Asset[]
 }
 
-function CompareServiceProductComponent({ services }) {
+function CompareServiceProductComponent({ services }: CompareServiceProductProps) {
   const router = useRouter()
   const serviceCount = services.length
 

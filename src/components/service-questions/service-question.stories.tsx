@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import toast from 'react-hot-toast'
