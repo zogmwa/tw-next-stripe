@@ -9,19 +9,24 @@ import { CompareServiceProsCons } from '../components/compare/page-cards/pros-co
 import { CompareServiceRating } from '../components/compare/page-cards/rating'
 import { CompareServicePricing } from '../components/compare/page-cards/pricing/pricing'
 import { CompareServiceUsedBy } from '../components/compare/page-cards/used-by'
+import { withSessionSSR } from '../utils/session'
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = withSessionSSR(async (context) => {
   /*
    ** https://github.com/vercel/next.js/discussions/13301
    ** Added favicon to /public
    */
-  const { services: serviceSlugs } = query
-  const servicesUrl = '?asset__slugs=' + serviceSlugs.join('&asset__slugs=')
-  const services = await fetchServicesDetailCompareServer(servicesUrl)
+  const serviceSlugs = context.query.services
+  let tempServiceSlugs = []
+  for (let i = 0; i < serviceSlugs.length; i++) {
+    tempServiceSlugs.push(serviceSlugs[i])
+  }
+  const sendUrl = '?asset__slugs=' + tempServiceSlugs.join('&asset__slugs=')
+  const services = await fetchServicesDetailCompareServer(context.req.session, sendUrl)
   return {
     props: { services },
   }
-}
+})
 
 export default function CompareList({ services }) {
   const elements = [
