@@ -30,7 +30,7 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
         attributes: attributes,
       })
     }
-
+    console.log(tempAttributesList)
     setAttributeList(tempAttributesList)
   }, [])
 
