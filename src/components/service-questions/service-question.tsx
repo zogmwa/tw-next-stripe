@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import toast from 'react-hot-toast'
@@ -8,7 +9,13 @@ import { ServiceQuestionCard } from '../service-question-card'
 import { AddAQuestion } from '../add-a-question'
 import { Modal } from '../Modal'
 import { useUserContext } from '../../hooks/use-user'
-import { QuestionEditor } from './question-editor'
+// import { QuestionEditor } from './question-editor'
+const QuestionEditor = dynamic<{ questionId; answerQuestionAction; clickedQuestionId; isLoading }>(
+  () => import('./question-editor').then((mod) => mod.QuestionEditor),
+  {
+    ssr: false,
+  },
+)
 
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2 text-sm">

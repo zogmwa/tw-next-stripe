@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
 import { MdVerified } from 'react-icons/md'
 import ReactTooltip from 'react-tooltip'
-import styled from 'styled-components'
 
-const Image = styled.img`
-   {
-    content: attr(alt);
-    display: block;
-    font-size: 16px;
-    font-style: normal;
-    font-family: FontAwesome;
-    color: rgb(100, 100, 100);
+const ImageStyle: any = {
+  display: 'block',
+  fontSize: '16px',
+  fontStyle: 'normal',
+  fontFamily: 'FontAwesome',
+  color: 'rgb(100, 100, 100)',
+  position: 'absolute',
+  top: '5px',
+  left: '0',
+  width: 'inherit',
+  wordWrap: 'normal',
+  textAlign: 'center',
+}
 
-    position: absolute;
-    top: 5px;
-    left: 0;
-    width: inherit;
-    word-wrap: normal;
-    text-align: center;
-  }
-`
-type ServiceLogo = {
+type ServiceLogoProps = {
   serviceId: number
   serviceName?: string
   logoUrl: string | null
@@ -38,12 +34,13 @@ function ServiceLogoComponent({
   className = '',
   imageClassName = '',
   fontClassName = 'text-success',
-}) {
+}: ServiceLogoProps) {
   const [imgSrc, setImgSrc] = useState<string | undefined>(logoUrl)
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
       {imgSrc ? (
-        <Image
+        <img
+          style={ImageStyle}
           src={imgSrc}
           onError={(e) => {
             e.currentTarget.onerror = null
@@ -51,13 +48,14 @@ function ServiceLogoComponent({
             setImgSrc('')
           }}
           alt={`${serviceName}`}
-          className={`object-contain rounded-md ${imageClassName}`}
+          className={`object-contain rounded-md ${imageClassName} logo-img`}
         />
       ) : (
-        <Image
+        <img
+          style={ImageStyle}
           src="/public/images/default_logo.png"
           alt={`${serviceName}`}
-          className={`object-contain rounded-md ${imageClassName}`}
+          className={`object-contain rounded-md ${imageClassName} logo-img`}
           width="72"
           height="72"
         />

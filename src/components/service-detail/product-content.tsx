@@ -1,8 +1,16 @@
 import React from 'react'
-import ReactPlayer from 'react-player'
-import { Carousel } from '../carousel/carousel'
+import dynamic from 'next/dynamic'
 import { Asset } from '../../types/asset'
+import { ProductContentCarouselPropsType } from './product-content-carousel'
+import { ProductContentCarouselSkeleton } from './product-content-skeleton'
 
+const ProductContentCarousel = dynamic<ProductContentCarouselPropsType>(
+  () => import('./product-content-carousel').then((mod) => mod.ProductContentCarousel),
+  {
+    ssr: false,
+    loading: ProductContentCarouselSkeleton,
+  },
+)
 type ServiceDetailPriductProps = {
   service: Asset
 }
@@ -17,22 +25,7 @@ function ProductContentComponent({ service }: ServiceDetailPriductProps) {
     <div className="ml-3">
       <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
       <p className="space-y-2 text-sm text-text-secondary">Screenshots</p>
-      {(promo_video !== '' || images.length > 0) && (
-        <Carousel className="mt-2">
-          {promo_video !== '' && (
-            <Carousel.Item>
-              <div className="promo-video-wrapper">
-                <ReactPlayer className="promo-video" url={promo_video} width="100%" height="100%" />
-              </div>
-            </Carousel.Item>
-          )}
-          {images.map((image) => (
-            <Carousel.Item key={image.url}>
-              <img className="object-contain" src={image.url} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      )}
+      <ProductContentCarousel promo_video={promo_video} images={images} />
       <p className="mt-2 space-y-2 text-sm text-text-secondary">{service.description}</p>
     </div>
   )
