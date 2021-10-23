@@ -5,10 +5,11 @@ import { PricingSelectNameDesktop } from '../service-pricing-card/pricing-select
 import { Asset } from '../../types/asset'
 
 type ServiceDetailPricingProps = {
+  isShowTitle?: boolean
   service: Asset
 }
 
-export function PricingContentComponent({ service }: ServiceDetailPricingProps) {
+export function PricingContentComponent({ isShowTitle = true, service }: ServiceDetailPricingProps) {
   const [selectedItem, setSelectedItem] = useState(0)
   const carouselSlider = useRef(null)
 
@@ -22,7 +23,7 @@ export function PricingContentComponent({ service }: ServiceDetailPricingProps) 
 
   return (
     <>
-      <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
+      {isShowTitle && (<h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>)}
       {plans.length > 0 && (
         <div className="grid grid-cols-1 md:flex md:justify-start">
           <PricingSelectNameDesktop pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} />
