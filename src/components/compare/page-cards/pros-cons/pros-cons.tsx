@@ -4,8 +4,8 @@ import { ServiceCollapse } from '../../../collapse'
 import { ProsCons } from './proscons-component'
 import { ProsCard } from './pros-card'
 import { ConsCard } from './cons-card'
-import { fetchUpvotedAttributes } from '../../../../queries/service'
 import { AddPorsConsBar } from './proscons-add-bar'
+import clsx from 'clsx'
 
 type CompareServiceProsCons = {
   services: Asset[]
@@ -18,27 +18,23 @@ const ProsplaceholderComponent = (
 )
 
 function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
-  const [attributesList, setAttributesList] = useState([])
+  const [attributesList, setAttributeList] = useState([])
 
   useEffect(() => {
-    async function getServicesAttributes() {
-      let tempAttributesList = []
+    let tempAttributesList = []
 
-      for (let i = 0; i < services.length; i++) {
-        const attributes = await fetchUpvotedAttributes(services[i].slug)
-        tempAttributesList.push({
-          asset: services[i].id,
-          attributes: attributes,
-        })
-      }
-      setAttributesList(tempAttributesList)
+    for (let i = 0; i < services.length; i++) {
+      const attributes = services[i].attributes
+      tempAttributesList.push({
+        asset: services[i].id,
+        attributes: attributes,
+      })
     }
 
-    getServicesAttributes()
+    setAttributeList(tempAttributesList)
   }, [])
 
   const serviceCount = services.length
-  const desktopClassName = `hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`
 
   return (
     <ServiceCollapse title="Pros & Cons">
@@ -48,7 +44,13 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
         ))}
       </div>
       <div className="hidden md:flex md:flex-col md:divide md:divide-y md:divide-border-default">
-        <div className={desktopClassName}>
+        <div className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          () => {
+            return `md:grid-cols-${serviceCount}`
+          },
+          'divide-x divide-border-default justify-items-around divide-solid'
+        )}>
           {services.map((service, index) => (
             <div className="flex flex-col justify-between p-2" key={index}>
               <ProsCard service={service} attributes={attributesList} />
@@ -62,7 +64,13 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
             </div>
           ))}
         </div>
-        <div className={desktopClassName}>
+        <div className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          () => {
+            return `md:grid-cols-${serviceCount}`
+          },
+          'divide-x divide-border-default justify-items-around divide-solid'
+        )}>
           {services.map((service, index) => (
             <div className="flex flex-col justify-between p-2" key={index}>
               <ConsCard service={service} attributes={attributesList} />
