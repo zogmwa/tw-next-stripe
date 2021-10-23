@@ -23,7 +23,7 @@ function CompareServicePricingCardComponent({ service, showPricingData }: Compar
         <span className="text-xs cursor-pointer text-text-tertiary" onClick={() => setIsOpen(true)}>
           view pricing details
         </span>
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} size="xl" dialogTitle="Pricing details">
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} size="2xl" dialogTitle="Pricing details">
           <PricingContent service={service} isShowTitle={false} />
         </Modal>
       </div>

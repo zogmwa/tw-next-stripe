@@ -1,13 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
+import clsx from 'clsx'
 
 type ModalProps = {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   dialogTitle?: string
   modalDescription?: string
-  size?: string
+  size?: 'md' | 'lg' | 'xl' | '2xl'
   // eslint-disable-next-line no-undef
   children: React.ReactChild
 }
@@ -47,7 +48,25 @@ function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, chil
               leaveTo="opacity-0 scale-95"
             >
               <div
-                className={`inline-block w-full max-w-${size} p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl`}
+                className={clsx(
+                  (() => {
+                    switch (size) {
+                      case '2xl': {
+                        return 'max-w-2xl'
+                      }
+                      case 'xl': {
+                        return 'max-w-xl'
+                      }
+                      case 'lg': {
+                        return 'max-w-lg'
+                      }
+                      default: {
+                        return 'max-w-md'
+                      }
+                    }
+                  })(),
+                  'inline-block w-full p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl',
+                )}
               >
                 <div className="flex items-center justify-between">
                   {dialogTitle !== undefined ? (
