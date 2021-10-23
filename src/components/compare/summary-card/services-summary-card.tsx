@@ -1,6 +1,7 @@
 import React from 'react'
 import { Asset } from '../../../types/asset'
 import { CompareServiceSummaryCardDetail } from './compare-summary-detail'
+import clsx from 'clsx'
 
 type CompareServiceCard = {
   services: Asset[]
@@ -16,7 +17,21 @@ function CompareServiceSummaryCardComponent({ services }: CompareServiceCard) {
           <CompareServiceSummaryCardDetail service={service} key={service.id} />
         ))}
       </div>
-      <div className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount}`}>
+      <div
+        className={clsx(
+          (() => {
+            switch (serviceCount) {
+              case 3: {
+                return 'md:grid-cols-3'
+              }
+              default: {
+                return 'md:grid-cols-2'
+              }
+            }
+          })(),
+          'hidden md:grid md:grid-flow-col',
+        )}
+      >
         {services.map((service) => (
           <CompareServiceSummaryCardDetail service={service} key={service.id} />
         ))}

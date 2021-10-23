@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { BiDollar } from 'react-icons/bi'
-import { AiFillCheckCircle } from 'react-icons/ai'
+import React from 'react'
 import { Asset } from '../../../../types/asset'
 import { ServiceCollapse } from '../../../collapse'
 import { CompareServicePricingCard } from './pricing-card'
+import clsx from 'clsx'
 
 type CompareServicePricing = {
   services: Asset[]
@@ -28,8 +27,6 @@ function CompareServicePricingComponent({ services }: CompareServicePricing) {
     }
   }
 
-  console.log(showPricingData)
-
   return (
     <ServiceCollapse title="Pricing">
       <div className="grid grid-cols-1 divide-y md:hidden divide-border-default justify-items-around divide-solid">
@@ -38,7 +35,20 @@ function CompareServicePricingComponent({ services }: CompareServicePricing) {
         ))}
       </div>
       <div
-        className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`}
+        className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          (() => {
+            switch (serviceCount) {
+              case 3: {
+                return 'md:grid-cols-3'
+              }
+              default: {
+                return 'md:grid-cols-2'
+              }
+            }
+          })(),
+          'divide-x divide-border-default justify-items-around divide-solid',
+        )}
       >
         {services.map((service) => (
           <CompareServicePricingCard service={service} showPricingData={showPricingData} key={service.id} />
