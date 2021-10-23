@@ -7,11 +7,12 @@ type ModalProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   dialogTitle?: string
   modalDescription?: string
+  size?: string
   // eslint-disable-next-line no-undef
   children: React.ReactChild
 }
 
-function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, children }: ModalProps) {
+function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, children, size = 'md' }: ModalProps) {
   function closeModal() {
     setIsOpen(false)
   }
@@ -45,7 +46,7 @@ function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, chil
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded">
+              <div className={`inline-block w-full max-w-${size} p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl`}>
                 <div className="flex items-center justify-between">
                   {dialogTitle !== undefined ? (
                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
@@ -54,7 +55,7 @@ function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, chil
                   ) : (
                     ''
                   )}
-                  <button className="focus:ring-white ml-auto mb-6">
+                  <button className="mb-6 ml-auto focus:ring-white">
                     <AiOutlineClose type="button" onClick={closeModal} />
                   </button>
                 </div>
