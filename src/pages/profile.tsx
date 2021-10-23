@@ -1,120 +1,69 @@
 import React, { useMemo, useEffect } from 'react'
-import { Link, Element } from 'react-scroll'
+import { Element } from 'react-scroll'
 import { useProfile } from '../hooks/use-profile'
 import { useUserContext } from '../hooks/use-user'
 import { Spinner } from '../components/spinner'
 import { ProfileCard } from '../components/profile-card'
-import { ProfileAsset } from '../components/profile-asset'
 import { UserContextType } from '../types/user-context-type'
 import { ProfileContextType } from '../types/profile-context-type'
-import { Asset } from '../types/asset'
 import { withPageAuthRequired } from '../utils/auth-wrappers'
+import { ProfileDesktop, ProfileMobile } from '../components/profile'
+import { Profile } from '../types/profile'
 
-function ScrollSpy({ elements }) {
-  return (
-    <div className="w-48">
-      <nav className="sticky w-48 p-2 bg-white border border-solid rounded-md shadow top-4 border-grey-200">
-        {elements.map((item) => (
-          <Link
-            activeClass="bg-secondary text-primary font-semibold rounded-sm"
-            className="block mx-1 my-0.5 px-1 py-0.5 text-text-secondary font-sm cursor-pointer"
-            to={item.id}
-            spy={true}
-            smooth={true}
-            duration={300}
-            key={item.id}
-            // containerId={item.containerId}
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-    </div>
-  )
-}
+// const asset1 = {
+//   logo_url: 'http://logo.clearbit.com/mailchimp.com',
+//   short_description: 'Mailchimp helps small businesses do big things with the right tools.',
+//   description:
+//     'Mailchimp helps small businesses do big things, with the right tools and guidance every step of the way.\r\n\r\n* Marketing\r\n* Websites and Commerce\r\n* Transactional Emails',
+//   tags: [
+//     {
+//       slug: 'email-marketing',
+//       name: 'Email Marketing',
+//     },
+//     {
+//       slug: 'landing-pages',
+//       name: 'Landing Pages',
+//     },
+//     {
+//       slug: 'marketing',
+//       name: 'Marketing',
+//     },
+//   ],
+//   upvotes_count: 10,
+//   name: 'Mailchimp',
+//   slug: 'mail-chimp',
+//   id: 1,
+//   has_free_trial: true,
+//   reviews_count: 1000,
+//   avg_rating: '8.1000',
+//   users_count: 1100,
+//   website: 'http://mailchimp.com/',
+// } as Asset
 
-const elements = [
-  {
-    id: 'personal-information',
-    name: 'Personal Information',
-    containerId: 'scroll-container-outer',
-  },
-  {
-    id: 'pending-assets',
-    name: 'Pending Assets',
-    containerId: 'scroll-container-inner',
-  },
-  {
-    id: 'published-assets',
-    name: 'Published Assets',
-    containerId: 'scroll-container-inner',
-  },
-]
-
-const asset1 = {
-  logo_url: 'http://logo.clearbit.com/mailchimp.com',
-  short_description: 'Mailchimp helps small businesses do big things with the right tools.',
-  description:
-    'Mailchimp helps small businesses do big things, with the right tools and guidance every step of the way.\r\n\r\n* Marketing\r\n* Websites and Commerce\r\n* Transactional Emails',
-  tags: [
-    {
-      slug: 'email-marketing',
-      name: 'Email Marketing',
-    },
-    {
-      slug: 'landing-pages',
-      name: 'Landing Pages',
-    },
-    {
-      slug: 'marketing',
-      name: 'Marketing',
-    },
-  ],
-  upvotes_count: 10,
-  name: 'Mailchimp',
-  slug: 'mail-chimp',
-  id: 1,
-  has_free_trial: true,
-  reviews_count: 1000,
-  avg_rating: '8.1000',
-  users_count: 1100,
-  website: 'http://mailchimp.com/',
-} as Asset
-const asset2 = {
-  logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
-  description:
-    'Campaign Monitor is an email marketing tool that enables marketers to send beautiful and personalized emails, creating a reliable channel to grow engagement with subscribers and promote loyal readership and conversions.\r\n\r\n* Email templates\r\n* Drag-and-drop builder\r\n* Engagement-based segmentation (Allows digital marketers to deliver targeted content to lists of subscribers without any technical expertise)',
-  tags: [
-    {
-      slug: 'email-marketing',
-      name: 'Email Marketing',
-    },
-  ],
-  upvotes_count: 10,
-  name: 'Campaign Monitor',
-  slug: 'campaign-monitor',
-  id: 2,
-  has_free_trial: false,
-  reviews_count: 457,
-  avg_rating: '10.000',
-  users_count: 102,
-} as Asset
-
-// TODO: change functions to filter published and pending assets
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const isPublished: (asset: Asset) => boolean = (asset) => true
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const isPending: (asset: Asset) => boolean = (asset) => true
+// const asset2 = {
+//   logo_url: 'http://logo.clearbit.com/campaignmonitor.com',
+//   description:
+//     'Campaign Monitor is an email marketing tool that enables marketers to send beautiful and personalized emails, creating a reliable channel to grow engagement with subscribers and promote loyal readership and conversions.\r\n\r\n* Email templates\r\n* Drag-and-drop builder\r\n* Engagement-based segmentation (Allows digital marketers to deliver targeted content to lists of subscribers without any technical expertise)',
+//   tags: [
+//     {
+//       slug: 'email-marketing',
+//       name: 'Email Marketing',
+//     },
+//   ],
+//   upvotes_count: 10,
+//   name: 'Campaign Monitor',
+//   slug: 'campaign-monitor',
+//   id: 2,
+//   has_free_trial: false,
+//   reviews_count: 457,
+//   avg_rating: '10.000',
+//   users_count: 102,
+// } as Asset
 
 function ProfilePage() {
   const user = useUserContext()
   const profile = useProfile()
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
-
-  // const publishedAssets: Asset[] = data.submittedAssets.filter(isPublished)
-  // const pendingAssets: Asset[] = data.submittedAssets.filter(isPending)
-  const publishedAssets: Asset[] = [asset1, asset2]
-  const pendingAssets: Asset[] = [asset1, asset2]
 
   useEffect(() => {
     const { error } = profile
@@ -140,33 +89,8 @@ function ProfilePage() {
         <Element name={'personal-information'}>
           <ProfileCard data={data} />
         </Element>
-        <div className="hidden md:flex">
-          <ScrollSpy elements={elements} />
-          <div id="scroll-container-inner" className="flex-grow ml-6">
-            <div id="pending-assets" className="mb-8">
-              <div className="flex mb-2">
-                <p className="text-base font-bold">Pending Assets</p>
-                <span className="ml-auto">{`${pendingAssets.length} Product(s)`}</span>
-              </div>
-              <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">
-                {pendingAssets.map((asset) => (
-                  <ProfileAsset asset={asset} key={asset.id} />
-                ))}
-              </div>
-            </div>
-            <div id="published-assets" className="mb-8">
-              <div className="flex mb-2">
-                <p className="text-base font-bold">Published Assets</p>
-                <span className="ml-auto">{`${publishedAssets.length} Product(s)`}</span>
-              </div>
-              <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">
-                {publishedAssets.map((asset) => (
-                  <ProfileAsset asset={asset} key={asset.id} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProfileDesktop profile={profile as Profile} />
+        <ProfileMobile profile={profile as Profile} />
       </div>
     </div>
   )

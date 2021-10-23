@@ -17,14 +17,17 @@ const mockupServices = [
       {
         slug: 'email-marketing',
         name: 'Email Marketing',
+        description: null,
       },
       {
         slug: 'landing-pages',
         name: 'Landing Pages',
+        description: null,
       },
       {
         slug: 'marketing',
         name: 'Marketing',
+        description: null,
       },
     ],
     upvotes_count: 10,
@@ -47,6 +50,7 @@ const mockupServices = [
       {
         slug: 'email-marketing',
         name: 'Email Marketing',
+        description: null,
       },
     ],
     upvotes_count: 10,

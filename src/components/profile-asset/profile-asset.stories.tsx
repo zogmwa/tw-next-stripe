@@ -24,6 +24,7 @@ const asset: Asset = {
     {
       slug: 'identity-resolution',
       name: 'Identity Resolution',
+      description: null,
     },
   ],
   attributes: [],

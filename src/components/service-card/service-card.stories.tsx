@@ -17,14 +17,17 @@ const asset1 = {
     {
       slug: 'email-marketing',
       name: 'Email Marketing',
+      description: null,
     },
     {
       slug: 'landing-pages',
       name: 'Landing Pages',
+      description: null,
     },
     {
       slug: 'marketing',
       name: 'Marketing',
+      description: null,
     },
   ],
   upvotes_count: 10,
@@ -47,6 +50,7 @@ const asset2 = {
     {
       slug: 'email-marketing',
       name: 'Email Marketing',
+      description: null,
     },
   ],
   upvotes_count: 10,
