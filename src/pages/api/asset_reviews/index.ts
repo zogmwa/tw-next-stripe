@@ -8,7 +8,7 @@ export default withSessionApi(async (req, res) => {
    * API Route handler for getting asset_review
    */
   if (req.method === 'GET') {
-    const { asset } = req.query
+    const { asset__slug } = req.query
     const access = await getAccessToken(req.session)
     const config = access
       ? {
@@ -17,7 +17,7 @@ export default withSessionApi(async (req, res) => {
           },
         }
       : null
-    const { data } = await clientWithRetries.get<Asset>(`/asset_reviews?asset=${asset}`, config)
+    const { data } = await clientWithRetries.get<Asset>(`/asset_reviews?asset__slug=${asset__slug}`, config)
     res.json(data)
   }
   /**

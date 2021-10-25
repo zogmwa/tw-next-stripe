@@ -44,7 +44,7 @@ export async function fetchService(slug: string): Promise<Asset | null> {
 // TODO: adapt this function for session.
 export async function fetchVote(slug: string): Promise<Asset | null> {
   try {
-    const { data } = await axios.get<Asset>(`/api/asset_reviews?asset=${slug}`)
+    const { data } = await axios.get<Asset>(`/api/asset_reviews?asset__slug=${slug}`)
     return data
   } catch (error) {
     // TODO: error handling
