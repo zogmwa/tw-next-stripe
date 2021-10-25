@@ -3,10 +3,8 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
-import { Modal } from '../Modal'
-import { CarouselCustomPaging } from './carousel-custom-paging'
 
-type CarouselPaging = {
+type CarouselCustomPaging = {
   images?: { asset: number; url: string }[]
 }
 
@@ -14,7 +12,7 @@ const PrevArrow = (props) => {
   const { className, onClick } = props
   return (
     <div className={`flex items-center rounded-md cursor-pointer ${className}`} onClick={onClick}>
-      <HiChevronLeft className="text-3xl rounded-md text-text-secondary bg-border-default hover:text-black" />
+      <HiChevronLeft className="rounded-full text-md text-text-secondary bg-border-default hover:text-black" />
     </div>
   )
 }
@@ -22,13 +20,12 @@ const NextArrow = (props) => {
   const { className, onClick } = props
   return (
     <div className={`flex items-center rounded-md cursor-pointer ${className}`} onClick={onClick}>
-      <HiChevronRight className="text-3xl rounded-md text-text-secondary bg-border-default hover:text-black" />
+      <HiChevronRight className="rounded-full text-md text-text-secondary bg-border-default hover:text-black" />
     </div>
   )
 }
 
-function CarouselPagingComponent({ images }: CarouselPaging) {
-  const [isOpen, setIsOpen] = useState(false)
+function CarouselCustomPagingComponent({ images }: CarouselCustomPaging) {
   const [sliderNav, setSliderNav] = useState(null)
   const [sliderThumb, setSliderThumb] = useState(null)
   const [mainSlider, setMainSlider] = useState(null)
@@ -42,9 +39,25 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
   const settingsMain = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     fade: true,
     asNavFor: '.slider-nav',
+    prevArrow: (
+      <PrevArrow
+        onClick={() => {
+          mainSlider.slickNext()
+          thumbSlider.slickNext()
+        }}
+      />
+    ),
+    nextArrow: (
+      <NextArrow
+        onClick={() => {
+          mainSlider.slickPrev()
+          thumbSlider.slickPrev()
+        }}
+      />
+    ),
   }
 
   const settingsThumbs = {
@@ -68,28 +81,20 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
   }
 
   return (
-    <div className="carousel-custom-paging">
+    <div className="p-6 carousel-custom-paging">
       <div className="slider-wrapper">
         <div className="show-slider-wrap">
-          <Slider {...settingsMain} asNavFor={sliderThumb} ref={(slider) => setMainSlider(slider)}>
+          <Slider {...settingsMain} asNavFor={sliderThumb} ref={(slider) => setMainSlider(slider)} className="flex">
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
                 <div className="flex items-center justify-center overflow-hidden border rounded-lg border-border-default bg-background-light">
-                  <img className="w-auto max-h-[400px]" src={image.url} onClick={() => setIsOpen(true)} />
+                  <img className="w-auto max-h-[400px]" src={image.url} />
                 </div>
               </div>
             ))}
           </Slider>
         </div>
-        <div className="flex justify-between thumbnail-slider-wrap">
-          {images.length > 0 && (
-            <PrevArrow
-              onClick={() => {
-                mainSlider.slickNext()
-                thumbSlider.slickNext()
-              }}
-            />
-          )}
+        <div className="flex justify-center thumbnail-slider-wrap">
           <Slider {...settingsThumbs} asNavFor={sliderNav} ref={(slider) => setThumbSlider(slider)} className="w-9/12">
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
@@ -99,21 +104,10 @@ function CarouselPagingComponent({ images }: CarouselPaging) {
               </div>
             ))}
           </Slider>
-          {images.length > 0 && (
-            <NextArrow
-              onClick={() => {
-                mainSlider.slickPrev()
-                thumbSlider.slickPrev()
-              }}
-            />
-          )}
         </div>
       </div>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} size="2xl" dialogTitle="Screenshots">
-        <CarouselCustomPaging images={images} />
-      </Modal>
     </div>
   )
 }
 
-export const CarouselPaging = CarouselPagingComponent
+export const CarouselCustomPaging = CarouselCustomPagingComponent

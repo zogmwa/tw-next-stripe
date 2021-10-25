@@ -27,7 +27,7 @@ function CompareServiceScrollNavbarComponent({ elements }) {
       <div className="scroll">
         <div id="scroll-element" className="pt-4 pb-8 space-y-10">
           {elements.map((item) => (
-            <div id={`scrollable-${item.id}`} key={item.id} style={{ scrollMarginTop: '4rem' }}>
+            <div id={`scrollable-${item.id}`} key={item.id} style={{ scrollMarginTop: '6rem' }}>
               {item.content}
             </div>
           ))}
