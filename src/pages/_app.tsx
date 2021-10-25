@@ -32,9 +32,9 @@ const RedirectSpinner = () => (
 )
 
 function CustomApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter()
+  const { asPath } = useRouter()
   const router = useRouter()
-  const renderNavBar = pathname !== '/login' && pathname !== '/signup'
+  const renderNavBar = asPath !== '/login' && asPath !== '/signup'
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
@@ -80,7 +80,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
                   className: 'text-sm !text-text-primary',
                   duration: 2000,
                   error: {
-                    icon: <MdOutlineError className=" text-red-600 text-2xl" />,
+                    icon: <MdOutlineError className="text-2xl text-red-600 " />,
                   },
                   custom: {
                     icon: <FcInfo className="text-2xl" />,

@@ -1,6 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Button } from '../button'
 import { useUserContext } from '../../hooks/use-user'
 import Avatar from './avatar'
@@ -12,6 +13,7 @@ type NavBarProps = {
 
 export function NavBar({ className, style }: NavBarProps) {
   const session = useUserContext()
+  const router = useRouter()
   const { isLoggedIn } = session
 
   return (
@@ -32,7 +34,7 @@ export function NavBar({ className, style }: NavBarProps) {
             <Avatar />
           </>
         ) : (
-          <Link href="/login">
+          <Link href={`/login?next=${router.asPath}`}>
             <Button> Sign Up | Login </Button>
           </Link>
         )}

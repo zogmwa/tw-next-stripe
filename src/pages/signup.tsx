@@ -59,7 +59,7 @@ export default function Signup() {
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
-          onClick={handleLinkedInLogin}
+          onClick={() => handleLinkedInLogin()}
         >
           Sign in with LinkedIn
         </Button>
@@ -69,7 +69,7 @@ export default function Signup() {
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
-          onClick={handleGoogleLogin}
+          onClick={() => handleGoogleLogin()}
         >
           Sign in with Google
         </Button>

@@ -63,7 +63,7 @@ function AuthenticationPopupComponent() {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <div className="flex py-6 items-center justify-between">
+                <div className="flex items-center justify-between py-6">
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                     Post review
                   </Dialog.Title>
@@ -84,7 +84,7 @@ function AuthenticationPopupComponent() {
                     buttonType="primary"
                     iconPlacement="right"
                     className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
-                    onClick={handleLinkedInLogin}
+                    onClick={() => handleLinkedInLogin()}
                   >
                     Login with LinkedIn
                   </Button>
@@ -94,7 +94,7 @@ function AuthenticationPopupComponent() {
                     buttonType="primary"
                     iconPlacement="right"
                     className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-4"
-                    onClick={handleGoogleLogin}
+                    onClick={() => handleGoogleLogin()}
                   >
                     Login with Google
                   </Button>

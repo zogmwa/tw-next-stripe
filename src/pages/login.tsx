@@ -56,7 +56,7 @@ export default function Login() {
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
-          onClick={handleLinkedInLogin}
+          onClick={() => handleLinkedInLogin()}
         >
           Login with LinkedIn
         </Button>
@@ -66,7 +66,7 @@ export default function Login() {
           buttonType="primary"
           iconPlacement="right"
           className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
-          onClick={handleGoogleLogin}
+          onClick={() => handleGoogleLogin()}
         >
           Login with Google
         </Button>

@@ -1,7 +1,7 @@
 import Router from 'next/router'
 
-export function handleLinkedInLogin(): void {
-  localStorage.setItem('failure_redirect', Router.pathname)
+export function handleLinkedInLogin(failure_redirect?: string): void {
+  localStorage.setItem('failure_redirect', failure_redirect ?? Router.asPath)
   const redirectUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/login-with-linkedin'
@@ -9,8 +9,8 @@ export function handleLinkedInLogin(): void {
   window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${redirectUrl}&state=${process.env.LINKEDIN_OAUTH_STATE}&scope=r_liteprofile,r_emailaddress`
 }
 
-export function handleGoogleLogin(): void {
-  localStorage.setItem('failure_redirect', Router.pathname)
+export function handleGoogleLogin(failure_redirect?: string): void {
+  localStorage.setItem('failure_redirect', failure_redirect ?? Router.asPath)
   const redirectUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/login-with-google'

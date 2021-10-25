@@ -84,7 +84,7 @@ const withPageAuthRequired: WithPageAuthRequired = (Component, options = {}) => 
     const user = useUserContext()
     const router = useRouter()
     if (!redirectTo) {
-      redirectTo = `/login?next=${router.pathname}`
+      redirectTo = `/login?next=${router.asPath}`
     }
 
     useEffect(() => {
