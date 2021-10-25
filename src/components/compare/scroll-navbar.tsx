@@ -14,12 +14,9 @@ function CompareServiceScrollNavbarComponent({ elements }) {
               activeClassName="text-primary border-primary"
               replaceClassName="text-gray-900 border-transparent"
             >
-              <a
-                className="flex-1 px-1 py-2 text-sm font-medium text-center border-b-2 whitespace-nowrap focus:outline-none focus:ring-0 focus:ring-offset-0 min-w-min"
-                href={`#scrollable-${item.id}`}
-              >
+              <span className="flex-1 px-1 py-2 text-sm font-medium text-center border-b-2 cursor-pointer whitespace-nowrap focus:outline-none focus:ring-0 focus:ring-offset-0 min-w-min">
                 {item.name}
-              </a>
+              </span>
             </ScrollableLink>
           ))}
         </div>
