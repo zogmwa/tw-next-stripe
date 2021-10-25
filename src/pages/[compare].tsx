@@ -10,6 +10,7 @@ import { CompareServiceRating } from '../components/compare/page-cards/rating'
 import { CompareServicePricing } from '../components/compare/page-cards/pricing/pricing'
 import { CompareServiceUsedBy } from '../components/compare/page-cards/used-by'
 import { withSessionSSR } from '../utils/session'
+import { CompareServiceScrollNavbar } from '../components/compare/scroll-navbar'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   /*
@@ -73,6 +74,7 @@ export default function CompareList({ services }) {
       <div className="max-w-screen-lg mx-auto">
         <CompareServiceCard services={services} />
         <CompareServiceTab elements={elements} />
+        <CompareServiceScrollNavbar elements={elements} />
       </div>
     </div>
   )
