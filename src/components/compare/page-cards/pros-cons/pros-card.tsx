@@ -17,7 +17,7 @@ function ProsCardComponent({ service, attributes }) {
     <div className="flex flex-col">
       <h2 className="text-black text-md text-semibold">{service.name} Pros</h2>
       {serviceProsAttributes.map((attribute) => (
-        <div className="mt-2" key={attribute.name}>
+        <div className="mt-2 mb-2" key={attribute.name}>
           <Button
             size="small"
             className={
