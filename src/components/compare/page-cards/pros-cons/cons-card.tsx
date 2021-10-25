@@ -17,7 +17,7 @@ function ConsCardComponent({ service, attributes }) {
     <div className="flex flex-col">
       <h2 className="text-black text-md text-semibold">{service.name} Cons</h2>
       {serviceConsAttributes.map((attribute) => (
-        <div className="mt-2" key={attribute.name}>
+        <div className="mt-2 mb-2" key={attribute.name}>
           <Button
             size="small"
             className={
