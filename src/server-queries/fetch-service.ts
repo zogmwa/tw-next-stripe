@@ -10,14 +10,14 @@ import { getAccessToken } from '../utils/token'
 export async function fetchServiceServer(session, slug) {
   const access = await getAccessToken(session)
   if (access) {
-    const { data } = await client.get(`/assets/${slug}?asset=${slug}`, {
+    const { data } = await client.get(`/assets/${slug}?asset__slug=${slug}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
     })
     return data
   } else {
-    const { data } = await client.get(`/assets/${slug}?asset=${slug}`)
+    const { data } = await client.get(`/assets/${slug}?asset__slug=${slug}`)
     return data
   }
 }

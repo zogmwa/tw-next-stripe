@@ -10,14 +10,14 @@ export default withSessionApi(async (req, res) => {
     const { slug } = req.query
     const access = await getAccessToken(req.session)
     if (access) {
-      const { data } = await clientWithRetries.get(`/asset_attributes/?assets__slug=${slug}&asset=${slug}`, {
+      const { data } = await clientWithRetries.get(`/asset_attributes/?assets__slug=${slug}&asset__slug=${slug}`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
       })
       res.json(data)
     } else {
-      const { data } = await clientWithRetries.get(`/asset_attributes/?assets__slug=${slug}&asset=${slug}`)
+      const { data } = await clientWithRetries.get(`/asset_attributes/?assets__slug=${slug}&asset__slug=${slug}`)
       res.json(data)
     }
   }
