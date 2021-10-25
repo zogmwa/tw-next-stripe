@@ -14,24 +14,24 @@ type CompareServiceRating = {
 function CompareServiceRatingComponent({ services }: CompareServiceRating) {
   const serviceCount = services.length
 
-  const marks = [
-    {
-      name: 'Features',
-      mark: 8.6,
-    },
-    {
-      name: 'Ease of Use',
-      mark: 8.5,
-    },
-    {
-      name: 'Value for Mone',
-      mark: 7.1,
-    },
-    {
-      name: 'Coustomer Support',
-      mark: 7.1,
-    },
-  ]
+  // const marks = [
+  //   {
+  //     name: 'Features',
+  //     mark: 8.6,
+  //   },
+  //   {
+  //     name: 'Ease of Use',
+  //     mark: 8.5,
+  //   },
+  //   {
+  //     name: 'Value for Mone',
+  //     mark: 7.1,
+  //   },
+  //   {
+  //     name: 'Coustomer Support',
+  //     mark: 7.1,
+  //   },
+  // ]
 
   var unitlist = ['', 'K', 'M', 'G']
   function kFormater(number) {
@@ -84,7 +84,7 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col mt-4 mb-2 md:items-center">
+            {/* <div className="flex flex-col mt-4 mb-2 md:items-center">
               {marks.map((item, index) => (
                 <MarkProgress
                   key={index}
@@ -98,7 +98,7 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
                   label={item.name}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
@@ -146,7 +146,7 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col mt-4 mb-2 md:items-center">
+            {/* <div className="flex flex-col mt-4 mb-2 md:items-center">
               {marks.map((item, index) => (
                 <MarkProgress
                   key={index}
@@ -160,7 +160,7 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
                   label={item.name}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
