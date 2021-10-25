@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import clsx from 'clsx'
 import { Asset } from '../../../../types/asset'
 import { ServiceCollapse } from '../../../collapse'
 import { ProsCons } from './proscons-component'
 import { ProsCard } from './pros-card'
 import { ConsCard } from './cons-card'
 import { AddPorsConsBar } from './proscons-add-bar'
-import clsx from 'clsx'
+import { useUserContext } from '../../../../hooks/use-user'
 
 type CompareServiceProsCons = {
   services: Asset[]
 }
 
-const ProsplaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2 text-sm">
-    <div>Add a Pro</div>
-  </div>
-)
-
 function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
+  const { authVerified } = useUserContext()
   const [attributesList, setAttributesList] = useState([])
 
   useEffect(() => {
@@ -25,6 +21,9 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
 
     for (let i = 0; i < services.length; i++) {
       const attributes = services[i].attributes
+      attributes.sort((attributeA, attributeB) => {
+        return (Number(attributeA.upvotes_count) - Number(attributeB.upvotes_count)) * -1
+      })
       tempAttributesList.push({
         asset: services[i].id,
         attributes: attributes,
@@ -65,10 +64,10 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
               <ProsCard service={service} attributes={attributesList} />
               <AddPorsConsBar
                 className="mt-2"
-                onSubmit={(selectedAttribute) => {
-                  console.log(selectedAttribute)
-                }}
-                placeholder={ProsplaceholderComponent}
+                isCon={false}
+                asset={service.id}
+                placeholder="Add a Pro"
+                authVerified={authVerified}
               />
             </div>
           ))}
@@ -94,10 +93,10 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
               <ConsCard service={service} attributes={attributesList} />
               <AddPorsConsBar
                 className="mt-2"
-                onSubmit={(selectedAttribute) => {
-                  console.log(selectedAttribute)
-                }}
-                placeholder={ProsplaceholderComponent}
+                isCon={true}
+                asset={service.id}
+                placeholder="Add a Con"
+                authVerified={authVerified}
               />
             </div>
           ))}

@@ -2,26 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { HiChevronUp } from 'react-icons/hi'
 import { Button } from '../../../button'
 import { Asset } from '../../../../types/asset'
-import { fetchUpvotedAttributes } from '../../../../queries/service'
 import { AddPorsConsBar } from './proscons-add-bar'
+import { useUserContext } from '../../../../hooks/use-user'
 
 type ProsConsComponent = {
   service: Asset
 }
 
-const ProsplaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2 text-sm">
-    <div>Add a Pro</div>
-  </div>
-)
-
-const ConsplaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2 text-sm">
-    <div>Add a Con</div>
-  </div>
-)
-
 function ProsConsComponent({ service }: ProsConsComponent) {
+  const { authVerified } = useUserContext()
   const [showProsList, setShowProsList] = useState([])
   const [showConsList, setShowConsList] = useState([])
   const defaultShowCount = 5
@@ -40,7 +29,7 @@ function ProsConsComponent({ service }: ProsConsComponent) {
       <div className="flex flex-col p-2">
         <h2 className="text-black text-md text-semibold">{service.name} Pros</h2>
         {showProsList.map((attribute) => (
-          <div className="mt-2" key={attribute.name}>
+          <div className="mt-2 mb-2" key={attribute.name}>
             <Button
               size="small"
               className={
@@ -70,16 +59,16 @@ function ProsConsComponent({ service }: ProsConsComponent) {
         ))}
         <AddPorsConsBar
           className="mt-2"
-          onSubmit={(selectedAttribute) => {
-            console.log(selectedAttribute)
-          }}
-          placeholder={ProsplaceholderComponent}
+          isCon={false}
+          asset={service.id}
+          placeholder="Add a Pro"
+          authVerified={authVerified}
         />
       </div>
       <div className="flex flex-col p-2">
         <h2 className="text-black text-md text-semibold">{service.name} Cons</h2>
         {showConsList.map((attribute) => (
-          <div className="mt-2" key={attribute.name}>
+          <div className="mt-2 mb-2" key={attribute.name}>
             <Button
               size="small"
               className={
@@ -109,10 +98,10 @@ function ProsConsComponent({ service }: ProsConsComponent) {
         ))}
         <AddPorsConsBar
           className="mt-2"
-          onSubmit={(selectedAttribute) => {
-            console.log(selectedAttribute)
-          }}
-          placeholder={ConsplaceholderComponent}
+          isCon={true}
+          asset={service.id}
+          placeholder="Add a Con"
+          authVerified={authVerified}
         />
       </div>
     </div>
