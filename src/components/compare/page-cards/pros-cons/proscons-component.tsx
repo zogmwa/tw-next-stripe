@@ -22,26 +22,18 @@ const ConsplaceholderComponent = (
 )
 
 function ProsConsComponent({ service }: ProsConsComponent) {
-  const [prosList, setProsList] = useState([])
-  const [consList, setConsList] = useState([])
   const [showProsList, setShowProsList] = useState([])
   const [showConsList, setShowConsList] = useState([])
   const defaultShowCount = 5
 
   useEffect(() => {
-    async function getServicesAttributes() {
-      const attributes = await fetchUpvotedAttributes(service.slug)
+    const attributes = service.attributes
 
-      if (attributes) {
-        setProsList(attributes.filter((attribute) => attribute.is_con === false))
-        setConsList(attributes.filter((attribute) => attribute.is_con === true))
-        setShowProsList(attributes.filter((attribute) => attribute.is_con === false).slice(0, defaultShowCount))
-        setShowConsList(attributes.filter((attribute) => attribute.is_con === true).slice(0, defaultShowCount))
-      }
+    if (attributes) {
+      setShowProsList(attributes.filter((attribute) => attribute.is_con === false).slice(0, defaultShowCount))
+      setShowConsList(attributes.filter((attribute) => attribute.is_con === true).slice(0, defaultShowCount))
     }
-
-    getServicesAttributes()
-  }, [service.id])
+  }, [])
 
   return (
     <div className="flex flex-col md:divide md:divide-y md:divide-border-default">

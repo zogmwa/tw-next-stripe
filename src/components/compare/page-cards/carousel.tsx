@@ -2,6 +2,7 @@ import React from 'react'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { CarouselPaging } from '../../carousel/carousel-paging'
+import clsx from 'clsx'
 
 type CompareServiceCarousel = {
   services: Asset[]
@@ -21,7 +22,20 @@ function CompareServiceCarouselComponent({ services }: CompareServiceCarousel) {
         ))}
       </div>
       <div
-        className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`}
+        className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          (() => {
+            switch (serviceCount) {
+              case 3: {
+                return 'md:grid-cols-3'
+              }
+              default: {
+                return 'md:grid-cols-2'
+              }
+            }
+          })(),
+          'divide-x divide-border-default justify-items-around divide-solid',
+        )}
       >
         {services.map((service, index) => (
           <div className="flex flex-col pt-6 pb-4 pl-4 pr-4" key={index}>

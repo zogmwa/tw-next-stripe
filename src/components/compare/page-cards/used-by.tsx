@@ -1,6 +1,7 @@
 import React from 'react'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
+import clsx from 'clsx'
 
 type CompareServiceUsedBy = {
   services: Asset[]
@@ -29,7 +30,20 @@ function CompareServiceUsedByComponent({ services }: CompareServiceUsedBy) {
         ))}
       </div>
       <div
-        className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`}
+        className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          (() => {
+            switch (serviceCount) {
+              case 3: {
+                return 'md:grid-cols-3'
+              }
+              default: {
+                return 'md:grid-cols-2'
+              }
+            }
+          })(),
+          'divide-x divide-border-default justify-items-around divide-solid',
+        )}
       >
         {services.map((service) => (
           <div className="flex flex-col p-4">

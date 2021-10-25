@@ -5,6 +5,7 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { MarkProgress } from '../../styled-mark-progress'
+import clsx from 'clsx'
 
 type CompareServiceRating = {
   services: Asset[]
@@ -102,7 +103,20 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
         ))}
       </div>
       <div
-        className={`hidden md:grid md:grid-flow-col md:grid-cols-${serviceCount} divide-x divide-border-default justify-items-around divide-solid`}
+        className={clsx(
+          'hidden md:grid md:grid-flow-col',
+          (() => {
+            switch (serviceCount) {
+              case 3: {
+                return 'md:grid-cols-3'
+              }
+              default: {
+                return 'md:grid-cols-2'
+              }
+            }
+          })(),
+          'divide-x divide-border-default justify-items-around divide-solid',
+        )}
       >
         {services.map((service) => (
           <div className="flex flex-col p-2" key={service.id}>
