@@ -18,7 +18,7 @@ const ProsplaceholderComponent = (
 )
 
 function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
-  const [attributesList, setAttributeList] = useState([])
+  const [attributesList, setAttributesList] = useState([])
 
   useEffect(() => {
     let tempAttributesList = []
@@ -31,7 +31,7 @@ function CompareServiceProsConsComponent({ services }: CompareServiceProsCons) {
       })
     }
 
-    setAttributeList(tempAttributesList)
+    setAttributesList(tempAttributesList)
   }, [])
 
   const serviceCount = services.length
