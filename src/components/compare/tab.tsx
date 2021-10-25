@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 function CompareServiceTabComponent({ elements }) {
   return (
-    <div className="mt-8">
+    <div className="block mt-8 md:hidden">
       <HeadlessuiTab.Group as="div" className="mt-2">
         <div className="border-b border-gray-200">
           <HeadlessuiTab.List className="flex px-4 -mb-px space-x-8 overflow-x-auto tablist">
