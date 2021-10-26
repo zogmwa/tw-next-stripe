@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { GrTwitter, GrLinkedin } from 'react-icons/gr'
 import { MdOutlineEmail } from 'react-icons/md'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
@@ -76,19 +75,19 @@ function HomePageFooterComponent({ topTags, sectionOneData, sectionTwoData }: fo
         <div className="justify-between hidden p-2 md:flex others">
           <div className="flex items-center">
             <div className="w-10 h-10 mr-2 bg-opacity-25 rounded-md bg-primary" />
-            <Link href="/">
+            <a href="/" target="_blank">
               <div className="text-base font-medium tracking-wide text-opacity-50 cursor-pointer text-primary">
                 TaggedWeb
               </div>
-            </Link>
+            </a>
           </div>
           <div className="flex p-2 space-x-4 other-sites">
-            <Link href="/">
+            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </Link>
-            <Link href="/">
+            </a>
+            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
               <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </Link>
+            </a>
           </div>
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
@@ -153,19 +152,19 @@ function HomePageFooterComponent({ topTags, sectionOneData, sectionTwoData }: fo
         <div className="flex flex-col justify-between p-2 md:hidden others">
           <div className="flex items-center">
             <div className="w-10 h-10 mr-2 bg-opacity-25 rounded-md bg-primary" />
-            <Link href="/">
+            <a href="/" target="_blank">
               <div className="text-base font-medium tracking-wide text-opacity-50 cursor-pointer text-primary">
                 TaggedWeb
               </div>
-            </Link>
+            </a>
           </div>
           <div className="flex justify-around mt-2 space-x-4 other-sites">
-            <Link href="/">
+            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </Link>
-            <Link href="/">
+            </a>
+            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
               <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </Link>
+            </a>
           </div>
           <div className="flex items-center mt-2 copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
