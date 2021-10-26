@@ -17,6 +17,8 @@ import { NavBar } from '../components/nav-bar'
 import { Spinner } from '../components/spinner'
 import { ToastWithDismiss } from '../components/toast-with-dismiss'
 import { fetcher } from '../queries/fetchJson'
+import { HomePageFooter } from '../components/footer'
+import { topTags } from '../utils/top-tags'
 
 const queryClient = new QueryClient()
 
@@ -35,6 +37,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter()
   const router = useRouter()
   const renderNavBar = asPath !== '/login' && asPath !== '/signup'
+  const renderFooter = asPath !== '/login' && asPath !== '/signup'
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
@@ -74,6 +77,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
                 ) : (
                   <Component {...restProps} key={router.asPath} />
                 )}
+                {renderFooter ? <HomePageFooter topTags={topTags} /> : null}
               </div>
               <Toaster
                 toastOptions={{
