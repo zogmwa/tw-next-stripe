@@ -2,7 +2,6 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { SearchBar } from '../components/search-bar'
 import { Button } from '../components/button'
-import { topTags } from '../utils/top-tags'
 import { useRequireLogin } from '../hooks/use-require-login'
 export default function Home() {
   const router = useRouter()
@@ -42,26 +41,6 @@ export default function Home() {
               <img src="/images/homepage_pic.jpg" alt="homepage_pic" className="w-full mx-auto" />
             </div>
           </div>
-        </div>
-      </div>
-      <div className="max-w-screen-lg px-2 mx-auto my-12">
-        <div className="mb-4 text-4xl font-medium">Top Tags</div>
-        <div className="flex flex-row flex-wrap mb-5">
-          {topTags.map((tag) => {
-            return (
-              <Button
-                key={tag.slug}
-                buttonType="tag"
-                size="small"
-                className="mt-2 mr-2"
-                onClick={() => {
-                  router.push(`/search/${tag.slug}`)
-                }}
-              >
-                {tag.value}
-              </Button>
-            )
-          })}
         </div>
       </div>
     </div>
