@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { GrTwitter, GrLinkedin } from 'react-icons/gr'
 import { MdOutlineEmail } from 'react-icons/md'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
@@ -82,12 +83,12 @@ function HomePageFooterComponent({ topTags, sectionOneData, sectionTwoData }: fo
             </a>
           </div>
           <div className="flex p-2 space-x-4 other-sites">
-            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
+            <Link href="/">
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </a>
-            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
+            </Link>
+            <Link href="/">
               <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </a>
+            </Link>
           </div>
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
@@ -159,12 +160,12 @@ function HomePageFooterComponent({ topTags, sectionOneData, sectionTwoData }: fo
             </a>
           </div>
           <div className="flex justify-around mt-2 space-x-4 other-sites">
-            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
+            <Link href="/">
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </a>
-            <a href="/" target="_blank" className="text-gray-900 no-underline focus:ring-0">
+            </Link>
+            <Link href="/">
               <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </a>
+            </Link>
           </div>
           <div className="flex items-center mt-2 copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
