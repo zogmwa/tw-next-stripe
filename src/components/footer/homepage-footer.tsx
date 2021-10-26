@@ -89,7 +89,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
           </div>
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
-            <span className="pl-1 text-xs text-text-tertiary">2021 Taggedweb. All rights reserved.</span>
+            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb. All rights reserved.</span>
           </div>
         </div>
       </div>
