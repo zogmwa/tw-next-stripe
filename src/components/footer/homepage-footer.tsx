@@ -66,7 +66,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="font-semibold text-md">We're here to help you</h2>
             <div className="flex items-center mt-2 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
-              <span className="ml-2 text-sm text-gray-900">contact@taggedweb.com</span>
+              <img src="/images/contact-email.png" alt="contact" />
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="font-semibold text-md">We're here to help you</h2>
             <div className="flex items-center mt-2 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
-              <span className="ml-2 text-sm text-gray-900">contact@taggeweb.com</span>
+              <img src="/images/contact-email.png" alt="contact" />
             </div>
           </div>
         </div>
