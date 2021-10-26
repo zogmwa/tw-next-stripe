@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GrTwitter, GrLinkedin } from 'react-icons/gr'
+import { GrTwitter } from 'react-icons/gr'
+import { TiSocialLinkedin } from 'react-icons/ti'
 import { MdOutlineEmail } from 'react-icons/md'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
 import { Button } from '../button'
@@ -15,12 +16,12 @@ function HomePageFooterComponent({ topTags }: footerData) {
   const showTopTags = topTags.slice(0, defaultShowCount)
 
   return (
-    <div className="w-full px-4 border-t border-solid bg-background-surface border-border-default">
+    <div className="w-full px-4 mt-8">
       <div className="hidden max-w-screen-lg pr-2 mx-auto divide-y md:block footer divide divide-border-default">
         <div className="justify-between hidden p-2 md:flex info">
           <div className="flex flex-col">
-            <h2 className="font-semibold text-md">Popular Tags</h2>
-            <div className="grid grid-cols-4 tags">
+            <h2 className="text-2xl font-semibold">Popular SaaS Tags</h2>
+            <div className="grid grid-cols-4 mt-2 tags">
               {showTopTags.map((tag) => (
                 <Button
                   key={tag.slug}
@@ -63,8 +64,8 @@ function HomePageFooterComponent({ topTags }: footerData) {
             </div>
           </div> */}
           <div className="contact-us">
-            <h2 className="font-semibold text-md">We're here to help you</h2>
-            <div className="flex items-center mt-2 email">
+            <h2 className="pt-2 font-semibold text-md">We're here to help you</h2>
+            <div className="flex items-center mt-4 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
               <img src="/images/contact-email.png" alt="contact" />
             </div>
@@ -84,7 +85,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
             <a href="https://www.linkedin.com" target="_blank" className="text-gray-900 no-underline">
-              <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+              <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
           </div>
           <div className="flex items-center copyright">
@@ -96,8 +97,8 @@ function HomePageFooterComponent({ topTags }: footerData) {
       <div className="block max-w-screen-lg divide-y footer divide divide-border-default md:hidden">
         <div className="flex flex-col p-2 md:hidden info">
           <div className="flex flex-col">
-            <h2 className="font-semibold text-md">Popular Tags</h2>
-            <div className="grid grid-cols-2 tags">
+            <h2 className="text-2xl font-semibold">Popular Saas Tags</h2>
+            <div className="grid grid-cols-2 mt-2 tags">
               {showTopTags.map((tag) => (
                 <Button
                   key={tag.slug}
@@ -161,7 +162,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
             <a href="https://www.linkedin.com" target="_blank" className="text-gray-900 no-underline">
-              <GrLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+              <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
           </div>
           <div className="flex items-center mt-2 copyright">
