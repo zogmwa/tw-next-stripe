@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { Button } from '../../button'
-import clsx from 'clsx'
 
 type CompareServiceProductProps = {
   services: Asset[]

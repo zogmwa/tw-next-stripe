@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { fetchAssetSimilar } from '../../queries/service'
 import { Button } from '../button'
@@ -86,12 +87,21 @@ function RelatedContentComponent({ name, slug }: RelateName) {
       </div>
       {relatedProductsList.length > defaultShowCount ? (
         viewMore ? (
-          <div
-            className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
-            onClick={() => setViewMore(false)}
-          >
-            Load Less alternatives
-            <HiChevronUp className="self-center ml-2 text-text-tertiary" />
+          <div className="flex flex-col space-y-2">
+            <div>
+              <Link href={`/alternatives-or-similar-services/${slug}`}>
+                <Button buttonType="primary" className="mt-2">
+                  See Similar Services
+                </Button>
+              </Link>
+            </div>
+            <div
+              className="flex self-start w-48 px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+              onClick={() => setViewMore(false)}
+            >
+              Show Less
+              <HiChevronUp className="self-center ml-2 text-text-tertiary" />
+            </div>
           </div>
         ) : (
           <div

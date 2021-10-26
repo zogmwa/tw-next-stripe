@@ -133,30 +133,23 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
           </Link>
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center space-x-4 cursor-pointer md:pr-2 md:flex-col md:space-x-0 md:space-y-2">
-        <div className="flex items-center space-x-2 md:hidden">
-          <AiFillStar className="text-primary" />
-          <span className="mr-1 text-2xl font-bold">{rating}</span>
-          <div className="text-text-secondary">/10</div>
+      <Link href={`/services/${service.slug}/`}>
+        <div className="flex flex-row items-center justify-center space-x-4 cursor-pointer md:pr-2 md:flex-col md:space-x-0 md:space-y-2">
+          <div className="flex items-center space-x-2 md:hidden">
+            <AiFillStar className="text-primary" />
+            <span className="mr-1 text-2xl font-bold">{rating}</span>
+            <div className="text-text-secondary">/10</div>
+          </div>
+          <div className="items-center hidden space-x-2 md:justify-center md:flex md:flex-row">
+            <AiFillStar className="text-primary" />
+            <div className="flex mr-1 text-2xl font-bold">{rating}</div>
+            <div className="text-text-secondary">/10</div>
+          </div>
+          <div className="flex items-center justify-center text-sm text-text-secondary">
+            {service.reviews_count} Reviews
+          </div>
         </div>
-        <div className="items-center hidden space-x-2 md:justify-center md:flex md:flex-row">
-          <AiFillStar className="text-primary" />
-          <div className="flex mr-1 text-2xl font-bold">{rating}</div>
-          <div className="text-text-secondary">/10</div>
-        </div>
-        <div className="flex items-center justify-center text-sm text-text-secondary">
-          {service.reviews_count} Reviews
-        </div>
-        <Button
-          buttonType="default"
-          size="small"
-          onClick={() => {
-            router.push(`/alternatives-or-similar-services/${service.slug}?name=${service.name}`)
-          }}
-        >
-          See alternatives
-        </Button>
-      </div>
+      </Link>
     </div>
   )
 }

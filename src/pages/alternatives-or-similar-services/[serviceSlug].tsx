@@ -10,12 +10,13 @@ import {
 import { clientWithRetries } from '../../utils/clientWithRetries'
 import { SearchBar } from '../../components/search-bar'
 import { Asset } from '../../types/asset'
+import { unslugify } from '../../utils/unslugify'
 
 export const getServerSideProps = async (context: {
-  query: { serviceSlug: string; name: string; page: string; order: string; free_trial: string }
+  query: { serviceSlug: string; page: string; order: string; free_trial: string }
 }) => {
   const slug = context.query.serviceSlug
-  const name = context.query.name
+  const name = unslugify(slug)
   const pg = context.query.page
   const order = context.query.order ? context.query.order : ''
   const free_trial = context.query.free_trial ? context.query.free_trial : ''
@@ -77,7 +78,7 @@ export default function ServiceList({
 }: ServiceListProps) {
   const router = useRouter()
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
-    let query = `/alternatives-or-similar-services/${slug}?name=${name}&page=${value}`
+    let query = `/alternatives-or-similar-services/${slug}?page=${value}`
     if (order) {
       query += `&order=${order}`
     }
@@ -111,12 +112,16 @@ export default function ServiceList({
               <SortServiceList
                 defaultValue={order}
                 onChange={(value) => {
-                  let query = `/alternatives-or-similar-services/${slug}?name=${name}`
+                  let query = `/alternatives-or-similar-services/${slug}`
                   if (value) {
-                    query += `&order=${value}`
-                  }
-                  if (free_trial) {
-                    query += `&free_trial=${free_trial}`
+                    query += `?order=${value}`
+                    if (free_trial) {
+                      query += `&free_trial=${free_trial}`
+                    }
+                  } else {
+                    if (free_trial) {
+                      query += `?free_trial=${free_trial}`
+                    }
                   }
                   router.push(query)
                 }}
@@ -126,14 +131,17 @@ export default function ServiceList({
               <FilterServiceList
                 defaultValue={free_trial}
                 onChange={(value) => {
-                  let query = `/alternatives-or-similar-services/${slug}?name=${name}`
+                  let query = `/alternatives-or-similar-services/${slug}`
                   if (value) {
-                    query += `&free_trial=${value}`
+                    query += `?free_trial=${value}`
+                    if (order) {
+                      query += `&order=${order}`
+                    }
+                  } else {
+                    if (order) {
+                      query += `?order=${order}`
+                    }
                   }
-                  if (order) {
-                    query += `&order=${order}`
-                  }
-
                   router.push(query)
                 }}
               />
@@ -150,12 +158,16 @@ export default function ServiceList({
                   <MobileViewSortAndFilterServiceList
                     defaultSortValue={order}
                     onSortChange={(value) => {
-                      let query = `/alternatives-or-similar-services/${slug}?name=${name}`
+                      let query = `/alternatives-or-similar-services/${slug}`
                       if (value) {
-                        query += `&order=${value}`
-                      }
-                      if (free_trial) {
-                        query += `&free_trial=${free_trial}`
+                        query += `?order=${value}`
+                        if (free_trial) {
+                          query += `&free_trial=${free_trial}`
+                        }
+                      } else {
+                        if (free_trial) {
+                          query += `&free_trial=${free_trial}`
+                        }
                       }
                       router.push(query)
                     }}
@@ -163,10 +175,14 @@ export default function ServiceList({
                     onFilterChange={(value) => {
                       let query = `/alternatives-or-similar-services/${slug}?name=${name}`
                       if (value) {
-                        query += `&free_trial=${value}`
-                      }
-                      if (order) {
-                        query += `&order=${order}`
+                        query += `?free_trial=${value}`
+                        if (order) {
+                          query += `&order=${order}`
+                        }
+                      } else {
+                        if (order) {
+                          query += `?order=${order}`
+                        }
                       }
                       router.push(query)
                     }}

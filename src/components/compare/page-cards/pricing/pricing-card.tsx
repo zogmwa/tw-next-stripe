@@ -5,12 +5,12 @@ import { Asset } from '../../../../types/asset'
 import { Modal } from '../../../Modal'
 import { PricingContent } from '../../../service-detail/pricing-content'
 
-type CompareServicePricingCard = {
+type CompareServicePricingCardProps = {
   service: Asset
   showPricingData: { asset: number; price: any }[]
 }
 
-function CompareServicePricingCardComponent({ service, showPricingData }: CompareServicePricingCard) {
+function CompareServicePricingCardComponent({ service, showPricingData }: CompareServicePricingCardProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   if (showPricingData === []) return null

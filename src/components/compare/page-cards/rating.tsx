@@ -3,10 +3,10 @@ import React from 'react'
 import { MdStar } from 'react-icons/md'
 import numeral from 'numeral'
 import { IoIosArrowUp } from 'react-icons/io'
+import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { MarkProgress } from '../../styled-mark-progress'
-import clsx from 'clsx'
 
 type CompareServiceRatingProps = {
   services: Asset[]
