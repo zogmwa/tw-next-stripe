@@ -6,7 +6,7 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import { Modal } from '../Modal'
 import { CarouselCustomPaging } from './carousel-custom-paging'
 
-type CarouselPaging = {
+type CarouselPagingProps = {
   images?: { asset: number; url: string }[]
 }
 
@@ -27,7 +27,7 @@ const NextArrow = (props) => {
   )
 }
 
-function CarouselPagingComponent({ images }: CarouselPaging) {
+function CarouselPagingComponent({ images }: CarouselPagingProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [sliderNav, setSliderNav] = useState(null)
   const [sliderThumb, setSliderThumb] = useState(null)

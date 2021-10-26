@@ -1,19 +1,19 @@
 import React from 'react'
+import clsx from 'clsx'
 import { Asset } from '../../../../types/asset'
 import { ServiceCollapse } from '../../../collapse'
 import { CompareServicePricingCard } from './pricing-card'
-import clsx from 'clsx'
 
-type CompareServicePricing = {
+type CompareServicePricingProps = {
   services: Asset[]
 }
 
-function CompareServicePricingComponent({ services }: CompareServicePricing) {
-  let showPricingData = []
+function CompareServicePricingComponent({ services }: CompareServicePricingProps) {
+  const showPricingData = []
   const serviceCount = services.length
 
   for (let i = 0; i < services.length; i++) {
-    let popularPricing = services[i].price_plans.filter((pricePlan) => pricePlan.most_popular === true)
+    const popularPricing = services[i].price_plans.filter((pricePlan) => pricePlan.most_popular === true)
     if (popularPricing.length > 0) {
       showPricingData.push({
         asset: services[i].id,

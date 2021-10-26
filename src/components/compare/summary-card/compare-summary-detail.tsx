@@ -6,14 +6,14 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { Asset } from '../../../types/asset'
 import { ServiceLogo } from '../../service-logo'
 
-type CompareServiceSummaryCardDetail = {
+type CompareServiceSummaryCardDetailProps = {
   service: Asset
 }
 
-function CompareServiceSummaryCardDetailComponent({ service }: CompareServiceSummaryCardDetail) {
-  var unitlist = ['', 'K', 'M', 'G']
+function CompareServiceSummaryCardDetailComponent({ service }: CompareServiceSummaryCardDetailProps) {
+  const unitlist = ['', 'K', 'M', 'G']
   function kFormater(number) {
-    let sign = Math.sign(number)
+    const sign = Math.sign(number)
     let unit = 0
     while (Math.abs(number) > 999) {
       unit = unit + 1

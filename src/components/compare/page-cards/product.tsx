@@ -1,15 +1,15 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { Button } from '../../button'
-import clsx from 'clsx'
 
-type CompareServiceProduct = {
+type CompareServiceProductProps = {
   services: Asset[]
 }
 
-function CompareServiceProductComponent({ services }) {
+function CompareServiceProductComponent({ services }: CompareServiceProductProps) {
   const router = useRouter()
   const serviceCount = services.length
 

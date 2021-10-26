@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { HiChevronUp } from 'react-icons/hi'
 import { Button } from '../../../button'
@@ -5,11 +6,11 @@ import { Asset } from '../../../../types/asset'
 import { AddPorsConsBar } from './proscons-add-bar'
 import { useUserContext } from '../../../../hooks/use-user'
 
-type ProsConsComponent = {
+type ProsConsComponentProps = {
   service: Asset
 }
 
-function ProsConsComponent({ service }: ProsConsComponent) {
+function ProsConsComponent({ service }: ProsConsComponentProps) {
   const { authVerified } = useUserContext()
   const [showProsList, setShowProsList] = useState([])
   const [showConsList, setShowConsList] = useState([])

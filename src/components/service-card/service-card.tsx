@@ -77,7 +77,11 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
             </Link>
           </div>
           <div className="flex-1">
-            {service.short_description ? <TruncatedDescription description={service.short_description} /> : null}
+            {service.short_description ? (
+              <TruncatedDescription description={service.short_description} />
+            ) : (
+              <TruncatedDescription description={service.description} />
+            )}
             <Link href={`/services/${service.slug}/`}>
               <div className="flex-1 cursor-pointer" />
             </Link>
@@ -134,7 +138,7 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
           <div className="flex items-center space-x-2 md:hidden">
             <AiFillStar className="text-primary" />
             <span className="mr-1 text-2xl font-bold">{rating}</span>
-            <span>/ 10</span>
+            <div className="text-text-secondary">/10</div>
           </div>
           <div className="items-center hidden space-x-2 md:justify-center md:flex md:flex-row">
             <AiFillStar className="text-primary" />

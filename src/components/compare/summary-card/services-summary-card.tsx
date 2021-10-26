@@ -1,7 +1,7 @@
 import React from 'react'
+import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { CompareServiceSummaryCardDetail } from './compare-summary-detail'
-import clsx from 'clsx'
 
 type CompareServiceCard = {
   services: Asset[]

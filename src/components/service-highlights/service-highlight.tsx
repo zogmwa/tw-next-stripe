@@ -50,7 +50,7 @@ function HighlightContentComponent({
   if (!viewMore) tempAttributes = tempConAttributes.slice(0, 10)
 
   const coustmerLength = Math.ceil(customerOrganizations.length / 4)
-  let showCustomers = []
+  const showCustomers = []
   for (let i = 0; i < coustmerLength; i++) {
     showCustomers.push([])
     for (let j = 0; j < 4; j++) {

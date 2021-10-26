@@ -10,11 +10,13 @@ import {
 import { clientWithRetries } from '../../utils/clientWithRetries'
 import { SearchBar } from '../../components/search-bar'
 import { Asset } from '../../types/asset'
+import { unslugify } from '../../utils/unslugify'
 
 export const getServerSideProps = async (context: {
-  query: { search_query: string; page: string; order: string; free_trial: string }
+  query: { serviceSlug: string; page: string; order: string; free_trial: string }
 }) => {
-  const tags = context.query.search_query
+  const slug = context.query.serviceSlug
+  const name = unslugify(slug)
   const pg = context.query.page
   const order = context.query.order ? context.query.order : ''
   const free_trial = context.query.free_trial ? context.query.free_trial : ''
@@ -25,22 +27,23 @@ export const getServerSideProps = async (context: {
     page = 0
   }
   const offset = page * 10
-  let query = `q=${tags}&offset=${offset}&limit=10`
+  let query = `slug=${slug}&offset=${offset}&limit=10`
   if (order) {
     query = `ordering=${order}&` + query
   }
   if (free_trial) {
     query = query + `&has_free_trial=${free_trial}`
   }
-  const { data } = await clientWithRetries.get<{ results: Asset[]; count: string }>(`/assets/?${query}`)
+  const { data } = await clientWithRetries.get<{ results: Asset[]; count: string }>(`/assets/similar/?${query}`)
   const totalCount = parseInt(data.count)
   const pageCount = totalCount % 10 === 0 ? totalCount / 10 : Math.floor(totalCount / 10) + 1
-  const defaultArr = tags.split(',').map((tag) => ({ value: tag, label: tag }))
+  const defaultArr = []
   return {
     props: {
       services: data.results,
       defaultArr,
-      tags,
+      slug,
+      name,
       currentPage: page + 1,
       pageCount,
       totalCount,
@@ -54,7 +57,8 @@ type ServiceListProps = {
   services: Asset[]
   defaultArr: { value: string; label: string }[]
   currentPage: number
-  tags: string
+  slug: string
+  name: string
   pageCount: number
   totalCount: number
   order: string
@@ -63,8 +67,9 @@ type ServiceListProps = {
 
 export default function ServiceList({
   services,
-  defaultArr,
-  tags,
+  defaultArr = [],
+  slug,
+  name,
   currentPage = 1,
   pageCount,
   totalCount,
@@ -73,7 +78,7 @@ export default function ServiceList({
 }: ServiceListProps) {
   const router = useRouter()
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
-    let query = `/search/${tags}?page=${value}`
+    let query = `/alternatives-or-similar-services/${slug}?page=${value}`
     if (order) {
       query += `&order=${order}`
     }
@@ -91,7 +96,7 @@ export default function ServiceList({
     }
   }, [services])
   return (
-    <div className="max-w-screen-lg px-2 mx-auto my-20">
+    <div className="max-w-screen-lg px-4 mx-auto my-20">
       <SearchBar
         className="mb-8"
         tagsArr={defaultArr}
@@ -107,7 +112,7 @@ export default function ServiceList({
               <SortServiceList
                 defaultValue={order}
                 onChange={(value) => {
-                  let query = `/search/${tags}`
+                  let query = `/alternatives-or-similar-services/${slug}`
                   if (value) {
                     query += `?order=${value}`
                     if (free_trial) {
@@ -126,7 +131,7 @@ export default function ServiceList({
               <FilterServiceList
                 defaultValue={free_trial}
                 onChange={(value) => {
-                  let query = `/search/${tags}`
+                  let query = `/alternatives-or-similar-services/${slug}`
                   if (value) {
                     query += `?free_trial=${value}`
                     if (order) {
@@ -144,7 +149,7 @@ export default function ServiceList({
           </div>
           <div className="md:w-3/4">
             <div className="flex justify-between mb-2">
-              <div className="text-xl font-medium text-text-primary">Products</div>
+              <div className="text-xl font-medium text-text-primary">Products similar to {name}</div>
               <div className="flex items-center justify-center space-x-4">
                 <div className="text-sm text-text-secondary">
                   {totalCount} {totalCount === 1 ? 'product' : 'products'}
@@ -153,7 +158,7 @@ export default function ServiceList({
                   <MobileViewSortAndFilterServiceList
                     defaultSortValue={order}
                     onSortChange={(value) => {
-                      let query = `/search/${tags}`
+                      let query = `/alternatives-or-similar-services/${slug}`
                       if (value) {
                         query += `?order=${value}`
                         if (free_trial) {
@@ -168,7 +173,7 @@ export default function ServiceList({
                     }}
                     defaultFilterValue={free_trial}
                     onFilterChange={(value) => {
-                      let query = `/search/${tags}`
+                      let query = `/alternatives-or-similar-services/${slug}?name=${name}`
                       if (value) {
                         query += `?free_trial=${value}`
                         if (order) {

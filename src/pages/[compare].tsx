@@ -18,7 +18,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
    ** Added favicon to /public
    */
   const serviceSlugs = context.query.services
-  let tempServiceSlugs = []
+  const tempServiceSlugs = []
   for (let i = 0; i < serviceSlugs.length; i++) {
     tempServiceSlugs.push(serviceSlugs[i])
   }

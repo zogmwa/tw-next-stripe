@@ -43,6 +43,7 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
   },
 }))
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: 0,
   borderTop: '1px solid rgba(0, 0, 0, .125)',

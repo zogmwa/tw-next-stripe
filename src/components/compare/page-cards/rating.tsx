@@ -1,17 +1,18 @@
+/* eslint-disable array-callback-return */
 import React from 'react'
 import { MdStar } from 'react-icons/md'
 import numeral from 'numeral'
 import { IoIosArrowUp } from 'react-icons/io'
+import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { MarkProgress } from '../../styled-mark-progress'
-import clsx from 'clsx'
 
-type CompareServiceRating = {
+type CompareServiceRatingProps = {
   services: Asset[]
 }
 
-function CompareServiceRatingComponent({ services }: CompareServiceRating) {
+function CompareServiceRatingComponent({ services }: CompareServiceRatingProps) {
   const serviceCount = services.length
 
   // const marks = [
@@ -33,9 +34,9 @@ function CompareServiceRatingComponent({ services }: CompareServiceRating) {
   //   },
   // ]
 
-  var unitlist = ['', 'K', 'M', 'G']
+  const unitlist = ['', 'K', 'M', 'G']
   function kFormater(number) {
-    let sign = Math.sign(number)
+    const sign = Math.sign(number)
     let unit = 0
     while (Math.abs(number) > 999) {
       unit = unit + 1

@@ -15,6 +15,7 @@ export function QuestionTruncated({
   className,
   style,
 }: TruncatedDescriptionProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [renderFull, setRenderFull] = useState(false)
   const isOverFlowingText = description?.length >= maxLength
 
