@@ -12,21 +12,28 @@ export type CreateServiceInput = {
   website: string
   logoUrl?: string
   promoVideo?: string
-  snapshots?: { asset: number; url: string }[]
+  snapshots?: { url: string }[]
 }
 
 export async function createService(createServiceInput: CreateServiceInput): Promise<Asset> {
-  const { data } = await axios.post<Asset>('/api/assets/', {
-    slug: createServiceInput.slug,
-    name: createServiceInput.name,
-    short_description: createServiceInput.shortDescription,
-    description: createServiceInput.description,
-    website: createServiceInput.website,
-    logo_url: createServiceInput.logoUrl,
-    promo_video: createServiceInput.promoVideo,
-    snapshots: createServiceInput.snapshots,
-  })
-  return data
+  try {
+    const { data } = await axios.post<Asset>('/api/assets/', {
+      slug: createServiceInput.slug,
+      name: createServiceInput.name,
+      short_description: createServiceInput.shortDescription,
+      description: createServiceInput.description,
+      website: createServiceInput.website,
+      logo_url: createServiceInput.logoUrl,
+      promo_video: createServiceInput.promoVideo,
+      snapshots: createServiceInput.snapshots,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line no-console
+    console.log('Failed to add a service', error)
+    return null
+  }
 }
 
 export async function fetchService(slug: string): Promise<Asset | null> {

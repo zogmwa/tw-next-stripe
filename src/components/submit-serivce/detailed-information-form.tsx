@@ -9,13 +9,13 @@ import { ImageUploader } from '../image-uploader'
 export type DetailedInformationFormValues = {
   description: string
   promoVideo: string | undefined
-  snapshots: { asset: number; url: string }[]
+  snapshots: { url: string }[]
 }
 
 // @TODO: Update min max limits according to api
 export const detailedInformationSchema = yup.object().shape({
   description: yup.string().optional(),
-  snapshots: yup.array().of(yup.string()).min(0).max(5).optional(),
+  snapshots: yup.array().of(yup.object()).min(0).max(5).optional(),
   promoVideo: yup.string().optional().url('Please enter a valid url'),
 })
 
@@ -106,7 +106,10 @@ export function DetailedInformationForm({
           limit={5}
           onUploading={onUploading}
           onChange={(urls) => {
-            setFieldValue('snapshots', urls)
+            setFieldValue(
+              'snapshots',
+              urls.map((url) => ({ url })),
+            )
           }}
         />
       </div>
