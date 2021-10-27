@@ -6,7 +6,7 @@ import { IoIosArrowUp } from 'react-icons/io'
 import clsx from 'clsx'
 import { Asset } from '../../../types/asset'
 import { ServiceCollapse } from '../../collapse'
-import { MarkProgress } from '../../styled-mark-progress'
+// import { MarkProgress } from '../../styled-mark-progress'
 
 type CompareServiceRatingProps = {
   services: Asset[]

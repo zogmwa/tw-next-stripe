@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 
-type CarouselCustomPaging = {
+type CarouselCustomPagingProps = {
   images?: { asset: number; url: string }[]
 }
 
@@ -25,7 +25,7 @@ const NextArrow = (props) => {
   )
 }
 
-function CarouselCustomPagingComponent({ images }: CarouselCustomPaging) {
+function CarouselCustomPagingComponent({ images }: CarouselCustomPagingProps) {
   const [sliderNav, setSliderNav] = useState(null)
   const [sliderThumb, setSliderThumb] = useState(null)
   const [mainSlider, setMainSlider] = useState(null)
