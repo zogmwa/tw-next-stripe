@@ -34,10 +34,10 @@ const RedirectSpinner = () => (
 )
 
 function CustomApp({ Component, pageProps }: AppProps) {
-  const { asPath } = useRouter()
+  const { pathname } = useRouter()
   const router = useRouter()
-  const renderNavBar = asPath !== '/login' && asPath !== '/signup'
-  const renderFooter = asPath !== '/login' && asPath !== '/signup'
+  const renderNavBar = pathname !== '/login' && pathname !== '/signup'
+  const renderFooter = pathname !== '/login' && pathname !== '/signup'
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
