@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { GrTwitter } from 'react-icons/gr'
+import { TiSocialFacebook } from 'react-icons/ti'
+import { TiSocialTwitter } from 'react-icons/ti'
 import { TiSocialLinkedin } from 'react-icons/ti'
 import { MdOutlineEmail } from 'react-icons/md'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
@@ -20,8 +21,8 @@ function HomePageFooterComponent({ topTags }: footerData) {
       <div className="hidden max-w-screen-lg pr-2 mx-auto divide-y md:block footer divide divide-border-default">
         <div className="justify-between hidden p-2 md:flex info">
           <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold">Popular SaaS Tags</h2>
-            <div className="grid grid-cols-4 mt-2 tags">
+            <h2 className="text-2xl font-semibold">Popular Software as a Service (SaaS) Categories and Tags</h2>
+            <div className="grid grid-cols-3 mt-2 tags">
               {showTopTags.map((tag) => (
                 <Button
                   key={tag.slug}
@@ -64,7 +65,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
             </div>
           </div> */}
           <div className="contact-us">
-            <h2 className="pt-2 font-semibold text-md">We're here to help you</h2>
+            <h2 className="pt-2 font-semibold text-md">We are here to help</h2>
             <div className="flex items-center mt-4 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
               <img src="/images/contact-email.png" alt="contact" />
@@ -82,14 +83,6 @@ function HomePageFooterComponent({ topTags }: footerData) {
           </div>
           <div className="flex p-2 space-x-4 other-sites">
             <a
-              href="https://twitter.com/TheTaggedWeb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-900 no-underline"
-            >
-              <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
-            </a>
-            <a
               href="https://www.linkedin.com/company/taggedweb/"
               target="_blank"
               rel="noopener noreferrer"
@@ -97,10 +90,26 @@ function HomePageFooterComponent({ topTags }: footerData) {
             >
               <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
+            <a
+              href="https://twitter.com/TheTaggedWeb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
+              <TiSocialTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+            </a>
+            <a
+              href="https://www.facebook.com/taggedweb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
+              <TiSocialFacebook className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+            </a>
           </div>
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
-            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb.com All rights reserved.</span>
+            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb.com. All rights reserved.</span>
           </div>
         </div>
       </div>
@@ -174,7 +183,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+              <TiSocialTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
             <a
               href="https://www.linkedin.com/company/taggedweb/"
@@ -183,6 +192,14 @@ function HomePageFooterComponent({ topTags }: footerData) {
               className="text-gray-900 no-underline"
             >
               <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
+            </a>
+            <a
+              href="https://www.facebook.com/taggedweb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
+              <TiSocialFacebook className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
           </div>
           <div className="flex items-center mt-2 copyright">

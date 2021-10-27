@@ -24,16 +24,18 @@ export default function Home() {
           <div className="flex flex-col items-center justify-start px-2 md:px-0 md:flex-row">
             <div className="flex flex-col items-start justify-center mb-2 md:w-12/12">
               <h4 className="mb-4 text-3xl text-black">
-                We will help you both find and evaluate the best SaaS Software and Services for your needs
+                We help you find and evaluate the best SaaS Software and Services for your needs
               </h4>
               <div className="mb-4 text-lg text-gray-600">
                 {' '}
-                Whether you are a business user at a large enterprise, a small business, or a non-profit: Our mission
-                just does not end with just helping you find a good SaaS option. We want it to be the best fit for
-                solving your problems. If you aren&apos;t sure if a software or a web service is a good candidate and
-                want to further evaluate it under a trial or learn how to use it, then we will work together with you to
-                evaluate it or connect you with specific experts who can show you how to most effectively utilize it,
-                for your use-cases.{' '}
+                <p>
+                  Whether you work at a large enterprise, a small business, or a non-profit: our mission just does not
+                  end with just helping you find a good SaaS option. We want it to be the best fit for solving your
+                  problems. If you aren&apos;t sure if a software or a web service will work for you and want to further
+                  evaluate it under a trial or learn how to use it, then we will work together with you to evaluate it
+                  and we will find you domain experts who can show you how to effectively utilize specific tools, for
+                  your use-cases.{' '}
+                </p>
               </div>
             </div>
           </div>
@@ -47,7 +49,7 @@ export default function Home() {
                 Are you a SaaS provider or creator? Connect with more users
               </div>
               <div className="mb-4 text-2xl text-gray-300">
-                Help people discover your SaaS services and their features by adding it to TaggedWeb
+                Help people discover your SaaS service and it&apos;s features by adding it to TaggedWeb
               </div>
               <Button
                 buttonType="primary"

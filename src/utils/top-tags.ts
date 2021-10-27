@@ -1,78 +1,78 @@
 export const topTags = [
   {
-    value: 'Email Marketing',
-    slug: 'email-marketing',
+    value: 'Accounting Software and Tools',
+    slug: 'accounting',
   },
   {
-    value: 'Marketplace',
-    slug: 'marketplace',
+    value: 'Analytics Software',
+    slug: 'analytics',
   },
   {
-    value: 'Affiliate Marketing',
-    slug: 'affiliate-marketing',
+    value: 'VPN Software and Tools',
+    slug: 'vpn',
   },
   {
-    value: 'Marketing',
-    slug: 'marketing',
-  },
-  {
-    value: 'Marketing Automation',
-    slug: 'marketing-automation',
-  },
-  {
-    value: 'Community',
-    slug: 'community',
-  },
-  {
-    value: 'Compliance',
+    value: 'Compliance Tools',
     slug: 'compliance',
   },
   {
-    value: 'E commerce',
+    value: 'CRM Software',
+    slug: 'crm',
+  },
+  {
+    value: 'Email Marketing SaaS',
+    slug: 'email-marketing',
+  },
+  {
+    value: 'E-Commerce Tools',
     slug: 'e-commerce',
   },
   {
-    value: 'Compute',
-    slug: 'compute',
+    value: 'Enterprise Resource Planning (ERP) Software',
+    slug: 'erp',
   },
   {
-    value: 'Communication',
-    slug: 'communication',
-  },
-  {
-    value: 'Environmental Compliance',
+    value: 'Environmental Compliance Software',
     slug: 'environmental-compliance',
   },
   {
-    value: 'Commission Free',
-    slug: 'commission-free',
+    value: 'Artificial Intelligence Tools',
+    slug: 'artificial-intelligence',
   },
   {
-    value: 'Investing',
-    slug: 'investing',
+    value: 'Marketplace Software',
+    slug: 'marketplace',
   },
   {
-    value: 'Video Conferencing',
+    value: 'Marketing Automation Tools',
+    slug: 'marketing-automation',
+  },
+  {
+    value: 'Marketing Automation SaaS',
+    slug: 'marketing-automation',
+  },
+  {
+    value: 'Video Conferencing Tools',
     slug: 'video-conferencing',
   },
   {
-    value: 'Video Streaming',
-    slug: 'video-streaming',
+    value: 'Design Tools',
+    slug: 'design',
   },
   {
-    value: 'Png',
-    slug: 'png',
+    value: 'Security Services',
+    slug: 'security',
   },
   {
-    value: 'Image Search',
-    slug: 'image-search',
+    value: 'Security Software',
+    slug: 'security',
   },
   {
-    value: 'Images',
-    slug: 'images',
+    value: 'Customer Service',
+    slug: 'customer-service',
   },
   {
-    value: 'NFT',
-    slug: 'nft',
+    value: 'Construction Management Software',
+    slug: 'construction-management',
   },
 ]
