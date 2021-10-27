@@ -20,7 +20,7 @@ const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
     <div className="hidden leading-none md:flex">
-      Type one or more feature tags of interest to you, e.g. email-marketing, landing-pages
+      Start by typing one or more feature tags of interest. e.g. email-marketing, landing-pages
     </div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>

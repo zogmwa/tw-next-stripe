@@ -81,23 +81,33 @@ function HomePageFooterComponent({ topTags }: footerData) {
             </a>
           </div>
           <div className="flex p-2 space-x-4 other-sites">
-            <a href="https://twitter.com" target="_blank" className="text-gray-900 no-underline">
+            <a
+              href="https://twitter.com/TheTaggedWeb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
-            <a href="https://www.linkedin.com" target="_blank" className="text-gray-900 no-underline">
+            <a
+              href="https://www.linkedin.com/company/taggedweb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
               <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
           </div>
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
-            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb. All rights reserved.</span>
+            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb.com All rights reserved.</span>
           </div>
         </div>
       </div>
       <div className="block max-w-screen-lg divide-y footer divide divide-border-default md:hidden">
         <div className="flex flex-col p-2 md:hidden info">
           <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold">Popular Saas Tags</h2>
+            <h2 className="text-2xl font-semibold">Popular SaaS Tags</h2>
             <div className="grid grid-cols-2 mt-2 tags">
               {showTopTags.map((tag) => (
                 <Button
@@ -158,16 +168,26 @@ function HomePageFooterComponent({ topTags }: footerData) {
             </a>
           </div>
           <div className="flex justify-around mt-2 space-x-4 other-sites">
-            <a href="https://twitter.com" target="_blank" className="text-gray-900 no-underline">
+            <a
+              href="https://twitter.com/TheTaggedWeb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
               <GrTwitter className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
-            <a href="https://www.linkedin.com" target="_blank" className="text-gray-900 no-underline">
+            <a
+              href="https://www.linkedin.com/company/taggedweb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 no-underline"
+            >
               <TiSocialLinkedin className="p-1 text-3xl border border-solid rounded-full border-border-default" />
             </a>
           </div>
           <div className="flex items-center mt-2 copyright">
             <AiOutlineCopyrightCircle className="text-sm text-text-tertiary" />
-            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb. All rights reserved.</span>
+            <span className="pl-1 text-xs text-text-tertiary">2021 TaggedWeb All rights reserved.</span>
           </div>
         </div>
       </div>
