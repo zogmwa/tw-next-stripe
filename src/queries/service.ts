@@ -16,16 +16,6 @@ export type CreateServiceInput = {
 }
 
 export async function createService(createServiceInput: CreateServiceInput): Promise<Asset> {
-  console.log({
-    slug: createServiceInput.slug,
-    name: createServiceInput.name,
-    short_description: createServiceInput.shortDescription,
-    description: createServiceInput.description,
-    website: createServiceInput.website,
-    logo_url: createServiceInput.logoUrl,
-    promo_video: createServiceInput.promoVideo,
-    snapshots: createServiceInput.snapshots,
-  })
   try {
     const { data } = await axios.post<Asset>('/api/assets/', {
       slug: createServiceInput.slug,
@@ -37,7 +27,6 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
       promo_video: createServiceInput.promoVideo,
       snapshots: createServiceInput.snapshots,
     })
-    console.log('============================================================', data)
     return data
   } catch (error) {
     // TODO: error handling
