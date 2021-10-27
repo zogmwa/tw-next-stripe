@@ -1,8 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { TiSocialFacebook } from 'react-icons/ti'
-import { TiSocialTwitter } from 'react-icons/ti'
-import { TiSocialLinkedin } from 'react-icons/ti'
+import { TiSocialFacebook, TiSocialTwitter, TiSocialLinkedin } from 'react-icons/ti'
+
 import { MdOutlineEmail } from 'react-icons/md'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
 import { Button } from '../button'
@@ -160,7 +159,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
             </div>
           </div> */}
           <div className="flex flex-col w-full mt-2 contact-us">
-            <h2 className="font-semibold text-md">We're here to help you</h2>
+            <h2 className="font-semibold text-md">We&apos;re here to help you</h2>
             <div className="flex items-center mt-2 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
               <img src="/images/contact-email.png" alt="contact" />

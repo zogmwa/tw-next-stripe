@@ -19,15 +19,20 @@ export function NavBar({ className, style }: NavBarProps) {
   return (
     <div className={clsx('w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
       <div className="flex items-center h-full max-w-screen-lg pr-2 mx-auto">
-        <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10" />
         <Link href="/">
-          <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+          <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+        </Link>
+        <Link href="/">
+          <div className="hidden text-base font-medium tracking-wide text-opacity-100 cursor-pointer md:flex text-primary">
             TaggedWeb
           </div>
         </Link>
         <div className="flex-1" />
         <Link href="/submit-service">
-          <Button className="mr-4">Submit A Web Service</Button>
+          <>
+            <Button className="px-2 py-2 mx-4 text-sm md:hidden">Submit A Web Service</Button>
+            <Button className="hidden mx-4 md:flex">Submit A Web Service</Button>
+          </>
         </Link>
         {isLoggedIn() ? (
           <>
