@@ -14,13 +14,14 @@ import { ServiceLogo } from '../service-logo'
 
 type ServiceCardProps = {
   service: Asset
-  onToggleCompare?: (bool: any) => void
+  onToggleCompare?: (bool: any, service: Asset) => void
+  isChecked?: boolean
 }
 
-function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
+function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCardProps) {
   const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onToggleCompare) {
-      onToggleCompare((event.target as HTMLInputElement).checked)
+      onToggleCompare((event.target as HTMLInputElement).checked, service)
     }
   }
   const router = useRouter()
@@ -49,7 +50,7 @@ function ServiceCardComponent({ service, onToggleCompare }: ServiceCardProps) {
             />
           </Link>
           <div className="flex items-center space-x-2">
-            <Checkbox onChange={onCompare} />
+            <Checkbox onChange={onCompare} checked={isChecked} />
             <div className="text-xs uppercase text-text-tertiary">Compare</div>
           </div>
         </div>
