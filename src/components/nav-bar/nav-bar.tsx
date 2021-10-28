@@ -78,9 +78,7 @@ export function NavBar({ className, style }: NavBarProps) {
                     <Button> Sign Up | Login </Button>
                   </Link>
                 )}
-                <IconButton className="p-1 text-2xl text-primary" onClick={() => setMobileTopShow(true)}>
-                  <GiHamburgerMenu />
-                </IconButton>
+                <GiHamburgerMenu className="p-1 text-3xl text-primary" onClick={() => setMobileTopShow(true)} />
               </div>
             </div>
           </div>
