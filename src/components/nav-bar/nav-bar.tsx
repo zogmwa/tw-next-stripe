@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineClose } from 'react-icons/md'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
+import { useRouter } from 'next/router'
 import { Button } from '../button'
 import { useUserContext } from '../../hooks/use-user'
 import Avatar from './avatar'
@@ -19,7 +19,7 @@ export function NavBar({ className, style }: NavBarProps) {
   const [mobileTopShow, setMobileTopShow] = useState(false)
   const session = useUserContext()
   const router = useRouter()
-  const { isLoggedIn } = session
+  const { isLoggedIn, logout } = session
 
   return (
     <div id="navbar">
@@ -101,7 +101,30 @@ export function NavBar({ className, style }: NavBarProps) {
             <a className="flex justify-center w-full" href="/submit-service">
               <span className="px-2 py-2 text-md">Submit A Web Service</span>
             </a>
-            {!isLoggedIn() && (
+            {isLoggedIn() ? (
+              <>
+                <a
+                  className="flex justify-center w-full"
+                  href="#"
+                  onClick={() => {
+                    router.push('/profile')
+                    setMobileTopShow(false)
+                  }}
+                >
+                  <span className="px-2 py-2 text-md"> Profile </span>
+                </a>
+                <a
+                  className="flex justify-center w-full"
+                  href="#"
+                  onClick={() => {
+                    logout()
+                    setMobileTopShow(false)
+                  }}
+                >
+                  <span className="px-2 py-2 text-md"> Logout </span>
+                </a>
+              </>
+            ) : (
               <a className="flex justify-center w-full" href={`/login?next=${router.asPath}`}>
                 <span className="px-2 py-2 text-md"> Sign Up | Login </span>
               </a>
