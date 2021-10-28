@@ -48,7 +48,10 @@ export function NavBar({ className, style }: NavBarProps) {
           )}
         </div>
       </div>
-      <div className={clsx('flex md:hidden w-full max-h-32 bg-background-surface border-b px-4', className)} style={style}>
+      <div
+        className={clsx('flex md:hidden w-full max-h-32 bg-background-surface border-b px-4', className)}
+        style={style}
+      >
         <div className="flex flex-col items-start w-full h-full py-2 pr-2">
           <div className="flex items-center justify-between w-full p-1">
             <div className="flex items-center">
@@ -61,8 +64,12 @@ export function NavBar({ className, style }: NavBarProps) {
                 </div>
               </Link>
             </div>
-            <FaGripLines 
-              className={isLoggedIn() ? "p-1 mr-2 text-2xl border border-solid rounded-md text-primary border-primary" : "p-1 text-2xl border border-solid rounded-md text-primary border-primary"}
+            <FaGripLines
+              className={
+                isLoggedIn()
+                  ? 'p-1 mr-2 text-2xl border border-solid rounded-md text-primary border-primary'
+                  : 'p-1 text-2xl border border-solid rounded-md text-primary border-primary'
+              }
               onClick={() => setMobileTopShow(!mobileTopShow)}
             />
           </div>
