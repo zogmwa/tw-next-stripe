@@ -41,13 +41,11 @@ function RelatedContentComponent({ name, slug }: RelateName) {
       toast.error('You can compare at most 3 services.')
     } else {
       const services = compareList
-      services.unshift(slug)
+      let compareParams = slug
+      services.map((compareService) => (compareParams += '-vs-' + compareService))
       router.push(
         {
-          pathname: '/compare',
-          query: {
-            services,
-          },
+          pathname: `/compare/${compareParams}`,
         },
         undefined,
         {

@@ -35,10 +35,7 @@ export function NavBar({ className, style }: NavBarProps) {
           </Link>
           <div className="flex-1" />
           <Link href="/submit-service">
-            <>
-              <Button className="px-2 py-2 mx-4 text-sm md:hidden">Submit A Web Service</Button>
-              <Button className="hidden mx-4 md:flex">Submit A Web Service</Button>
-            </>
+            <Button className="flex mx-4">Submit A Web Service</Button>
           </Link>
           {isLoggedIn() ? (
             <>
