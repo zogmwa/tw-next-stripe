@@ -30,8 +30,16 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
   const tempServiceSlugs = SplitTheString(compare_url)
   const sendUrl = '?asset__slugs=' + tempServiceSlugs.join('&asset__slugs=')
+  const tempServices = await fetchServicesDetailCompareServer(context.req.session, sendUrl)
+  let services = []
+  for (let serviceSlugIndex = 0; serviceSlugIndex < tempServiceSlugs.length; serviceSlugIndex++) {
+    for (let serviceIndex = 0; serviceIndex < tempServices.length; serviceIndex++) {
+      if (tempServiceSlugs[serviceSlugIndex] === tempServices[serviceIndex].slug) {
+        services.push(tempServices[serviceIndex])
+      }
+    }
+  }
 
-  const services = await fetchServicesDetailCompareServer(context.req.session, sendUrl)
   return {
     props: { services },
   }
