@@ -62,6 +62,7 @@ const asset2 = {
   avg_rating: '10.000',
   users_count: 102,
   my_asset_vote: null,
+  edit_allowed: true,
 }
 
 export function DefaultCard() {
@@ -104,6 +105,7 @@ export function DetailCard() {
       <li className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light">
         <ServiceDetailCard
           service={asset2}
+          editAllowed={true}
           onToggleCompare={(isCompared) => {
             // eslint-disable-next-line no-console
             console.log(isCompared)
