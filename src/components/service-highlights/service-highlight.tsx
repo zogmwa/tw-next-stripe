@@ -3,6 +3,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import toast from 'react-hot-toast'
 import { TiImageOutline } from 'react-icons/ti'
+import ReactTooltip from 'react-tooltip'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -43,6 +44,10 @@ function HighlightContentComponent({
   }
 
   const defaultShowCount = 10
+
+  attributes.sort((attributeA, attributeB) => {
+    return (Number(attributeA.upvotes_count) - Number(attributeB.upvotes_count)) * -1
+  })
 
   let tempAttributes = attributes
   let tempConAttributes = attributes
@@ -230,7 +235,16 @@ function HighlightContentComponent({
                         title={item.name}
                         key={item.name}
                       >
-                        <img src={item.logo_url} alt={item.name} />
+                        <img src={item.logo_url} alt={item.name} data-for={`tooltip${item.name}`} data-tip />
+                        <ReactTooltip
+                          id={`tooltip${item.name}`}
+                          type="light"
+                          place="right"
+                          border={true}
+                          borderColor="text-grey-200"
+                        >
+                          {item.name}
+                        </ReactTooltip>
                       </div>
                     )
                   } else {
@@ -240,8 +254,23 @@ function HighlightContentComponent({
                         title={item.name}
                         key={item.name}
                       >
-                        <TiImageOutline className="text-4xl" />
-                        <span className="text-2xl italic tracking-wide text-text-secondary">{item.name}</span>
+                        <TiImageOutline className="text-4xl" data-for={`tooltip${item.name}`} data-tip />
+                        <span
+                          className="text-2xl italic tracking-wide text-text-secondary"
+                          data-for={`tooltip${item.name}`}
+                          data-tip
+                        >
+                          {item.name}
+                        </span>
+                        <ReactTooltip
+                          id={`tooltip${item.name}`}
+                          type="light"
+                          place="right"
+                          border={true}
+                          borderColor="text-grey-200"
+                        >
+                          {item.name}
+                        </ReactTooltip>
                       </div>
                     )
                   }
