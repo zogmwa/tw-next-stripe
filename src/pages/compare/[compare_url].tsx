@@ -1,28 +1,36 @@
 import React from 'react'
-import { CompareServiceCard } from '../components/compare/services-detail'
-import { CompareServiceTab } from '../components/compare/tab'
-import { CompareServiceSummaryCard } from '../components/compare/summary-card'
-import { fetchServicesDetailCompareServer } from '../server-queries/fetch-services-compare-detail'
-import { CompareServiceProduct } from '../components/compare/page-cards/product'
-import { CompareServiceCarousel } from '../components/compare/page-cards/carousel'
-import { CompareServiceProsCons } from '../components/compare/page-cards/pros-cons/pros-cons'
-import { CompareServiceRating } from '../components/compare/page-cards/rating'
-import { CompareServicePricing } from '../components/compare/page-cards/pricing/pricing'
-import { CompareServiceUsedBy } from '../components/compare/page-cards/used-by'
-import { withSessionSSR } from '../utils/session'
-import { CompareServiceScrollNavbar } from '../components/compare/scroll-navbar'
+import { CompareServiceCard } from '../../components/compare/services-detail'
+import { CompareServiceTab } from '../../components/compare/tab'
+import { CompareServiceSummaryCard } from '../../components/compare/summary-card'
+import { fetchServicesDetailCompareServer } from '../../server-queries/fetch-services-compare-detail'
+import { CompareServiceProduct } from '../../components/compare/page-cards/product'
+import { CompareServiceCarousel } from '../../components/compare/page-cards/carousel'
+import { CompareServiceProsCons } from '../../components/compare/page-cards/pros-cons/pros-cons'
+import { CompareServiceRating } from '../../components/compare/page-cards/rating'
+import { CompareServicePricing } from '../../components/compare/page-cards/pricing/pricing'
+import { CompareServiceUsedBy } from '../../components/compare/page-cards/used-by'
+import { withSessionSSR } from '../../utils/session'
+import { CompareServiceScrollNavbar } from '../../components/compare/scroll-navbar'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   /*
    ** https://github.com/vercel/next.js/discussions/13301
    ** Added favicon to /public
    */
-  const serviceSlugs = context.query.services
-  const tempServiceSlugs = []
-  for (let i = 0; i < serviceSlugs.length; i++) {
-    tempServiceSlugs.push(serviceSlugs[i])
+  const {
+    params: { compare_url },
+  } = context
+
+  const SplitTheString = (url) => {
+    if (url != null) {
+      var SplitChars = '-vs-'
+      return url.split(SplitChars)
+    }
   }
+
+  const tempServiceSlugs = SplitTheString(compare_url)
   const sendUrl = '?asset__slugs=' + tempServiceSlugs.join('&asset__slugs=')
+
   const services = await fetchServicesDetailCompareServer(context.req.session, sendUrl)
   return {
     props: { services },
