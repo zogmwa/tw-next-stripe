@@ -3,7 +3,12 @@ import { ShowEditable } from './show-editable'
 import { EditableTextarea } from './editable-textarea'
 import { TruncatedDescription } from '../truncated-description'
 
-function EditableServiceDescriptionComponent({ serviceDescription, handleSubmit }) {
+type EditableServiceDescriptionComponent = {
+  serviceDescription: string
+  onSubmit: Function
+}
+
+function EditableServiceDescriptionComponent({ serviceDescription, onSubmit }: EditableServiceDescriptionComponent) {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
@@ -12,14 +17,14 @@ function EditableServiceDescriptionComponent({ serviceDescription, handleSubmit 
         <EditableTextarea
           textareaName="serviceDescription"
           textareaValue={serviceDescription}
-          handleSubmit={(value) => {
+          onSubmit={(value) => {
             setIsEdit(false)
-            handleSubmit('description', value)
+            onSubmit('description', value)
           }}
-          handleCancel={() => setIsEdit(false)}
+          onCancel={() => setIsEdit(false)}
         />
       ) : (
-        <ShowEditable handleEdit={() => setIsEdit(true)}>
+        <ShowEditable onEdit={() => setIsEdit(true)}>
           <TruncatedDescription description={serviceDescription} />
         </ShowEditable>
       )}

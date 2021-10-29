@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import ReactTooltip from 'react-tooltip'
 
-function EditableInputComponent({ inputName, inputValue, handleSubmit, handleCancel }) {
+type EditableInputComponent = {
+  inputName: string
+  inputValue: string | number
+  onSubmit: Function
+  onCancel: Function
+}
+
+function EditableInputComponent({ inputName, inputValue, onSubmit, onCancel }: EditableInputComponent) {
   const [value, setValue] = useState(inputValue)
 
   return (
@@ -15,7 +22,7 @@ function EditableInputComponent({ inputName, inputValue, handleSubmit, handleCan
       />
       <AiOutlineCheck
         className="absolute top-[0.3rem] right-[1.5rem] text-success text-md cursor-pointer"
-        onClick={() => handleSubmit(value)}
+        onClick={() => onSubmit(value)}
         data-for="tooltip-save"
         data-tip
       />
@@ -24,7 +31,7 @@ function EditableInputComponent({ inputName, inputValue, handleSubmit, handleCan
       </ReactTooltip>
       <AiOutlineClose
         className="absolute top-[0.3rem] right-[0.5rem] text-red-600 text-md cursor-pointer"
-        onClick={handleCancel}
+        onClick={() => onCancel()}
         data-for="tooltip-cancel"
         data-tip
       />

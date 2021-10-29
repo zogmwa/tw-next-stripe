@@ -111,7 +111,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare, editAllowed = fa
               {editAllowed ? (
                 <EditableServiceName
                   serviceName={service.name}
-                  handleSubmit={(field, value) => handleUpdate(field, value)}
+                  onSubmit={(field, value) => handleUpdate(field, value)}
                 />
               ) : (
                 <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
@@ -140,7 +140,7 @@ function ServiceDetailCardComponent({ service, onToggleCompare, editAllowed = fa
             {editAllowed ? (
               <EditableServiceDescription
                 serviceDescription={service.short_description ? service.short_description : service.description}
-                handleSubmit={(field, value) => handleUpdate(field, value)}
+                onSubmit={(field, value) => handleUpdate(field, value)}
               />
             ) : service.short_description ? (
               <TruncatedDescription description={service.short_description} />

@@ -3,7 +3,14 @@ import { FiEdit } from 'react-icons/fi'
 import ReactTooltip from 'react-tooltip'
 import { ServiceLogo } from '../service-logo'
 
-function EditableServiceLogoComponent({ serviceName, serviceId, logoUrl, owned }) {
+type EditableServiceLogoComponent = {
+  serviceName: string
+  serviceId: number
+  logoUrl: string
+  owned: boolean
+}
+
+function EditableServiceLogoComponent({ serviceName, serviceId, logoUrl, owned }: EditableServiceLogoComponent) {
   return (
     <>
       <ServiceLogo serviceName={serviceName} serviceId={serviceId} logoUrl={logoUrl} owned={owned ?? false} />

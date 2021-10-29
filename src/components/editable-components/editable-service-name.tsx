@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { ShowEditable } from './show-editable'
 import { EditableInput } from './editable-input'
 
-function EditableServiceNameComponent({ serviceName, handleSubmit }) {
+type EditableServiceNameComponent = {
+  serviceName: string
+  onSubmit: Function
+}
+
+function EditableServiceNameComponent({ serviceName, onSubmit }: EditableServiceNameComponent) {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
@@ -11,14 +16,14 @@ function EditableServiceNameComponent({ serviceName, handleSubmit }) {
         <EditableInput
           inputName="serviceName"
           inputValue={serviceName}
-          handleSubmit={(value) => {
+          onSubmit={(value) => {
             setIsEdit(false)
-            handleSubmit('name', value)
+            onSubmit('name', value)
           }}
-          handleCancel={() => setIsEdit(false)}
+          onCancel={() => setIsEdit(false)}
         />
       ) : (
-        <ShowEditable handleEdit={() => setIsEdit(true)}>
+        <ShowEditable onEdit={() => setIsEdit(true)}>
           <h1 className="text-base font-medium text-text-primary">{serviceName}</h1>
         </ShowEditable>
       )}
