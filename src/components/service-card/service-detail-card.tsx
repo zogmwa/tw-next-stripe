@@ -12,13 +12,17 @@ import { Button } from '../button'
 import { Asset } from '../../types/asset'
 import { Checkbox } from '../checkbox'
 import { ServiceLogo } from '../service-logo'
+import { EditableServiceLogo } from '../editable-components'
+import { EditableServiceName } from '../editable-components'
+import { EditableServiceDescription } from '../editable-components'
 
 type ServiceDetailCardProps = {
   service: Asset
   onToggleCompare?: (bool: any) => void
+  editAllowed?: boolean
 }
 
-function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailCardProps) {
+function ServiceDetailCardComponent({ service, onToggleCompare, editAllowed = false }: ServiceDetailCardProps) {
   const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onToggleCompare) {
       onToggleCompare((event.target as HTMLInputElement).checked)
@@ -70,24 +74,49 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
     setIsLoadingUpvote(false)
   }
 
+  const handleUpdate = (field, value) => {
+    console.log('Field: ', field)
+    console.log('Value: ', value)
+  }
+
   return (
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <ServiceLogo
-            serviceName={service?.name}
-            serviceId={service.id}
-            logoUrl={service.logo_url}
-            owned={service?.is_owned ?? false}
-          />
+          <div className="relative">
+            {editAllowed ? (
+              <EditableServiceLogo
+                serviceName={service?.name}
+                serviceId={service.id}
+                logoUrl={service.logo_url}
+                owned={service?.is_owned ?? false}
+              />
+            ) : (
+              <ServiceLogo
+                serviceName={service?.name}
+                serviceId={service.id}
+                logoUrl={service.logo_url}
+                owned={service?.is_owned ?? false}
+              />
+            )}
+          </div>
           <div className="flex items-center space-x-2">
             <Checkbox onChange={onCompare} />
             <div className="text-xs uppercase text-text-tertiary">Compare</div>
           </div>
         </div>
         <div className="flex-1">
-          <div className="flex justify-start space-x-2">
-            <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+          <div className="flex items-center justify-start space-x-2">
+            <>
+              {editAllowed ? (
+                <EditableServiceName
+                  serviceName={service.name}
+                  onSubmit={(field, value) => handleUpdate(field, value)}
+                />
+              ) : (
+                <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+              )}
+            </>
             <a
               href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
               target={service.affiliate_link || service.website ? '_blank' : ''}
@@ -107,11 +136,18 @@ function ServiceDetailCardComponent({ service, onToggleCompare }: ServiceDetailC
               <span className="text-xs text-primary">Own this Service?</span>
             </div>
           </div>
-          {service.short_description ? (
-            <TruncatedDescription description={service.short_description} />
-          ) : service.description ? (
-            <TruncatedDescription description={service.description.substring(0, 200)} />
-          ) : null}
+          <div className="flex items-start">
+            {editAllowed ? (
+              <EditableServiceDescription
+                serviceDescription={service.short_description ? service.short_description : service.description}
+                onSubmit={(field, value) => handleUpdate(field, value)}
+              />
+            ) : service.short_description ? (
+              <TruncatedDescription description={service.short_description} />
+            ) : service.description ? (
+              <TruncatedDescription description={service.description.substring(0, 200)} />
+            ) : null}
+          </div>
           <div className="flex mt-2 space-x-2 text-sm sm:space-x-4 md:divide-x">
             <div className="flex items-end space-x-2">
               <AiOutlineStar className="self-center text-primary" />

@@ -31,6 +31,7 @@ export type Asset = {
   used_by_me?: boolean
   my_asset_vote?: number | null
   is_owned?: boolean
+  edit_allowed?: boolean
 }
 
 export type AssetVote = {
