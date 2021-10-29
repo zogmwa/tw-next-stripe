@@ -34,13 +34,11 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
     } else if (compareList.length > MAX_COMPARE_COUNT) {
       toast.error('You can compare at most 3 services.')
     } else {
-      const services = compareList.map((service) => service.slug)
+      const services = compareList.map((item) => item.slug)
+      const compareParams = services.join('-vs-')
       router.push(
         {
-          pathname: '/compare',
-          query: {
-            services,
-          },
+          pathname: `/compare/${compareParams}`,
         },
         undefined,
         {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Pagination from '@mui/material/Pagination'
 import { ServiceCard } from '../../components/service-card'
@@ -11,6 +11,7 @@ import { clientWithRetries } from '../../utils/clientWithRetries'
 import { SearchBar } from '../../components/search-bar'
 import { Asset } from '../../types/asset'
 import { unslugify } from '../../utils/unslugify'
+import { CompareAccordian } from '../../components/compare-accordian'
 
 export const getServerSideProps = async (context: {
   query: { serviceSlug: string; page: string; order: string; free_trial: string }
@@ -77,6 +78,38 @@ export default function ServiceList({
   free_trial = '',
 }: ServiceListProps) {
   const router = useRouter()
+  let preCheckedList: { name: string; slug: string; logo_url: string }[] = []
+  const [checkedList, setCheckedList] = useState(preCheckedList)
+  useEffect(() => {
+    preCheckedList = JSON.parse(localStorage.getItem('taggedweb-service-checklist'))
+    if (!preCheckedList) {
+      setCheckedList([])
+    } else {
+      setCheckedList(preCheckedList)
+    }
+    // console.log('test')
+  }, [])
+  const notInitialRender = useRef(false)
+  useEffect(() => {
+    const tempCheckedList = checkedList
+    if (notInitialRender.current) {
+      localStorage.setItem('taggedweb-service-checklist', JSON.stringify(tempCheckedList))
+    } else {
+      notInitialRender.current = true
+    }
+  }, [checkedList])
+  const handleChecked = (isCompared: boolean, service: Asset) => {
+    const List = checkedList
+    if (isCompared) {
+      // List.push({ name: service.name, slug: service.slug, logo_url: service.logo_url })
+      setCheckedList([...List, { name: service.name, slug: service.slug, logo_url: service.logo_url }])
+    } else {
+      setCheckedList(List.filter((item) => item.slug !== service.slug))
+    }
+  }
+  const handleServiceRemove = (list) => {
+    setCheckedList(list)
+  }
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
     let query = `/alternatives-or-similar-services/${slug}?page=${value}`
     if (order) {
@@ -192,22 +225,20 @@ export default function ServiceList({
             </div>
             <div className="max-w-full px-2 mb-2 border rounded-md">
               <ul className="flex flex-col justify-start pb-8 divide-y divide">
-                {services.map((service, index) => (
-                  <li
-                    key={index}
-                    className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
-                  >
-                    <ServiceCard
-                      service={service}
-                      onToggleCompare={(isCompared) => {
-                        // eslint-disable-next-line no-console
-                        console.log(isCompared)
-                      }}
-                    />
-                  </li>
-                ))}
+                {services.map((service, index) => {
+                  const isChecked = !!checkedList.find((item) => item.slug === service.slug)
+                  return (
+                    <li
+                      key={index}
+                      className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
+                    >
+                      <ServiceCard service={service} onToggleCompare={handleChecked} isChecked={isChecked} />
+                    </li>
+                  )
+                })}
               </ul>
             </div>
+            <CompareAccordian checkedList={checkedList} onServiceRemove={handleServiceRemove} />
           </div>
         </div>
       )}
