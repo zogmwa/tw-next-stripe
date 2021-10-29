@@ -30,16 +30,16 @@ function CompareServicePricingCardComponent({ service, showPricingData }: Compar
       <div className="flex items-end mt-2">
         <BiDollar className="text-xl text-text-secondary" />
         <div className="flex content-end text-2xl">
-          {showPricingData.filter((price) => price.asset === service.id)[0].price.price}
+          {showPricingData.filter((price) => price.asset === service.id)[0].price?.price ?? null}
         </div>
         <div className="pl-2 text-text-secondary">
-          /{showPricingData.filter((price) => price.asset === service.id)[0].price.per}
+          /{showPricingData.filter((price) => price.asset === service.id)[0].price?.per ?? null}
         </div>
       </div>
       <div className="flex items-center mt-4">
         <h2 className="text-sm text-black text-semibold">Pricing Model:</h2>
         <div className="pl-2 text-sm">
-          {showPricingData.filter((price) => price.asset === service.id)[0].price.name}
+          {showPricingData.filter((price) => price.asset === service.id)[0].price?.name ?? null}
         </div>
       </div>
       <div className="flex flex-col mt-1">
