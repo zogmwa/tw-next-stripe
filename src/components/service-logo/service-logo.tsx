@@ -9,7 +9,7 @@ const ImageStyle: any = {
   fontFamily: 'FontAwesome',
   color: 'rgb(100, 100, 100)',
   position: 'absolute',
-  top: '5px',
+  top: '0',
   left: '0',
   width: 'inherit',
   wordWrap: 'normal',
