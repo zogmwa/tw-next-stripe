@@ -246,8 +246,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="max-w-screen-lg pl-2 mx-auto my-16">
-        <HomepageFeatured featuredList={featuredList} />
+      <div className="py-8 bg-gray-100">
+        <div className="max-w-screen-lg pl-2 mx-auto">
+          <HomepageFeatured featuredList={featuredList} />
+        </div>
       </div>
     </div>
   )

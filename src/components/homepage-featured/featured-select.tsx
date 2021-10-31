@@ -17,7 +17,7 @@ function FeaturedSelectComponent({ featuredList, selected, onSelect }: FeaturedS
           className={
             item.name === selected
               ? 'py-1 my-1 px-4 bg-primary rounded-md text-white cursor-pointer'
-              : 'py-1 my-1 px-4 cursor-pointer text-text-tertiary'
+              : 'py-1 my-1 px-4 cursor-pointer text-text-secondary'
           }
           key={item.name}
           onClick={() => onSelect(item.name)}

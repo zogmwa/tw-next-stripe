@@ -30,7 +30,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
               logoUrl={service.logo_url}
               imageClassName="rounded-full top-[0px]"
             />
-            <span className="ml-4 text-md text-text-tertiary">{service.name}</span>
+            <span className="ml-4 text-md text-text-secondary">{service.name}</span>
           </div>
           <MdArrowForwardIos />
         </div>
