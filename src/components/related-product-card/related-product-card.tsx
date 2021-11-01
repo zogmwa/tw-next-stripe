@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Checkbox } from '../checkbox'
 import { MAX_RELATEDCARDCONTENT_LENGTH } from '../../utils/constants'
+import Link from 'next/link'
 
 type RelatedProduct = {
   relatedProduct: any
@@ -17,8 +18,16 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
 
   return (
     <div className="flex flex-col items-center p-4 mt-2 mr-2 border border-solid border-border-default">
-      <img src={relatedProduct.logo_url} alt={`${relatedProduct.name}`} className="object-cover w-16 h-16 rounded-md" />
-      <span className="mt-4 text-sm text-center text-bold">{relatedProduct.name}</span>
+      <Link href={`/services/${relatedProduct.slug}/`} scroll={true}>
+        <div>
+          <img
+            src={relatedProduct.logo_url}
+            alt={`${relatedProduct.name}`}
+            className="object-cover w-16 h-16 rounded-md"
+          />
+          <span className="mt-4 text-sm text-center text-bold">{relatedProduct.name}</span>
+        </div>
+      </Link>
       <span className="mt-4 text-sm text-center text-text-tertiary">
         {relatedProduct?.description.length < MAX_RELATEDCARDCONTENT_LENGTH
           ? relatedProduct?.description
