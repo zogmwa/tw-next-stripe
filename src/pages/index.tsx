@@ -32,7 +32,14 @@ export default function Home({ featuredList }) {
           />
         </div>
       </div>
-      <div className="py-12 bg-gray-100">
+      {showFeaturedList && (
+        <div className="py-8 bg-gray-100">
+          <div className="max-w-screen-lg pl-2 mx-auto">
+            <HomepageFeatured featuredList={featuredList} />
+          </div>
+        </div>
+      )}
+      <div className="py-12">
         <div className="max-w-screen-lg px-4 mx-auto">
           <div className="flex flex-col items-center justify-start px-2 md:px-0 md:flex-row">
             <div className="flex flex-col items-start justify-center mb-2 md:w-12/12">
@@ -80,13 +87,6 @@ export default function Home({ featuredList }) {
           </div>
         </div>
       </div>
-      {showFeaturedList && (
-        <div className="py-8 bg-gray-100">
-          <div className="max-w-screen-lg pl-2 mx-auto">
-            <HomepageFeatured featuredList={featuredList} />
-          </div>
-        </div>
-      )}
     </div>
   )
 }
