@@ -32,6 +32,7 @@ export type Asset = {
   my_asset_vote?: number | null
   is_owned?: boolean
   edit_allowed?: boolean
+  trial_days?: number | null
 }
 
 export type AssetVote = {

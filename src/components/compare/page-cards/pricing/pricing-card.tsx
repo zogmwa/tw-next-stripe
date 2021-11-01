@@ -15,6 +15,8 @@ function CompareServicePricingCardComponent({ service, showPricingData }: Compar
 
   if (showPricingData === []) return null
 
+  const trialDays = service.trial_days ?? 0
+
   return (
     <div className="flex flex-col p-4" key={service.id}>
       <h2 className="text-black text-md text-semibold">{service.name} Pricing</h2>
@@ -43,14 +45,17 @@ function CompareServicePricingCardComponent({ service, showPricingData }: Compar
         </div>
       </div>
       <div className="flex flex-col mt-1">
-        <div className="flex items-center mt-2 align-center">
-          <AiFillCheckCircle className=" text-primary text-md" />
-          <div className="pl-1 text-xs">Free Trail</div>
-        </div>
-        <div className="flex items-center mt-2 align-center">
-          <AiOutlineCloseCircle className=" text-text-tertiary text-md" />
-          <div className="pl-1 text-xs text-text-tertiary">Free Version</div>
-        </div>
+        {service.has_free_trial ? (
+          <div className="flex items-center mt-2 align-center">
+            <AiFillCheckCircle className=" text-primary text-md" />
+            <div className="pl-1 text-xs">Free Trial{trialDays !== 0 && ` / ${trialDays} Days`}</div>
+          </div>
+        ) : (
+          <div className="flex items-center mt-2 align-center">
+            <AiOutlineCloseCircle className=" text-text-tertiary text-md" />
+            <div className="pl-1 text-xs">Free Trial</div>
+          </div>
+        )}
       </div>
     </div>
   )
