@@ -5,7 +5,7 @@ import { FeaturedService } from './featured-service'
 type HomepageFeaturedComponent = {
   featuredList: {
     name: string
-    services: { id: number; name: string; logo_url: string; slug: string }[]
+    assets: { name: string; logo_url: string; slug: string }[]
   }[]
 }
 

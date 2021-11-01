@@ -3,7 +3,7 @@ import React from 'react'
 type FeaturedSelectProps = {
   featuredList: {
     name: string
-    services: { id: number; name: string; logo_url: string; slug: string }[]
+    assets: { name: string; logo_url: string; slug: string }[]
   }[]
   selected: string
   onSelect: Function
