@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdVerified } from 'react-icons/md'
 import ReactTooltip from 'react-tooltip'
 
@@ -36,6 +36,11 @@ function ServiceLogoComponent({
   fontClassName = 'text-success',
 }: ServiceLogoProps) {
   const [imgSrc, setImgSrc] = useState<string | undefined>(logoUrl)
+
+  useEffect(() => {
+    setImgSrc(logoUrl)
+  }, [logoUrl])
+
   return (
     <div className={`relative h-[72px] w-[72px] inline-block ${className}`}>
       {imgSrc ? (
