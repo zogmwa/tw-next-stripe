@@ -3,6 +3,7 @@ import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import { Button } from '../button'
 import { Profile } from '../../types/profile'
 import { User } from '../../types/user'
+import { handleGoogleConnect, handleLinkedInConnect } from '../../utils/login'
 
 type ProfileCardProps = { data: Partial<User & Profile> }
 
@@ -32,24 +33,47 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
         </div>
       </div>
       <div className="flex flex-col items-center justify-start space-x-0 space-y-2">
-        <Button
-          icon={<AiFillLinkedin size={20} />}
-          buttonType="primary"
-          iconPlacement="right"
-          className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
-          // onClick={connectLinkedIn}
-        >
-          Add your LinkedIn Profile
-        </Button>
-        <Button
-          icon={<AiFillGoogleSquare size={20} />}
-          buttonType="primary"
-          iconPlacement="right"
-          className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
-          // onClick={connectGoogle}
-        >
-          Add your Google Profile
-        </Button>
+        {(data.social_accounts ?? []).includes('linkedin_oauth2') ? (
+          <Button
+            icon={<AiFillLinkedin size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
+            onClick={() => handleLinkedInConnect()}
+          >
+            Connected to LinkedIn
+          </Button>
+        ) : (
+          <Button
+            icon={<AiFillLinkedin size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
+          >
+            Add your LinkedIn Profile
+          </Button>
+        )}
+
+        {(data.social_accounts ?? []).includes('google') ? (
+          <Button
+            icon={<AiFillGoogleSquare size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
+            onClick={() => handleGoogleConnect()}
+          >
+            Connected to Google
+          </Button>
+        ) : (
+          <Button
+            icon={<AiFillGoogleSquare size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
+          >
+            Add your Google Profile
+          </Button>
+        )}
       </div>
     </div>
   )

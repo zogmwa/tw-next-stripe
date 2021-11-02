@@ -45,7 +45,9 @@ export const ProfileMobile = ({ profile }: { profile: Profile }) => {
                 </HeadlessuiTab>
               ))}
             </div>
-            <span className="block h-full ml-4 text-sm whitespace-nowrap">{`${profile.submitted_assets.length} Product(s)`}</span>
+            <span className="block h-full ml-4 text-sm whitespace-nowrap">{`${
+              profile.submitted_assets?.length ?? 0
+            } Product(s)`}</span>
           </HeadlessuiTab.List>
         </div>
         <HeadlessuiTab.Panels as={Fragment}>
