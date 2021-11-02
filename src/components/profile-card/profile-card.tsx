@@ -39,7 +39,6 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             buttonType="primary"
             iconPlacement="right"
             className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
-            onClick={() => handleLinkedInConnect()}
           >
             Connected to LinkedIn
           </Button>
@@ -49,6 +48,7 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             buttonType="primary"
             iconPlacement="right"
             className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
+            onClick={() => handleLinkedInConnect()}
           >
             Add your LinkedIn Profile
           </Button>
@@ -60,7 +60,6 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             buttonType="primary"
             iconPlacement="right"
             className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
-            onClick={() => handleGoogleConnect()}
           >
             Connected to Google
           </Button>
@@ -70,6 +69,7 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             buttonType="primary"
             iconPlacement="right"
             className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
+            onClick={() => handleGoogleConnect()}
           >
             Add your Google Profile
           </Button>

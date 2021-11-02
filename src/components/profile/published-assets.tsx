@@ -11,7 +11,7 @@ export const PublishedAssetsProfile = ({ data }: { data: Profile }) => {
   return (
     <div id="published-assets" className="mb-8">
       <div className="hidden mb-2 md:flex">
-        <p className="text-base font-bold">Published Assets</p>
+        <p className="text-base font-bold">Published Web Services</p>
         <span className="ml-auto">{`${publishedAssets?.length ?? 0} Product(s)`}</span>
       </div>
       <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">

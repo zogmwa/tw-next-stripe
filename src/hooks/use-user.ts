@@ -86,7 +86,7 @@ export function useSessionUser(): UserContextType {
 
   const nextPageRedirect = useCallback(() => {
     localStorage.removeItem(process.env.NEXT_PAGE_URL_LOCAL_STORAGE_KEY)
-    if (router.pathname === '/login-with-google' || router.pathname === '/login-with-linkedin') {
+    if (router.pathname === '/google-login' || router.pathname === '/linkedin-login') {
       return router.replace(nextPageUrl)
     }
     return router.push(nextPageUrl)

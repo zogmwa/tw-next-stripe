@@ -78,8 +78,8 @@ export default function LoginWithLinkedin() {
               setLoginRequestSent(true)
               const redirectUrl =
                 process.env.NODE_ENV === 'development'
-                  ? 'http://localhost:3000/login-with-linkedin'
-                  : 'https://taggedweb.com/login-with-linkedin'
+                  ? 'http://localhost:3000/linkedin-login'
+                  : 'https://taggedweb.com/linkedin-login'
 
               // Exchange LinkedIn auth code for LinkedIn authtoken
               const {
