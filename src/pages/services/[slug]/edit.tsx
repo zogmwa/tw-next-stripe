@@ -2,6 +2,7 @@ import React from 'react'
 import { withSessionSSR } from '../../../utils/session'
 import { fetchServiceServer } from '../../../server-queries/fetch-service'
 import { ServiceDetailCard } from '../../../components/service-card'
+import { patchAssetField } from '../../../queries/service'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -26,9 +27,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 export default function Service({ service }) {
   const editAllowed = service?.edit_allowed ?? false
 
-  const handleChange = (field, value) => {
+  const handleChange = async (field, value) => {
     console.log('Field: ', field)
     console.log('Value: ', value)
+    const data = await patchAssetField(field, value, service.slug)
+    console.log(data)
   }
 
   return (
