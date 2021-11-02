@@ -9,7 +9,7 @@ const ImageStyle: any = {
   fontFamily: 'FontAwesome',
   color: 'rgb(100, 100, 100)',
   position: 'absolute',
-  top: '5px',
+  top: '0',
   left: '0',
   width: 'inherit',
   wordWrap: 'normal',
@@ -17,7 +17,8 @@ const ImageStyle: any = {
 }
 
 type ServiceLogoProps = {
-  serviceId: number
+  serviceId?: number
+  serviceSlug?: string
   serviceName?: string
   logoUrl: string | null
   owned?: boolean | null
@@ -27,7 +28,8 @@ type ServiceLogoProps = {
 }
 
 function ServiceLogoComponent({
-  serviceId,
+  serviceId = 0,
+  serviceSlug = '',
   serviceName = '',
   logoUrl,
   owned,
@@ -67,10 +69,20 @@ function ServiceLogoComponent({
       )}
       {owned !== null && owned ? (
         <>
-          <div className="absolute right-[3px] bottom-[3px] cursor-pointer" data-for={`tooltip${serviceId}`} data-tip>
+          <div
+            className="absolute right-[3px] bottom-[3px] cursor-pointer"
+            data-for={`tooltip${serviceSlug}${serviceId}`}
+            data-tip
+          >
             <MdVerified className={`text-xl ${fontClassName}`} />
           </div>
-          <ReactTooltip id={`tooltip${serviceId}`} type="light" place="right" border={true} borderColor="text-grey-200">
+          <ReactTooltip
+            id={`tooltip${serviceSlug}${serviceId}`}
+            type="light"
+            place="right"
+            border={true}
+            borderColor="text-grey-200"
+          >
             Verified Owner
           </ReactTooltip>
         </>
