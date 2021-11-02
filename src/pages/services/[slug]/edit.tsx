@@ -26,10 +26,15 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 export default function Service({ service }) {
   const editAllowed = service?.edit_allowed ?? false
 
+  const handleChange = (field, value) => {
+    console.log('Field: ', field)
+    console.log('Value: ', value)
+  }
+
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
-        <ServiceDetailCard service={service} editAllowed={editAllowed} />
+        <ServiceDetailCard service={service} editAllowed={editAllowed} onChange={handleChange} />
       </div>
     </div>
   )
