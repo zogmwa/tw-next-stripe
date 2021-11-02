@@ -278,14 +278,14 @@ export async function addAssetReview(sendData): Promise<any | null> {
 
 export async function patchAssetField(updateField, updateValue, serviceSlug) {
   try {
-    const { data } = await axios.patch(`/api/assets/${serviceSlug}`, {
-      [updateField]: updateValue
+    const { data } = await axios.patch(`/api/assets/${serviceSlug}/`, {
+      [updateField]: updateValue,
     })
-    console.log('=====================data========================', data)
     return data
   } catch (error) {
-    console.log('--------------error-------------:', error)
-    toast.error('Could not updated this asset.')
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not update this asset')
     return null
   }
 }

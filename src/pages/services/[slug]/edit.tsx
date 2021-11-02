@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 import { withSessionSSR } from '../../../utils/session'
 import { fetchServiceServer } from '../../../server-queries/fetch-service'
 import { ServiceDetailCard } from '../../../components/service-card'
@@ -25,19 +26,23 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function Service({ service }) {
+  const [showService, setShowService] = useState(service)
   const editAllowed = service?.edit_allowed ?? false
 
   const handleChange = async (field, value) => {
-    console.log('Field: ', field)
-    console.log('Value: ', value)
+    console.log('Field: ', field) // Will delete when finish the edit page.
+    console.log('Value: ', value) // Will delete when finish the edit page.
     const data = await patchAssetField(field, value, service.slug)
-    console.log(data)
+    if (data) {
+      setShowService(data)
+      toast.success('Updated successfully.')
+    }
   }
 
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
-        <ServiceDetailCard service={service} editAllowed={editAllowed} onChange={handleChange} />
+        <ServiceDetailCard service={showService} editAllowed={editAllowed} onChange={handleChange} />
       </div>
     </div>
   )

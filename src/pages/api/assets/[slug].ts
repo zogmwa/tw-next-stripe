@@ -13,12 +13,11 @@ export default withSessionApi(async (req, res) => {
     const access = await getAccessToken(req.session)
     if (access) {
       const slug = req.query.slug
-      const data = await clientWithRetries.patch(`/assets/${slug}/`, req.body, {
+      const { data } = await clientWithRetries.patch(`/assets/${slug}/`, req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
       })
-      console.log('----------data:------------', data)
       return res.json(data)
     } else {
       return res.status(401).send({ message: 'You need to be loggedin to access this api.' })
