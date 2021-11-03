@@ -275,3 +275,17 @@ export async function addAssetReview(sendData): Promise<any | null> {
     return null
   }
 }
+
+export async function patchAssetField(updateField, updateValue, serviceSlug) {
+  try {
+    const { data } = await axios.patch(`/api/assets/${serviceSlug}/`, {
+      [updateField]: updateValue,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not update this asset')
+    return null
+  }
+}
