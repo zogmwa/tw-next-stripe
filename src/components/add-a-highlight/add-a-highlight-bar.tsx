@@ -5,12 +5,10 @@ import axios from 'axios'
 const filterAttributes = async (inputValue: string) => {
   const { data } = await axios.get(`/api/autocomplete/attributes/${inputValue}`)
   const attributes = data.results
-  const tempAttributes = attributes.filter((attribute) =>
-    attribute.attr_name.toLowerCase().includes(inputValue.toLowerCase()),
-  )
+  const tempAttributes = attributes.filter((attribute) => attribute[1].toLowerCase().includes(inputValue.toLowerCase()))
   let returnAttributes = []
   tempAttributes.map((attribute) =>
-    returnAttributes.push({ id: attribute.id, label: attribute.attr_name, value: attribute.attr_name.toLowerCase() }),
+    returnAttributes.push({ id: attribute[0], label: attribute[1], value: attribute[1].toLowerCase() }),
   )
 
   return returnAttributes

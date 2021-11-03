@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from '../button'
-import { Textarea } from '../textarea'
 import AddAHighlightBar from './add-a-highlight-bar'
 import { Switch } from '../switch'
 
