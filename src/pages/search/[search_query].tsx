@@ -75,6 +75,8 @@ export default function ServiceList({
   const router = useRouter()
   let preCheckedList: { name: string; slug: string; logo_url: string }[] = []
   const [checkedList, setCheckedList] = useState(preCheckedList)
+
+  const pageRef = useRef(null)
   useEffect(() => {
     preCheckedList = JSON.parse(localStorage.getItem('taggedweb-service-checklist'))
     if (!preCheckedList) {
@@ -82,7 +84,13 @@ export default function ServiceList({
     } else {
       setCheckedList(preCheckedList)
     }
-    // console.log('test')
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
   }, [])
   const notInitialRender = useRef(false)
   useEffect(() => {
@@ -113,8 +121,10 @@ export default function ServiceList({
     if (free_trial) {
       query += `&free_trial=${free_trial}`
     }
+
     router.push(query)
   }
+
   const [error, setError] = useState('')
   useEffect(() => {
     if (services.length === 0) {
@@ -124,7 +134,7 @@ export default function ServiceList({
     }
   }, [services])
   return (
-    <div className="max-w-screen-lg px-2 mx-auto my-20">
+    <div className="max-w-screen-lg px-2 mx-auto my-20" ref={pageRef}>
       <SearchBar
         className="mb-8"
         tagsArr={defaultArr}
