@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../button'
 import { Textarea } from '../textarea'
+import AddAHighlightBar from './add-a-highlight-bar'
 import { Switch } from '../switch'
 
 /**
@@ -26,7 +27,7 @@ function AddAHighlightComponent({
   addAttributeNameErrorMessage,
 }: featureProps) {
   return (
-    <div>
+    <div className="space-y-4">
       <div className="flex">
         <div className="flex-grow font-bold">Add a Highlight</div>
         <div>
@@ -46,17 +47,7 @@ function AddAHighlightComponent({
           <span className={addAttributeCon ? 'text-red-600' : 'text-gray-400'}>Con</span>
         </div>
       </div>
-      <Textarea
-        className="w-full mt-4 mb-4 whitespace-nowrap"
-        rows={'1' as unknown as number}
-        placeholder="Write something..."
-        value={addAttributeName}
-        onChange={(evnet) => {
-          const target = evnet.target as HTMLTextAreaElement
-          setAddAttributeName(target.value)
-        }}
-        errorMessage={addAttributeNameErrorMessage}
-      />
+      <AddAHighlightBar />
       <div className="flex flex-row-reverse">
         <Button
           className="ml-4"
