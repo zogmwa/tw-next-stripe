@@ -36,7 +36,7 @@ export default function AddAHighlightBar() {
       defaultOptions
       onChange={handleChange}
       loadOptions={promiseOptions}
-      placeholder="write something..."
+      placeholder="Start typing top features/highlights"
       components={{ DropdownIndicator: () => null }}
       className="flex-1 mb-2 md:mb-0"
       classNamePrefix="select"
