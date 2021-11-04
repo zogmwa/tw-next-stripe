@@ -84,7 +84,7 @@ function HighlightContentComponent({
         >
           Add a Highlight
         </Button>
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} isModalOverflow={true}>
           <AddAHighlight
             setIsOpen={setIsOpen}
             addAttributeName={addAttributeName}

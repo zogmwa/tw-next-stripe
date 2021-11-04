@@ -11,9 +11,18 @@ type ModalProps = {
   size?: 'md' | 'lg' | 'xl' | '2xl'
   // eslint-disable-next-line no-undef
   children: React.ReactChild
+  isModalOverflow?: boolean
 }
 
-function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, children, size = 'md' }: ModalProps) {
+function ModalComponent({
+  isOpen,
+  setIsOpen,
+  dialogTitle,
+  modalDescription,
+  children,
+  size = 'md',
+  isModalOverflow = false,
+}: ModalProps) {
   function closeModal() {
     setIsOpen(false)
   }
@@ -65,7 +74,8 @@ function ModalComponent({ isOpen, setIsOpen, dialogTitle, modalDescription, chil
                       }
                     }
                   })(),
-                  'inline-block w-full p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl',
+                  'inline-block w-full p-6 my-8 text-left align-middle transition-all transform bg-white rounded shadow-xl',
+                  !isModalOverflow && 'overflow-hidden',
                 )}
               >
                 <div className="flex items-center justify-between">
