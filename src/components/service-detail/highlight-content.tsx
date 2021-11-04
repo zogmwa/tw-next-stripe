@@ -8,6 +8,7 @@ import {
   toggleDownVoteAttribute,
   fetchUpvotedAttributes,
   toggleAddAttribute,
+  linkAttributeToAsset,
 } from '../../queries/service'
 import { HighlightContent } from '../service-highlights'
 import { useUserContext } from '../../hooks/use-user'
@@ -23,7 +24,7 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
-  const [addAttributeName, setAddAttributeName] = useState('')
+  const [addAttributeName, setAddAttributeName] = useState(null)
   const [addAttributeCon, setAddAttributeCon] = useState(false)
   const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
   const user = useUserContext()
@@ -87,22 +88,31 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   }
 
   const addAttributeAction = async () => {
-    if (addAttributeName === '') {
+    let addedAttribute = null
+    if (addAttributeName === null) {
       setAddAttributeNameErrorMessage('This field is not valid')
     } else {
-      const addedAttribute = await toggleAddAttribute(service?.id, addAttributeName, addAttributeCon)
-      if (addedAttribute) {
-        const updatedAttributes = attributes
-        updatedAttributes.push({
-          id: addedAttribute.id,
-          name: addedAttribute.name,
-          is_con: addedAttribute.is_con,
-          upvotes_count: addedAttribute.upvotes_count,
-        })
-        setAttributes(updatedAttributes)
-        toast.success('Added an attribute successfully.')
+      if (addAttributeName.value === '') {
+        setAddAttributeNameErrorMessage('This field is not valid')
+      } else {
+        if (addAttributeName.id === 0) {
+          addedAttribute = await toggleAddAttribute(service?.id, addAttributeName.label, addAttributeCon)
+        } else {
+          addedAttribute = await linkAttributeToAsset(service.slug, addAttributeName.id)
+        }
+        if (addedAttribute) {
+          const updatedAttributes = attributes
+          updatedAttributes.push({
+            id: addedAttribute.id,
+            name: addedAttribute.name,
+            is_con: addedAttribute.is_con,
+            upvotes_count: addedAttribute.upvotes_count,
+          })
+          setAttributes(updatedAttributes)
+          toast.success('Added an attribute successfully.')
+        }
         setAddAttributeNameErrorMessage('')
-        setAddAttributeName('')
+        setAddAttributeName(null)
         setAddAttributeCon(false)
       }
     }

@@ -21,4 +21,14 @@ export default withSessionApi(async (req, res) => {
       res.json(data)
     }
   }
+  if (req.method === 'POST') {
+    const { slug } = req.query
+    const access = await getAccessToken(req.session)
+    const { data } = await clientWithRetries.post(`/assets/${slug}/link_attribute/`, req.body, {
+      headers: {
+        Authorization: `Bearer ${access}`,
+      },
+    })
+    res.json(data)
+  }
 })
