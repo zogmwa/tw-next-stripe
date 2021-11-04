@@ -285,7 +285,21 @@ export async function patchAssetField(updateField, updateValue, serviceSlug) {
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    toast.error('Could not update this asset')
+    toast.error('Could not update this web service.')
+    return null
+  }
+}
+
+export async function linkAttributeToAsset(slug, attributeId) {
+  try {
+    const { data } = await axios.post(`/api/asset_attributes/${slug}`, {
+      attribute_id: attributeId,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Unexpected error in submitting the highlight.')
     return null
   }
 }

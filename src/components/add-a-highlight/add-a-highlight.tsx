@@ -8,7 +8,7 @@ import { Switch } from '../switch'
  */
 type featureProps = {
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-  addAttributeName: string
+  addAttributeName: any
   setAddAttributeName?: React.Dispatch<React.SetStateAction<string>>
   addAttributeCon: boolean
   setAddAttributeCon?: React.Dispatch<React.SetStateAction<boolean>>
@@ -46,7 +46,10 @@ function AddAHighlightComponent({
           <span className={addAttributeCon ? 'text-red-600' : 'text-gray-400'}>Con</span>
         </div>
       </div>
-      <AddAHighlightBar />
+      <AddAHighlightBar onChange={(value) => setAddAttributeName(value)} />
+      {addAttributeNameErrorMessage !== '' && (
+        <span className="p-1 text-xs text-red-600">{addAttributeNameErrorMessage}</span>
+      )}
       <div className="flex flex-row-reverse">
         <Button
           className="ml-4"
@@ -54,8 +57,8 @@ function AddAHighlightComponent({
           type="submit"
           onClick={async () => {
             await addAttributeAction()
-            if (addAttributeName !== '') {
-              setIsOpen(false)
+            if (addAttributeName) {
+              if (addAttributeName.value !== '') setIsOpen(false)
             }
           }}
         >

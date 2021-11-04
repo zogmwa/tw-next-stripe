@@ -24,17 +24,12 @@ const promiseOptions = async (inputValue: string) => {
   }
 }
 
-export default function AddAHighlightBar() {
-  const handleChange = (value) => {
-    // TODO: Add attrubute or link attribute to asset. This will be done after backend finished.
-    console.log(value)
-  }
-
+export default function AddAHighlightBar({ onChange }) {
   return (
     <AsyncSelect
       cacheOptions
       defaultOptions
-      onChange={handleChange}
+      onChange={onChange}
       loadOptions={promiseOptions}
       placeholder="Start typing top features/highlights"
       components={{ DropdownIndicator: () => null }}

@@ -46,7 +46,7 @@ function HighlightContentComponent({
   const defaultShowCount = 10
 
   attributes.sort((attributeA, attributeB) => {
-    return Number(attributeA.upvotes_count) - Number(attributeB.upvotes_count)
+    return Number(attributeB.upvotes_count) - Number(attributeA.upvotes_count)
   })
 
   let tempAttributes = attributes
