@@ -29,7 +29,6 @@ const nextConfig = {
     NEXT_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-next-page-redirect',
     FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
   },
-  swcMinify: true,
 }
 
 module.exports = nextConfig
