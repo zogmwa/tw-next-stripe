@@ -38,11 +38,19 @@ export default function Service({ service }) {
   const [showService, setShowService] = useState(service)
   const editAllowed = service?.edit_allowed ?? false
 
+  const handleChange = async (data) => {
+    const updatedData = await patchAssetField(data, service.slug)
+    if (updatedData) {
+      setShowService(updatedData)
+      toast.success('Updated successfully.')
+    }
+  }
+
   const elements = [
     {
       id: 'products-information',
       name: 'Product Information',
-      content: <ProductContent service={service as Asset} editAllowed={editAllowed} />,
+      content: <ProductContent service={showService as Asset} editAllowed={editAllowed} onChange={handleChange} />,
     },
     // {
     //   id: 'features',
@@ -78,20 +86,17 @@ export default function Service({ service }) {
     // },
   ]
 
-  const handleChange = async (field, value) => {
-    console.log('Field: ', field) // Will delete when finish the edit page.
-    console.log('Value: ', value) // Will delete when finish the edit page.
-    const data = await patchAssetField(field, value, service.slug)
-    if (data) {
-      setShowService(data)
-      toast.success('Updated successfully.')
-    }
-  }
-
   return (
     <div className="min-h-full p-4 bg-background-light">
       <div className="max-w-screen-lg mx-auto">
-        <ServiceDetailCard service={showService} editAllowed={editAllowed} onChange={handleChange} />
+        <ServiceDetailCard
+          service={showService}
+          editAllowed={editAllowed}
+          onChange={(field, value) => {
+            const data = { [field]: value }
+            handleChange(data)
+          }}
+        />
         {/* Sidebar will be rendered in Desktop */}
         <ServiceDetailSidebar elements={elements} />
         {/* Tab will be rendered in Mobile */}
