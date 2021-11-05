@@ -276,11 +276,9 @@ export async function addAssetReview(sendData): Promise<any | null> {
   }
 }
 
-export async function patchAssetField(updateField, updateValue, serviceSlug) {
+export async function patchAssetField(updateData, serviceSlug) {
   try {
-    const { data } = await axios.patch(`/api/assets/${serviceSlug}/`, {
-      [updateField]: updateValue,
-    })
+    const { data } = await axios.patch(`/api/assets/${serviceSlug}/`, updateData)
     return data
   } catch (error) {
     // TODO: error handling

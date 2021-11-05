@@ -33,7 +33,7 @@ function getClassNames({ isFileDialogActive, isDragAccept, isDragReject, isFocus
 }
 
 function getFilePreview(file: File) {
-  const isImage = file.type.split('/')[0] === 'image'
+  const isImage = file?.type?.split('/')[0] === 'image'
   if (isImage) {
     return URL.createObjectURL(file)
   }
@@ -93,10 +93,7 @@ function FilesDropzoneComponent(
         files.map((file, index) => {
           const preview = getFilePreview(file)
           return (
-            <div
-              className="aspect-h-1 aspect-w-1 sm:aspect-none"
-              key={`${file.name}-${file.size}-${file.lastModified}`}
-            >
+            <div className="aspect-h-1 aspect-w-1 sm:aspect-none" key={`${file.name}-${file.size}-${index}`}>
               <div
                 className={clsx(
                   'sm:relative flex-shrink-0 sm:w-32 sm:h-32 h-full w-full rounded-lg bg-cover bg-center bg-background-light',
@@ -105,7 +102,8 @@ function FilesDropzoneComponent(
               >
                 <button
                   className="absolute p-1 text-xs text-red-600 rounded opacity-50 bg-background-surface top-1 right-1 hover:opacity-100 focus-visible:opacity-100"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
                     removeFile(index)
                   }}
                 >
