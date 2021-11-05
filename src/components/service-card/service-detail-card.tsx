@@ -12,9 +12,7 @@ import { Button } from '../button'
 import { Asset } from '../../types/asset'
 import { Checkbox } from '../checkbox'
 import { ServiceLogo } from '../service-logo'
-import { EditableServiceLogo } from '../editable-components'
-import { EditableServiceName } from '../editable-components'
-import { EditableServiceDescription } from '../editable-components'
+import { EditableServiceLogo, EditableServiceName, EditableServiceDescription } from '../editable-components'
 
 type ServiceDetailCardProps = {
   service: Asset

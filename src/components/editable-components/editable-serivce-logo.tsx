@@ -6,7 +6,7 @@ import { ServiceLogo } from '../service-logo'
 import { uploadFileToCloudinary } from '../../utils/file'
 import { Spinner } from '../spinner'
 
-type EditableServiceLogoComponent = {
+type EditableServiceLogoComponentProps = {
   serviceName: string
   serviceId: number
   logoUrl: string
@@ -20,7 +20,7 @@ function EditableServiceLogoComponent({
   logoUrl,
   owned,
   onSubmit,
-}: EditableServiceLogoComponent) {
+}: EditableServiceLogoComponentProps) {
   const imageFileInput = useRef(null)
   const [showLogoUrl, setShowLogoUrl] = useState(logoUrl)
   const [isChangeLogo, setIsChangeLogo] = useState(false)

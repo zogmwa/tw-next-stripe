@@ -2,16 +2,17 @@ import React, { useState } from 'react'
 import { FeaturedSelect } from './featured-select'
 import { FeaturedService } from './featured-service'
 
-type HomepageFeaturedComponent = {
+type HomepageFeaturedComponentProps = {
   featuredList: {
     name: string
     assets: { name: string; logo_url: string; slug: string }[]
   }[]
 }
 
-function HomepageFeaturedComponent({ featuredList }: HomepageFeaturedComponent) {
+function HomepageFeaturedComponent({ featuredList }: HomepageFeaturedComponentProps) {
   if (featuredList.length === 0) return null
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedItem, setSelectedItem] = useState(featuredList[0].name)
 
   const handleSelectedFeatureItem = (name) => {

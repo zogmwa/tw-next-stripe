@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { Checkbox } from '../checkbox'
 import { MAX_RELATEDCARDCONTENT_LENGTH } from '../../utils/constants'
-import Link from 'next/link'
 
 type RelatedProduct = {
   relatedProduct: any
