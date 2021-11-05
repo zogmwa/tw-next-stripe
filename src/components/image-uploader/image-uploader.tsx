@@ -5,10 +5,17 @@ import { FilesDropzone } from '../files-dropzone'
 type ImageUploaderProps = React.ComponentProps<typeof FilesDropzone> & {
   onUploading?: (uploading: boolean) => void
   onChange?: (urls: string[]) => void
+  defaultUrls?: any
 }
 
-export function ImageUploader({ onChange, onUploading, onFilesChange, ...restProps }: ImageUploaderProps) {
-  const [urls, setUrls] = useState<{ [name: string]: string }>({})
+export function ImageUploader({
+  defaultUrls = {},
+  onChange,
+  onUploading,
+  onFilesChange,
+  ...restProps
+}: ImageUploaderProps) {
+  const [urls, setUrls] = useState<{ [name: string]: string }>(defaultUrls)
 
   const onChangeCb = useRef(onChange)
 

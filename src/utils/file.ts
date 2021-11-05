@@ -26,3 +26,9 @@ export async function uploadFileToCloudinary(file: File): Promise<string> {
   )
   return response.secure_url
 }
+
+export async function fetchFileFromCloudinary(url: string): Promise<any> {
+  const loadedFileBlob = await fetch(url).then((res) => res.blob())
+
+  return loadedFileBlob
+}
