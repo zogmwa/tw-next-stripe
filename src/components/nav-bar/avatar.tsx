@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
+import Link from 'next/link'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
-import { useRouter } from 'next/router'
 import { useUserContext } from '../../hooks/use-user'
 
 const menuIconClassNames = (active) =>
@@ -9,7 +9,6 @@ const menuIconClassNames = (active) =>
 
 export default function Avatar() {
   const { authVerified, first_name, last_name, logout } = useUserContext()
-  const { push } = useRouter()
 
   return (
     <Menu as="div" className="relative">
@@ -32,9 +31,11 @@ export default function Avatar() {
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
-                <button onClick={() => push('/profile')} className={menuIconClassNames(active)}>
-                  Profile
-                </button>
+                <Link href="/profile">
+                  <a>
+                    <button className={menuIconClassNames(active)}>Profile</button>
+                  </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>

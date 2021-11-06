@@ -47,10 +47,10 @@ export const topTags = [
     value: 'Marketing Automation Tools',
     slug: 'marketing-automation',
   },
-  {
-    value: 'Marketing Automation SaaS',
-    slug: 'marketing-automation',
-  },
+  // {
+  //   value: 'Marketing Automation SaaS',
+  //   slug: 'marketing-automation', // Slug 'marketing-automation' is repeated
+  // },
   {
     value: 'Video Conferencing Tools',
     slug: 'video-conferencing',

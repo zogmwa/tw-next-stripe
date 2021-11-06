@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { TiSocialFacebook, TiSocialTwitter, TiSocialLinkedin } from 'react-icons/ti'
 
 import { MdOutlineEmail } from 'react-icons/md'
@@ -11,7 +11,6 @@ type footerData = {
 }
 
 function HomePageFooterComponent({ topTags }: footerData) {
-  const router = useRouter()
   const defaultShowCount = 15
   const showTopTags = topTags.slice(0, defaultShowCount)
 
@@ -23,17 +22,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="text-2xl font-semibold">Popular Software as a Service (SaaS) Categories and Tags</h2>
             <div className="grid grid-cols-3 mt-2 tags">
               {showTopTags.map((tag) => (
-                <Button
-                  key={tag.slug}
-                  buttonType="tag"
-                  size="small"
-                  className="mt-2 mr-2"
-                  onClick={() => {
-                    router.push(`/search/${tag.slug}`)
-                  }}
-                >
-                  {tag.value}
-                </Button>
+                <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
+                  <a className="inline-flex mt-2 mr-2">
+                    <Button buttonType="tag" size="small" className="flex-1">
+                      {tag.value}
+                    </Button>
+                  </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -118,17 +113,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="text-2xl font-semibold">Popular SaaS Tags</h2>
             <div className="grid grid-cols-2 mt-2 tags">
               {showTopTags.map((tag) => (
-                <Button
-                  key={tag.slug}
-                  buttonType="tag"
-                  size="small"
-                  className="mt-2 mr-2"
-                  onClick={() => {
-                    router.push(`/search/${tag.slug}`)
-                  }}
-                >
-                  {tag.value}
-                </Button>
+                <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
+                  <a className="mt-2 mr-2">
+                    <Button buttonType="tag" size="small" className="flex-1">
+                      {tag.value}
+                    </Button>
+                  </a>
+                </Link>
               ))}
             </div>
           </div>
