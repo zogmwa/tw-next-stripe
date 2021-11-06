@@ -65,6 +65,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
               className="self-center"
               rel="noreferrer"
             >
+              <GrShare className="md:hidden sm:inline-flex gr-primary gr-icon-share" />
               <Button
                 className="hidden md:inline-flex"
                 size="small"
@@ -80,9 +81,9 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
           <div className="flex-1">
             {service.short_description ? (
               <TruncatedDescription description={service.short_description} />
-            ) : (
-              <TruncatedDescription description={service.description} />
-            )}
+            ) : service.description ? (
+              <TruncatedDescription description={service.description.substring(0, 200)} />
+            ) : null}
             <Link href={`/services/${service.slug}/`}>
               <div className="flex-1 cursor-pointer" />
             </Link>

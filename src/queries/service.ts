@@ -283,6 +283,7 @@ export async function patchAssetField(updateData, serviceSlug) {
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
+
     toast.error('Could not update this web service.')
     return null
   }
@@ -298,6 +299,23 @@ export async function linkAttributeToAsset(slug, attributeId) {
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Unexpected error in submitting the highlight.')
+    return null
+  }
+}
+
+export async function claimOwnershipToAsset(assetId: number, User, Value) {
+  try {
+    const { data } = await axios.post('/api/claim_asset/', {
+      asset: assetId,
+      user: User,
+      user_comment: JSON.stringify(Value),
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+
+    toast.error('Could not submit the claim for the web service. Please send mail directly to contact@taggedweb.com.')
     return null
   }
 }
