@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { ShowEditable } from './show-editable'
 import { EditableInput } from './editable-input'
 
-type EditableServiceNameComponent = {
+type EditableServiceNameComponentProps = {
   serviceName: string
   onSubmit: Function
 }
 
-function EditableServiceNameComponent({ serviceName, onSubmit }: EditableServiceNameComponent) {
+function EditableServiceNameComponent({ serviceName, onSubmit }: EditableServiceNameComponentProps) {
   const [isEdit, setIsEdit] = useState(false)
 
   return (

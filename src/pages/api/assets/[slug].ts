@@ -4,12 +4,12 @@ import { getAccessToken } from '../../../utils/token'
 import { clientWithRetries } from '../../../utils/clientWithRetries'
 
 export default withSessionApi(async (req, res) => {
-  if (req.method == 'GET') {
+  if (req.method === 'GET') {
     const slug = req.query.slug
     const data = await fetchServiceServer(req.session, slug)
     return res.json(data)
   }
-  if (req.method == 'PATCH') {
+  if (req.method === 'PATCH') {
     const access = await getAccessToken(req.session)
     if (access) {
       const slug = req.query.slug

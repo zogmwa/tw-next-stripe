@@ -3,12 +3,15 @@ import { ShowEditable } from './show-editable'
 import { EditableTextarea } from './editable-textarea'
 import { TruncatedDescription } from '../truncated-description'
 
-type EditableServiceDescriptionComponent = {
+type EditableServiceDescriptionComponentProps = {
   serviceDescription: string
   onSubmit: Function
 }
 
-function EditableServiceDescriptionComponent({ serviceDescription, onSubmit }: EditableServiceDescriptionComponent) {
+function EditableServiceDescriptionComponent({
+  serviceDescription,
+  onSubmit,
+}: EditableServiceDescriptionComponentProps) {
   const [isEdit, setIsEdit] = useState(false)
 
   return (
