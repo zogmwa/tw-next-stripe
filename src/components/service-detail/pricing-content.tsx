@@ -3,15 +3,26 @@ import { ServicePricingCard } from '../service-pricing-card/service-pricing-card
 import { PricingSelectNameMobile } from '../service-pricing-card/pricing-select-name-mobile'
 import { PricingSelectNameDesktop } from '../service-pricing-card/pricing-select-name-desktop'
 import { Asset } from '../../types/asset'
+import { ShowEditable } from '../editable-components'
+import { Modal } from '../Modal'
+import { EditablePricing } from '../editable-components'
 
 type ServiceDetailPricingProps = {
   isShowTitle?: boolean
   service: Asset
+  editAllowed?: boolean
+  onChange?: Function
 }
 
-export function PricingContentComponent({ isShowTitle = true, service }: ServiceDetailPricingProps) {
+export function PricingContentComponent({
+  isShowTitle = true,
+  service,
+  editAllowed = false,
+  onChange = () => {},
+}: ServiceDetailPricingProps) {
   const [selectedItem, setSelectedItem] = useState(0)
   const carouselSlider = useRef(null)
+  const [showPriceEditModal, setPriceShowEditModal] = useState(false)
 
   if (typeof service === 'undefined') return null
   const { price_plans: plans } = service
@@ -23,7 +34,16 @@ export function PricingContentComponent({ isShowTitle = true, service }: Service
 
   return (
     <>
-      {isShowTitle && <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>}
+      {isShowTitle &&
+        (editAllowed ? (
+          <div className="flex items-center mt-8">
+            <ShowEditable onEdit={() => setPriceShowEditModal(true)}>
+              <h1 className="text-base font-medium text-text-primary">Pricing</h1>
+            </ShowEditable>
+          </div>
+        ) : (
+          <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
+        ))}
       {plans.length > 0 && (
         <div className="grid grid-cols-1 md:flex md:justify-start">
           <PricingSelectNameDesktop pricePlans={plans} selected={selectedItem} onSelected={handleSelectedSlideItem} />
@@ -36,6 +56,9 @@ export function PricingContentComponent({ isShowTitle = true, service }: Service
           />
         </div>
       )}
+      <Modal isOpen={showPriceEditModal} setIsOpen={setPriceShowEditModal} size="5xl">
+        <EditablePricing pricePlans={plans} setEditModal={setPriceShowEditModal} onSubmit={onChange} />
+      </Modal>
     </>
   )
 }
