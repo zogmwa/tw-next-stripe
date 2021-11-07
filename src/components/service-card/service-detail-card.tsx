@@ -204,7 +204,7 @@ function ServiceDetailCardComponent({
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
-                <Link href={"../search/" + tag.slug}>
+                <Link href={'../search/' + tag.slug}>
                   <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
                     {tag.name}
                   </Button>
