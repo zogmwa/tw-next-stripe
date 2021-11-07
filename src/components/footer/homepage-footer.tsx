@@ -114,7 +114,7 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <div className="grid grid-cols-2 mt-2 tags">
               {showTopTags.map((tag) => (
                 <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
-                  <a className="mt-2 mr-2">
+                  <a className="inline-flex mt-2 mr-2">
                     <Button buttonType="tag" size="small" className="flex-1">
                       {tag.value}
                     </Button>
