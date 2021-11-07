@@ -25,6 +25,7 @@ import { Modal } from '../Modal'
 import { Input } from '../input'
 import { phoneRegex } from '../../utils/constants'
 import { Textarea } from '../textarea'
+import Link from 'next/link'
 
 const OwnTheServiceFormSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -203,9 +204,11 @@ function ServiceDetailCardComponent({
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
-                <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
-                  {tag.name}
-                </Button>
+                <Link href={'../search/' + tag.slug}>
+                  <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                    {tag.name}
+                  </Button>
+                </Link>
               )
             })}
           </div>
