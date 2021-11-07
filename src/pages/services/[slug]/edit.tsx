@@ -57,11 +57,11 @@ export default function Service({ service }) {
     //   name: 'Features',
     //   content: <HighlightSection service={service as Asset} />,
     // },
-    // {
-    //   id: 'pricing',
-    //   name: 'Pricing',
-    //   content: <PricingContent service={service as Asset} />,
-    // },
+    {
+      id: 'pricing',
+      name: 'Pricing',
+      content: <PricingContent service={showService as Asset} editAllowed={editAllowed} onChange={handleChange} />,
+    },
     // {
     //   id: 'qa',
     //   name: 'Q & A',

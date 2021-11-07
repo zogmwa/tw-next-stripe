@@ -8,7 +8,7 @@ type ModalProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   dialogTitle?: string
   modalDescription?: string
-  size?: 'md' | 'lg' | 'xl' | '2xl'
+  size?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
   // eslint-disable-next-line no-undef
   children: React.ReactChild
   isModalOverflow?: boolean
@@ -65,6 +65,18 @@ function ModalComponent({
                       }
                       case 'xl': {
                         return 'max-w-xl'
+                      }
+                      case '2xl': {
+                        return 'max-w-2xl'
+                      }
+                      case '3xl': {
+                        return 'max-w-3xl'
+                      }
+                      case '4xl': {
+                        return 'max-w-4xl'
+                      }
+                      case '5xl': {
+                        return 'max-w-5xl'
                       }
                       case 'lg': {
                         return 'max-w-lg'
