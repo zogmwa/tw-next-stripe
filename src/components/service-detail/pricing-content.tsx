@@ -3,9 +3,8 @@ import { ServicePricingCard } from '../service-pricing-card/service-pricing-card
 import { PricingSelectNameMobile } from '../service-pricing-card/pricing-select-name-mobile'
 import { PricingSelectNameDesktop } from '../service-pricing-card/pricing-select-name-desktop'
 import { Asset } from '../../types/asset'
-import { ShowEditable } from '../editable-components'
+import { ShowEditable, EditablePricing } from '../editable-components'
 import { Modal } from '../Modal'
-import { EditablePricing } from '../editable-components'
 
 type ServiceDetailPricingProps = {
   isShowTitle?: boolean

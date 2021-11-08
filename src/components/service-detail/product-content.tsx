@@ -3,9 +3,7 @@ import dynamic from 'next/dynamic'
 import { Asset } from '../../types/asset'
 import { ProductContentCarouselPropsType } from './product-content-carousel'
 import { ProductContentCarouselSkeleton } from './product-content-skeleton'
-import { ShowEditable } from '../editable-components'
-import { EditableCarousel } from '../editable-components'
-import { EditableServiceDescription } from '../editable-components'
+import { ShowEditable, EditableCarousel, EditableServiceDescription } from '../editable-components'
 
 const ProductContentCarousel = dynamic<ProductContentCarouselPropsType>(
   () => import('./product-content-carousel').then((mod) => mod.ProductContentCarousel),

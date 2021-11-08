@@ -18,15 +18,17 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
 
   return (
     <div className="flex flex-col items-center p-4 mt-2 mr-2 border border-solid border-border-default">
-      <Link href={`/services/${relatedProduct.slug}/`} scroll={true}>
-        <div>
-          <img
-            src={relatedProduct.logo_url}
-            alt={`${relatedProduct.name}`}
-            className="object-cover w-16 h-16 rounded-md"
-          />
-          <span className="mt-4 text-sm text-center text-bold">{relatedProduct.name}</span>
-        </div>
+      <Link href={`/services/${relatedProduct.slug}/#top`} scroll={true}>
+        <a>
+          <div>
+            <img
+              src={relatedProduct.logo_url}
+              alt={`${relatedProduct.name}`}
+              className="block object-cover w-16 h-16 m-auto rounded-md"
+            />
+            <span className="mt-4 text-sm text-center text-bold">{relatedProduct.name}</span>
+          </div>
+        </a>
       </Link>
       <span className="mt-4 text-sm text-center text-text-tertiary">
         {relatedProduct?.description.length < MAX_RELATEDCARDCONTENT_LENGTH

@@ -315,7 +315,9 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
     // TODO: error handling
     // eslint-disable-next-line
 
-    toast.error('Could not submit the claim for the web service. Please send mail directly to contact@taggedweb.com.')
+    toast.error('Request failed. Kindly reach out to us at contact@taggedweb.com.', {
+      duration: 5000,
+    })
     return null
   }
 }

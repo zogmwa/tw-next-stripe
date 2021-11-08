@@ -8,6 +8,7 @@ import numeral from 'numeral'
 import { Formik } from 'formik'
 import { toast } from 'react-hot-toast'
 import * as yup from 'yup'
+import Link from 'next/link'
 import { useUserContext } from '../../hooks/use-user'
 import {
   toggleUsedByStatus,
@@ -25,11 +26,10 @@ import { Modal } from '../Modal'
 import { Input } from '../input'
 import { phoneRegex } from '../../utils/constants'
 import { Textarea } from '../textarea'
-import Link from 'next/link'
 
 const OwnTheServiceFormSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
-  mobile: yup.string().matches(phoneRegex, 'Please enter a valid number').min(10, 'to short'),
+  mobile: yup.string().min(7, 'too short').matches(phoneRegex, 'Please enter a valid number'),
   information: yup.string().required('Please share some details'),
 })
 
@@ -204,8 +204,8 @@ function ServiceDetailCardComponent({
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
-                <Link href={'../search/' + tag.slug}>
-                  <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                <Link key={tag.slug} href={'../search/' + tag.slug}>
+                  <Button buttonType="tag" size="small" className="mt-2 mr-2">
                     {tag.name}
                   </Button>
                 </Link>
@@ -273,12 +273,12 @@ function ServiceDetailCardComponent({
           <Formik
             initialValues={{ email: '', information: '', mobile: '', organizationName: '' }}
             validationSchema={OwnTheServiceFormSchema}
-            // eslint-disable-next-line
             onSubmit={async (values) => {
               const data = await claimOwnershipToAsset(service?.id, user, values)
               if (data) {
                 toast.success('Claim submitted for review.')
               }
+              setIsOpenOwnServiceModal(false)
             }}
           >
             {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
@@ -297,10 +297,12 @@ function ServiceDetailCardComponent({
                     errorMessage={touched.email ? errors.email : undefined}
                     success={touched.email && !errors.email}
                   />
+                  {/* ToDo : Include Phone Number Masking */}
                   <label className="block mb-2 text-sm text-text-primary" htmlFor="mobile">
                     Mobile Number
                   </label>
                   <Input
+                    placeholder="e.g. +919999999999"
                     id="mobile"
                     className="mb-4"
                     onChange={handleChange('mobile')}
