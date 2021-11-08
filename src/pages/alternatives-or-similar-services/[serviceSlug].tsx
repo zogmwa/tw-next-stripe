@@ -120,6 +120,18 @@ export default function ServiceList({
     }
     router.push(query)
   }
+
+  const pageRef = useRef(null)
+  useEffect(() => {
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }, [])
+
   const [error, setError] = useState('')
   useEffect(() => {
     if (services.length === 0) {
@@ -129,7 +141,7 @@ export default function ServiceList({
     }
   }, [services])
   return (
-    <div className="max-w-screen-lg px-4 mx-auto my-20">
+    <div className="max-w-screen-lg px-4 mx-auto my-20" ref={pageRef}>
       <SearchBar
         className="mb-8"
         tagsArr={defaultArr}
