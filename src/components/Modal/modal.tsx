@@ -60,9 +60,6 @@ function ModalComponent({
                 className={clsx(
                   (() => {
                     switch (size) {
-                      case '2xl': {
-                        return 'max-w-2xl'
-                      }
                       case 'xl': {
                         return 'max-w-xl'
                       }

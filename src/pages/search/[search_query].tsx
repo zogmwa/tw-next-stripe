@@ -64,6 +64,7 @@ type ServiceListProps = {
 
 export default function ServiceList({
   services,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   defaultArr,
   tags,
   currentPage = 1,
@@ -137,7 +138,6 @@ export default function ServiceList({
     <div className="max-w-screen-lg px-2 mx-auto my-20" ref={pageRef}>
       <SearchBar
         className="mb-8"
-        tagsArr={defaultArr}
         onSubmit={(selectedTag) => {
           router.push(`/search/${selectedTag}`)
         }}

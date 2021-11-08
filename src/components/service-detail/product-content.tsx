@@ -21,6 +21,7 @@ type ServiceDetailPriductProps = {
 function ProductContentComponent({ service, editAllowed = false, onChange = () => {} }: ServiceDetailPriductProps) {
   if (typeof service === 'undefined') return null
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [carouselEdit, setCaroselEdit] = useState(false)
   const promo_video = service?.promo_video ?? ''
   const images = service?.snapshots ?? []
