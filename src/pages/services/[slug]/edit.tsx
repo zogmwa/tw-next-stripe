@@ -52,11 +52,11 @@ export default function Service({ service }) {
       name: 'Product Information',
       content: <ProductContent service={showService as Asset} editAllowed={editAllowed} onChange={handleChange} />,
     },
-    // {
-    //   id: 'features',
-    //   name: 'Features',
-    //   content: <HighlightSection service={service as Asset} />,
-    // },
+    {
+      id: 'features',
+      name: 'Features',
+      content: <HighlightSection service={showService as Asset} editAllowed={editAllowed} onChange={handleChange} />,
+    },
     {
       id: 'pricing',
       name: 'Pricing',
