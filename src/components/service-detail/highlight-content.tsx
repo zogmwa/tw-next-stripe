@@ -15,9 +15,11 @@ import { useUserContext } from '../../hooks/use-user'
 
 type ServiceDetailFeatureProps = {
   service: Asset
+  editAllowed?: boolean
+  onChange?: Function
 }
 
-function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
+function HighlightContentComponent({ service, editAllowed = false, onChange = () => {} }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
 
   const [attributeVotesList, setAttributeVotesList] = useState([])
@@ -30,6 +32,10 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
   const user = useUserContext()
   const { authVerified } = user
   const customerOrganizations = service?.customer_organizations ?? []
+
+  useEffect(() => {
+    setAttributes(service.attributes ?? [])
+  }, [service.attributes])
 
   useEffect(() => {
     async function getVotedAttribute() {
@@ -133,6 +139,8 @@ function HighlightContentComponent({ service }: ServiceDetailFeatureProps) {
         addAttributeAction={addAttributeAction}
         addAttributeNameErrorMessage={addAttributeNameErrorMessage}
         customerOrganizations={customerOrganizations}
+        editAllowed={editAllowed}
+        onChange={onChange}
       />
     </>
   )
