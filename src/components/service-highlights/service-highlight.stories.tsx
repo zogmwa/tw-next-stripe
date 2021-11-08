@@ -122,6 +122,8 @@ export function DefaultStarRating() {
       addAttributeAction={addAttributeAction}
       addAttributeNameErrorMessage={addAttributeNameErrorMessage}
       customerOrganizations={customerOrganizations}
+      editAllowed={false}
+      onChange={() => {}}
     />
   )
 }

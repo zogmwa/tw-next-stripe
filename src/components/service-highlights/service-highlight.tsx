@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import toast from 'react-hot-toast'
 import { TiImageOutline } from 'react-icons/ti'
 import ReactTooltip from 'react-tooltip'
+import { RiDeleteBin5Line } from 'react-icons/ri'
+import { FiAlertTriangle } from 'react-icons/fi'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -24,10 +26,15 @@ function HighlightContentComponent({
   addAttributeAction,
   addAttributeNameErrorMessage,
   customerOrganizations,
+  editAllowed,
+  onChange,
 }) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [unlinkAttribute, setUnlinkAttribute] = useState(null)
+  const [isConfirm, setIsConfirm] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(false)
   const user = useUserContext()
   const { authVerified } = user
 
@@ -38,6 +45,17 @@ function HighlightContentComponent({
       setIsOpen(!isOpen)
     }
   }
+
+  useEffect(() => {
+    if (isSubmit) {
+      let unlinkedAttrubutesIds = []
+      const unlinkedAttributes = attributes.filter((attribute) => attribute !== unlinkAttribute)
+      unlinkedAttributes.map((attribute) => unlinkedAttrubutesIds.push({ name: attribute.name }))
+      setIsSubmit(false)
+      setUnlinkAttribute(null)
+      onChange({ attributes: unlinkedAttrubutesIds })
+    }
+  }, [isSubmit])
 
   const handleUpvoteAttribute = (attribute) => {
     if (typeof upvoteAttribute === 'function') upvoteAttribute(attribute)
@@ -148,6 +166,15 @@ function HighlightContentComponent({
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
+                  {editAllowed && (
+                    <RiDeleteBin5Line
+                      className="inline ml-2 text-sm text-red-600 cursor-pointer"
+                      onClick={() => {
+                        setUnlinkAttribute(attribute)
+                        setIsConfirm(true)
+                      }}
+                    />
+                  )}
                 </div>
               )
             } else {
@@ -194,10 +221,54 @@ function HighlightContentComponent({
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
+                  {editAllowed && (
+                    <RiDeleteBin5Line
+                      className="inline ml-2 text-sm text-red-600 cursor-pointer"
+                      onClick={() => {
+                        setUnlinkAttribute(attribute)
+                        setIsConfirm(true)
+                      }}
+                    />
+                  )}
                 </div>
               )
             }
           })}
+          <Modal isOpen={isConfirm} setIsOpen={setIsConfirm} isModalOverflow={true}>
+            <>
+              <div className="text-center">
+                <FiAlertTriangle className="inline text-4xl text-yellow-600" />
+              </div>
+              <div className="my-4 text-center">
+                Highlight <b>{unlinkAttribute && unlinkAttribute.name}</b> will be remove from service with upvote
+                counts. Are you sure?
+              </div>
+              <div className="flex flex-row-reverse">
+                <Button
+                  className="ml-4"
+                  buttonType="default"
+                  type="submit"
+                  onClick={() => {
+                    setIsConfirm(false)
+                    setIsSubmit(false)
+                    setUnlinkAttribute(null)
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  buttonType="primary"
+                  type="submit"
+                  onClick={() => {
+                    setIsConfirm(false)
+                    setIsSubmit(true)
+                  }}
+                >
+                  OK
+                </Button>
+              </div>
+            </>
+          </Modal>
         </div>
         {tempAttributes.length > 0 &&
         attributes.length !== defaultShowCount &&
