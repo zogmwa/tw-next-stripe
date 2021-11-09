@@ -26,16 +26,22 @@ export function NavBar({ className, style }: NavBarProps) {
       <div className={clsx('hidden md:block w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
         <div className="flex items-center h-full max-w-screen-lg pr-2 mx-auto">
           <Link href="/">
-            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+            <a>
+              <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+            </a>
           </Link>
           <Link href="/">
-            <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
-              TaggedWeb
-            </div>
+            <a>
+              <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                TaggedWeb
+              </div>
+            </a>
           </Link>
           <div className="flex-1" />
           <Link href="/submit-service">
-            <Button className="flex mx-4">Submit A Web Service</Button>
+            <a>
+              <Button className="flex mx-4">Submit A Web Service</Button>
+            </a>
           </Link>
           {isLoggedIn() ? (
             <>
@@ -43,7 +49,9 @@ export function NavBar({ className, style }: NavBarProps) {
             </>
           ) : (
             <Link href={`/login?next=${router.asPath}`}>
-              <Button> Sign Up | Login </Button>
+              <a>
+                <Button> Sign Up | Login </Button>
+              </a>
             </Link>
           )}
         </div>
@@ -57,12 +65,16 @@ export function NavBar({ className, style }: NavBarProps) {
             <div className="flex items-center justify-between w-full p-1">
               <div className="flex items-center">
                 <Link href="/">
-                  <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+                  <a>
+                    <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+                  </a>
                 </Link>
                 <Link href="/">
-                  <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
-                    TaggedWeb
-                  </div>
+                  <a>
+                    <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                      TaggedWeb
+                    </div>
+                  </a>
                 </Link>
               </div>
               <div className="flex items-center justify-between p-1">
@@ -72,7 +84,9 @@ export function NavBar({ className, style }: NavBarProps) {
                   </>
                 ) : (
                   <Link href={`/login?next=${router.asPath}`}>
-                    <Button> Sign Up | Login </Button>
+                    <a>
+                      <Button> Sign Up | Login </Button>
+                    </a>
                   </Link>
                 )}
                 <GiHamburgerMenu className="p-1 text-3xl text-primary" onClick={() => setMobileTopShow(true)} />

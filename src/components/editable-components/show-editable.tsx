@@ -2,12 +2,12 @@ import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import { FiEdit } from 'react-icons/fi'
 
-type ShowEditableComponent = {
+type ShowEditableComponentProps = {
   children: React.ReactNode
   onEdit: Function
 }
 
-function ShowEditableComponent({ children, onEdit }: ShowEditableComponent) {
+function ShowEditableComponent({ children, onEdit }: ShowEditableComponentProps) {
   return (
     <>
       {children}

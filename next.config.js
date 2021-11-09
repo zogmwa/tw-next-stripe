@@ -17,10 +17,10 @@ const nextConfig = {
     GOOGLE_CLIENT_ID: '638599930121-73t33tmtfr4ggr9jsv3m7pb4lv53skp8.apps.googleusercontent.com',
     GOOGLE_OAUTH_STATE: 'GZublByuSS',
 
-    CLOUDINARY_CLOUD_NAME: 'dgfmcs1yy',
+    CLOUDINARY_CLOUD_NAME: 'taggedweb',
     CLOUDINARY_PRESET_NAME: 'ml_default',
-    CLOUDINARY_API_KEY: '241677845793131',
-    CLOUDINARY_API_SECRET: '3DQQEO7VRHMo4WNp_JKOYxGMTtg',
+    CLOUDINARY_API_KEY: '922317449762841',
+    CLOUDINARY_API_SECRET: 'DPZho9YCX_9Lf7LsJI5c96-gBkQ',
 
     SECRET_COOKIE_PASSWORD: 'cklvnmwhdfklsdfjasdkfajskdnfjkxcvyiuwerbkashkdjf',
 
@@ -29,7 +29,6 @@ const nextConfig = {
     NEXT_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-next-page-redirect',
     FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
   },
-  swcMinify: true,
 }
 
 module.exports = nextConfig

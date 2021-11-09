@@ -50,7 +50,7 @@ function EditalePriceTableTrowComponent({
   }, [editData])
 
   const handleChange = (e) => {
-    let { name, value } = e.target
+    const { name, value } = e.target
     setEditData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -112,7 +112,7 @@ function EditalePriceTableTrowComponent({
           name="features"
           value={editData.features}
           onChange={(event) => handleChange(event)}
-        ></textarea>
+        />
       </TableCell>
       <TableCell>
         <div className="flex items-center justify-center">

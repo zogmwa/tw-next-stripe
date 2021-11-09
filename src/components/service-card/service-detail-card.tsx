@@ -5,16 +5,33 @@ import { useRouter } from 'next/router'
 import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
+import { Formik } from 'formik'
+import { toast } from 'react-hot-toast'
+import * as yup from 'yup'
+import Link from 'next/link'
 import { useUserContext } from '../../hooks/use-user'
-import { toggleUsedByStatus, toggleUpVoteAsset, toggleDownVoteAsset } from '../../queries/service'
+import {
+  toggleUsedByStatus,
+  toggleUpVoteAsset,
+  toggleDownVoteAsset,
+  claimOwnershipToAsset,
+} from '../../queries/service'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Asset } from '../../types/asset'
 import { Checkbox } from '../checkbox'
 import { ServiceLogo } from '../service-logo'
-import { EditableServiceLogo } from '../editable-components'
-import { EditableServiceName } from '../editable-components'
-import { EditableServiceDescription } from '../editable-components'
+import { EditableServiceLogo, EditableServiceName, EditableServiceDescription } from '../editable-components'
+import { Modal } from '../Modal'
+import { Input } from '../input'
+import { phoneRegex } from '../../utils/constants'
+import { Textarea } from '../textarea'
+
+const OwnTheServiceFormSchema = yup.object().shape({
+  email: yup.string().email().required('Please enter a valid email'),
+  mobile: yup.string().min(7, 'too short').matches(phoneRegex, 'Please enter a valid number'),
+  information: yup.string().required('Please share some details'),
+})
 
 type ServiceDetailCardProps = {
   service: Asset
@@ -47,6 +64,15 @@ function ServiceDetailCardComponent({
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
   const user = useUserContext()
   const { authVerified } = user
+  const [isOpenOwnServiceModal, setIsOpenOwnServiceModal] = useState(false)
+
+  function authCheck() {
+    if (!authVerified) {
+      toast.error('Kindly log in to claim ownership')
+    } else {
+      setIsOpenOwnServiceModal(!isOpenOwnServiceModal)
+    }
+  }
 
   const setToggleUsedByState = async () => {
     if (!authVerified) return
@@ -94,12 +120,18 @@ function ServiceDetailCardComponent({
                 onSubmit={(field, value) => onChange(field, value)}
               />
             ) : (
-              <ServiceLogo
-                serviceName={service?.name}
-                serviceId={service.id}
-                logoUrl={service.logo_url}
-                owned={service?.is_owned ?? false}
-              />
+              <a
+                href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+                target={service.affiliate_link || service.website ? '_blank' : ''}
+                rel="noreferrer"
+              >
+                <ServiceLogo
+                  serviceName={service?.name}
+                  serviceId={service.id}
+                  logoUrl={service.logo_url}
+                  owned={service?.is_owned ?? false}
+                />
+              </a>
             )}
           </div>
           <div className="flex items-center space-x-2">
@@ -130,10 +162,16 @@ function ServiceDetailCardComponent({
                 Visit Website
               </Button>
             </a>
-            <div className="hidden md:flex md:items-center md:cursor-pointer md:space-x-2">
+
+            <a
+              href="#"
+              id="ownService"
+              onClick={authCheck}
+              className="hidden md:flex md:items-center md:cursor-pointer md:space-x-2"
+            >
               <AiOutlineInfoCircle className="text-primary" />
               <span className="text-xs text-primary">Own this Service?</span>
-            </div>
+            </a>
           </div>
           <div className="flex items-start">
             {editAllowed ? (
@@ -166,9 +204,11 @@ function ServiceDetailCardComponent({
           <div className="flex flex-row flex-wrap mb-5">
             {service.tags.map((tag) => {
               return (
-                <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
-                  {tag.name}
-                </Button>
+                <Link key={tag.slug} href={'../search/' + tag.slug}>
+                  <Button buttonType="tag" size="small" className="mt-2 mr-2">
+                    {tag.name}
+                  </Button>
+                </Link>
               )
             })}
           </div>
@@ -190,8 +230,10 @@ function ServiceDetailCardComponent({
           </Button>
         </a>
         <div className="flex items-center justify-center w-40 space-x-2 cursor-pointer md:hidden">
-          <AiOutlineInfoCircle className="text-primary" />
-          <span className="text-xs text-primary">Own this Service?</span>
+          <a href="#" id="ownService">
+            <AiOutlineInfoCircle className="text-primary" />
+            <span className="text-xs text-primary">Own this Service?</span>
+          </a>
         </div>
       </div>
       <div className="flex flex-row justify-center space-x-4 md:flex-col md:justify-start md:items-center md:space-x-0 md:space-y-4">
@@ -226,6 +268,98 @@ function ServiceDetailCardComponent({
           I&apos;ve used this
         </Button>
       </div>
+      <Modal isOpen={isOpenOwnServiceModal} setIsOpen={setIsOpenOwnServiceModal}>
+        <>
+          <Formik
+            initialValues={{ email: '', information: '', mobile: '', organizationName: '' }}
+            validationSchema={OwnTheServiceFormSchema}
+            onSubmit={async (values) => {
+              const data = await claimOwnershipToAsset(service?.id, user, values)
+              if (data) {
+                toast.success('Claim submitted for review.')
+              }
+              setIsOpenOwnServiceModal(false)
+            }}
+          >
+            {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
+              <>
+                <form onSubmit={handleSubmit}>
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                    Email Id
+                  </label>
+                  <Input
+                    placeholder="Enter email"
+                    id="email"
+                    className="mb-4"
+                    onChange={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    errorMessage={touched.email ? errors.email : undefined}
+                    success={touched.email && !errors.email}
+                  />
+                  {/* ToDo : Include Phone Number Masking */}
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="mobile">
+                    Mobile Number
+                  </label>
+                  <Input
+                    placeholder="e.g. +919999999999"
+                    id="mobile"
+                    className="mb-4"
+                    onChange={handleChange('mobile')}
+                    onBlur={handleBlur('mobile')}
+                    value={values.mobile}
+                    errorMessage={touched.mobile ? errors.mobile : undefined}
+                    success={touched.mobile && !errors.mobile}
+                  />
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="organizationName">
+                    Organization Name
+                  </label>
+                  <Input
+                    id="organizationName"
+                    className="mb-4"
+                    onChange={handleChange('organizationName')}
+                    onBlur={handleBlur('organizationName')}
+                    value={values.organizationName}
+                    errorMessage={touched.organizationName ? errors.organizationName : undefined}
+                    success={touched.organizationName && !errors.organizationName}
+                  />
+                  {/* Keeping it for form Design reference */}
+                  {/* <label className="block mb-2 text-sm text-text-primary" htmlFor="organizationSize">
+                    Organization Size
+                  </label>
+                  <Input
+                    id="organizationSize"
+                    className="mb-4"
+                    onChange={handleChange('organizationSize')}
+                    onBlur={handleBlur('organizationSize')}
+                    value={values.organizationSize}
+                    errorMessage={touched.organizationSize ? errors.organizationSize : undefined}
+                    success={touched.organizationSize && !errors.organizationSize}
+                  /> */}
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="information">
+                    Information
+                  </label>
+                  <Textarea
+                    placeholder="Ensure the details you provide, help us verify the ownership."
+                    id="information"
+                    className="mb-4"
+                    onChange={handleChange('information')}
+                    onBlur={handleBlur('information')}
+                    value={values.information}
+                    errorMessage={touched.information ? errors.information : undefined}
+                    success={touched.information && !errors.information}
+                  />
+                  <div className="flex items-center space-x-4">
+                    <Button type="submit" buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
+                      Submit
+                    </Button>
+                  </div>
+                </form>
+              </>
+            )}
+          </Formik>
+        </>
+      </Modal>
     </div>
   )
 }

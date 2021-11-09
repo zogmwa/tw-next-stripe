@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { Spinner } from '../components/spinner'
-import { useUserContext } from '../hooks/use-user'
+import { Spinner } from '../../components/spinner'
+import { useUserContext } from '../../hooks/use-user'
 
 /**
  * This is a component to handle the callback from Google for OAuth flow.

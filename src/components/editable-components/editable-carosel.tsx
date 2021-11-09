@@ -35,7 +35,7 @@ function EditableCarouselComponent({ promo_video, images, onChange, isEdit, onEd
   const [defaultImages, setDefaultImages] = useState([])
 
   useEffect(() => {
-    let defaultUpdateUrl = []
+    const defaultUpdateUrl = []
     for (let i = 0; i < images.length; i++) defaultUpdateUrl.push({ url: images[i].url })
     setDefaultImages(images)
     setUpdateUrls(defaultUpdateUrl)
@@ -45,10 +45,10 @@ function EditableCarouselComponent({ promo_video, images, onChange, isEdit, onEd
   useEffect(() => {
     async function getImageFilesList() {
       await Promise.all(defaultImages.map((image) => fetchFileFromCloudinary(image.url))).then((res) => {
-        let loadedFiles = []
-        let loadedUrls = {}
+        const loadedFiles = []
+        const loadedUrls = {}
         for (let i = 0; i < res.length; i++) {
-          let loadedFile: any = res[i] as File
+          const loadedFile: any = res[i] as File
           loadedFile.name = `fake-loaded-file-name-${i}`
           loadedUrls[`fake-loaded-file-name-${i}`] = defaultImages[i].url
           loadedFiles.push(loadedFile)

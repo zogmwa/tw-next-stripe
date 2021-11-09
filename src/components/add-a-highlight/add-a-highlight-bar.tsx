@@ -6,7 +6,7 @@ const filterAttributes = async (inputValue: string) => {
   const { data } = await axios.get(`/api/autocomplete/attributes/${inputValue}`)
   const attributes = data.results
   const tempAttributes = attributes.filter((attribute) => attribute[1].toLowerCase().includes(inputValue.toLowerCase()))
-  let returnAttributes = []
+  const returnAttributes = []
   tempAttributes.map((attribute) =>
     returnAttributes.push({ id: attribute[0], label: attribute[1], value: attribute[1].toLowerCase() }),
   )
@@ -16,7 +16,7 @@ const filterAttributes = async (inputValue: string) => {
 
 const promiseOptions = async (inputValue: string) => {
   if (inputValue.trim().length >= 3) {
-    let showHighlights = await filterAttributes(inputValue)
+    const showHighlights = await filterAttributes(inputValue)
     showHighlights.push({ id: 0, label: inputValue, value: inputValue })
     return showHighlights
   } else {

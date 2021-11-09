@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { AiOutlineSearch, AiOutlinePlusCircle } from 'react-icons/ai'
-import { GrShare } from 'react-icons/gr'
+import React, { useState, useEffect, ReactElement } from 'react'
+import { AiOutlineSearch } from 'react-icons/ai'
 import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
-import { components } from 'react-select'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { searchSuggestions } from '../../queries/search'
 import { Button } from '../button'
 
@@ -26,50 +24,11 @@ const placeholderComponent = (
   </div>
 )
 
-const TagSearchResultComponent = ({ input }: { input: string }) => (
-  <div className="flex items-center justify-between ml-2 space-x-1 group">
-    <div>{input}</div>
-    <AiOutlinePlusCircle className="hidden text-text-secondary group-hover:flex" />
-  </div>
-)
-
-const AssetSearchResultComponent = ({ input, slug }: { input: string; slug: string }) => (
-  <Link href={`/services/${slug}`}>
-    <div className="flex items-center justify-between ml-2 space-x-1 group !text-black">
-      <div>{input}</div>
-      <GrShare className="hidden text-text-secondary group-hover:flex" />
-    </div>
-  </Link>
-)
-
-const OptionComponent = (props) => {
-  const { label, value, options } = props
-  if (options.length === 3 && options?.[0].options) {
-    // If there are 3 groups of options
-    const values = options[1].options.map((option) => option.value)
-    // Get an array of value of all web services
-    if (values.includes(value)) {
-      // Check if current option is a webservice
-      return (
-        <components.Option {...props}>
-          <AssetSearchResultComponent input={label} slug={value} />
-        </components.Option>
-      )
-    }
-  }
-
-  return (
-    <components.Option {...props}>
-      <TagSearchResultComponent input={label} />
-    </components.Option>
-  )
-}
-
 export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsProps) {
   const [tags, setTags] = useState<string[]>([])
   const [, setError] = useState<string>('')
   const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
-
+  const router = useRouter()
   useEffect(() => {
     if (tagsArr) {
       setDefaultTags(tagsArr)
@@ -85,14 +44,26 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
    * @param text - the text entered in the select menu
    */
 
-  const handleChange = (value: { value: string; label: string }[]) => {
-    const tags = value.map((tag) => tag.value)
-    if (tags.length > 5) {
-      setError('A maximum of 5 tags are allowed.')
-      toast.error('A maximum of 5 tags are allowed.')
+  const handleChange = (value: { value: string; label: ReactElement; isWebService: boolean }[]) => {
+    let onWebServiceSelect = false
+    let webserviceSlug = ''
+    const tags = value.map((tag) => {
+      if (tag.isWebService) {
+        onWebServiceSelect = true
+        webserviceSlug = tag.value
+      }
+      return tag.value
+    })
+    if (onWebServiceSelect) {
+      router.push(`services/${webserviceSlug}`)
     } else {
-      setError('')
-      setTags(tags)
+      if (tags.length > 5) {
+        setError('A maximum of 5 tags are allowed.')
+        toast.error('A maximum of 5 tags are allowed.')
+      } else {
+        setError('')
+        setTags(tags)
+      }
     }
   }
 
@@ -127,7 +98,7 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
         defaultValue={defaultTags}
         isMulti
         name="tags"
-        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
+        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
         instanceId

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { client } from '../utils/client'
-import { Spinner } from '../components/spinner'
-import { useUserContext } from '../hooks/use-user'
+import { client } from '../../utils/client'
+import { Spinner } from '../../components/spinner'
+import { useUserContext } from '../../hooks/use-user'
 
 /**
  * This is a basic component that handles the callback from LinkedIn, after a login.
@@ -78,8 +78,8 @@ export default function LoginWithLinkedin() {
               setLoginRequestSent(true)
               const redirectUrl =
                 process.env.NODE_ENV === 'development'
-                  ? 'http://localhost:3000/login-with-linkedin'
-                  : 'https://taggedweb.com/login-with-linkedin'
+                  ? 'http://localhost:3000/linkedin-login'
+                  : 'https://taggedweb.com/linkedin-login'
 
               // Exchange LinkedIn auth code for LinkedIn authtoken
               const {
@@ -105,7 +105,7 @@ export default function LoginWithLinkedin() {
                   connectLinkedInAccountToExistingTaggedWebAccount(linkedin_access_token, code)
                 } else {
                   // If it isn't redirected to a page yet then it is likely an error case
-                  replace(`${failureRedirect}`)
+                  replace(failureRedirect)
                 }
               }
             }

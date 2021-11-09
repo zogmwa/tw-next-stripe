@@ -72,21 +72,21 @@ export function useSessionUser(): UserContextType {
   )
 
   useEffect(() => {
-    const url = localStorage.getItem('next_page_url')
+    const url = localStorage.getItem(process.env.NEXT_PAGE_URL_LOCAL_STORAGE_KEY)
     if (url && url !== 'undefined' && url !== nextPageUrl) {
-      localStorage.removeItem('next_page_url')
+      localStorage.removeItem(process.env.NEXT_PAGE_URL_LOCAL_STORAGE_KEY)
       setNextPageUrlState(url)
     }
   }, [setNextPageUrlState, nextPageUrl])
 
   const setNextPageUrl = useCallback((url: string = '/') => {
     setNextPageUrlState(url)
-    localStorage.setItem('next_page_url', url)
+    localStorage.setItem(process.env.NEXT_PAGE_URL_LOCAL_STORAGE_KEY, url)
   }, [])
 
   const nextPageRedirect = useCallback(() => {
-    localStorage.removeItem('next_page_url')
-    if (router.pathname === '/login-with-google' || router.pathname === '/login-with-linkedin') {
+    localStorage.removeItem(process.env.NEXT_PAGE_URL_LOCAL_STORAGE_KEY)
+    if (router.pathname === '/google-login' || router.pathname === '/linkedin-login') {
       return router.replace(nextPageUrl)
     }
     return router.push(nextPageUrl)

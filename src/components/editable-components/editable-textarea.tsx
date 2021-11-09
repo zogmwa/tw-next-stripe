@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import ReactTooltip from 'react-tooltip'
 
-type EditableTextareaComponent = {
+type EditableTextareaComponentProps = {
   textareaName: string
   textareaValue: string | number
   onSubmit: Function
   onCancel: Function
 }
 
-function EditableTextareaComponent({ textareaName, textareaValue, onSubmit, onCancel }: EditableTextareaComponent) {
+function EditableTextareaComponent({
+  textareaName,
+  textareaValue,
+  onSubmit,
+  onCancel,
+}: EditableTextareaComponentProps) {
   const [value, setValue] = useState(textareaValue)
 
   return (
@@ -19,7 +24,7 @@ function EditableTextareaComponent({ textareaName, textareaValue, onSubmit, onCa
         value={value}
         name={textareaName}
         onChange={(event) => setValue(event.target.value)}
-      ></textarea>
+      />
       <AiOutlineCheck
         className="absolute top-[0.3rem] right-[2rem] text-success text-md cursor-pointer hover:shadow-sm"
         onClick={() => onSubmit(value)}

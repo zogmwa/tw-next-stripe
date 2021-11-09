@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import ReactTooltip from 'react-tooltip'
 
-type EditableInputComponent = {
+type EditableInputComponentProps = {
   inputName: string
   inputValue: string | number
   onSubmit: Function
   onCancel: Function
 }
 
-function EditableInputComponent({ inputName, inputValue, onSubmit, onCancel }: EditableInputComponent) {
+function EditableInputComponent({ inputName, inputValue, onSubmit, onCancel }: EditableInputComponentProps) {
   const [value, setValue] = useState(inputValue)
 
   return (

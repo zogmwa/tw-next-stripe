@@ -1,8 +1,9 @@
 import React from 'react'
-import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
+import { AiFillLinkedin, AiFillGoogleSquare, AiFillCheckCircle } from 'react-icons/ai'
 import { Button } from '../button'
 import { Profile } from '../../types/profile'
 import { User } from '../../types/user'
+import { handleGoogleConnect, handleLinkedInConnect } from '../../utils/login'
 
 type ProfileCardProps = { data: Partial<User & Profile> }
 
@@ -32,24 +33,39 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
         </div>
       </div>
       <div className="flex flex-col items-center justify-start space-x-0 space-y-2">
-        <Button
-          icon={<AiFillLinkedin size={20} />}
-          buttonType="primary"
-          iconPlacement="right"
-          className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
-          // onClick={connectLinkedIn}
-        >
-          Add your LinkedIn Profile
-        </Button>
-        <Button
-          icon={<AiFillGoogleSquare size={20} />}
-          buttonType="primary"
-          iconPlacement="right"
-          className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
-          // onClick={connectGoogle}
-        >
-          Add your Google Profile
-        </Button>
+        {(data.social_accounts ?? []).includes('linkedin_oauth2') ? (
+          <span className="w-full !border-[#0077B5] !flex px-4 py-2 rounded-md space-x-4 text-sm border inline-flex items-center justify-center text-[#0077B5] border-primary">
+            <span className="font-medium">Connected to Linkedin</span>
+            <AiFillCheckCircle size={20} className="text-[#00ee00]" />
+          </span>
+        ) : (
+          <Button
+            icon={<AiFillLinkedin size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
+            onClick={() => handleLinkedInConnect()}
+          >
+            Add your LinkedIn
+          </Button>
+        )}
+
+        {(data.social_accounts ?? []).includes('google') ? (
+          <span className="w-full !border-[#DB4437] !flex px-4 py-2 rounded-md space-x-4 text-sm border inline-flex items-center justify-center text-[#DB4437] border-primary">
+            <span className="font-medium">Connected to Google</span>
+            <AiFillCheckCircle size={20} className="text-[#00ee00]" />
+          </span>
+        ) : (
+          <Button
+            icon={<AiFillGoogleSquare size={20} />}
+            buttonType="primary"
+            iconPlacement="right"
+            className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
+            onClick={() => handleGoogleConnect()}
+          >
+            Add your Google
+          </Button>
+        )}
       </div>
     </div>
   )
