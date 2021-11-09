@@ -41,8 +41,11 @@ function EditaleUsedByCompaniesTableTrowComponent({
   }, [isSubmit])
 
   useEffect(() => {
-    setCurrentEditData(editData)
-    setCurrentEditIndex(rowIndex)
+    if (editData !== rowData) {
+      console.log('here')
+      setCurrentEditData(editData)
+      setCurrentEditIndex(rowIndex)
+    }
   }, [editData])
 
   return (
@@ -92,6 +95,7 @@ function EditaleUsedByCompaniesTableTrowComponent({
               if (tempData.length > 0) {
                 toast.error('This organization is already exist')
               } else {
+                setErrorMessage('')
                 setEditData({ name: value.label, logo_url: value.logo_url, website: value.website })
               }
             }}
@@ -104,7 +108,7 @@ function EditaleUsedByCompaniesTableTrowComponent({
       <TableCell>{editData.name !== '' && <>{editData.website}</>}</TableCell>
       <TableCell align="center">
         <div className="flex items-center justify-center">
-          <RiDeleteBin5Line onClick={() => onDelete(rowIndex)} className="text-red-600 cursor-pointer" />
+          <RiDeleteBin5Line onClick={() => onDelete()} className="text-red-600 cursor-pointer" />
         </div>
       </TableCell>
     </TableRow>

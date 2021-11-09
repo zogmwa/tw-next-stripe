@@ -58,70 +58,60 @@ function EditableUsedByCompaniesTableComponent({
   const [currentEditIndex, setCurrentEditIndex] = useState(-1)
 
   useEffect(() => {
-    setShowCustomerOrganizations(editCustomerOrganizations)
-  }, [editCustomerOrganizations])
+    if (showCustomerOrganizations !== editCustomerOrganizations) {
+      setEditCustomerOrganizations(showCustomerOrganizations)
+    }
+  }, [showCustomerOrganizations])
 
   useEffect(() => {
     if (currentEditData) {
-      setEditCustomerOrganizations([
-        ...showCustomerOrganizations.slice(0, currentEditIndex),
+      setShowCustomerOrganizations((prevState) => [
+        ...prevState.slice(0, currentEditIndex),
         currentEditData,
-        ...showCustomerOrganizations.slice(currentEditIndex + 1),
+        ...prevState.slice(currentEditIndex + 1),
       ])
     }
   }, [currentEditData])
 
   const handleAdd = () => {
     setShowCustomerOrganizations((prevState) => [...prevState, defaultCustomerOrganizationData])
-    setEditCustomerOrganizations((prevState) => [...prevState, defaultCustomerOrganizationData])
   }
 
   const handleDelete = (index) => {
     setShowCustomerOrganizations((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
-    setEditCustomerOrganizations((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
   }
 
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <div className="flex justify-end">
-          <RiMenuAddFill
-            onClick={() => handleAdd()}
-            className="m-2 text-xl cursor-pointer text-success"
-            data-for="tooltip-add"
-            data-tip
-          />
+          <span data-for="tooltip-add" data-tip>
+            <RiMenuAddFill onClick={() => handleAdd()} className="m-2 text-xl cursor-pointer text-success" />
+          </span>
+          <ReactTooltip id="tooltip-add" type="light" place="left" border={true} borderColor="text-grey-200">
+            Add Row
+          </ReactTooltip>
         </div>
-
-        {/* <ThemeProvider theme={theme}> */}
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
             <EditableTableHead headCells={headCells} />
             <TableBody>
-              {showCustomerOrganizations.map((organization, index) => {
-                if (organization) {
-                  return (
-                    <EditaleUsedByCompaniesTableTrow
-                      allRowData={showCustomerOrganizations}
-                      rowData={organization}
-                      rowIndex={index}
-                      onDelete={handleDelete}
-                      isSubmit={isSubmit}
-                      setCurrentEditData={setCurrentEditData}
-                      setCurrentEditIndex={setCurrentEditIndex}
-                      key={`organization-table-trow-${index}`}
-                    />
-                  )
-                }
-              })}
+              {showCustomerOrganizations.map((organization, index) => (
+                <EditaleUsedByCompaniesTableTrow
+                  allRowData={showCustomerOrganizations}
+                  rowData={organization}
+                  rowIndex={index}
+                  onDelete={() => handleDelete(index)}
+                  isSubmit={isSubmit}
+                  setCurrentEditData={setCurrentEditData}
+                  setCurrentEditIndex={setCurrentEditIndex}
+                  key={`${organization.name}-${index}`}
+                />
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
-        {/* </ThemeProvider> */}
       </Paper>
-      <ReactTooltip id="tooltip-add" type="light" place="left" border={true} borderColor="text-grey-200">
-        Add Row
-      </ReactTooltip>
     </Box>
   )
 }

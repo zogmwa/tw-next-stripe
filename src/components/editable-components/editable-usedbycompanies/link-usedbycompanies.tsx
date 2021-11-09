@@ -23,7 +23,6 @@ function LinkUsedByCompaniesComponent({
 
   useEffect(() => {
     if (isSubmit) {
-      console.log('editCustomerOrganizations:', editCustomerOrganizations)
       let isSend = true
       for (let i = 0; i < editCustomerOrganizations.length; i++) {
         if (editCustomerOrganizations[i].name === '') isSend = false
@@ -32,6 +31,7 @@ function LinkUsedByCompaniesComponent({
         onSubmit({ customer_organizations: editCustomerOrganizations })
         setIsOpen(false)
       }
+      setIsSubmit(false)
     }
   }, [isSubmit])
 
