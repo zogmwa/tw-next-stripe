@@ -24,6 +24,12 @@ const filterOrganizations = async (inputValue: string) => {
 const promiseOptions = async (inputValue: string) => {
   if (inputValue.trim().length >= 3) {
     let showOrganizations = await filterOrganizations(inputValue)
+    showOrganizations.push({
+      label: inputValue,
+      value: inputValue.toLowerCase(),
+      website: null,
+      logo_url: null,
+    })
 
     return showOrganizations
   } else {
