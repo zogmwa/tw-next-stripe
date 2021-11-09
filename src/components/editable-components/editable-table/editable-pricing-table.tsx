@@ -9,7 +9,7 @@ import { RiMenuAddFill } from 'react-icons/ri'
 import { EditableTableHead, EditalePriceTableTrow } from './index'
 import { Plan } from '../../../types/price-plan'
 
-type EditablePricingTableComponentComponentProps = {
+type EditablePricingTableComponentProps = {
   pricePlans: Plan[]
   defaultPriceData: Plan
   setEditPricePlans: React.Dispatch<React.SetStateAction<Plan[]>>
@@ -72,7 +72,7 @@ function EditablePricingTableComponent({
   defaultPriceData,
   setEditPricePlans,
   isSubmit,
-}: EditablePricingTableComponentComponentProps) {
+}: EditablePricingTableComponentProps) {
   const [showPricePlans, setShowPricePlans] = useState(pricePlans)
   const [currentEditData, setCurrentEditData] = useState({
     name: '',
