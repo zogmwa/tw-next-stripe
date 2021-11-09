@@ -71,17 +71,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  const pageRef = useRef(null)
-  useEffect(() => {
-    if (pageRef.current) {
-      pageRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'start',
-      })
-    }
-  }, [])
-
   return (
     <>
       <Head>
