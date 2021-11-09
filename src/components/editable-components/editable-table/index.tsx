@@ -1,3 +1,5 @@
 export { EditablePricingTable } from './editable-pricing-table'
 export { EditableTableHead } from './editable-thead'
 export { EditalePriceTableTrow } from './editable-price-trow'
+export { EditableUsedByCompaniesTable } from './editable-usedbycompanies-table'
+export { EditaleUsedByCompaniesTableTrow } from './editable-usedbycompanies-trow'

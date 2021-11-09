@@ -10,7 +10,9 @@ import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
 import { AddAHighlight } from '../add-a-highlight'
+import { LinkUsedByCompanies } from '../editable-components/editable-usedbycompanies/link-usedbycompanies'
 import { Modal } from '../Modal'
+import { ShowEditable } from '../editable-components'
 import { useUserContext } from '../../hooks/use-user'
 
 function HighlightContentComponent({
@@ -32,6 +34,7 @@ function HighlightContentComponent({
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isOrganizationOpen, setIsOrganizationOpen] = useState(false)
   const [unlinkAttribute, setUnlinkAttribute] = useState(null)
   const [isConfirm, setIsConfirm] = useState(false)
   const [isSubmit, setIsSubmit] = useState(false)
@@ -293,7 +296,22 @@ function HighlightContentComponent({
         ) : null}
       </div>
       <div className="mt-6 md:mt-4">
-        <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
+        {editAllowed ? (
+          <div className="flex items-center">
+            <ShowEditable onEdit={() => setIsOrganizationOpen(true)}>
+              <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
+            </ShowEditable>
+            <Modal isOpen={isOrganizationOpen} setIsOpen={setIsOrganizationOpen} isModalOverflow={true} size="4xl">
+              <LinkUsedByCompanies
+                setIsOpen={setIsOrganizationOpen}
+                customerOrganizations={customerOrganizations}
+                onSubmit={onChange}
+              />
+            </Modal>
+          </div>
+        ) : (
+          <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
+        )}
         <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
           {showCustomers.map((showCustomer, index) => (
             <Carousel.Item className="aspect-h-8 md:aspect-h-3" key={index}>
