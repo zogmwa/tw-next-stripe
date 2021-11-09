@@ -2,7 +2,6 @@ import React from 'react'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
-import TableLabel from '@mui/material/TableSortLabel'
 
 type EditableTableHeadComponentProps = {
   headCells: any[]
@@ -17,6 +16,7 @@ function EditableTableHeadComponent({ headCells }: EditableTableHeadComponentPro
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
+            width={headCell.width ? headCell.width : ''}
           >
             {headCell.label}
           </TableCell>
