@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
