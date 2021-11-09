@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -71,6 +71,17 @@ function CustomApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
+  const pageRef = useRef(null)
+  useEffect(() => {
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'start',
+      })
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -84,7 +95,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <UserProvider>
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
-              <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
+              <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
                 {redirectTo ? (
                   <RedirectSpinner />
                 ) : errorCode ? (
