@@ -17,6 +17,7 @@ function EditableTableHeadComponent({ headCells }: EditableTableHeadComponentPro
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             width={headCell.width ? headCell.width : ''}
+            sx={{ fontWeight: 'bold' }}
           >
             {headCell.label}
           </TableCell>

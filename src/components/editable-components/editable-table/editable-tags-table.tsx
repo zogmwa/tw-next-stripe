@@ -76,7 +76,7 @@ function EditableTagsTableComponent({
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper sx={{ width: '100%', mb: 2, boxShadow: 'none' }}>
         <div className="flex justify-end">
           <span data-for="tooltip-add" data-tip>
             <RiMenuAddFill onClick={() => handleAdd()} className="m-2 text-xl cursor-pointer text-success" />

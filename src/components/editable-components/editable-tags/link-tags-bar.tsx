@@ -51,7 +51,7 @@ const promiseOptions = async (inputValue: string) => {
   }
 }
 
-export default function LinkUsedByCompaniesBar({ onChange }) {
+export default function LinkTagsBar({ onChange }) {
   return (
     <AsyncSelect
       cacheOptions
