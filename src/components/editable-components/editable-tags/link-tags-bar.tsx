@@ -10,8 +10,16 @@ const convertToSlug = (txt: string): string => {
 }
 
 const filterTags = async (inputValue: string) => {
-  const { data } = await axios.get(`/api/autocomplete/tags/${inputValue}`)
-  const tags = data.results
+  let tagsList
+  try {
+    const { data } = await axios.get(`/api/autocomplete/tags/${inputValue}`)
+    tagsList = data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    console.log('Could not get similar tags.')
+  }
+  const tags = tagsList.results
   const tempTags = tags.filter((Tag) => Tag.name.toLowerCase().includes(inputValue.toLowerCase()))
   console.log(tempTags)
   let returnTags = []
