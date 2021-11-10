@@ -19,7 +19,6 @@ export default function Home({ featuredList }) {
   const { requireLoginBeforeAction } = useRequireLogin()
   let showFeaturedList = false
   if (featuredList.length > 0) showFeaturedList = true
-
   return (
     <div>
       <div className="max-w-screen-lg pl-2 mx-auto">

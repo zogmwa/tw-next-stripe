@@ -51,7 +51,7 @@ function HighlightContentComponent({
 
   useEffect(() => {
     if (isSubmit) {
-      let unlinkedAttrubutesIds = []
+      const unlinkedAttrubutesIds = []
       const unlinkedAttributes = attributes.filter((attribute) => attribute !== unlinkAttribute)
       unlinkedAttributes.map((attribute) => unlinkedAttrubutesIds.push({ name: attribute.name }))
       setIsSubmit(false)

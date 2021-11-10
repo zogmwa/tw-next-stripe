@@ -5,6 +5,7 @@ import TableContainer from '@mui/material/TableContainer'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
+import toast from 'react-hot-toast'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { EditableTableHead, EditableTagsTableTrow } from './index'
 import { Tag } from '../../../types/tag'
@@ -67,7 +68,11 @@ function EditableTagsTableComponent({
   }, [currentEditData])
 
   const handleAdd = () => {
-    setShowTags((prevState) => [...prevState, defaultTagData])
+    if (showTags.length > 4) {
+      toast.error('Could not add more tags.')
+    } else {
+      setShowTags((prevState) => [...prevState, defaultTagData])
+    }
   }
 
   const handleDelete = (index) => {
@@ -76,7 +81,7 @@ function EditableTagsTableComponent({
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper sx={{ width: '100%', mb: 2, boxShadow: 'none' }}>
         <div className="flex justify-end">
           <span data-for="tooltip-add" data-tip>
             <RiMenuAddFill onClick={() => handleAdd()} className="m-2 text-xl cursor-pointer text-success" />

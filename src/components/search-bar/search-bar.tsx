@@ -11,7 +11,7 @@ type SearchByTagsProps = {
   onSubmit?: (query: string) => void
   className?: string
   style?: React.CSSProperties
-  tagsArr?: { value: string; label: string }[]
+  tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
 }
 
 const placeholderComponent = (
@@ -24,19 +24,20 @@ const placeholderComponent = (
   </div>
 )
 
-export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsProps) {
-  const [tags, setTags] = useState<string[]>([])
+export function SearchBar({ onSubmit, className, style }: SearchByTagsProps) {
+  const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
-  const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
+  // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   useEffect(() => {
-    if (tagsArr) {
-      setDefaultTags(tagsArr)
-      const tags = tagsArr.map((tag) => tag.value)
-      setTags(tags)
+    const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags'))
+    if (!defautlTags) {
+      setTags([])
+    } else {
+      setTags(defautlTags)
+      // console.log(tags)
     }
-    // eslint-disable-next-line
-  }, [defaultTags])
+  }, [])
 
   /**
    * Handler function called when the user is searching.
@@ -47,22 +48,25 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
   const handleChange = (value: { value: string; label: ReactElement; isWebService: boolean }[]) => {
     let onWebServiceSelect = false
     let webserviceSlug = ''
-    const tags = value.map((tag) => {
+    const Tags = value.map((tag) => {
       if (tag.isWebService) {
         onWebServiceSelect = true
         webserviceSlug = tag.value
       }
-      return tag.value
+
+      return { value: tag.value, label: tag.value, isWebService: tag.isWebService }
     })
     if (onWebServiceSelect) {
+      setTags(value)
       router.push(`services/${webserviceSlug}`)
     } else {
-      if (tags.length > 5) {
+      if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
         toast.error('A maximum of 5 tags are allowed.')
       } else {
         setError('')
-        setTags(tags)
+        setTags(value)
+        localStorage.setItem('taggedweb-searched-tags', JSON.stringify(Tags))
       }
     }
   }
@@ -82,7 +86,7 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
       setError('')
       if (onSubmit) {
         // form.getFieldValue(fieldName) would return the value of the field
-        const tagsSelected = tags.join(',')
+        const tagsSelected = tags.map((tag) => tag.value).join(',')
         onSubmit(tagsSelected)
       }
     }
@@ -95,7 +99,7 @@ export function SearchBar({ onSubmit, className, style, tagsArr }: SearchByTagsP
       onSubmit={handleSubmit}
     >
       <AsyncSelect
-        defaultValue={defaultTags}
+        value={tags}
         isMulti
         name="tags"
         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}

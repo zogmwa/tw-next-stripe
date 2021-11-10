@@ -9,9 +9,9 @@ import { ServiceDetailTab } from '../../../components/service-detail/tab'
 import { HighlightSection } from '../../../components/service-detail/highlight-content'
 import { PricingContent } from '../../../components/service-detail/pricing-content'
 import { ProductContent } from '../../../components/service-detail/product-content'
-import { QaContent } from '../../../components/service-detail/qa-content'
-import { RelatedContent } from '../../../components/service-detail/related-content'
-import { ReviewsContainer } from '../../../components/service-detail/get-reviews'
+// import { QaContent } from '../../../components/service-detail/qa-content'
+// import { RelatedContent } from '../../../components/service-detail/related-content'
+// import { ReviewsContainer } from '../../../components/service-detail/get-reviews'
 import { Asset } from '../../../types/asset'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
