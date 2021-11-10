@@ -37,6 +37,7 @@ function EditalePriceTableTrowComponent({
         nameError = 'This value is not valid.'
       }
       if (editData.name === '') {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         isError = true
         currencyError = 'This value is not valid.'
       }
