@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
 import { RiMenuAddFill } from 'react-icons/ri'
-import { EditableTableHead, EditaleUsedByCompaniesTableTrow } from './index'
+import { EditableTableHead, EditableUsedByCompaniesTableTrow } from './index'
 import { CustomerOrganization } from '../../../types/customer_organization'
 
 type EditableUsedByCompaniesTableComponentProps = {
@@ -97,7 +97,7 @@ function EditableUsedByCompaniesTableComponent({
             <EditableTableHead headCells={headCells} />
             <TableBody>
               {showCustomerOrganizations.map((organization, index) => (
-                <EditaleUsedByCompaniesTableTrow
+                <EditableUsedByCompaniesTableTrow
                   allRowData={showCustomerOrganizations}
                   rowData={organization}
                   rowIndex={index}

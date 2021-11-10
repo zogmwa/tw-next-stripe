@@ -8,7 +8,7 @@ import ReactTooltip from 'react-tooltip'
 import { CustomerOrganization } from '../../../types/customer_organization'
 import LinkUsedByCompaniesBar from '../editable-usedbycompanies/link-usedbycompanies-bar'
 
-type EditaleUsedByCompaniesTableTrowComponentProps = {
+type EditableUsedByCompaniesTableTrowComponentProps = {
   allRowData: CustomerOrganization[]
   rowData: CustomerOrganization
   rowIndex: number
@@ -18,7 +18,7 @@ type EditaleUsedByCompaniesTableTrowComponentProps = {
   setCurrentEditIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
-function EditaleUsedByCompaniesTableTrowComponent({
+function EditableUsedByCompaniesTableTrowComponent({
   allRowData,
   rowData,
   rowIndex,
@@ -26,7 +26,7 @@ function EditaleUsedByCompaniesTableTrowComponent({
   isSubmit,
   setCurrentEditData,
   setCurrentEditIndex,
-}: EditaleUsedByCompaniesTableTrowComponentProps) {
+}: EditableUsedByCompaniesTableTrowComponentProps) {
   const [editData, setEditData] = useState(rowData)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -115,4 +115,4 @@ function EditaleUsedByCompaniesTableTrowComponent({
   )
 }
 
-export const EditaleUsedByCompaniesTableTrow = EditaleUsedByCompaniesTableTrowComponent
+export const EditableUsedByCompaniesTableTrow = EditableUsedByCompaniesTableTrowComponent
