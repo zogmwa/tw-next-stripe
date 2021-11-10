@@ -5,6 +5,7 @@ import TableContainer from '@mui/material/TableContainer'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
+import toast from 'react-hot-toast'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { EditableTableHead, EditableTagsTableTrow } from './index'
 import { Tag } from '../../../types/tag'
@@ -67,7 +68,11 @@ function EditableTagsTableComponent({
   }, [currentEditData])
 
   const handleAdd = () => {
-    setShowTags((prevState) => [...prevState, defaultTagData])
+    if (showTags.length > 4) {
+      toast.error('Could not add more tags.')
+    } else {
+      setShowTags((prevState) => [...prevState, defaultTagData])
+    }
   }
 
   const handleDelete = (index) => {
