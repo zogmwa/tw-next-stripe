@@ -76,3 +76,39 @@ export const topTags = [
     slug: 'construction-management',
   },
 ]
+
+export const TopSaasTags = [
+  {
+    name: 'Email Marketing Software',
+    slug: 'email-marketing-software',
+    description: '',
+  },
+  {
+    name: 'Video Conferencing Service',
+    slug: 'video-conferencing-service',
+    description: '',
+  },
+  {
+    name: 'E-commerce Software',
+    slug: 'e-commerce-software',
+    description: '',
+  },
+]
+
+export const TopSolutionTags = [
+  {
+    name: 'CRM Software',
+    slug: 'crm-software',
+    description: '',
+  },
+  {
+    name: 'Project Mangement Software',
+    slug: 'project-management-software',
+    description: '',
+  },
+  {
+    name: 'ERP System Tools',
+    slug: 'erp-system-tools',
+    description: '',
+  },
+]
