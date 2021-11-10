@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { Tag } from '../../types/tag'
 import { Select } from '../select'
 
-type SolutionFooterComponentProps = {
-  productTags: Tag[]
-  solutionTags: Tag[]
+type FooterComponentProps = {
+  topSaasTags: Tag[]
+  topSolutionTags: Tag[]
 }
 
 type Language = {
@@ -17,27 +17,22 @@ type Language = {
 }
 
 const companies = ['About', 'Blog', 'Career']
-const languages = [
-  { id: '1', text: 'English', disabled: false },
-  { id: '2', text: 'French', disabled: false },
-  { id: '3', text: 'Detch', disabled: false },
-  { id: '4', text: 'Spanish', disabled: false },
-]
+const languages = [{ id: '1', text: 'English', disabled: false }]
 
-function SolutionFooterComponent({ productTags, solutionTags }: SolutionFooterComponentProps) {
+export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponentProps) {
   const tagsDefaultShowCount = 3
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null | undefined>(languages[0])
   const [contactEmail, setContactEmail] = useState<string>('')
 
-  const showProductTags = productTags.slice(0, tagsDefaultShowCount)
-  const showSolutionTags = solutionTags.slice(0, tagsDefaultShowCount)
+  const showSaasTags = topSaasTags.slice(0, tagsDefaultShowCount)
+  const showSolutionTags = topSolutionTags.slice(0, tagsDefaultShowCount)
 
   return (
     <>
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">TOP PRODUCT TAGS</h4>
-          {showProductTags.map((tag) => (
+          <h4 className="text-sm text-gray-400">TOP SAAS TAGS</h4>
+          {showSaasTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
               <h4 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h4>
             </Link>
@@ -62,7 +57,7 @@ function SolutionFooterComponent({ productTags, solutionTags }: SolutionFooterCo
         <div className="flex flex-col items-center w-full px-4 space-y-4 md:items-start">
           <h4 className="text-sm text-gray-400">LANGUAGE</h4>
           <Select
-            buttonClassName="text-gray-800"
+            buttonClassName="text-gray-800 !px-3 !py-2"
             items={languages}
             selectedItem={selectedLanguage}
             onSelectedItemChange={({ selectedItem }) => setSelectedLanguage(selectedItem)}
@@ -127,8 +122,8 @@ function SolutionFooterComponent({ productTags, solutionTags }: SolutionFooterCo
           </div>
         </div>
       </div>
-      <div className="flex-col items-center hidden px-4 py-2 mt-10 space-y-4 divide-y md:flex bg-primary divide-solid divide-border-default">
-        <div className="flex items-start justify-between w-full py-4 text-xs text-white">
+      <div className="flex-col items-center hidden px-4 py-4 mt-10 divide-y md:flex bg-primary divide-solid divide-border-default">
+        <div className="flex items-start justify-between w-full pt-4 pb-6 text-xs text-white">
           <div className="flex flex-col w-full space-y-4">
             <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
             <h4 className="text-xs text-white">Latest news, articles, and resources, sent to your inbox weekly</h4>
@@ -145,7 +140,7 @@ function SolutionFooterComponent({ productTags, solutionTags }: SolutionFooterCo
             <button className="py-2 bg-green-400 border-none rounded-md min-w-[5rem]">Subscribe</button>
           </div>
         </div>
-        <div className="flex items-center justify-between w-full py-4">
+        <div className="flex items-center justify-between w-full pt-6 pb-4">
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-white" />
             <span className="pl-1 text-xs text-white">2021 TaggedWeb All rights reserved.</span>
@@ -181,5 +176,3 @@ function SolutionFooterComponent({ productTags, solutionTags }: SolutionFooterCo
     </>
   )
 }
-
-export const SolutionFooter = SolutionFooterComponent

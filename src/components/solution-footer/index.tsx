@@ -1,1 +1,1 @@
-export { SolutionFooter } from './solution-footer'
+export { FooterComponent } from './solution-footer'

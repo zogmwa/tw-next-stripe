@@ -1,13 +1,13 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { SolutionFooter } from './solution-footer'
-import { ProductTopTags, SolutionTopTags } from '../../utils/top-tags'
+import { FooterComponent } from './solution-footer'
+import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
 
 export default {
-  title: 'General/SolutionFooter',
-  component: SolutionFooter,
+  title: 'General/FooterComponent',
+  component: FooterComponent,
 } as Meta
 
-export function DefaultSolutionFooter() {
-  return <SolutionFooter productTags={ProductTopTags} solutionTags={SolutionTopTags} />
+export function DefaultFooterComponent() {
+  return <FooterComponent topSaasTags={TopSaasTags} topSolutionTags={TopSolutionTags} />
 }
