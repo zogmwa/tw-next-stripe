@@ -17,7 +17,7 @@ export default withApiAuthRequired(async (req, res) => {
     res.json(data)
   } else {
     const access = await getAccessToken(req.session)
-    const { data } = await clientWithRetries.get<AttributeVote>('/asset_attribute_votes/', {
+    const { data } = await clientWithRetries.get<AttributeVote>('/asset_attribute_votes/?is_upvote=true', {
       headers: {
         Authorization: `Bearer ${access}`,
       },
