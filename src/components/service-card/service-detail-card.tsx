@@ -26,6 +26,8 @@ import { Modal } from '../Modal'
 import { Input } from '../input'
 import { phoneRegex } from '../../utils/constants'
 import { Textarea } from '../textarea'
+import { ShowEditable } from '../editable-components'
+import { LinkTags } from '../editable-components/editable-tags/link-tags'
 
 const OwnTheServiceFormSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -59,6 +61,7 @@ function ServiceDetailCardComponent({
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
   const [votedByMe, setVotedByMe] = useState(service?.my_asset_vote)
   const [upvotesCount, setUpvotesCount] = useState(service?.upvotes_count)
+  const [isTagsEdit, setIsTagsEdit] = useState(false)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
@@ -201,16 +204,32 @@ function ServiceDetailCardComponent({
               <span className="text-xs text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</span>
             </div>
           </div>
-          <div className="flex flex-row flex-wrap mb-5">
-            {service.tags.map((tag) => {
-              return (
-                <Link key={tag.slug} href={'../search/' + tag.slug}>
-                  <Button buttonType="tag" size="small" className="mt-2 mr-2">
-                    {tag.name}
-                  </Button>
-                </Link>
-              )
-            })}
+          <div className="flex flex-row flex-wrap items-center mt-2 mb-5">
+            {editAllowed ? (
+              <ShowEditable onEdit={() => setIsTagsEdit(true)}>
+                {service.tags.map((tag) => {
+                  return (
+                    <Link key={tag.slug} href={'../search/' + tag.slug}>
+                      <Button buttonType="tag" size="small" className="mr-2">
+                        {tag.name}
+                      </Button>
+                    </Link>
+                  )
+                })}
+              </ShowEditable>
+            ) : (
+              <>
+                {service.tags.map((tag) => {
+                  return (
+                    <Link key={tag.slug} href={'../search/' + tag.slug}>
+                      <Button buttonType="tag" size="small" className="mt-2 mr-2">
+                        {tag.name}
+                      </Button>
+                    </Link>
+                  )
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -359,6 +378,9 @@ function ServiceDetailCardComponent({
             )}
           </Formik>
         </>
+      </Modal>
+      <Modal isOpen={isTagsEdit} setIsOpen={setIsTagsEdit} size="4xl">
+        <LinkTags setIsOpen={setIsTagsEdit} onSubmit={onChange} tags={service.tags} />
       </Modal>
     </div>
   )

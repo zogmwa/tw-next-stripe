@@ -5,38 +5,32 @@ import TableContainer from '@mui/material/TableContainer'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
+import toast from 'react-hot-toast'
 import { RiMenuAddFill } from 'react-icons/ri'
-import { EditableTableHead, EditableUsedByCompaniesTableTrow } from './index'
-import { CustomerOrganization } from '../../../types/customer_organization'
+import { EditableTableHead, EditableTagsTableTrow } from './index'
+import { Tag } from '../../../types/tag'
 
-type EditableUsedByCompaniesTableComponentProps = {
-  editCustomerOrganizations: CustomerOrganization[]
-  defaultCustomerOrganizationData: CustomerOrganization
-  setEditCustomerOrganizations: React.Dispatch<React.SetStateAction<CustomerOrganization[]>>
+type EditableTagsTableComponentProps = {
+  editTags: Tag[]
+  defaultTagData: Tag
+  setEditTags: React.Dispatch<React.SetStateAction<Tag[]>>
   isSubmit: boolean
 }
 
 const headCells = [
   {
-    id: 'logo_url',
-    numeric: false,
-    disablePadding: false,
-    width: '30%',
-    label: 'Logo',
-  },
-  {
     id: 'name',
     numeric: false,
     disablePadding: false,
-    width: '40%',
+    width: '50%',
     label: 'Name',
   },
   {
-    id: 'website',
+    id: 'description',
     numeric: false,
     disablePadding: false,
-    label: 'Website',
-    width: '20%',
+    width: '40%',
+    label: 'Description',
   },
   {
     id: 'function',
@@ -47,25 +41,25 @@ const headCells = [
   },
 ]
 
-function EditableUsedByCompaniesTableComponent({
-  editCustomerOrganizations,
-  defaultCustomerOrganizationData,
-  setEditCustomerOrganizations,
+function EditableTagsTableComponent({
+  editTags,
+  defaultTagData,
+  setEditTags,
   isSubmit,
-}: EditableUsedByCompaniesTableComponentProps) {
-  const [showCustomerOrganizations, setShowCustomerOrganizations] = useState(editCustomerOrganizations)
+}: EditableTagsTableComponentProps) {
+  const [showTags, setShowTags] = useState(editTags)
   const [currentEditData, setCurrentEditData] = useState(null)
   const [currentEditIndex, setCurrentEditIndex] = useState(-1)
 
   useEffect(() => {
-    if (showCustomerOrganizations !== editCustomerOrganizations) {
-      setEditCustomerOrganizations(showCustomerOrganizations)
+    if (showTags !== editTags) {
+      setEditTags(showTags)
     }
-  }, [showCustomerOrganizations])
+  }, [showTags])
 
   useEffect(() => {
     if (currentEditData) {
-      setShowCustomerOrganizations((prevState) => [
+      setShowTags((prevState) => [
         ...prevState.slice(0, currentEditIndex),
         currentEditData,
         ...prevState.slice(currentEditIndex + 1),
@@ -74,11 +68,15 @@ function EditableUsedByCompaniesTableComponent({
   }, [currentEditData])
 
   const handleAdd = () => {
-    setShowCustomerOrganizations((prevState) => [...prevState, defaultCustomerOrganizationData])
+    if (showTags.length > 4) {
+      toast.error('Could not add more tags.')
+    } else {
+      setShowTags((prevState) => [...prevState, defaultTagData])
+    }
   }
 
   const handleDelete = (index) => {
-    setShowCustomerOrganizations((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
+    setShowTags((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
   }
 
   return (
@@ -96,16 +94,16 @@ function EditableUsedByCompaniesTableComponent({
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
             <EditableTableHead headCells={headCells} />
             <TableBody>
-              {showCustomerOrganizations.map((organization, index) => (
-                <EditableUsedByCompaniesTableTrow
-                  allRowData={showCustomerOrganizations}
-                  rowData={organization}
+              {showTags.map((tag, index) => (
+                <EditableTagsTableTrow
+                  allRowData={showTags}
+                  rowData={tag}
                   rowIndex={index}
                   onDelete={() => handleDelete(index)}
                   isSubmit={isSubmit}
                   setCurrentEditData={setCurrentEditData}
                   setCurrentEditIndex={setCurrentEditIndex}
-                  key={`${organization.name}-${index}`}
+                  key={`${tag.name}-${index}`}
                 />
               ))}
             </TableBody>
@@ -116,4 +114,4 @@ function EditableUsedByCompaniesTableComponent({
   )
 }
 
-export const EditableUsedByCompaniesTable = EditableUsedByCompaniesTableComponent
+export const EditableTagsTable = EditableTagsTableComponent
