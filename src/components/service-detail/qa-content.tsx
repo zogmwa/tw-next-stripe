@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { ServiceQuestion } from '../service-questions'
-import { Asset } from '../../types/asset'
+import { Asset } from '@tw/types/asset'
 import {
   toggleAddQuestion,
   toggleAnswerQuestion,
@@ -10,7 +9,8 @@ import {
   fetchVotedQuestions,
   toggleUpVoteQuestion,
   toggleDownVoteQuestion,
-} from '../../queries/service'
+} from '@tw/queries/service'
+import { ServiceQuestion } from '../service-questions'
 
 type ServiceDetailQAProps = {
   service: Asset

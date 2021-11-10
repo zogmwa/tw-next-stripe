@@ -1,8 +1,8 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Asset, AssetVote } from '../types/asset'
-import { AttributeVote, VotedAttribute } from '../types/attribute_vote'
-import { ServiceQuestion } from '../types/service-question'
+import { Asset, AssetVote } from '@tw/types/asset'
+import { AttributeVote, VotedAttribute } from '@tw/types/attribute_vote'
+import { ServiceQuestion } from '@tw/types/service-question'
 
 export type CreateServiceInput = {
   name: string

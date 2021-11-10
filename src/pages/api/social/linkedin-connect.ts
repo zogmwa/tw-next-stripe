@@ -1,7 +1,7 @@
-import { withSessionApi } from '../../../utils/session'
-import { client } from '../../../utils/client'
-import { getAccessToken, setSessionTokens } from '../../../utils/token'
-import { User } from '../../../types/user'
+import { withSessionApi } from '@tw/utils/session'
+import { client } from '@tw/utils/client'
+import { getAccessToken, setSessionTokens } from '@tw/utils/token'
+import { User } from '@tw/types/user'
 
 /**
  * API Route for connecting LinkedIn to current account. Logs in sets the tokens and the user in session.

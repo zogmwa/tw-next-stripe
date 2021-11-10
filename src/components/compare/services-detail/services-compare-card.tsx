@@ -1,5 +1,5 @@
 import React from 'react'
-import { Asset } from '../../../types/asset'
+import { Asset } from '@tw/types/asset'
 import { Button } from '../../button'
 
 type CompareServiceCardProps = {

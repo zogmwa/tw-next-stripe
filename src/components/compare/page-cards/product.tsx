@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { Asset } from '../../../types/asset'
+import { Asset } from '@tw/types/asset'
 import { ServiceCollapse } from '../../collapse'
 import { Button } from '../../button'
 

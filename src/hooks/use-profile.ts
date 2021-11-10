@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { ProfileContextType } from '../types/profile-context-type'
+import { ProfileContextType } from '@tw/types/profile-context-type'
 import { useUserContext } from './use-user'
 
 /**

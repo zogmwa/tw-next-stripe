@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
-import { Asset } from '../../../../types/asset'
+import { Asset } from '@tw/types/asset'
+import { useUserContext } from '@tw/hooks/use-user'
 import { ServiceCollapse } from '../../../collapse'
 import { ProsCons } from './proscons-component'
 import { ProsCard } from './pros-card'
 import { ConsCard } from './cons-card'
 import { AddPorsConsBar } from './proscons-add-bar'
-import { useUserContext } from '../../../../hooks/use-user'
 
 type CompareServiceProsConsProps = {
   services: Asset[]

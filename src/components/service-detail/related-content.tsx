@@ -3,10 +3,10 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
-import { fetchAssetSimilar } from '../../queries/service'
+import { fetchAssetSimilar } from '@tw/queries/service'
+import { MAX_COMPARE_COUNT } from '@tw/utils/constants'
 import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
-import { MAX_COMPARE_COUNT } from '../../utils/constants'
 
 type RelateName = {
   name: string

@@ -1,7 +1,7 @@
-import { clientWithRetries } from '../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../utils/token'
-import { Asset } from '../../../types/asset'
-import { withSessionApi } from '../../../utils/session'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
+import { Asset } from '@tw/types/asset'
+import { withSessionApi } from '@tw/utils/session'
 
 export default withSessionApi(async (req, res) => {
   /**

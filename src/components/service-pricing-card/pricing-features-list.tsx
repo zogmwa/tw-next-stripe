@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiFillCheckCircle } from 'react-icons/ai'
-import { Plan } from '../../types/price-plan'
+import { Plan } from '@tw/types/price-plan'
 
 type ServicePricingFeaturesListProps = {
   pricePlans: Plan[]

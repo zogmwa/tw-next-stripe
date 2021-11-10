@@ -1,7 +1,7 @@
-import { withSessionApi } from '../../utils/session'
-import { client } from '../../utils/client'
-import { getAccessToken } from '../../utils/token'
-import { Profile } from '../../types/profile'
+import { withSessionApi } from '@tw/utils/session'
+import { client } from '@tw/utils/client'
+import { getAccessToken } from '@tw/utils/token'
+import { Profile } from '@tw/types/profile'
 
 /**
  * API route for profile fetching for current user. If user is not loggedin then returns 401 repsonse

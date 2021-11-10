@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { AiFillCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai'
-import { Asset } from '../../../../types/asset'
+import { Asset } from '@tw/types/asset'
 import { Modal } from '../../../Modal'
 import { PricingContent } from '../../../service-detail/pricing-content'
 

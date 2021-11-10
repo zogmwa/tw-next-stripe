@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
+import { toggleAddAttribute } from '@tw/queries/service'
 import { Input } from '../../../input'
 import { Button } from '../../../button'
-import { toggleAddAttribute } from '../../../../queries/service'
 
 type AddPorsConsBarProps = {
   className?: string

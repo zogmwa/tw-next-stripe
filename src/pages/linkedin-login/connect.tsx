@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { client } from '../../utils/client'
-import { Spinner } from '../../components/spinner'
-import { useUserContext } from '../../hooks/use-user'
+import { client } from '@tw/utils/client'
+import { Spinner } from '@tw/components/spinner'
+import { useUserContext } from '@tw/hooks/use-user'
 
 /**
  * This is a basic component that handles the callback from LinkedIn, after a login.

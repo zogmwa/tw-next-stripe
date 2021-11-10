@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Tab as HeadlessuiTab } from '@headlessui/react'
 import clsx from 'clsx'
-import { Profile } from '../../types/profile'
+import { Profile } from '@tw/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
 

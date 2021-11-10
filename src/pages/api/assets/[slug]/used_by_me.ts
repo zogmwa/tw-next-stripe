@@ -1,6 +1,6 @@
-import { withApiAuthRequired } from '../../../../utils/auth-wrappers'
-import { clientWithRetries } from '../../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../../utils/token'
+import { withApiAuthRequired } from '@tw/utils/auth-wrappers'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
 
 /**
  * API Route handler for Toggling whether a service is used by user.

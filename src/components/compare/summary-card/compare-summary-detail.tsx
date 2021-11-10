@@ -3,7 +3,7 @@ import { RiShareBoxLine } from 'react-icons/ri'
 import { MdStar } from 'react-icons/md'
 import numeral from 'numeral'
 import { IoIosArrowUp } from 'react-icons/io'
-import { Asset } from '../../../types/asset'
+import { Asset } from '@tw/types/asset'
 import { ServiceLogo } from '../../service-logo'
 
 type CompareServiceSummaryCardDetailProps = {

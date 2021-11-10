@@ -6,8 +6,8 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
 import { RiMenuAddFill } from 'react-icons/ri'
+import { CustomerOrganization } from '@tw/types/customer_organization'
 import { EditableTableHead, EditableUsedByCompaniesTableTrow } from './index'
-import { CustomerOrganization } from '../../../types/customer_organization'
 
 type EditableUsedByCompaniesTableComponentProps = {
   editCustomerOrganizations: CustomerOrganization[]

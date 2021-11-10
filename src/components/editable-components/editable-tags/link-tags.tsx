@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { Tag } from '@tw/types/tag'
 import { Button } from '../../button'
 import { EditableTagsTable } from '../editable-table'
-import { Tag } from '../../../types/tag'
 
 type LinkTagsComponentProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>

@@ -1,5 +1,5 @@
-import { withSessionApi } from '../../utils/session'
-import { getAccessToken } from '../../utils/token'
+import { withSessionApi } from '@tw/utils/session'
+import { getAccessToken } from '@tw/utils/token'
 
 /**
  * Get User from session if user is logged in else returns {authVerified: false}. Used by useUserContext to get user details.

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
+import { User } from '@tw/types/user'
+import { Profile } from '@tw/types/profile'
 import { ProfileCard } from './index'
-import { User } from '../../types/user'
-import { Profile } from '../../types/profile'
 
 export default {
   title: 'General/ProfileCard',

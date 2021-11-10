@@ -3,7 +3,7 @@ import { BiDollar } from 'react-icons/bi'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import Carousel from 'react-elastic-carousel'
 import './style.css'
-import { Plan } from '../../types/price-plan'
+import { Plan } from '@tw/types/price-plan'
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, itemsToScroll: 1 },
@@ -18,12 +18,12 @@ type ServicePricingProps = { priceplans: Plan[] }
 
 function ServicePricingComponent({ priceplans }: ServicePricingProps) {
   return (
-    <div className="w-full items-center">
+    <div className="items-center w-full">
       <Carousel isRTL={false} pagination={false} breakPoints={breakPoints}>
         {priceplans.map((items, index) => {
           return (
-            <div key={index} className="flex flex-col rounded border-2 mx-2 h-48 ">
-              <div className=" self-center font-bold text-text-primary">
+            <div key={index} className="flex flex-col h-48 mx-2 border-2 rounded ">
+              <div className="self-center font-bold  text-text-primary">
                 <h1 className="text-base">{items.name}</h1>
               </div>
               <div className="flex flex-auto justify-evenly">
@@ -35,7 +35,7 @@ function ServicePricingComponent({ priceplans }: ServicePricingProps) {
                   <div className="text-text-secondary">per {items.per}</div>
                 </div>
                 <div className="flex flex-col px-4 py-2">
-                  <div className="font-medium text-text-primary self-center">Plan Features</div>
+                  <div className="self-center font-medium text-text-primary">Plan Features</div>
                   <div className="flex flex-wrap">
                     <div className="flex items-center mr-2 align-center">
                       <AiFillCheckCircle className=" text-primary" />

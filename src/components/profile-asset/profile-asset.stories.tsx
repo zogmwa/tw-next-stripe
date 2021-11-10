@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
+import { Asset } from '@tw/types/asset'
 import { ProfileAsset } from './index'
-import { Asset } from '../../types/asset'
 
 export default {
   title: 'General/ProfileAsset',

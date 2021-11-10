@@ -1,6 +1,6 @@
-import { clientWithRetries } from '../../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../../utils/token'
-import { withSessionApi } from '../../../../utils/session'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
+import { withSessionApi } from '@tw/utils/session'
 
 /* API integration for fetch similar assets. */
 export default withSessionApi(async (req, res) => {

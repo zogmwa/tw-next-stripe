@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
-import { useUserContext } from '../hooks/use-user'
+import { useUserContext } from '@tw/hooks/use-user'
+import { Spinner } from '@tw/components/spinner'
+import { GetIronServerSideProps } from '@tw/types/session'
+import { WithApiAuthRequired, WithPageAuthRequired, WithSSRAuthRequired } from '@tw/types/auth-wrappers'
 import { withSessionApi, withSessionSSR } from './session'
 import { getAccessToken } from './token'
-import { Spinner } from '../components/spinner'
-import { GetIronServerSideProps } from '../types/session'
-import { WithApiAuthRequired, WithPageAuthRequired, WithSSRAuthRequired } from '../types/auth-wrappers'
 
 // Future implementations of this function might pass an extra argument 'authClient' to handler which would be an AxiosInstance with Authorization Header and refresh interceptor set.
 /**

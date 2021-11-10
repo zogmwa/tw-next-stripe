@@ -7,8 +7,8 @@ import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
 import toast from 'react-hot-toast'
 import { RiMenuAddFill } from 'react-icons/ri'
+import { Tag } from '@tw/types/tag'
 import { EditableTableHead, EditableTagsTableTrow } from './index'
-import { Tag } from '../../../types/tag'
 
 type EditableTagsTableComponentProps = {
   editTags: Tag[]

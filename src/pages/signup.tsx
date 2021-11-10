@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useRouter } from 'next/router'
-import { Button } from '../components/button'
-import { Input } from '../components/input'
-import { useUserContext } from '../hooks/use-user'
-import { handleGoogleLogin, handleLinkedInLogin } from '../utils/login'
+import { Button } from '@tw/components/button'
+import { Input } from '@tw/components/input'
+import { useUserContext } from '@tw/hooks/use-user'
+import { handleGoogleLogin, handleLinkedInLogin } from '@tw/utils/login'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
+import { Asset } from '@tw/types/asset'
 import { ServicePricingCard } from '../service-pricing-card/service-pricing-card'
 import { PricingSelectNameMobile } from '../service-pricing-card/pricing-select-name-mobile'
 import { PricingSelectNameDesktop } from '../service-pricing-card/pricing-select-name-desktop'
-import { Asset } from '../../types/asset'
 import { ShowEditable, EditablePricing } from '../editable-components'
 import { Modal } from '../Modal'
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
+import { Profile } from '@tw/types/profile'
+import { Asset } from '@tw/types/asset'
 import { ProfileAsset } from '../profile-asset'
-import { Profile } from '../../types/profile'
-import { Asset } from '../../types/asset'
 
 export const PendingAssetsProfile = ({ data }: { data: Profile }) => {
   const pendingAssets: Asset[] = useMemo(() => {

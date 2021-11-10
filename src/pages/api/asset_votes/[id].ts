@@ -1,6 +1,6 @@
-import { clientWithRetries } from '../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../utils/token'
-import { withApiAuthRequired } from '../../../utils/auth-wrappers'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
+import { withApiAuthRequired } from '@tw/utils/auth-wrappers'
 
 /**
  * API Route handler for deleting asset_votes.

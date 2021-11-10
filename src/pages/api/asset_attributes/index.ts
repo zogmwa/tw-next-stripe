@@ -1,6 +1,6 @@
-import { withSessionApi } from '../../../utils/session'
-import { clientWithRetries } from '../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../utils/token'
+import { withSessionApi } from '@tw/utils/session'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
 
 /**
  * API Route handler for upvoting on an asset.

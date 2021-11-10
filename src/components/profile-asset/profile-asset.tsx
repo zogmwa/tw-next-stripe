@@ -1,8 +1,8 @@
 import React from 'react'
 import { GrShare } from 'react-icons/gr'
+import { Asset } from '@tw/types/asset'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
-import { Asset } from '../../types/asset'
 import { ServiceLogo } from '../service-logo'
 
 type ProfileCardProps = {

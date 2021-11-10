@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-scroll'
-import { Profile } from '../../types/profile'
+import { Profile } from '@tw/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
 function ScrollSpy({ elements }) {

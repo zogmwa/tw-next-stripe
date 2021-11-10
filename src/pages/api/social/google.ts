@@ -1,7 +1,7 @@
-import { withSessionApi } from '../../../utils/session'
-import { client } from '../../../utils/client'
-import { setSessionTokens } from '../../../utils/token'
-import { User } from '../../../types/user'
+import { withSessionApi } from '@tw/utils/session'
+import { client } from '@tw/utils/client'
+import { setSessionTokens } from '@tw/utils/token'
+import { User } from '@tw/types/user'
 
 /**
  * API Route for Google Login. Logs in sets the tokens and the user in session.

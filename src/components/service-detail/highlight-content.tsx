@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { Asset } from '../../types/asset'
+import { Asset } from '@tw/types/asset'
 import {
   fetchAttributeVotes,
   toggleUpVoteAttribute,
@@ -9,9 +9,9 @@ import {
   fetchUpvotedAttributes,
   toggleAddAttribute,
   linkAttributeToAsset,
-} from '../../queries/service'
+} from '@tw/queries/service'
+import { useUserContext } from '@tw/hooks/use-user'
 import { HighlightContent } from '../service-highlights'
-import { useUserContext } from '../../hooks/use-user'
 
 type ServiceDetailFeatureProps = {
   service: Asset

@@ -1,7 +1,7 @@
-import { clientWithRetries } from '../../../utils/clientWithRetries'
-import { getAccessToken } from '../../../utils/token'
-import { AttributeVote } from '../../../types/attribute_vote'
-import { withApiAuthRequired } from '../../../utils/auth-wrappers'
+import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { getAccessToken } from '@tw/utils/token'
+import { AttributeVote } from '@tw/types/attribute_vote'
+import { withApiAuthRequired } from '@tw/utils/auth-wrappers'
 
 /**
  * API Route handler for fetching asset_attribute_votes. Might include Get all services in the future

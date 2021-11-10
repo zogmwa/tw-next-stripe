@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import numeral from 'numeral'
 import toast from 'react-hot-toast'
+import { ServiceReview } from '@tw/types/service-review'
+import { addAssetReview } from '@tw/queries/service'
 import { StyledStarRating } from '../styled-star-rating'
 // import { MarkProgress } from '../styled-mark-progress'
 import { ReviewInput } from '../review-input'
 import { ReviewCard } from '../review-card'
-import { ServiceReview } from '../../types/service-review'
-import { addAssetReview } from '../../queries/service'
 
 type ServiceDetailReviewsProps = {
   assetId: number

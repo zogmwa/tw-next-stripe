@@ -1,19 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
-import { topTags } from '../utils/top-tags'
+import { topTags } from '@tw/utils/top-tags'
 
 function Page404() {
   const length = topTags.length
 
   return (
     <>
-      <div className="py-20 flex flex-col md:flex-col">
-        <p className="p-6 text-8xl font-normal text-text-secondary text-center">404</p>
+      <div className="flex flex-col py-20 md:flex-col">
+        <p className="p-6 font-normal text-center text-8xl text-text-secondary">404</p>
         <p className="p-6 text-3xl font-light text-center">Sorry, this URL does not exist or is no longer available.</p>
-        <p className="p-6 text-2xl font-light text-text-secondary text-center">
+        <p className="p-6 text-2xl font-light text-center text-text-secondary">
           Perhaps you were looking for one of the following pages:
         </p>
-        <div className="flex flex-row list-none font-semibold p-4 grid grid-cols-2 gap-20 justify-items-stretch ">
+        <div className="flex grid flex-row grid-cols-2 gap-20 p-4 font-semibold list-none justify-items-stretch ">
           <div className="flex-1 px-6 justify-self-end">
             {topTags.slice(0, length / 2 + 1).map((tag) => {
               return (

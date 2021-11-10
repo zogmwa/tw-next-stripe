@@ -2,8 +2,8 @@ import React from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { format as dateFormat } from 'date-fns'
 import { BsDot } from 'react-icons/bs'
+import { ServiceQuestion } from '@tw/types/service-question'
 import { QuestionTruncated } from './question-trancate'
-import { ServiceQuestion } from '../../types/service-question'
 import { Button } from '../button'
 
 type ServiceQuestionCardProps = {

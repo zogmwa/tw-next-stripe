@@ -4,7 +4,7 @@ import { BiDollar } from 'react-icons/bi'
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { Plan } from '../../types/price-plan'
+import { Plan } from '@tw/types/price-plan'
 import { PricingFeaturesList } from './pricing-features-list'
 
 type ServicePricingProps = {

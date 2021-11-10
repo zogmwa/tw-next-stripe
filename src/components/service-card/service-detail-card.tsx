@@ -9,24 +9,23 @@ import { Formik } from 'formik'
 import { toast } from 'react-hot-toast'
 import * as yup from 'yup'
 import Link from 'next/link'
-import { useUserContext } from '../../hooks/use-user'
-import {
-  toggleUsedByStatus,
-  toggleUpVoteAsset,
-  toggleDownVoteAsset,
-  claimOwnershipToAsset,
-} from '../../queries/service'
+import { useUserContext } from '@tw/hooks/use-user'
+import { toggleUsedByStatus, toggleUpVoteAsset, toggleDownVoteAsset, claimOwnershipToAsset } from '@tw/queries/service'
+import { Asset } from '@tw/types/asset'
+import { phoneRegex } from '@tw/utils/constants'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
-import { Asset } from '../../types/asset'
 import { Checkbox } from '../checkbox'
 import { ServiceLogo } from '../service-logo'
-import { EditableServiceLogo, EditableServiceName, EditableServiceDescription } from '../editable-components'
+import {
+  EditableServiceLogo,
+  EditableServiceName,
+  EditableServiceDescription,
+  ShowEditable,
+} from '../editable-components'
 import { Modal } from '../Modal'
 import { Input } from '../input'
-import { phoneRegex } from '../../utils/constants'
 import { Textarea } from '../textarea'
-import { ShowEditable } from '../editable-components'
 import { LinkTags } from '../editable-components/editable-tags/link-tags'
 
 const OwnTheServiceFormSchema = yup.object().shape({

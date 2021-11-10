@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Plan } from '@tw/types/price-plan'
 import { EditablePricingTable } from './editable-table'
-import { Plan } from '../../types/price-plan'
 import { Button } from '../button'
 
 type EditablePricingComponentProps = {

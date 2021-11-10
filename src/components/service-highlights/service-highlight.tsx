@@ -6,6 +6,7 @@ import { TiImageOutline } from 'react-icons/ti'
 import ReactTooltip from 'react-tooltip'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import { FiAlertTriangle } from 'react-icons/fi'
+import { useUserContext } from '@tw/hooks/use-user'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -13,7 +14,6 @@ import { AddAHighlight } from '../add-a-highlight'
 import { LinkUsedByCompanies } from '../editable-components/editable-usedbycompanies/link-usedbycompanies'
 import { Modal } from '../Modal'
 import { ShowEditable } from '../editable-components'
-import { useUserContext } from '../../hooks/use-user'
 
 function HighlightContentComponent({
   attributeVotesList,

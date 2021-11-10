@@ -1,7 +1,7 @@
 import React from 'react'
 import gfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
-import { ServiceReview } from '../../types/service-review'
+import { ServiceReview } from '@tw/types/service-review'
 import { StyledStarRating } from '../styled-star-rating'
 
 type VideoCardProps = {
