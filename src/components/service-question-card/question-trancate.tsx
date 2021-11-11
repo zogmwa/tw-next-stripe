@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
-import { MAX_DESCRIPTION_LENGTH } from '@tw/utils/constants'
+import { MAX_DESCRIPTION_LENGTH } from '@taggedweb/utils/constants'
 
 type TruncatedDescriptionProps = {
   description: string

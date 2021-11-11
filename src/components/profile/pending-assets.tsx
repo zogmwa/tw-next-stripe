@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { Profile } from '@tw/types/profile'
-import { Asset } from '@tw/types/asset'
+import { Profile } from '@taggedweb/types/profile'
+import { Asset } from '@taggedweb/types/asset'
 import { ProfileAsset } from '../profile-asset'
 
 export const PendingAssetsProfile = ({ data }: { data: Profile }) => {

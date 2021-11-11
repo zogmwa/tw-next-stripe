@@ -1,7 +1,7 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { User } from '@tw/types/user'
-import { Profile } from '@tw/types/profile'
+import { User } from '@taggedweb/types/user'
+import { Profile } from '@taggedweb/types/profile'
 import { ProfileCard } from './index'
 
 export default {

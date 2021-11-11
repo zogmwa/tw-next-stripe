@@ -1,7 +1,7 @@
-import { client } from '@tw/utils/client'
-import { Asset } from '@tw/types/asset'
-import { getAccessToken } from '@tw/utils/token'
-import { withApiAuthRequired } from '@tw/utils/auth-wrappers'
+import { client } from '@taggedweb/utils/client'
+import { Asset } from '@taggedweb/types/asset'
+import { getAccessToken } from '@taggedweb/utils/token'
+import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
 
 /**
  * API Route handler for Service Creation. Might include Get all services in the future

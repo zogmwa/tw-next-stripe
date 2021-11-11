@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
-import { MAX_DESCRIPTION_LENGTH } from '@tw/utils/constants'
+import { MAX_DESCRIPTION_LENGTH } from '@taggedweb/utils/constants'
 
 type TruncatedDescriptionProps = {
   description: string

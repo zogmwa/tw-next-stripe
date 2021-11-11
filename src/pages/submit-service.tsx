@@ -7,17 +7,17 @@ import {
   BasicInformationForm,
   BasicInformationFormValues,
   basicInformationSchema,
-} from '@tw/components/submit-serivce/basic-information-form'
+} from '@taggedweb/components/submit-serivce/basic-information-form'
 import {
   DetailedInformationForm,
   DetailedInformationFormValues,
   detailedInformationSchema,
-} from '@tw/components/submit-serivce/detailed-information-form'
-import { createService, CreateServiceInput } from '@tw/queries/service'
-import { withPageAuthRequired } from '@tw/utils/auth-wrappers'
-import { Asset } from '@tw/types/asset'
-import { Stepper } from '@tw/components/stepper'
-import { Button } from '@tw/components/button'
+} from '@taggedweb/components/submit-serivce/detailed-information-form'
+import { createService, CreateServiceInput } from '@taggedweb/queries/service'
+import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
+import { Asset } from '@taggedweb/types/asset'
+import { Stepper } from '@taggedweb/components/stepper'
+import { Button } from '@taggedweb/components/button'
 
 type FormValues = BasicInformationFormValues & DetailedInformationFormValues
 

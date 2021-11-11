@@ -3,7 +3,7 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import toast from 'react-hot-toast'
-import { Tag } from '@tw/types/tag'
+import { Tag } from '@taggedweb/types/tag'
 import LinkTagsBar from '../editable-tags/link-tags-bar'
 
 type EditableTagsTableTrowComponentProps = {

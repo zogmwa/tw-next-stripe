@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Home from '@tw/pages/index'
+import Home from '@taggedweb/pages/index'
 
 describe('Home', () => {
   it('should render successfully', () => {

@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
-import { searchSuggestions } from '@tw/queries/question'
+import { searchSuggestions } from '@taggedweb/queries/question'
 import { Button } from '../button'
 
 type SearchByQuestionsProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Plan } from '@tw/types/price-plan'
+import { Plan } from '@taggedweb/types/price-plan'
 
 type ServicePricingProps = {
   pricePlans: Plan[]

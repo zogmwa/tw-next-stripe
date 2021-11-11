@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
-import { useUserContext } from '@tw/hooks/use-user'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 
 const menuIconClassNames = (active) =>
   `${active ? 'bg-primary text-white' : 'text-gray-900'} group flex rounded-md items-center px-2 py-2 w-full text-sm`

@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 import { useSWRConfig } from 'swr'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { Spinner } from '@tw/components/spinner'
-import { useUserContext } from '@tw/hooks/use-user'
+import { Spinner } from '@taggedweb/components/spinner'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 
 export default function GoogleConnect() {
   const { replace } = useRouter()

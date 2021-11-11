@@ -1,8 +1,8 @@
 import React from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare, AiFillCheckCircle } from 'react-icons/ai'
-import { Profile } from '@tw/types/profile'
-import { User } from '@tw/types/user'
-import { handleGoogleConnect, handleLinkedInConnect } from '@tw/utils/login'
+import { Profile } from '@taggedweb/types/profile'
+import { User } from '@taggedweb/types/user'
+import { handleGoogleConnect, handleLinkedInConnect } from '@taggedweb/utils/login'
 import { Button } from '../button'
 
 type ProfileCardProps = { data: Partial<User & Profile> }

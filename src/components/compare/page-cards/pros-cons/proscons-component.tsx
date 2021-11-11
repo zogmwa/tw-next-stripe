@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { HiChevronUp } from 'react-icons/hi'
-import { Asset } from '@tw/types/asset'
-import { useUserContext } from '@tw/hooks/use-user'
+import { Asset } from '@taggedweb/types/asset'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 import { Button } from '../../../button'
 import { AddPorsConsBar } from './proscons-add-bar'
 

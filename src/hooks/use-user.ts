@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { UserContextType } from '@tw/types/user-context-type'
-import { User } from '@tw/types/user'
+import { UserContextType } from '@taggedweb/types/user-context-type'
+import { User } from '@taggedweb/types/user'
 
 /**
  * Fetches user details from /api/user. Provides user details and essential methods such as isLoggedIn, logout, mutateUser.

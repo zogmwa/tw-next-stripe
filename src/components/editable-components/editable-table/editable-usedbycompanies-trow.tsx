@@ -5,7 +5,7 @@ import { RiDeleteBin5Line } from 'react-icons/ri'
 import { TiImageOutline } from 'react-icons/ti'
 import toast from 'react-hot-toast'
 import ReactTooltip from 'react-tooltip'
-import { CustomerOrganization } from '@tw/types/customer_organization'
+import { CustomerOrganization } from '@taggedweb/types/customer_organization'
 import LinkUsedByCompaniesBar from '../editable-usedbycompanies/link-usedbycompanies-bar'
 
 type EditableUsedByCompaniesTableTrowComponentProps = {

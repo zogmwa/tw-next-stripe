@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Tag } from '@tw/types/tag'
+import { Tag } from '@taggedweb/types/tag'
 import { Button } from '../../button'
 import { EditableTagsTable } from '../editable-table'
 

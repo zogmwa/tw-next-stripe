@@ -5,12 +5,12 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { Button } from '@tw/components/button'
-import { Input } from '@tw/components/input'
-import { handleGoogleLogin, handleLinkedInLogin } from '@tw/utils/login'
-import { useUserContext } from '@tw/hooks/use-user'
-import { PasswordReset } from '@tw/components/password-reset'
-import { client } from '@tw/utils/client'
+import { Button } from '@taggedweb/components/button'
+import { Input } from '@taggedweb/components/input'
+import { handleGoogleLogin, handleLinkedInLogin } from '@taggedweb/utils/login'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { PasswordReset } from '@taggedweb/components/password-reset'
+import { client } from '@taggedweb/utils/client'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),

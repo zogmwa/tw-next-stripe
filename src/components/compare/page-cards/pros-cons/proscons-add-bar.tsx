@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
-import { toggleAddAttribute } from '@tw/queries/service'
+import { toggleAddAttribute } from '@taggedweb/queries/service'
 import { Input } from '../../../input'
 import { Button } from '../../../button'
 

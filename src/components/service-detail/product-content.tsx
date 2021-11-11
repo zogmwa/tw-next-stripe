@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { Asset } from '@tw/types/asset'
+import { Asset } from '@taggedweb/types/asset'
 import { ProductContentCarouselPropsType } from './product-content-carousel'
 import { ProductContentCarouselSkeleton } from './product-content-skeleton'
 import { ShowEditable, EditableCarousel, EditableServiceDescription } from '../editable-components'

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AiFillLinkedin, AiFillGoogleSquare, AiOutlineClose } from 'react-icons/ai'
 import Link from 'next/link'
-import { handleGoogleLogin, handleLinkedInLogin } from '@tw/utils/login'
+import { handleGoogleLogin, handleLinkedInLogin } from '@taggedweb/utils/login'
 import { Button } from '../button'
 
 function AuthenticationPopupComponent() {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import sha1 from 'simple-sha1'
-import { CloudinaryUploadResponse } from '@tw/types/cloudinary'
+import { CloudinaryUploadResponse } from '@taggedweb/types/cloudinary'
 
 function sha1Promisified(value: string): Promise<string> {
   return new Promise((resolve) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import { Plan } from '@tw/types/price-plan'
+import { Plan } from '@taggedweb/types/price-plan'
 
 type EditalePriceTableTrowComponentProps = {
   rowData: Plan
