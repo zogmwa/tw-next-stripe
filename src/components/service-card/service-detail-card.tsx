@@ -10,7 +10,12 @@ import { toast } from 'react-hot-toast'
 import * as yup from 'yup'
 import Link from 'next/link'
 import { useUserContext } from '@taggedweb/hooks/use-user'
-import { toggleUsedByStatus, toggleUpVoteAsset, toggleDownVoteAsset, claimOwnershipToAsset } from '@taggedweb/queries/service'
+import {
+  toggleUsedByStatus,
+  toggleUpVoteAsset,
+  toggleDownVoteAsset,
+  claimOwnershipToAsset,
+} from '@taggedweb/queries/service'
 import { Asset } from '@taggedweb/types/asset'
 import { phoneRegex } from '@taggedweb/utils/constants'
 import { TruncatedDescription } from '../truncated-description'
