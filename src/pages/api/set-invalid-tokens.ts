@@ -1,5 +1,5 @@
-import { withSessionApi } from '@tw/utils/session'
-import { setSessionTokens } from '@tw/utils/token'
+import { withSessionApi } from '@taggedweb/utils/session'
+import { setSessionTokens } from '@taggedweb/utils/token'
 
 // Add more tokens for testing.
 const access_tokens = [

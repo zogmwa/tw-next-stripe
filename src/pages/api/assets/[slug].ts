@@ -1,7 +1,7 @@
-import { withSessionApi } from '@tw/utils/session'
-import { fetchServiceServer } from '@tw/server-queries/fetch-service'
-import { getAccessToken } from '@tw/utils/token'
-import { clientWithRetries } from '@tw/utils/clientWithRetries'
+import { withSessionApi } from '@taggedweb/utils/session'
+import { fetchServiceServer } from '@taggedweb/server-queries/fetch-service'
+import { getAccessToken } from '@taggedweb/utils/token'
+import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
 
 export default withSessionApi(async (req, res) => {
   if (req.method === 'GET') {

@@ -1,5 +1,5 @@
-import { client } from '@tw/utils/client'
-import { withApiErrorHandling } from '@tw/utils/error-handling'
+import { client } from '@taggedweb/utils/client'
+import { withApiErrorHandling } from '@taggedweb/utils/error-handling'
 
 export default withApiErrorHandling(async (req, res) => {
   const search_query = req.query.search_query

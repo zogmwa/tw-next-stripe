@@ -2,7 +2,7 @@ import React from 'react'
 import { FaThumbsUp } from 'react-icons/fa'
 import { format as dateFormat } from 'date-fns'
 import { BsDot } from 'react-icons/bs'
-import { ServiceQuestion } from '@tw/types/service-question'
+import { ServiceQuestion } from '@taggedweb/types/service-question'
 import { QuestionTruncated } from './question-trancate'
 import { Button } from '../button'
 

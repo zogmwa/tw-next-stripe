@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
-import { fetchVote } from '@tw/queries/service'
+import { fetchVote } from '@taggedweb/queries/service'
 import { ReviewsContent } from './reviews-content'
 
 function GetReviewsComponent({ assetId, assetName, avgRating, reviewsCount }) {

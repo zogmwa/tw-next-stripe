@@ -1,6 +1,6 @@
-import { withSessionApi } from '@tw/utils/session'
-import { getAccessToken } from '@tw/utils/token'
-import { client } from '@tw/utils/client'
+import { withSessionApi } from '@taggedweb/utils/session'
+import { getAccessToken } from '@taggedweb/utils/token'
+import { client } from '@taggedweb/utils/client'
 
 /**
  * Logs the user out and revokes their refresh token previously stored in session.

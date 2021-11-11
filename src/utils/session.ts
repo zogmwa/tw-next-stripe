@@ -1,6 +1,6 @@
 // this file is a wrapper with defaults to be used in both API routes and `getServerSideProps` functions
 import { applySession } from 'next-iron-session'
-import { WithSessionApiHandler, WithSessionSSRHandler } from '@tw/types/session'
+import { WithSessionApiHandler, WithSessionSSRHandler } from '@taggedweb/types/session'
 import { withApiErrorHandling, withSSRErrorHandling } from './error-handling'
 
 const applySessionDefaults = (req, res) => {

@@ -3,9 +3,9 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { Button } from '@tw/components/button'
-import { Input } from '@tw/components/input'
-import { forgotPasswordReset } from '@tw/queries/forgot-password'
+import { Button } from '@taggedweb/components/button'
+import { Input } from '@taggedweb/components/input'
+import { forgotPasswordReset } from '@taggedweb/queries/forgot-password'
 
 const validationSchema = yup.object().shape({
   new_password1: yup

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { Asset } from '@tw/types/asset'
+import { Asset } from '@taggedweb/types/asset'
 import { ProfileAsset } from './index'
 
 export default {

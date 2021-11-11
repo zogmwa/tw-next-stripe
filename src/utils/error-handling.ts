@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSideProps, NextApiHandler } from 'next'
-import { GetIronServerSideProps, NextIronHandler } from '@tw/types/session'
+import { GetIronServerSideProps, NextIronHandler } from '@taggedweb/types/session'
 
 /**
  * Add basic error handling and status, error.data to res if an error occurs.

@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { topTags } from '@tw/utils/top-tags'
+import { topTags } from '@taggedweb/utils/top-tags'
 
 function Page404() {
   const length = topTags.length

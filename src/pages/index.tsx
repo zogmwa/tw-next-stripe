@@ -1,10 +1,10 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { SearchBar } from '@tw/components/search-bar'
-import { Button } from '@tw/components/button'
-import { useRequireLogin } from '@tw/hooks/use-require-login'
-import { HomepageFeatured } from '@tw/components/homepage-featured'
-import { client } from '@tw/utils/client'
+import { SearchBar } from '@taggedweb/components/search-bar'
+import { Button } from '@taggedweb/components/button'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { HomepageFeatured } from '@taggedweb/components/homepage-featured'
+import { client } from '@taggedweb/utils/client'
 
 export const getServerSideProps = async () => {
   const { data: featuredList } = await client.get('/assets/featured/')

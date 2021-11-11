@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Pagination from '@mui/material/Pagination'
-import { ServiceCard } from '@tw/components/service-card'
+import { ServiceCard } from '@taggedweb/components/service-card'
 import {
   SortServiceList,
   MobileViewSortAndFilterServiceList,
   FilterServiceList,
-} from '@tw/components/service-list-filter'
-import { clientWithRetries } from '@tw/utils/clientWithRetries'
-import { SearchBar } from '@tw/components/search-bar'
-import { Asset } from '@tw/types/asset'
-import { CompareAccordian } from '@tw/components/compare-accordian'
+} from '@taggedweb/components/service-list-filter'
+import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { SearchBar } from '@taggedweb/components/search-bar'
+import { Asset } from '@taggedweb/types/asset'
+import { CompareAccordian } from '@taggedweb/components/compare-accordian'
 
 export const getServerSideProps = async (context: {
   query: { search_query: string; page: string; order: string; free_trial: string }

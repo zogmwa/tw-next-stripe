@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import ReactTooltip from 'react-tooltip'
 import { RiMenuAddFill } from 'react-icons/ri'
-import { Plan } from '@tw/types/price-plan'
+import { Plan } from '@taggedweb/types/price-plan'
 import { EditableTableHead, EditalePriceTableTrow } from './index'
 
 type EditablePricingTableComponentProps = {

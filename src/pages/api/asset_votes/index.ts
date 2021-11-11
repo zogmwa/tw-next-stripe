@@ -1,6 +1,6 @@
-import { withApiAuthRequired } from '@tw/utils/auth-wrappers'
-import { clientWithRetries } from '@tw/utils/clientWithRetries'
-import { getAccessToken } from '@tw/utils/token'
+import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
+import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { getAccessToken } from '@taggedweb/utils/token'
 
 /**
  * API Route handler for upvoting on an asset.

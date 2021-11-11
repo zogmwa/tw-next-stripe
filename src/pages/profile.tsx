@@ -1,14 +1,14 @@
 import React, { useMemo, useEffect } from 'react'
 import { Element } from 'react-scroll'
-import { useProfile } from '@tw/hooks/use-profile'
-import { useUserContext } from '@tw/hooks/use-user'
-import { Spinner } from '@tw/components/spinner'
-import { ProfileCard } from '@tw/components/profile-card'
-import { UserContextType } from '@tw/types/user-context-type'
-import { ProfileContextType } from '@tw/types/profile-context-type'
-import { withPageAuthRequired } from '@tw/utils/auth-wrappers'
-import { ProfileDesktop, ProfileMobile } from '@tw/components/profile'
-import { Profile } from '@tw/types/profile'
+import { useProfile } from '@taggedweb/hooks/use-profile'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { Spinner } from '@taggedweb/components/spinner'
+import { ProfileCard } from '@taggedweb/components/profile-card'
+import { UserContextType } from '@taggedweb/types/user-context-type'
+import { ProfileContextType } from '@taggedweb/types/profile-context-type'
+import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
+import { ProfileDesktop, ProfileMobile } from '@taggedweb/components/profile'
+import { Profile } from '@taggedweb/types/profile'
 
 // const asset1 = {
 //   logo_url: 'http://logo.clearbit.com/mailchimp.com',

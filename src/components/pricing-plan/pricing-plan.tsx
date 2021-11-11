@@ -3,7 +3,7 @@ import { BiDollar } from 'react-icons/bi'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import Carousel from 'react-elastic-carousel'
 import './style.css'
-import { Plan } from '@tw/types/price-plan'
+import { Plan } from '@taggedweb/types/price-plan'
 
 const breakPoints = [
   { width: 1, itemsToShow: 1, itemsToScroll: 1 },

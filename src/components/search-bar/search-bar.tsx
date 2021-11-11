@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { searchSuggestions } from '@tw/queries/search'
+import { searchSuggestions } from '@taggedweb/queries/search'
 import { Button } from '../button'
 
 type SearchByTagsProps = {

@@ -1,6 +1,6 @@
-import { clientWithRetries } from '@tw/utils/clientWithRetries'
-import { getAccessToken } from '@tw/utils/token'
-import { withSessionApi } from '@tw/utils/session'
+import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { getAccessToken } from '@taggedweb/utils/token'
+import { withSessionApi } from '@taggedweb/utils/session'
 
 /* API integration for fetch similar assets. */
 export default withSessionApi(async (req, res) => {

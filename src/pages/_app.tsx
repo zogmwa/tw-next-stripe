@@ -6,20 +6,20 @@ import toast, { Toaster } from 'react-hot-toast'
 import Router, { useRouter } from 'next/router'
 import Error from 'next/error'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import '@tw/styles/styles.css'
+import '@taggedweb/styles/styles.css'
 import 'nprogress/nprogress.css'
 import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
 import { FcInfo } from 'react-icons/fc'
 import { MdOutlineError } from 'react-icons/md'
-import { UserProvider } from '@tw/hooks/use-user'
-import { NavBar } from '@tw/components/nav-bar'
-import { Spinner } from '@tw/components/spinner'
-import { ToastWithDismiss } from '@tw/components/toast-with-dismiss'
-import { fetcher } from '@tw/queries/fetchJson'
-import { HomePageFooter } from '@tw/components/footer'
-import { topTags } from '@tw/utils/top-tags'
-import * as ga from '@tw/lib/ga'
+import { UserProvider } from '@taggedweb/hooks/use-user'
+import { NavBar } from '@taggedweb/components/nav-bar'
+import { Spinner } from '@taggedweb/components/spinner'
+import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
+import { fetcher } from '@taggedweb/queries/fetchJson'
+import { HomePageFooter } from '@taggedweb/components/footer'
+import { topTags } from '@taggedweb/utils/top-tags'
+import * as ga from '@taggedweb/lib/ga'
 
 const queryClient = new QueryClient()
 
@@ -84,7 +84,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <UserProvider>
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
-              <div className={clsx('w-full h-screen overflow-auto', renderNavBar ? 'pt-14' : undefined)}>
+              <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
                 {redirectTo ? (
                   <RedirectSpinner />
                 ) : errorCode ? (

@@ -14,7 +14,8 @@ We prefer using `yarn` instead of `npm` for this repo.
 
 - `yarn dev` to run a dev server
 - `yarn build` - To build/compile the yarn application.
-- Check the package.json for other common scripts.
+- `yarn format <filepath>` - To format specific files (if the file is not formatted, our code formatting checks on PRs might fail)
+- Check package.json for other common scripts/targets.
 
 **Make sure to install eslint and prettier plugin for your favorite IDE to catch errors before commiting**.
 

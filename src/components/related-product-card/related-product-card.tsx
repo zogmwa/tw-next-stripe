@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { MAX_RELATEDCARDCONTENT_LENGTH } from '@tw/utils/constants'
+import { MAX_RELATEDCARDCONTENT_LENGTH } from '@taggedweb/utils/constants'
 import { Checkbox } from '../checkbox'
 
 type RelatedProduct = {

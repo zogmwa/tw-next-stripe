@@ -1,6 +1,6 @@
 import React from 'react'
 import { GrShare } from 'react-icons/gr'
-import { Asset } from '@tw/types/asset'
+import { Asset } from '@taggedweb/types/asset'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
