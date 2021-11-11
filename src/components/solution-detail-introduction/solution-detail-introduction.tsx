@@ -44,7 +44,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <div className="flex items-center mt-4 space-x-2">
             <IoIosArrowUp className="text-primary" />
             <span className="text-xl">{kFormater(introductionData.upvoted_count)}</span>
-            <span className="self-end text-xs text-text-secondary">
+            <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
               {kFormater(introductionData.users_count)} users
             </span>
           </div>
