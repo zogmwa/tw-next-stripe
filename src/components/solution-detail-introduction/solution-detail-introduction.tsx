@@ -1,8 +1,13 @@
 import React from 'react'
-import Link from 'next/link'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiHeart } from 'react-icons/bi'
 import { BsShare } from 'react-icons/bs'
+import { useRouter } from 'next/router'
+import { BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+import Popover from '@mui/material/Popover'
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
+import Typography from '@mui/material/Typography'
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
 import { Button } from '../button'
 
 type SolutionDetailIntroductionProps = {
@@ -19,6 +24,8 @@ type SolutionDetailIntroductionProps = {
 
 function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
   const unitlist = ['', 'K', 'M', 'G']
+  const { asPath } = useRouter()
+
   function kFormater(number) {
     const sign = Math.sign(number)
     let unit = 0
@@ -81,7 +88,40 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <button className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary">
             <BiHeart className="text-primary text-[1.4rem]" />
           </button>
-          <Button icon={<BsShare className="text-primary" />}>Share</Button>
+          <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+              <div>
+                <Button icon={<BsShare className="text-primary" />} {...bindTrigger(popupState)}>
+                  Share
+                </Button>
+                <Popover
+                  {...bindPopover(popupState)}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                >
+                  <Typography sx={{ paddingY: '0.5rem', paddingX: '1rem' }}>
+                    <div className="flex space-x-2">
+                      <FacebookShareButton url={process.env.SITE_BASE_URL + asPath}>
+                        <BsFacebook className="p-1 text-2xl rounded-full text-primary" />
+                      </FacebookShareButton>
+                      <LinkedinShareButton url={process.env.SITE_BASE_URL + asPath}>
+                        <BsLinkedin className="p-1 text-2xl rounded-md text-primary" />
+                      </LinkedinShareButton>
+                      <TwitterShareButton url={process.env.SITE_BASE_URL + asPath}>
+                        <BsTwitter className="p-1 text-2xl rounded-full text-primary" />
+                      </TwitterShareButton>
+                    </div>
+                  </Typography>
+                </Popover>
+              </div>
+            )}
+          </PopupState>
         </div>
       </div>
       <div className="flex flex-col pt-6">
