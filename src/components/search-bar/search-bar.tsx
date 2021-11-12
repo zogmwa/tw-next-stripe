@@ -12,6 +12,7 @@ type SearchByTagsProps = {
   className?: string
   style?: React.CSSProperties
   tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
+  forHomepage?: boolean
 }
 
 const placeholderComponent = (
@@ -24,11 +25,21 @@ const placeholderComponent = (
   </div>
 )
 
-export function SearchBar({ onSubmit, className, style }: SearchByTagsProps) {
+const homepagePlaceholderComponent = (
+  <div className="flex items-center justify-center space-x-2">
+    <AiOutlineSearch />
+    <div className="leading-none">e.g. Improve my Python application performance</div>
+  </div>
+)
+
+export function SearchBar({ onSubmit, className, style, forHomepage = false }: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
+  const serachBtnType = forHomepage ? 'homepage' : 'primary'
+  const placeholder = forHomepage ? homepagePlaceholderComponent : placeholderComponent
+  const searchBtnText = forHomepage ? 'Find Solutions' : 'Search'
   useEffect(() => {
     const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags'))
     if (!defautlTags) {
@@ -58,7 +69,7 @@ export function SearchBar({ onSubmit, className, style }: SearchByTagsProps) {
     })
     if (onWebServiceSelect) {
       setTags(value)
-      router.push(`services/${webserviceSlug}`)
+      router.push(`/services/${webserviceSlug}`)
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
@@ -108,10 +119,10 @@ export function SearchBar({ onSubmit, className, style }: SearchByTagsProps) {
         instanceId
         className="flex-1 mb-2 md:mb-0"
         classNamePrefix="select"
-        placeholder={placeholderComponent}
+        placeholder={placeholder}
       />
-      <Button type="submit" buttonType="primary">
-        Search
+      <Button type="submit" buttonType={serachBtnType}>
+        {searchBtnText}
       </Button>
     </form>
   )
