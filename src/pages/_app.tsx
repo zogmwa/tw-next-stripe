@@ -18,8 +18,9 @@ import { Spinner } from '@taggedweb/components/spinner'
 import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
 import { fetcher } from '@taggedweb/queries/fetchJson'
 import { HomePageFooter } from '@taggedweb/components/footer'
-import { topTags } from '@taggedweb/utils/top-tags'
+import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
+import { FooterComponent } from '@taggedweb/components/solution-footer'
 
 const queryClient = new QueryClient()
 
@@ -39,6 +40,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
   const renderFooter = pathname !== '/login' && pathname !== '/signup'
+  const renderMainFooter = pathname.split('/')[1] === 'solutions'
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
@@ -93,7 +95,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
                 ) : (
                   <Component {...restProps} key={router.asPath} />
                 )}
-                {renderFooter ? <HomePageFooter topTags={topTags} /> : null}
+                {renderFooter ? (
+                  renderMainFooter ? (
+                    <FooterComponent topSaasTags={TopSaasTags} topSolutionTags={TopSolutionTags} />
+                  ) : (
+                    <HomePageFooter topTags={topTags} />
+                  )
+                ) : null}
               </div>
               <Toaster
                 toastOptions={{

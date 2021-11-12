@@ -18,11 +18,10 @@ const introductionData = {
   provide_organization: {
     name: 'Solution Provider Organization',
     logo_url: null,
+    website: null,
   },
-  overview_description: [
-    'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible.',
-    'ZOOM Cloud Meetings is an intelligently engineered video conference software that can help you arrange video meetings, conferences, and video webinars from a remote location. It can build collaboration-enabled conference rooms.',
-  ],
+  overview_description:
+    'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible. ZOOM Cloud Meetings is an intelligently engineered video conference software that can help you arrange video meetings, conferences, and video webinars from a remote location. It can build collaboration-enabled conference rooms.',
   scope_of_work_description:
     'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible.',
 }
