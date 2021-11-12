@@ -13,7 +13,7 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
       }
     }
   }
-
+  //ToDo: Clean or Remove this
   console.log(showRelatedProducts)
   return (
     <>
@@ -21,8 +21,8 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
         {showRelatedProducts.map((showRelateds, index) => (
           <Carousel.Item className="aspect-h-8 md:aspect-h-3" key={index}>
             <div className="grid content-around w-full h-full grid-cols-2 md:content-center md:grid-cols-4 justify-items-center">
-              {showRelateds.map((related) => (
-                <div className="w-full h-full p-4">
+              {showRelateds.map((related, index) => (
+                <div key={index} className="w-full h-full p-4">
                   <div className="flex flex-col items-center py-4 space-y-6 bg-white border border-solid rounded-md border-border-default">
                     <ServiceLogo
                       logoUrl={related.logo_url}

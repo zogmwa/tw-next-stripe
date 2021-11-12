@@ -8,7 +8,7 @@ const filterOrganizations = async (inputValue: string) => {
   const tempOrganizations = organizations.filter((organization) =>
     organization.name.toLowerCase().includes(inputValue.toLowerCase()),
   )
-  let returnOrganizations = []
+  const returnOrganizations = []
   tempOrganizations.map((organization) =>
     returnOrganizations.push({
       label: organization.name,
@@ -23,7 +23,7 @@ const filterOrganizations = async (inputValue: string) => {
 
 const promiseOptions = async (inputValue: string) => {
   if (inputValue.trim().length >= 3) {
-    let showOrganizations = await filterOrganizations(inputValue)
+    const showOrganizations = await filterOrganizations(inputValue)
     showOrganizations.push({
       label: inputValue,
       value: inputValue.toLowerCase(),

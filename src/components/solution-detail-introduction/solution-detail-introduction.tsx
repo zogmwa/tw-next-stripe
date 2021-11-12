@@ -75,7 +75,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
               alt={introductionData.provide_organization.name}
             />
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full"></div>
+            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
           )}
           <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
         </div>
