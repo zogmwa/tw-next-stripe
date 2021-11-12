@@ -4,8 +4,8 @@ import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import { SolutionDetailSidebar } from '@taggedweb/components/solution-detail-sidebar'
 import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detail-introduction'
-import { QaContent } from '@taggedweb/components/solution-detail-introduction'
-import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
+// import { QaContent } from '@taggedweb/components/solution-detail-introduction'
+// import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
