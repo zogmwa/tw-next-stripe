@@ -12,7 +12,13 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     params: { id },
   } = context
 
-  const solutionDetail = await fetchSolutionDetail(context.req.session, id)
+  let solutionDetail
+  try {
+    solutionDetail = await fetchSolutionDetail(context.req.session, id)
+  } catch (error) {
+    // eslint-disable-next-line
+    // TODO: Redirect to solution search page.
+  }
 
   return {
     props: { solutionDetail },

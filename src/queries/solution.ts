@@ -6,7 +6,6 @@ export async function fetchSolutionDetail(solutionId) {
     const { data } = await axios.get(`/api/solutions/detail/${solutionId}`)
     return data
   } catch (error) {
-    // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not get solution detail data.')
     return null
