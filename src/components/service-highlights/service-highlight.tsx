@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
-import toast from 'react-hot-toast'
 import { TiImageOutline } from 'react-icons/ti'
 import ReactTooltip from 'react-tooltip'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import { FiAlertTriangle } from 'react-icons/fi'
-import { useUserContext } from '@taggedweb/hooks/use-user'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { Switch } from '../switch'
 import { Button } from '../button'
 import { Carousel } from '../carousel/carousel'
@@ -38,16 +37,7 @@ function HighlightContentComponent({
   const [unlinkAttribute, setUnlinkAttribute] = useState(null)
   const [isConfirm, setIsConfirm] = useState(false)
   const [isSubmit, setIsSubmit] = useState(false)
-  const user = useUserContext()
-  const { authVerified } = user
-
-  function authCheck() {
-    if (!authVerified) {
-      toast.error('Please login to Add a Highlight.')
-    } else {
-      setIsOpen(!isOpen)
-    }
-  }
+  const { requireLoginBeforeAction } = useRequireLogin()
 
   useEffect(() => {
     if (isSubmit) {
@@ -101,7 +91,7 @@ function HighlightContentComponent({
           className="self-start bg-primary"
           textClassName="text-white"
           icon={<AiOutlinePlus className="text-white" />}
-          onClick={authCheck}
+          onClick={requireLoginBeforeAction(() => setIsOpen(!isOpen))}
         >
           Add a Highlight
         </Button>
@@ -163,7 +153,7 @@ function HighlightContentComponent({
                         ? 'text-background-light w-3 h-3'
                         : 'text-primary w-3 h-3'
                     }
-                    onClick={() => handleUpvoteAttribute(attribute)}
+                    onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
@@ -218,7 +208,7 @@ function HighlightContentComponent({
                         ? 'text-background-light w-3 h-3'
                         : 'text-primary w-3 h-3'
                     }
-                    onClick={() => handleUpvoteAttribute(attribute)}
+                    onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
                     {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}

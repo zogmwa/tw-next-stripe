@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { StyledStarRating } from '../styled-star-rating'
 import { Button } from '../button'
 import { Input } from '../input'
@@ -45,6 +46,8 @@ const items = [
 ]
 
 function ReviewInputComponent({ serviceName, handleSubmit }: ReviewInputProps) {
+  const { requireLoginBeforeAction } = useRequireLogin()
+
   return (
     <Formik
       initialValues={{
@@ -53,9 +56,9 @@ function ReviewInputComponent({ serviceName, handleSubmit }: ReviewInputProps) {
         avarageRate: 0,
       }}
       validationSchema={validationSchema}
-      onSubmit={(data) => {
+      onSubmit={requireLoginBeforeAction((data) => {
         handleSubmit(data)
-      }}
+      })}
     >
       {({ handleSubmit, values, handleChange, handleBlur, touched, errors }) => (
         <form onSubmit={handleSubmit}>
