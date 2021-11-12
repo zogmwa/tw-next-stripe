@@ -28,7 +28,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
   const showSolutionTags = topSolutionTags.slice(0, tagsDefaultShowCount)
 
   return (
-    <>
+    <div className="max-w-screen-lg pr-2 mx-auto">
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <div className="flex flex-col items-center space-y-4 md:items-start">
           <h4 className="text-sm text-gray-400">TOP SAAS TAGS</h4>
@@ -173,6 +173,6 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

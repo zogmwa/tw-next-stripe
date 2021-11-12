@@ -11,8 +11,8 @@ type SolutionDetailIntroductionProps = {
     title: string
     upvoted_count: number
     users_count: number
-    provide_organization: { name: string; logo_url: string | null }
-    overview_description: string[]
+    provide_organization: { name: string; logo_url: string | null; website: string | null }
+    overview_description: string
     scope_of_work_description: string
   }
 }
@@ -30,16 +30,14 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
   }
 
   return (
-    <div className="flex flex-col space-y-4 divide-y flex-fol divide-solid divide-border-default">
+    <div className="flex flex-col w-full space-y-4 divide-y flex-fol divide-solid divide-border-default">
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <Link href={`/search/${introductionData.tag.slug}`} prefetch={false} key={introductionData.tag.slug}>
-            <a className="inline-flex mt-2 mr-2">
-              <Button buttonType="tag" size="small">
-                {introductionData.tag.name}
-              </Button>
-            </a>
-          </Link>
+          <a className="inline-flex">
+            <Button buttonType="tag" size="small">
+              {introductionData.tag.name}
+            </Button>
+          </a>
           <h2 className="mt-2 text-3xl font-bold">{introductionData.title}</h2>
           <div className="flex items-center mt-4 space-x-2">
             <IoIosArrowUp className="text-primary" />
@@ -88,11 +86,12 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
       </div>
       <div className="flex flex-col pt-6">
         <h4 className="font-bold text-md">Overview</h4>
-        {introductionData.overview_description.map((overview, index) => (
-          <div className="mt-3 text-sm text-text-secondary" key={index}>
-            {overview}
-          </div>
-        ))}
+        <div
+          className="mt-3 text-sm text-text-secondary"
+          dangerouslySetInnerHTML={{
+            __html: introductionData.overview_description,
+          }}
+        ></div>
       </div>
       <div className="flex flex-col pt-6">
         <h4 className="font-bold text-md">Scope of Work</h4>
