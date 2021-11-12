@@ -23,7 +23,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
       </div>
       <div className="flex flex-col p-2 space-y-2">
         {detailInfo.features.map((feature) => (
-          <div className="flex items-center">
+          <div className="flex items-center" key={feature.name}>
             <IoIosCheckmarkCircleOutline className="text-md text-primary" />
             <span className="pl-2 text-sm text-text-secondary">{feature.name}</span>
           </div>

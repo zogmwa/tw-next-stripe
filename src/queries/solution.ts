@@ -8,7 +8,6 @@ export async function fetchSolutionDetail(solutionId) {
   } catch (error) {
     // TODO: error handling
     // eslint-disable-next-line
-    console.log(error)
     toast.error('Could not get solution detail data.')
     return null
   }
