@@ -22,9 +22,11 @@ export default function Home({ featuredList }) {
 
   return (
     <div>
-      <div className="max-w-screen-lg pl-2 mx-auto">
-        <div className="flex flex-col items-start justify-start my-12 space-y-8">
-          <h1 className="text-4xl font-semibold">Find the best SaaS software and web services for your needs</h1>
+      <div className="max-w-screen-lg mx-auto">
+        <div className="mx-2 flex flex-col items-start justify-start my-12 space-y-8 overflow-hidden">
+          <h1 className="text-4xl font-semibold text-center md:text-left">
+            Find the best SaaS software and web services for your needs
+          </h1>
           <SearchBar
             onSubmit={(selectedTag) => {
               router.push(`/search/${selectedTag}`)
