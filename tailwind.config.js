@@ -40,6 +40,13 @@ module.exports = {
           dark: gray['200'],
           surface: colors.white,
         },
+
+        // For golden color in Solutions theme
+        backgroundSolution: {
+          default: colors.coolGray['100'],
+          light: colors.coolGray['50'],
+          dark: colors.coolGray['200'],
+        },
       },
     },
   },

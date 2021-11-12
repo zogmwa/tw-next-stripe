@@ -22,7 +22,7 @@ const filterTags = async (inputValue: string) => {
   const tags = tagsList.results
   const tempTags = tags.filter((Tag) => Tag.name.toLowerCase().includes(inputValue.toLowerCase()))
   console.log(tempTags)
-  let returnTags = []
+  const returnTags = []
   tempTags.map((tag) =>
     returnTags.push({
       label: tag.name,
@@ -37,7 +37,7 @@ const filterTags = async (inputValue: string) => {
 
 const promiseOptions = async (inputValue: string) => {
   if (inputValue.trim().length >= 3) {
-    let showTags = await filterTags(inputValue)
+    const showTags = await filterTags(inputValue)
     showTags.push({
       label: inputValue,
       value: inputValue.toLowerCase(),

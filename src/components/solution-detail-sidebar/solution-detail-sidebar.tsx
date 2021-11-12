@@ -22,8 +22,8 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
         <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price}</h4>
       </div>
       <div className="flex flex-col p-2 space-y-2">
-        {detailInfo.features.map((feature) => (
-          <div className="flex items-center" key={feature.name}>
+        {detailInfo.features.map((feature, index) => (
+          <div key={index} className="flex items-center">
             <IoIosCheckmarkCircleOutline className="text-md text-primary" />
             <span className="pl-2 text-sm text-text-secondary">{feature.name}</span>
           </div>
