@@ -71,7 +71,7 @@ export function NavBar({ className, style }: NavBarProps) {
                 </Link>
                 <Link href="/">
                   <a>
-                    <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                    <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary hidden sm:block">
                       TaggedWeb
                     </div>
                   </a>
