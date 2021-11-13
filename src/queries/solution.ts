@@ -11,3 +11,14 @@ export async function fetchSolutionDetail(solutionId) {
     return null
   }
 }
+
+export async function fetchSimilarProducts(solutionSlug) {
+  try {
+    const { data } = await axios.get(`/api/solutions/similar/${solutionSlug}`)
+    return data
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Could not get similar SaaS products.')
+    return null
+  }
+}
