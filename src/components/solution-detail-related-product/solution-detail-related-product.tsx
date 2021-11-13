@@ -13,7 +13,7 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
       }
     }
   }
-  
+
   return (
     <>
       <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
