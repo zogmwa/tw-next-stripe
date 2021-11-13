@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import { SolutionDetailSidebar } from '@taggedweb/components/solution-detail-sidebar'
 import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detail-introduction'
+import { fetchSimilarProducts } from '@taggedweb/queries/solution'
 // import { QaContent } from '@taggedweb/components/solution-detail-introduction'
-// import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
+import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -27,6 +28,17 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function SolutionDetail({ solutionDetail }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
+  const [relatedProducts, setRelatedProducts] = useState([])
+
+  useEffect(() => {
+    async function fetchRelatedSaasProducts() {
+      const products = await fetchSimilarProducts(solutionDetail.slug)
+
+      setRelatedProducts(products)
+    }
+
+    fetchRelatedSaasProducts()
+  }, [solutionDetail])
 
   const breadcrumbData = [
     {
@@ -85,6 +97,10 @@ export default function SolutionDetail({ solutionDetail }) {
           {/* <QaContent solution={solutionDetail} /> */}
         </div>
         <SolutionDetailSidebar detailInfo={solutionSidebarInfo} className="w-[15rem] h-full sticky top-16" />
+      </div>
+      <div className="flex flex-col pb-6 mt-8">
+        <h4 className="pb-4 text-lg font-bold text-black">Related SaaS Products</h4>
+        <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
       </div>
     </div>
   )
