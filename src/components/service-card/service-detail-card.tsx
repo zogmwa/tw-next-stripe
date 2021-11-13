@@ -18,6 +18,7 @@ import {
 } from '@taggedweb/queries/service'
 import { Asset } from '@taggedweb/types/asset'
 import { phoneRegex } from '@taggedweb/utils/constants'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
@@ -70,20 +71,10 @@ function ServiceDetailCardComponent({
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
   const rating = numeral(Number(service.avg_rating ?? 0)).format('0.[0]')
   const user = useUserContext()
-  const { authVerified } = user
   const [isOpenOwnServiceModal, setIsOpenOwnServiceModal] = useState(false)
-
-  function authCheck() {
-    if (!authVerified) {
-      toast.error('Kindly log in to claim ownership')
-    } else {
-      setIsOpenOwnServiceModal(!isOpenOwnServiceModal)
-    }
-  }
+  const { requireLoginBeforeAction } = useRequireLogin()
 
   const setToggleUsedByState = async () => {
-    if (!authVerified) return
-
     setIsLoadingUsedByMe(true)
     const resultStatus = await toggleUsedByStatus(slug, !usedByMe)
     setIsLoadingUsedByMe(false)
@@ -93,8 +84,6 @@ function ServiceDetailCardComponent({
   }
 
   const setToggleUpvotedByMe = async () => {
-    if (!authVerified) return
-
     setIsLoadingUpvote(true)
     const upvotesCounts = upvotesCount
     if (votedByMe) {
@@ -173,7 +162,7 @@ function ServiceDetailCardComponent({
             <a
               href="#"
               id="ownService"
-              onClick={authCheck}
+              onClick={requireLoginBeforeAction(() => setIsOpenOwnServiceModal(!isOpenOwnServiceModal))}
               className="hidden md:flex md:items-center md:cursor-pointer md:space-x-2"
             >
               <AiOutlineInfoCircle className="text-primary" />
@@ -265,7 +254,7 @@ function ServiceDetailCardComponent({
           loading={isLoadingUsedByMe}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-background-light'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={() => setToggleUsedByState()}
+          onClick={requireLoginBeforeAction(() => setToggleUsedByState())}
           disabled={isLoadingUsedByMe}
         >
           I&apos;ve used this
@@ -276,7 +265,7 @@ function ServiceDetailCardComponent({
           icon={<BsChevronUp className={votedByMe ? 'self-center text-white' : 'self-center text-primary'} />}
           loading={isLoadingUpvote}
           loadingClassName={votedByMe ? 'text-background-light' : 'text-primary'}
-          onClick={() => setToggleUpvotedByMe()}
+          onClick={requireLoginBeforeAction(() => setToggleUpvotedByMe())}
         >
           {`Upvote ${upvotesCount}`}
         </Button>
@@ -285,7 +274,7 @@ function ServiceDetailCardComponent({
           loading={isLoadingUsedByMe}
           loadingClassName={!usedByMe ? 'text-primary' : 'text-background-light'}
           buttonType={usedByMe ? 'primary' : 'default'}
-          onClick={() => setToggleUsedByState()}
+          onClick={requireLoginBeforeAction(() => setToggleUsedByState())}
           disabled={isLoadingUsedByMe}
         >
           I&apos;ve used this

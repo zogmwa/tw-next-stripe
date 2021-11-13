@@ -1,9 +1,9 @@
 import React from 'react'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiHeart } from 'react-icons/bi'
-import { BsShare } from 'react-icons/bs'
+import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
-import { BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+
 import Popover from '@mui/material/Popover'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
@@ -131,7 +131,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           dangerouslySetInnerHTML={{
             __html: introductionData.overview_description,
           }}
-        ></div>
+        />
       </div>
       <div className="flex flex-col pt-6">
         <h4 className="font-bold text-md">Scope of Work</h4>
