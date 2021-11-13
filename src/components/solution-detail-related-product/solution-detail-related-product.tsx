@@ -13,7 +13,7 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
       }
     }
   }
-  //ToDo: Clean or Remove this
+  // ToDo: Clean or Remove this
   console.log(showRelatedProducts)
   return (
     <>

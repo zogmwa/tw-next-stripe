@@ -22,7 +22,7 @@ export default function Home({ featuredList }) {
   return (
     <div>
       <div className="max-w-screen-lg mx-auto">
-        <div className="mx-2 flex flex-col items-start justify-start my-12 space-y-8 overflow-hidden">
+        <div className="flex flex-col items-start justify-start mx-2 my-12 space-y-8">
           <h1 className="text-4xl font-semibold text-center md:text-left">
             Find the best SaaS software and web services for your needs
           </h1>
