@@ -28,17 +28,6 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function SolutionDetail({ solutionDetail }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
-  const [relatedProducts, setRelatedProducts] = useState([])
-
-  useEffect(() => {
-    async function fetchRelatedSaasProducts() {
-      const products = await fetchSimilarProducts(solutionDetail.slug)
-
-      setRelatedProducts(products)
-    }
-
-    fetchRelatedSaasProducts()
-  }, [solutionDetail])
 
   const breadcrumbData = [
     {
@@ -87,6 +76,7 @@ export default function SolutionDetail({ solutionDetail }) {
     overview_description: solutionDetail.description ?? '',
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
   }
+  const relatedProducts = solutionDetail.related_assets ?? []
 
   return (
     <div className="flex flex-col max-w-screen-lg mx-auto my-6">
@@ -99,7 +89,7 @@ export default function SolutionDetail({ solutionDetail }) {
         <SolutionDetailSidebar detailInfo={solutionSidebarInfo} className="w-[15rem] h-full sticky top-16" />
       </div>
       <div className="flex flex-col pb-6 mt-8">
-        <h4 className="pb-4 text-lg font-bold text-black">Related SaaS Products</h4>
+        {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related SaaS Products</h4>}
         <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
       </div>
     </div>
