@@ -26,7 +26,9 @@ export function useRequireLogin(): UseRequireLogin {
       popupTick = setInterval(function () {
         if (popupWindow.closed) {
           clearInterval(popupTick)
-          toast.error('Login Failed')
+          toast.error('Login Failed', {
+            duration: 1000,
+          })
           setPopupWindow(null)
         }
       }, 500)
@@ -56,7 +58,7 @@ export function useRequireLogin(): UseRequireLogin {
     } else {
       popupOptions += `, width=${screen.width}, height=${screen.height}`
     }
-
+    toast.loading('Loading window for Login')
     const popup = window.open('/login?next=login', 'login_auth_popup', popupOptions)
     setPopupWindow(popup)
   }, [])
