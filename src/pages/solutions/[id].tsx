@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import { SolutionDetailSidebar } from '@taggedweb/components/solution-detail-sidebar'
 import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detail-introduction'
-import { fetchSimilarProducts } from '@taggedweb/queries/solution'
-// import { QaContent } from '@taggedweb/components/solution-detail-introduction'
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
@@ -84,7 +82,6 @@ export default function SolutionDetail({ solutionDetail }) {
       <div className="flex mt-6">
         <div className="flex w-full p-4 mr-4 border border-solid rounded-md border-border-default">
           <SolutionDetailIntroduction introductionData={introductionData} />
-          {/* <QaContent solution={solutionDetail} /> */}
         </div>
         <SolutionDetailSidebar detailInfo={solutionSidebarInfo} className="w-[15rem] h-full sticky top-16" />
       </div>
