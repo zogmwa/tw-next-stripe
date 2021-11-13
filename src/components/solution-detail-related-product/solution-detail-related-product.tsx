@@ -13,8 +13,7 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
       }
     }
   }
-  // ToDo: Clean or Remove this
-  console.log(showRelatedProducts)
+
   return (
     <>
       <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
