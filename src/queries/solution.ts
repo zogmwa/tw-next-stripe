@@ -12,6 +12,7 @@ export async function fetchSolutionDetail(solutionId) {
   }
 }
 
+// We aren't looking to use this for now as we are using Solution.assets instead to show related software. But in the future we may add an "Other Related SaaS" section where we can show these products/software.
 export async function fetchSimilarProducts(solutionSlug) {
   try {
     const { data } = await axios.get(`/api/solutions/related_assets/${solutionSlug}`)
