@@ -76,7 +76,7 @@ export default function SolutionDetail({ solutionDetail }) {
     overview_description: solutionDetail.description ?? '',
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
   }
-  const relatedProducts = solutionDetail.related_assets ?? []
+  const relatedProducts = solutionDetail.assets ?? []
 
   return (
     <div className="flex flex-col max-w-screen-lg mx-auto my-6">
