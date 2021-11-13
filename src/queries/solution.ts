@@ -14,7 +14,7 @@ export async function fetchSolutionDetail(solutionId) {
 
 export async function fetchSimilarProducts(solutionSlug) {
   try {
-    const { data } = await axios.get(`/api/solutions/similar/${solutionSlug}`)
+    const { data } = await axios.get(`/api/solutions/related_assets/${solutionSlug}`)
     return data
   } catch (error) {
     // eslint-disable-next-line

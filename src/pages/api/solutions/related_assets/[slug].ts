@@ -14,7 +14,7 @@ export default withSessionApi(async (req, res) => {
         }
       : null
 
-    const { data } = await clientWithRetries.get(`/solutions/similar/?slug=${slug}`, config)
+    const { data } = await clientWithRetries.get(`/solutions/related_assets/?slug=${slug}`, config)
     return res.json(data)
   }
 })
