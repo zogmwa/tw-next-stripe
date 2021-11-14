@@ -1,3 +1,4 @@
+// TODO: Deprecate this in favor of topSaaStags and topSolutionTags and eventually remove this when it's unused.
 export const topTags = [
   {
     value: 'Accounting Software and Tools',
@@ -47,10 +48,6 @@ export const topTags = [
     value: 'Marketing Automation Tools',
     slug: 'marketing-automation',
   },
-  // {
-  //   value: 'Marketing Automation SaaS',
-  //   slug: 'marketing-automation', // Slug 'marketing-automation' is repeated
-  // },
   {
     value: 'Video Conferencing Tools',
     slug: 'video-conferencing',
@@ -79,36 +76,121 @@ export const topTags = [
 
 export const TopSaasTags = [
   {
-    name: 'Email Marketing Software',
+    name: 'Accounting Software and Tools',
+    slug: 'accounting',
+    description: 'Make sure your books are in order for tax season',
+  },
+  {
+    name: 'Analytics Software',
+    slug: 'analytics',
+    description: '',
+  },
+  {
+    name: 'VPN Software and Tools',
+    slug: 'vpn',
+    description: '',
+  },
+  {
+    name: 'Compliance Tools',
+    slug: 'compliance',
+    description: '',
+  },
+  {
+    name: 'Customer Relationship Management Tools',
+    slug: 'crm',
+    description: '',
+  },
+  {
+    name: 'Email Marketing SaaS',
     slug: 'email-marketing',
     description: '',
   },
   {
-    name: 'Video Conferencing Service',
+    name: 'E-Commerce Tools',
+    slug: 'e-commerce',
+    description: '',
+  },
+  {
+    name: 'Enterprise Resource Planning (ERP) Software',
+    slug: 'erp',
+    description: '',
+  },
+  {
+    name: 'Environmental Compliance Software',
+    slug: 'environmental-compliance',
+    description: '',
+  },
+  {
+    name: 'Artificial Intelligence Tools',
+    slug: 'artificial-intelligence',
+    description: '',
+  },
+  {
+    name: 'Marketplace Software',
+    slug: 'marketplace',
+    description: '',
+  },
+  {
+    name: 'Marketing Automation Tools',
+    slug: 'marketing-automation',
+    description: '',
+  },
+  {
+    name: 'Video Conferencing Tools',
     slug: 'video-conferencing',
     description: '',
   },
   {
-    name: 'E-commerce Software',
-    slug: 'e-commerce',
+    name: 'Design Tools',
+    slug: 'design',
+    description: '',
+  },
+  {
+    name: 'Security Services',
+    slug: 'security',
+    description: '',
+  },
+  {
+    name: 'Security Software',
+    slug: 'security',
+    description: '',
+  },
+  {
+    name: 'Customer Service',
+    slug: 'customer-service',
+    description: '',
+  },
+  {
+    name: 'Construction Management Software',
+    slug: 'construction-management',
     description: '',
   },
 ]
 
 export const TopSolutionTags = [
   {
+    name: 'Integrate Datadog APM',
+    slug: 'integrate-datadog-apm',
+    description: '',
+  },
+  {
+    name: 'Send SMS from your Application',
+    slug: 'integrate-twilio-sms',
+    description: '',
+  },
+  {
     name: 'Improve Application Performance',
     slug: 'improve-application-software',
     description: '',
   },
   {
-    name: 'Integrate Social Authentication',
-    slug: 'integrate-social-authentication',
+    name: 'Reduce AWS Costs',
+    slug: 'reduce-aws-tools',
     description: '',
   },
   {
-    name: 'Reduce AWS Costs',
-    slug: 'reduce-aws-tools',
+    name: 'Integrate Social Authentication',
+    slug: 'integrate-social-authentication',
     description: '',
   },
 ]

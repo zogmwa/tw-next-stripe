@@ -16,11 +16,11 @@ type Language = {
   disabled: boolean
 }
 
-const companies = ['About', 'Blog', 'Career']
+const companies = ['About', 'Blog', 'Careers']
 const languages = [{ id: '1', text: 'English', disabled: false }]
 
 export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponentProps) {
-  const tagsDefaultShowCount = 3
+  const tagsDefaultShowCount = 5
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null | undefined>(languages[0])
   const [contactEmail, setContactEmail] = useState<string>('')
 
@@ -31,27 +31,27 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
     <div className="w-full pt-6 mx-auto">
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">TOP SOLUTION TAGS</h4>
+          <h2 className="text-sm text-gray-400">TOP SOLUTION TAGS</h2>
           {showSolutionTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h4 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h4>
+              <h3 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}
         </div>
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h4>
+          <h2 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h2>
           {showSaasTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h4 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h4>
+              <h3 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}
         </div>
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">COMPANY</h4>
+          <h2 className="text-sm text-gray-400">COMPANY</h2>
           {companies.map((company) => (
-            <h4 className="text-sm text-gray-800 cursor-pointer" key={company} onClick={() => {}}>
+            <h3 className="text-sm text-gray-800 cursor-pointer" key={company} onClick={() => {}}>
               {company}
-            </h4>
+            </h3>
           ))}
         </div>
         <div className="flex flex-col items-center w-full px-4 space-y-4 md:items-start">
