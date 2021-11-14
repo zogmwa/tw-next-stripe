@@ -26,7 +26,7 @@ export function FindingSolutions() {
             </div>
           </div>
         </div>
-        <div className="absolute z-10 border-l-4 border-blue-400 rounded vertical-line-1 left-1/2" />
+        <div className="absolute z-10 hidden border-l-4 border-blue-400 rounded lg:flex vertical-line-1 left-1/2" />
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:hidden md:w-5/12">
             <img src="/images/step_2.png" alt="step_2" className="w-full mx-auto" />
@@ -49,7 +49,7 @@ export function FindingSolutions() {
             <img src="/images/step_2.png" alt="step_2" className="w-full mx-auto" />
           </div>
         </div>
-        <div className="absolute z-10 border-l-4 border-blue-400 rounded vertical-line-2 left-1/2" />
+        <div className="absolute z-10 hidden border-l-4 border-blue-400 rounded lg:flex vertical-line-2 left-1/2" />
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:w-5/12">
             <img src="/images/step_3.png" alt="step_3" className="w-3/4 mx-auto" />
