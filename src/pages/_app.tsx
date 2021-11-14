@@ -85,7 +85,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
             <div suppressHydrationWarning={true}>
-              {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
+              {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
               <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
                 {redirectTo ? (
                   <RedirectSpinner />

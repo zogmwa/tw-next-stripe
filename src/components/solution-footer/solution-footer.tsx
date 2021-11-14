@@ -19,7 +19,7 @@ type Language = {
 const companies = ['About', 'Blog', 'Careers']
 const languages = [{ id: '1', text: 'English', disabled: false }]
 
-export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponentProps) {
+export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: FooterComponentProps) {
   const tagsDefaultShowCount = 5
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null | undefined>(languages[0])
   const [contactEmail, setContactEmail] = useState<string>('')

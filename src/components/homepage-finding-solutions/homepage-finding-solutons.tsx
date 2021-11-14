@@ -4,12 +4,12 @@ import { HiClipboardList } from 'react-icons/hi'
 
 export function FindingSolutions() {
   return (
-    <div className="py-8 bg-gray-100">
-      <div className="max-w-screen-lg px-2 mx-auto">
+    <div className="py-8 bg-gray-50">
+      <div className="relative max-w-screen-lg px-2 mx-auto">
         <div className="mb-20 text-2xl font-bold text-center">Finding Solutions: How it Works</div>
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:w-5/12">
-            <img src="/images/finding_sol_1.png" alt="finding_sol_1" className="w-full mx-auto" />
+            <img src="/images/step_1.png" alt="step_1" className="w-full mx-auto" />
           </div>
           <div className="items-center justify-center hidden w-2/12 md:flex">
             <div className="flex items-center justify-center w-24 h-24 text-xl text-center text-white bg-blue-500 border-8 border-blue-200 rounded-full">
@@ -26,9 +26,10 @@ export function FindingSolutions() {
             </div>
           </div>
         </div>
+        <div className="absolute z-10 border-l-4 border-blue-400 rounded vertical-line-1 left-1/2" />
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:hidden md:w-5/12">
-            <div className="w-full bg-gray-200 rounded h-72" />
+            <img src="/images/step_2.png" alt="step_2" className="w-full mx-auto" />
           </div>
           <div className="flex flex-col items-center justify-center w-full py-4 space-y-2 md:py-0 md:items-start md:w-5/12">
             <div className="text-4xl text-blue-500">
@@ -45,12 +46,13 @@ export function FindingSolutions() {
             </div>
           </div>
           <div className="hidden w-full md:flex md:w-5/12">
-            <div className="w-full bg-gray-200 rounded h-72" />
+            <img src="/images/step_2.png" alt="step_2" className="w-full mx-auto" />
           </div>
         </div>
+        <div className="absolute z-10 border-l-4 border-blue-400 rounded vertical-line-2 left-1/2" />
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:w-5/12">
-            <img src="/images/finding_sol_3.png" alt="finding_sol_3" className="mx-auto rounded h-72" />
+            <img src="/images/step_3.png" alt="step_3" className="w-3/4 mx-auto" />
           </div>
           <div className="items-center justify-center hidden w-2/12 md:flex">
             <div className="flex items-center justify-center w-24 h-24 text-xl text-center text-white bg-blue-500 border-8 border-blue-200 rounded-full">
