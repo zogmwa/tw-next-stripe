@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import Typical from 'react-typical'
 import { SearchBar } from '@taggedweb/components/search-bar'
 import { PopularSolutionTags } from '@taggedweb/components/homepage-popular-solutions'
 import { FindingSolutions } from '@taggedweb/components/homepage-finding-solutions'
@@ -12,11 +13,24 @@ export default function Home() {
       <div className="bg-blue-600 bg-opacity-80">
         <div className="max-w-screen-lg px-2 mx-auto">
           <div className="flex flex-col items-center justify-center py-20">
-            <h1 className="px-2 py-2 text-2xl font-bold text-white bg-blue-300 rounded">Looking to __________</h1>
-            <h1 className="px-2 py-2 mb-8 text-2xl font-bold text-center text-white">
-              Integrate a SaaS? Improve application performance?
-              <br /> Solve XYZ Problem with SaaS? We may have a solution for you!
-            </h1>
+            <h1 className="px-2 py-2 text-2xl font-bold text-white bg-blue-300 rounded"> Are you looking to ...</h1>
+            <h2 className="px-2 py-2 mb-8 text-2xl font-bold text-center text-white">
+              <u>
+                <Typical
+                  steps={[
+                    'Integrate a SaaS?',
+                    500,
+                    'Improve application performance?',
+                    500,
+                    'Integrate payment flows?',
+                    500,
+                  ]}
+                  wrapper="p"
+                  loop={Infinity}
+                />
+              </u>
+              TaggedWeb may have a solution for you!
+            </h2>
             <div className="w-full mr-2 md:w-3/4">
               <SearchBar
                 onSubmit={(selectedTag) => {
