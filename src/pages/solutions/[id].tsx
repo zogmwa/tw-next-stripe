@@ -39,16 +39,16 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name: solutionDetail.primary_tag.name,
+      name: solutionDetail?.primary_tag?.name,
       url: '#',
       is_selected: true,
     },
   ]
   let price = solutionDetail.prices.filter((price) => price.is_primary === true)[0]
-  if (price.length === 0) price = solutionDetail.prices[0]
+  if (price?.length === 0) price = solutionDetail.prices[0]
 
   const solutionSidebarInfo = {
-    price: price.price,
+    price: price?.price,
     features: [
       { name: '10 Ready Capacity' },
       { name: '14 Eta Days' },
