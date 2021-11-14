@@ -72,3 +72,18 @@
   top: 0;
   left: 0;
 }
+
+/* new homepage */
+.skew-pic {
+  --tw-skew-x: 12deg;
+}
+
+.vertical-line-1 {
+  top: 19rem;
+  height: 18.5rem;
+}
+
+.vertical-line-2 {
+  bottom: 17rem;
+  height: 23rem;
+}
