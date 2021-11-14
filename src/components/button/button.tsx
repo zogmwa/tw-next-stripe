@@ -8,7 +8,7 @@ export type ButtonProps = Omit<
 > & {
   loading?: boolean
   children?: string | number
-  buttonType?: 'default' | 'primary' | 'tag' | 'homepage'
+  buttonType?: 'default' | 'primary' | 'tag' | 'homePage'
   error?: boolean
   icon?: React.ReactNode
   iconPlacement?: 'left' | 'right'
@@ -63,7 +63,7 @@ function ButtonComponent(
           if (buttonType === 'tag') {
             return 'bg-background-default text-text-tertiary border-background-dark'
           }
-          if (buttonType === 'homepage') {
+          if (buttonType === 'homePage') {
             return 'bg-green-400 text-white border-none'
           }
           return 'bg-primary text-text-on-surface border-primary'

@@ -13,33 +13,30 @@ type SearchByTagsProps = {
   style?: React.CSSProperties
   tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
   forHomepage?: boolean
+  forSoftware?: boolean
 }
 
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
-    <AiOutlineSearch />
-    <div className="hidden leading-none md:flex">
-      Start by typing one or more feature tags of interest. e.g. email-marketing, landing-pages
-    </div>
+    <div className="hidden leading-none md:flex">Type feature tags of interest e.g. email-marketing, landing-pages</div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>
 )
 
 const homepagePlaceholderComponent = (
   <div className="flex items-center justify-center space-x-2">
-    <AiOutlineSearch />
     <div className="leading-none">e.g. Improve my Python application performance</div>
   </div>
 )
 
-export function SearchBar({ onSubmit, className, style, forHomepage = false }: SearchByTagsProps) {
+export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
-  const serachBtnType = forHomepage ? 'homepage' : 'primary'
-  const placeholder = forHomepage ? homepagePlaceholderComponent : placeholderComponent
-  const searchBtnText = forHomepage ? 'Find Solutions' : 'Search'
+  const serachBtnType = forHomepage ? 'homePage' : 'primary'
+  const placeholder = !forSoftware ? homepagePlaceholderComponent : placeholderComponent
+  const searchBtnText = !forSoftware ? 'Find Solutions' : 'Find Software'
   useEffect(() => {
     const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags'))
     if (!defautlTags) {
@@ -121,7 +118,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false }: S
         classNamePrefix="select"
         placeholder={placeholder}
       />
-      <Button type="submit" buttonType={serachBtnType}>
+      <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
         {searchBtnText}
       </Button>
     </form>
