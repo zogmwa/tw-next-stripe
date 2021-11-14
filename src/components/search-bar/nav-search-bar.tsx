@@ -16,7 +16,7 @@ type SearchByTagsProps = {
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
     <AiOutlineSearch />
-    <div className="hidden leading-none md:flex">Type feature tags. e.g. email-marketing, landing-pages</div>
+    <div className="hidden leading-none md:flex">Type feature tags. e.g. email marketing, landing pages</div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>
 )
@@ -27,13 +27,9 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   useEffect(() => {
-    const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags'))
-    if (!defautlTags) {
-      setTags([])
-    } else {
-      setTags(defautlTags)
-      // console.log(tags)
-    }
+    const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags')) || []
+    setTags(defautlTags)
+    // console.log(tags)
   }, [])
 
   /**

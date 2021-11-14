@@ -22,8 +22,10 @@ export function NavBar({ className, style }: NavBarProps) {
   const { pathname } = useRouter()
   const router = useRouter()
   const { isLoggedIn, logout } = session
+
+  // Keeping this false for now as improvements to search bar required.
   const renderNavSearchBar =
-    pathname !== '/login' && pathname !== '/signup' && pathname !== '/' && pathname.split('/')[1] !== 'search'
+    pathname !== '/login' && pathname !== '/signup' && pathname !== '/' && pathname.split('/')[1] !== 'search' && false
 
   return (
     <div id="navbar">
@@ -56,9 +58,7 @@ export function NavBar({ className, style }: NavBarProps) {
               </a>
             </Link>
             {isLoggedIn() ? (
-              <>
-                <Avatar />
-              </>
+              <Avatar />
             ) : (
               <Link href={`/login?next=${router.asPath}`}>
                 <a>

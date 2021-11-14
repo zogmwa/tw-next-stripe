@@ -38,13 +38,8 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
   const placeholder = !forSoftware ? homepagePlaceholderComponent : placeholderComponent
   const searchBtnText = !forSoftware ? 'Find Solutions' : 'Find Software'
   useEffect(() => {
-    const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags'))
-    if (!defautlTags) {
-      setTags([])
-    } else {
-      setTags(defautlTags)
-      // console.log(tags)
-    }
+    const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags')) || []
+    setTags(defautlTags)
   }, [])
 
   /**
