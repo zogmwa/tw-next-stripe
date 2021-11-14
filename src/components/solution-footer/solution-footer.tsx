@@ -34,7 +34,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
           <h2 className="text-sm text-gray-400">TOP SOLUTION TAGS</h2>
           {showSolutionTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h3 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h3>
+              <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}
         </div>
@@ -42,14 +42,14 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
           <h2 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h2>
           {showSaasTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h3 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h3>
+              <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}
         </div>
         <div className="flex flex-col items-center space-y-4 md:items-start">
           <h2 className="text-sm text-gray-400">COMPANY</h2>
           {companies.map((company) => (
-            <h3 className="text-sm text-gray-800 cursor-pointer" key={company} onClick={() => {}}>
+            <h3 className="text-base text-gray-800 cursor-pointer" key={company} onClick={() => {}}>
               {company}
             </h3>
           ))}
@@ -72,9 +72,9 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
         </div>
       </div>
       <div className="flex flex-col items-center p-2 mt-10 space-y-4 divide-y bg-primary divide-solid divide-border-default md:hidden">
-        <div className="flex flex-col items-center w-full px-1 py-4 space-y-6 text-xs text-white">
+        <div className="flex flex-col items-center w-full px-1 py-4 space-y-6 text-sm text-white">
           <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
-          <h4 className="text-xs text-center text-white">
+          <h4 className="text-sm text-center text-white">
             Latest news, articles, and resources, sent to your inbox monthly
           </h4>
           <div className="flex justify-between w-full bg-white rounded-lg">
@@ -118,15 +118,15 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
           </div>
           <div className="flex items-center pb-4 copyright">
             <AiOutlineCopyrightCircle className="text-sm text-white" />
-            <span className="pl-1 text-xs text-white">2021 TaggedWeb All rights reserved.</span>
+            <span className="pl-1 text-sm text-white">2021 TaggedWeb All rights reserved.</span>
           </div>
         </div>
       </div>
       <div className="flex-col items-center hidden px-4 py-4 mt-10 divide-y md:flex bg-primary divide-solid divide-border-default">
-        <div className="flex items-start justify-between w-full pt-4 pb-6 text-xs text-white">
+        <div className="flex items-start justify-between w-full pt-4 pb-6 text-sm text-white">
           <div className="flex flex-col w-full space-y-4">
             <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
-            <h4 className="text-xs text-white">Latest news, articles, and resources, sent to your inbox weekly</h4>
+            <h4 className="text-sm text-white">Latest news, articles, and resources, sent to your inbox weekly</h4>
           </div>
           <div className="flex justify-end w-full">
             <input
@@ -143,7 +143,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
         <div className="flex items-center justify-between w-full pt-6 pb-4">
           <div className="flex items-center copyright">
             <AiOutlineCopyrightCircle className="text-sm text-white" />
-            <span className="pl-1 text-xs text-white">2021 TaggedWeb All rights reserved.</span>
+            <span className="pl-1 text-sm text-white">2021 TaggedWeb All rights reserved.</span>
           </div>
           <div className="flex justify-around space-x-4 other-sites">
             <a
