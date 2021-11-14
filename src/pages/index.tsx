@@ -18,18 +18,18 @@ export default function Home() {
               <u>
                 <Typical
                   steps={[
-                    'Integrate a SaaS?',
-                    500,
-                    'Improve application performance?',
-                    500,
-                    'Integrate payment flows?',
-                    500,
+                    'Find the best SaaS for your needs?',
+                    400,
+                    'Integrate a SaaS into your application stack?',
+                    400,
+                    'Improve your web application performance?',
+                    400,
                   ]}
                   wrapper="p"
                   loop={Infinity}
                 />
               </u>
-              TaggedWeb may have a solution for you!
+              <div className="space-y-1"> We may have a solution. Search what you need! </div>
             </h2>
             <div className="w-full mr-2 md:w-3/4">
               <SearchBar
@@ -45,7 +45,7 @@ export default function Home() {
       <div className="bg-blue-100">
         <div className="max-w-screen-lg py-4 mx-auto text-center">
           <div className="text-lg font-medium text-black">
-            Our mission is to help you find and utilize SaaS web services that best fit your needs
+            Our mission is to help you find and utilize SaaS solutions and software that best fits your needs
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function Home() {
               <div className="text-2xl font-bold text-white">Are you a solution provider or a creator?</div>
               <div className="mb-8 text-lg font-medium text-white">Better connect with solution customers</div>
               <Button buttonType="homepage" className="mb-4">
-                List your Solutions
+                List your Solution
               </Button>
             </div>
             <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8">
