@@ -34,7 +34,7 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <HiClipboardList />
             </div>
-            <div className="text-2xl font-bold">See Solutoin Details, Scope of Work, Ask Questions to clarify</div>
+            <div className="text-2xl font-bold">See Solution Details, Scope of Work, Ask Questions to clarify</div>
             <div className="text-lg text-text-tertiary">
               See detials, and if needed ask questions to clarify whether the solution may meet your needs.
             </div>

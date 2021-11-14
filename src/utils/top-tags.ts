@@ -80,35 +80,35 @@ export const topTags = [
 export const TopSaasTags = [
   {
     name: 'Email Marketing Software',
-    slug: 'email-marketing-software',
+    slug: 'email-marketing',
     description: '',
   },
   {
     name: 'Video Conferencing Service',
-    slug: 'video-conferencing-service',
+    slug: 'video-conferencing',
     description: '',
   },
   {
     name: 'E-commerce Software',
-    slug: 'e-commerce-software',
+    slug: 'e-commerce',
     description: '',
   },
 ]
 
 export const TopSolutionTags = [
   {
-    name: 'CRM Software',
-    slug: 'crm-software',
+    name: 'Improve Application Performance',
+    slug: 'improve-application-software',
     description: '',
   },
   {
-    name: 'Project Mangement Software',
-    slug: 'project-management-software',
+    name: 'Integrate Social Authentication',
+    slug: 'integrate-social-authentication',
     description: '',
   },
   {
-    name: 'ERP System Tools',
-    slug: 'erp-system-tools',
+    name: 'Reduce AWS Costs',
+    slug: 'reduce-aws-tools',
     description: '',
   },
 ]

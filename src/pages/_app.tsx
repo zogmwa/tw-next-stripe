@@ -40,7 +40,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
   const renderFooter = pathname !== '/login' && pathname !== '/signup'
-  const renderMainFooter = pathname.split('/')[1] === 'solutions'
+  const renderMainFooter = true
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.

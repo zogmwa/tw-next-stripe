@@ -28,19 +28,19 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
   const showSolutionTags = topSolutionTags.slice(0, tagsDefaultShowCount)
 
   return (
-    <div className="max-w-screen-lg pr-2 mx-auto">
+    <div className="w-full pt-6 mx-auto">
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">TOP SAAS TAGS</h4>
-          {showSaasTags.map((tag) => (
+          <h4 className="text-sm text-gray-400">TOP SOLUTION TAGS</h4>
+          {showSolutionTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
               <h4 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h4>
             </Link>
           ))}
         </div>
         <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h4 className="text-sm text-gray-400">TOP SOLUTION TAGS</h4>
-          {showSolutionTags.map((tag) => (
+          <h4 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h4>
+          {showSaasTags.map((tag) => (
             <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
               <h4 className="text-sm text-gray-800 cursor-pointer">{tag.name}</h4>
             </Link>
@@ -75,7 +75,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
         <div className="flex flex-col items-center w-full px-1 py-4 space-y-6 text-xs text-white">
           <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
           <h4 className="text-xs text-center text-white">
-            Latest news, articles, and resources, sent to your inbox weekly
+            Latest news, articles, and resources, sent to your inbox monthly
           </h4>
           <div className="flex justify-between w-full bg-white rounded-lg">
             <input
@@ -97,7 +97,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsFacebook className="p-1 text-2xl text-white rounded-full" />
+              <BsTwitter className="p-1 text-2xl text-white rounded-full" />
             </a>
             <a
               href="https://www.linkedin.com/company/taggedweb/"
@@ -105,7 +105,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsTwitter className="p-1 text-2xl text-white rounded-full" />
+              <BsLinkedin className="p-1 text-2xl text-white rounded-full" />
             </a>
             <a
               href="https://www.facebook.com/taggedweb/"
@@ -113,7 +113,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsLinkedin className="p-1 text-2xl text-white rounded-md" />
+              <BsFacebook className="p-1 text-2xl text-white rounded-md" />
             </a>
           </div>
           <div className="flex items-center pb-4 copyright">
@@ -152,7 +152,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsFacebook className="p-1 text-2xl text-white rounded-full" />
+              <BsTwitter className="p-1 text-2xl text-white rounded-full" />
             </a>
             <a
               href="https://www.linkedin.com/company/taggedweb/"
@@ -160,7 +160,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsTwitter className="p-1 text-2xl text-white rounded-full" />
+              <BsLinkedin className="p-1 text-2xl text-white rounded-full" />
             </a>
             <a
               href="https://www.facebook.com/taggedweb/"
@@ -168,7 +168,7 @@ export function FooterComponent({ topSaasTags, topSolutionTags }: FooterComponen
               rel="noopener noreferrer"
               className="text-gray-900 no-underline"
             >
-              <BsLinkedin className="p-1 text-2xl text-white rounded-md" />
+              <BsFacebook className="p-1 text-2xl text-white rounded-md" />
             </a>
           </div>
         </div>
