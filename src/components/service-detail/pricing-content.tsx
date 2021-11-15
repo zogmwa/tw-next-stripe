@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { Asset } from '@taggedweb/types/asset'
-import { ServicePricingCard } from '../service-pricing-card/service-pricing-card'
-import { PricingSelectNameMobile } from '../service-pricing-card/pricing-select-name-mobile'
-import { PricingSelectNameDesktop } from '../service-pricing-card/pricing-select-name-desktop'
+import { ServicePricingCard } from '../pricing-components/service-pricing-card/service-pricing-card'
+import { PricingSelectNameMobile } from '../pricing-components/service-pricing-card/pricing-select-name-mobile'
+import { PricingSelectNameDesktop } from '../pricing-components/service-pricing-card/pricing-select-name-desktop'
 import { ShowEditable, EditablePricing } from '../editable-components'
 import { Modal } from '../Modal'
 
