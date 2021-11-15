@@ -77,7 +77,7 @@ function HighlightContentComponent({
   }
 
   return (
-    <div className="ml-3 md:mt-10">
+    <div className="md:mt-10">
       <div className="flex justify-between">
         <div className="md:flex md:justify-start">
           <h1 className="text-base font-medium text-text-primary">Highlights</h1>

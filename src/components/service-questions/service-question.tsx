@@ -61,7 +61,7 @@ function ServiceQuestionComponent({
   }
 
   return (
-    <div className="md:mt-10 md:ml-3">
+    <div className="md:mt-10">
       <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
       <SearchQuestionBar
         className="mt-2"

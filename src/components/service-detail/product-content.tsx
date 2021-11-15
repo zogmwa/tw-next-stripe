@@ -27,7 +27,7 @@ function ProductContentComponent({ service, editAllowed = false, onChange = () =
   const images = service?.snapshots ?? []
 
   return (
-    <div className="ml-3">
+    <div>
       <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
       {editAllowed ? (
         <div className="flex">
