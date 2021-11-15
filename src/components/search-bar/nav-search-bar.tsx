@@ -5,41 +5,31 @@ import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { searchSuggestions } from '@taggedweb/queries/search'
-import { Button } from '../button'
 
 type SearchByTagsProps = {
   onSubmit?: (query: string) => void
   className?: string
   style?: React.CSSProperties
   tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
-  forHomepage?: boolean
-  forSoftware?: boolean
 }
 
 const placeholderComponent = (
   <div className="flex items-center justify-center space-x-2">
-    <div className="hidden leading-none md:flex">Type feature tags of interest e.g. email-marketing, landing-pages</div>
+    <AiOutlineSearch />
+    <div className="hidden leading-none md:flex">Type feature tags. e.g. email marketing, landing pages</div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>
 )
 
-const homepagePlaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
-    <div className="leading-none">e.g. Improve my Python application performance</div>
-  </div>
-)
-
-export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
+export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
-  const serachBtnType = forHomepage ? 'homePage' : 'primary'
-  const placeholder = !forSoftware ? homepagePlaceholderComponent : placeholderComponent
-  const searchBtnText = !forSoftware ? 'Find Solutions' : 'Find Software'
   useEffect(() => {
     const defautlTags = JSON.parse(localStorage.getItem('taggedweb-searched-tags')) || []
     setTags(defautlTags)
+    // console.log(tags)
   }, [])
 
   /**
@@ -61,7 +51,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     })
     if (onWebServiceSelect) {
       setTags(value)
-      router.push(`/services/${webserviceSlug}`)
+      router.push(`services/${webserviceSlug}`)
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
@@ -111,11 +101,8 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
         instanceId
         className="flex-1 mb-2 md:mb-0"
         classNamePrefix="select"
-        placeholder={placeholder}
+        placeholder={placeholderComponent}
       />
-      <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
-        {searchBtnText}
-      </Button>
     </form>
   )
 }

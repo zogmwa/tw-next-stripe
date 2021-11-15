@@ -9,6 +9,7 @@ import { useUserContext } from '@taggedweb/hooks/use-user'
 import { useRouter } from 'next/router'
 import { Button } from '../button'
 import Avatar from './avatar'
+import { NavSearchBar } from '../search-bar'
 
 type NavBarProps = {
   className?: string
@@ -18,8 +19,13 @@ type NavBarProps = {
 export function NavBar({ className, style }: NavBarProps) {
   const [mobileTopShow, setMobileTopShow] = useState(false)
   const session = useUserContext()
+  const { pathname } = useRouter()
   const router = useRouter()
   const { isLoggedIn, logout } = session
+
+  // Keeping this false for now as improvements to search bar required.
+  const renderNavSearchBar =
+    pathname !== '/login' && pathname !== '/signup' && pathname !== '/' && pathname.split('/')[1] !== 'search' && false
 
   return (
     <div id="navbar">
@@ -37,23 +43,30 @@ export function NavBar({ className, style }: NavBarProps) {
               </div>
             </a>
           </Link>
-          <div className="flex-1" />
-          <Link href="/submit-service">
-            <a>
-              <Button className="flex mx-4">Submit A Web Service</Button>
-            </a>
-          </Link>
-          {isLoggedIn() ? (
-            <>
-              <Avatar />
-            </>
-          ) : (
-            <Link href={`/login?next=${router.asPath}`}>
+          <div className="flex justify-end flex-1">
+            {renderNavSearchBar ? (
+              <NavSearchBar
+                className="flex-1 ml-2"
+                onSubmit={(selectedTag) => {
+                  router.push(`/search/${selectedTag}`)
+                }}
+              />
+            ) : null}
+            <Link href="/submit-service">
               <a>
-                <Button> Sign Up | Login </Button>
+                <Button className="flex mx-4">Submit A Web Service</Button>
               </a>
             </Link>
-          )}
+            {isLoggedIn() ? (
+              <Avatar />
+            ) : (
+              <Link href={`/login?next=${router.asPath}`}>
+                <a>
+                  <Button> Sign Up | Login </Button>
+                </a>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
       {!mobileTopShow && (
@@ -71,7 +84,7 @@ export function NavBar({ className, style }: NavBarProps) {
                 </Link>
                 <Link href="/">
                   <a>
-                    <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary hidden sm:block">
+                    <div className="hidden text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary sm:block">
                       TaggedWeb
                     </div>
                   </a>
