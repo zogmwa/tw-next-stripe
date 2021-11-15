@@ -19,23 +19,25 @@ export default function Home() {
         <img src="/images/homepage_icon4.png" className="absolute hidden w-12 lg:flex top-48 right-64" />
         <div className="flex items-center justify-center flex-1 md:justify-end">
           <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
-            <h1 className="py-2 text-3xl font-semibold text-green-400">Looking to _________</h1>
-            <h2 className="py-2 text-3xl font-semibold text-white">
-              <u>
-                <Typical
-                  steps={[
-                    'Find the best SaaS for your needs?',
-                    400,
-                    'Integrate a SaaS into your application stack?',
-                    400,
-                    'Improve your web application performance?',
-                    400,
-                  ]}
-                  wrapper="p"
-                  loop={Infinity}
-                />
-              </u>
-            </h2>
+            <div className="2xl:flex 2xl:flex-1">
+              <h1 className="py-2 text-3xl font-semibold text-green-400">Looking to&#160;</h1>
+              <h2 className="py-2 text-3xl font-semibold text-white underline">
+                <>
+                  <Typical
+                    steps={[
+                      'Find the best SaaS for your needs?',
+                      400,
+                      'Integrate a SaaS into your application stack?',
+                      400,
+                      'Improve your web application performance?',
+                      400,
+                    ]}
+                    wrapper="p"
+                    loop={Infinity}
+                  />
+                </>
+              </h2>
+            </div>
             <div className="py-2 mb-4 text-3xl font-semibold text-white">
               {' '}
               We may have a solution. Search what you need!{' '}

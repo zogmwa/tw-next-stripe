@@ -60,5 +60,14 @@ module.exports = {
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    function ({ addUtilities }) {
+      const extendUnderline = {
+        '.underline': {
+          textDecoration: 'underline',
+          'text-decoration-color': colors.emerald['400'],
+        },
+      }
+      addUtilities(extendUnderline)
+    },
   ],
 }
