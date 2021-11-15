@@ -31,11 +31,11 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
         </a>
       </Link>
       <span className="mt-4 text-sm text-center text-text-tertiary">
-        {relatedProduct?.description.length < MAX_RELATEDCARDCONTENT_LENGTH
+        {relatedProduct?.description?.length < MAX_RELATEDCARDCONTENT_LENGTH
           ? relatedProduct?.description
-          : `${relatedProduct?.description.substring(0, MAX_RELATEDCARDCONTENT_LENGTH)}...`}
+          : `${relatedProduct?.description?.substring(0, MAX_RELATEDCARDCONTENT_LENGTH)}...`}
       </span>
-      <div className="flex items-center space-x-1.5 mt-4">
+      <div className="flex items-center mt-auto space-x-1.5">
         <Checkbox
           size="md"
           id={relatedProduct.id}
