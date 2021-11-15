@@ -24,6 +24,16 @@ const introductionData = {
     'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible. ZOOM Cloud Meetings is an intelligently engineered video conference software that can help you arrange video meetings, conferences, and video webinars from a remote location. It can build collaboration-enabled conference rooms.',
   scope_of_work_description:
     'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible.',
+  sidebar_info: {
+    price: 120,
+    features: [
+      { name: '10 Ready Capacity' },
+      { name: '14 Eta Days' },
+      { name: 'Free Trial' },
+      { name: 'Benefit 4' },
+      { name: 'Benefit 5' },
+    ],
+  }
 }
 
 export function DefaultSolutionDetailIntroduction() {
