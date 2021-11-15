@@ -33,7 +33,7 @@ const introductionData = {
       { name: 'Benefit 4' },
       { name: 'Benefit 5' },
     ],
-  }
+  },
 }
 
 export function DefaultSolutionDetailIntroduction() {
