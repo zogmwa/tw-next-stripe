@@ -39,7 +39,9 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name: solutionDetail.primary_tag?.name || solutionDetail.tags[0]?.name,
+      name:
+        solutionDetail.primary_tag?.name ||
+        (solutionDetail?.tags && solutionDetail?.tags?.length > 0 ? solutionDetail?.tags[0]?.name : ''),
       url: '#',
       is_selected: true,
     },
