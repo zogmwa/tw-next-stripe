@@ -1,9 +1,9 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-export async function fetchSolutionDetail(solutionId) {
+export async function fetchSolutionDetail(solutionSlug) {
   try {
-    const { data } = await axios.get(`/api/solutions/detail/${solutionId}`)
+    const { data } = await axios.get(`/api/solutions/detail/${solutionSlug}`)
     return data
   } catch (error) {
     // eslint-disable-next-line
