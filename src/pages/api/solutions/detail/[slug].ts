@@ -4,7 +4,7 @@ import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
 
 export default withSessionApi(async (req, res) => {
   if (req.method === 'GET') {
-    const id = req.query.id
+    const slug = req.query.slug
     const access = await getAccessToken(req.session)
     const config = access
       ? {
@@ -14,7 +14,7 @@ export default withSessionApi(async (req, res) => {
         }
       : null
 
-    const { data } = await clientWithRetries.get(`/solutions/${id}/`, config)
+    const { data } = await clientWithRetries.get(`/solutions/${slug}/`, config)
     return res.json(data)
   }
 })

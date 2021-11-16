@@ -7,17 +7,17 @@ import { getAccessToken } from '../utils/token'
  * @param id The id for solution
  * @returns profileData
  */
-export async function fetchSolutionDetail(session, id) {
+export async function fetchSolutionDetail(session, slug) {
   const access = await getAccessToken(session)
   if (access) {
-    const { data } = await client.get(`/solutions/${id}/`, {
+    const { data } = await client.get(`/solutions/${slug}/`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
     })
     return data
   } else {
-    const { data } = await client.get(`/solutions/${id}/`)
+    const { data } = await client.get(`/solutions/${slug}/`)
     return data
   }
 }
