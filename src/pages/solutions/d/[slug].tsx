@@ -8,17 +8,15 @@ import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-det
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
-    params: { id },
+    params: { slug },
   } = context
-
   let solutionDetail
   try {
-    solutionDetail = await fetchSolutionDetail(context.req.session, id)
+    solutionDetail = await fetchSolutionDetail(context.req.session, slug)
   } catch (error) {
     // eslint-disable-next-line
     // TODO: Redirect to solution search page.
   }
-
   return {
     props: { solutionDetail },
   }
