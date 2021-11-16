@@ -10,7 +10,6 @@ import {
   toggleAddAttribute,
   linkAttributeToAsset,
 } from '@taggedweb/queries/service'
-import { useUserContext } from '@taggedweb/hooks/use-user'
 import { HighlightContent } from '../service-highlights'
 
 type ServiceDetailFeatureProps = {
@@ -29,8 +28,6 @@ function HighlightContentComponent({ service, editAllowed = false, onChange = ()
   const [addAttributeName, setAddAttributeName] = useState(null)
   const [addAttributeCon, setAddAttributeCon] = useState(false)
   const [addAttributeNameErrorMessage, setAddAttributeNameErrorMessage] = useState('')
-  const user = useUserContext()
-  const { authVerified } = user
   const customerOrganizations = service?.customer_organizations ?? []
 
   useEffect(() => {
@@ -50,10 +47,6 @@ function HighlightContentComponent({ service, editAllowed = false, onChange = ()
   }, [service.id])
 
   const upvoteAttribute = async (attribute) => {
-    if (!authVerified) {
-      toast.error('Please login to upvote.')
-      return
-    }
     setClickedAttribute(attribute.id)
     setIsLoading(true)
     let data = null

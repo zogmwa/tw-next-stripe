@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { SolutionDetailSidebar } from '.'
+import { SolutionDetailSidebar, SolutionDetailMobileSidebar } from '.'
 
 export default {
   title: 'General/Sidebar',
@@ -19,5 +19,12 @@ const solutionSidebarInfo = {
 }
 
 export function DefaultSolutionDetailSidebar() {
-  return <SolutionDetailSidebar detailInfo={solutionSidebarInfo} className="max-w-[14rem]" />
+  return (
+    <>
+      <h4 className="py-2 font-bold text-md text-text-primary">Desktop UI</h4>
+      <SolutionDetailSidebar detailInfo={solutionSidebarInfo} className="max-w-[14rem]" />
+      <h4 className="py-2 font-bold text-md text-text-primary">Mobile UI</h4>
+      <SolutionDetailMobileSidebar detailInfo={solutionSidebarInfo} className="max-w-[18rem]" />
+    </>
+  )
 }

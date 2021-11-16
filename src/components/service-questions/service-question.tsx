@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
-import toast from 'react-hot-toast'
-import { useUserContext } from '@taggedweb/hooks/use-user'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { Button } from '../button'
 import { SearchQuestionBar } from '../service-detail/search-question-bar'
 import { ServiceQuestionCard } from '../service-question-card'
@@ -41,17 +40,8 @@ function ServiceQuestionComponent({
   const [isAnswered, setIsAnswered] = useState(isShowAnswered)
   const [viewMore, setViewMore] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const user = useUserContext()
-  const { authVerified } = user
+  const { requireLoginBeforeAction } = useRequireLogin()
   const votedQuestionList = votedQuestions ?? []
-
-  function authCheck() {
-    if (!authVerified) {
-      toast.error('Please login to Add a Highlight.')
-    } else {
-      setIsOpen(!isOpen)
-    }
-  }
 
   const defaultShowCount = 2
   let tempQuestions = serviceQuestions
@@ -71,7 +61,7 @@ function ServiceQuestionComponent({
   }
 
   return (
-    <div className="md:mt-10 md:ml-3">
+    <div className="md:mt-10">
       <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
       <SearchQuestionBar
         className="mt-2"
@@ -152,7 +142,7 @@ function ServiceQuestionComponent({
       <div className="w-full px-2 py-4 mt-4 text-center rounded-md bg-background-default md:flex md:justify-center">
         <div className="text-sm text-primary">Don&apos;t you see the answer you&apos;re looking for</div>
         <Button
-          onClick={authCheck}
+          onClick={requireLoginBeforeAction(() => setIsOpen(!isOpen))}
           className="inline-flex mt-2 bg-primary md:mt-0 md:ml-8"
           textClassName="text-white"
           size="small"

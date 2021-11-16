@@ -14,7 +14,7 @@ function CompareServiceCardComponent({ services }: CompareServiceCardProps) {
       <div className="flex flex-col items-start justify-between mt-2 md:flex-row md:items-center">
         <div className="compare-services-names">
           {services.map((service, index) => (
-            <h2 key={index} className="inline-block">
+            <h2 key={index} className="inline-block font-extrabold">
               {service.name}
               {serivceCount - 1 !== index && <span className="px-4 text-sm text-text-secondary">Vs</span>}
             </h2>

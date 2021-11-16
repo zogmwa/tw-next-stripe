@@ -40,7 +40,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
   const renderFooter = pathname !== '/login' && pathname !== '/signup'
-  const renderMainFooter = pathname.split('/')[1] === 'solutions'
+  const renderMainFooter = true
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
@@ -85,7 +85,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
             <div suppressHydrationWarning={true}>
-              {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-10" /> : null}
+              {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
               <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
                 {redirectTo ? (
                   <RedirectSpinner />

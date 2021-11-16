@@ -40,12 +40,14 @@ module.exports = {
           dark: gray['200'],
           surface: colors.white,
         },
-
         // For golden color in Solutions theme
         backgroundSolution: {
           default: colors.coolGray['100'],
           light: colors.coolGray['50'],
           dark: colors.coolGray['200'],
+        },
+        skew: {
+          24: '24deg',
         },
       },
     },
@@ -58,5 +60,14 @@ module.exports = {
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    function ({ addUtilities }) {
+      const extendUnderline = {
+        '.underline': {
+          textDecoration: 'underline',
+          'text-decoration-color': colors.emerald['400'],
+        },
+      }
+      addUtilities(extendUnderline)
+    },
   ],
 }
