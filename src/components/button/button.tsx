@@ -44,7 +44,7 @@ function ButtonComponent(
               return 'px-3 py-1 rounded space-x-2 text-xs'
             }
             default: {
-              return 'px-4 py-2 rounded-md space-x-4 text-sm'
+              return 'px-2 py-2 rounded-md space-x-3 text-sm'
             }
           }
         })(),

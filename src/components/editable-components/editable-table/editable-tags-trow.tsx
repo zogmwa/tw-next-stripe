@@ -40,7 +40,6 @@ function EditableTagsTableTrowComponent({
 
   useEffect(() => {
     if (editData !== rowData) {
-      console.log('here')
       setCurrentEditData(editData)
       setCurrentEditIndex(rowIndex)
     }

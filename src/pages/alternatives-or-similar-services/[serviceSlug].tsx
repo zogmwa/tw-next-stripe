@@ -88,7 +88,6 @@ export default function ServiceList({
     } else {
       setCheckedList(preCheckedList)
     }
-    // console.log('test')
   }, [])
   const notInitialRender = useRef(false)
   useEffect(() => {

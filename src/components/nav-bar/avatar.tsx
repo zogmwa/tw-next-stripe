@@ -31,11 +31,9 @@ export default function Avatar() {
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
-                <Link href="/profile">
-                  <a>
-                    <button className={menuIconClassNames(active)}>Profile</button>
-                  </a>
-                </Link>
+                <a href="/profile">
+                  <button className={menuIconClassNames(active)}>Profile</button>
+                </a>
               )}
             </Menu.Item>
             <Menu.Item>

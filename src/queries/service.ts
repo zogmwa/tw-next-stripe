@@ -105,7 +105,6 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
 
 export async function toggleDownVoteAttribute(attributeId: number): Promise<number | null> {
   try {
-    // console.log('toggleDownVote ran')
     const { status } = await axios.delete(`/api/asset_attribute_votes/${attributeId}/`)
     return status
   } catch (error) {

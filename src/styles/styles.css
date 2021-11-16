@@ -87,3 +87,8 @@
   bottom: 17rem;
   height: 23rem;
 }
+
+a:focus,
+button:focus {
+  box-shadow: none !important;
+}

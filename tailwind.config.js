@@ -9,6 +9,13 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      screens: {
+        'md-lg': '860px',
+        // @media (min-width: 860px)
+      },
+      spacing: {
+        156: '40rem',
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },

@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { MdOutlineClose } from 'react-icons/md'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { useRouter } from 'next/router'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { MdOutlineClose } from 'react-icons/md'
 import { Button } from '../button'
 import Avatar from './avatar'
 import { NavSearchBar } from '../search-bar'
+import { NavbarMenu, NavbarMenuResponsive } from '../navbar-menu/navbar-menu'
 
 type NavBarProps = {
   className?: string
@@ -30,52 +31,53 @@ export function NavBar({ className, style }: NavBarProps) {
   return (
     <div id="navbar">
       <div className={clsx('hidden md:block w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
-        <div className="flex items-center h-full max-w-screen-lg pr-2 mx-auto">
-          <Link href="/">
-            <a>
-              <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
-            </a>
-          </Link>
-          <Link href="/">
-            <a>
-              <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
-                TaggedWeb
-              </div>
-            </a>
-          </Link>
-          <div className="flex justify-end flex-1">
-            {renderNavSearchBar ? (
-              <NavSearchBar
-                className="flex-1 ml-2"
-                onSubmit={(selectedTag) => {
-                  router.push(`/search/${selectedTag}`)
-                }}
-              />
-            ) : null}
-            <Link href="/submit-service">
+        <div className="flex items-center justify-between h-full max-w-screen-lg mx-auto jus">
+          <div className="flex items-center">
+            <Link href="/">
               <a>
-                <Button className="flex mx-4">Submit A Web Service</Button>
+                <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
               </a>
             </Link>
+            <Link href="/">
+              <a>
+                <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                  TaggedWeb
+                </div>
+              </a>
+            </Link>
+          </div>
+          {renderNavSearchBar ? (
+            <NavSearchBar
+              className="flex-1 ml-2"
+              onSubmit={(selectedTag) => {
+                router.push(`/search/${selectedTag}`)
+              }}
+            />
+          ) : null}
+          <NavbarMenu />
+          <div className="flex flex-row items-center justify-around ">
             {isLoggedIn() ? (
-              <Avatar />
+              <>
+                <Avatar />
+              </>
             ) : (
               <Link href={`/login?next=${router.asPath}`}>
                 <a>
-                  <Button> Sign Up | Login </Button>
+                  <Button buttonType="primary"> Sign Up | Login </Button>
                 </a>
               </Link>
             )}
           </div>
         </div>
       </div>
+
       {!mobileTopShow && (
         <div
-          className={clsx('flex md:hidden w-full h-14 bg-background-surface border-b px-4', className)}
+          className={clsx('flex md-lg:hidden w-full h-14 bg-background-surface border-b px-2', className)}
           style={style}
         >
-          <div className="flex flex-col items-start w-full h-full py-2 pr-2">
-            <div className="flex items-center justify-between w-full p-1">
+          <div className="flex flex-col items-start w-full h-full py-2 ">
+            <div className="flex items-center justify-between w-full ">
               <div className="flex items-center">
                 <Link href="/">
                   <a>
@@ -90,7 +92,7 @@ export function NavBar({ className, style }: NavBarProps) {
                   </a>
                 </Link>
               </div>
-              <div className="flex items-center justify-between p-1">
+              <div className="flex items-center justify-between">
                 {isLoggedIn() ? (
                   <>
                     <Avatar />
@@ -98,7 +100,7 @@ export function NavBar({ className, style }: NavBarProps) {
                 ) : (
                   <Link href={`/login?next=${router.asPath}`}>
                     <a>
-                      <Button> Sign Up | Login </Button>
+                      <Button buttonType="primary"> Sign Up | Login </Button>
                     </a>
                   </Link>
                 )}
@@ -115,43 +117,49 @@ export function NavBar({ className, style }: NavBarProps) {
         open={mobileTopShow}
         onClose={() => setMobileTopShow(false)}
       >
-        <div className="w-full p-2 divide-y divide divide-border-default">
+        <div className="w-full divide-y divide divide-border-default">
           <div className="flex justify-end w-full p-1">
             <IconButton className="p-1 text-3xl tex-primary" onClick={() => setMobileTopShow(false)}>
               <MdOutlineClose />
             </IconButton>
           </div>
-          <div className="flex flex-col items-center justify-between w-full p-1">
-            <a className="flex justify-center w-full" href="/submit-service">
-              <span className="px-2 py-2 text-md">Submit A Web Service</span>
-            </a>
+          <NavbarMenuResponsive />
+          <div className="flex flex-col justify-center w-full px-4 py-2 text-center">
+            <Link href="/submit-service">
+              <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Web Service</a>
+            </Link>
+            <Link href="/submit-solution">
+              <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Solution</a>
+            </Link>
             {isLoggedIn() ? (
               <>
-                <a
-                  className="flex justify-center w-full"
-                  href="#"
-                  onClick={() => {
-                    router.push('/profile')
-                    setMobileTopShow(false)
-                  }}
-                >
-                  <span className="px-2 py-2 text-md"> Profile </span>
-                </a>
-                <a
-                  className="flex justify-center w-full"
-                  href="#"
-                  onClick={() => {
-                    logout()
-                    setMobileTopShow(false)
-                  }}
-                >
-                  <span className="px-2 py-2 text-md"> Logout </span>
-                </a>
+                <Link href="#">
+                  <a
+                    className="py-2 hover:bg-gray-100"
+                    onClick={() => {
+                      router.push('/profile')
+                      setMobileTopShow(false)
+                    }}
+                  >
+                    Profile
+                  </a>
+                </Link>
+                <Link href="#">
+                  <a
+                    className="py-2 hover:bg-gray-100"
+                    onClick={() => {
+                      logout()
+                      setMobileTopShow(false)
+                    }}
+                  >
+                    Logout
+                  </a>
+                </Link>
               </>
             ) : (
-              <a className="flex justify-center w-full" href={`/login?next=${router.asPath}`}>
-                <span className="px-2 py-2 text-md"> Sign Up | Login </span>
-              </a>
+              <Link href={`/login?next=${router.asPath}`}>
+                <a className="w-full py-2 text-center text-white bg-primary">Sign Up | Login</a>
+              </Link>
             )}
           </div>
         </div>
