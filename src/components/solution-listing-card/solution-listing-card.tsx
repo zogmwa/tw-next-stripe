@@ -50,14 +50,24 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             })}
           </div>
           <h2 className="mt-2 text-xl">{listingData.title}</h2>
+          <div className="flex items-center pt-4 space-x-4 md:hidden">
+            <div className="flex items-center space-x-1 text-xs">
+              <AiFillStar className="self-center text-primary" />
+              <span>{rating}</span>
+            </div>
+            <div className="flex items-center space-x-1 text-xs">
+              <IoIosArrowUp className="text-primary" />
+              <span className="text-xs ">{kFormater(listingData.upvoted_count)}</span>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center self-start mt-4 space-x-0 text-xs">
+        <div className="items-center self-start hidden mt-4 space-x-0 text-xs md:inline-flex">
           <BiDollar className="text-xl font-bold text-text-primary" />
           <h4 className="text-xl font-bold text-text-primary">{listingData.price}</h4>
         </div>
       </div>
-      <div className="flex items-center justify-between pt-4">
-        <div className="flex items-center">
+      <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
+        <div className="flex items-center pt-4 md:pt-0">
           {listingData.provide_organization.logo_url ? (
             <img
               className="w-[40px] h-[40px] rounded-full"
@@ -69,14 +79,18 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           )}
           <span className="pl-2 text-sm text-text-secondary">{listingData.provide_organization.name}</span>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-1 text-xs">
+        <div className="flex items-center justify-between">
+          <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
             <AiFillStar className="self-center text-primary" />
             <span>{rating}</span>
           </div>
-          <div className="flex items-center space-x-1 text-xs">
+          <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
             <IoIosArrowUp className="text-primary" />
-            <span className="text-xs ">{kFormater(listingData.upvoted_count)}</span>
+            <span className="text-xs">{kFormater(listingData.upvoted_count)}</span>
+          </div>
+          <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
+            <BiDollar className="text-xl font-bold text-text-primary" />
+            <h4 className="text-xl font-bold text-text-primary">{listingData.price}</h4>
           </div>
           <div className="flex self-start space-x-2">
             <div className="p-1 border border-solid rounded-md border-border-default">
