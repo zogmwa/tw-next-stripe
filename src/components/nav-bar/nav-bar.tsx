@@ -100,7 +100,9 @@ export function NavBar({ className, style }: NavBarProps) {
                 ) : (
                   <Link href={`/login?next=${router.asPath}`}>
                     <a>
-                      <Button buttonType="primary"> Sign Up | Login </Button>
+                      <Button className="mr-2" buttonType="primary">
+                        Sign Up | Login
+                      </Button>
                     </a>
                   </Link>
                 )}
