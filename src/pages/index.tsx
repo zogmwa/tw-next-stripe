@@ -21,7 +21,7 @@ export default function Home() {
           <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
             <div className="xl:flex">
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Looking to&#160;</h1>
-              <h2 className="flex-shrink-0 py-2 text-4xl font-semibold text-green-400">
+              <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
                 <>
                   <Typical
                     steps={[
@@ -36,7 +36,7 @@ export default function Home() {
                     loop={Infinity}
                   />
                 </>
-              </h2>
+              </h1>
             </div>
             <div className="py-2 mb-4 text-3xl font-semibold text-white">
               {' '}
