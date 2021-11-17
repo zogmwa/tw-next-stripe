@@ -1,119 +1,94 @@
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import {
-  toggleAddQuestion,
-  toggleAnswerQuestion,
-  fetchQuestions,
-  fetchVotedQuestions,
-  toggleUpVoteQuestion,
-  toggleDownVoteQuestion,
-} from '@taggedweb/queries/service'
-import { ServiceQuestion } from '../service-questions'
+import { AiOutlineSearch } from 'react-icons/ai'
+import axios from 'axios'
+import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { TruncatedDescription } from '../truncated-description'
 
-function QaContentComponent({ solution }) {
-  if (typeof solution === 'undefined') return null
-
-  const [isAnswered, setIsAnswered] = useState(true)
-  const [addQuestionName, setAddQuestionName] = useState('')
-  const [addQuestionNameErrorMessage, setAddQuestionNameErrorMessage] = useState('')
-  const [serviceQuestions, setServiceQuestions] = useState(solution.questions)
-  const [votedQuestions, setVotedQuestions] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [clickedQuestionId, setClickedQuestionId] = useState(0)
+function SolutionFAQComponent({ questions, solutionSlug }) {
+  const defaultShowCount = 2
+  const [searchQuestion, setSearchQuestion] = useState('')
+  const [isPressEnter, setIsPressEnter] = useState(false)
+  const [allQuestion, setAllQuestion] = useState(questions)
+  const [showQuestions, setShowQuestions] = useState(questions.slice(0, defaultShowCount))
+  const [isShowAll, setIsShowAll] = useState(false)
 
   useEffect(() => {
-    async function getVotedQuestions() {
-      const votedQuestionList = await fetchVotedQuestions(solution?.slug)
-      setVotedQuestions(votedQuestionList)
-    }
+    async function updateQuestion() {
+      if (searchQuestion === '' || searchQuestion.trim().length >= 3) {
+        try {
+          const { data } = await axios.get(
+            `/api/autocomplete/solution-questions/${solutionSlug}/?search_query=${searchQuestion}`,
+          )
+          const searchedQuestions = data.results
 
-    getVotedQuestions()
-  }, [])
-
-  const addQuestionAction = async () => {
-    if (addQuestionName === '') {
-      setAddQuestionNameErrorMessage('This field is not valid')
-    } else {
-      const addedQuestion = await toggleAddQuestion(solution?.id, addQuestionName)
-      if (addedQuestion) {
-        const questions = serviceQuestions
-        questions.push(addedQuestion)
-        setServiceQuestions(questions)
-        toast.success('Added a question successfully.')
-        setAddQuestionNameErrorMessage('')
-        setAddQuestionName('')
-        setIsAnswered(false)
-      }
-    }
-  }
-
-  const answerQuestionAction = async (answerQuestion, questionId) => {
-    setIsLoading(true)
-    setClickedQuestionId(questionId)
-    const confirmQuestion = answerQuestion.replace(/\s/g, '').replace(/\n/g, '')
-    if (confirmQuestion !== '' && confirmQuestion !== '<p></p>') {
-      const data = await toggleAnswerQuestion(questionId, answerQuestion)
-      if (data) {
-        const questions = await fetchQuestions(solution.slug)
-        setServiceQuestions(questions)
-        toast.success('Answered successfully.')
-        setIsAnswered(true)
-      }
-    } else {
-      toast.error('Please enter your answer.')
-    }
-    setIsLoading(false)
-    setClickedQuestionId(0)
-  }
-
-  const upvoteQuestion = async (id, isAddVote) => {
-    setIsLoading(true)
-    let data = null
-    if (isAddVote) {
-      data = await toggleUpVoteQuestion(id)
-    } else {
-      data = await toggleDownVoteQuestion(id)
-    }
-
-    if (data) {
-      const questions = await fetchQuestions(solution.slug)
-      setServiceQuestions(questions)
-      const votedQuestionList = []
-      // eslint-disable-next-line array-callback-return
-      questions.map((question) => {
-        if (question.my_asset_question_vote) {
-          votedQuestionList.push({
-            id: question.my_asset_question_vote,
-            question: question.id,
-          })
+          setAllQuestion(searchedQuestions)
+          setShowQuestions(searchedQuestions.slice(0, defaultShowCount))
+          toast.success('Loaded Questions List')
+        } catch (error) {
+          // eslint-disable-next-line
+          console.log(error)
         }
-      })
-      setVotedQuestions(votedQuestionList)
-    } else {
-      toast.error('Please try again later.')
+      } else {
+        toast.error('Type at least 3 letters.')
+      }
+      setIsPressEnter(false)
     }
-    setIsLoading(false)
-    setClickedQuestionId(0)
-  }
+
+    if (isPressEnter) {
+      updateQuestion()
+    }
+  }, [isPressEnter])
+
+  useEffect(() => {
+    if (isShowAll) setShowQuestions(allQuestion)
+    else setShowQuestions(allQuestion.slice(0, 2))
+  }, [isShowAll])
 
   return (
-    <>
-      <ServiceQuestion
-        isShowAnswered={isAnswered}
-        serviceQuestions={serviceQuestions}
-        addQuestionName={addQuestionName}
-        setAddQuestionName={setAddQuestionName}
-        addQuestionNameErrorMessage={addQuestionNameErrorMessage}
-        addQuestionAction={addQuestionAction}
-        answerQuestionAction={answerQuestionAction}
-        votedQuestions={votedQuestions}
-        upvoteQuestion={upvoteQuestion}
-        isLoading={isLoading}
-        setClickedQuestionId={setClickedQuestionId}
-        clickedQuestionId={clickedQuestionId}
-      />
-    </>
+    <div className="flex flex-col">
+      <h4 className="font-bold text-md">FAQ</h4>
+      <div className="flex items-center w-full px-2 py-1 mt-4 border border-solid rounded-md md:px-4 border-border-default">
+        <AiOutlineSearch className="mr-1 md:mr-2 text-md text-text-tertiary" />
+        <input
+          type="text"
+          className="w-full focus:ring-0"
+          placeholder="Have a question? Search for answer."
+          value={searchQuestion}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setIsPressEnter(true)
+            }
+          }}
+          onChange={(e) => setSearchQuestion(e.target.value)}
+        />
+      </div>
+      {showQuestions.map((question, index) => (
+        <div className="flex flex-col" key={index}>
+          <h4 className="mt-4 font-bold text-md text-text-primary">{question.title}</h4>
+          <TruncatedDescription description={question.primary_answer} className="mt-3 space-x-0" maxLength={220} />
+        </div>
+      ))}
+      {allQuestion.length > 2 &&
+        (isShowAll ? (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setIsShowAll(false)}
+          >
+            Load Less Answered Questions
+            <HiChevronUp className="self-center ml-2 text-text-tertiary" />
+          </div>
+        ) : (
+          <div
+            className="flex self-start w-full px-0 mt-2 text-sm border-0 cursor-pointer text-text-tertiary"
+            onClick={() => setIsShowAll(true)}
+          >
+            Load More Answered Questions
+            <HiChevronDown className="self-center ml-2 text-text-tertiary" />
+          </div>
+        ))}
+    </div>
   )
 }
 
-export const QaContent = QaContentComponent
+export const SolutionFAQ = SolutionFAQComponent
