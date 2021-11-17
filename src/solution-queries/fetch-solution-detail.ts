@@ -4,8 +4,8 @@ import { getAccessToken } from '../utils/token'
 /**
  * Utility to fetch Solution detail on Server Side. Can be used in Api route handler or getServerSideProps for solution detail page.
  * @param session The session from req.session
- * @param id The id for solution
- * @returns profileData
+ * @param slug The slug for solution
+ * @returns Solution detail data.
  */
 export async function fetchSolutionDetail(session, slug) {
   const access = await getAccessToken(session)
