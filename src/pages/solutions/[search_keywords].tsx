@@ -30,5 +30,5 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function SolutionList({ solutionList }) {
   console.log(solutionList)
-  return <div></div>
+  return <div />
 }
