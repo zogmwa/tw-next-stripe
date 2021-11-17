@@ -26,7 +26,7 @@ export function NavItem({ dropdownData, navItem }: MenuItemProps) {
         <Menu.Items className="absolute left-0 py-2 mt-2 origin-top-right bg-white rounded-md shadow-lg w-156">
           <div className="grid grid-cols-3 gap-4 py-1">
             {dropdownData.map((item) => {
-              if (item.name != '/') {
+              if (item.name !== '/') {
                 return (
                   <Menu.Item key={item.name}>
                     {({ active }) => (

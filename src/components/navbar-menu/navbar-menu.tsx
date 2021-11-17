@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { NavItem } from './menu-item'
 import { NavAccordion } from './navbar-accordion'
 import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
-import Link from 'next/link'
 
 const SolutionDropdown = [{ name: 'Search Solution', slug: '/' }, ...TopSolutionTags]
 const SaaSDropdown = [{ name: 'Search Software', slug: '/' }, ...TopSaasTags]
