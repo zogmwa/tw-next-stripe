@@ -65,7 +65,7 @@ export default function SolutionDetail({ solutionDetail }) {
       slug: solutionDetail.type === 'I' ? 'integrations' : solutionDetail.type === 'U' ? 'ssage-support' : 'other',
     },
     title: solutionDetail.title,
-    upvoted_count: 324,
+    upvoted_count: solutionDetail.upvotes_count,
     users_count: 1100,
     provide_organization: {
       name: solutionDetail.organization.name,
