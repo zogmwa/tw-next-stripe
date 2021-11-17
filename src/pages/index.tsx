@@ -13,15 +13,15 @@ export default function Home() {
           src="/images/homepage_shapes.png"
           className="absolute z-0 hidden max-w-5xl mx-auto md:top-0 lg:top-12 lg:left-44 lg:flex"
         />
-        <img src="/images/homepage_icon1.png" className="absolute hidden w-24 lg:flex top-72 right-64" />
-        <img src="/images/homepage_icon2.png" className="absolute hidden w-20 lg:flex top-56 right-28" />
-        <img src="/images/homepage_icon3.png" className="absolute hidden w-16 lg:flex top-28 right-44" />
-        <img src="/images/homepage_icon4.png" className="absolute hidden w-12 lg:flex top-48 right-64" />
-        <div className="flex items-center justify-center flex-1 md:justify-end">
+        <img src="/images/homepage_icon1.png" className="absolute z-10 hidden w-24 lg:flex top-72 right-64" />
+        <img src="/images/homepage_icon2.png" className="absolute z-10 hidden w-20 lg:flex top-56 right-28" />
+        <img src="/images/homepage_icon3.png" className="absolute z-10 hidden w-16 lg:flex top-28 right-44" />
+        <img src="/images/homepage_icon4.png" className="absolute z-10 hidden w-12 lg:flex top-48 right-64" />
+        <div className="z-20 flex items-center justify-center flex-1 md:justify-end">
           <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
-            <div className="2xl:flex 2xl:flex-1">
-              <h1 className="py-2 text-3xl font-semibold text-green-400">Looking to&#160;</h1>
-              <h2 className="py-2 text-3xl font-semibold text-white underline">
+            <div className="xl:flex">
+              <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Looking to&#160;</h1>
+              <h2 className="flex-shrink-0 py-2 text-4xl font-semibold text-green-400">
                 <>
                   <Typical
                     steps={[
@@ -47,7 +47,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="justify-end hidden w-1/3 lg:flex">
+        <div className="z-0 justify-end hidden w-1/3 lg:flex">
           <img src="/images/homepage_circle.png" className="w-full" />
         </div>
       </div>
