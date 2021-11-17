@@ -59,6 +59,7 @@ export default function SolutionDetail({ solutionDetail }) {
   }
 
   const introductionData = {
+    slug: solutionDetail.slug,
     tag: {
       name: solutionDetail.type === 'I' ? 'Integrations' : solutionDetail.type === 'U' ? 'Usage Support' : 'Other',
       slug: solutionDetail.type === 'I' ? 'integrations' : solutionDetail.type === 'U' ? 'ssage-support' : 'other',
@@ -74,6 +75,7 @@ export default function SolutionDetail({ solutionDetail }) {
     overview_description: solutionDetail.description ?? '',
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
     sidebar_info: solutionSidebarInfo,
+    questions: solutionDetail.questions,
   }
   const relatedProducts = solutionDetail.assets ?? []
 

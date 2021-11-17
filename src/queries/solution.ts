@@ -7,7 +7,7 @@ export async function fetchSolutionDetail(solutionSlug) {
     return data
   } catch (error) {
     // eslint-disable-next-line
-    toast.error('Could not get solution detail data.')
+    toast.error('Please Try Again. Could not load the data')
     return null
   }
 }
