@@ -8,10 +8,12 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
+import { SolutionFAQ } from './index'
 import { Button } from '../button'
 
 type SolutionDetailIntroductionProps = {
   introductionData: {
+    slug: string
     tag: { name: string; slug: string }
     title: string
     upvoted_count: number
@@ -20,6 +22,7 @@ type SolutionDetailIntroductionProps = {
     overview_description: string
     scope_of_work_description: string
     sidebar_info: { price: number; features: { name: string }[] }
+    questions: { title: string; primary_answer: string }[]
   }
 }
 
@@ -164,6 +167,9 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Scope of Work</h4>
           <div className="mt-3 text-sm text-text-secondary">{introductionData.scope_of_work_description}</div>
+        </div>
+        <div className="py-4">
+          <SolutionFAQ questions={introductionData.questions} solutionSlug={introductionData.slug} />
         </div>
       </div>
     </div>

@@ -1,2 +1,2 @@
 export { SolutionDetailIntroduction } from './solution-detail-introduction'
-export { QaContent } from './solution-qa-content'
+export { SolutionFAQ } from './solution-qa-content'

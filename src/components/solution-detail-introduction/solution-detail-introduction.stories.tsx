@@ -8,6 +8,7 @@ export default {
 } as Meta
 
 const introductionData = {
+  slug: 'test',
   tag: {
     name: 'Integrations',
     slug: 'integrations',
@@ -34,6 +35,35 @@ const introductionData = {
       { name: 'Benefit 5' },
     ],
   },
+  questions: [
+    {
+      id: 1,
+      solution: 1,
+      title: '123123123',
+      primary_answer:
+        'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.',
+      created: '2021-11-15T21:38:36.066629Z',
+      updated: '2021-11-16T23:41:57.250264Z',
+    },
+    {
+      id: 2,
+      solution: 1,
+      title: '1231231231',
+      primary_answer:
+        'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
+      created: '2021-11-17T00:00:51.914002Z',
+      updated: '2021-11-17T00:00:51.914002Z',
+    },
+    {
+      id: 3,
+      solution: 1,
+      title: '222222222222',
+      primary_answer:
+        'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
+      created: '2021-11-17T00:00:52.023369Z',
+      updated: '2021-11-17T00:00:52.023369Z',
+    },
+  ],
 }
 
 export function DefaultSolutionDetailIntroduction() {
