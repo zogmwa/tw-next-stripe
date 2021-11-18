@@ -20,10 +20,23 @@ const listingData = {
     },
   ],
   title: 'Improving application performance with APM, metrics and monitoring',
-  upvoted_count: 324,
-  price: 1200,
+  upvotes_count: 324,
+  prices: [
+    {
+      stripe_price_id: 2,
+      price: 11,
+      currency: 'USD',
+      is_primary: false,
+    },
+    {
+      stripe_price_id: 2,
+      price: 120,
+      currency: 'USD',
+      is_primary: false,
+    },
+  ],
   avg_rating: '4.700',
-  provide_organization: {
+  organization: {
     name: 'Solution Provider Organization',
     logo_url: null,
   },

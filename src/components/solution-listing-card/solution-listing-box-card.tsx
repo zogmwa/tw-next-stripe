@@ -12,10 +12,10 @@ type SolutionListingCardProps = {
   listingData: {
     tags: { name: string; slug: string }[]
     title: string
-    price: number
-    upvoted_count: number
+    prices: { stripe_price_id: number | string; price: number | string; is_primary: boolean }[]
+    upvotes_count: number
     avg_rating?: string | number
-    provide_organization?: { name: string; logo_url: string | null }
+    organization?: { name: string; logo_url: string | null }
   }
   className?: string
 }
@@ -32,6 +32,9 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
     }
     return sign * number + unitlist[unit]
   }
+
+  let primaryPrice = listingData.prices.filter((price) => price.is_primary === true)[0]
+  if (!primaryPrice) primaryPrice = listingData.prices[0]
 
   return (
     <div className={clsx('flex flex-col p-4 mt-2 mr-2 border border-solid rounded border-border-default', className)}>
@@ -55,7 +58,7 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
           </div>
           <div className="flex items-center py-2">
             <BiDollar className="text-xl font-bold text-text-primary" />
-            <h4 className="text-xl font-bold text-text-primary">{listingData.price}</h4>
+            <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
           </div>
         </div>
         <div className="flex flex-col">
@@ -84,7 +87,7 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
         </div>
         <div className="flex items-center space-x-1 text-xs">
           <IoIosArrowUp className="text-primary" />
-          <span className="text-xs ">{kFormater(listingData.upvoted_count)}</span>
+          <span className="text-xs ">{kFormater(listingData.upvotes_count)}</span>
         </div>
         <Button
           className="py-2 border-none rounded-md min-w-[5rem] !flex space-x-0.5 bg-primary"
