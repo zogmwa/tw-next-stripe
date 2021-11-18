@@ -9,7 +9,7 @@ export function NavItem({ dropdownData, navItem }: MenuItemProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm text-base font-medium tracking-wide text-opacity-100 border-none rounded outline-none cursor-pointer text-primary hover:bg-gray-100 shadow:none">
+        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm text-base tracking-wide text-opacity-100 border-none rounded outline-none cursor-pointer text-primary hover:bg-gray-100 shadow:none">
           {navItem}
         </Menu.Button>
       </div>
@@ -24,7 +24,7 @@ export function NavItem({ dropdownData, navItem }: MenuItemProps) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute left-0 py-2 mt-2 origin-top-right bg-white rounded-md shadow-lg w-156">
-          <div className="grid grid-cols-3 gap-4 py-1">
+          <div className="z-30 grid grid-cols-3 gap-4 py-1">
             {dropdownData.map((item) => {
               if (item.name !== '/') {
                 return (
@@ -35,8 +35,7 @@ export function NavItem({ dropdownData, navItem }: MenuItemProps) {
                         className={clsx(
                           active ? 'bg-gray-100' : null,
                           'text-base  tracking-wide text-opacity-100 cursor-pointer text-primary h-full',
-                          'block  font-medium',
-                          'px-4',
+                          'block px-4',
                         )}
                       >
                         {item.name}

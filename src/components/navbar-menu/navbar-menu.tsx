@@ -4,23 +4,21 @@ import { NavItem } from './menu-item'
 import { NavAccordion } from './navbar-accordion'
 import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
 
-const SolutionDropdown = [{ name: 'Search Solution', slug: '/' }, ...TopSolutionTags]
-const SaaSDropdown = [{ name: 'Search Software', slug: '/' }, ...TopSaasTags]
 // const ResourceDropdown = [{ name: 'Blog', slug: '/' }]
 
 export function NavbarMenu() {
   return (
     <div id="navbar">
       <div className="flex flex-row w-full h-full item-start">
-        <NavItem dropdownData={SolutionDropdown} navItem="Solutions" />
-        <NavItem dropdownData={SaaSDropdown} navItem="SaaS" />
+        <NavItem dropdownData={TopSolutionTags} navItem="Solutions" />
+        <NavItem dropdownData={TopSaasTags} navItem="Software" />
         <Link href="/submit-service">
-          <a className="flex px-4 py-2 text-sm text-base font-medium tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
+          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
             Submit a Web Service
           </a>
         </Link>
-        <Link href="/submit-service">
-          <a className="flex px-4 py-2 text-sm text-base font-medium tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
+        <Link href="/submit-solution">
+          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
             Submit a Solution
           </a>
         </Link>
@@ -42,10 +40,10 @@ export function NavbarMenuResponsive() {
       <NavAccordion
         expanded={expanded}
         handleChange={handleChange}
-        dropdownData={SolutionDropdown}
+        dropdownData={TopSolutionTags}
         navItem="Solutions"
       />
-      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={SaaSDropdown} navItem="SaaS" />
+      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={TopSaasTags} navItem="Software" />
       {/* <NavAccordion
         expanded={expanded}
         handleChange={handleChange}
