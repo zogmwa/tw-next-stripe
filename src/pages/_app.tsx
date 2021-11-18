@@ -76,10 +76,11 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>
-          TaggedWeb: Search and Discover SaaS Web Services, Software and Web Applications. Evaluate, Vote, Add Reviews
-          and more{' '}
-        </title>
+        <title>TaggedWeb - Shop around for the best SaaS Software and Solutions</title>
+        <meta
+          name="description"
+          content="Shop around for the best SaaS Software and Solutions. Unblock your team with solutions from top engineers and domain experts. SaaS Integrations, Usage Consultations and more."
+        />
       </Head>
       <QueryClientProvider client={queryClient}>
         <SWRConfig value={{ fetcher, fallback }}>
