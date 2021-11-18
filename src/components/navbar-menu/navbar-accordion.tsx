@@ -24,7 +24,7 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange }: 
         </div>
         <AccordionDetails>
           {dropdownData.map((item) => {
-            if (item.slug != '/') {
+            if (item.slug !== '/') {
               return (
                 <Typography key={item.name}>
                   <Link href={`/search/${item.slug}`}>
@@ -37,7 +37,7 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange }: 
             } else {
               return (
                 <Typography key={item.name}>
-                  <Link href={`/`}>
+                  <Link href={'/'}>
                     <a href="">
                       <div className="py-2 hover:bg-gray-100">{item.name}</div>
                     </a>

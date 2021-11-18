@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'md-lg': '860px',
-        // @media (min-width: 860px)
+        'md-lg': '880px',
+        // @media (min-width: 880px)
       },
       spacing: {
         156: '40rem',

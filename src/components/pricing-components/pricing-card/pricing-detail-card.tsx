@@ -12,7 +12,7 @@ type PricingDetailCardComponentProps = {
 function PricingDetailCardComponent({ price }: PricingDetailCardComponentProps) {
   const [isShowMore, setIsShowMore] = useState(false)
   const defaultShowCount = 4
-  let featureString = price.features ?? ''
+  const featureString = price.features ?? ''
   const featuresList = featureString.split('\r\n')
 
   let showFeatureList = featuresList

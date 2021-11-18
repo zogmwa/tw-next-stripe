@@ -8,8 +8,6 @@ export default {
   component: NavAccordion,
 } as Meta
 
-const SolutionDropdown = [{ name: 'Search Solution', slug: '/' }, ...TopSolutionTags]
-const SaaSDropdown = [{ name: 'Search Software', slug: '/' }, ...TopSaasTags]
 // const ResourceDropdown = [{ name: 'Blog', slug: '/' }]
 
 export function NavbarMenuResponsive() {
@@ -24,10 +22,10 @@ export function NavbarMenuResponsive() {
       <NavAccordion
         expanded={expanded}
         handleChange={handleChange}
-        dropdownData={SolutionDropdown}
+        dropdownData={TopSolutionTags}
         navItem="Solutions"
       />
-      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={SaaSDropdown} navItem="SaaS" />
+      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={TopSaasTags} navItem="Software" />
       {/* <NavAccordion
         expanded={expanded}
         handleChange={handleChange}

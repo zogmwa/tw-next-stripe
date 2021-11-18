@@ -38,6 +38,7 @@ export default function SolutionList({ solutionData, defaultUrl }) {
   const [pageLen, setPageLen] = useState(20)
   const [pageCount, setPageCount] = useState(Math.ceil(solutionData.count / pageLen))
   const [solutionList, setSolutionList] = useState(solutionData.results)
+
   const handlePagination = async (event, pageValue) => {
     const offset = (page - 1) * pageLen
     const sendUrl = `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}`
@@ -50,6 +51,7 @@ export default function SolutionList({ solutionData, defaultUrl }) {
       console.log(error)
     }
   }
+
   return (
     <div className="flex flex-col justify-between">
       <div className="flex flex-col p-2">
