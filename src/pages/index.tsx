@@ -33,7 +33,7 @@ export default function Home() {
           alt="Software SaaS Logo 4"
           className="absolute z-10 hidden w-12 lg:flex top-48 right-64"
         />
-        <div className="z-20 flex items-center justify-center flex-1 md:justify-end">
+        <div className="flex items-center justify-center flex-1 md:justify-end">
           <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
             <div className="xl:flex">
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking to&#160;</h1>
