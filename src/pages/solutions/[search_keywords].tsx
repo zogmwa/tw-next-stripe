@@ -38,6 +38,8 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function SolutionList({ solutionData, defaultUrl, keywords }) {
+  if (typeof solutionData.results === 'undefined') return null
+
   const [page, setPage] = useState(1)
   const [pageLen, setPageLen] = useState(20)
   const [pageCount, setPageCount] = useState(Math.ceil(solutionData.count / pageLen))
@@ -93,42 +95,44 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
   }
 
   return (
-    <div className="flex pt-4 pl-2 md:p-4">
-      <div className="hidden md:flex flex-col border border-solid divide-y rounded-md border-border-default divide-solid divide-border-default w-[20rem]">
-        <SortServiceList onChange={orderingSolution} />
-        <FilterServiceList onChange={filterSolution} />
-      </div>
-      <div className="flex flex-col justify-between w-full p-2 md:ml-6">
-        <h1 className="hidden text-xl font-bold md:flex text-text-primary">
-          {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
-        </h1>
-        <div className="flex items-center justify-between md:hidden">
-          <h1 className="text-xl font-bold text-text-primary">
+    <div className="flex justify-center">
+      <div className="flex max-w-screen-lg pt-4">
+        <div className="hidden md:flex flex-col border border-solid divide-y rounded-md border-border-default divide-solid divide-border-default w-[20rem]">
+          <SortServiceList onChange={orderingSolution} />
+          <FilterServiceList onChange={filterSolution} />
+        </div>
+        <div className="flex flex-col justify-between w-full p-2 md:ml-6">
+          <h1 className="hidden text-xl font-bold md:flex text-text-primary">
             {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
           </h1>
-          <MobileViewSortAndFilterServiceList onSortChange={orderingSolution} onFilterChange={filterSolution} />
-        </div>
-        <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
-        <div className="flex flex-row flex-wrap my-2">
-          {showSuggestionTags.map((tag) => {
-            return (
-              <Link key={tag.slug} prefetch={false} href={'../search/' + tag.slug}>
-                <a className="inline-flex mt-2 mr-2">
-                  <Button buttonType="tag" size="small" className="mr-1">
-                    {tag.name}
-                  </Button>
-                </a>
-              </Link>
-            )
-          })}
-        </div>
-        <div className="flex flex-col">
-          {solutionList.map((solution) => (
-            <SolutionListingCard listingData={solution} key={solution.slug} />
-          ))}
-        </div>
-        <div className="flex justify-end p-2">
-          <Pagination page={page} count={pageCount} onChange={handlePagination} />
+          <div className="flex items-center justify-between md:hidden">
+            <h1 className="text-xl font-bold text-text-primary">
+              {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
+            </h1>
+            <MobileViewSortAndFilterServiceList onSortChange={orderingSolution} onFilterChange={filterSolution} />
+          </div>
+          <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
+          <div className="flex flex-row flex-wrap my-2">
+            {showSuggestionTags.map((tag) => {
+              return (
+                <Link key={tag.slug} prefetch={false} href={'../search/' + tag.slug}>
+                  <a className="inline-flex mt-2 mr-2">
+                    <Button buttonType="tag" size="small" className="mr-1">
+                      {tag.name}
+                    </Button>
+                  </a>
+                </Link>
+              )
+            })}
+          </div>
+          <div className="flex flex-col">
+            {solutionList.map((solution) => (
+              <SolutionListingCard listingData={solution} key={solution.slug} />
+            ))}
+          </div>
+          <div className="flex justify-end p-2">
+            <Pagination page={page} count={pageCount} onChange={handlePagination} />
+          </div>
         </div>
       </div>
     </div>
