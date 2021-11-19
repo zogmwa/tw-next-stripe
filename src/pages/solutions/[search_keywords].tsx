@@ -53,7 +53,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
 
   const fetchSolutionList = async (sendUrl) => {
     try {
-      const { data } = await client.get(`/solutions${sendUrl}`)
+      const { data } = await client.get(`/solutions/${sendUrl}`)
       setPageCount(Math.ceil(solutionData.count / pageLen))
       setSolutionList(data.results)
     } catch (error) {
