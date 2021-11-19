@@ -8,6 +8,7 @@ export default {
 } as Meta
 
 const introductionData = {
+  id: 1,
   slug: 'test',
   tag: {
     name: 'Integrations',
@@ -64,6 +65,7 @@ const introductionData = {
       updated: '2021-11-17T00:00:52.023369Z',
     },
   ],
+  my_solution_vote: 3,
 }
 
 export function DefaultSolutionDetailIntroduction() {
