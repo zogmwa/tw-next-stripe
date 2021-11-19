@@ -23,3 +23,17 @@ export async function fetchSimilarProducts(solutionSlug) {
     return null
   }
 }
+
+export async function toggleUpVoteSolution(solutionId: number) {
+  try {
+    const { data } = await axios.post('/api/solution_votes/', {
+      solution: solutionId,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not vote a solution.')
+    return null
+  }
+}
