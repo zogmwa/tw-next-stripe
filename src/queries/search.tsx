@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import axios from 'axios'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
+import { client } from '../utils/client'
 type GroupOption = {
   label: string
   options: Option[]
@@ -11,6 +12,16 @@ type Option = {
   label: ReactElement
   value: string
   isWebService: boolean
+}
+
+type SolutionOption = {
+  label: string
+  options: Soltuion[]
+}
+
+type Soltuion = {
+  label: string
+  value: string
 }
 
 const labelTagComponent = (input: string) => (
@@ -62,4 +73,27 @@ export async function searchSuggestions(searchInput: string): Promise<GroupOptio
   return [
     { label: 'Others', options: [{ value: searchInput, label: labelTagComponent(searchInput), isWebService: false }] },
   ]
+}
+
+export async function solutionSuggestions(searchInput: string): Promise<SolutionOption[]> {
+  if (searchInput.length >= 3) {
+    try {
+      const { data } = await client.get(`/autocomplete-solutions/?q=${searchInput}`)
+      const soltuionResults = data.results.map((option) => ({ value: option.slug, label: option.title }))
+      return [
+        { label: 'Solutions', options: soltuionResults },
+        { label: 'Others', options: [{ value: searchInput, label: searchInput }] },
+      ]
+    } catch (error) {
+      //  always wrap any API fetching operation within try/catch block
+      // and return the default value in case of error
+      return [
+        {
+          label: 'Others',
+          options: [{ value: searchInput, label: searchInput }],
+        },
+      ]
+    }
+  }
+  return [{ label: 'Others', options: [{ value: searchInput, label: searchInput }] }]
 }

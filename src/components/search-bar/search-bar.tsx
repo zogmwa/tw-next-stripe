@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { searchSuggestions } from '@taggedweb/queries/search'
+import { searchSuggestions, solutionSuggestions } from '@taggedweb/queries/search'
 import { Button } from '../button'
 
 type SearchByTagsProps = {
@@ -32,6 +32,7 @@ const homepagePlaceholderComponent = (
 export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
+  const [solution, setSolution] = useState<string>('')
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   const serachBtnType = forHomepage ? 'homePage' : 'primary'
@@ -74,6 +75,10 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     }
   }
 
+  const handleSolutionChange = (value: { value: string; label: string }) => {
+    setSolution(value.value)
+  }
+
   /**
    * Handler function called when the user clicks on the "submit" button
    * and all the fields are valid
@@ -82,15 +87,27 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     // as onSubmit is optional, first check if the field is required
     // or not before proceeding
     event.preventDefault()
-    if (tags.length === 0) {
-      setError('Please enter a tag')
-      toast.error('Please enter a tag')
+    if (forSoftware) {
+      if (tags.length === 0) {
+        setError('Please enter a tag')
+        toast.error('Please enter a tag')
+      } else {
+        setError('')
+        if (onSubmit) {
+          // form.getFieldValue(fieldName) would return the value of the field
+          const tagsSelected = tags.map((tag) => tag.value).join(',')
+          onSubmit(tagsSelected)
+        }
+      }
     } else {
-      setError('')
-      if (onSubmit) {
-        // form.getFieldValue(fieldName) would return the value of the field
-        const tagsSelected = tags.map((tag) => tag.value).join(',')
-        onSubmit(tagsSelected)
+      if (solution.length === 0) {
+        setError('No input given')
+        toast.error('No input given')
+      } else {
+        setError('')
+        if (onSubmit) {
+          onSubmit(solution)
+        }
       }
     }
   }
@@ -101,18 +118,31 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
       style={style}
       onSubmit={handleSubmit}
     >
-      <AsyncSelect
-        value={tags}
-        isMulti
-        name="tags"
-        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-        onChange={handleChange}
-        loadOptions={searchSuggestions}
-        instanceId
-        className="flex-1 mb-2 md:mb-0"
-        classNamePrefix="select"
-        placeholder={placeholder}
-      />
+      {forSoftware ? (
+        <AsyncSelect
+          value={tags}
+          isMulti
+          name="tags"
+          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+          onChange={handleChange}
+          loadOptions={searchSuggestions}
+          instanceId
+          className="flex-1 mb-2 md:mb-0"
+          classNamePrefix="select"
+          placeholder={placeholder}
+        />
+      ) : (
+        <AsyncSelect
+          name="solutions"
+          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+          onChange={handleSolutionChange}
+          loadOptions={solutionSuggestions}
+          instanceId
+          className="flex-1 mb-2 md:mb-0"
+          classNamePrefix="select"
+          placeholder={placeholder}
+        />
+      )}
       <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
         {searchBtnText}
       </Button>
