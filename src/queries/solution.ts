@@ -37,3 +37,17 @@ export async function toggleUpVoteSolution(solutionId: number) {
     return null
   }
 }
+
+export async function toggleDownVoteSolution(voteId: number, slug: string): Promise<number | null> {
+  try {
+    const { status } = await axios.delete(`/api/solution_votes/${voteId}/`, {
+      data: { solution: slug },
+    })
+    return status
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not destroy a solution vote.')
+    return null
+  }
+}
