@@ -10,14 +10,14 @@ import { getAccessToken } from '../utils/token'
 export async function fetchSolutionList(session, sendUrl) {
   const access = await getAccessToken(session)
   if (access) {
-    const { data } = await client.get(`/solutions${sendUrl}`, {
+    const { data } = await client.get(`/solutions/${sendUrl}`, {
       headers: {
         Authorization: `Bearer ${access}`,
       },
     })
     return data
   } else {
-    const { data } = await client.get(`/solutions${sendUrl}`)
+    const { data } = await client.get(`/solutions/${sendUrl}`)
     return data
   }
 }
