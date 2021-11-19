@@ -59,6 +59,7 @@ export default function SolutionDetail({ solutionDetail }) {
   }
 
   const introductionData = {
+    id: solutionDetail.id,
     slug: solutionDetail.slug,
     tag: {
       name: solutionDetail.type === 'I' ? 'Integrations' : solutionDetail.type === 'U' ? 'Usage Support' : 'Other',
@@ -76,6 +77,7 @@ export default function SolutionDetail({ solutionDetail }) {
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
     sidebar_info: solutionSidebarInfo,
     questions: solutionDetail.questions,
+    my_solution_vote: solutionDetail?.my_solution_vote,
   }
   const relatedProducts = solutionDetail.assets ?? []
 
