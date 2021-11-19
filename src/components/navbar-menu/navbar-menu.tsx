@@ -17,8 +17,12 @@ export function NavbarMenu() {
             Submit a Web Service
           </a>
         </Link>
-        <Link href="/submit-solution">
-          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
+        <Link href="https://forms.gle/Tes4NywNjB6q86Xy9">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100"
+          >
             Submit a Solution
           </a>
         </Link>

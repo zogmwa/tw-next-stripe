@@ -130,8 +130,14 @@ export function NavBar({ className, style }: NavBarProps) {
             <Link href="/submit-service">
               <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Web Service</a>
             </Link>
-            <Link href="/submit-solution">
-              <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Solution</a>
+            <Link href="https://forms.gle/Tes4NywNjB6q86Xy9">
+              <a
+                className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Submit a Solution
+              </a>
             </Link>
             {isLoggedIn() ? (
               <>
