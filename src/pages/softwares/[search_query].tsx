@@ -115,7 +115,7 @@ export default function ServiceList({
     setCheckedList(list)
   }
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
-    let query = `/search/${tags}?page=${value}`
+    let query = `/softwares/${tags}?page=${value}`
     if (order) {
       query += `&order=${order}`
     }
@@ -139,7 +139,7 @@ export default function ServiceList({
       <SearchBar
         className="mb-8"
         onSubmit={(selectedTag) => {
-          router.push(`/search/${selectedTag}`)
+          router.push(`/softwares/${selectedTag}`)
         }}
       />
       {error && <div className="font-medium text-center text-red-500">{error}</div>}
@@ -150,7 +150,7 @@ export default function ServiceList({
               <SortServiceList
                 defaultValue={order}
                 onChange={(value) => {
-                  let query = `/search/${tags}`
+                  let query = `/softwares/${tags}`
                   if (value) {
                     query += `?order=${value}`
                     if (free_trial) {
@@ -169,7 +169,7 @@ export default function ServiceList({
               <FilterServiceList
                 defaultValue={free_trial}
                 onChange={(value) => {
-                  let query = `/search/${tags}`
+                  let query = `/softwares/${tags}`
                   if (value) {
                     query += `?free_trial=${value}`
                     if (order) {
@@ -196,7 +196,7 @@ export default function ServiceList({
                   <MobileViewSortAndFilterServiceList
                     defaultSortValue={order}
                     onSortChange={(value) => {
-                      let query = `/search/${tags}`
+                      let query = `/softwares/${tags}`
                       if (value) {
                         query += `?order=${value}`
                         if (free_trial) {
@@ -211,7 +211,7 @@ export default function ServiceList({
                     }}
                     defaultFilterValue={free_trial}
                     onFilterChange={(value) => {
-                      let query = `/search/${tags}`
+                      let query = `/softwares/${tags}`
                       if (value) {
                         query += `?free_trial=${value}`
                         if (order) {

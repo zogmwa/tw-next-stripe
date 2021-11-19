@@ -202,7 +202,7 @@ function ServiceDetailCardComponent({
               <ShowEditable onEdit={() => setIsTagsEdit(true)}>
                 {service.tags.map((tag) => {
                   return (
-                    <Link key={tag.slug} href={'../search/' + tag.slug}>
+                    <Link key={tag.slug} href={'../softwares/' + tag.slug}>
                       <Button buttonType="tag" size="small" className="mr-2">
                         {tag.name}
                       </Button>
@@ -214,7 +214,7 @@ function ServiceDetailCardComponent({
               <>
                 {service.tags.map((tag) => {
                   return (
-                    <Link key={tag.slug} href={'../search/' + tag.slug}>
+                    <Link key={tag.slug} href={'../softwares/' + tag.slug}>
                       <Button buttonType="tag" size="small" className="mt-2 mr-2">
                         {tag.name}
                       </Button>

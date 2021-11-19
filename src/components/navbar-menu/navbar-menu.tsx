@@ -10,8 +10,8 @@ export function NavbarMenu() {
   return (
     <div id="navbar">
       <div className="flex flex-row w-full h-full item-start">
-        <NavItem dropdownData={TopSolutionTags} navItem="Solutions" />
-        <NavItem dropdownData={TopSaasTags} navItem="Software" />
+        <NavItem dropdownData={TopSolutionTags} navItem="Solutions" pathName="solutions" />
+        <NavItem dropdownData={TopSaasTags} navItem="Software" pathName="softwares" />
         <Link href="/submit-service">
           <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
             Submit a Web Service

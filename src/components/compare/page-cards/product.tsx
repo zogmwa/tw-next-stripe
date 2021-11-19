@@ -29,7 +29,7 @@ function CompareServiceProductComponent({ services }: CompareServiceProductProps
                     size="small"
                     className="mt-2 mr-2"
                     onClick={() => {
-                      router.push(`/search/${tag.slug}`)
+                      router.push(`/softwares/${tag.slug}`)
                     }}
                   >
                     {tag.name}
@@ -69,7 +69,7 @@ function CompareServiceProductComponent({ services }: CompareServiceProductProps
                     size="small"
                     className="mt-2 mr-2"
                     onClick={() => {
-                      router.push(`/search/${tag.slug}`)
+                      router.push(`/softwares/${tag.slug}`)
                     }}
                   >
                     {tag.name}
