@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiHeart } from 'react-icons/bi'
+import { AiFillHeart } from 'react-icons/ai'
 import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { toggleUpVoteSolution, toggleDownVoteSolution } from '@taggedweb/queries/solution'
+import { Spinner } from '../spinner'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { SolutionFAQ } from './index'
 import { Button } from '../button'
 
 type SolutionDetailIntroductionProps = {
   introductionData: {
+    id: number
     slug: string
     tag: { name: string; slug: string }
     title: string
@@ -23,12 +28,36 @@ type SolutionDetailIntroductionProps = {
     scope_of_work_description: string
     sidebar_info: { price: number; features: { name: string }[] }
     questions: { title: string; primary_answer: string }[]
+    my_solution_vote: number | null
   }
 }
 
 function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
+  const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
+  const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
+  const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const unitlist = ['', 'K', 'M', 'G']
   const { asPath } = useRouter()
+  const { requireLoginBeforeAction } = useRequireLogin()
+
+  const setToggleUpvotedByMe = async () => {
+    setIsLoadingUpvote(true)
+    const upvotesCounts = upvotesCount
+    if (votedByMe) {
+      const votedByMeStatus = await toggleDownVoteSolution(votedByMe, introductionData.slug)
+      if (votedByMeStatus) {
+        setVotedByMe(null)
+        setUpvotesCount(upvotesCounts - 1) // TODO: we need to get the accurate upvote count from API
+      }
+    } else {
+      const votedByMeStatus = await toggleUpVoteSolution(introductionData.id)
+      if (votedByMeStatus) {
+        setVotedByMe(votedByMeStatus.id)
+        setUpvotesCount(upvotesCounts + 1) // TODO: we need to get the accurate upvote count from API
+      }
+    }
+    setIsLoadingUpvote(false)
+  }
 
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -52,7 +81,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <h2 className="mt-2 text-3xl font-bold">{introductionData.title}</h2>
           <div className="items-center hidden mt-4 space-x-2 md:flex">
             <IoIosArrowUp className="text-primary" />
-            <span className="text-xl">{kFormater(introductionData.upvoted_count)}</span>
+            <span className="text-xl">{kFormater(upvotesCount)}</span>
             <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
               {kFormater(introductionData.users_count)} users
             </span>
@@ -114,8 +143,21 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
         </div>
         <div className="flex">
-          <button className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary">
-            <BiHeart className="text-primary text-[1.4rem]" />
+          <button
+            className={
+              votedByMe
+                ? 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-red-600 text-red-600'
+                : 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary'
+            }
+            onClick={requireLoginBeforeAction(() => setToggleUpvotedByMe())}
+            disabled={isLoadingUpvote}
+          >
+            {isLoadingUpvote && <Spinner className="text-primary" />}
+            {votedByMe ? (
+              <AiFillHeart className="text-red-600 text-[1.4rem]" />
+            ) : (
+              <BiHeart className="text-primary text-[1.4rem]" />
+            )}
           </button>
           <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
