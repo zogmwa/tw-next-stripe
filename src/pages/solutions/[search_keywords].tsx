@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Pagination from '@mui/material/Pagination'
@@ -41,6 +42,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
   if (typeof solutionData.results === 'undefined') return null
 
   const [page, setPage] = useState(1)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [pageLen, setPageLen] = useState(20)
   const [pageCount, setPageCount] = useState(Math.ceil(solutionData.count / pageLen))
   const [solutionList, setSolutionList] = useState(solutionData.results)
