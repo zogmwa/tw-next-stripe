@@ -106,9 +106,11 @@ export default function Home() {
               <div className="text-2xl font-bold text-white">Are you a solution provider or a creator?</div>
               <div className="mb-8 text-lg font-medium text-white">Better connect with solution customers</div>
               <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`} passHref>
-                <Button buttonType="homePage" className="mb-4">
-                  List your Solution
-                </Button>
+                <a target="_blank" rel="noreferrer">
+                  <Button buttonType="homePage" className="mb-4">
+                    List your Solution
+                  </Button>
+                </a>
               </Link>
             </div>
             <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8">
