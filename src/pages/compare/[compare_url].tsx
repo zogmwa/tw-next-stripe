@@ -80,7 +80,7 @@ export default function CompareList({ services }) {
     },
     {
       id: 'related-products',
-      name: 'Related Products',
+      name: 'Related Software',
       content: <CompareServiceUsedBy services={services} />,
     },
   ]

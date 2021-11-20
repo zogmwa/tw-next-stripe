@@ -73,7 +73,7 @@ function RelatedContentComponent({ name, slug }: RelateName) {
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="my-2 text-base font-medium text-text-primary">Related Products</h1>
+        <h1 className="my-2 text-base font-medium text-text-primary">Related Software</h1>
         <Button buttonType="primary" className="self-start text-white bg-primary" onClick={() => handleCompare()}>
           Compare
         </Button>

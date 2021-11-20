@@ -94,7 +94,7 @@ export default function SolutionDetail({ solutionDetail }) {
         />
       </div>
       <div className="flex flex-col pb-6 mt-8">
-        {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related SaaS Products</h4>}
+        {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related Software</h4>}
         <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
       </div>
     </div>
