@@ -19,7 +19,7 @@ export async function fetchSimilarProducts(solutionSlug) {
     return data
   } catch (error) {
     // eslint-disable-next-line
-    toast.error('Could not get similar SaaS products.')
+    toast.error('Could not get similar software.')
     return null
   }
 }

@@ -196,7 +196,7 @@ export default function ServiceList({
               <div className="text-xl font-medium text-text-primary">Products similar to {name}</div>
               <div className="flex items-center justify-center space-x-4">
                 <div className="text-sm text-text-secondary">
-                  {totalCount} {totalCount === 1 ? 'product' : 'products'}
+                  {totalCount} {totalCount === 1 ? 'product' : 'software options'}
                 </div>
                 <div className="md:hidden">
                   <MobileViewSortAndFilterServiceList

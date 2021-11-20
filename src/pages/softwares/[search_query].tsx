@@ -187,10 +187,12 @@ export default function ServiceList({
           </div>
           <div className="md:w-3/4">
             <div className="flex justify-between mb-2">
-              <div className="text-xl font-medium text-text-primary">Products</div>
+              <h1 className="text-xl font-medium text-text-primary">
+                Software tagged with {tags.split(',').join(', ')}
+              </h1>
               <div className="flex items-center justify-center space-x-4">
                 <div className="text-sm text-text-secondary">
-                  {totalCount} {totalCount === 1 ? 'product' : 'products'}
+                  {totalCount} {totalCount === 1 ? 'software' : 'software options'}
                 </div>
                 <div className="md:hidden">
                   <MobileViewSortAndFilterServiceList

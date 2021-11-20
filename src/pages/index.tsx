@@ -4,6 +4,8 @@ import { PopularSolutionTags } from '@taggedweb/components/homepage-popular-solu
 import { FindingSolutions } from '@taggedweb/components/homepage-finding-solutions'
 import { Button } from '@taggedweb/components/button'
 import { SearchComponent } from '@taggedweb/components/homepage-searchbar'
+import Link from 'next/link'
+import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 
 export default function Home() {
   return (
@@ -11,6 +13,7 @@ export default function Home() {
       <div className="relative flex justify-between bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
+          alt="Solution Shapes"
           className="absolute z-0 hidden max-w-5xl mx-auto md:top-0 lg:top-12 lg:left-44 lg:flex"
         />
         <img
@@ -82,12 +85,12 @@ export default function Home() {
       <div className="relative bg-gray-700 rounded-lg">
         <img
           src="/images/homepage_shapes.png"
-          alt="shapes"
+          alt="Solution Shapes"
           className="absolute z-10 hidden max-w-2xl md:top-0 lg:top-12 lg:right-44 lg:flex"
         />
         <div className="max-w-screen-lg px-2 mx-auto">
           <div className="flex flex-col md:flex-row md:space-x-4">
-            <div className="relative hidden w-full md:flex h-80 md:w-1/2 md:mr-8">
+            <div className="relative w-full md:flex h-80 md:w-1/2 md:mr-8">
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
@@ -102,9 +105,13 @@ export default function Home() {
             <div className="z-10 flex flex-col items-start justify-center w-full pt-4 md:pt-0 md:w-1/2">
               <div className="text-2xl font-bold text-white">Are you a solution provider or a creator?</div>
               <div className="mb-8 text-lg font-medium text-white">Better connect with solution customers</div>
-              <Button buttonType="homePage" className="mb-4">
-                List your Solution
-              </Button>
+              <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`} passHref>
+                <a target="_blank" rel="noreferrer">
+                  <Button buttonType="homePage" className="mb-4">
+                    List your Solution
+                  </Button>
+                </a>
+              </Link>
             </div>
             <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8">
               <img

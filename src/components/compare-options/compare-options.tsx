@@ -7,7 +7,7 @@ function CompareOptionsComponent({ options }) {
 
   return (
     <div>
-      <div className="font-bold">Compare Products</div>
+      <div className="font-bold">Compare Software</div>
       <div
         className={`grid justify-items-center grid-cols-${MAX_COMPARABLE_OPTIONS} md:grid-cols-${
           options.length <= MAX_COMPARABLE_OPTIONS ? options.length : 4

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { NavItem } from './menu-item'
 import { NavAccordion } from './navbar-accordion'
 import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
@@ -17,7 +18,7 @@ export function NavbarMenu() {
             Submit a Web Service
           </a>
         </Link>
-        <Link href="https://forms.gle/Tes4NywNjB6q86Xy9">
+        <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`}>
           <a
             target="_blank"
             rel="noopener noreferrer"
