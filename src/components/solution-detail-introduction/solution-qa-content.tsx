@@ -47,22 +47,24 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
 
   return (
     <div className="flex flex-col">
-      <h4 className="font-bold text-md">FAQ</h4>
-      <div className="flex items-center w-full px-2 py-1 mt-4 border border-solid rounded-md md:px-4 border-border-default">
-        <AiOutlineSearch className="mr-1 md:mr-2 text-md text-text-tertiary" />
-        <input
-          type="text"
-          className="w-full focus:ring-0"
-          placeholder="Have a question? Search for answer."
-          value={searchQuestion}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              setIsPressEnter(true)
-            }
-          }}
-          onChange={(e) => setSearchQuestion(e.target.value)}
-        />
-      </div>
+      <h4 className="font-bold text-md">FAQs</h4>
+      {allQuestion.length >= 10 && (
+        <div className="flex items-center w-full px-2 py-1 mt-4 border border-solid rounded-md md:px-4 border-border-default">
+          <AiOutlineSearch className="mr-1 md:mr-2 text-md text-text-tertiary" />
+          <input
+            type="text"
+            className="w-full focus:ring-0"
+            placeholder="Have a question? Search for answer."
+            value={searchQuestion}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setIsPressEnter(true)
+              }
+            }}
+            onChange={(e) => setSearchQuestion(e.target.value)}
+          />
+        </div>
+      )}
       {showQuestions.map((question, index) => (
         <div className="flex flex-col" key={index}>
           <h4 className="mt-4 font-bold text-md text-text-primary">{question.title}</h4>
