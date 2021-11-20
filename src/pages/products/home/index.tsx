@@ -26,7 +26,7 @@ export default function Home({ featuredList }) {
           <h1 className="text-4xl font-semibold">Find the best SaaS software and web services for your needs</h1>
           <SearchBar
             onSubmit={(selectedTag) => {
-              router.push(`/search/${selectedTag}`)
+              router.push(`/softwares/${selectedTag}`)
             }}
           />
         </div>

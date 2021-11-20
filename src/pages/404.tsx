@@ -18,7 +18,7 @@ function Page404() {
             {topTags.slice(0, length / 2 + 1).map((tag) => {
               return (
                 <li key={tag.slug}>
-                  <Link href={`/search/${tag.slug}`} passHref>
+                  <Link href={`/softwares/${tag.slug}`} passHref>
                     <a
                       href="/#"
                       className="text-black hover:underline focus:ring-white focus:outline-none focus:border-white"
@@ -34,7 +34,7 @@ function Page404() {
             {topTags.slice(length / 2 + 1, length).map((tag) => {
               return (
                 <li key={tag.slug}>
-                  <Link href={`/search/${tag.slug}`} passHref>
+                  <Link href={`/softwares/${tag.slug}`} passHref>
                     <a
                       href="/#"
                       className="text-black hover:underline focus:ring-white focus:outline-none focus:border-white"

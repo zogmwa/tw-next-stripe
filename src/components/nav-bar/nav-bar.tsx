@@ -50,7 +50,7 @@ export function NavBar({ className, style }: NavBarProps) {
             <NavSearchBar
               className="flex-1 ml-2"
               onSubmit={(selectedTag) => {
-                router.push(`/search/${selectedTag}`)
+                router.push(`/softwares/${selectedTag}`)
               }}
             />
           ) : null}

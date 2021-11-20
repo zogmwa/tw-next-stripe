@@ -49,7 +49,7 @@ export function SearchComponent() {
           >
             <SearchBar
               onSubmit={(selectedTag) => {
-                router.push(`/search/${selectedTag}`)
+                router.push(`/softwares/${selectedTag}`)
               }}
               forHomepage={true}
             />
@@ -61,7 +61,7 @@ export function SearchComponent() {
           >
             <SearchBar
               onSubmit={(selectedTag) => {
-                router.push(`/search/${selectedTag}`)
+                router.push(`/softwares/${selectedTag}`)
               }}
               forHomepage={true}
               forSoftware={true}

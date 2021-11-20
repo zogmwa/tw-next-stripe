@@ -65,7 +65,7 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
           <div className="flex flex-row flex-wrap mb-5">
             {listingData.tags.map((tag) => {
               return (
-                <Link key={tag.slug} prefetch={false} href={'../search/' + tag.slug}>
+                <Link key={tag.slug} prefetch={false} href={'../solutions/' + tag.slug}>
                   <a className="inline-flex mt-2 mr-2">
                     <Button buttonType="tag" size="small" className="mt-2 mr-1">
                       {tag.name}

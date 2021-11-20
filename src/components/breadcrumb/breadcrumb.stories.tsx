@@ -15,12 +15,12 @@ const breadcrumbItems = [
   },
   {
     name: 'Integrations',
-    url: '/search/integrations',
+    url: '/solutions/integrations',
     is_selected: false,
   },
   {
     name: 'User Interface',
-    url: '/search/integrations/user-interface',
+    url: '/solutions/integrations/user-interface',
     is_selected: true,
   },
 ]

@@ -27,7 +27,7 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange }: 
             if (item.slug !== '/') {
               return (
                 <Typography key={item.name}>
-                  <Link href={`/search/${item.slug}`}>
+                  <Link href={`/softwares/${item.slug}`}>
                     <a href="">
                       <div className="py-2 hover:bg-gray-100">{item.name}</div>
                     </a>

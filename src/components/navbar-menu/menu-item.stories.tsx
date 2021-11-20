@@ -12,8 +12,8 @@ export function DropdownNav() {
   // const ResourceDropdown = [{ name: 'Blog', slug: '/' }]
   return (
     <div className="flex items-center h-full max-w-screen-lg mx-auto justify-evenly">
-      <NavItem dropdownData={TopSolutionTags} navItem="Solutions" />
-      <NavItem dropdownData={TopSaasTags} navItem="Software" />
+      <NavItem dropdownData={TopSolutionTags} navItem="Solutions" pathName="solutions" />
+      <NavItem dropdownData={TopSaasTags} navItem="Software" pathName="softwares" />
       {/* <NavItem dropdownData={ResourceDropdown} navItem="Resources" /> */}
     </div>
   )

@@ -33,7 +33,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
         <div className="flex flex-col items-center space-y-4 md:items-start">
           <h2 className="text-sm text-gray-400">TOP SOLUTION TAGS</h2>
           {showSolutionTags.map((tag) => (
-            <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
+            <Link href={`/solutions/${tag.slug}`} prefetch={false} key={tag.slug}>
               <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}
@@ -41,7 +41,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
         <div className="flex flex-col items-center space-y-4 md:items-start">
           <h2 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h2>
           {showSaasTags.map((tag) => (
-            <Link href={`/search/${tag.slug}`} prefetch={false} key={tag.slug}>
+            <Link href={`/softwares/${tag.slug}`} prefetch={false} key={tag.slug}>
               <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
             </Link>
           ))}

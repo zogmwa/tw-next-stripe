@@ -145,7 +145,7 @@ export default function ServiceList({
       <SearchBar
         className="mb-8"
         onSubmit={(selectedTag) => {
-          router.push(`/search/${selectedTag}`)
+          router.push(`/softwares/${selectedTag}`)
         }}
       />
       {error && <div className="font-medium text-center text-red-500">{error}</div>}

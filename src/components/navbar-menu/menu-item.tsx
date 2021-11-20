@@ -4,8 +4,9 @@ import clsx from 'clsx'
 type MenuItemProps = {
   dropdownData: { name: string; slug: string }[]
   navItem: string
+  pathName: string
 }
-export function NavItem({ dropdownData, navItem }: MenuItemProps) {
+export function NavItem({ dropdownData, navItem, pathName }: MenuItemProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -31,7 +32,7 @@ export function NavItem({ dropdownData, navItem }: MenuItemProps) {
                   <Menu.Item key={item.name}>
                     {({ active }) => (
                       <a
-                        href={`/search/${item.slug}`}
+                        href={`/${pathName}/${item.slug}`}
                         className={clsx(
                           active ? 'bg-gray-100' : null,
                           'text-base  tracking-wide text-opacity-100 cursor-pointer text-primary h-full',
