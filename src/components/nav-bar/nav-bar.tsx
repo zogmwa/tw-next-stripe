@@ -7,6 +7,7 @@ import { useUserContext } from '@taggedweb/hooks/use-user'
 import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineClose } from 'react-icons/md'
+import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { Button } from '../button'
 import Avatar from './avatar'
 import { NavSearchBar } from '../search-bar'
@@ -130,7 +131,7 @@ export function NavBar({ className, style }: NavBarProps) {
             <Link href="/submit-service">
               <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Web Service</a>
             </Link>
-            <Link href="https://forms.gle/Tes4NywNjB6q86Xy9">
+            <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`}>
               <a
                 className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100"
                 target="_blank"

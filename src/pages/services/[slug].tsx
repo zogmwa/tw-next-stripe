@@ -57,7 +57,7 @@ export default function Service() {
     },
     {
       id: 'related-products',
-      name: 'Related Products',
+      name: 'Related Software',
       content: <RelatedContent name={data.name} slug={data.slug} />,
     },
   ]
