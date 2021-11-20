@@ -115,7 +115,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
           <div className="flex flex-row flex-wrap my-2">
             {showSuggestionTags.map((tag) => {
               return (
-                <Link key={tag.slug} prefetch={false} href={'../search/' + tag.slug}>
+                <Link key={tag.slug} prefetch={false} href={'../solutions/' + tag.slug}>
                   <a className="inline-flex mt-2 mr-2">
                     <Button buttonType="tag" size="small" className="mr-1">
                       {tag.name}
