@@ -76,10 +76,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>TaggedWeb - Shop around for the best SaaS Software and Solutions</title>
+        <title>Shop around for SaaS Solutions, Software, Integrations, Consultations</title>
         <meta
           name="description"
-          content="Shop around for the best SaaS Software and Solutions. Unblock your team with solutions from top engineers and domain experts. SaaS Integrations, Usage Consultations and more."
+          content="Shop for the best SaaS Solutions and Cloud Software. Unblock your team with SaaS Integrations, Consultations, Usage Support and more from top engineers and domain experts."
         />
       </Head>
       <QueryClientProvider client={queryClient}>

@@ -49,9 +49,10 @@ export function SearchComponent() {
           >
             <SearchBar
               onSubmit={(selectedTag) => {
-                router.push(`/softwares/${selectedTag}`)
+                router.push(`/solutions/${selectedTag}`)
               }}
               forHomepage={true}
+              forSoftware={false}
             />
           </Tab.Panel>
           <Tab.Panel
