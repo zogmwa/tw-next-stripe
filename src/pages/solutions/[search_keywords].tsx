@@ -70,7 +70,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
-      (filtering ? `&has_free_trial=${filtering}` : '')
+      (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
 
@@ -80,7 +80,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (orderValue ? `&ordering=${orderValue}` : '') +
-      (filtering ? `&has_free_trial=${filtering}` : '')
+      (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
 
@@ -90,7 +90,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
-      (filterValue ? `&has_free_trial=${filterValue}` : '')
+      (filterValue ? `&has_free_consultation=${filterValue}` : '')
     fetchSolutionList(sendUrl)
   }
 
@@ -99,7 +99,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
       <div className="flex max-w-screen-lg pt-4">
         <div className="hidden md:flex flex-col border border-solid divide-y rounded-md border-border-default divide-solid divide-border-default w-[20rem]">
           <SortServiceList onChange={orderingSolution} />
-          <FilterServiceList onChange={filterSolution} />
+          <FilterServiceList onChange={filterSolution} label="Consultation" />
         </div>
         <div className="flex flex-col justify-between w-full p-2 md:ml-6">
           <h1 className="hidden text-xl font-bold md:flex text-text-primary">
@@ -109,7 +109,11 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
             <h1 className="text-xl font-bold text-text-primary">
               {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
             </h1>
-            <MobileViewSortAndFilterServiceList onSortChange={orderingSolution} onFilterChange={filterSolution} />
+            <MobileViewSortAndFilterServiceList
+              onSortChange={orderingSolution}
+              onFilterChange={filterSolution}
+              filterLabel="Consultation"
+            />
           </div>
           <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
           <div className="flex flex-row flex-wrap my-2">

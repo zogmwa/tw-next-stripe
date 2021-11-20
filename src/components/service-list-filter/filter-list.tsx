@@ -4,9 +4,10 @@ import { Checkbox } from '../checkbox'
 type SortServiceListProps = {
   defaultValue?: string
   onChange: (value: string) => void
+  label?: string
 }
 
-export function FilterServiceList({ defaultValue = '', onChange }: SortServiceListProps) {
+export function FilterServiceList({ defaultValue = '', onChange, label = 'Trial' }: SortServiceListProps) {
   const [checked, setChecked] = useState(!!defaultValue)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ export function FilterServiceList({ defaultValue = '', onChange }: SortServiceLi
       <div className="py-2 text-lg font-medium text-text-primary">Pricing</div>
       <div className="flex items-center space-x-2">
         <Checkbox size="md" onChange={(e) => handleChange(e)} checked={checked} />
-        <div className="text-sm text-text-primary">Free Trial</div>
+        <div className="text-sm text-text-primary">Free {label}</div>
       </div>
     </div>
   )

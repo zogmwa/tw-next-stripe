@@ -9,6 +9,7 @@ type MobileViewSortServiceListProps = {
   defaultFilterValue?: string
   onSortChange: (value: string) => void
   onFilterChange: (value: string) => void
+  filterLabel?: string
 }
 
 export function MobileViewSortAndFilterServiceList({
@@ -16,6 +17,7 @@ export function MobileViewSortAndFilterServiceList({
   defaultFilterValue = '',
   onSortChange,
   onFilterChange,
+  filterLabel = 'Trial',
 }: MobileViewSortServiceListProps) {
   return (
     <Menu as="div" className="relative">
@@ -38,7 +40,9 @@ export function MobileViewSortAndFilterServiceList({
           <div className="px-1 py-1">
             <Menu.Item>{() => <SortServiceList defaultValue={defaultSortValue} onChange={onSortChange} />}</Menu.Item>
             <Menu.Item>
-              {() => <FilterServiceList defaultValue={defaultFilterValue} onChange={onFilterChange} />}
+              {() => (
+                <FilterServiceList defaultValue={defaultFilterValue} onChange={onFilterChange} label={filterLabel} />
+              )}
             </Menu.Item>
           </div>
         </Menu.Items>
