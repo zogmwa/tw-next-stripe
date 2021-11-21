@@ -48,6 +48,7 @@ export default function SolutionDetail({ solutionDetail }) {
   if (price?.length === 0) price = solutionDetail.prices[0]
 
   const solutionSidebarInfo = {
+    primary_price: price,
     price: price?.price,
     features: [
       { name: '10 Ready Capacity' },
