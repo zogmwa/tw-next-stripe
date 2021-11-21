@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import clsx from 'clsx'
 import { BiDollar } from 'react-icons/bi'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { toggleSolutionPurchase } from '@taggedweb/queries/solution'
 import { Button } from '../button'
 
 type SolutionDetailSidebarComponentProps = {
-  detailInfo: { price: number; features: { name: string }[] }
+  detailInfo: {
+    primary_price: {
+      id: number
+      solution: number
+      stripe_price_id: string
+      price: string | number
+      currency: string
+      is_primary: boolean
+    }
+    price: number
+    features: { name: string }[]
+  }
   className?: string
 }
 
 function SolutionDetailSidebarComponent({ detailInfo, className = '' }: SolutionDetailSidebarComponentProps) {
+  const [isPurchase, setIsPurchase] = useState(false)
+  const { requireLoginBeforeAction } = useRequireLogin()
+
+  const togglePurchase = async () => {
+    setIsPurchase(true)
+    const data = await toggleSolutionPurchase(detailInfo.primary_price.id)
+    if (data) window.location = data.checkout_page_url
+    setIsPurchase(false)
+  }
+
   return (
     <div
       className={clsx(
@@ -29,7 +52,14 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           </div>
         ))}
         <div className="flex flex-col items-center w-full">
-          <Button className="mt-4 bg-primary" textClassName="text-white">
+          <Button
+            className="mt-4 bg-primary"
+            textClassName="text-white"
+            loading={isPurchase}
+            disabled={isPurchase}
+            loadingClassName="text-background-light"
+            onClick={requireLoginBeforeAction(() => togglePurchase())}
+          >
             Purchase Now
           </Button>
           <Button className="mt-2">Ask Questions</Button>
