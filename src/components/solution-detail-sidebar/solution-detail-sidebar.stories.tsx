@@ -9,6 +9,14 @@ export default {
 
 const solutionSidebarInfo = {
   price: 120,
+  primary_price: {
+    id: 1,
+    solution: 1,
+    stripe_price_id: 'price_1JyKvjJYlLsCg3G3ZwhcIrw8',
+    price: '10.00',
+    currency: 'USD',
+    is_primary: true,
+  },
   features: [
     { name: '10 Ready Capacity' },
     { name: '14 Eta Days' },
