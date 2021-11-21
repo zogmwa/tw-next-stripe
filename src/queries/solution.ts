@@ -51,3 +51,14 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
     return null
   }
 }
+
+export async function toggleSolutionPurchase(solutionPriceId: number): Promise<any | null> {
+  try {
+    const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}`, {})
+    return data
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Could not purchase this solution .')
+    return null
+  }
+}
