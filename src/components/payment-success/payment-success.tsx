@@ -17,9 +17,6 @@ function PaymentSuccessComponent({ emailAddress, className = '' }: PaymentSucces
       </div>
       <div className="my-2 text-xl font-bold text-text-secondary">{emailAddress}</div>
       <div className="text-lg text-text-tertiary">with in 2 - 3 business days.</div>
-      <Button className="mt-4 bg-primary" textClassName="!text-white">
-        View Solution Progress
-      </Button>
     </div>
   )
 }
