@@ -8,11 +8,10 @@ import ReactTooltip from 'react-tooltip'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
-import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { toggleUpVoteSolution, toggleDownVoteSolution } from '@taggedweb/queries/solution'
-import { Spinner } from '../spinner'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { SolutionFAQ } from './index'
+import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
 
 type SolutionDetailIntroductionProps = {
@@ -36,9 +35,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
   const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
-  const unitlist = ['', 'K', 'M', 'G']
   const { asPath } = useRouter()
-  const { requireLoginBeforeAction } = useRequireLogin()
 
   const setToggleUpvotedByMe = async () => {
     if (!isLoadingUpvote) {
@@ -61,16 +58,6 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
     }
   }
 
-  function kFormater(number) {
-    const sign = Math.sign(number)
-    let unit = 0
-    while (Math.abs(number) > 999) {
-      unit = unit + 1
-      number = Math.floor(Math.abs(number) / 100) / 10
-    }
-    return sign * number + unitlist[unit]
-  }
-
   return (
     <div className="flex flex-col w-full divide-y flex-fol divide-solid divide-border-default">
       <div className="flex justify-between p-4 md:px-0">
@@ -81,47 +68,22 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             </Button>
           </a>
           <h2 className="mt-2 text-3xl font-bold">{introductionData.title}</h2>
-          <div className="items-center hidden mt-4 space-x-2 md:flex">
-            <span
-              className="flex items-center text-lg cursor-pointer"
-              data-for="tooltip-upvote"
-              data-tip
-              onClick={requireLoginBeforeAction(() => setToggleUpvotedByMe())}
-            >
-              {isLoadingUpvote ? (
-                <Spinner className="mr-2 text-xs text-primary" />
-              ) : (
-                <IoIosArrowUp
-                  className={votedByMe ? 'text-xl text-primary mr-2 font-bold' : 'text-text-secondary mr-2'}
-                />
-              )}
-              {kFormater(upvotesCount)}
-            </span>
-            <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
-              {kFormater(introductionData.users_count)} users
-            </span>
-          </div>
+          <UpvoteUser
+            isLoading={isLoadingUpvote}
+            isVotedByMe={votedByMe}
+            upvotesCount={upvotesCount}
+            usersCount={introductionData.users_count}
+            toggleUpvote={setToggleUpvotedByMe}
+            className="hidden mt-2 md:flex"
+          />
           <div className="flex items-center justify-between mt-4 md:hidden">
-            <div className="flex items-center space-x-2">
-              <span
-                className="flex items-center text-lg cursor-pointer"
-                data-for="tooltip-upvote"
-                data-tip
-                onClick={requireLoginBeforeAction(() => setToggleUpvotedByMe())}
-              >
-                {isLoadingUpvote ? (
-                  <Spinner className="mr-2 text-xs text-primary" />
-                ) : (
-                  <IoIosArrowUp
-                    className={votedByMe ? 'text-xl text-primary mr-2 font-bold' : 'text-text-secondary mr-2'}
-                  />
-                )}
-                {kFormater(upvotesCount)}
-              </span>
-              <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
-                {kFormater(introductionData.users_count)} users
-              </span>
-            </div>
+            <UpvoteUser
+              isLoading={isLoadingUpvote}
+              isVotedByMe={votedByMe}
+              upvotesCount={upvotesCount}
+              usersCount={introductionData.users_count}
+              toggleUpvote={setToggleUpvotedByMe}
+            />
             <div className="flex space-x-2">
               <div className="p-1 border border-solid rounded-md border-border-default">
                 <img

@@ -32,6 +32,7 @@ import {
 import { Modal } from '../Modal'
 import { Input } from '../input'
 import { Textarea } from '../textarea'
+import { UpvoteUser } from '../upvote-user'
 import { LinkTags } from '../editable-components/editable-tags/link-tags'
 
 const OwnTheServiceFormSchema = yup.object().shape({
@@ -182,19 +183,24 @@ function ServiceDetailCardComponent({
             ) : null}
           </div>
           <div className="flex mt-2 space-x-2 text-sm sm:space-x-4 md:divide-x">
-            <div className="flex items-end space-x-2">
+            <div className="flex items-center space-x-2 text-lg">
               <AiOutlineStar className="self-center text-primary" />
               <span>{rating}</span>
-              <span className="text-xs text-text-secondary">
+              <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
                 {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
                   ? 'No Review'
                   : `${numeral(service.reviews_count).format('0.[0]a')} Reviews`}
               </span>
             </div>
-            <div className="flex items-end space-x-2 md:pl-4">
-              <BsChevronUp className="self-center text-primary" />
-              <span>{service.upvotes_count}</span>
-              <span className="text-xs text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</span>
+            <div className="flex items-center space-x-2 md:pl-4">
+              <UpvoteUser
+                isLoading={isLoadingUpvote}
+                isVotedByMe={votedByMe}
+                upvotesCount={upvotesCount}
+                usersCount={service.users_count}
+                toggleUpvote={setToggleUpvotedByMe}
+                className="hidden md:flex"
+              />
             </div>
           </div>
           <div className="flex flex-row flex-wrap items-center mt-2 mb-5">
@@ -263,6 +269,7 @@ function ServiceDetailCardComponent({
           className="w-40 space-x-2"
           buttonType={votedByMe ? 'primary' : 'default'}
           icon={<BsChevronUp className={votedByMe ? 'self-center text-white' : 'self-center text-primary'} />}
+          disabled={isLoadingUpvote}
           loading={isLoadingUpvote}
           loadingClassName={votedByMe ? 'text-background-light' : 'text-primary'}
           onClick={requireLoginBeforeAction(() => setToggleUpvotedByMe())}
