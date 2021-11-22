@@ -19,5 +19,5 @@ export async function getServerSideProps(context) {
 }
 
 export default function Software() {
-  return <div>There is no Top Saas Tags.</div>
+  return <div>There are no Top Saas Tags.</div>
 }
