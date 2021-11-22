@@ -1,4 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/router'
+import slugify from 'slugify'
 
 const solutionTag = [
   {
@@ -113,6 +115,7 @@ const solutionTag = [
   },
 ]
 export function PopularSolutionTags() {
+  const router = useRouter()
   return (
     <div className="max-w-screen-lg px-2 mx-auto">
       <div className="mb-8 text-2xl font-bold text-center text-black">Popular Solution Tags</div>
@@ -121,6 +124,9 @@ export function PopularSolutionTags() {
           <div
             key={index}
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:border-blue-500"
+            onClick={() => {
+              router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
+            }}
           >
             <div className="text-4xl text-blue-500">{solution.icon}</div>
             <div className="text-lg font-medium text-center">{solution.name}</div>
@@ -132,6 +138,9 @@ export function PopularSolutionTags() {
           <div
             key={index}
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:border-blue-500"
+            onClick={() => {
+              router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
+            }}
           >
             <div className="text-4xl text-blue-500">{solution.icon}</div>
             <div className="text-lg font-medium text-center">{solution.name}</div>
