@@ -9,6 +9,7 @@ export default {
 } as Meta
 
 const listingData = {
+  slug: 'improve',
   tags: [
     {
       name: 'Design',

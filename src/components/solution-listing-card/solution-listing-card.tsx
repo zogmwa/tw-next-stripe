@@ -5,10 +5,12 @@ import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { AiFillStar } from 'react-icons/ai'
 import numeral from 'numeral'
+import { useRouter } from 'next/router'
 import { Button } from '../button'
 
 type SolutionListingCardProps = {
   listingData: {
+    slug: string
     tags: { name: string; slug: string }[]
     title: string
     prices: { stripe_price_id: number | string; price: number | string; is_primary: boolean }[]
@@ -20,8 +22,10 @@ type SolutionListingCardProps = {
 }
 
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
+  const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(listingData.avg_rating ?? 0)).format('0.[0]')
+
   function kFormater(number) {
     const sign = Math.sign(number)
     let unit = 0
@@ -36,7 +40,13 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
   if (!primaryPrice) primaryPrice = listingData.prices[0]
 
   return (
-    <div className={clsx('flex flex-col p-4 mt-2 mr-2 border border-solid rounded border-border-default', className)}>
+    <div
+      className={clsx(
+        'flex flex-col p-4 mt-2 mr-2 border border-solid rounded border-border-default cursor-pointer',
+        className,
+      )}
+      onClick={() => router.push(`/solution/${listingData.slug}`)}
+    >
       <div className="flex justify-between">
         <div className="flex flex-col">
           <div className="flex flex-row flex-wrap">
