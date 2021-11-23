@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Pagination from '@mui/material/Pagination'
 import { client } from '@taggedweb/utils/client'
@@ -95,14 +95,29 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
       (filterValue ? `&has_free_consultation=${filterValue}` : '')
     fetchSolutionList(sendUrl)
   }
-
+  const [error, setError] = useState('')
+  useEffect(() => {
+    if (solutionList.length === 0) {
+      setError(
+        'No Results Found. Try again or reach us out directly at contact@taggedweb.com with your problem statement.',
+      )
+    } else {
+      setError('')
+    }
+  }, [solutionList])
   return (
     <div className="flex justify-center">
       <div className="flex max-w-screen-lg pt-4">
-        <div className="hidden md:flex flex-col border border-solid divide-y rounded-md border-border-default divide-solid divide-border-default w-[20rem]">
-          <SortServiceList onChange={orderingSolution} />
-          <FilterServiceList onChange={filterSolution} label="Consultation" />
-        </div>
+        {!error && (
+          <div className="hidden md:flex flex-col space-y-4 w-[20rem]">
+            <div className="border rounded">
+              <SortServiceList onChange={orderingSolution} />{' '}
+            </div>
+            <div className="border rounded">
+              <FilterServiceList onChange={filterSolution} label="Consultation" />
+            </div>
+          </div>
+        )}
         <div className="flex flex-col justify-between w-full p-2 md:ml-6">
           <h1 className="hidden text-xl font-bold md:flex text-text-primary">
             {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
@@ -111,11 +126,13 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
             <h1 className="text-xl font-bold text-text-primary">
               {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
             </h1>
-            <MobileViewSortAndFilterServiceList
-              onSortChange={orderingSolution}
-              onFilterChange={filterSolution}
-              filterLabel="Consultation"
-            />
+            {!error && (
+              <MobileViewSortAndFilterServiceList
+                onSortChange={orderingSolution}
+                onFilterChange={filterSolution}
+                filterLabel="Consultation"
+              />
+            )}
           </div>
           <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
           <div className="flex flex-row flex-wrap my-2">
@@ -131,14 +148,19 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
               )
             })}
           </div>
-          <div className="flex flex-col">
-            {solutionList.map((solution) => (
-              <SolutionListingCard listingData={solution} key={solution.slug} />
-            ))}
-          </div>
-          <div className="flex justify-end p-2">
-            <Pagination page={page} count={pageCount} onChange={handlePagination} />
-          </div>
+          {error && <div className="font-medium text-center text-red-500">{error}</div>}
+          {!error && (
+            <div>
+              <div className="flex flex-col">
+                {solutionList.map((solution) => (
+                  <SolutionListingCard listingData={solution} key={solution.slug} />
+                ))}
+              </div>
+              <div className="flex justify-end p-2">
+                <Pagination page={page} count={pageCount} onChange={handlePagination} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

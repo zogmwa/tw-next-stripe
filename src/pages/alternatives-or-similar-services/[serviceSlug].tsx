@@ -144,6 +144,7 @@ export default function ServiceList({
     <div className="max-w-screen-lg px-4 mx-auto my-20" ref={pageRef}>
       <SearchBar
         className="mb-8"
+        forSoftware={true}
         onSubmit={(selectedTag) => {
           router.push(`/softwares/${selectedTag}`)
         }}

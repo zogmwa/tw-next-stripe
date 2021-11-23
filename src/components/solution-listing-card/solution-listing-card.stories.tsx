@@ -20,12 +20,13 @@ const listingData = {
       slug: 'user-interface',
     },
   ],
-  title: 'Improving application performance with APM, metrics and monitoring',
+  title:
+    'Improve the performance of your Python application instrumenting it with Datadog APM, Uncover performance bottlenecks',
   upvotes_count: 324,
   prices: [
     {
       stripe_price_id: 2,
-      price: 11,
+      price: 1500,
       currency: 'USD',
       is_primary: false,
     },

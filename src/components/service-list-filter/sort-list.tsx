@@ -34,12 +34,12 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
           <FormControlLabel
             value="-avg_rating"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Average Rating - High to Low</div>}
+            label={<div className="text-sm text-text-primary">Avg. Rating - High to Low</div>}
           />
           <FormControlLabel
             value="avg_rating"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Average Rating - Low to High</div>}
+            label={<div className="text-sm text-text-primary">Avg. Rating - Low to High</div>}
           />
           <FormControlLabel
             value="-upvotes_count"

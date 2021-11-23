@@ -28,6 +28,7 @@ export default function Home({ featuredList }) {
             onSubmit={(selectedTag) => {
               router.push(`/softwares/${selectedTag}`)
             }}
+            forSoftware={true}
           />
         </div>
       </div>

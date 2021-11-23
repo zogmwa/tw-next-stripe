@@ -74,7 +74,7 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             </div>
           </div>
         </div>
-        <div className="items-center self-start hidden mt-4 space-x-0 text-xs md:inline-flex">
+        <div className="items-center self-start hidden mt-4 mr-6 space-x-0 text-xs md:inline-flex">
           <BiDollar className="text-xl font-bold text-text-primary" />
           <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
         </div>

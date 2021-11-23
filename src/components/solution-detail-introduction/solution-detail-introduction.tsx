@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { IoIosArrowUp } from 'react-icons/io'
 import { BiHeart } from 'react-icons/bi'
 import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
