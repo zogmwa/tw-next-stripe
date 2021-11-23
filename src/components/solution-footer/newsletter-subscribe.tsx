@@ -66,7 +66,7 @@ export function SubscribeComponent() {
                 {formDetails.emailError ? formDetails.emailError : ''}
               </p>
             </div>
-            <button className="px-4 py-3 font-bold text-white text-opacity-100 bg-green-500 rounded-md">
+            <button className="px-4 py-3 font-bold text-white text-opacity-100 bg-green-500 rounded-md hover:bg-green-600">
               Subscribe
             </button>
           </form>
