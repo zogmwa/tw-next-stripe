@@ -10,11 +10,11 @@ import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 export default function Home() {
   return (
     <div>
-      <div className="relative flex justify-between bg-blue-600">
+      <div className="relative flex justify-between overflow-hidden bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
           alt="Solution Shapes"
-          className="absolute z-0 hidden max-w-5xl mx-auto md:top-0 lg:top-12 lg:left-44 lg:flex"
+          className="absolute z-0 hidden max-w-5xl md:top-0 lg:top-12 lg:left-40 lg:flex"
         />
         <img
           src="/images/homepage_icon1.png"
