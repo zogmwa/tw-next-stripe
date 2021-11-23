@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { TopSolutionTags } from '@taggedweb/utils/top-tags'
 
-export default function Software() {
+export default function Solution() {
   const router = useRouter()
 
   return (
