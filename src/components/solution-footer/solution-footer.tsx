@@ -69,7 +69,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
           </Select>
         </div>
       </div>
-      <SubscribeComponent />{' '}
+      <SubscribeComponent />
     </div>
   )
 }
