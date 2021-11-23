@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import Router, { useRouter } from 'next/router'
 import Error from 'next/error'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import Drift from 'react-driftjs'
 import '@taggedweb/styles/styles.css'
 import 'nprogress/nprogress.css'
 import nProgress from 'nprogress'
@@ -21,6 +22,7 @@ import { HomePageFooter } from '@taggedweb/components/footer'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
 import { FooterComponent } from '@taggedweb/components/solution-footer'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 
 const queryClient = new QueryClient()
 
@@ -36,6 +38,7 @@ const RedirectSpinner = () => (
 )
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  const { authVerified, pk } = useUserContext()
   const { pathname } = useRouter()
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
@@ -122,6 +125,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           </UserProvider>
         </SWRConfig>
       </QueryClientProvider>
+      {authVerified && <Drift appId="wbhma5svtxcb" userId={`user-${pk}`} />}
     </>
   )
 }
