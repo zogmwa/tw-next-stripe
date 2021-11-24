@@ -11,6 +11,7 @@ import { CompareServicePricing } from '@taggedweb/components/compare/page-cards/
 import { CompareServiceUsedBy } from '@taggedweb/components/compare/page-cards/used-by'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { CompareServiceScrollNavbar } from '@taggedweb/components/compare/scroll-navbar'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   /*
@@ -86,12 +87,15 @@ export default function CompareList({ services }) {
   ]
 
   return (
-    <div className="min-h-full p-4 bg-background-light">
-      <div className="max-w-screen-lg mx-auto">
-        <CompareServiceCard services={services} />
-        <CompareServiceTab elements={elements} />
-        <CompareServiceScrollNavbar elements={elements} />
+    <>
+      <DynamicHeader />
+      <div className="min-h-full p-4 bg-background-light">
+        <div className="max-w-screen-lg mx-auto">
+          <CompareServiceCard services={services} />
+          <CompareServiceTab elements={elements} />
+          <CompareServiceScrollNavbar elements={elements} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }

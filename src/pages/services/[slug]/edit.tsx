@@ -13,6 +13,7 @@ import { ProductContent } from '@taggedweb/components/service-detail/product-con
 // import { RelatedContent } from '@taggedweb/components/service-detail/related-content'
 // import { ReviewsContainer } from '@taggedweb/components/service-detail/get-reviews'
 import { Asset } from '@taggedweb/types/asset'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -87,21 +88,24 @@ export default function Service({ service }) {
   ]
 
   return (
-    <div className="min-h-full p-4 bg-background-light">
-      <div className="max-w-screen-lg mx-auto">
-        <ServiceDetailCard
-          service={showService}
-          editAllowed={editAllowed}
-          onChange={(field, value) => {
-            const data = { [field]: value }
-            handleChange(data)
-          }}
-        />
-        {/* Sidebar will be rendered in Desktop */}
-        <ServiceDetailSidebar elements={elements} />
-        {/* Tab will be rendered in Mobile */}
-        <ServiceDetailTab elements={elements} />
+    <>
+      <DynamicHeader />
+      <div className="min-h-full p-4 bg-background-light">
+        <div className="max-w-screen-lg mx-auto">
+          <ServiceDetailCard
+            service={showService}
+            editAllowed={editAllowed}
+            onChange={(field, value) => {
+              const data = { [field]: value }
+              handleChange(data)
+            }}
+          />
+          {/* Sidebar will be rendered in Desktop */}
+          <ServiceDetailSidebar elements={elements} />
+          {/* Tab will be rendered in Mobile */}
+          <ServiceDetailTab elements={elements} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
