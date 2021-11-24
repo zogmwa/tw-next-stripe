@@ -34,7 +34,7 @@ export default function Login() {
 
   return (
     <>
-      <DynamicHeader title="Reset Password" />
+      <DynamicHeader title="Taggedweb | Reset Password" />
       <div className="flex flex-col items-center justify-center w-full min-h-[60vh] p-4">
         <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
           <h3 className="mb-4 text-lg font-medium leading-6 text-text-primary">Enter New Password</h3>

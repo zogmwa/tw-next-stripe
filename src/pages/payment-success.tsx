@@ -10,7 +10,7 @@ export default function PaymentSuccessPage() {
 
   return (
     <>
-      <DynamicHeader title="Payment Success" />
+      <DynamicHeader title="Taggedweb | Payment Success" />
       <PaymentSuccess emailAddress={email} className="mt-12" />
     </>
   )

@@ -46,7 +46,7 @@ export default function Login() {
 
   return (
     <>
-      <DynamicHeader title="Login" />
+      <DynamicHeader title="Taggedweb | Login" />
       <div className="flex items-center justify-center w-screen h-screen">
         <div className="max-w-md p-0 mx-4 rounded-md lg:p-6 lg:border">
           <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to TaggedWeb!</h1>

@@ -86,7 +86,7 @@ function ProfilePage() {
 
   return (
     <>
-      <DynamicHeader title="Profile" />
+      <DynamicHeader title="Taggedweb | Profile" />
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto" id="scroll-container-outer">
           <Element name={'personal-information'}>

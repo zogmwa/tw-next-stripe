@@ -49,7 +49,7 @@ export default function Signup() {
 
   return (
     <>
-      <DynamicHeader title="Sign up" />
+      <DynamicHeader title="Taggedweb | Sign up" />
       <div className="flex flex-col items-center justify-center w-screen h-full p-4">
         <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
           <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to Taggedweb</h1>
