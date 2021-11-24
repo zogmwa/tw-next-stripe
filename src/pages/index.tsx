@@ -6,10 +6,12 @@ import { Button } from '@taggedweb/components/button'
 import { SearchComponent } from '@taggedweb/components/homepage-searchbar'
 import Link from 'next/link'
 import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export default function Home() {
   return (
     <div>
+      <DynamicHeader />
       <div className="relative flex justify-between bg-blue-600">
         <img
           src="/images/homepage_shapes.png"

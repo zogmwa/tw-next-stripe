@@ -9,6 +9,7 @@ import { ProfileContextType } from '@taggedweb/types/profile-context-type'
 import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { ProfileDesktop, ProfileMobile } from '@taggedweb/components/profile'
 import { Profile } from '@taggedweb/types/profile'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 // const asset1 = {
 //   logo_url: 'http://logo.clearbit.com/mailchimp.com',
@@ -84,15 +85,18 @@ function ProfilePage() {
   }
 
   return (
-    <div className="min-h-full p-4 bg-background-light">
-      <div className="max-w-screen-lg mx-auto" id="scroll-container-outer">
-        <Element name={'personal-information'}>
-          <ProfileCard data={data} />
-        </Element>
-        <ProfileDesktop profile={profile as Profile} />
-        <ProfileMobile profile={profile as Profile} />
+    <>
+      <DynamicHeader title="Profile" />
+      <div className="min-h-full p-4 bg-background-light">
+        <div className="max-w-screen-lg mx-auto" id="scroll-container-outer">
+          <Element name={'personal-information'}>
+            <ProfileCard data={data} />
+          </Element>
+          <ProfileDesktop profile={profile as Profile} />
+          <ProfileMobile profile={profile as Profile} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
