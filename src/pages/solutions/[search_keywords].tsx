@@ -10,6 +10,7 @@ import { SortServiceList } from '@taggedweb/components/service-list-filter/sort-
 import { MobileViewSortAndFilterServiceList } from '@taggedweb/components/service-list-filter/mobile-view'
 import { FilterServiceList } from '@taggedweb/components/service-list-filter/filter-list'
 import { Button } from '@taggedweb/components/button'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -106,63 +107,66 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
     }
   }, [solutionList])
   return (
-    <div className="flex justify-center">
-      <div className="flex max-w-screen-lg pt-4">
-        {!error && (
-          <div className="hidden md:flex flex-col space-y-4 w-[20rem]">
-            <div className="border rounded">
-              <SortServiceList onChange={orderingSolution} />{' '}
-            </div>
-            <div className="border rounded">
-              <FilterServiceList onChange={filterSolution} label="Consultation" />
-            </div>
-          </div>
-        )}
-        <div className="flex flex-col justify-between w-full p-2 md:ml-6">
-          <h1 className="hidden text-xl font-bold md:flex text-text-primary">
-            {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
-          </h1>
-          <div className="flex items-center justify-between md:hidden">
-            <h1 className="text-xl font-bold text-text-primary">
-              {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
-            </h1>
-            {!error && (
-              <MobileViewSortAndFilterServiceList
-                onSortChange={orderingSolution}
-                onFilterChange={filterSolution}
-                filterLabel="Consultation"
-              />
-            )}
-          </div>
-          <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
-          <div className="flex flex-row flex-wrap my-2">
-            {showSuggestionTags.map((tag) => {
-              return (
-                <Link key={tag.slug} prefetch={false} href={'../solutions/' + tag.slug}>
-                  <a className="inline-flex mt-2 mr-2">
-                    <Button buttonType="tag" size="small" className="mr-1">
-                      {tag.name}
-                    </Button>
-                  </a>
-                </Link>
-              )
-            })}
-          </div>
-          {error && <div className="font-medium text-center text-red-500">{error}</div>}
+    <>
+      <DynamicHeader />
+      <div className="flex justify-center">
+        <div className="flex max-w-screen-lg pt-4">
           {!error && (
-            <div>
-              <div className="flex flex-col">
-                {solutionList.map((solution) => (
-                  <SolutionListingCard listingData={solution} key={solution.slug} />
-                ))}
+            <div className="hidden md:flex flex-col space-y-4 w-[20rem]">
+              <div className="border rounded">
+                <SortServiceList onChange={orderingSolution} />{' '}
               </div>
-              <div className="flex justify-end p-2">
-                <Pagination page={page} count={pageCount} onChange={handlePagination} />
+              <div className="border rounded">
+                <FilterServiceList onChange={filterSolution} label="Consultation" />
               </div>
             </div>
           )}
+          <div className="flex flex-col justify-between w-full p-2 md:ml-6">
+            <h1 className="hidden text-xl font-bold md:flex text-text-primary">
+              {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
+            </h1>
+            <div className="flex items-center justify-between md:hidden">
+              <h1 className="text-xl font-bold text-text-primary">
+                {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
+              </h1>
+              {!error && (
+                <MobileViewSortAndFilterServiceList
+                  onSortChange={orderingSolution}
+                  onFilterChange={filterSolution}
+                  filterLabel="Consultation"
+                />
+              )}
+            </div>
+            <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
+            <div className="flex flex-row flex-wrap my-2">
+              {showSuggestionTags.map((tag) => {
+                return (
+                  <Link key={tag.slug} prefetch={false} href={'../solutions/' + tag.slug}>
+                    <a className="inline-flex mt-2 mr-2">
+                      <Button buttonType="tag" size="small" className="mr-1">
+                        {tag.name}
+                      </Button>
+                    </a>
+                  </Link>
+                )
+              })}
+            </div>
+            {error && <div className="font-medium text-center text-red-500">{error}</div>}
+            {!error && (
+              <div>
+                <div className="flex flex-col">
+                  {solutionList.map((solution) => (
+                    <SolutionListingCard listingData={solution} key={solution.slug} />
+                  ))}
+                </div>
+                <div className="flex justify-end p-2">
+                  <Pagination page={page} count={pageCount} onChange={handlePagination} />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
