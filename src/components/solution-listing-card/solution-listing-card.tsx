@@ -47,8 +47,8 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
       )}
       onClick={() => router.push(`/solution/${listingData.slug}`)}
     >
-      <div className="flex justify-between">
-        <div className="flex flex-col">
+      <div className="flex flex-row">
+        <div className="flex flex-col flex-grow">
           <div className="flex flex-row flex-wrap">
             {listingData.tags.map((tag) => {
               return (
@@ -74,7 +74,7 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             </div>
           </div>
         </div>
-        <div className="items-center self-start hidden mt-4 mr-6 space-x-0 text-xs md:inline-flex">
+        <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
           <BiDollar className="text-xl font-bold text-text-primary" />
           <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
         </div>
