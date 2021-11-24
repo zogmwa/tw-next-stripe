@@ -67,10 +67,8 @@ export default function Service() {
   return (
     <>
       <DynamicHeader
-        title={`Best ${primary_tag?.name} Software and Solutions in ${new Date('Y')}: Integrate ${
-          primary_tag?.name
-        } Software`}
-        description={`Best ${primary_tag?.name} Software`}
+        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
+        description={`Best ${primary_tag?.name ?? ''} Software`}
       />
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">

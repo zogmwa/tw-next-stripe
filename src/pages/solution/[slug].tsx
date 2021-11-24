@@ -89,10 +89,8 @@ export default function SolutionDetail({ solutionDetail }) {
   return (
     <>
       <DynamicHeader
-        title={`Best ${primary_tag?.name} Software and Solutions in ${new Date('Y')}: Integrate ${
-          primary_tag?.name
-        } Software`}
-        description={`Best ${primary_tag?.name} Software`}
+        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
+        description={`Best ${primary_tag?.name ?? ''} Software`}
       />
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
         <Breadcrumb breadcrumbs={breadcrumbData} />
