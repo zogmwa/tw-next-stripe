@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
 import toast, { Toaster } from 'react-hot-toast'
 import Router, { useRouter } from 'next/router'
 import Error from 'next/error'

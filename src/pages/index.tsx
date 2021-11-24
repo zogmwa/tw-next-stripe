@@ -92,7 +92,7 @@ export default function Home() {
         />
         <div className="max-w-screen-lg px-2 mx-auto">
           <div className="flex flex-col md:flex-row md:space-x-4">
-            <div className="relative w-full md:flex h-80 md:w-1/2 md:mr-8">
+            <div className="relative hidden w-full md:flex h-80 md:w-1/2 md:mr-8">
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
@@ -115,16 +115,16 @@ export default function Home() {
                 </a>
               </Link>
             </div>
-            <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8">
+            <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8 md:mt-2">
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
-                className="absolute z-0 w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
+                className="absolute w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
                 alt="finding_sol_1"
-                className="absolute bottom-0 z-10 w-3/4 transform rounded shadow right-8 skew-pic"
+                className="absolute bottom-0 w-3/4 transform rounded shadow right-8 skew-pic"
               />
             </div>
           </div>

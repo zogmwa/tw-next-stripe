@@ -7,22 +7,6 @@ export function SubscribeComponent() {
   const [contactEmail, setContactEmail] = useState<string>('')
   const [formDetails, setFormDetails] = useState<any>({ emailError: '', isSubscribed: false })
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (validate(contactEmail)) {
-      try {
-        await client.post(`/newsletter_contact/`, { email: contactEmail })
-        setFormDetails({ ...formDetails, isSubscribed: true })
-      } catch (error) {
-        if (parseInt(error.response.status) === 400) {
-          setFormDetails({ ...formDetails, emailError: 'This email user is already subscribed!' })
-        } else if (parseInt(error.response.status) === 500) {
-          console.log('Something went wrong, server error!')
-        }
-      }
-    }
-  }
-
   const validate = (email) => {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (!email) {
@@ -34,6 +18,23 @@ export function SubscribeComponent() {
     }
     return true
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (validate(contactEmail)) {
+      try {
+        await client.post('/newsletter_contact/', { email: contactEmail })
+        setFormDetails({ ...formDetails, isSubscribed: true })
+      } catch (error) {
+        if (parseInt(error.response.status) === 400) {
+          setFormDetails({ ...formDetails, emailError: 'This email user is already subscribed!' })
+        } else if (parseInt(error.response.status) === 500) {
+          console.log('Something went wrong, server error!')
+        }
+      }
+    }
+  }
+
   return (
     <div className="flex-col items-center px-6 py-4 mt-10 divide-y md:flex bg-primary divide-solid divide-border-default">
       <div className="flex flex-col items-start justify-between w-full py-4 pr-2 space-y-2 text-sm text-white sm:space-y-0 lg:flex-row">
@@ -43,7 +44,7 @@ export function SubscribeComponent() {
         </div>
         {formDetails.isSubscribed ? (
           <div className="w-full py-4 font-bold text-md lg:text-right">
-            <p>You've successfully subscribed to TaggedWeb Newsletter!!</p>
+            <p>You&apos;ve successfully subscribed to TaggedWeb Newsletter!!</p>
           </div>
         ) : (
           <form

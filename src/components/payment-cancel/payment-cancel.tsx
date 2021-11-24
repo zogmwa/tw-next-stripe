@@ -9,6 +9,7 @@ type PaymentCancelComponentProps = {
 
 function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps) {
   const router = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { session_id, solution } = router.query
 
   return (
