@@ -75,13 +75,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>Shop around for SaaS Solutions, Software, Integrations, Consultations</title>
-        <meta
-          name="description"
-          content="Shop for the best SaaS Solutions and Cloud Software. Unblock your team with SaaS Integrations, Consultations, Usage Support and more from top engineers and domain experts."
-        />
-      </Head>
       <QueryClientProvider client={queryClient}>
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
