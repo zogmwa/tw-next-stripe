@@ -17,10 +17,10 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
       <h4 className="my-4 text-3xl font-bold text-text-primary">Canceling</h4>
       <div className="text-lg text-text-tertiary">Do you want to cancel to pay this solutions?</div>
       <Button className="mt-6 bg-primary" textClassName="!text-white" onClick={() => router.push('/')}>
-        Yes, find another Solutions
+        Yes, find another Solution
       </Button>
       <Button className="!border-0 mt-2" onClick={() => router.push(`/solution/${solution}`)}>
-        No, Procced this Solutions
+        No, Procced this Solution
       </Button>
     </div>
   )
