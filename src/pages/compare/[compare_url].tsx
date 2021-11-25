@@ -69,11 +69,11 @@ export default function CompareList({ services }) {
       name: 'Pricing',
       content: <CompareServicePricing services={services} />,
     },
-    {
-      id: 'qa',
-      name: 'Q & A',
-      content: <div />,
-    },
+    // {
+    //   id: 'qa',
+    //   name: 'Q & A',
+    //   content: <div />,
+    // },
     {
       id: 'reviews',
       name: 'Reviews',
