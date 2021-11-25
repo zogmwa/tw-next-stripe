@@ -18,7 +18,7 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
 
   return (
     <div className="flex flex-col items-center p-4 mt-2 mr-2 border border-solid border-border-default">
-      <Link href={`/services/${relatedProduct.slug}/#top`} scroll={true}>
+      <Link href={`/software/${relatedProduct.slug}/#top`} scroll={true}>
         <a>
           <div>
             <img

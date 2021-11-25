@@ -22,7 +22,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
           <div
             className="flex items-center justify-between w-full px-4 py-2 cursor-pointer"
             key={`service-${service.slug}`}
-            onClick={() => router.push(`/services/${service.slug}`)}
+            onClick={() => router.push(`/software/${service.slug}`)}
           >
             <div className="flex items-center">
               <ServiceLogo

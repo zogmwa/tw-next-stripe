@@ -70,7 +70,7 @@ function SubmitService() {
   const { isLoading, mutate } = useMutation((Asset: CreateServiceInput) => createService(Asset), {
     onSuccess: (serviceCreated: Asset) => {
       queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
-      push(`/services/${serviceCreated.slug}`)
+      push(`/software/${serviceCreated.slug}`)
     },
     onError: (error: any) => {
       // @TODO: get error message from server

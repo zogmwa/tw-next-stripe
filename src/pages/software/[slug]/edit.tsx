@@ -25,7 +25,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   if (!editAllowed) {
     return {
       redirect: {
-        destination: `/services/${slug}`,
+        destination: `/software/${slug}`,
         permanent: false,
       },
     }
