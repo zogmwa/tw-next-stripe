@@ -1,6 +1,6 @@
 import React from 'react'
 import { CompareServiceCard } from '@taggedweb/components/compare/services-detail'
-import { CompareServiceTab } from '@taggedweb/components/compare/tab'
+// import { CompareServiceTab } from '@taggedweb/components/compare/tab'
 import { CompareServiceSummaryCard } from '@taggedweb/components/compare/summary-card'
 import { fetchServicesDetailCompareServer } from '@taggedweb/server-queries/fetch-services-compare-detail'
 import { CompareServiceProduct } from '@taggedweb/components/compare/page-cards/product'
@@ -92,7 +92,7 @@ export default function CompareList({ services }) {
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">
           <CompareServiceCard services={services} />
-          <CompareServiceTab elements={elements} />
+          {/* <CompareServiceTab elements={elements} /> */}
           <CompareServiceScrollNavbar elements={elements} />
         </div>
       </div>
