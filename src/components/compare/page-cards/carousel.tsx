@@ -12,7 +12,7 @@ function CompareServiceCarouselComponent({ services }: CompareServiceCarouselPro
   const serviceCount = services.length
 
   return (
-    <ServiceCollapse title="Screenshoots">
+    <ServiceCollapse title="Screenshots">
       <div className="grid grid-cols-1 p-1 divide-y md:hidden divide-border-default justify-items-around divide-solid">
         {services.map((service, index) => (
           <div className="flex flex-col p-2" key={index}>
