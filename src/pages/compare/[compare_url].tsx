@@ -52,7 +52,7 @@ export default function CompareList({ services }) {
       id: 'products-information',
       name: 'Product Information',
       content: (
-        <div>
+        <div className="space-y-10">
           <CompareServiceSummaryCard services={services} />
           <CompareServiceProduct services={services} />
           <CompareServiceCarousel services={services} />
