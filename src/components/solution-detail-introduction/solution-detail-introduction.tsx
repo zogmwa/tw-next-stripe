@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { AiTwotoneHeart } from 'react-icons/ai'
-import { BiHeart } from 'react-icons/bi'
-import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+import { BsBookmarkPlus, BsBookmarkCheckFill, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
 import ReactTooltip from 'react-tooltip'
@@ -162,19 +160,15 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         </div>
         <div className="flex">
           <button
-            className={
-              bookmarkByMe
-                ? 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-red-600  text-primary'
-                : 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary'
-            }
+            className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary"
             onClick={requireLoginBeforeAction(() => setToggleBookmarkByMe())}
             disabled={isLoadingBookmark}
           >
             {isLoadingBookmark && <Spinner />}
             {bookmarkByMe ? (
-              <AiTwotoneHeart className="text-red-600 text-[1.4rem]" />
+              <BsBookmarkCheckFill className="text-primary text-[1.4rem]" />
             ) : (
-              <BiHeart className="text-primary text-[1.4rem]" />
+              <BsBookmarkPlus className="text-primary text-[1.4rem]" />
             )}
           </button>
           <PopupState variant="popover" popupId="demo-popup-popover">
