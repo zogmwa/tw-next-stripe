@@ -62,3 +62,30 @@ export async function toggleSolutionPurchase(solutionPriceId: number): Promise<a
     return null
   }
 }
+
+export async function toggleBookmarkSolution(solutionId: number): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/solution_bookmarks/', {
+      solution: solutionId,
+    })
+    return data
+  } catch (error) {
+    // TODO: error handling
+    // eslint-disable-next-line
+    toast.error('Could not bookmark a solution.')
+    return null
+  }
+}
+
+export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: string): Promise<number | null> {
+  try {
+    const { status } = await axios.delete(`/api/solution_bookmarks/${bookmarkId}/`, {
+      data: { solution: slug },
+    })
+    return status
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Could not destroy a solution bookmark.')
+    return null
+  }
+}

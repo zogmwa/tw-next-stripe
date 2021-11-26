@@ -83,6 +83,7 @@ export default function SolutionDetail({ solutionDetail }) {
     sidebar_info: solutionSidebarInfo,
     questions: solutionDetail.questions,
     my_solution_vote: solutionDetail?.my_solution_vote,
+    my_solution_bookmark: solutionDetail?.my_solution_bookmark,
   }
   const relatedProducts = solutionDetail.assets ?? []
 
