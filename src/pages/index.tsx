@@ -46,14 +46,14 @@ export default function Home() {
                 <>
                   <Typical
                     steps={[
-                      'Find the best SaaS for your needs?',
-                      350,
-                      'Integrate a SaaS into your software stack?',
-                      350,
-                      'Improve your application performance?',
-                      350,
-                      'Reduce your cloud bill?',
-                      350,
+                      'Integrate a SaaS into your stack?',
+                      400,
+                      'Improve application performance?',
+                      400,
+                      'Reduce AWS bills?',
+                      400,
+                      'Find best-fit software for your needs?',
+                      400,
                     ]}
                     wrapper="p"
                     loop={Infinity}

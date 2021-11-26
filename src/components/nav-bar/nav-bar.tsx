@@ -7,7 +7,7 @@ import { useUserContext } from '@taggedweb/hooks/use-user'
 import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineClose } from 'react-icons/md'
-import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { Button } from '../button'
 import Avatar from './avatar'
 import { NavSearchBar } from '../search-bar'
@@ -128,7 +128,7 @@ export function NavBar({ className, style }: NavBarProps) {
           </div>
           <NavbarMenuResponsive />
           <div className="flex flex-col justify-center w-full px-4 py-2 text-center">
-            <Link href="/submit-service">
+            <Link href={LIST_A_SOFTWARE_PATH}>
               <a className="py-2 tracking-wide rounded cursor-pointer hover:bg-gray-100">Submit a Web Service</a>
             </Link>
             <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`}>

@@ -6,3 +6,4 @@ export const MAX_COMPARE_COUNT = 3
 export const phoneRegex = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
 export const SOLUTIONS_CONTACT_GOOGLE_FORM = 'https://forms.gle/Tes4NywNjB6q86Xy9'
+export const LIST_A_SOFTWARE_PATH = '/list-a-software'
