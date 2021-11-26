@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiTwotoneHeart } from 'react-icons/ai'
 import { BiHeart } from 'react-icons/bi'
 import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
@@ -7,11 +8,18 @@ import ReactTooltip from 'react-tooltip'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
-import { toggleUpVoteSolution, toggleDownVoteSolution } from '@taggedweb/queries/solution'
+import {
+  toggleUpVoteSolution,
+  toggleDownVoteSolution,
+  toggleBookmarkSolution,
+  toggleCancelBookmarkSolution,
+} from '@taggedweb/queries/solution'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { SolutionFAQ } from './index'
 import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
+import { Spinner } from '../spinner'
 
 type SolutionDetailIntroductionProps = {
   introductionData: {
@@ -27,11 +35,15 @@ type SolutionDetailIntroductionProps = {
     sidebar_info: { price: number; features: { name: string }[] }
     questions: { title: string; primary_answer: string }[]
     my_solution_vote: number | null
+    my_solution_bookmark: number | null
   }
 }
 
 function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
+  const { requireLoginBeforeAction } = useRequireLogin()
   const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
+  const [bookmarkByMe, setBookmarkByMe] = useState(introductionData.my_solution_bookmark)
+  const [isLoadingBookmark, setIsLoadingBookmark] = useState(false)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const { asPath } = useRouter()
@@ -54,6 +66,23 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         }
       }
       setIsLoadingUpvote(false)
+    }
+  }
+
+  const setToggleBookmarkByMe = async () => {
+    if (!isLoadingBookmark) {
+      setIsLoadingBookmark(true)
+      if (bookmarkByMe) {
+        const bookmarkedByMeStatus = await toggleCancelBookmarkSolution(bookmarkByMe, introductionData.slug)
+        if (bookmarkedByMeStatus) setBookmarkByMe(null)
+      } else {
+        const bookmarkedByMeStatus = await toggleBookmarkSolution(introductionData.id)
+        if (bookmarkedByMeStatus) {
+          console.log(bookmarkedByMeStatus)
+          setBookmarkByMe(bookmarkedByMeStatus.id)
+        }
+      }
+      setIsLoadingBookmark(false)
     }
   }
 
@@ -132,8 +161,21 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
         </div>
         <div className="flex">
-          <button className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary">
-            <BiHeart className="text-primary text-[1.4rem]" />
+          <button
+            className={
+              bookmarkByMe
+                ? 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-red-600  text-primary'
+                : 'inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary'
+            }
+            onClick={requireLoginBeforeAction(() => setToggleBookmarkByMe())}
+            disabled={isLoadingBookmark}
+          >
+            {isLoadingBookmark && <Spinner />}
+            {bookmarkByMe ? (
+              <AiTwotoneHeart className="text-red-600 text-[1.4rem]" />
+            ) : (
+              <BiHeart className="text-primary text-[1.4rem]" />
+            )}
           </button>
           <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
