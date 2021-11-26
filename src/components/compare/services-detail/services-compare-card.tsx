@@ -1,5 +1,6 @@
 import React from 'react'
 import { Asset } from '@taggedweb/types/asset'
+import Link from 'next/link'
 import { Button } from '../../button'
 
 type CompareServiceCardProps = {
@@ -20,9 +21,14 @@ function CompareServiceCardComponent({ services }: CompareServiceCardProps) {
             </h2>
           ))}
         </div>
-        <Button buttonType="primary" textClassName="text-background-light" className="mt-2 md:mt-0">
-          Compare another Product
-        </Button>
+
+        <Link href={`/alternatives-or-similar-services/${services[0].slug}`}>
+          <a>
+            <Button buttonType="primary" textClassName="text-background-light" className="mt-2 md:mt-0">
+              Compare another Software
+            </Button>
+          </a>
+        </Link>
       </div>
       <div className="mt-4">
         {services.map((service, index) => (
