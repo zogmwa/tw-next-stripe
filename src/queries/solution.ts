@@ -71,7 +71,7 @@ export async function toggleBookmarkSolution(solutionId: number): Promise<any | 
     return data
   } catch (error) {
     // eslint-disable-next-line
-    toast.error('Could not bookmark a solution.')
+    toast.error('Failed to bookmark the solution.')
     return null
   }
 }
@@ -84,7 +84,7 @@ export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: str
     return status
   } catch (error) {
     // eslint-disable-next-line
-    toast.error('Could not destroy a solution bookmark.')
+    toast.error('Failed to delete the bookmark.')
     return null
   }
 }
