@@ -9,6 +9,11 @@ import { Formik } from 'formik'
 import { toast } from 'react-hot-toast'
 import * as yup from 'yup'
 import Link from 'next/link'
+import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
+import Popover from '@mui/material/Popover'
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
+import Typography from '@mui/material/Typography'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import {
   toggleUsedByStatus,
@@ -62,6 +67,7 @@ function ServiceDetailCardComponent({
 
   if (typeof service === 'undefined') return null
 
+  const { asPath } = useRouter()
   const [isLoadingUsedByMe, setIsLoadingUsedByMe] = useState(false)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
@@ -137,25 +143,57 @@ function ServiceDetailCardComponent({
           </div>
         </div>
         <div className="flex-1">
-          <div className="flex items-center justify-start space-x-2">
+          <div className="flex items-center justify-between space-x-2 md:justify-start">
             <>
               {editAllowed ? (
                 <EditableServiceName serviceName={service.name} onSubmit={(field, value) => onChange(field, value)} />
               ) : (
-                <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+                <>
+                  <h1 className="text-base font-medium text-text-primary">{service.name}</h1>
+                  <PopupState variant="popover" popupId="demo-popup-popover">
+                    {(popupState) => (
+                      <div className="flex justify-end md:hidden">
+                        <Button icon={<BsShare className="text-primary" />} {...bindTrigger(popupState)}>
+                          Share
+                        </Button>
+                        <Popover
+                          {...bindPopover(popupState)}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        >
+                          <Typography sx={{ paddingY: '0.5rem', paddingX: '1rem' }}>
+                            <div className="flex space-x-2">
+                              <FacebookShareButton url={process.env.SITE_BASE_URL + asPath}>
+                                <BsFacebook className="p-1 text-2xl rounded-full text-primary" />
+                              </FacebookShareButton>
+                              <LinkedinShareButton url={process.env.SITE_BASE_URL + asPath}>
+                                <BsLinkedin className="p-1 text-2xl rounded-md text-primary" />
+                              </LinkedinShareButton>
+                              <TwitterShareButton url={process.env.SITE_BASE_URL + asPath}>
+                                <BsTwitter className="p-1 text-2xl rounded-full text-primary" />
+                              </TwitterShareButton>
+                            </div>
+                          </Typography>
+                        </Popover>
+                      </div>
+                    )}
+                  </PopupState>
+                </>
               )}
             </>
             <a
               href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
               target={service.affiliate_link || service.website ? '_blank' : ''}
-              className="self-center"
+              className="self-center hidden md:inline-flex"
               rel="noreferrer"
             >
-              <Button
-                className="hidden md:inline-flex"
-                size="small"
-                icon={<GrShare className="gr-primary gr-icon-share" />}
-              >
+              <Button size="small" icon={<GrShare className="gr-primary gr-icon-share" />}>
                 Visit Website
               </Button>
             </a>
