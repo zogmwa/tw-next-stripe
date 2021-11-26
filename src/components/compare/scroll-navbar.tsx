@@ -1,5 +1,6 @@
 import React from 'react'
 import ScrollableLink from '../scrollspy/scrollable-link'
+
 // className='flex-1 px-1 py-2 text-sm font-medium text-gray-900 border-b-2 border-transparent whitespace-nowrap focus:outline-none focus:ring-0 focus:ring-offset-0 min-w-min'
 
 function CompareServiceScrollNavbarComponent({ elements }) {
