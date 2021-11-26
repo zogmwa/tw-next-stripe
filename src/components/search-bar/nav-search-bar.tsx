@@ -51,7 +51,7 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     })
     if (onWebServiceSelect) {
       setTags(value)
-      router.push(`services/${webserviceSlug}`)
+      router.push(`software/${webserviceSlug}`)
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')

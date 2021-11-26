@@ -41,7 +41,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <Link href={`/services/${service.slug}/`}>
+          <Link href={`/software/${service.slug}/`}>
             <a>
               <ServiceLogo
                 serviceName={service?.name}
@@ -58,7 +58,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
         </div>
         <div className="flex-1">
           <div className="flex justify-start space-x-2">
-            <Link href={`/services/${service.slug}/`}>
+            <Link href={`/software/${service.slug}/`}>
               <a>
                 <h1 className="text-base font-medium cursor-pointer text-text-primary">{service.name}</h1>
               </a>
@@ -78,7 +78,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                 Visit Website
               </Button>
             </a>
-            <Link href={`/services/${service.slug}/`}>
+            <Link href={`/software/${service.slug}/`}>
               <a>
                 <div className="flex-1 cursor-pointer" />
               </a>
@@ -90,7 +90,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
             ) : service.description ? (
               <TruncatedDescription description={service.description.substring(0, 200)} />
             ) : null}
-            <Link href={`/services/${service.slug}/`}>
+            <Link href={`/software/${service.slug}/`}>
               <a>
                 <div className="flex-1 cursor-pointer" />
               </a>
@@ -116,13 +116,13 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                 </Button>
               )
             })}
-            <Link href={`/services/${service.slug}/`}>
+            <Link href={`/software/${service.slug}/`}>
               <a>
                 <div className="flex-1 cursor-pointer" />
               </a>
             </Link>
           </div>
-          <Link href={`/services/${service.slug}/`}>
+          <Link href={`/software/${service.slug}/`}>
             <a>
               <div className="flex items-center space-x-6 text-sm cursor-pointer">
                 <div className="flex items-center space-x-2">
@@ -147,7 +147,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
           </Link>
         </div>
       </div>
-      <Link href={`/services/${service.slug}/`}>
+      <Link href={`/software/${service.slug}/`}>
         <a>
           <div className="flex flex-row items-center justify-center space-x-4 cursor-pointer md:pr-2 md:flex-col md:space-x-0 md:space-y-2">
             <div className="flex items-center space-x-2 md:hidden">

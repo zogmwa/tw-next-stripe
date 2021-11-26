@@ -111,7 +111,7 @@ export default function ServiceList({
     setCheckedList(list)
   }
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
-    let query = `/alternatives-or-similar-services/${slug}?page=${value}`
+    let query = `/alternatives-or-similar-softwares/${slug}?page=${value}`
     if (order) {
       query += `&order=${order}`
     }
@@ -157,7 +157,7 @@ export default function ServiceList({
               <SortServiceList
                 defaultValue={order}
                 onChange={(value) => {
-                  let query = `/alternatives-or-similar-services/${slug}`
+                  let query = `/alternatives-or-similar-softwares/${slug}`
                   if (value) {
                     query += `?order=${value}`
                     if (free_trial) {
@@ -176,7 +176,7 @@ export default function ServiceList({
               <FilterServiceList
                 defaultValue={free_trial}
                 onChange={(value) => {
-                  let query = `/alternatives-or-similar-services/${slug}`
+                  let query = `/alternatives-or-similar-softwares/${slug}`
                   if (value) {
                     query += `?free_trial=${value}`
                     if (order) {
@@ -203,7 +203,7 @@ export default function ServiceList({
                   <MobileViewSortAndFilterServiceList
                     defaultSortValue={order}
                     onSortChange={(value) => {
-                      let query = `/alternatives-or-similar-services/${slug}`
+                      let query = `/alternatives-or-similar-softwares/${slug}`
                       if (value) {
                         query += `?order=${value}`
                         if (free_trial) {
@@ -218,7 +218,7 @@ export default function ServiceList({
                     }}
                     defaultFilterValue={free_trial}
                     onFilterChange={(value) => {
-                      let query = `/alternatives-or-similar-services/${slug}?name=${name}`
+                      let query = `/alternatives-or-similar-softwares/${slug}?name=${name}`
                       if (value) {
                         query += `?free_trial=${value}`
                         if (order) {

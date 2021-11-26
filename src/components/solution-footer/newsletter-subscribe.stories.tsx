@@ -7,6 +7,6 @@ export default {
   component: SubscribeComponent,
 } as Meta
 
-export function DefaultHomePageFooter() {
+export function SubscribeComponentFooter() {
   return <SubscribeComponent />
 }

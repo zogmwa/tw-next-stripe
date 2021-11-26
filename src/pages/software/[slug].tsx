@@ -13,6 +13,7 @@ import { ReviewsContainer } from '@taggedweb/components/service-detail/get-revie
 import { Asset } from '@taggedweb/types/asset'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchServiceServer } from '@taggedweb/server-queries/fetch-service'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export default function Service() {
   const { query } = useRouter()
@@ -61,17 +62,24 @@ export default function Service() {
       content: <RelatedContent name={data.name} slug={data.slug} />,
     },
   ]
+  const primary_tag = data.tags[0]
 
   return (
-    <div className="min-h-full p-4 bg-background-light">
-      <div className="max-w-screen-lg mx-auto">
-        <ServiceDetailCard service={data as Asset} />
-        {/* Sidebar will be rendered in Desktop */}
-        <ServiceDetailSidebar elements={elements} />
-        {/* Tab will be rendered in Mobile */}
-        <ServiceDetailTab elements={elements} />
+    <>
+      <DynamicHeader
+        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
+        description={`Best ${primary_tag?.name ?? ''} Software`}
+      />
+      <div className="min-h-full p-4 bg-background-light">
+        <div className="max-w-screen-lg mx-auto">
+          <ServiceDetailCard service={data as Asset} />
+          {/* Sidebar will be rendered in Desktop */}
+          <ServiceDetailSidebar elements={elements} />
+          {/* Tab will be rendered in Mobile */}
+          <ServiceDetailTab elements={elements} />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

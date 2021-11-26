@@ -87,7 +87,7 @@ function RelatedContentComponent({ name, slug }: RelateName) {
         viewMore ? (
           <div className="flex flex-col space-y-2">
             <div>
-              <Link href={`/alternatives-or-similar-services/${slug}`}>
+              <Link href={`/alternatives-or-similar-softwares/${slug}`}>
                 <a>
                   <Button buttonType="primary" className="mt-2">
                     See Similar Services

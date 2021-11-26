@@ -10,6 +10,8 @@ import { SortServiceList } from '@taggedweb/components/service-list-filter/sort-
 import { MobileViewSortAndFilterServiceList } from '@taggedweb/components/service-list-filter/mobile-view'
 import { FilterServiceList } from '@taggedweb/components/service-list-filter/filter-list'
 import { Button } from '@taggedweb/components/button'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { unslugify } from '@taggedweb/utils/unslugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -23,8 +25,9 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     }
   }
 
-  let solutionData, defaultUrl, keywords
+  let solutionData, defaultUrl, keywords, pageTitle
   try {
+    pageTitle = unslugify(String(search_keywords))
     keywords = SplitTheString(search_keywords)
     defaultUrl = '?q=' + keywords.join('&q=')
     const sendUrl = `${defaultUrl}&page=1&offest=0&limit=20`
@@ -34,11 +37,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     // TODO: Redirect to solution search page.
   }
   return {
-    props: { solutionData, defaultUrl, keywords },
+    props: { solutionData, defaultUrl, pageTitle },
   }
 })
 
-export default function SolutionList({ solutionData, defaultUrl, keywords }) {
+export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   if (typeof solutionData.results === 'undefined') return null
 
   const [page, setPage] = useState(1)
@@ -106,10 +109,11 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
     }
   }, [solutionList])
   return (
-    <div className="flex justify-center">
-      <div className="flex max-w-screen-lg pt-4">
+    <>
+      <DynamicHeader />
+      <div className="flex max-w-screen-lg px-2 mx-auto my-10">
         {!error && (
-          <div className="hidden md:flex flex-col space-y-4 w-[20rem]">
+          <div className="flex-col hidden w-1/4 space-y-4 md:flex">
             <div className="border rounded">
               <SortServiceList onChange={orderingSolution} />{' '}
             </div>
@@ -118,14 +122,10 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
             </div>
           </div>
         )}
-        <div className="flex flex-col justify-between w-full p-2 md:ml-6">
-          <h1 className="hidden text-xl font-bold md:flex text-text-primary">
-            {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
-          </h1>
+        <div className="flex flex-col justify-between w-full p-2 md:w-3/4 md:ml-3">
+          <h1 className="hidden text-xl font-bold text-black md:flex">All &#8220;{pageTitle}&#8221; Solutions</h1>
           <div className="flex items-center justify-between md:hidden">
-            <h1 className="text-xl font-bold text-text-primary">
-              {keywords.map((keyword) => keyword[0].toUpperCase() + keyword.slice(1).toLowerCase()).join(' ')}
-            </h1>
+            <h1 className="text-xl font-bold text-black">All &#8220;{pageTitle}&#8221; Solutions</h1>
             {!error && (
               <MobileViewSortAndFilterServiceList
                 onSortChange={orderingSolution}
@@ -134,7 +134,7 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
               />
             )}
           </div>
-          <h1 className="mt-4 text-xl font-bold text-text-primary">Tag Suggestions</h1>
+          <h1 className="mt-4 text-xl font-medium text-text-primary">Tag Suggestions</h1>
           <div className="flex flex-row flex-wrap my-2">
             {showSuggestionTags.map((tag) => {
               return (
@@ -163,6 +163,6 @@ export default function SolutionList({ solutionData, defaultUrl, keywords }) {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

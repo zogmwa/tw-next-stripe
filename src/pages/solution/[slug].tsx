@@ -5,6 +5,7 @@ import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import { SolutionDetailSidebar } from '@taggedweb/components/solution-detail-sidebar'
 import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detail-introduction'
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -47,6 +48,9 @@ export default function SolutionDetail({ solutionDetail }) {
   let price = solutionDetail.prices.filter((price) => price.is_primary === true)[0]
   if (price?.length === 0) price = solutionDetail.prices[0]
 
+  let primary_tag = solutionDetail.primary_tag
+  if (primary_tag?.length === 0) primary_tag = solutionDetail.tags[0]
+
   const solutionSidebarInfo = {
     primary_price: price,
     price: price?.price,
@@ -83,21 +87,27 @@ export default function SolutionDetail({ solutionDetail }) {
   const relatedProducts = solutionDetail.assets ?? []
 
   return (
-    <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
-      <Breadcrumb breadcrumbs={breadcrumbData} />
-      <div className="flex mt-6">
-        <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
-          <SolutionDetailIntroduction introductionData={introductionData} />
+    <>
+      <DynamicHeader
+        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
+        description={`Best ${primary_tag?.name ?? ''} Software`}
+      />
+      <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
+        <Breadcrumb breadcrumbs={breadcrumbData} />
+        <div className="flex mt-6">
+          <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
+            <SolutionDetailIntroduction introductionData={introductionData} />
+          </div>
+          <SolutionDetailSidebar
+            detailInfo={solutionSidebarInfo}
+            className="w-[15rem] h-full sticky top-16 hidden md:flex"
+          />
         </div>
-        <SolutionDetailSidebar
-          detailInfo={solutionSidebarInfo}
-          className="w-[15rem] h-full sticky top-16 hidden md:flex"
-        />
+        <div className="flex flex-col pb-6 mt-8">
+          {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related Software</h4>}
+          <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
+        </div>
       </div>
-      <div className="flex flex-col pb-6 mt-8">
-        {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related Software</h4>}
-        <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
-      </div>
-    </div>
+    </>
   )
 }

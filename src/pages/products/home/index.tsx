@@ -5,6 +5,7 @@ import { Button } from '@taggedweb/components/button'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { HomepageFeatured } from '@taggedweb/components/homepage-featured'
 import { client } from '@taggedweb/utils/client'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export const getServerSideProps = async () => {
   const { data: featuredList } = await client.get('/assets/featured/')
@@ -21,6 +22,7 @@ export default function Home({ featuredList }) {
   if (featuredList.length > 0) showFeaturedList = true
   return (
     <div>
+      <DynamicHeader />
       <div className="max-w-screen-lg pl-2 mx-auto">
         <div className="flex flex-col items-start justify-start my-12 space-y-8">
           <h1 className="text-4xl font-semibold">Find the best SaaS software and web services for your needs</h1>

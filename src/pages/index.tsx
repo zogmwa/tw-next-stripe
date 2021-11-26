@@ -6,15 +6,17 @@ import { Button } from '@taggedweb/components/button'
 import { SearchComponent } from '@taggedweb/components/homepage-searchbar'
 import Link from 'next/link'
 import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export default function Home() {
   return (
     <div>
-      <div className="relative flex justify-between bg-blue-600">
+      <DynamicHeader />
+      <div className="relative flex justify-between overflow-hidden bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
           alt="Solution Shapes"
-          className="absolute z-0 hidden max-w-5xl mx-auto md:top-0 lg:top-12 lg:left-44 lg:flex"
+          className="absolute z-0 hidden max-w-5xl md:top-0 lg:top-12 lg:left-40 lg:flex"
         />
         <img
           src="/images/homepage_icon1.png"
@@ -90,7 +92,7 @@ export default function Home() {
         />
         <div className="max-w-screen-lg px-2 mx-auto">
           <div className="flex flex-col md:flex-row md:space-x-4">
-            <div className="relative w-full md:flex h-80 md:w-1/2 md:mr-8">
+            <div className="relative hidden w-full md:flex h-80 md:w-1/2 md:mr-8">
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
@@ -113,16 +115,16 @@ export default function Home() {
                 </a>
               </Link>
             </div>
-            <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8">
+            <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8 md:mt-2">
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
-                className="absolute z-0 w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
+                className="absolute w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
                 alt="finding_sol_1"
-                className="absolute bottom-0 z-10 w-3/4 transform rounded shadow right-8 skew-pic"
+                className="absolute bottom-0 w-3/4 transform rounded shadow right-8 skew-pic"
               />
             </div>
           </div>
