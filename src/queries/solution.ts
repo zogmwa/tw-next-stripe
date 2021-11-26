@@ -70,7 +70,6 @@ export async function toggleBookmarkSolution(solutionId: number): Promise<any | 
     })
     return data
   } catch (error) {
-    // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not bookmark a solution.')
     return null
