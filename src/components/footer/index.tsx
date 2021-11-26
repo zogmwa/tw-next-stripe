@@ -1,1 +1,1 @@
-export { HomePageFooter } from './homepage-footer'
+export { FooterComponent } from './footer'
