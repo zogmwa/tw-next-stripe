@@ -107,18 +107,10 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           </div>
           <div className="flex self-start space-x-2">
             <div className="p-1 border border-solid rounded-md border-border-default">
-              <img
-                src="https://s3-alpha-sig.figma.com/img/439e/fbad/d7071737e5895ae4fc5638fce3ef9d7d?Expires=1637539200&Signature=Z4Zxj2A8~d-~jzhWTQHMlbrjY8X3PxwvJ-YvhooQ90OQeYSoZWUDxsWlCgZvtl1dhJ7~stlijY9cic~BrnD0Uqdmz~~1MwMEgQsqrcs1Oz6Gi~Yc4hssrMNvpg2elR4ItWu349hWWwI~-mUlTv6YugkxaU3AuzROJtlKAoDfX8dXvmZvCYFenzEhK-k3tTTSviW2ynIAVzBDCFBlt9QqA0SWFS6by65ff7NilgzUbsryJCsLlbqmrsHcODbqxWoICPW9oQ09C3o48-sb60LEWl-w2hbaE2mkYvLVQdpCg7zXwd878AN~Tz3ebm5C0WFbjK9gjtkLARBxLg3ykHIfuA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                alt="diamond"
-                className="w-8 h-8"
-              />
+              <img src="/images/diamond.png" alt="diamond" className="w-8 h-8" />
             </div>
             <div className="p-1 border border-solid rounded-md border-border-default">
-              <img
-                src="https://s3-alpha-sig.figma.com/img/c955/3ecf/e57798dfb2637c0280d36e30d747befc?Expires=1637539200&Signature=VPWp5Nb2vNzRd2tth4B9~X9R2MOxmVxVu9orXKRI0BLAPXChgrExUYcksMn6exW6C-6q47NOa2QXcDCc8dGrDwoRGwye19BK5oPRVCwLie9Rm3cAonu0MA3npHwSuFzJZKbAknMraHr1sk5OSZicnjHbpnKWi3JyzB6KeF8-qPN2Sf0aJGDMpJoDy3Hk~IsfbbBge7NdEZJkItFyqeCp7QHwMq7aWFXhDPP-Xt440CFVk-fWG7hLcBO6NgdKCIZGrhcVdBIdkrbZAGbFsVNqQ9Y~7GcEkzn2T7xT31SbQb3LqE1Z9o35r-mOBl08X~MIeuMgqHebLoi7MnjQgvNUXA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                alt="webflow"
-                className="w-8 h-8"
-              />
+              <img src="/images/webflow.png" alt="webflow" className="w-8 h-8" />
             </div>
           </div>
         </div>
