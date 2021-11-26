@@ -28,7 +28,7 @@ function ProfileCardComponent({ asset }: ProfileCardProps) {
               href={asset.affiliate_link ? asset.affiliate_link : asset.website ?? '#'}
               target={asset.affiliate_link || asset.website ? '_blank' : ''}
               className="self-center"
-              rel="noreferrer"
+              rel="noreferrer nofollow"
             >
               <Button
                 className="hidden md:inline-flex"

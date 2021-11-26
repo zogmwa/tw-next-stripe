@@ -40,7 +40,9 @@ export function SubscribeComponent() {
       <div className="flex flex-col items-start justify-between w-full py-4 pr-2 space-y-2 text-sm text-white sm:space-y-0 lg:flex-row">
         <div className="flex flex-col w-full space-y-2 sm:space-y-4 ">
           <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
-          <h4 className="text-sm text-white">Latest news, articles, and resources, sent to your inbox weekly</h4>
+          <h4 className="text-sm text-white">
+            Latest articles, news tips on useful Software, SaaS Integrations and more (you can always opt out later)!
+          </h4>
         </div>
         {formDetails.isSubscribed ? (
           <div className="w-full py-4 font-bold text-md lg:text-right">

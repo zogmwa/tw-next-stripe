@@ -67,7 +67,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
               href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
               target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center"
-              rel="noreferrer"
+              rel="noreferrer nofollow"
             >
               <GrShare className="md:hidden sm:inline-flex gr-primary gr-icon-share" />
               <Button
