@@ -66,6 +66,7 @@ const introductionData = {
     },
   ],
   my_solution_vote: 3,
+  my_solution_bookmark: null,
 }
 
 export function DefaultSolutionDetailIntroduction() {
