@@ -1,6 +1,6 @@
 import React from 'react'
 import { CompareServiceCard } from '@taggedweb/components/compare/services-detail'
-import { CompareServiceTab } from '@taggedweb/components/compare/tab'
+// import { CompareServiceTab } from '@taggedweb/components/compare/tab'
 import { CompareServiceSummaryCard } from '@taggedweb/components/compare/summary-card'
 import { fetchServicesDetailCompareServer } from '@taggedweb/server-queries/fetch-services-compare-detail'
 import { CompareServiceProduct } from '@taggedweb/components/compare/page-cards/product'
@@ -52,7 +52,7 @@ export default function CompareList({ services }) {
       id: 'products-information',
       name: 'Product Information',
       content: (
-        <div>
+        <div className="space-y-10">
           <CompareServiceSummaryCard services={services} />
           <CompareServiceProduct services={services} />
           <CompareServiceCarousel services={services} />
@@ -69,19 +69,19 @@ export default function CompareList({ services }) {
       name: 'Pricing',
       content: <CompareServicePricing services={services} />,
     },
-    {
-      id: 'qa',
-      name: 'Q & A',
-      content: <div />,
-    },
+    // {
+    //   id: 'qa',
+    //   name: 'Q & A',
+    //   content: <div />,
+    // },
     {
       id: 'reviews',
       name: 'Reviews',
       content: <CompareServiceRating services={services} />,
     },
     {
-      id: 'related-products',
-      name: 'Related Software',
+      id: 'organisations',
+      name: 'Organisations',
       content: <CompareServiceUsedBy services={services} />,
     },
   ]
@@ -92,7 +92,7 @@ export default function CompareList({ services }) {
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">
           <CompareServiceCard services={services} />
-          <CompareServiceTab elements={elements} />
+          {/* <CompareServiceTab elements={elements} /> */}
           <CompareServiceScrollNavbar elements={elements} />
         </div>
       </div>

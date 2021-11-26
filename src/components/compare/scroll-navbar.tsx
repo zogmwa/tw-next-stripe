@@ -4,9 +4,9 @@ import ScrollableLink from '../scrollspy/scrollable-link'
 
 function CompareServiceScrollNavbarComponent({ elements }) {
   return (
-    <div className="hidden mt-10 md:block">
+    <div className="mt-10">
       <div className="sticky z-10 bg-white border-b border-gray-200 top-14">
-        <div className="flex px-4 -mb-px space-x-8 overflow-x-auto">
+        <div className="flex px-2 -mb-px space-x-2 overflow-x-auto md:px-4 md:space-x-8 scrollbar-hide">
           {elements.map((item) => (
             <ScrollableLink
               href={`#scrollable-${item.id}`}
