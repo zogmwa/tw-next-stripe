@@ -102,7 +102,7 @@ function SubmitService() {
 
   return (
     <>
-      <DynamicHeader />
+      <DynamicHeader title="TaggedWeb - List a Software" />
       <div className="min-h-full p-4 bg-background-light">
         <div className="flex items-start max-w-screen-lg mx-auto">
           <Stepper
@@ -157,4 +157,4 @@ function SubmitService() {
   )
 }
 
-export default withPageAuthRequired(SubmitService, { message: 'You need to login to submit a service.' })
+export default withPageAuthRequired(SubmitService, { message: 'Log-in is required to submit a software for listing' })

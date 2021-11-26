@@ -126,7 +126,7 @@ function ServiceDetailCardComponent({
               <a
                 href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
                 target={service.affiliate_link || service.website ? '_blank' : ''}
-                rel="noreferrer"
+                rel="noreferrer nofollow"
               >
                 <ServiceLogo
                   serviceName={service?.name}
@@ -275,7 +275,7 @@ function ServiceDetailCardComponent({
           href={service.website ?? '#'}
           target={service.website ? '_blank' : ''}
           className="self-center"
-          rel="noreferrer"
+          rel="noreferrer nofollow"
         >
           <Button
             className="inline-flex w-40 md:hidden"

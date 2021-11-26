@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { HiClipboardList } from 'react-icons/hi'
@@ -20,9 +21,11 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <AiOutlineSearch />
             </div>
-            <div className="text-2xl font-bold">Find micro solutions provided by domain experts</div>
+            <div className="text-2xl font-bold">Find software solutions provided by domain experts</div>
             <div className="text-lg text-text-tertiary">
-              Search through our available solutions. See description and scope of work to see if it fits your needs
+              Micro-Solutions are well defined in scope and can range from SaaS Integration Solutions to a consultation
+              on how to effectively utilize a piece of software. Check description and scope of work to see if a
+              solution fits your needs.
             </div>
           </div>
         </div>
@@ -35,9 +38,12 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <HiClipboardList />
             </div>
-            <div className="text-2xl font-bold">See Solution Details, Scope of Work, Ask Questions to clarify</div>
+            <div className="text-2xl font-bold">See Solution details, Scope of Work, FAQs, Ask Questions</div>
             <div className="text-lg text-text-tertiary">
-              See detials, and if needed ask questions to clarify whether the solution may meet your needs.
+              See details about the solution. If needed, ask questions with us over chat to clarify if the solution
+              meets your needs. Reach out to us if anything is unclear. If you are not looking for solutions but just
+              finding the best-fit SaaS options, then you may browse through our open{' '}
+              <Link href="/softwares"> software catalog </Link> or can ask us for software recommendations.
             </div>
           </div>
           <div className="items-center justify-center hidden w-2/12 md:flex">
@@ -65,8 +71,8 @@ export function FindingSolutions() {
             </div>
             <div className="text-2xl font-bold">Book the solution and let us take care of the rest</div>
             <div className="text-lg text-text-tertiary">
-              We will match you with the top 2% solution providers who will “solve” it for you. We will communicate with
-              you through the process of providing the solution.
+              We will match you with the top 10 percent solution providers who will “solve” it for you. We will
+              communicate with you during the process of fulfilling the solution.
             </div>
           </div>
         </div>

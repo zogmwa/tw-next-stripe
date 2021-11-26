@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
-import { BiHeart } from 'react-icons/bi'
-import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+import { BsBookmarkPlus, BsBookmarkCheckFill, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 import Popover from '@mui/material/Popover'
 import ReactTooltip from 'react-tooltip'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
-import { toggleUpVoteSolution, toggleDownVoteSolution } from '@taggedweb/queries/solution'
+import {
+  toggleUpVoteSolution,
+  toggleDownVoteSolution,
+  toggleBookmarkSolution,
+  toggleCancelBookmarkSolution,
+} from '@taggedweb/queries/solution'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
+import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { SolutionFAQ } from './index'
 import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
+import { Spinner } from '../spinner'
 
 type SolutionDetailIntroductionProps = {
   introductionData: {
@@ -27,11 +33,15 @@ type SolutionDetailIntroductionProps = {
     sidebar_info: { price: number; features: { name: string }[] }
     questions: { title: string; primary_answer: string }[]
     my_solution_vote: number | null
+    my_solution_bookmark: number | null
   }
 }
 
 function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
+  const { requireLoginBeforeAction } = useRequireLogin()
   const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
+  const [bookmarkByMe, setBookmarkByMe] = useState(introductionData.my_solution_bookmark)
+  const [isLoadingBookmark, setIsLoadingBookmark] = useState(false)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const { asPath } = useRouter()
@@ -54,6 +64,23 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         }
       }
       setIsLoadingUpvote(false)
+    }
+  }
+
+  const setToggleBookmarkByMe = async () => {
+    if (!isLoadingBookmark) {
+      setIsLoadingBookmark(true)
+      if (bookmarkByMe) {
+        const bookmarkedByMeStatus = await toggleCancelBookmarkSolution(bookmarkByMe, introductionData.slug)
+        if (bookmarkedByMeStatus) setBookmarkByMe(null)
+      } else {
+        const bookmarkedByMeStatus = await toggleBookmarkSolution(introductionData.id)
+        if (bookmarkedByMeStatus) {
+          console.log(bookmarkedByMeStatus)
+          setBookmarkByMe(bookmarkedByMeStatus.id)
+        }
+      }
+      setIsLoadingBookmark(false)
     }
   }
 
@@ -85,36 +112,20 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             />
             <div className="flex min-w-[5rem]">
               <div className="p-1 border border-solid rounded-md border-border-default">
-                <img
-                  src="https://s3-alpha-sig.figma.com/img/439e/fbad/d7071737e5895ae4fc5638fce3ef9d7d?Expires=1637539200&Signature=Z4Zxj2A8~d-~jzhWTQHMlbrjY8X3PxwvJ-YvhooQ90OQeYSoZWUDxsWlCgZvtl1dhJ7~stlijY9cic~BrnD0Uqdmz~~1MwMEgQsqrcs1Oz6Gi~Yc4hssrMNvpg2elR4ItWu349hWWwI~-mUlTv6YugkxaU3AuzROJtlKAoDfX8dXvmZvCYFenzEhK-k3tTTSviW2ynIAVzBDCFBlt9QqA0SWFS6by65ff7NilgzUbsryJCsLlbqmrsHcODbqxWoICPW9oQ09C3o48-sb60LEWl-w2hbaE2mkYvLVQdpCg7zXwd878AN~Tz3ebm5C0WFbjK9gjtkLARBxLg3ykHIfuA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                  alt="diamond"
-                  className="w-[2rem]"
-                />
+                <img src="/images/diamond.png" alt="diamond" className="w-[2rem]" />
               </div>
               <div className="p-1 ml-2 border border-solid rounded-md border-border-default">
-                <img
-                  src="https://s3-alpha-sig.figma.com/img/c955/3ecf/e57798dfb2637c0280d36e30d747befc?Expires=1637539200&Signature=VPWp5Nb2vNzRd2tth4B9~X9R2MOxmVxVu9orXKRI0BLAPXChgrExUYcksMn6exW6C-6q47NOa2QXcDCc8dGrDwoRGwye19BK5oPRVCwLie9Rm3cAonu0MA3npHwSuFzJZKbAknMraHr1sk5OSZicnjHbpnKWi3JyzB6KeF8-qPN2Sf0aJGDMpJoDy3Hk~IsfbbBge7NdEZJkItFyqeCp7QHwMq7aWFXhDPP-Xt440CFVk-fWG7hLcBO6NgdKCIZGrhcVdBIdkrbZAGbFsVNqQ9Y~7GcEkzn2T7xT31SbQb3LqE1Z9o35r-mOBl08X~MIeuMgqHebLoi7MnjQgvNUXA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                  alt="webflow"
-                  className="w-[2rem]"
-                />
+                <img src="/images/webflow.png" alt="webflow" className="w-[2rem]" />
               </div>
             </div>
           </div>
         </div>
         <div className="self-start hidden md:flex min-w-[5rem]">
           <div className="p-1 border border-solid rounded-md border-border-default">
-            <img
-              src="https://s3-alpha-sig.figma.com/img/439e/fbad/d7071737e5895ae4fc5638fce3ef9d7d?Expires=1637539200&Signature=Z4Zxj2A8~d-~jzhWTQHMlbrjY8X3PxwvJ-YvhooQ90OQeYSoZWUDxsWlCgZvtl1dhJ7~stlijY9cic~BrnD0Uqdmz~~1MwMEgQsqrcs1Oz6Gi~Yc4hssrMNvpg2elR4ItWu349hWWwI~-mUlTv6YugkxaU3AuzROJtlKAoDfX8dXvmZvCYFenzEhK-k3tTTSviW2ynIAVzBDCFBlt9QqA0SWFS6by65ff7NilgzUbsryJCsLlbqmrsHcODbqxWoICPW9oQ09C3o48-sb60LEWl-w2hbaE2mkYvLVQdpCg7zXwd878AN~Tz3ebm5C0WFbjK9gjtkLARBxLg3ykHIfuA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-              alt="diamond"
-              className="w-[2rem]"
-            />
+            <img src="/images/diamond.png" alt="diamond" className="w-[2rem]" />
           </div>
           <div className="p-1 ml-2 border border-solid rounded-md border-border-default">
-            <img
-              src="https://s3-alpha-sig.figma.com/img/c955/3ecf/e57798dfb2637c0280d36e30d747befc?Expires=1637539200&Signature=VPWp5Nb2vNzRd2tth4B9~X9R2MOxmVxVu9orXKRI0BLAPXChgrExUYcksMn6exW6C-6q47NOa2QXcDCc8dGrDwoRGwye19BK5oPRVCwLie9Rm3cAonu0MA3npHwSuFzJZKbAknMraHr1sk5OSZicnjHbpnKWi3JyzB6KeF8-qPN2Sf0aJGDMpJoDy3Hk~IsfbbBge7NdEZJkItFyqeCp7QHwMq7aWFXhDPP-Xt440CFVk-fWG7hLcBO6NgdKCIZGrhcVdBIdkrbZAGbFsVNqQ9Y~7GcEkzn2T7xT31SbQb3LqE1Z9o35r-mOBl08X~MIeuMgqHebLoi7MnjQgvNUXA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-              alt="webflow"
-              className="w-[2rem]"
-            />
+            <img src="/images/webflow.png" alt="webflow" className="w-[2rem]" />
           </div>
         </div>
       </div>
@@ -132,8 +143,17 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
         </div>
         <div className="flex">
-          <button className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary">
-            <BiHeart className="text-primary text-[1.4rem]" />
+          <button
+            className="inline-flex items-center justify-center px-2 py-1 mr-2 space-x-4 text-sm border rounded-md border-primary text-primary"
+            onClick={requireLoginBeforeAction(() => setToggleBookmarkByMe())}
+            disabled={isLoadingBookmark}
+          >
+            {isLoadingBookmark && <Spinner />}
+            {bookmarkByMe ? (
+              <BsBookmarkCheckFill className="text-primary text-[1.4rem]" />
+            ) : (
+              <BsBookmarkPlus className="text-primary text-[1.4rem]" />
+            )}
           </button>
           <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
