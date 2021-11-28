@@ -72,7 +72,7 @@ export default function SolutionDetail({ solutionDetail }) {
     },
     title: solutionDetail.title,
     upvoted_count: solutionDetail.upvotes_count,
-    users_count: 1100,
+    booked_count: solutionDetail.booked_count,
     provide_organization: {
       name: solutionDetail.organization.name,
       logo_url: solutionDetail.organization.logo_url,
