@@ -42,7 +42,7 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
   return (
     <div
       className={clsx(
-        'flex flex-col p-4 mt-2 mr-2 border border-solid rounded border-border-default cursor-pointer',
+        'flex flex-col p-4 m-2 border border-solid rounded border-border-default cursor-pointer',
         className,
       )}
       onClick={() => router.push(`/solution/${listingData.slug}`)}

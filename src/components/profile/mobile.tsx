@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Profile } from '@taggedweb/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
+import { BookmarkedSolutionsProfile } from './bookmarked-solutions'
 
 export const ProfileMobile = ({ profile }: { profile: Profile }) => {
   const elements = [
@@ -16,6 +17,11 @@ export const ProfileMobile = ({ profile }: { profile: Profile }) => {
       id: 'published-assets',
       name: 'Published Assets',
       content: <PublishedAssetsProfile data={profile} />,
+    },
+    {
+      id: 'bookmarked-solutions',
+      name: 'Bookmarked Solutions',
+      content: <BookmarkedSolutionsProfile data={profile} />,
     },
   ]
 
@@ -45,9 +51,6 @@ export const ProfileMobile = ({ profile }: { profile: Profile }) => {
                 </HeadlessuiTab>
               ))}
             </div>
-            <span className="block h-full ml-4 text-sm whitespace-nowrap">{`${
-              profile.submitted_assets?.length ?? 0
-            } Product(s)`}</span>
           </HeadlessuiTab.List>
         </div>
         <HeadlessuiTab.Panels as={Fragment}>
