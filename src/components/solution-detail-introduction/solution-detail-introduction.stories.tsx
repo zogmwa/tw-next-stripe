@@ -27,6 +27,14 @@ const introductionData = {
   scope_of_work_description:
     'A product is a tangible item that is put on the market for acquisition, attention, or consumption, while a service is an intangible item, which arises from the output of one or more individuals. Although it seems like the main distinction between the two concepts is founded on their tangibility, that is not always the case. In most cases services are intangible, but products are not always tangible.',
   sidebar_info: {
+    primary_price: {
+      id: 1,
+      solution: 1,
+      stripe_price_id: 'randomString',
+      price: 10,
+      currency: 'USD',
+      is_primary: true,
+    },
     price: 120,
     features: [
       { name: '10 Ready Capacity' },
