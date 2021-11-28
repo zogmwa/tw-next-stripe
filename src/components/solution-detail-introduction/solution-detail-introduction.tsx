@@ -30,7 +30,18 @@ type SolutionDetailIntroductionProps = {
     provide_organization: { name: string; logo_url: string | null; website: string | null }
     overview_description: string
     scope_of_work_description: string
-    sidebar_info: { price: number; features: { name: string }[] }
+    sidebar_info: {
+      primary_price: {
+        id: number
+        solution: number
+        stripe_price_id: string
+        price: string | number
+        currency: string
+        is_primary: boolean
+      }
+      price: number
+      features: { name: string }[]
+    }
     questions: { title: string; primary_answer: string }[]
     my_solution_vote: number | null
     my_solution_bookmark: number | null
