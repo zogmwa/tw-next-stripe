@@ -119,12 +119,12 @@ export default function Home() {
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
-                className="absolute w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
+                className="absolute w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
                 alt="finding_sol_1"
-                className="absolute bottom-0 w-3/4 transform rounded shadow right-8 skew-pic"
+                className="absolute bottom-0 w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 right-8 skew-pic"
               />
             </div>
           </div>
