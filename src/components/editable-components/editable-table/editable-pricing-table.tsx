@@ -80,7 +80,7 @@ function EditablePricingTableComponent({
     currency: '',
     price: 0,
     per: 'Month',
-    features: '',
+    features: [''],
     most_popular: false,
   })
   const [currentEditIndex, setCurrentEditIndex] = useState(-1)
