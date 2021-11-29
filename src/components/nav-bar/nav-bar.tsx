@@ -107,7 +107,10 @@ export function NavBar({ className, style }: NavBarProps) {
                     </a>
                   </Link>
                 )}
-                <GiHamburgerMenu className="p-1 text-3xl text-primary" onClick={() => setMobileTopShow(true)} />
+                <GiHamburgerMenu
+                  className="p-1 text-3xl cursor-pointer text-primary"
+                  onClick={() => setMobileTopShow(true)}
+                />
               </div>
             </div>
           </div>
@@ -122,7 +125,7 @@ export function NavBar({ className, style }: NavBarProps) {
       >
         <div className="w-full divide-y divide divide-border-default">
           <div className="flex justify-end w-full p-1">
-            <IconButton className="p-1 text-3xl tex-primary" onClick={() => setMobileTopShow(false)}>
+            <IconButton className="p-1 text-3xl text-primary" onClick={() => setMobileTopShow(false)}>
               <MdOutlineClose />
             </IconButton>
           </div>
