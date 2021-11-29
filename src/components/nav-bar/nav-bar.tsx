@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import Drawer from '@mui/material/Drawer'
@@ -29,6 +29,9 @@ export function NavBar({ className, style }: NavBarProps) {
   const renderNavSearchBar =
     pathname !== '/login' && pathname !== '/signup' && pathname !== '/' && pathname.split('/')[1] !== 'search' && false
 
+  useEffect(() => {
+    setMobileTopShow(false)
+  }, [router.asPath])
   return (
     <div id="navbar">
       <div className={clsx('hidden md:block w-full h-14 bg-background-surface border-b px-4', className)} style={style}>
