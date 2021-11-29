@@ -4,6 +4,6 @@ export type Plan = {
   currency: string
   price: string | number
   per: string
-  features?: string
+  features?: string[]
   most_popular?: boolean
 }

@@ -14,7 +14,7 @@ const priceplans = [
     currency: '$',
     price: '999',
     per: 'Month',
-    features: '',
+    features: [''],
   },
   {
     name: 'Premium Per Year',
@@ -22,7 +22,7 @@ const priceplans = [
     currency: '$',
     price: '9999',
     per: 'Year',
-    features: '',
+    features: [''],
   },
   {
     name: 'Premium Per day',
@@ -30,7 +30,7 @@ const priceplans = [
     currency: '$',
     price: '99',
     per: 'Day',
-    features: '',
+    features: [''],
   },
   {
     name: 'Basic Per Month',
@@ -38,7 +38,7 @@ const priceplans = [
     currency: '$',
     price: '999',
     per: 'Month',
-    features: '',
+    features: [''],
   },
   {
     name: 'Basic Per Year',
@@ -46,7 +46,7 @@ const priceplans = [
     currency: '$',
     price: '9999',
     per: 'Year',
-    features: '',
+    features: [''],
   },
   {
     name: 'Basic Per day',
@@ -54,7 +54,7 @@ const priceplans = [
     currency: '$',
     price: '99',
     per: 'Day',
-    features: '',
+    features: [''],
   },
 ]
 

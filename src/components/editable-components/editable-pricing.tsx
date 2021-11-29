@@ -18,7 +18,7 @@ function EditablePricingComponent({ pricePlans, setEditModal, onSubmit }: Editab
     currency: '',
     price: 0,
     per: 'Month',
-    features: '',
+    features: [''],
     most_popular: false,
   }
 
