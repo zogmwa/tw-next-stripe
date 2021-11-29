@@ -55,7 +55,9 @@ function UpvoteUserComponent({ isLoading, isVotedByMe, upvotesCount, usersCount,
         )}
         {kFormater(showUpvotesCount)}
       </span>
-      <span className="self-end text-xs text-text-secondary pb-[0.2rem]">{kFormater(showUsersCount)} users</span>
+      {showUsersCount > 10 && (
+        <span className="self-end text-xs text-text-secondary pb-[0.2rem]">{kFormater(showUsersCount)} users</span>
+      )}
     </div>
   )
 }

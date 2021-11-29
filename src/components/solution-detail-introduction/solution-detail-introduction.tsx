@@ -26,7 +26,7 @@ type SolutionDetailIntroductionProps = {
     tag: { name: string; slug: string }
     title: string
     upvoted_count: number
-    users_count: number
+    booked_count: number
     provide_organization: { name: string; logo_url: string | null; website: string | null }
     overview_description: string
     scope_of_work_description: string
@@ -109,7 +109,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             isLoading={isLoadingUpvote}
             isVotedByMe={votedByMe}
             upvotesCount={upvotesCount}
-            usersCount={introductionData.users_count}
+            usersCount={introductionData.booked_count}
             toggleUpvote={setToggleUpvotedByMe}
             className="hidden mt-2 md:flex"
           />
@@ -118,7 +118,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
               isLoading={isLoadingUpvote}
               isVotedByMe={votedByMe}
               upvotesCount={upvotesCount}
-              usersCount={introductionData.users_count}
+              usersCount={introductionData.booked_count}
               toggleUpvote={setToggleUpvotedByMe}
             />
             <div className="flex min-w-[5rem]">

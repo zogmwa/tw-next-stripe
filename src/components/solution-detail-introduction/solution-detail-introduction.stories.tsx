@@ -16,7 +16,7 @@ const introductionData = {
   },
   title: 'Improving application performance with APM, metrics and monitoring',
   upvoted_count: 324,
-  users_count: 1100,
+  booked_count: 1100,
   provide_organization: {
     name: 'Solution Provider Organization',
     logo_url: null,
