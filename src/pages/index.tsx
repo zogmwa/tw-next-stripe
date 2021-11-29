@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       <DynamicHeader />
-      <div className="relative flex justify-between overflow-hidden bg-blue-600">
+      <div className="relative flex justify-between bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
           alt="Solution Shapes"
