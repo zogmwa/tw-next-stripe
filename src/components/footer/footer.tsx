@@ -19,35 +19,40 @@ const companies = ['About', 'Blog', 'Careers']
 const languages = [{ id: '1', text: 'English', disabled: false }]
 
 export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: FooterComponentProps) {
-  const tagsDefaultShowCount = 5
+  const saasTagsDefaultShowCount = 10
+  const solutionTagsDefaultShowCount = 5
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null | undefined>(languages[0])
 
-  const showSaasTags = topSaasTags.slice(0, tagsDefaultShowCount)
-  const showSolutionTags = topSolutionTags.slice(0, tagsDefaultShowCount)
+  const showSaasTags = topSaasTags.slice(0, saasTagsDefaultShowCount)
+  const showSolutionTags = topSolutionTags.slice(0, solutionTagsDefaultShowCount)
 
   return (
     <div className="w-full pt-6 mx-auto">
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
-        <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h2 className="text-sm text-gray-400">TOP SOLUTION TAGS</h2>
+        <div className="flex flex-col items-center space-y-1 md:items-start">
+          <h2 className="mb-4 text-sm text-gray-400">TOP SOLUTION TAGS</h2>
           {showSolutionTags.map((tag) => (
             <Link href={`/solutions/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
+              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                {tag.name}
+              </h3>
             </Link>
           ))}
         </div>
-        <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h2 className="text-sm text-gray-400">TOP SOFTWARE TAGS</h2>
+        <div className="flex flex-col items-center space-y-1 md:items-start">
+          <h2 className="mb-4 text-sm text-gray-400">TOP SOFTWARE TAGS</h2>
           {showSaasTags.map((tag) => (
             <Link href={`/softwares/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h3 className="text-base text-gray-800 cursor-pointer">{tag.name}</h3>
+              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                {tag.name}
+              </h3>
             </Link>
           ))}
         </div>
-        <div className="flex flex-col items-center space-y-4 md:items-start">
-          <h2 className="text-sm text-gray-400">COMPANY</h2>
+        <div className="flex flex-col items-center space-y-1 md:items-start">
+          <h2 className="mb-4 text-sm text-gray-400">COMPANY</h2>
           {companies.map((company) => (
-            <h3 className="text-base text-gray-800 cursor-pointer" key={company} onClick={() => {}}>
+            <h3 className="text-sm text-gray-800 cursor-pointer hover:underline" key={company} onClick={() => {}}>
               {company}
             </h3>
           ))}
