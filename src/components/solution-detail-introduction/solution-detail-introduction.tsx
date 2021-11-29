@@ -12,8 +12,8 @@ import {
   toggleBookmarkSolution,
   toggleCancelBookmarkSolution,
 } from '@taggedweb/queries/solution'
-import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { SolutionFAQ } from './index'
 import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'

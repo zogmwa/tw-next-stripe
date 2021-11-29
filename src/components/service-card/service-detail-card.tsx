@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
-import { BsChevronUp } from 'react-icons/bs'
+import { BsChevronUp, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 import { AiOutlineInfoCircle, AiOutlineStar } from 'react-icons/ai'
 import { GrShare } from 'react-icons/gr'
@@ -9,7 +9,7 @@ import { Formik } from 'formik'
 import { toast } from 'react-hot-toast'
 import * as yup from 'yup'
 import Link from 'next/link'
-import { BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
+
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
 import Popover from '@mui/material/Popover'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
