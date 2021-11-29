@@ -22,7 +22,7 @@ function CompareServiceCardComponent({ services }: CompareServiceCardProps) {
           ))}
         </div>
 
-        <Link href={`/alternatives-or-similar-services/${services[0].slug}`}>
+        <Link href={`/alternatives-or-similar-softwares/${services[0].slug}`}>
           <a>
             <Button buttonType="primary" textClassName="text-background-light" className="mt-2 md:mt-0">
               Compare another Software
