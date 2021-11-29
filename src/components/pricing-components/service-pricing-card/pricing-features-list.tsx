@@ -8,8 +8,7 @@ type ServicePricingFeaturesListProps = {
 }
 
 function PricingFeaturesListComponent({ pricePlans, selected }: ServicePricingFeaturesListProps) {
-  const featuresString = pricePlans[selected]?.features ?? ''
-  const features = featuresString.split('\r\n')
+  const features = pricePlans[selected]?.features
 
   return (
     <div className="mt-4 border border-solid rounded-md md:border-0 border-border-default">
