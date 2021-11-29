@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Plan } from '@taggedweb/types/price-plan'
-import { PricingForm } from '../submit-serivce/pricing-form'
 import { EditablePricingTable } from './editable-table'
 import { Button } from '../button'
 
