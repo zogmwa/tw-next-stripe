@@ -8,7 +8,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 type BreadcrumbComponentProps = {
-  breadcrumbs: { name: string; url: string; is_selected: boolean; }[]
+  breadcrumbs: { name: string; url: string; is_selected: boolean }[]
   copyUrl: string
 }
 
@@ -54,9 +54,7 @@ export default function BreadcrumbComponent({ breadcrumbs, copyUrl }: Breadcrumb
           }
         })}
       </Breadcrumbs>
-      <CopyToClipboard
-        text={copyUrl}
-        onCopy={() => setIsCopied(true)}>
+      <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
         <AiOutlineCopy />
       </CopyToClipboard>
       {isCopied ? <span className="text-sm text-red-600">Copied.</span> : null}
