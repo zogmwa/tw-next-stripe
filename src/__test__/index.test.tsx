@@ -3,6 +3,7 @@
  */
 
 import React from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { render, fireEvent, waitFor, screen, getByText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../pages/index'

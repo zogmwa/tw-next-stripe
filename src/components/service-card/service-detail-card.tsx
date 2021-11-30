@@ -26,7 +26,6 @@ import { phoneRegex } from '@taggedweb/utils/constants'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
-import { Checkbox } from '../checkbox'
 import { ServiceLogo } from '../service-logo'
 import {
   EditableServiceLogo,
@@ -53,18 +52,7 @@ type ServiceDetailCardProps = {
   onChange?: Function
 }
 
-function ServiceDetailCardComponent({
-  service,
-  onToggleCompare,
-  editAllowed = false,
-  onChange,
-}: ServiceDetailCardProps) {
-  const onCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onToggleCompare) {
-      onToggleCompare((event.target as HTMLInputElement).checked)
-    }
-  }
-
+function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: ServiceDetailCardProps) {
   if (typeof service === 'undefined') return null
 
   const { asPath } = useRouter()
@@ -136,10 +124,6 @@ function ServiceDetailCardComponent({
                 />
               </a>
             )}
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox onChange={onCompare} />
-            <div className="text-xs uppercase text-text-tertiary">Compare</div>
           </div>
         </div>
         <div className="flex-1">
