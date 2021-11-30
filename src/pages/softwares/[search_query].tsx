@@ -12,6 +12,7 @@ import { SearchBar } from '@taggedweb/components/search-bar'
 import { Asset } from '@taggedweb/types/asset'
 import { CompareAccordian } from '@taggedweb/components/compare-accordian'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { unslugify } from '@taggedweb/utils/unslugify'
 
 export const getServerSideProps = async (context: {
   query: { search_query: string; page: string; order: string; free_trial: string }
@@ -38,6 +39,7 @@ export const getServerSideProps = async (context: {
   const totalCount = parseInt(data.count)
   const pageCount = totalCount % 10 === 0 ? totalCount / 10 : Math.floor(totalCount / 10) + 1
   const defaultArr = tags.split(',').map((tag) => ({ value: tag, label: tag }))
+
   return {
     props: {
       services: data.results,
@@ -127,6 +129,10 @@ export default function ServiceList({
     router.push(query)
   }
 
+  const capTags = tags.split(',').map((tag) => {
+    return unslugify(tag)
+  })
+
   const [error, setError] = useState('')
   useEffect(() => {
     if (services.length === 0) {
@@ -137,7 +143,10 @@ export default function ServiceList({
   }, [services])
   return (
     <>
-      <DynamicHeader />
+      <DynamicHeader
+        title={`Best ${capTags.join(', ')} Software Services in ${new Date().getFullYear()} | TaggedWeb`}
+        description={`Top ${capTags.join(', ')} Software Services in ${new Date().getFullYear()}`}
+      />
       <div className="max-w-screen-lg px-2 mx-auto my-20" ref={pageRef}>
         <SearchBar
           className="mb-8"

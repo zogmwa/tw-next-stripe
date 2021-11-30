@@ -62,13 +62,17 @@ export default function Service() {
       content: <RelatedContent name={data.name} slug={data.slug} />,
     },
   ]
-  const primary_tag = data.tags[0]
+  let tag_names = data.tags
+    .map((tag) => {
+      return tag.name
+    })
+    .join(', ')
 
   return (
     <>
       <DynamicHeader
-        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
-        description={`Best ${primary_tag?.name ?? ''} Software`}
+        title={`${data.name} | Best ${tag_names ? tag_names : ''} Software in ${new Date().getFullYear()} | TaggedWeb`}
+        description={`Best ${tag_names ? tag_names : ''} Software in ${new Date().getFullYear()}`}
       />
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">
