@@ -8,7 +8,7 @@ import '@testing-library/jest-dom'
 import Home from '../pages/index'
 
 describe('Homepage', () => {
-  test('renders title', async () => {
+  it('renders homepage banner text', async () => {
     render(<Home />)
 
     await waitFor(() => {
