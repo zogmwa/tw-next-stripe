@@ -6,6 +6,7 @@ import { SolutionDetailSidebar } from '@taggedweb/components/solution-detail-sid
 import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detail-introduction'
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { unslugify } from '@taggedweb/utils/unslugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -38,13 +39,12 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name:
-        solutionDetail.primary_tag?.name ||
-        (solutionDetail?.tags && solutionDetail?.tags?.length > 0 ? solutionDetail?.tags[0]?.name : ''),
+      name: unslugify(String(solutionDetail.slug)),
       url: '#',
       is_selected: true,
     },
   ]
+  const copyUrl = process.env.SITE_BASE_URL + `/solution/${solutionDetail.slug}`
   let price = solutionDetail.prices.filter((price) => price.is_primary === true)[0]
   if (price?.length === 0) price = solutionDetail.prices[0]
 
@@ -94,7 +94,7 @@ export default function SolutionDetail({ solutionDetail }) {
         description={`Best ${primary_tag?.name ?? ''} Software`}
       />
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
-        <Breadcrumb breadcrumbs={breadcrumbData} />
+        <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
         <div className="flex mt-6">
           <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
             <SolutionDetailIntroduction introductionData={introductionData} />
