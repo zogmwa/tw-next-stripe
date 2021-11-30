@@ -12,7 +12,8 @@
     "validate-format": "prettier --check --no-error-on-unmatched-pattern src/**/*.{js,ts,tsx,css,json} *.{js,json}",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "private": true,
   "dependencies": {
