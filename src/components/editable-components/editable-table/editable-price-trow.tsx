@@ -58,13 +58,6 @@ function EditalePriceTableTrowComponent({
     }))
   }
 
-  const handleFeaturesChange = (e) => {
-    setEditData((prevState) => ({
-      ...prevState,
-      features: e.target.value.split('\n'),
-    }))
-  }
-
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
       <TableCell>
@@ -118,8 +111,8 @@ function EditalePriceTableTrowComponent({
         <textarea
           className="p-1 border border-solid rounded-md border-border-default"
           name="features"
-          value={editData.features.join('\n')}
-          onChange={(event) => handleFeaturesChange(event)}
+          value={editData.features}
+          onChange={(event) => handleChange(event)}
         />
       </TableCell>
       <TableCell>
