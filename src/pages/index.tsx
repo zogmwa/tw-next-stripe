@@ -16,7 +16,7 @@ export default function Home() {
         <img
           src="/images/homepage_shapes.png"
           alt="Solution Shapes"
-          className="absolute z-0 hidden max-w-5xl md:top-0 lg:top-12 lg:left-40 lg:flex"
+          className="absolute z-0 hidden max-w-4xl md:top-0 lg:top-12 lg:left-30 lg:flex"
         />
         <img
           src="/images/homepage_icon1.png"
