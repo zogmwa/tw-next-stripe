@@ -1,6 +1,7 @@
 import React from 'react'
 import { Carousel } from '../carousel/carousel'
 import { ServiceLogo } from '../service-logo'
+import Link from 'next/link'
 
 function SolutionDetailRelatedProductComponent({ relatedProducts }) {
   const relatedProductsLength = Math.ceil(relatedProducts.length / 4)
@@ -21,15 +22,17 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
             <div className="grid content-around w-full h-full grid-cols-2 md:content-center md:grid-cols-4 justify-items-center">
               {showRelateds.map((related, index) => (
                 <div key={index} className="w-full h-full p-2 md:p-4">
-                  <div className="flex flex-col items-center py-4 space-y-6 bg-white border border-solid rounded-md border-border-default">
-                    <ServiceLogo
-                      logoUrl={related.logo_url}
-                      owned={false}
-                      serviceSlug={related.slug}
-                      serviceName={related.name}
-                    />
-                    <span className="text-md text-text-primary">{related.name}</span>
-                  </div>
+                  <Link href={`/solutions/${related.slug}`}>
+                    <div className="flex flex-col items-center py-4 space-y-6 bg-white border border-solid rounded-md cursor-pointer border-border-default">
+                      <ServiceLogo
+                        logoUrl={related.logo_url}
+                        owned={false}
+                        serviceSlug={related.slug}
+                        serviceName={related.name}
+                      />
+                      <span className="text-md text-text-primary">{related.name}</span>
+                    </div>
+                  </Link>
                 </div>
               ))}
             </div>
