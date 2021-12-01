@@ -24,6 +24,7 @@ const solutionSidebarInfo = {
     { name: 'Benefit 4' },
     { name: 'Benefit 5' },
   ],
+  purchaseDisableOption: true,
 }
 
 export function DefaultSolutionDetailSidebar() {

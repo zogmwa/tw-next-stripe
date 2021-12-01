@@ -41,6 +41,7 @@ type SolutionDetailIntroductionProps = {
       }
       price: number
       features: { name: string }[]
+      purchaseDisableOption: boolean
     }
     questions: { title: string; primary_answer: string }[]
     my_solution_vote: number | null
