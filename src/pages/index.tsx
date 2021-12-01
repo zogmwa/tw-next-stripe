@@ -21,7 +21,7 @@ export default function Home() {
         <img
           src="/images/homepage_icon1.png"
           alt="Software SaaS Logo 1"
-          className="absolute z-10 hidden w-24 lg:flex top-72 right-64"
+          className="absolute z-10 hidden w-24 lg:flex lg:top-64 xl:top-72 lg:right-60"
         />
         <img
           src="/images/homepage_icon2.png"
@@ -38,8 +38,8 @@ export default function Home() {
           alt="Software SaaS Logo 4"
           className="absolute z-10 hidden w-12 lg:flex top-48 right-64"
         />
-        <div className="flex items-center justify-center flex-1 md:justify-end">
-          <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
+        <div className="flex items-center justify-center flex-1 2xl:justify-end ">
+          <div className="flex flex-col items-start justify-start w-full mx-6 my-4 lg:mr-0 xl:w-4/5 2xl:w-3/4">
             <div className="xl:flex">
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking to&#160;</h1>
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
@@ -61,8 +61,8 @@ export default function Home() {
                 </>
               </h1>
             </div>
-            <div className="py-2 mb-4 text-3xl font-semibold text-white"> We may have a solution. Just search! </div>
-            <div className="z-10 w-full mr-2">
+            <div className="py-2 mb-4 text-3xl font-semibold text-white">We may have a solution. Just search!</div>
+            <div className="z-10 w-full mb-4">
               <SearchComponent />
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Home() {
       </div>
       <div className="bg-blue-300">
         <div className="max-w-screen-lg py-4 mx-auto text-center">
-          <div className="text-lg font-medium text-black">
+          <div className="mx-2 text-sm font-medium text-black md:text-base lg:text-lg">
             Our mission is to help you find and utilize SaaS solutions and software that best fits your needs
           </div>
         </div>
