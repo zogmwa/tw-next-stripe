@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { MAX_RELATEDCARDCONTENT_LENGTH } from '@taggedweb/utils/constants'
 import { Checkbox } from '../checkbox'
@@ -6,13 +6,11 @@ import { Checkbox } from '../checkbox'
 type RelatedProduct = {
   relatedProduct: any
   handleChecked?: Function
+  isChecked?: boolean
 }
 
-function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedProduct) {
-  const [checked, setChecked] = useState(false)
-
+function RelatedProductCardComponent({ relatedProduct, handleChecked, isChecked }: RelatedProduct) {
   const handleCheckedChange = (value, serviceName) => {
-    setChecked(value)
     handleChecked(value, serviceName)
   }
 
@@ -39,8 +37,8 @@ function RelatedProductCardComponent({ relatedProduct, handleChecked }: RelatedP
         <Checkbox
           size="md"
           id={relatedProduct.id}
-          checked={checked}
-          onChange={(e) => handleCheckedChange(e.target.checked, relatedProduct.slug)}
+          checked={isChecked}
+          onChange={(e) => handleCheckedChange(e.target.checked, relatedProduct)}
         />
         <label htmlFor={relatedProduct.id} className="text-xs text-text-secondary">
           COMPARE

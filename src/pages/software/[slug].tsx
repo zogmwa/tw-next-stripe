@@ -59,10 +59,10 @@ export default function Service() {
     {
       id: 'related-products',
       name: 'Related Software',
-      content: <RelatedContent name={data.name} slug={data.slug} />,
+      content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} />,
     },
   ]
-  let tag_names = data.tags
+  const tag_names = data.tags
     .map((tag) => {
       return tag.name
     })
@@ -71,8 +71,8 @@ export default function Service() {
   return (
     <>
       <DynamicHeader
-        title={`${data.name} | Best ${tag_names ? tag_names : ''} Software in ${new Date().getFullYear()} | TaggedWeb`}
-        description={`Best ${tag_names ? tag_names : ''} Software in ${new Date().getFullYear()}`}
+        title={`${data.name} | Best ${tag_names || ''} Software in ${new Date().getFullYear()} | TaggedWeb`}
+        description={`Best ${tag_names || ''} Software in ${new Date().getFullYear()}`}
       />
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">
