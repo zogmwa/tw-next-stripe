@@ -6,6 +6,7 @@ import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { HomepageFeatured } from '@taggedweb/components/homepage-featured'
 import { client } from '@taggedweb/utils/client'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { LIST_A_SOFTWARE_PATH } from '@taggedweb/utils/constants'
 
 export const getServerSideProps = async () => {
   const { data: featuredList } = await client.get('/assets/featured/')
@@ -77,7 +78,7 @@ export default function Home({ featuredList }) {
                 buttonType="primary"
                 className="mt-2 mr-2"
                 onClick={requireLoginBeforeAction(() => {
-                  router.push('/submit-service')
+                  router.push(LIST_A_SOFTWARE_PATH)
                 })}
               >
                 Add your web service (It&apos;s free)

@@ -24,8 +24,15 @@ export function NavbarMenuResponsive() {
         handleChange={handleChange}
         dropdownData={TopSolutionTags}
         navItem="Solutions"
+        pathName="solutions"
       />
-      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={TopSaasTags} navItem="Software" />
+      <NavAccordion
+        expanded={expanded}
+        handleChange={handleChange}
+        dropdownData={TopSaasTags}
+        navItem="Software"
+        pathName="softwares"
+      />
       {/* <NavAccordion
         expanded={expanded}
         handleChange={handleChange}

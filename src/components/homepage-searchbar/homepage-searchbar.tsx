@@ -13,7 +13,7 @@ export function SearchComponent() {
   return (
     <div className="w-full">
       <Tab.Group>
-        <Tab.List className="flex p-1 space-x-1 md:w-1/2 bg-blue-900/20 rounded-xl">
+        <Tab.List className="flex p-1 space-x-1 sm:w-1/2 bg-blue-900/20 rounded-xl">
           <Tab
             className={({ selected }) =>
               classNames(

@@ -11,9 +11,10 @@ type MenuItemProps = {
   navItem: string
   expanded: string
   handleChange: any
+  pathName: string
 }
 
-export function NavAccordion({ dropdownData, navItem, expanded, handleChange }: MenuItemProps) {
+export function NavAccordion({ dropdownData, navItem, expanded, handleChange, pathName }: MenuItemProps) {
   return (
     <div className="mx-2">
       <Accordion className="w-full shadow-none" expanded={expanded === navItem} onChange={handleChange(navItem)}>
@@ -27,7 +28,7 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange }: 
             if (item.slug !== '/') {
               return (
                 <Typography key={item.name}>
-                  <Link href={`/softwares/${item.slug}`}>
+                  <Link href={`/${pathName}/${item.slug}`}>
                     <a href="">
                       <div className="py-2 hover:bg-gray-100">{item.name}</div>
                     </a>

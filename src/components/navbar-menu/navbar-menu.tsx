@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { NavItem } from './menu-item'
 import { NavAccordion } from './navbar-accordion'
 import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
@@ -13,18 +13,18 @@ export function NavbarMenu() {
       <div className="flex flex-row w-full h-full item-start">
         <NavItem dropdownData={TopSolutionTags} navItem="Solutions" pathName="solutions" />
         <NavItem dropdownData={TopSaasTags} navItem="Software" pathName="softwares" />
-        <Link href="/submit-service">
-          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
-            Submit a Web Service
-          </a>
-        </Link>
         <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`}>
           <a
             target="_blank"
             rel="noopener noreferrer"
             className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100"
           >
-            Submit a Solution
+            Solution Providers
+          </a>
+        </Link>
+        <Link href={LIST_A_SOFTWARE_PATH}>
+          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
+            List a Software
           </a>
         </Link>
         {/* <NavItem dropdownData={ResourceDropdown} navItem="Resources" /> */}
@@ -47,8 +47,15 @@ export function NavbarMenuResponsive() {
         handleChange={handleChange}
         dropdownData={TopSolutionTags}
         navItem="Solutions"
+        pathName="solutions"
       />
-      <NavAccordion expanded={expanded} handleChange={handleChange} dropdownData={TopSaasTags} navItem="Software" />
+      <NavAccordion
+        expanded={expanded}
+        handleChange={handleChange}
+        dropdownData={TopSaasTags}
+        navItem="Software"
+        pathName="softwares"
+      />
       {/* <NavAccordion
         expanded={expanded}
         handleChange={handleChange}

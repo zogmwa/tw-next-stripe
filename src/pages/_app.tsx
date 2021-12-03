@@ -17,10 +17,10 @@ import { NavBar } from '@taggedweb/components/nav-bar'
 import { Spinner } from '@taggedweb/components/spinner'
 import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
 import { fetcher } from '@taggedweb/queries/fetchJson'
-import { HomePageFooter } from '@taggedweb/components/footer'
+import { HomePageFooter } from '@taggedweb/components/homepage-footer-old'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
-import { FooterComponent } from '@taggedweb/components/solution-footer'
+import { FooterComponent } from '@taggedweb/components/footer'
 
 const queryClient = new QueryClient()
 

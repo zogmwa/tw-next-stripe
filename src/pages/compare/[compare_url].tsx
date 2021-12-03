@@ -1,6 +1,6 @@
 import React from 'react'
 import { CompareServiceCard } from '@taggedweb/components/compare/services-detail'
-import { CompareServiceTab } from '@taggedweb/components/compare/tab'
+// import { CompareServiceTab } from '@taggedweb/components/compare/tab'
 import { CompareServiceSummaryCard } from '@taggedweb/components/compare/summary-card'
 import { fetchServicesDetailCompareServer } from '@taggedweb/server-queries/fetch-services-compare-detail'
 import { CompareServiceProduct } from '@taggedweb/components/compare/page-cards/product'
@@ -12,6 +12,7 @@ import { CompareServiceUsedBy } from '@taggedweb/components/compare/page-cards/u
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { CompareServiceScrollNavbar } from '@taggedweb/components/compare/scroll-navbar'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { Asset } from '@taggedweb/types/asset'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   /*
@@ -46,13 +47,17 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   }
 })
 
-export default function CompareList({ services }) {
+type CompareServiceCardProps = {
+  services: Asset[]
+}
+
+export default function CompareList({ services }: CompareServiceCardProps) {
   const elements = [
     {
       id: 'products-information',
       name: 'Product Information',
       content: (
-        <div>
+        <div className="space-y-10">
           <CompareServiceSummaryCard services={services} />
           <CompareServiceProduct services={services} />
           <CompareServiceCarousel services={services} />
@@ -69,30 +74,38 @@ export default function CompareList({ services }) {
       name: 'Pricing',
       content: <CompareServicePricing services={services} />,
     },
-    {
-      id: 'qa',
-      name: 'Q & A',
-      content: <div />,
-    },
+    // {
+    //   id: 'qa',
+    //   name: 'Q & A',
+    //   content: <div />,
+    // },
     {
       id: 'reviews',
       name: 'Reviews',
       content: <CompareServiceRating services={services} />,
     },
     {
-      id: 'related-products',
-      name: 'Related Software',
+      id: 'organisations',
+      name: 'Organisations',
       content: <CompareServiceUsedBy services={services} />,
     },
   ]
-
   return (
     <>
-      <DynamicHeader />
+      <DynamicHeader
+        title={`${services[0]?.name ?? ''} vs ${services[1]?.name ?? ''}${
+          services[2] ? ' vs ' + services[2].name : ''
+        } [${new Date().getFullYear()}] | Taggedweb`}
+        description={`Trying to choose between ${services[0]?.name ?? ''} and ${services[1]?.name ?? ''}${
+          services[2] ? ' and ' + services[2].name : ''
+        }? Want to compare across features, pricing, customer organisations? Look no further. We’ve compared these ${
+          services[0].tags[0].name ? services[0]?.tags[0].name + ' ' : '' ?? ''
+        }tools to help you make the best choice for your business.`}
+      />
       <div className="min-h-full p-4 bg-background-light">
         <div className="max-w-screen-lg mx-auto">
           <CompareServiceCard services={services} />
-          <CompareServiceTab elements={elements} />
+          {/* <CompareServiceTab elements={elements} /> */}
           <CompareServiceScrollNavbar elements={elements} />
         </div>
       </div>

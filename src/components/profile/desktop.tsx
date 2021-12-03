@@ -3,6 +3,8 @@ import { Link } from 'react-scroll'
 import { Profile } from '@taggedweb/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
+import { BookmarkedSolutionsProfile } from './bookmarked-solutions'
+
 function ScrollSpy({ elements }) {
   return (
     <div className="flex-shrink-0 w-48">
@@ -38,15 +40,21 @@ const elements = [
     id: 'published-assets',
     name: 'Published Assets',
   },
+  {
+    id: 'bookmarked-solutions',
+    name: 'Bookmarked Solutions',
+  },
 ]
 
 export const ProfileDesktop = ({ profile }: { profile: Profile }) => {
+  console.log('profile:', profile)
   return (
     <div className="hidden md:flex">
       <ScrollSpy elements={elements} />
       <div id="scroll-container-inner" className="flex-grow ml-6">
         <PendingAssetsProfile data={profile} />
         <PublishedAssetsProfile data={profile} />
+        <BookmarkedSolutionsProfile data={profile} />
       </div>
     </div>
   )

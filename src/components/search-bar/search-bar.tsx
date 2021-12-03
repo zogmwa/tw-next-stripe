@@ -1,10 +1,12 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch, AiOutlinePlusCircle } from 'react-icons/ai'
 import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { searchSuggestions, solutionSuggestions } from '@taggedweb/queries/search'
+import { components } from 'react-select'
+import { GrShare } from 'react-icons/gr'
 import { Button } from '../button'
 
 type SearchByTagsProps = {
@@ -29,8 +31,45 @@ const homepagePlaceholderComponent = (
   </div>
 )
 
+const TagSearchResultComponent = ({ input }: { input: string }) => (
+  <div className="flex items-center justify-between ml-2 space-x-1 group">
+    <div>{input}</div>
+    <AiOutlinePlusCircle className="hidden text-text-secondary group-hover:flex" />
+  </div>
+)
+
+const AssetSearchResultComponent = ({ input }: { input: string }) => (
+  <div className="flex items-center justify-between ml-2 space-x-1 group !text-black">
+    <div>{input}</div>
+    <GrShare className="hidden text-text-secondary group-hover:flex" />
+  </div>
+)
+
+const OptionComponent = (props) => {
+  const { label, value, options } = props
+  if (options.length === 3 && options?.[0].options) {
+    // If there are 3 groups of options
+    const values = options[1].options.map((option) => option.value)
+    // Get an array of value of all web services
+    if (values.includes(value)) {
+      // Check if current option is a webservice
+      return (
+        <components.Option {...props}>
+          <AssetSearchResultComponent input={label} />
+        </components.Option>
+      )
+    }
+  }
+
+  return (
+    <components.Option {...props}>
+      <TagSearchResultComponent input={label} />
+    </components.Option>
+  )
+}
+
 export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
-  const [tags, setTags] = useState<{ value: string; label: ReactElement; isWebService?: boolean }[]>([])
+  const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   const [solution, setSolution] = useState<string>('')
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
@@ -49,7 +88,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
    * @param text - the text entered in the select menu
    */
 
-  const handleChange = (value: { value: string; label: ReactElement; isWebService: boolean }[]) => {
+  const handleChange = (value: { value: string; label: string; isWebService: boolean }[]) => {
     let onWebServiceSelect = false
     let webserviceSlug = ''
     const Tags = value.map((tag) => {
@@ -114,7 +153,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
 
   return (
     <form
-      className={clsx('flex flex-col md:flex-row space-x-0 md:space-x-2 w-full', className)}
+      className={clsx('flex flex-col sm:flex-row space-x-0 sm:space-x-2 w-full', className)}
       style={style}
       onSubmit={handleSubmit}
     >
@@ -123,11 +162,11 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           value={tags}
           isMulti
           name="tags"
-          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+          components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
           onChange={handleChange}
           loadOptions={searchSuggestions}
           instanceId
-          className="flex-1 mb-2 md:mb-0"
+          className="flex-1 mb-2 sm:mb-0"
           classNamePrefix="select"
           placeholder={placeholder}
         />
@@ -138,7 +177,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           onChange={handleSolutionChange}
           loadOptions={solutionSuggestions}
           instanceId
-          className="flex-1 mb-2 md:mb-0"
+          className="flex-1 mb-2 sm:mb-0"
           classNamePrefix="select"
           placeholder={placeholder}
         />

@@ -1,7 +1,5 @@
-import React, { ReactElement } from 'react'
 import axios from 'axios'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { GrShare } from 'react-icons/gr'
+import { unslugify } from '@taggedweb/utils/unslugify'
 import { client } from '../utils/client'
 type GroupOption = {
   label: string
@@ -9,7 +7,7 @@ type GroupOption = {
 }
 
 type Option = {
-  label: ReactElement
+  label: string
   value: string
   isWebService: boolean
 }
@@ -24,33 +22,19 @@ type Soltuion = {
   value: string
 }
 
-const labelTagComponent = (input: string) => (
-  <div className="flex items-center justify-between ml-2 space-x-1 group">
-    <div>{input}</div>
-    <AiOutlinePlusCircle className="hidden text-text-secondary group-hover:flex" />
-  </div>
-)
-
-const labelAssetComponent = (input: string) => (
-  <div className="flex items-center justify-between ml-2 space-x-1 group">
-    <div>{input}</div>
-    <GrShare className="hidden text-text-secondary group-hover:flex" />
-  </div>
-)
-
 export async function searchSuggestions(searchInput: string): Promise<GroupOption[]> {
   if (searchInput.length >= 3) {
     try {
       const { data } = await axios.get<{ tags: string[]; assets: string[]; asset_slugs: string[] }>(
         `/api/autocomplete/${searchInput}`,
       )
-      const tagResults = data.tags.map((val) => ({ value: val, label: labelTagComponent(val), isWebService: false }))
+      const tagResults = data.tags.map((val) => ({ value: val, label: unslugify(val), isWebService: false }))
       const len = Math.min(data.assets.length, data.asset_slugs.length)
       const assetResults = []
       for (let i = 0; i < len; i++) {
         assetResults.push({
           value: data.asset_slugs[i],
-          label: labelAssetComponent(data.assets[i]),
+          label: data.assets[i],
           isWebService: true,
         })
       }
@@ -65,14 +49,12 @@ export async function searchSuggestions(searchInput: string): Promise<GroupOptio
       return [
         {
           label: 'Others',
-          options: [{ value: searchInput, label: labelTagComponent(searchInput), isWebService: false }],
+          options: [{ value: searchInput, label: unslugify(searchInput), isWebService: false }],
         },
       ]
     }
   }
-  return [
-    { label: 'Others', options: [{ value: searchInput, label: labelTagComponent(searchInput), isWebService: false }] },
-  ]
+  return [{ label: 'Others', options: [{ value: searchInput, label: unslugify(searchInput), isWebService: false }] }]
 }
 
 export async function solutionSuggestions(searchInput: string): Promise<SolutionOption[]> {

@@ -12,4 +12,5 @@ export type Profile = {
   pending_asset_ids: number[]
   used_assets: number[]
   social_accounts: string[]
+  bookmarked_solutions: any[]
 }

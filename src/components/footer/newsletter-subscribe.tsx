@@ -40,7 +40,9 @@ export function SubscribeComponent() {
       <div className="flex flex-col items-start justify-between w-full py-4 pr-2 space-y-2 text-sm text-white sm:space-y-0 lg:flex-row">
         <div className="flex flex-col w-full space-y-2 sm:space-y-4 ">
           <h4 className="font-bold">SUBSCRIBE TO OUR NEWSLETTER</h4>
-          <h4 className="text-sm text-white">Latest news, articles, and resources, sent to your inbox weekly</h4>
+          <h4 className="text-sm text-white">
+            Latest articles, news tips on useful Software, SaaS Integrations and more (you can always opt out later)!
+          </h4>
         </div>
         {formDetails.isSubscribed ? (
           <div className="w-full py-4 font-bold text-md lg:text-right">
@@ -67,7 +69,7 @@ export function SubscribeComponent() {
                 {formDetails.emailError ? formDetails.emailError : ''}
               </p>
             </div>
-            <button className="px-4 py-3 font-bold text-white text-opacity-100 bg-green-500 rounded-md hover:bg-green-600">
+            <button className="py-3 font-bold text-white text-opacity-100 bg-green-500 rounded-md w-28 lg:w-32 hover:bg-green-600">
               Subscribe
             </button>
           </form>

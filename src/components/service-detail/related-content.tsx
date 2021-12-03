@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import toast from 'react-hot-toast'
 import { fetchAssetSimilar } from '@taggedweb/queries/service'
-import { MAX_COMPARE_COUNT } from '@taggedweb/utils/constants'
+import { CompareAccordian } from '../compare-accordian'
 import { Button } from '../button'
 import { RelatedProductCard } from '../related-product-card'
 
 type RelateName = {
   name: string
   slug: string
+  logo: string
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function RelatedContentComponent({ name, slug }: RelateName) {
+function RelatedContentComponent({ name, slug, logo }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
   const [relatedProductsList, setRelatedProductsList] = useState([])
   const [compareRelatedList, setCompareRelatedList] = useState([])
-  const router = useRouter()
   const defaultShowCount = 4
 
   useEffect(() => {
@@ -33,36 +31,23 @@ function RelatedContentComponent({ name, slug }: RelateName) {
     getAssetSimilarList()
   }, [])
 
-  const handleCompare = () => {
-    const compareList = compareRelatedList
-    if (compareList.length < 1) {
-      toast.error('You should check at least 1 service.')
-    } else if (compareList.length > MAX_COMPARE_COUNT) {
-      toast.error('You can compare at most 3 services.')
+  const handleChecked = (value, service) => {
+    let checkedRelatedList = compareRelatedList
+    if (checkedRelatedList.length === 0) {
+      checkedRelatedList = [{ name, slug, logo_url: logo }]
+    }
+    if (value) {
+      setCompareRelatedList([
+        ...checkedRelatedList,
+        { name: service.name, slug: service.slug, logo_url: service.logo_url },
+      ])
     } else {
-      const services = compareList
-      let compareParams = slug
-      services.map((compareService) => (compareParams += '-vs-' + compareService))
-      router.push(
-        {
-          pathname: `/compare/${compareParams}`,
-        },
-        undefined,
-        {
-          shallow: true,
-        },
-      )
+      setCompareRelatedList(checkedRelatedList.filter((related) => related.slug !== service.slug))
     }
   }
 
-  const handleChecked = (value, serviceSlug) => {
-    const checkedRelatedList = compareRelatedList
-    if (value) {
-      checkedRelatedList.push(serviceSlug)
-      setCompareRelatedList(checkedRelatedList)
-    } else {
-      setCompareRelatedList(checkedRelatedList.filter((related) => related !== serviceSlug))
-    }
+  const handleServiceRemove = (list) => {
+    setCompareRelatedList(list)
   }
 
   let viewRelatedProducts = relatedProductsList
@@ -74,15 +59,21 @@ function RelatedContentComponent({ name, slug }: RelateName) {
     <>
       <div className="flex justify-between">
         <h1 className="my-2 text-base font-medium text-text-primary">Related Software</h1>
-        <Button buttonType="primary" className="self-start text-white bg-primary" onClick={() => handleCompare()}>
-          Compare
-        </Button>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4">
-        {viewRelatedProducts.map((relatedProduct, index) => (
-          <RelatedProductCard relatedProduct={relatedProduct} key={index} handleChecked={handleChecked} />
-        ))}
+        {viewRelatedProducts.map((relatedProduct, index) => {
+          const isChecked = !!compareRelatedList.find((item) => item.slug === relatedProduct.slug)
+          return (
+            <RelatedProductCard
+              relatedProduct={relatedProduct}
+              key={index}
+              handleChecked={handleChecked}
+              isChecked={isChecked}
+            />
+          )
+        })}
       </div>
+      <CompareAccordian checkedList={compareRelatedList} onServiceRemove={handleServiceRemove} />
       {relatedProductsList.length > defaultShowCount ? (
         viewMore ? (
           <div className="flex flex-col space-y-2">

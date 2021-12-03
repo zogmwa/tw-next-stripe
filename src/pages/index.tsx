@@ -12,16 +12,16 @@ export default function Home() {
   return (
     <div>
       <DynamicHeader />
-      <div className="relative flex justify-between overflow-hidden bg-blue-600">
+      <div className="relative flex justify-between bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
           alt="Solution Shapes"
-          className="absolute z-0 hidden max-w-5xl md:top-0 lg:top-12 lg:left-40 lg:flex"
+          className="absolute z-0 hidden max-w-4xl md:top-0 lg:top-12 lg:left-30 lg:flex"
         />
         <img
           src="/images/homepage_icon1.png"
           alt="Software SaaS Logo 1"
-          className="absolute z-10 hidden w-24 lg:flex top-72 right-64"
+          className="absolute z-10 hidden w-24 lg:flex lg:top-64 xl:top-72 lg:right-60"
         />
         <img
           src="/images/homepage_icon2.png"
@@ -38,22 +38,22 @@ export default function Home() {
           alt="Software SaaS Logo 4"
           className="absolute z-10 hidden w-12 lg:flex top-48 right-64"
         />
-        <div className="flex items-center justify-center flex-1 md:justify-end">
-          <div className="flex flex-col items-start justify-start w-full px-2 py-2 lg:w-3/4">
+        <div className="flex items-center justify-center flex-1 2xl:justify-end ">
+          <div className="flex flex-col items-start justify-start w-full mx-6 my-4 lg:mr-0 xl:w-4/5 2xl:w-3/4">
             <div className="xl:flex">
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking to&#160;</h1>
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
                 <>
                   <Typical
                     steps={[
-                      'Find the best SaaS for your needs?',
-                      350,
-                      'Integrate a SaaS into your software stack?',
-                      350,
-                      'Improve your application performance?',
-                      350,
-                      'Reduce your cloud bill?',
-                      350,
+                      'Integrate a SaaS into your stack?',
+                      400,
+                      'Improve application performance?',
+                      400,
+                      'Reduce AWS bills?',
+                      400,
+                      'Find best-fit software for your needs?',
+                      400,
                     ]}
                     wrapper="p"
                     loop={Infinity}
@@ -61,8 +61,8 @@ export default function Home() {
                 </>
               </h1>
             </div>
-            <div className="py-2 mb-4 text-3xl font-semibold text-white"> We may have a solution. Just search! </div>
-            <div className="z-10 w-full mr-2">
+            <div className="py-2 mb-4 text-3xl font-semibold text-white">We may have a solution. Just search!</div>
+            <div className="z-10 w-full mb-4">
               <SearchComponent />
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Home() {
       </div>
       <div className="bg-blue-300">
         <div className="max-w-screen-lg py-4 mx-auto text-center">
-          <div className="text-lg font-medium text-black">
+          <div className="mx-2 text-sm font-medium text-black md:text-base lg:text-lg">
             Our mission is to help you find and utilize SaaS solutions and software that best fits your needs
           </div>
         </div>
@@ -119,12 +119,12 @@ export default function Home() {
               <img
                 src="/images/sol_provider.png"
                 alt="sol_provider"
-                className="absolute w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
+                className="absolute w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
                 alt="finding_sol_1"
-                className="absolute bottom-0 w-3/4 transform rounded shadow right-8 skew-pic"
+                className="absolute bottom-0 w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 right-8 skew-pic"
               />
             </div>
           </div>

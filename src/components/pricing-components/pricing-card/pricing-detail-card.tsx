@@ -13,7 +13,7 @@ function PricingDetailCardComponent({ price }: PricingDetailCardComponentProps) 
   const [isShowMore, setIsShowMore] = useState(false)
   const defaultShowCount = 4
   const featureString = price.features ?? ''
-  const featuresList = featureString.split('\r\n')
+  const featuresList = featureString.split('\n')
 
   let showFeatureList = featuresList
   if (!isShowMore) showFeatureList = featuresList.slice(0, defaultShowCount)

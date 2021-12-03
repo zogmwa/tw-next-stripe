@@ -63,6 +63,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),

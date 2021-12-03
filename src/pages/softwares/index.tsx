@@ -8,7 +8,11 @@ export default function Software() {
 
   return (
     <>
-      <DynamicHeader />
+      <DynamicHeader
+        title={`Top Software Services Tags in ${new Date().getFullYear()} | TaggedWeb`}
+        description={`Top Software Services Tags searched by the users in ${new Date().getFullYear()}.`}
+      />
+
       <div className="flex flex-col max-w-screen-lg mx-auto">
         <h4 className="self-start my-4 text-lg font-semibold text-text-primary">TOP SOFTWARE TAGS</h4>
         <div className="flex flex-col space-y-2">
