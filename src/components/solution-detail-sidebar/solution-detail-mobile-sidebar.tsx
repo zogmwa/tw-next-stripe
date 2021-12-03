@@ -19,6 +19,7 @@ type SolutionDetailMobileSidebarComponentProps = {
     }
     price: number
     features: { name: string }[]
+    purchaseDisableOption: boolean
   }
   className?: string
 }
@@ -56,7 +57,7 @@ function SolutionDetailMobileSidebarComponent({
               <span className="inline pl-2 text-sm text-text-secondary">{feature.name}</span>
             </div>
           ))}
-          {showFeatureList.length > 0 &&
+          {detailInfo.features.length > 2 &&
             (isShowMore ? (
               <div
                 className="flex self-start w-full px-0 mt-4 text-xs border-0 cursor-pointer text-text-secondary"
@@ -81,7 +82,7 @@ function SolutionDetailMobileSidebarComponent({
           className="px-[0.5rem] mt-2 bg-primary"
           textClassName="text-white text-xs"
           loading={isPurchase}
-          disabled={isPurchase}
+          disabled={detailInfo.purchaseDisableOption || isPurchase}
           loadingClassName="text-background-light"
           onClick={requireLoginBeforeAction(() => togglePurchase())}
         >

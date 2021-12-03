@@ -18,6 +18,7 @@ type SolutionDetailSidebarComponentProps = {
     }
     price: number
     features: { name: string }[]
+    purchaseDisableOption: boolean
   }
   className?: string
 }
@@ -46,9 +47,9 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
       </div>
       <div className="flex flex-col p-2 space-y-2">
         {detailInfo.features.map((feature, index) => (
-          <div key={index} className="flex items-center">
-            <IoIosCheckmarkCircleOutline className="text-md text-primary" />
-            <span className="pl-2 text-sm text-text-secondary">{feature.name}</span>
+          <div key={index}>
+            <IoIosCheckmarkCircleOutline className="inline text-md text-primary" />
+            <span className="inline pl-2 text-sm text-text-secondary">{feature.name}</span>
           </div>
         ))}
         <div className="flex flex-col items-center w-full">
@@ -56,7 +57,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
             className="mt-4 bg-primary"
             textClassName="text-white"
             loading={isPurchase}
-            disabled={isPurchase}
+            disabled={detailInfo.purchaseDisableOption || isPurchase}
             loadingClassName="text-background-light"
             onClick={requireLoginBeforeAction(() => togglePurchase())}
           >

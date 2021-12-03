@@ -51,16 +51,25 @@ export default function SolutionDetail({ solutionDetail }) {
   let primary_tag = solutionDetail.primary_tag
   if (primary_tag?.length === 0) primary_tag = solutionDetail.tags[0]
 
+  const features = []
+  let purchaseDisableOption = false
+  if (solutionDetail.eta_days) features.push({ name: `${solutionDetail.eta_days} Eta Days` })
+  if (solutionDetail.has_free_consultation) features.push({ name: 'Free Trial' })
+  if (solutionDetail.follow_up_hourly_rate)
+    features.push({ name: `$${solutionDetail.follow_up_hourly_rate} / hr Post Job` })
+  features.push({
+    name: `${solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count} / ${
+      solutionDetail.capacity
+    } Ready Capacity`,
+  })
+  if ((solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count) / solutionDetail.capacity < 1.0)
+    purchaseDisableOption = true
+
   const solutionSidebarInfo = {
     primary_price: price,
     price: price?.price,
-    features: [
-      { name: '10 Ready Capacity' },
-      { name: '14 Eta Days' },
-      { name: 'Free Trial' },
-      { name: 'Benefit 4' },
-      { name: 'Benefit 5' },
-    ],
+    features: features,
+    purchaseDisableOption: purchaseDisableOption,
   }
 
   const introductionData = {
