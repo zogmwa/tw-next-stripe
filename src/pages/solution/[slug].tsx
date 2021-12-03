@@ -99,9 +99,10 @@ export default function SolutionDetail({ solutionDetail }) {
   return (
     <>
       <DynamicHeader
-        title={`Best ${primary_tag?.name ?? ''} Software and Solutions in ${new Date().getFullYear()}`}
-        description={`Best ${primary_tag?.name ?? ''} Software`}
+        title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
+        description={solutionDetail.description}
       />
+      {/* Can also use scope_of_work field on solutionDetail for description */}
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
         <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
         <div className="flex mt-6">
