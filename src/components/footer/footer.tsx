@@ -38,9 +38,9 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
   return (
     <div className="w-full pt-6 mx-auto">
       <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
-        <FooterSubComponent service={showSolutionTags} />
-        <FooterSubComponent service={showSaasTags} />
-        <FooterSubComponent service={companies} />
+        <FooterSubComponent service={showSolutionTags} type="solutions" />
+        <FooterSubComponent service={showSaasTags} type="softwares" />
+        <FooterSubComponent service={companies} type="compaines" />
         <LanguageComponent languages={languages} />
       </div>
       <SubscribeComponent />
@@ -48,15 +48,27 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
   )
 }
 
-export function FooterSubComponent({ service }) {
+export function FooterSubComponent({ service, type }) {
   return (
     <div key={service} className="flex flex-col items-center space-y-2 md:items-start">
       <h2 className="mb-4 text-sm font-bold text-gray-400">{service.title}</h2>
-      {service.content.map((tag) => (
-        <Link href={`/solutions/${tag.slug}`} prefetch={false} key={tag.slug}>
-          <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">{tag.name}</h3>
-        </Link>
-      ))}
+      {service.content.map((tag) => {
+        if (type !== 'compaines') {
+          return (
+            <Link href={`/${type}/${tag.slug}`} prefetch={false} key={tag.slug}>
+              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                {tag.name}
+              </h3>
+            </Link>
+          )
+        } else {
+          return (
+            <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+              {tag.name}
+            </h3>
+          )
+        }
+      })}
     </div>
   )
 }
