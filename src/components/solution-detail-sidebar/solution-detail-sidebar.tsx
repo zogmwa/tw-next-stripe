@@ -43,7 +43,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     >
       <div className="flex items-center py-2">
         <BiDollar className="text-3xl font-bold text-text-primary" />
-        <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price}</h4>
+        <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price : 0}</h4>
       </div>
       <div className="flex flex-col p-2 space-y-2">
         {detailInfo.features.map((feature, index) => (
