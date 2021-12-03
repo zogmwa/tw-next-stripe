@@ -58,8 +58,8 @@ export default function SolutionDetail({ solutionDetail }) {
   if (solutionDetail.follow_up_hourly_rate)
     features.push({ name: `$${solutionDetail.follow_up_hourly_rate} / hr Post Job` })
   features.push({
-    name: `${solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count} / ${
-      solutionDetail.capacity
+    name: `${(solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)} / ${
+      solutionDetail?.capacity ?? 0
     } Ready Capacity`,
   })
   if ((solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count) / solutionDetail.capacity < 1.0)
@@ -83,9 +83,9 @@ export default function SolutionDetail({ solutionDetail }) {
     upvoted_count: solutionDetail.upvotes_count,
     booked_count: solutionDetail.booked_count,
     provide_organization: {
-      name: solutionDetail.organization.name,
-      logo_url: solutionDetail.organization.logo_url,
-      website: solutionDetail.organization.website,
+      name: solutionDetail.organization?.name ?? '',
+      logo_url: solutionDetail.organization?.logo_url ?? '',
+      website: solutionDetail.organization?.website ?? '',
     },
     overview_description: solutionDetail.description ?? '',
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
