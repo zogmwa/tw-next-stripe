@@ -72,14 +72,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  const fcWidgetInitOption = {
-    token: process.env.FRESHCHAT_TOKEN,
-    host: 'https://wchat.freshchat.com',
-    externalId: 'userId',
-    firstName: 'TestFName',
-    lastName: 'TestLName',
-  }
-
   return (
     <>
       <QueryClientProvider client={queryClient}>
