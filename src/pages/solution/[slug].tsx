@@ -1,4 +1,6 @@
 import React from 'react'
+import { Freshchat } from 'reactjs-freshchat'
+import 'reactjs-freshchat/dist/index.css'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
@@ -7,6 +9,7 @@ import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detai
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -26,6 +29,8 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function SolutionDetail({ solutionDetail }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
+
+  const { authVerified, pk, email, first_name, last_name } = useUserContext()
 
   const breadcrumbData = [
     {
@@ -99,6 +104,17 @@ export default function SolutionDetail({ solutionDetail }) {
 
   return (
     <>
+      {authVerified ? (
+        <Freshchat
+          token={process.env.FRESHCHAT_TOKEN}
+          externalId={`${pk}`}
+          firstName={first_name}
+          lastName={last_name}
+          email={email}
+        />
+      ) : (
+        <Freshchat token={process.env.FRESHCHAT_TOKEN} />
+      )}
       <DynamicHeader
         title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
         description={solutionDetail.description}
