@@ -75,6 +75,7 @@ export default function SolutionDetail({ solutionDetail }) {
   const introductionData = {
     id: solutionDetail.id,
     slug: solutionDetail.slug,
+    assets: solutionDetail.assets,
     tag: {
       name: solutionDetail.type === 'I' ? 'Integrations' : solutionDetail.type === 'U' ? 'Usage Support' : 'Other',
       slug: solutionDetail.type === 'I' ? 'integrations' : solutionDetail.type === 'U' ? 'ssage-support' : 'other',
