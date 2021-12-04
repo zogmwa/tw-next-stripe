@@ -15,6 +15,7 @@ import {
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { SolutionFAQ } from './index'
+import { ServiceLogo } from '../service-logo'
 import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
 import { Spinner } from '../spinner'
@@ -23,6 +24,7 @@ type SolutionDetailIntroductionProps = {
   introductionData: {
     id: number
     slug: string
+    assets: any[]
     tag: { name: string; slug: string }
     title: string
     upvoted_count: number
@@ -57,6 +59,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const { asPath } = useRouter()
+  const router = useRouter()
 
   const setToggleUpvotedByMe = async () => {
     if (!isLoadingUpvote) {
@@ -122,23 +125,31 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
               usersCount={introductionData.booked_count}
               toggleUpvote={setToggleUpvotedByMe}
             />
-            <div className="flex min-w-[5rem]">
-              <div className="p-1 border border-solid rounded-md border-border-default">
-                <img src="/images/diamond.png" alt="diamond" className="w-[2rem]" />
-              </div>
-              <div className="p-1 ml-2 border border-solid rounded-md border-border-default">
-                <img src="/images/webflow.png" alt="webflow" className="w-[2rem]" />
-              </div>
+            <div className="flex min-w-[7rem] self-start justify-end space-x-2">
+              {introductionData.assets.slice(0, 3).map((asset, key) => (
+                <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                  <ServiceLogo
+                    serviceName={asset?.name}
+                    serviceId={asset.id}
+                    logoUrl={asset.logo_url}
+                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="self-start hidden md:flex min-w-[5rem]">
-          <div className="p-1 border border-solid rounded-md border-border-default">
-            <img src="/images/diamond.png" alt="diamond" className="w-[2rem]" />
-          </div>
-          <div className="p-1 ml-2 border border-solid rounded-md border-border-default">
-            <img src="/images/webflow.png" alt="webflow" className="w-[2rem]" />
-          </div>
+        <div className="self-start hidden md:flex min-w-[7rem] justify-end space-x-2">
+          {introductionData.assets.slice(0, 3).map((asset, key) => (
+            <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+              <ServiceLogo
+                serviceName={asset?.name}
+                serviceId={asset.id}
+                logoUrl={asset.logo_url}
+                className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+              />
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex items-center justify-between p-4 md:px-0">
