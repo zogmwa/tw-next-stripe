@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
-import { AiOutlineCopy } from 'react-icons/ai'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -36,7 +35,7 @@ export default function BreadcrumbComponent({ breadcrumbs, copyUrl }: Breadcrumb
             return (
               <Typography key={breadcrumb.name} sx={{ color: '#000' }}>
                 <span className="hidden md:flex">{breadcrumb.name}</span>
-                <img src="/images/webflow.png" alt="word" className="flex md:hidden w-[2rem]" />
+                <span className="flex md:hidden">Solution</span>
               </Typography>
             )
           } else {
@@ -54,10 +53,12 @@ export default function BreadcrumbComponent({ breadcrumbs, copyUrl }: Breadcrumb
           }
         })}
       </Breadcrumbs>
-      <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
-        <AiOutlineCopy />
-      </CopyToClipboard>
-      {isCopied ? <span className="text-sm text-red-600">Copied.</span> : null}
+      <div className="relative">
+        <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
+          <img alt="copy-link" src="/images/copy-link.png" className="w-4 h-4 cursor-pointer" />
+        </CopyToClipboard>
+        {isCopied ? <span className="absolute text-xs text-blue-600 -top-4 -right-2">Copied.</span> : null}
+      </div>
     </div>
   )
 }
