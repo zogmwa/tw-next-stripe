@@ -16118,6 +16118,11 @@ react@17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
+reactjs-freshchat@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/reactjs-freshchat/-/reactjs-freshchat-1.3.3.tgz#dcea526c090798bb63c3ad1e3347a193f788a00a"
+  integrity sha512-jGEa0L0K9KmScTjIISKAf2yp0PyR8lWFGQm7XxHYjMBEef+7WvyhOw+e7lbF3lKLUdf08CrU4d/Oa3fhVzhf+A==
+
 read-cache@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"
