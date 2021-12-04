@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import toast, { Toaster } from 'react-hot-toast'
 import Router, { useRouter } from 'next/router'
-import Script from 'next/script'
 import Error from 'next/error'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import '@taggedweb/styles/styles.css'
@@ -83,13 +82,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Script
-        id="freshchat"
-        src="https://wchat.freshchat.com/js/widget.js"
-        onLoad={(event) => {
-          if (event.isTrusted) event.target.ownerDocument.defaultView.fcWidget.init(fcWidgetInitOption)
-        }}
-      />
       <QueryClientProvider client={queryClient}>
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
