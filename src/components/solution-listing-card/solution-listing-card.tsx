@@ -7,10 +7,12 @@ import { AiFillStar } from 'react-icons/ai'
 import numeral from 'numeral'
 import { useRouter } from 'next/router'
 import { Button } from '../button'
+import { ServiceLogo } from '../service-logo'
 
 type SolutionListingCardProps = {
   listingData: {
     slug: string
+    assets: any[]
     tags: { name: string; slug: string }[]
     title: string
     prices: { stripe_price_id: number | string; price: number | string; is_primary: boolean }[]
@@ -106,12 +108,16 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
           </div>
           <div className="flex self-start space-x-2">
-            <div className="p-1 border border-solid rounded-md border-border-default">
-              <img src="/images/diamond.png" alt="diamond" className="w-8 h-8" />
-            </div>
-            <div className="p-1 border border-solid rounded-md border-border-default">
-              <img src="/images/webflow.png" alt="webflow" className="w-8 h-8" />
-            </div>
+            {listingData.assets.slice(0, 3).map((asset, key) => (
+              <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                <ServiceLogo
+                  serviceName={asset?.name}
+                  serviceId={asset.id}
+                  logoUrl={asset.logo_url}
+                  className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
