@@ -33,6 +33,7 @@ export type Asset = {
   is_owned?: boolean
   edit_allowed?: boolean
   trial_days?: number | null
+  solutions?: any[]
 }
 
 export type AssetVote = {

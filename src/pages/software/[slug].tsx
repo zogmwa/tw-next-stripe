@@ -10,6 +10,7 @@ import { ProductContent } from '@taggedweb/components/service-detail/product-con
 import { QaContent } from '@taggedweb/components/service-detail/qa-content'
 import { RelatedContent } from '@taggedweb/components/service-detail/related-content'
 import { ReviewsContainer } from '@taggedweb/components/service-detail/get-reviews'
+import { RelatedSolutions } from '@taggedweb/components/related-solutions'
 import { Asset } from '@taggedweb/types/asset'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchServiceServer } from '@taggedweb/server-queries/fetch-service'
@@ -23,6 +24,7 @@ export default function Service() {
   // eslint-disable-next-line
   const { data, error } = useSWR(`/api/assets/${slug}`)
 
+  console.log(data)
   const elements = [
     {
       id: 'products-information',
@@ -60,6 +62,11 @@ export default function Service() {
       id: 'related-products',
       name: 'Related Software',
       content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} />,
+    },
+    {
+      id: 'related-solutions',
+      name: 'Related Solutions',
+      content: <RelatedSolutions service={data as Asset} desktopClassName="mt-10" />,
     },
   ]
   const tag_names = data.tags
