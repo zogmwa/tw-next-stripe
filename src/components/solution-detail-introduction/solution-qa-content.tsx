@@ -67,7 +67,7 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
       )}
       {showQuestions.map((question, index) => (
         <div className="flex flex-col" key={index}>
-          <h4 className="mt-4 font-bold text-md text-text-primary">{question.title}</h4>
+          <h4 className="mt-4 font-semibold text-md text-text-primary">{question.title}</h4>
           <TruncatedDescription description={question.primary_answer} className="mt-3 space-x-0" maxLength={220} />
         </div>
       ))}

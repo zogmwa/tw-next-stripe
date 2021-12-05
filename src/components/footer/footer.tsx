@@ -56,17 +56,29 @@ export function FooterSubComponent({ service, type }) {
         if (type !== 'compaines') {
           return (
             <Link href={`/${type}/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                {tag.name}
-              </h3>
+              <a>
+                <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                  {tag.name}
+                </h3>
+              </a>
             </Link>
           )
         } else {
-          return (
-            <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-              {tag.name}
-            </h3>
-          )
+          if (tag.name === 'Careers') {
+            return (
+              <a href="https://angel.co/company/taggedweb/jobs" target="_blank" rel="noopener noreferrer">
+                <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                  {tag.name}
+                </h3>
+              </a>
+            )
+          } else {
+            return (
+              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                {tag.name}
+              </h3>
+            )
+          }
         }
       })}
     </div>
