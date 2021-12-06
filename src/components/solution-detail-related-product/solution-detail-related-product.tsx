@@ -1,7 +1,7 @@
 import React from 'react'
+import Link from 'next/link'
 import { Carousel } from '../carousel/carousel'
 import { ServiceLogo } from '../service-logo'
-import Link from 'next/link'
 
 function SolutionDetailRelatedProductComponent({ relatedProducts }) {
   const relatedProductsLength = Math.ceil(relatedProducts.length / 4)
