@@ -43,7 +43,7 @@ type SolutionDetailIntroductionProps = {
         is_primary: boolean
       }
       price: number
-      features: { name: string }[]
+      features: { id: string; name: string; tooltipContent: string }[]
       purchaseDisableOption: boolean
     }
     questions: { title: string; primary_answer: string }[]
