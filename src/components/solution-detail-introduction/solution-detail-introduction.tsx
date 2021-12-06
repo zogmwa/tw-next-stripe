@@ -49,9 +49,13 @@ type SolutionDetailIntroductionProps = {
     my_solution_vote: number | null
     my_solution_bookmark: number | null
   }
+  setIsFreshChatShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
+function SolutionDetailIntroductionComponent({
+  introductionData,
+  setIsFreshChatShow,
+}: SolutionDetailIntroductionProps) {
   const { requireLoginBeforeAction } = useRequireLogin()
   const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
   const [bookmarkByMe, setBookmarkByMe] = useState(introductionData.my_solution_bookmark)
@@ -214,7 +218,11 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           </PopupState>
         </div>
       </div>
-      <SolutionDetailMobileSidebar detailInfo={introductionData.sidebar_info} className="md:hidden" />
+      <SolutionDetailMobileSidebar
+        setIsFreshChatShow={setIsFreshChatShow}
+        detailInfo={introductionData.sidebar_info}
+        className="md:hidden"
+      />
       <div className="flex flex-col p-4 md:p-0">
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Overview</h4>
