@@ -229,9 +229,11 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <h4 className="font-bold text-md">Scope of Work</h4>
           <div className="mt-3 text-sm text-text-secondary">{introductionData.scope_of_work_description}</div>
         </div>
-        <div className="py-4">
-          <SolutionFAQ questions={introductionData.questions} solutionSlug={introductionData.slug} />
-        </div>
+        {introductionData.questions.length > 0 && (
+          <div className="py-4">
+            <SolutionFAQ questions={introductionData.questions} solutionSlug={introductionData.slug} />
+          </div>
+        )}
       </div>
       <ReactTooltip id="tooltip-upvote" type="light" place="top" border={true} borderColor="text-grey-200">
         Upvote Solution
