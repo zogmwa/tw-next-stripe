@@ -72,11 +72,22 @@ const introductionData = {
     },
     price: 120,
     features: [
-      { name: '10 Ready Capacity' },
-      { name: '14 Eta Days' },
-      { name: 'Free Trial' },
-      { name: 'Benefit 4' },
-      { name: 'Benefit 5' },
+      {
+        id: 'ready-capacity',
+        name: '9/10 Available Capacity',
+        tooltipContent:
+          'We have 1 solution actively being worked on and up-to 9 solutions that can be booked. We limit capacity to prevent overbooking a provider.',
+      },
+      {
+        id: 'eda-days',
+        name: 'Estimated Days to Fulfill: 1',
+        tooltipContent: 'This is an estimate on number of days it will take to deliver.',
+      },
+      {
+        id: 'free-trial',
+        name: 'Free Trial',
+        tooltipContent: 'This solution has free trial.',
+      },
     ],
     purchaseDisableOption: true,
   },
