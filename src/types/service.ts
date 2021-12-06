@@ -32,4 +32,5 @@ export type Service = {
   snapshots: string[]
   users_count: number
   my_asset_vote?: number | null
+  solutions: any[]
 }
