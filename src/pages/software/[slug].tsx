@@ -63,12 +63,16 @@ export default function Service() {
       name: 'Related Software',
       content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} />,
     },
-    {
+  ]
+
+  if (data.solutions.length > 0) {
+    elements.push({
       id: 'related-solutions',
       name: 'Related Solutions',
       content: <RelatedSolutions service={data as Asset} desktopClassName="mt-10" />,
-    },
-  ]
+    })
+  }
+
   const tag_names = data.tags
     .map((tag) => {
       return tag.name

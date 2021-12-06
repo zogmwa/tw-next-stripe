@@ -1,7 +1,7 @@
 import React from 'react'
 import { Asset } from '@taggedweb/types/asset'
 import { ServiceCollapse } from '../collapse'
-import { SolutionListingCard } from '../solution-listing-card'
+import { SolutionList } from './solution-list'
 
 type RelatedSolutionsComponentProps = {
   service: Asset
@@ -16,15 +16,11 @@ function RelatedSolutionsComponent({ service, desktopClassName, mobileClassName 
     <>
       <div className={`hidden md:block ${desktopClassName}`}>
         <ServiceCollapse title="Related Solutions">
-          {service.solutions.map((solution, key) => (
-            <SolutionListingCard key={`desktopSeviceList${key}`} listingData={solution} />
-          ))}
+          <SolutionList solutions={service.solutions} />
         </ServiceCollapse>
       </div>
       <div className={`block md:hidden ${mobileClassName}`}>
-        {service.solutions.map((solution, key) => (
-          <SolutionListingCard key={`desktopSeviceList${key}`} listingData={solution} />
-        ))}
+        <SolutionList solutions={service.solutions} />
       </div>
     </>
   )
