@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import { SolutionDetailIntroduction } from '.'
 
@@ -114,5 +114,6 @@ const introductionData = {
 }
 
 export function DefaultSolutionDetailIntroduction() {
-  return <SolutionDetailIntroduction introductionData={introductionData} />
+  const [isFreshChatShow, setIsFreshChatShow] = useState(false)
+  return <SolutionDetailIntroduction introductionData={introductionData} setIsFreshChatShow={setIsFreshChatShow} />
 }
