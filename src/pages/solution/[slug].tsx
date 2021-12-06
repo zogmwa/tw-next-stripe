@@ -30,6 +30,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 export default function SolutionDetail({ solutionDetail }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { authVerified, pk, email, first_name, last_name } = useUserContext()
 
   const breadcrumbData = [
@@ -87,8 +88,9 @@ export default function SolutionDetail({ solutionDetail }) {
       (solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)
     } solutions that can be booked. We limit capacity to prevent overbooking a provider.`,
   })
-  if ((solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count) / solutionDetail.capacity < 1.0)
+  if ((solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count) / solutionDetail.capacity < 1.0) {
     purchaseDisableOption = true
+  }
 
   const solutionSidebarInfo = {
     primary_price: price,
@@ -96,7 +98,13 @@ export default function SolutionDetail({ solutionDetail }) {
     features: features,
     purchaseDisableOption: purchaseDisableOption,
   }
-
+  const provide_organization = solutionDetail.organization
+    ? {
+        name: solutionDetail.organization.name,
+        logo_url: solutionDetail.organization.logo_url,
+        website: solutionDetail.organization.website,
+      }
+    : null
   const introductionData = {
     id: solutionDetail.id,
     slug: solutionDetail.slug,
@@ -108,11 +116,8 @@ export default function SolutionDetail({ solutionDetail }) {
     title: solutionDetail.title,
     upvoted_count: solutionDetail.upvotes_count,
     booked_count: solutionDetail.booked_count,
-    provide_organization: {
-      name: solutionDetail.organization?.name ?? '',
-      logo_url: solutionDetail.organization?.logo_url ?? '',
-      website: solutionDetail.organization?.website ?? '',
-    },
+    provide_organization,
+    point_of_contact: solutionDetail.point_of_contact,
     overview_description: solutionDetail.description ?? '',
     scope_of_work_description: solutionDetail.scope_of_work ?? '',
     sidebar_info: solutionSidebarInfo,

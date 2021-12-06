@@ -14,8 +14,14 @@ function ServiceDetailSidebarComponent({ elements }) {
   return (
     <div className="hidden mt-6 md:flex">
       <div className="w-52">
-        <div className="sticky top-[4rem] h-60">
-          <nav className="w-48 p-2 bg-white border border-solid rounded-md shadow h-52 lg:h-46 border-grey-200">
+        <div className={elements.length === 7 ? 'sticky top-[4rem] h-60' : 'sticky top-[4rem] h-56'}>
+          <nav
+            className={
+              elements.length === 7
+                ? 'w-48 p-2 bg-white border border-solid rounded-md shadow h-52 lg:h-46 border-grey-200'
+                : 'w-48 p-2 bg-white border border-solid rounded-md shadow h-48 lg:h-42 border-grey-200'
+            }
+          >
             {elements.map((item) => (
               <ScrollableLink
                 href={`#scrollable-${item.id}`}
