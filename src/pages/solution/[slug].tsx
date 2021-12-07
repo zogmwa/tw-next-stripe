@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { Freshchat } from 'reactjs-freshchat'
+import React from 'react'
 import 'reactjs-freshchat/dist/index.css'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
@@ -9,7 +8,6 @@ import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detai
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
-import { useUserContext } from '@taggedweb/hooks/use-user'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -29,9 +27,6 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function SolutionDetail({ solutionDetail }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
-
-  const [isFreshChatShow, setIsFreshChatShow] = useState(false)
-  const { authVerified, pk, email, first_name, last_name } = useUserContext()
 
   const breadcrumbData = [
     {
@@ -129,18 +124,6 @@ export default function SolutionDetail({ solutionDetail }) {
 
   return (
     <>
-      {isFreshChatShow &&
-        (authVerified ? (
-          <Freshchat
-            token={process.env.FRESHCHAT_TOKEN}
-            externalId={`${pk}`}
-            firstName={first_name}
-            lastName={last_name}
-            email={email}
-          />
-        ) : (
-          <Freshchat token={process.env.FRESHCHAT_TOKEN} />
-        ))}
       <DynamicHeader
         title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
         description={solutionDetail.description}
@@ -150,10 +133,9 @@ export default function SolutionDetail({ solutionDetail }) {
         <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
         <div className="flex mt-6">
           <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
-            <SolutionDetailIntroduction setIsFreshChatShow={setIsFreshChatShow} introductionData={introductionData} />
+            <SolutionDetailIntroduction introductionData={introductionData} />
           </div>
           <SolutionDetailSidebar
-            setIsFreshChatShow={setIsFreshChatShow}
             detailInfo={solutionSidebarInfo}
             className="w-[15rem] h-full sticky top-16 hidden md:flex"
           />
