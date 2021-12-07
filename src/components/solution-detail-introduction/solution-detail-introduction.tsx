@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { BsBookmarkPlus, BsBookmarkCheckFill, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Popover from '@mui/material/Popover'
 import ReactTooltip from 'react-tooltip'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
@@ -244,16 +246,19 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
       <div className="flex flex-col p-4 md:p-0">
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Overview</h4>
-          <div
+          <Markdown
             className="mt-3 text-sm text-text-secondary"
-            dangerouslySetInnerHTML={{
-              __html: introductionData.overview_description,
-            }}
+            children={introductionData.overview_description}
+            remarkPlugins={[remarkGfm]}
           />
         </div>
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Scope of Work</h4>
-          <div className="mt-3 text-sm text-text-secondary">{introductionData.scope_of_work_description}</div>
+          <Markdown
+            className="mt-3 text-sm text-text-secondary"
+            children={introductionData.scope_of_work_description}
+            remarkPlugins={[remarkGfm]}
+          />
         </div>
         {introductionData.questions.length > 0 && (
           <div className="py-4">
