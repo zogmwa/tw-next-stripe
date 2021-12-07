@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Freshchat } from 'reactjs-freshchat'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import toast, { Toaster } from 'react-hot-toast'
@@ -20,6 +21,7 @@ import { HomePageFooter } from '@taggedweb/components/homepage-footer-old'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
 import { FooterComponent } from '@taggedweb/components/footer'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 
 const queryClient = new QueryClient()
 
@@ -35,6 +37,7 @@ const RedirectSpinner = () => (
 )
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  const { authVerified, pk, email, first_name, last_name } = useUserContext()
   const { pathname } = useRouter()
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
@@ -74,6 +77,17 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      {authVerified ? (
+        <Freshchat
+          token={process.env.FRESHCHAT_TOKEN}
+          externalId={`${pk}`}
+          firstName={first_name}
+          lastName={last_name}
+          email={email}
+        />
+      ) : (
+        <Freshchat token={process.env.FRESHCHAT_TOKEN} />
+      )}
       <QueryClientProvider client={queryClient}>
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
