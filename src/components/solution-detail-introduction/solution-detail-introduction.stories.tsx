@@ -249,7 +249,7 @@ const introductionData_ = {
 
 export function DefaultSolutionDetailIntroduction() {
   const [isFreshChatShow, setIsFreshChatShow] = useState(false)
-  return <SolutionDetailIntroduction introductionData={introductionData} setIsFreshChatShow={setIsFreshChatShow} />
+  return <SolutionDetailIntroduction introductionData={introductionData} />
 }
 
 export function PointOfContactSolutionDetailIntroduction() {
