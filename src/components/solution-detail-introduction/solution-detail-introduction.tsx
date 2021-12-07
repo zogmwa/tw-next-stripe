@@ -29,7 +29,8 @@ type SolutionDetailIntroductionProps = {
     title: string
     upvoted_count: number
     booked_count: number
-    provide_organization: { name: string; logo_url: string | null; website: string | null }
+    provide_organization: { name: string; logo_url: string | null; website: string | null } | null
+    point_of_contact: { username: string; first_name: string; last_name: string }
     overview_description: string
     scope_of_work_description: string
     sidebar_info: {
@@ -42,7 +43,7 @@ type SolutionDetailIntroductionProps = {
         is_primary: boolean
       }
       price: number
-      features: { name: string }[]
+      features: { id: string; name: string; tooltipContent: string }[]
       purchaseDisableOption: boolean
     }
     questions: { title: string; primary_answer: string }[]
@@ -158,16 +159,34 @@ function SolutionDetailIntroductionComponent({
       </div>
       <div className="flex items-center justify-between p-4 md:px-0">
         <div className="flex items-center">
-          {introductionData.provide_organization.logo_url ? (
-            <img
-              className="w-[40px] h-[40px] rounded-full"
-              src={introductionData.provide_organization.logo_url}
-              alt={introductionData.provide_organization.name}
-            />
+          {introductionData.provide_organization ? (
+            <>
+              {introductionData.provide_organization.logo_url ? (
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={introductionData.provide_organization.logo_url}
+                  alt={introductionData.provide_organization.name}
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+              )}
+              <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
+            </>
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+                style={{ boxShadow: 'none !important' }}
+              >
+                <p>
+                  {introductionData.point_of_contact.first_name[0] + introductionData.point_of_contact.last_name[0]}
+                </p>
+              </div>
+              <span className="pl-2 text-sm text-text-secondary">
+                {introductionData.point_of_contact.first_name} {introductionData.point_of_contact.last_name}
+              </span>
+            </>
           )}
-          <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
         </div>
         <div className="flex">
           <button
