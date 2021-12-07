@@ -22,14 +22,9 @@ type SolutionDetailSidebarComponentProps = {
     purchaseDisableOption: boolean
   }
   className?: string
-  setIsFreshChatShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function SolutionDetailSidebarComponent({
-  detailInfo,
-  className = '',
-  setIsFreshChatShow,
-}: SolutionDetailSidebarComponentProps) {
+function SolutionDetailSidebarComponent({ detailInfo, className = '' }: SolutionDetailSidebarComponentProps) {
   const [isPurchase, setIsPurchase] = useState(false)
   const { requireLoginBeforeAction } = useRequireLogin()
 
@@ -69,7 +64,13 @@ function SolutionDetailSidebarComponent({
           >
             Purchase Now
           </Button>
-          <Button onClick={() => setIsFreshChatShow(true)} className="mt-2">
+          <Button
+            onClick={() => {
+              // @ts-ignore
+              window.fcWidget.open()
+            }}
+            className="mt-2"
+          >
             Ask Questions
           </Button>
         </div>
