@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.taggedweb.com
+
+# Sitemaps
+Sitemap: https://www.taggedweb.com/sitemap.xml

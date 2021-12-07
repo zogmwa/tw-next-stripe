@@ -32,5 +32,8 @@ const nextConfig = {
     FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
   },
 }
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer({ nextConfig })

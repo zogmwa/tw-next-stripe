@@ -26,6 +26,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function SolutionDetail({ solutionDetail }) {
+  const { authVerified, pk, email, first_name, last_name } = useUserContext()
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
 
   const breadcrumbData = [

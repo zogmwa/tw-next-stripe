@@ -13,6 +13,7 @@ We prefer using `yarn` instead of `npm` for this repo.
 ## Scripts
 
 - `yarn dev` to run a dev server
+- `yarn analyze` to run webpack analyzer to understand the bundle sizes of libraries used
 - `yarn build` - To build/compile the yarn application.
 - `yarn format <filepath>` - To format specific files (if the file is not formatted, our code formatting checks on PRs might fail)
 - Check package.json for other common scripts/targets.
