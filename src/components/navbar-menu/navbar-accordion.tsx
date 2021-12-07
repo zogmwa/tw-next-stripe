@@ -12,15 +12,30 @@ type MenuItemProps = {
   expanded: string
   handleChange: any
   pathName: string
+  isFooter?: boolean | false
+  isNavbar?: boolean | false
 }
 
-export function NavAccordion({ dropdownData, navItem, expanded, handleChange, pathName }: MenuItemProps) {
+export function NavAccordion({
+  dropdownData,
+  navItem,
+  expanded,
+  handleChange,
+  pathName,
+  isFooter,
+  isNavbar,
+}: MenuItemProps) {
   return (
-    <div className="mx-2">
+    <div className={`${isNavbar && 'mx-2'} ${isFooter && 'w-full'}`}>
       <Accordion className="w-full shadow-none" expanded={expanded === navItem} onChange={handleChange(navItem)}>
-        <div className="focus:bg-gray-100">
+        <div className="">
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>{navItem}</Typography>
+            <Typography
+              className={`${isFooter && 'font-sans text-sm font-bold text-gray-400'}`}
+              sx={{ width: '100%', flexShrink: 0 }}
+            >
+              {navItem}
+            </Typography>
           </AccordionSummary>
         </div>
         <AccordionDetails>
@@ -30,8 +45,28 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange, pa
                 <Typography key={item.name}>
                   <Link href={`/${pathName}/${item.slug}`}>
                     <a href="">
-                      <div className="py-2 hover:bg-gray-100">{item.name}</div>
+                      <div
+                        className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
+                          isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
+                        }`}
+                      >
+                        {item.name}
+                      </div>
                     </a>
+                  </Link>
+                </Typography>
+              )
+            } else if (item.name === 'Careers') {
+              return (
+                <Typography key={item.name}>
+                  <Link href="https://angel.co/company/taggedweb/jobs">
+                    <div
+                      className={` ${
+                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'
+                      }`}
+                    >
+                      {item.name}
+                    </div>
                   </Link>
                 </Typography>
               )
@@ -40,7 +75,13 @@ export function NavAccordion({ dropdownData, navItem, expanded, handleChange, pa
                 <Typography key={item.name}>
                   <Link href={'/'}>
                     <a href="">
-                      <div className="py-2 hover:bg-gray-100">{item.name}</div>
+                      <div
+                        className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
+                          isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
+                        }`}
+                      >
+                        {item.name}
+                      </div>
                     </a>
                   </Link>
                 </Typography>

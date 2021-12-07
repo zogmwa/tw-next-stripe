@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Tag } from '../../types/tag'
 import { Select } from '../select'
 import { SubscribeComponent } from './newsletter-subscribe'
+import { NavAccordion } from '../navbar-menu/navbar-accordion'
 
 type FooterComponentProps = {
   topSaasTags: Tag[]
@@ -28,16 +29,16 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
   const companies = {
     title: 'COMPANY',
     content: [
-      { name: 'About', slug: '' },
-      { name: 'Blog', slug: '' },
-      { name: 'Careers', slug: '' },
+      { name: 'About', slug: '/' },
+      { name: 'Blog', slug: '/' },
+      { name: 'Careers', slug: '/' },
     ],
   }
   const languages = [{ id: '1', text: 'English', disabled: false }]
 
   return (
-    <div className="w-full pt-6 mx-auto">
-      <div className="flex flex-col items-center p-1 space-y-4 md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
+    <div className="w-full pt-6 mx-auto ">
+      <div className="flex flex-col items-start w-full p-1 mx-auto md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <FooterSubComponent service={showSolutionTags} type="solutions" />
         <FooterSubComponent service={showSaasTags} type="softwares" />
         <FooterSubComponent service={companies} type="compaines" />
@@ -49,39 +50,57 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
 }
 
 export function FooterSubComponent({ service, type }) {
+  const [expanded, setExpanded] = useState<string>('')
+
+  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : '')
+  }
+
   return (
-    <div key={service} className="flex flex-col items-center space-y-2 md:items-start">
-      <h2 className="mb-4 text-sm font-bold text-gray-400">{service.title}</h2>
-      {service.content.map((tag) => {
-        if (type !== 'compaines') {
-          return (
-            <Link href={`/${type}/${tag.slug}`} prefetch={false} key={tag.slug}>
-              <a>
-                <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                  {tag.name}
-                </h3>
-              </a>
-            </Link>
-          )
-        } else {
-          if (tag.name === 'Careers') {
+    <>
+      <div key={service} className="flex-col items-center hidden space-y-2 text-sm md:flex md:items-start">
+        <h2 className="px-3 mb-4 font-bold text-gray-400">{service.title}</h2>
+        {service.content.map((tag) => {
+          if (type !== 'compaines') {
             return (
-              <a href="https://angel.co/company/taggedweb/jobs" target="_blank" rel="noopener noreferrer">
-                <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                  {tag.name}
-                </h3>
-              </a>
+              <Link href={`/${type}/${tag.slug}`} prefetch={false} key={tag.slug}>
+                <a>
+                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                    {tag.name}
+                  </h3>
+                </a>
+              </Link>
             )
           } else {
-            return (
-              <h3 className="text-sm text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                {tag.name}
-              </h3>
-            )
+            if (tag.name === 'Careers') {
+              return (
+                <a href="https://angel.co/company/taggedweb/jobs" target="_blank" rel="noopener noreferrer">
+                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                    {tag.name}
+                  </h3>
+                </a>
+              )
+            } else {
+              return (
+                <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                  {tag.name}
+                </h3>
+              )
+            }
           }
-        }
-      })}
-    </div>
+        })}
+      </div>
+      <div className="flex w-full md:hidden">
+        <NavAccordion
+          expanded={expanded}
+          handleChange={handleChange}
+          dropdownData={service.content}
+          navItem={service.title}
+          pathName={type}
+          isFooter={true}
+        />
+      </div>
+    </>
   )
 }
 
@@ -89,10 +108,10 @@ export function LanguageComponent({ languages }) {
   const [selectedLanguage, setSelectedLanguage] = useState<Language | null | undefined>(languages[0])
 
   return (
-    <div className="flex flex-col items-center w-full space-y-4 md:items-start">
-      <h4 className="text-sm font-bold text-gray-400">LANGUAGE</h4>
+    <div className="flex flex-col w-full px-4 my-3 space-y-4 md:items-start">
+      <h4 className="items-start text-sm font-bold text-gray-400">LANGUAGE</h4>
       <Select
-        buttonClassName="text-gray-800 !px-3 !py-2"
+        buttonClassName="text-gray-800 !py-2"
         items={languages}
         selectedItem={selectedLanguage}
         onSelectedItemChange={({ selectedItem }) => setSelectedLanguage(selectedItem)}

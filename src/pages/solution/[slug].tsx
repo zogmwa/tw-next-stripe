@@ -26,7 +26,6 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function SolutionDetail({ solutionDetail }) {
-  const { authVerified, pk, email, first_name, last_name } = useUserContext()
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
 
   const breadcrumbData = [
@@ -55,24 +54,27 @@ export default function SolutionDetail({ solutionDetail }) {
 
   const features = []
   let purchaseDisableOption = false
-  if (solutionDetail.eta_days)
+  if (solutionDetail.eta_days) {
     features.push({
-      id: `eta-days`,
+      id: 'eta-days',
       name: `Estimated Days to Fulfill: ${solutionDetail.eta_days}`,
       tooltipContent: 'This is an estimate on number of days it will take to deliver.',
     })
-  if (solutionDetail.has_free_consultation)
+  }
+  if (solutionDetail.has_free_consultation) {
     features.push({
-      id: `free-trial`,
+      id: 'free-trial',
       name: 'Free Trial',
       tooltipContent: 'This Solution has free trial.',
     })
-  if (solutionDetail.follow_up_hourly_rate)
+  }
+  if (solutionDetail.follow_up_hourly_rate) {
     features.push({
       id: 'hourly-rate',
       name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
       tooltipContent: 'This is the estimated hourly rate for followup work beyond scope of work.',
     })
+  }
   features.push({
     id: 'capacity',
     name: `${(solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)} / ${

@@ -48,6 +48,7 @@ export function NavbarMenuResponsive() {
         dropdownData={TopSolutionTags}
         navItem="Solutions"
         pathName="solutions"
+        isNavbar={true}
       />
       <NavAccordion
         expanded={expanded}
@@ -55,6 +56,7 @@ export function NavbarMenuResponsive() {
         dropdownData={TopSaasTags}
         navItem="Software"
         pathName="softwares"
+        isNavbar={true}
       />
       {/* <NavAccordion
         expanded={expanded}

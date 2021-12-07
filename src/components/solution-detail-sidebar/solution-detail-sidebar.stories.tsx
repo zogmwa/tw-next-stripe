@@ -39,6 +39,7 @@ const solutionSidebarInfo = {
 }
 
 export function DefaultSolutionDetailSidebar() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isFreshChatShow, setIsFreshChatShow] = useState(false)
 
   return (

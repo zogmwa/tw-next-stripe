@@ -246,19 +246,15 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
       <div className="flex flex-col p-4 md:p-0">
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Overview</h4>
-          <Markdown
-            className="mt-3 text-sm text-text-secondary"
-            children={introductionData.overview_description}
-            remarkPlugins={[remarkGfm]}
-          />
+          <Markdown className="mt-3 text-sm text-text-secondary" remarkPlugins={[remarkGfm]}>
+            {introductionData.overview_description}
+          </Markdown>
         </div>
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Scope of Work</h4>
-          <Markdown
-            className="mt-3 text-sm text-text-secondary"
-            children={introductionData.scope_of_work_description}
-            remarkPlugins={[remarkGfm]}
-          />
+          <Markdown className="mt-3 text-sm text-text-secondary" remarkPlugins={[remarkGfm]}>
+            {introductionData.scope_of_work_description}
+          </Markdown>
         </div>
         {introductionData.questions.length > 0 && (
           <div className="py-4">
