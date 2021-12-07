@@ -17,21 +17,21 @@ function SolutionDetailRelatedProductComponent({ relatedProducts }) {
   return (
     <>
       <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none h-full">
-        {showRelatedProducts.map((showRelateds, index) => (
+        {showRelatedProducts.map((relatedSoftwares, index) => (
           <Carousel.Item className="!aspect-h-16 md:!aspect-h-3" key={index}>
             <div className="grid content-around w-full h-full grid-cols-2 md:content-center md:grid-cols-4 justify-items-center">
-              {showRelateds.map((related, index) => (
+              {relatedSoftwares.map((software, index) => (
                 <div key={index} className="w-full h-full p-2 md:p-4">
-                  <Link href={`/solutions/${related.slug}`}>
+                  <Link href={`/software/${software.slug}`}>
                     <a>
                       <div className="flex flex-col items-center py-4 space-y-6 bg-white border border-solid rounded-md cursor-pointer border-border-default">
                         <ServiceLogo
-                          logoUrl={related.logo_url}
+                          logoUrl={software.logo_url}
                           owned={false}
-                          serviceSlug={related.slug}
-                          serviceName={related.name}
+                          serviceSlug={software.slug}
+                          serviceName={software.name}
                         />
-                        <span className="text-md text-text-primary">{related.name}</span>
+                        <span className="text-md text-text-primary">{software.name}</span>
                       </div>
                     </a>
                   </Link>
