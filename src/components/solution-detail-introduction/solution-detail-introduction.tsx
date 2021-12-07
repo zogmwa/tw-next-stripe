@@ -233,7 +233,14 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           </PopupState>
         </div>
       </div>
-      <SolutionDetailMobileSidebar detailInfo={introductionData.sidebar_info} className="md:hidden" />
+      <SolutionDetailMobileSidebar
+        setIsFreshChatShow={() => {
+          // @ts-ignore
+          window.fcWidget.open()
+        }}
+        detailInfo={introductionData.sidebar_info}
+        className="md:hidden"
+      />
       <div className="flex flex-col p-4 md:p-0">
         <div className="flex flex-col pt-2 md:pt-6">
           <h4 className="font-bold text-md">Overview</h4>

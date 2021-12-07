@@ -64,7 +64,15 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           >
             Purchase Now
           </Button>
-          <Button className="mt-2">Ask Questions</Button>
+          <Button
+            onClick={() => {
+              // @ts-ignore
+              window.fcWidget.open()
+            }}
+            className="mt-2"
+          >
+            Ask Questions
+          </Button>
         </div>
       </div>
       {detailInfo.features.map((feature) => (

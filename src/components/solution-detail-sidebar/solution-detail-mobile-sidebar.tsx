@@ -23,11 +23,13 @@ type SolutionDetailMobileSidebarComponentProps = {
     purchaseDisableOption: boolean
   }
   className?: string
+  setIsFreshChatShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function SolutionDetailMobileSidebarComponent({
   detailInfo,
   className = '',
+  setIsFreshChatShow,
 }: SolutionDetailMobileSidebarComponentProps) {
   const [isShowMore, setIsShowMore] = useState(false)
   const defaultShowCount = 2
@@ -89,7 +91,7 @@ function SolutionDetailMobileSidebarComponent({
         >
           Purchase Now
         </Button>
-        <Button className="px-[0.5rem] mt-2" textClassName="text-xs">
+        <Button onClick={() => setIsFreshChatShow(true)} className="px-[0.5rem] mt-2" textClassName="text-xs">
           Ask Questions
         </Button>
       </div>
