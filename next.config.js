@@ -11,7 +11,7 @@ const nextConfig = {
 
     ACCESS_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-access-token',
     REFRESH_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-refresh-token',
-    FRESHCHAT_TOKEN: '9c479967-f077-4e9f-a451-611601282b69',
+    FRESHCHAT_TOKEN: '4fb0a735-9e98-42cd-9b19-0237f15701e7',
 
     LINKEDIN_CLIENT_ID: '86a9kyhpahci31',
     LINKEDIN_OAUTH_STATE: 'bku19h5hfb',
