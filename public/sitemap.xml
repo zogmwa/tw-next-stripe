@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.taggedweb.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.751Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/google-login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/google-login/connect</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/linkedin-login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/linkedin-login/connect</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/list-a-software</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/payment-cancel</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/payment-success</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/products/home</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/profile</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/server-sitemap.xml</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/signup</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/softwares</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
-<url><loc>https://www.taggedweb.com/solutions</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-07T16:55:44.752Z</lastmod></url>
+<url><loc>https://www.taggedweb.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/google-login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/google-login/connect</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/linkedin-login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/linkedin-login/connect</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/list-a-software</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/login</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/payment-cancel</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/payment-success</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/products/home</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/profile</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/signup</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
+<url><loc>https://www.taggedweb.com/solutions</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-12-09T12:59:38.518Z</lastmod></url>
 </urlset>
