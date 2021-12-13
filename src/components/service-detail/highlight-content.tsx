@@ -16,9 +16,15 @@ type ServiceDetailFeatureProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
+  id: string
 }
 
-function HighlightContentComponent({ service, editAllowed = false, onChange = () => {} }: ServiceDetailFeatureProps) {
+function HighlightContentComponent({
+  service,
+  editAllowed = false,
+  onChange = () => {},
+  id,
+}: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
 
   const [attributeVotesList, setAttributeVotesList] = useState([])
@@ -134,6 +140,7 @@ function HighlightContentComponent({ service, editAllowed = false, onChange = ()
         customerOrganizations={customerOrganizations}
         editAllowed={editAllowed}
         onChange={onChange}
+        id={id}
       />
     </>
   )

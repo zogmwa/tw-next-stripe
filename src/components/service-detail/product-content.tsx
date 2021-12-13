@@ -16,9 +16,10 @@ type ServiceDetailPriductProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
+  id: string
 }
 
-function ProductContentComponent({ service, editAllowed = false, onChange = () => {} }: ServiceDetailPriductProps) {
+function ProductContentComponent({ service, editAllowed = false, onChange = () => {}, id }: ServiceDetailPriductProps) {
   if (typeof service === 'undefined') return null
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -28,7 +29,9 @@ function ProductContentComponent({ service, editAllowed = false, onChange = () =
 
   return (
     <div>
-      <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
+      <a href={`#scrollable-${id}`}>
+        <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
+      </a>
       {editAllowed ? (
         <div className="flex">
           <ShowEditable onEdit={() => setCaroselEdit(true)}>

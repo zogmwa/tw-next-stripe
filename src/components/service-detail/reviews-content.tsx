@@ -16,6 +16,7 @@ type ServiceDetailReviewsProps = {
   reviews: ServiceReview[]
   avgRating: number
   reviewsCount: number
+  id: string
 }
 
 function ReviewsContentComponent({
@@ -24,6 +25,7 @@ function ReviewsContentComponent({
   reviews,
   avgRating,
   reviewsCount: initReviewsCount,
+  id,
 }: ServiceDetailReviewsProps) {
   const [sortType, setSortType] = useState('TOP_REVIEWS')
   const [viewMore, setViewMore] = useState(false)
@@ -92,7 +94,9 @@ function ReviewsContentComponent({
 
   return (
     <>
-      <h1 className="text-base font-medium text-text-primary">Reviews</h1>
+      <a href={`#scrollable-${id}`}>
+        <h1 className="text-base font-medium text-text-primary">Reviews</h1>
+      </a>
       <div className="flex flex-col items-center">
         <StyledStarRating
           name="default"

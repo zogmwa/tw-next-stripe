@@ -29,22 +29,22 @@ export default function Service() {
     {
       id: 'products-information',
       name: 'Product Information',
-      content: <ProductContent service={data as Asset} />,
+      content: <ProductContent service={data as Asset} id="products-information" />,
     },
     {
       id: 'features',
       name: 'Features',
-      content: <HighlightSection service={data as Asset} />,
+      content: <HighlightSection service={data as Asset} id="features" />,
     },
     {
       id: 'pricing',
       name: 'Pricing',
-      content: <PricingContent service={data as Asset} />,
+      content: <PricingContent service={data as Asset} id="pricing" />,
     },
     {
       id: 'qa',
       name: 'Q & A',
-      content: <QaContent service={data as Asset} />,
+      content: <QaContent service={data as Asset} id="qa" />,
     },
     {
       id: 'reviews',
@@ -55,13 +55,14 @@ export default function Service() {
           assetName={data?.name}
           avgRating={data?.avg_rating ?? 0}
           reviewsCount={data?.reviews_count ?? 0}
+          id="reviews"
         />
       ),
     },
     {
       id: 'related-products',
       name: 'Related Software',
-      content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} />,
+      content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} id="related-products" />,
     },
   ]
 
