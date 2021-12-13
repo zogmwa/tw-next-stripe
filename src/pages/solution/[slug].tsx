@@ -88,12 +88,15 @@ export default function SolutionDetail({ solutionDetail }) {
       (solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)
     } solutions that can be booked. We limit capacity to prevent overbooking a provider.`,
   })
-  if (solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count <= 0) {
+  if (
+    solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count <= 0 ||
+    price.stripe_price_id === ''
+  ) {
     purchaseDisableOption = true
   }
 
   const solutionSidebarInfo = {
-    primary_price: price,
+    pay_now_price: price,
     price: price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,

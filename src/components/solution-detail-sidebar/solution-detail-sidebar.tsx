@@ -9,7 +9,7 @@ import { Button } from '../button'
 
 type SolutionDetailSidebarComponentProps = {
   detailInfo: {
-    primary_price: {
+    pay_now_price: {
       stripe_price_id: string
       price: string | number
     }
@@ -26,7 +26,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    const data = await toggleSolutionPurchase(detailInfo.primary_price.stripe_price_id)
+    const data = await toggleSolutionPurchase(detailInfo.pay_now_price.stripe_price_id)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }

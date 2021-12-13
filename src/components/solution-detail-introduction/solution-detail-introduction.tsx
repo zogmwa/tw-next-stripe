@@ -36,7 +36,7 @@ type SolutionDetailIntroductionProps = {
     overview_description: string
     scope_of_work_description: string
     sidebar_info: {
-      primary_price: {
+      pay_now_price: {
         stripe_price_id: string
         price: string | number
       }
