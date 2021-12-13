@@ -10,12 +10,8 @@ import { Button } from '../button'
 type SolutionDetailSidebarComponentProps = {
   detailInfo: {
     primary_price: {
-      id: number
-      solution: number
       stripe_price_id: string
       price: string | number
-      currency: string
-      is_primary: boolean
     }
     price: number
     features: { id: string; name: string; tooltipContent: string }[]
@@ -30,7 +26,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    const data = await toggleSolutionPurchase(detailInfo.primary_price.id)
+    const data = await toggleSolutionPurchase(detailInfo.primary_price.stripe_price_id)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }
@@ -44,7 +40,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     >
       <div className="flex items-center py-2">
         <BiDollar className="text-3xl font-bold text-text-primary" />
-        <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price : 0}</h4>
+        <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price / 100 : 0}</h4>
       </div>
       <div className="flex flex-col p-2 space-y-2">
         {detailInfo.features.map((feature, index) => (

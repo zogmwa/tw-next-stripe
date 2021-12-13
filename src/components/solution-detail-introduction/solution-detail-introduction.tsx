@@ -37,12 +37,8 @@ type SolutionDetailIntroductionProps = {
     scope_of_work_description: string
     sidebar_info: {
       primary_price: {
-        id: number
-        solution: number
         stripe_price_id: string
         price: string | number
-        currency: string
-        is_primary: boolean
       }
       price: number
       features: { id: string; name: string; tooltipContent: string }[]
