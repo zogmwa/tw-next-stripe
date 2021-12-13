@@ -46,8 +46,10 @@ export default function SolutionDetail({ solutionDetail }) {
     },
   ]
   const copyUrl = process.env.SITE_BASE_URL + `/solution/${solutionDetail.slug}`
-  let price = solutionDetail.prices.filter((price) => price.is_primary === true)[0]
-  if (price?.length === 0) price = solutionDetail.prices[0]
+  let price = {
+    stripe_price_id: solutionDetail.pay_now_price_stripe_id ?? '',
+    price: solutionDetail.pay_now_price_unit_amount ?? 0,
+  }
 
   let primary_tag = solutionDetail.primary_tag
   if (primary_tag?.length === 0) primary_tag = solutionDetail.tags[0]
@@ -86,12 +88,15 @@ export default function SolutionDetail({ solutionDetail }) {
       (solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)
     } solutions that can be booked. We limit capacity to prevent overbooking a provider.`,
   })
-  if ((solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count) / solutionDetail.capacity < 1.0) {
+  if (
+    solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count <= 0 ||
+    price.stripe_price_id === ''
+  ) {
     purchaseDisableOption = true
   }
 
   const solutionSidebarInfo = {
-    primary_price: price,
+    pay_now_price: price,
     price: price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,

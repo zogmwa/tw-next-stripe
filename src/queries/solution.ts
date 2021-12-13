@@ -52,7 +52,7 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
   }
 }
 
-export async function toggleSolutionPurchase(solutionPriceId: number): Promise<any | null> {
+export async function toggleSolutionPurchase(solutionPriceId: number | string): Promise<any | null> {
   try {
     const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}`, {})
     return data
