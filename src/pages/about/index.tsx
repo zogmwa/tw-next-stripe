@@ -1,6 +1,5 @@
 import React from 'react'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
-import { Button } from '../../components/button/button'
 import 'reactjs-freshchat/dist/index.css'
 
 export default function Software() {
