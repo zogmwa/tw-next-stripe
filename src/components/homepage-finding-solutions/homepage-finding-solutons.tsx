@@ -42,7 +42,7 @@ export function FindingSolutions() {
             <div className="text-lg text-text-tertiary">
               See details about the solution. If needed, ask questions with us over chat to clarify if the solution
               meets your needs. Reach out to us if anything is unclear. If you are not looking for solutions but just
-              finding the best-fit SaaS options, then you may browse through our open{' '}
+              finding the best-fit SaaS options, then you may browse through our open
               <Link href="/softwares"> software catalog </Link> or can ask us for software recommendations.
             </div>
           </div>

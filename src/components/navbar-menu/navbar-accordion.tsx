@@ -40,11 +40,11 @@ export function NavAccordion({
         </div>
         <AccordionDetails>
           {dropdownData.map((item) => {
-            if (item.slug !== '/') {
+            if (pathName !== 'compaines') {
               return (
                 <Typography key={item.name}>
                   <Link href={`/${pathName}/${item.slug}`}>
-                    <a href="">
+                    <a>
                       <div
                         className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
                           isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
@@ -73,8 +73,8 @@ export function NavAccordion({
             } else {
               return (
                 <Typography key={item.name}>
-                  <Link href={'/'}>
-                    <a href="">
+                  <Link href={`/${item.slug}`}>
+                    <a>
                       <div
                         className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
                           isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'

@@ -29,7 +29,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
   const companies = {
     title: 'COMPANY',
     content: [
-      { name: 'About', slug: '/' },
+      { name: 'About', slug: '/about' },
       { name: 'Blog', slug: '/' },
       { name: 'Careers', slug: '/' },
     ],
@@ -82,9 +82,13 @@ export function FooterSubComponent({ service, type }) {
               )
             } else {
               return (
-                <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                  {tag.name}
-                </h3>
+                <Link href={`/${tag.slug}`} prefetch={false} key={tag.slug}>
+                  <a>
+                    <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                      {tag.name}
+                    </h3>
+                  </a>
+                </Link>
               )
             }
           }
