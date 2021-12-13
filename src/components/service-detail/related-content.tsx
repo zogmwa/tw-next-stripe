@@ -59,7 +59,7 @@ function RelatedContentComponent({ name, slug, logo, id }: RelateName) {
   return (
     <>
       <div className="flex justify-between">
-        <a href={`#scrollable-${id}`}>
+        <a href={`#${id}`}>
           <h1 className="my-2 text-base font-medium text-text-primary">Related Software</h1>
         </a>
       </div>

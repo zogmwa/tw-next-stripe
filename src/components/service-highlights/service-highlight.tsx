@@ -81,7 +81,7 @@ function HighlightContentComponent({
     <div className="md:mt-10">
       <div className="flex justify-between">
         <div className="md:flex md:justify-start">
-          <a href={`#scrollable-${id}`}>
+          <a href={`#${id}`}>
             <h1 className="text-base font-medium text-text-primary">Highlights</h1>
           </a>
           <Switch.Group className="mt-2 md:mt-0 md:ml-2">

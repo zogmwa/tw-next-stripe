@@ -29,7 +29,7 @@ function ProductContentComponent({ service, editAllowed = false, onChange = () =
 
   return (
     <div>
-      <a href={`#scrollable-${id}`}>
+      <a href={`#${id}`}>
         <h1 className="text-base font-medium text-text-primary">What is {service.name}?</h1>
       </a>
       {editAllowed ? (

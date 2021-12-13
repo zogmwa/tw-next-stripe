@@ -63,7 +63,7 @@ function ServiceQuestionComponent({
 
   return (
     <div className="md:mt-10">
-      <a href={`#scrollable-${id}`}>
+      <a href={`#${id}`}>
         <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
       </a>
       <SearchQuestionBar

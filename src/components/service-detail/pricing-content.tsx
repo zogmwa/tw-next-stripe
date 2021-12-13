@@ -43,7 +43,7 @@ export function PricingContentComponent({
             </ShowEditable>
           </div>
         ) : (
-          <a href={`#scrollable-${id}`}>
+          <a href={`#${id}`}>
             <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
           </a>
         ))}

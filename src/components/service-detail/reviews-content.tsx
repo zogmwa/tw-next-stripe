@@ -94,7 +94,7 @@ function ReviewsContentComponent({
 
   return (
     <>
-      <a href={`#scrollable-${id}`}>
+      <a href={`#${id}`}>
         <h1 className="text-base font-medium text-text-primary">Reviews</h1>
       </a>
       <div className="flex flex-col items-center">
