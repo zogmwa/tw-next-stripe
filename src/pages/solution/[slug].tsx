@@ -143,8 +143,12 @@ export default function SolutionDetail({ solutionDetail }) {
             className="w-[15rem] h-full sticky top-16 hidden md:flex"
           />
         </div>
-        <div className="flex flex-col pb-6 mt-8">
-          {relatedProducts.length > 0 && <h4 className="pb-4 text-lg font-bold text-black">Related Software</h4>}
+        <div id="related-software" className="flex flex-col pb-6 mt-8">
+          {relatedProducts.length > 0 && (
+            <a href="#related-software">
+              <h4 className="pb-4 text-lg font-bold text-black">Related Software</h4>
+            </a>
+          )}
           <SolutionDetailRelatedProduct relatedProducts={relatedProducts} />
         </div>
       </div>
