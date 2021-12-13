@@ -29,7 +29,7 @@ function HighlightContentComponent({
   customerOrganizations,
   editAllowed,
   onChange,
-  id
+  id,
 }) {
   const [isCon, setIsCon] = useState(false)
   const [viewMore, setViewMore] = useState(false)

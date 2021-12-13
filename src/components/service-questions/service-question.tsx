@@ -36,7 +36,7 @@ function ServiceQuestionComponent({
   isLoading,
   clickedQuestionId,
   setClickedQuestionId,
-  id
+  id,
 }) {
   const [isAnswered, setIsAnswered] = useState(isShowAnswered)
   const [viewMore, setViewMore] = useState(false)

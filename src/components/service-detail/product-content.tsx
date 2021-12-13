@@ -16,7 +16,7 @@ type ServiceDetailPriductProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
-  id: string
+  id?: string | ''
 }
 
 function ProductContentComponent({ service, editAllowed = false, onChange = () => {}, id }: ServiceDetailPriductProps) {

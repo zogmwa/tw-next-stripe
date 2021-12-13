@@ -11,7 +11,7 @@ type ServiceDetailPricingProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
-  id: string
+  id?: string | ''
 }
 
 export function PricingContentComponent({

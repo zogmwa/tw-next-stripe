@@ -16,7 +16,7 @@ type ServiceDetailFeatureProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
-  id: string
+  id?: string | ''
 }
 
 function HighlightContentComponent({
