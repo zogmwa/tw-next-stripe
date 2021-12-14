@@ -12,10 +12,11 @@ import { ServiceLogo } from '../service-logo'
 type SolutionListingCardProps = {
   listingData: {
     slug: string
+    pay_now_price_stripe_id: string
+    pay_now_price_unit_amount: string | number
     assets: any[]
     tags: { name: string; slug: string }[]
     title: string
-    prices: { stripe_price_id: number | string; price: number | string; is_primary: boolean }[]
     upvotes_count: number
     avg_rating?: string | number
     organization: { name: string; logo_url: string | null }
@@ -37,9 +38,6 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
     }
     return sign * number + unitlist[unit]
   }
-
-  let primaryPrice = listingData.prices.filter((price) => price.is_primary === true)[0]
-  if (!primaryPrice) primaryPrice = listingData.prices[0]
 
   return (
     <div
@@ -78,7 +76,9 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
         </div>
         <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
           <BiDollar className="text-xl font-bold text-text-primary" />
-          <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
+          <h4 className="text-xl font-bold text-text-primary">
+            {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+          </h4>
         </div>
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
@@ -105,7 +105,9 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           </div>
           <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
             <BiDollar className="text-xl font-bold text-text-primary" />
-            <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
+            <h4 className="text-xl font-bold text-text-primary">
+              {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+            </h4>
           </div>
           <div className="flex self-start space-x-2">
             {listingData.assets.slice(0, 3).map((asset, key) => (
