@@ -36,6 +36,7 @@ function ServiceQuestionComponent({
   isLoading,
   clickedQuestionId,
   setClickedQuestionId,
+  id,
 }) {
   const [isAnswered, setIsAnswered] = useState(isShowAnswered)
   const [viewMore, setViewMore] = useState(false)
@@ -62,7 +63,9 @@ function ServiceQuestionComponent({
 
   return (
     <div className="md:mt-10">
-      <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
+      <a href={`#${id}`}>
+        <h1 className="text-base font-medium text-text-primary">Questions and Answers</h1>
+      </a>
       <SearchQuestionBar
         className="mt-2"
         onSubmit={(selectedQuestion) => {

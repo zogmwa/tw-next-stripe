@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 import { fetchVote } from '@taggedweb/queries/service'
 import { ReviewsContent } from './reviews-content'
 
-function GetReviewsComponent({ assetId, assetName, avgRating, reviewsCount }) {
+function GetReviewsComponent({ assetId, assetName, avgRating, reviewsCount, id }) {
   const { query } = useRouter()
   const { slug } = query as { slug: string }
   const [data, setData] = useState(null)
@@ -30,6 +30,7 @@ function GetReviewsComponent({ assetId, assetName, avgRating, reviewsCount }) {
       reviews={data}
       avgRating={avgRating}
       reviewsCount={reviewsCount}
+      id={id}
     />
   )
 }

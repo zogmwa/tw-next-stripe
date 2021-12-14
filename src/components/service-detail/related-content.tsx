@@ -10,9 +10,10 @@ type RelateName = {
   name: string
   slug: string
   logo: string
+  id: string
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function RelatedContentComponent({ name, slug, logo }: RelateName) {
+function RelatedContentComponent({ name, slug, logo, id }: RelateName) {
   const [viewMore, setViewMore] = useState(false)
   const [relatedProductsList, setRelatedProductsList] = useState([])
   const [compareRelatedList, setCompareRelatedList] = useState([])
@@ -58,7 +59,9 @@ function RelatedContentComponent({ name, slug, logo }: RelateName) {
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="my-2 text-base font-medium text-text-primary">Related Software</h1>
+        <a href={`#${id}`}>
+          <h1 className="my-2 text-base font-medium text-text-primary">Related Software</h1>
+        </a>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4">
         {viewRelatedProducts.map((relatedProduct, index) => {

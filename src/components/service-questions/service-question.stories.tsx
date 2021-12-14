@@ -102,6 +102,7 @@ export function DefaultServiceQuestion() {
         isLoading={isLoading}
         setClickedQuestionId={setClickedQuestionId}
         clickedQuestionId={clickedQuestionId}
+        id="qa"
       />
     </>
   )

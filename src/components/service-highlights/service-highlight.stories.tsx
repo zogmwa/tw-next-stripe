@@ -124,6 +124,7 @@ export function DefaultStarRating() {
       customerOrganizations={customerOrganizations}
       editAllowed={false}
       onChange={() => {}}
+      id="features"
     />
   )
 }

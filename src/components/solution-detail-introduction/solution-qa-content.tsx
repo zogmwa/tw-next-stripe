@@ -47,7 +47,9 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
 
   return (
     <div className="flex flex-col">
-      <h4 className="font-bold text-md">FAQs</h4>
+      <a href="#solutions-faq">
+        <h4 className="font-bold text-black text-md">FAQs</h4>
+      </a>
       {allQuestion.length >= 10 && (
         <div className="flex items-center w-full px-2 py-1 mt-4 border border-solid rounded-md md:px-4 border-border-default">
           <AiOutlineSearch className="mr-1 md:mr-2 text-md text-text-tertiary" />

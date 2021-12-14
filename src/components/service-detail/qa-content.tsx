@@ -14,9 +14,10 @@ import { ServiceQuestion } from '../service-questions'
 
 type ServiceDetailQAProps = {
   service: Asset
+  id: string
 }
 
-function QaContentComponent({ service }: ServiceDetailQAProps) {
+function QaContentComponent({ service, id }: ServiceDetailQAProps) {
   if (typeof service === 'undefined') return null
 
   const [isAnswered, setIsAnswered] = useState(true)
@@ -117,6 +118,7 @@ function QaContentComponent({ service }: ServiceDetailQAProps) {
         isLoading={isLoading}
         setClickedQuestionId={setClickedQuestionId}
         clickedQuestionId={clickedQuestionId}
+        id={id}
       />
     </>
   )

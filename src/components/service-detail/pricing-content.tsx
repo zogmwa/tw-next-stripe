@@ -11,6 +11,7 @@ type ServiceDetailPricingProps = {
   service: Asset
   editAllowed?: boolean
   onChange?: Function
+  id?: string | ''
 }
 
 export function PricingContentComponent({
@@ -18,6 +19,7 @@ export function PricingContentComponent({
   service,
   editAllowed = false,
   onChange = () => {},
+  id,
 }: ServiceDetailPricingProps) {
   const [selectedItem, setSelectedItem] = useState(0)
   const carouselSlider = useRef(null)
@@ -41,7 +43,9 @@ export function PricingContentComponent({
             </ShowEditable>
           </div>
         ) : (
-          <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
+          <a href={`#${id}`}>
+            <h1 className="text-base font-medium text-text-primary md:mt-2">Pricing</h1>
+          </a>
         ))}
       {plans.length > 0 && (
         <div className="grid grid-cols-1 md:flex md:justify-start">
