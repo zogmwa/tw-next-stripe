@@ -14,8 +14,9 @@ type SolutionListingCardProps = {
   listingData: {
     assets: any[]
     tags: { name: string; slug: string }[]
+    pay_now_price_stripe_id: string
+    pay_now_price_unit_amount: string | number
     title: string
-    prices: { stripe_price_id: number | string; price: number | string; is_primary: boolean }[]
     upvotes_count: number
     avg_rating?: string | number
     organization?: { name: string; logo_url: string | null }
@@ -37,9 +38,6 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
     return sign * number + unitlist[unit]
   }
 
-  let primaryPrice = listingData.prices.filter((price) => price.is_primary === true)[0]
-  if (!primaryPrice) primaryPrice = listingData.prices[0]
-
   return (
     <div className={clsx('flex flex-col p-4 mt-2 mr-2 border border-solid rounded border-border-default', className)}>
       <div className="flex flex-col">
@@ -58,7 +56,9 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
           </div>
           <div className="flex items-center py-2">
             <BiDollar className="text-xl font-bold text-text-primary" />
-            <h4 className="text-xl font-bold text-text-primary">{primaryPrice?.price ?? 0}</h4>
+            <h4 className="text-xl font-bold text-text-primary">
+              {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+            </h4>
           </div>
         </div>
         <div className="flex flex-col">
