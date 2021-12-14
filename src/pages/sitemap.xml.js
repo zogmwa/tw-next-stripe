@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
 
 const Sitemap = () => {}
