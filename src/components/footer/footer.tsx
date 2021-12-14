@@ -29,9 +29,9 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
   const companies = {
     title: 'COMPANY',
     content: [
-      { name: 'About', slug: '/about' },
-      { name: 'Blog', slug: '/' },
-      { name: 'Careers', slug: '/' },
+      { name: 'About', slug: 'about' },
+      { name: 'Blog', slug: '' },
+      { name: 'Careers', slug: '' },
     ],
   }
   const languages = [{ id: '1', text: 'English', disabled: false }]
