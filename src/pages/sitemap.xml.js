@@ -7,7 +7,6 @@ const Sitemap = () => {}
 export const getServerSideProps = async ({ res }) => {
   const { data } = await clientWithRetries.get('/static/sitemap.xml')
 
-  console.log(googleData)
   res.setHeader('Content-Type', 'text/xml')
   res.write(data)
   res.end()
