@@ -23,20 +23,8 @@ const listingData = {
   title:
     'Improve the performance of your Python application instrumenting it with Datadog APM, Uncover performance bottlenecks',
   upvotes_count: 324,
-  prices: [
-    {
-      stripe_price_id: 2,
-      price: 1500,
-      currency: 'USD',
-      is_primary: false,
-    },
-    {
-      stripe_price_id: 2,
-      price: 120,
-      currency: 'USD',
-      is_primary: false,
-    },
-  ],
+  pay_now_price_stripe_id: 'price_1K6JX7CD3MPWHCo8oL6VpZD1',
+  pay_now_price_unit_amount: 1000,
   avg_rating: '4.700',
   organization: {
     name: 'Solution Provider Organization',
