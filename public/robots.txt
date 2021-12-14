@@ -6,4 +6,4 @@ Allow: /
 Host: https://www.taggedweb.com
 
 # Sitemaps
-Sitemap: https://taggedweb.s3.us-east-1.amazonaws.com/static/sitemap.xml
+Sitemap: https://www.taggedweb.com/sitemap.xml
