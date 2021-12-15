@@ -159,7 +159,7 @@ function HighlightContentComponent({
                     onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
-                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 1}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                   {editAllowed && (
@@ -214,7 +214,7 @@ function HighlightContentComponent({
                     onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
-                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 1}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                   {editAllowed && (
