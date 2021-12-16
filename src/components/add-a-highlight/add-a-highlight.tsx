@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../button'
 import AddAHighlightBar from './add-a-highlight-bar'
 import { Switch } from '../switch'
@@ -25,12 +25,16 @@ function AddAHighlightComponent({
   addAttributeAction,
   addAttributeNameErrorMessage,
 }: featureProps) {
+  const [submitDisable, setSubmitDisable] = useState(false)
+
   return (
     <form
       className="space-y-4"
       onSubmit={async (e) => {
         e.preventDefault()
+        setSubmitDisable(true)
         await addAttributeAction()
+        setSubmitDisable(false)
         if (addAttributeName) {
           if (addAttributeName.value !== '') setIsOpen(false)
         }
@@ -60,17 +64,7 @@ function AddAHighlightComponent({
         <span className="p-1 text-xs text-red-600">{addAttributeNameErrorMessage}</span>
       )}
       <div className="flex flex-row-reverse">
-        <Button
-          className="ml-4"
-          buttonType="primary"
-          type="submit"
-          // onClick={async () => {
-          //   await addAttributeAction()
-          //   if (addAttributeName) {
-          //     if (addAttributeName.value !== '') setIsOpen(false)
-          //   }
-          // }}
-        >
+        <Button className="ml-4" buttonType="primary" type="submit" disabled={submitDisable}>
           Add
         </Button>
         <Button buttonType="default" onClick={() => setIsOpen(false)}>
