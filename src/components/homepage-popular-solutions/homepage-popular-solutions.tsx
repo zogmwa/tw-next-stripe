@@ -123,7 +123,7 @@ export function PopularSolutionTags() {
         {solutionTag.slice(0, 4).map((solution, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:border-blue-500"
+            className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
             onClick={() => {
               router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
             }}
@@ -137,7 +137,7 @@ export function PopularSolutionTags() {
         {solutionTag.map((solution, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:border-blue-500"
+            className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
             onClick={() => {
               router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
             }}

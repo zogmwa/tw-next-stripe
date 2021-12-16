@@ -34,7 +34,7 @@ export function NavItem({ dropdownData, navItem, pathName }: MenuItemProps) {
                       <a
                         href={`/${pathName}/${item.slug}`}
                         className={clsx(
-                          active ? 'bg-gray-100' : null,
+                          active ? 'bg-gray-200' : null,
                           'text-base  tracking-wide text-opacity-100 cursor-pointer text-primary h-full',
                           'block px-4',
                         )}
@@ -51,7 +51,7 @@ export function NavItem({ dropdownData, navItem, pathName }: MenuItemProps) {
                       <a
                         href="/"
                         className={clsx(
-                          active ? 'bg-gray-100' : null,
+                          active ? 'bg-gray-200' : null,
                           'text-base  tracking-wide text-opacity-100 cursor-pointer text-primary',
                           'block px-4 py-2 font-medium',
                         )}

@@ -17,6 +17,9 @@ export type BasicInformationFormValues = {
   logoUrl: string
   protocol: typeof URL_PROTOCOLS[number]
   shortDescription: string
+  description: string
+  promoVideo: string | undefined
+  snapshots: { url: string }[]
 }
 
 // @TODO: Update min max limits according to api
@@ -40,9 +43,12 @@ export const basicInformationSchema = yup.object().shape({
     .required('Please enter the service url'),
   shortDescription: yup
     .string()
-    .min(12, 'Description should be atleast 12 chars long')
-    .max(40, 'Description should be less than 40 chars')
-    .required('Please enter a description'),
+    .min(12, 'Short Description should be atleast 12 chars long')
+    .max(512, 'Short Description should be less than 512 chars')
+    .required('Please enter a short description'),
+  description: yup.string().min(100, 'Description should be atleast 100 chars long').optional(),
+  snapshots: yup.array().of(yup.object()).min(0).max(10).optional(),
+  promoVideo: yup.string().optional().url('Please enter a valid url'),
 })
 
 type BasicInformationFormProps = {
@@ -148,6 +154,44 @@ export function BasicInformationForm({
         as={Textarea}
         errorMessage={touched.shortDescription ? errors.shortDescription : undefined}
         success={touched.shortDescription && !errors.shortDescription}
+      />
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
+        Detailed Description
+      </label>
+      <Field
+        id="description"
+        className="mb-8"
+        name="description"
+        placeholder="Write detailed description..."
+        as={Textarea}
+        errorMessage={touched.description ? errors.description : undefined}
+        success={touched.description && !errors.description}
+      />
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary">Screenshots</label>
+      <div className="mb-8">
+        <ImageUploader
+          limit={5}
+          onUploading={onUploading}
+          onChange={(urls) => {
+            setFieldValue(
+              'snapshots',
+              urls.map((url) => ({ url })),
+            )
+          }}
+        />
+      </div>
+
+      <label className="block mb-2 text-sm font-medium lg:text-base text-text-primary" htmlFor="description">
+        Video URL
+      </label>
+      <Field
+        id="promoVideo"
+        className="mb-8"
+        name="promoVideo"
+        placeholder="https://example.com/video.mp4"
+        as={Input}
+        errorMessage={touched.promoVideo ? errors.promoVideo : undefined}
+        success={touched.promoVideo && !errors.promoVideo}
       />
     </Form>
   )

@@ -23,18 +23,13 @@ function ServiceDetailSidebarComponent({ elements }) {
             }
           >
             {elements.map((item) => (
-              <ScrollableLink
-                href={`#scrollable-${item.id}`}
+              <a
                 key={item.id}
-                activeClassName={'bg-secondary text-primary border-secondary font-semibold rounded-sm'}
+                className="hover:bg-secondary hover:font-semibold hover:rounded-sm block mx-1 my-0.5 px-1 py-0.5 text-sm text-text-secondary font-sm cursor-pointer focus:ring-0 focus:ring-offset-0"
+                href={`#${item.id}`}
               >
-                <a
-                  className="block mx-1 my-0.5 px-1 py-0.5 text-sm text-text-secondary font-sm cursor-pointer focus:ring-0 focus:ring-offset-0"
-                  href={`#scrollable-${item.id}`}
-                >
-                  {item.name}
-                </a>
-              </ScrollableLink>
+                {item.name}
+              </a>
             ))}
           </nav>
           <PopupState variant="popover" popupId="demo-popup-popover">

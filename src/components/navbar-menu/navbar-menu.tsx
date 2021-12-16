@@ -17,13 +17,13 @@ export function NavbarMenu() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100"
+            className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-200"
           >
             Solution Providers
           </a>
         </Link>
         <Link href={LIST_A_SOFTWARE_PATH}>
-          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-100">
+          <a className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-200">
             List a Software
           </a>
         </Link>

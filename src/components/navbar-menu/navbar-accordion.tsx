@@ -46,7 +46,7 @@ export function NavAccordion({
                   <Link href={`/${pathName}/${item.slug}`}>
                     <a>
                       <div
-                        className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
+                        className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
                           isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
                         }`}
                       >
@@ -76,7 +76,7 @@ export function NavAccordion({
                   <Link href={`/${item.slug}`}>
                     <a>
                       <div
-                        className={`${isNavbar && 'py-2 hover:bg-gray-100'} ${
+                        className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
                           isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
                         }`}
                       >

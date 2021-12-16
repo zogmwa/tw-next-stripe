@@ -41,7 +41,7 @@ function AddAHighlightComponent({
       }}
     >
       <div className="flex">
-        <div className="flex-grow font-bold">Add a Highlight</div>
+        <div className="flex-grow font-bold">Add a Feature</div>
         <div>
           <span className={addAttributeCon ? 'text-gray-400' : 'text-green-600'}>Pro</span>
           <Switch

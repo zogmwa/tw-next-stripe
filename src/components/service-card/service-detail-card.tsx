@@ -205,15 +205,17 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
             ) : null}
           </div>
           <div className="flex mt-2 space-x-2 text-sm sm:space-x-4 md:divide-x">
-            <div className="flex items-center space-x-2 text-lg">
-              <AiOutlineStar className="self-center text-primary" />
-              <span>{rating}</span>
-              <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
-                {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
-                  ? 'No Review'
-                  : `${numeral(service.reviews_count).format('0.[0]a')} Reviews`}
-              </span>
-            </div>
+            <a href="#reviews">
+              <div className="flex items-center space-x-2 text-lg">
+                <AiOutlineStar className="self-center text-primary" />
+                <span>{rating}</span>
+                <span className="self-end text-xs text-text-secondary pb-[0.2rem]">
+                  {Number(numeral(service.reviews_count).format('0.[0]a')) === 0
+                    ? 'No Review'
+                    : `${numeral(service.reviews_count).format('0.[0]a')} Reviews`}
+                </span>
+              </div>
+            </a>
             <div className="flex items-center space-x-2 md:pl-4">
               <UpvoteUser
                 isLoading={isLoadingUpvote}
