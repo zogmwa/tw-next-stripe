@@ -26,7 +26,16 @@ function AddAHighlightComponent({
   addAttributeNameErrorMessage,
 }: featureProps) {
   return (
-    <div className="space-y-4">
+    <form
+      className="space-y-4"
+      onSubmit={async (e) => {
+        e.preventDefault()
+        await addAttributeAction()
+        if (addAttributeName) {
+          if (addAttributeName.value !== '') setIsOpen(false)
+        }
+      }}
+    >
       <div className="flex">
         <div className="flex-grow font-bold">Add a Highlight</div>
         <div>
@@ -55,20 +64,20 @@ function AddAHighlightComponent({
           className="ml-4"
           buttonType="primary"
           type="submit"
-          onClick={async () => {
-            await addAttributeAction()
-            if (addAttributeName) {
-              if (addAttributeName.value !== '') setIsOpen(false)
-            }
-          }}
+          // onClick={async () => {
+          //   await addAttributeAction()
+          //   if (addAttributeName) {
+          //     if (addAttributeName.value !== '') setIsOpen(false)
+          //   }
+          // }}
         >
           Add
         </Button>
-        <Button buttonType="default" type="submit" onClick={() => setIsOpen(false)}>
+        <Button buttonType="default" onClick={() => setIsOpen(false)}>
           Cancel
         </Button>
       </div>
-    </div>
+    </form>
   )
 }
 
