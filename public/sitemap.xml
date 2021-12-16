@@ -1,916 +1,227 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-
-<url>
-  <loc>https://taggedweb.com/</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/list-a-software</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/improve-application-software</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/integrate-datadog-apm</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/integrate-social-authentication</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/reduce-aws-tools</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/integrate-twilio-sms</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/accounting</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/artificial-intelligence</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/compliance</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/construction-management</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/crm</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/customer-service</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/design</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/e-commerce</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/email-marketing</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/erp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/environmental-compliance</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/marketing-automation</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/marketplace</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/vpn</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/video-conferencing</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/about</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/solutions/integration</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/patriot-accounting</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/quickbooks-accounting</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/acumatica</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/infor-cloudsuite-financials</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/quickbooks-online-advanced</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/yaypay</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/reach-accountant</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/freshbooks</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/reserved-instance-reporting</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/deltek-vision</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/analytics-hub</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/logi-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/text-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/amenity-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/microstrategy-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/brevo-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/zoho-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/longview-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/merchandise-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/oracle-it-analytics</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/oracle-artificial-intelligence</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/acobot</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/appzen</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/makezu</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/botmind</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/tara</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ghostwriterai</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/squirro</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/machine-translation</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/synaptik</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/compliance-ce</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/adaptive-compliance-engine-ace</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ibm-cloud-security-and-compliance-center</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/accessibe</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/mapistry</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/gensuite</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/enablon</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/etq-reliance</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/actiontrail</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/osano</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/sage-300-construction-and-real-estate</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/www.sage.com</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/procore</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/contractor-foreman</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/projul</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/projectteamcom</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/go.projectteam.com</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/buildingconnected</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/sharemytoolbox</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/www.sharemytoolbox.com</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/redteam</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/www.redteam.com</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ineight</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/softwares/ineight.com</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/projectsight</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ellucian-crm-advise</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/amazon-connect</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/freshworks</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ellucian-degree-works</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/amazon-simple-email-service-ses</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/truly</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/verishow</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/playerlync</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ringio</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/msgai</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/azure-lighthouse</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/cipherise</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/cognigyai</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/text-to-speech</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/statapile</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/devicepilot</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/autonoma</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/snapsio</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/connect-software</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/alibre-design</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/vr-design-studio</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/strata-design-3d-cx</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/figma</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/appy-pie</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/edge-tpu</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/tinkercad</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/altium-designer</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/freecad</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/solidworks-premium</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/shopify</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/shopney</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/nosto</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/elasticpath-moltin</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/mobinyze</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/microsoft-sql-server</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/autochat</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/image-search</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/campaign-monitor</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/hubspot-marketing-hub</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/persistiq</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/mailchimp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/getresponse</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/aweber</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/mailslurp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/competitors-app</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/exceed-ai</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/eventtia</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/sap-cloud-erp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/acumatica-cloud-erp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/oracle-fusion-cloud-erp</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/altior</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/priority-software</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ecms</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/astek</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/nchannel</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/unanet-ae</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/oracle-mobile-hub</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/incox</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/yellowfin</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/two-minute-reports</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/cognitive-workbench</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/tapclicks</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/zema</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/synerise</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/facebook-marketplace</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/flippa</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/opensea</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/kubernetes-applications-on-google-cloud-marketplac</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/azure-managed-applications</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/azure-quantum</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/rarible</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/udemy</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/shipstation</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ethical-angel</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/security-center</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/api-security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/network-security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/container-security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/duo-security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/oracle-database-security</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/appsian-security-platform</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/aws-security-hub</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/managed-security-service</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/security-command-center</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/vpn-gateway</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/openotp-mfa-vpn</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/ncp-secure-communication</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/azure-expressroute</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/hybrid-connectivity</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/beyondcorp-enterprise</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/myownconference</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/zebu</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/c-meeting</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/lifesize</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/meetingpulse</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/cisco-jabber</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/podia</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/samepage</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://taggedweb.com/software/gruveo</loc>
-  <lastmod>2021-12-16T18:10:10+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
-</urlset>
+<?xml version="1.0" unicode="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">        
+<url><loc>https://www.taggedweb.com/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.259306</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.259306</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/email-marketing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/nft/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/accounting/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/invoicing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/chatbot/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/marketing-automation/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/digital-signature/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/electronic-signature/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-forms/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/landing-pages/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/newsletters/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/images/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/image-search/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/png/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/online-forms/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/forms/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cloud/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/kubernetes/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/website-hosting/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cloud-servers/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/freelancers/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-development/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/freelance-services/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/soc2/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/corporate-sustainability-responsibilty/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sustainability/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sustainability-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/supply-chain-visibility/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sustainability-reporting/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/eu-taxonomy/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/esg/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/compliance/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/environmental-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ehs/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/environmental-compliance/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/monitoring/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/application-performance-monitoring/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/metrics/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/photo-editor/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-framework/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/marketing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/automation/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/data-science/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/online-learning/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/python/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sql/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/artificial-intelligence/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/investing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/corporate-social-responsibility/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/marketplace/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/donations/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/volunteering/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/crm/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/recycling/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/affiliate-marketing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/e-commerce/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/customer-support/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/interviewing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/machine-learning/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/trading/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/api/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/project-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/seo/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/supply-chain-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/erp/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/video-conferencing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/vpn/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/online-backup/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/expense-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/imaging/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/accounts-payable/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/data-analysis/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/construction/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/security/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/dashboards/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/voice-analytics/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/commission-free/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/communication/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/buy-now-pay-later/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/payments/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/housing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/database/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/graph-database/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/customer-behavior/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/contract-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/construction-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/aws/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/analytics/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/application-integration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/aws-cost-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/blockchain/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/virtual-reality/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/compute/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/containers/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/customer-engagement/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/developer-tools/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/end-user-computing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/frontend/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/game-tech/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/internet-of-things/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/governance/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/media-services/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/migration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/content-delivery/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/quantum-technologies/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/robotics/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/satellite/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/identity/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/serverless/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/storage/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ar/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ide/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/version-control/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/azure/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/graph/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/authentication/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/authorization/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/google/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/mathematical-modeling/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sales/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-service-search/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cad/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/application-development/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/applied-software-technologies/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/integration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/observability-and-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/networking/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-scraping/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/spreadsheets/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/deskless-workforce/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/lms/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/voip/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/web-templates/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/simulations/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/engineering-tools/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/medical-practice/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/hr/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/performance-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/datawarehouse/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/design/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ux-design/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/math/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/puzzles/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/learning/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/gaming/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/video-streaming/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/qna/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/teams/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/community/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/social-media/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/customer-data-platform/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/advertising/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cas/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/college-applications/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sms/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/short-code/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/banking/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/advertisement/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/transactional-emails/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/biotech/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/biopharmaceutical/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/payroll/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/mobile-event-tracking/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/business-intelligence/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/data-visualization/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/saas-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/api-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/hotel-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/testing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/privacy/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/gps/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/documents/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/incorporation/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/agriculture/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/realtime/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/auto-dealer-software/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/fintech/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/identity-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/startup/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/legal/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/commmunication/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/human-capital-management/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/budgeting/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/desktop/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/financing/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ibm/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/hpc/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/warehouse-service/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/elastic-orchestration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/hybrid-cloud/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cdn/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/essential-storage-service/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/nosql-database/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/relational-database/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/dedicated-cluster/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/data-warehouse/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/chatbots/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/data-development/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/analysis/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/micro-services/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sdk/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/collaboration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/games/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/manufacturing-software/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/recruiting/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/talent-intelligence/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/continuous-integration/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/code-autocomplete/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/wireframes/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ui-design/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/identity-resolution/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/introductions/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/sales-leads/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/admin-support/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/debugging/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/cookie-consent/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/time-tracking/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/elearning/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/softwares/ed-tech/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/solution/improve-python-application-performance-datadog/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/solution/consult-for-reducing-aws-cost/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
+<url><loc>https://www.taggedweb.com/solution/debug-python-code/</loc><changefreq>weekly</changefreq><priority>0.7</priority><lastmod>2021-12-16 10:27:26.306181</lastmod></url>
