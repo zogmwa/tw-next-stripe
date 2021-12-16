@@ -98,7 +98,7 @@ function ReviewInputComponent({ serviceName, handleSubmit }: ReviewInputProps) {
           <Input
             type="text"
             className="w-full mb-4"
-            placeholder="Video Review URL"
+            placeholder="Paste a video review link here (optional)"
             onChange={handleChange('videoUrl')}
             onBlur={handleBlur('videoUrl')}
             value={values.videoUrl}

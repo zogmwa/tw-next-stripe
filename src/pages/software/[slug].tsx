@@ -24,7 +24,7 @@ export default function Service() {
   // eslint-disable-next-line
   const { data, error } = useSWR(`/api/assets/${slug}`)
 
-  console.log(data)
+  // console.log(data)
   const elements = [
     {
       id: 'products-information',
