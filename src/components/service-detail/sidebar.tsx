@@ -5,7 +5,6 @@ import Popover from '@mui/material/Popover'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
-import ScrollableLink from '../scrollspy/scrollable-link'
 import { Button } from '../button'
 
 function ServiceDetailSidebarComponent({ elements }) {
