@@ -20,9 +20,9 @@ function DynamicHeaderComponent({
       <meta property="og:description" name="description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="TaggedWeb" />
-      <meta property="og:image" content="images/step_1.png" />
+      <meta property="og:image" content="/images/step_1.png" />
       <meta name="og:url" content={process.env.SITE_BASE_URL + asPath} />
-      <meta name="og:logo" content="images/taggedweb-logo.svg" />
+      <meta name="og:logo" content="/images/taggedweb-logo.svg" />
     </Head>
   )
 }

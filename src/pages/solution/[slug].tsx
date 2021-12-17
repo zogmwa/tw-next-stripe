@@ -46,7 +46,7 @@ export default function SolutionDetail({ solutionDetail }) {
     },
   ]
   const copyUrl = process.env.SITE_BASE_URL + `/solution/${solutionDetail.slug}`
-  let price = {
+  const price = {
     stripe_price_id: solutionDetail.pay_now_price_stripe_id ?? '',
     price: solutionDetail.pay_now_price_unit_amount ?? 0,
   }
