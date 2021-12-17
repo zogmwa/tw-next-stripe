@@ -63,8 +63,8 @@ export async function solutionSuggestions(searchInput: string): Promise<Solution
       const { data } = await client.get(`/autocomplete-solutions/?q=${searchInput}`)
       const soltuionResults = data.results.map((option) => ({ value: option.slug, label: option.title }))
       return [
-        { label: '', options: [{ value: searchInput, label: searchInput }] },
         { label: 'Solutions', options: soltuionResults },
+        { label: '', options: [{ value: searchInput, label: searchInput }] },
       ]
     } catch (error) {
       //  always wrap any API fetching operation within try/catch block
