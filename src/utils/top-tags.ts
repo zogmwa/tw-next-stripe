@@ -13,7 +13,7 @@ export const topTags = [
     value: 'Artificial Intelligence Tools',
   },
   {
-    slug: 'crm',
+    slug: 'CRM',
     value: 'CRM Software',
   },
   {
@@ -102,7 +102,7 @@ export const TopSaasTags = [
   {
     description: '',
     name: 'Customer Relationship Management Tools',
-    slug: 'crm',
+    slug: 'CRM',
   },
   {
     description: '',
