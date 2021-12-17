@@ -43,16 +43,17 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
       <div className="flex flex-col">
         <div className="flex flex-row justify-between">
           <div className="flex self-start space-x-2">
-            {listingData.assets.slice(0, 3).map((asset, key) => (
-              <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
-                <ServiceLogo
-                  serviceName={asset?.name}
-                  serviceId={asset.id}
-                  logoUrl={asset.logo_url}
-                  className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                />
-              </div>
-            ))}
+            {listingData.assets &&
+              listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
+                <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                  <ServiceLogo
+                    serviceName={asset?.name}
+                    serviceId={asset.id}
+                    logoUrl={asset.logo_url}
+                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                  />
+                </div>
+              ))}
           </div>
           <div className="flex items-center py-2">
             <BiDollar className="text-xl font-bold text-text-primary" />
