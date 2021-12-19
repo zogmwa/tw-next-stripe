@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Freshchat } from 'reactjs-freshchat'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import toast, { Toaster } from 'react-hot-toast'
@@ -12,7 +11,7 @@ import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
 import { FcInfo } from 'react-icons/fc'
 import { MdOutlineError } from 'react-icons/md'
-import { UserProvider, useUserContext } from '@taggedweb/hooks/use-user'
+import { UserProvider } from '@taggedweb/hooks/use-user'
 import { NavBar } from '@taggedweb/components/nav-bar'
 import { Spinner } from '@taggedweb/components/spinner'
 import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
@@ -21,6 +20,7 @@ import { HomePageFooter } from '@taggedweb/components/homepage-footer-old'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
 import { FooterComponent } from '@taggedweb/components/footer'
+import { FreshChat } from '@taggedweb/components/freshchat-container'
 
 const queryClient = new QueryClient()
 
@@ -36,7 +36,6 @@ const RedirectSpinner = () => (
 )
 
 function CustomApp({ Component, pageProps }: AppProps) {
-  const { authVerified, pk, email, first_name, last_name } = useUserContext()
   const { pathname } = useRouter()
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
@@ -76,20 +75,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {authVerified ? (
-        <Freshchat
-          token={process.env.FRESHCHAT_TOKEN}
-          externalId={`${pk}`}
-          firstName={first_name}
-          lastName={last_name}
-          email={email}
-        />
-      ) : (
-        <Freshchat token={process.env.FRESHCHAT_TOKEN} />
-      )}
       <QueryClientProvider client={queryClient}>
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
+            <FreshChat />
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
               <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
