@@ -42,49 +42,41 @@ export function NavAccordion({
           {dropdownData.map((item) => {
             if (pathName !== 'compaines') {
               return (
-                <Typography key={item.name}>
-                  <Link href={`/${pathName}/${item.slug}`}>
-                    <a>
-                      <div
-                        className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
-                          isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
-                        }`}
-                      >
-                        {item.name}
-                      </div>
-                    </a>
-                  </Link>
-                </Typography>
+                <Link href={`/${pathName}/${item.slug}`} key={item.name}>
+                  <a>
+                    <div
+                      className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
+                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
+                      }`}
+                    >
+                      <Typography>{item.name}</Typography>
+                    </div>
+                  </a>
+                </Link>
               )
             } else if (item.name === 'Careers') {
               return (
-                <Typography key={item.name}>
-                  <Link href="https://angel.co/company/taggedweb/jobs">
-                    <div
-                      className={` ${
-                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'
-                      }`}
-                    >
-                      {item.name}
-                    </div>
-                  </Link>
-                </Typography>
+                <Link href="https://angel.co/company/taggedweb/jobs" key={item.name}>
+                  <div
+                    className={` ${isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'}`}
+                  >
+                    <Typography>{item.name}</Typography>
+                  </div>
+                </Link>
               )
             } else {
               return (
-                <Typography key={item.name}>
-                  <Link href={`/${item.slug}`}>
-                    <a>
-                      <div
-                        className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
-                          isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
-                        }`}
-                      >
-                        {item.name}
-                      </div>
-                    </a>
-                  </Link>
-                </Typography>
+                <Link href={`/${item.slug}`} key={item.name}>
+                  <a>
+                    <div
+                      className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
+                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
+                      }`}
+                    >
+                      <Typography>{item.name}</Typography>
+                    </div>
+                  </a>
+                </Link>
               )
             }
           })}

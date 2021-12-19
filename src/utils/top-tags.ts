@@ -60,10 +60,10 @@ export const topTags = [
     slug: 'security',
     value: 'Security Services',
   },
-  {
-    slug: 'security',
-    value: 'Security Software',
-  },
+  // {
+  //   slug: 'security',
+  //   value: 'Security Software',
+  // },
   {
     slug: 'vpn',
     value: 'VPN Software and Tools',
@@ -149,11 +149,11 @@ export const TopSaasTags = [
     name: 'Security Services',
     slug: 'security',
   },
-  {
-    description: '',
-    name: 'Security Software',
-    slug: 'security',
-  },
+  // {
+  //   description: '',
+  //   name: 'Security Software',
+  //   slug: 'security',
+  // },
   {
     description: '',
     name: 'VPN Software and Tools',

@@ -74,7 +74,20 @@ export function FooterSubComponent({ service, type }) {
           } else {
             if (tag.name === 'Careers') {
               return (
-                <a href="https://angel.co/company/taggedweb/jobs" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://angel.co/company/taggedweb/jobs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key="careers"
+                >
+                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                    {tag.name}
+                  </h3>
+                </a>
+              )
+            } else if (tag.name === 'Blog') {
+              return (
+                <a href="/blog" target="_blank" rel="noopener noreferrer" key="blog">
                   <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
                     {tag.name}
                   </h3>
