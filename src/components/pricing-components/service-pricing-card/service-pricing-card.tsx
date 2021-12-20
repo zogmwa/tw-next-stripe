@@ -36,7 +36,7 @@ function ServicePricingCardComponent({ pricePlans, selected, onSelected, carouse
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2.999,
+    slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
