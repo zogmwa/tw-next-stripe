@@ -238,6 +238,7 @@ const profileContextValue: Profile = {
   pending_asset_ids: [],
   social_accounts: ['linkedin_oauth2', 'google'],
   bookmarked_solutions: [],
+  booked_solutions: [],
 }
 
 ProfileCardComponent.args = {

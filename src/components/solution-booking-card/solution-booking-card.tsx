@@ -12,8 +12,17 @@ import { ServiceLogo } from '../service-logo'
 
 type SolutionBookingCardProps = {
   solutionBookingData: {
-    solution: any
+    solution: {
+      assets: any[]
+      avg_rating: string | number
+      title: string
+      organization: any
+      upvotes_count: number
+      slug: string
+      pay_now_price_unit_amount: number
+    }
     status: string
+    updated: string
   }
   className?: string
 }

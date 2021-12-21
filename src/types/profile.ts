@@ -13,4 +13,17 @@ export type Profile = {
   used_assets: number[]
   social_accounts: string[]
   bookmarked_solutions: any[]
+  booked_solutions: {
+    solution: {
+      assets: any[]
+      avg_rating: string | number
+      title: string
+      organization: any
+      upvotes_count: number
+      slug: string
+      pay_now_price_unit_amount: number
+    }
+    status: string
+    updated: string
+  }[]
 }
