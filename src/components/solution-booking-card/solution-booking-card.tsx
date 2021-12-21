@@ -23,6 +23,7 @@ type SolutionBookingCardProps = {
     }
     status: string
     updated: string
+    price_at_booking: number
   }
   className?: string
 }
@@ -108,16 +109,14 @@ function SolutionBookingCardComponent({ solutionBookingData, className }: Soluti
             </div>
             <div className="flex items-center space-x-1 text-xs">
               <IoIosArrowUp className="text-primary" />
-              <span className="text-xs ">{kFormater(solutionBookingData.solution.upvotes_count)}</span>
+              <span className="text-xs ">{kFormater(solutionBookingData.solution?.upvotes_count ?? 0)}</span>
             </div>
           </div>
         </div>
         <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
           <BiDollar className="text-xl font-bold text-text-primary" />
           <h4 className="text-xl font-bold text-text-primary">
-            {solutionBookingData.solution.pay_now_price_unit_amount
-              ? Number(solutionBookingData.solution.pay_now_price_unit_amount) / 100
-              : 0}
+            {solutionBookingData.price_at_booking ? Number(solutionBookingData.price_at_booking) / 100 : 0}
           </h4>
         </div>
       </div>
@@ -141,14 +140,12 @@ function SolutionBookingCardComponent({ solutionBookingData, className }: Soluti
           </div>
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
             <IoIosArrowUp className="text-primary" />
-            <span className="text-xs">{kFormater(solutionBookingData.solution.upvotes_count)}</span>
+            <span className="text-xs">{kFormater(solutionBookingData.solution?.upvotes_count ?? 0)}</span>
           </div>
           <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {solutionBookingData.solution.pay_now_price_unit_amount
-                ? Number(solutionBookingData.solution.pay_now_price_unit_amount) / 100
-                : 0}
+              {solutionBookingData.price_at_booking ? Number(solutionBookingData.price_at_booking) / 100 : 0}
             </h4>
           </div>
           <div className="flex self-start space-x-2">
