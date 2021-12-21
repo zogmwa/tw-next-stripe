@@ -29,11 +29,11 @@ type SolutionBookingCardProps = {
 }
 
 function SolutionBookingCardComponent({ solutionBookingData, className }: SolutionBookingCardProps) {
-  if (solutionBookingData.solution?.title === '') return null
+  if (typeof solutionBookingData.solution?.title === 'undefined') return null
 
   const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
-  const rating = numeral(Number(solutionBookingData.solution.avg_rating ?? 0)).format('0.[0]')
+  const rating = numeral(Number(solutionBookingData.solution?.avg_rating ?? 0)).format('0.[0]')
 
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -72,7 +72,7 @@ function SolutionBookingCardComponent({ solutionBookingData, className }: Soluti
   statuses.map((status, index) => {
     if (status.name === solutionBookingData.status) statusIndex = index + 1
   })
-  console.log(statusIndex)
+
   return (
     <div
       className={clsx(
