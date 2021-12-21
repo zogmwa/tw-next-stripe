@@ -16,8 +16,9 @@ function DynamicHeaderComponent({
   return (
     <Head>
       <title>{title}</title>
-      {/* This robot meta element should be delete in Prod. */}
-      <meta name="robots" content="noindex,nofollow" />
+      {process.env.NODE_ENV === 'development' && (
+        <meta name="robots" content="noindex,nofollow" />
+      )}
       <meta property="og:title" content={title} />
       <meta property="og:description" name="description" content={description} />
       <meta property="og:type" content="website" />
