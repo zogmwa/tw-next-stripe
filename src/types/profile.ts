@@ -25,5 +25,6 @@ export type Profile = {
     }
     status: string
     updated: string
+    price_at_booking: number
   }[]
 }
