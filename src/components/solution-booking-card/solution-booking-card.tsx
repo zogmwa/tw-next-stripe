@@ -6,7 +6,6 @@ import { AiFillStar } from 'react-icons/ai'
 import numeral from 'numeral'
 import { useRouter } from 'next/router'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
-import Typography from '@mui/material/Typography'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { ServiceLogo } from '../service-logo'
 

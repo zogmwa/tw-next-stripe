@@ -4,7 +4,7 @@ import { Profile } from '@taggedweb/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
 import { BookmarkedSolutionsProfile } from './bookmarked-solutions'
-import { BookedSolutionsProfile } from './booked-solutions-profile'
+import { SolutionBookingsProfileProfile } from './solution-booking-profile'
 
 function ScrollSpy({ elements }) {
   return (
@@ -46,8 +46,8 @@ const elements = [
     name: 'Bookmarked Solutions',
   },
   {
-    id: 'booked-solutions',
-    name: 'Booked Solutions',
+    id: 'contracts',
+    name: 'Contracts',
   },
 ]
 
@@ -60,7 +60,7 @@ export const ProfileDesktop = ({ profile }: { profile: Profile }) => {
         <PendingAssetsProfile data={profile} />
         <PublishedAssetsProfile data={profile} />
         <BookmarkedSolutionsProfile data={profile} />
-        <BookedSolutionsProfile data={profile} />
+        <SolutionBookingsProfileProfile data={profile} />
       </div>
     </div>
   )
