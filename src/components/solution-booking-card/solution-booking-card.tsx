@@ -29,6 +29,8 @@ type SolutionBookingCardProps = {
 }
 
 function SolutionBookingCardComponent({ solutionBookingData, className }: SolutionBookingCardProps) {
+  if (solutionBookingData.solution?.title === '') return null
+
   const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(solutionBookingData.solution.avg_rating ?? 0)).format('0.[0]')
