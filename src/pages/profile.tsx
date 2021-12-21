@@ -87,8 +87,8 @@ function ProfilePage() {
   return (
     <>
       <DynamicHeader title="TaggedWeb | My Profile" />
-      <div className="min-h-full p-4 bg-background-light">
-        <div className="max-w-screen-lg mx-auto" id="scroll-container-outer">
+      <div className="flex justify-center min-h-full pt-4 mx-auto bg-background-light">
+        <div className="w-full max-w-screen-lg" id="scroll-container-outer">
           <Element name={'personal-information'}>
             <ProfileCard data={data} />
           </Element>
