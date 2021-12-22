@@ -101,16 +101,28 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
     <div className="flex flex-col pt-4 space-y-3 md:flex-row md:space-x-8 md:space-y-0 service-detail-card">
       <div className="flex items-start justify-start w-full space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
-          <div className="relative">
-            {editAllowed ? (
-              <EditableServiceLogo
-                serviceName={service?.name}
-                serviceId={service.id}
-                logoUrl={service.logo_url}
-                owned={service?.is_owned ?? false}
-                onSubmit={(field, value) => onChange(field, value)}
-              />
-            ) : (
+          {editAllowed ? (
+            <>
+              <div className="relative">
+                <EditableServiceLogo
+                  serviceName={service?.name}
+                  serviceId={service.id}
+                  logoUrl={service.logo_url}
+                  owned={service?.is_owned ?? false}
+                  onSubmit={(field, value) => onChange(field, value)}
+                />
+              </div>
+              <button
+                className="px-1 py-0.5 rounded-md text-xs border border-primary text-primary"
+                onClick={() => {
+                  router.push(`/software/${service.slug}`)
+                }}
+              >
+                View mode
+              </button>
+            </>
+          ) : (
+            <>
               <a
                 href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
                 target={service.affiliate_link || service.website ? '_blank' : ''}
@@ -123,8 +135,18 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                   owned={service?.is_owned ?? false}
                 />
               </a>
-            )}
-          </div>
+              {service.edit_allowed && (
+                <button
+                  className="px-1 py-0.5 rounded-md text-xs border border-primary text-primary"
+                  onClick={() => {
+                    router.push(`/software/${service.slug}/edit`)
+                  }}
+                >
+                  Edit mode
+                </button>
+              )}
+            </>
+          )}
         </div>
         <div className="flex-1">
           <div className="flex items-center justify-between space-x-2 md:justify-start">
