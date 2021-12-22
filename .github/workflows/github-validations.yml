@@ -56,3 +56,6 @@ jobs:
         run: |
           yarn build
           yarn validate-format
+
+      - name: Test
+        run: yarn test

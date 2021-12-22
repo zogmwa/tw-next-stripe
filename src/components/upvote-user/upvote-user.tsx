@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { IoIosArrowUp } from 'react-icons/io'
 import clsx from 'clsx'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { useRouter } from 'next/router'
 import { Spinner } from '../spinner'
 
 function UpvoteUserComponent({ isLoading, isVotedByMe, upvotesCount, usersCount, toggleUpvote, className = '' }) {
@@ -11,7 +12,9 @@ function UpvoteUserComponent({ isLoading, isVotedByMe, upvotesCount, usersCount,
   const [showVotedByMe, setShowVotedByMe] = useState(isVotedByMe)
   const [showUsersCount, setShowUsersCount] = useState(usersCount)
   const [showUpvotesCount, setShowUpvotesCount] = useState(upvotesCount)
+  const { pathname } = useRouter()
 
+  const renderUsersCount = pathname.split('/')[1] !== 'solution'
   useEffect(() => {
     setIsLoadingUpote(isLoading)
   }, [isLoading])
@@ -55,8 +58,8 @@ function UpvoteUserComponent({ isLoading, isVotedByMe, upvotesCount, usersCount,
         )}
         {kFormater(showUpvotesCount)}
       </span>
-      {showUsersCount > 10 && (
-        <span className="self-end text-xs text-text-secondary pb-[0.2rem]">{kFormater(showUsersCount)} users</span>
+      {showUsersCount > 10 && renderUsersCount && (
+        <span className=" self-end text-xs text-text-secondary pb-[0.2rem]">{kFormater(showUsersCount)} users</span>
       )}
     </div>
   )
