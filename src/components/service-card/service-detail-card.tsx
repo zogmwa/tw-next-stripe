@@ -112,14 +112,15 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                   onSubmit={(field, value) => onChange(field, value)}
                 />
               </div>
-              <button
-                className="px-1 py-0.5 rounded-md text-xs border border-red-600 text-red-600"
+              <Button
+                className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                textClassName="text-red-600"
                 onClick={() => {
                   router.push(`/software/${service.slug}`)
                 }}
               >
-                View mode
-              </button>
+                Switch to View mode
+              </Button>
             </>
           ) : (
             <>
@@ -136,14 +137,15 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 />
               </a>
               {service.edit_allowed && (
-                <button
-                  className="px-1 py-0.5 rounded-md text-xs border border-red-600 text-red-600"
+                <Button
+                  className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                  textClassName="text-red-600"
                   onClick={() => {
                     router.push(`/software/${service.slug}/edit`)
                   }}
                 >
                   Edit mode
-                </button>
+                </Button>
               )}
             </>
           )}
