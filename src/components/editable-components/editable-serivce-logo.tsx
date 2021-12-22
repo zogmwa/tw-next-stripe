@@ -59,7 +59,7 @@ function EditableServiceLogoComponent({
       <ServiceLogo serviceName={serviceName} serviceId={serviceId} logoUrl={showLogoUrl} owned={owned ?? false} />
       <input type="file" className="hidden" ref={imageFileInput} onChange={(event) => onFileChange(event)} />
       {isChangeLogo ? (
-        <div className="opacity-100 bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[5px] left-0 w-[72px] h-[72px]">
+        <div className="opacity-100 bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[0px] left-0 w-[72px] h-[72px]">
           <AiOutlineCheck
             className="absolute top-[0.3rem] right-[1.5rem] text-success text-md cursor-pointer"
             onClick={() => onConfirme()}
@@ -82,11 +82,11 @@ function EditableServiceLogoComponent({
       ) : (
         <>
           {isUploading ? (
-            <div className="opacity-100 bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[5px] left-0 w-[72px] h-[72px]">
+            <div className="opacity-100 bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[0px] left-0 w-[72px] h-[72px]">
               <Spinner />
             </div>
           ) : (
-            <div className="opacity-0 bg-opacity-0 hover:opacity-100 hover:bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[5px] left-0 w-[72px] h-[72px]">
+            <div className="opacity-0 bg-opacity-0 hover:opacity-100 hover:bg-opacity-70 bg-background-default flex absolute justify-center items-center top-[0px] left-0 w-[72px] h-[72px]">
               <FiEdit
                 className="cursor-pointer text-md text-primary hover:shadow-sm"
                 data-for="tooltip-edit"
