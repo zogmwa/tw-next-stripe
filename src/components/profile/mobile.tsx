@@ -5,6 +5,7 @@ import { Profile } from '@taggedweb/types/profile'
 import { PendingAssetsProfile } from './pending-assets'
 import { PublishedAssetsProfile } from './published-assets'
 import { BookmarkedSolutionsProfile } from './bookmarked-solutions'
+import { SolutionBookingsProfileProfile } from './solution-booking-profile'
 
 export const ProfileMobile = ({ profile }: { profile: Profile }) => {
   const elements = [
@@ -22,6 +23,11 @@ export const ProfileMobile = ({ profile }: { profile: Profile }) => {
       id: 'bookmarked-solutions',
       name: 'Bookmarked Solutions',
       content: <BookmarkedSolutionsProfile data={profile} />,
+    },
+    {
+      id: 'contracts',
+      name: 'Contracts',
+      content: <SolutionBookingsProfileProfile data={profile} />,
     },
   ]
 
