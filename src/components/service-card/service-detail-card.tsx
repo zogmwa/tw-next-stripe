@@ -113,7 +113,7 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 />
               </div>
               <button
-                className="px-1 py-0.5 rounded-md text-xs border border-primary text-primary"
+                className="px-1 py-0.5 rounded-md text-xs border border-red-600 text-red-600"
                 onClick={() => {
                   router.push(`/software/${service.slug}`)
                 }}
@@ -137,7 +137,7 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               </a>
               {service.edit_allowed && (
                 <button
-                  className="px-1 py-0.5 rounded-md text-xs border border-primary text-primary"
+                  className="px-1 py-0.5 rounded-md text-xs border border-red-600 text-red-600"
                   onClick={() => {
                     router.push(`/software/${service.slug}/edit`)
                   }}
