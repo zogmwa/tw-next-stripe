@@ -1,13 +1,13 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { SolutionBookingCard } from './'
+import { ContractCard } from '.'
 
 export default {
   title: 'General/SolutionBookingCard',
-  component: SolutionBookingCard,
+  component: ContractCard,
 } as Meta
 
-const solutionBookingsList = [
+const contractsList = [
   {
     solution: {
       id: 3,
@@ -209,8 +209,8 @@ const solutionBookingsList = [
 export function DefaultSolutionListingCard() {
   return (
     <>
-      {solutionBookingsList.map((solutionBooking, index) => (
-        <SolutionBookingCard key={`${index}solutionBooking`} solutionBookingData={solutionBooking} />
+      {contractsList.map((contract, index) => (
+        <ContractCard key={`${index}contract`} contractData={contract} />
       ))}
     </>
   )
