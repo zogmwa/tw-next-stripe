@@ -4,6 +4,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { Button } from '../button'
 
 type SortServiceListProps = {
@@ -34,22 +35,50 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
           <FormControlLabel
             value="-avg_rating"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Avg. Rating - High to Low</div>}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Avg. Rating{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowDown />
+                </span>
+              </div>
+            }
           />
           <FormControlLabel
             value="avg_rating"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Avg. Rating - Low to High</div>}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Avg. Rating{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowUp />
+                </span>
+              </div>
+            }
           />
           <FormControlLabel
             value="-upvotes_count"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Upvotes - High to Low</div>}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Upvotes{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowDown />
+                </span>
+              </div>
+            }
           />
           <FormControlLabel
             value="upvotes_count"
             control={<Radio />}
-            label={<div className="text-sm text-text-primary">Upvotes - Low to High</div>}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Upvotes{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowUp />
+                </span>
+              </div>
+            }
           />
         </RadioGroup>
       </FormControl>
