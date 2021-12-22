@@ -13,7 +13,7 @@ export type Profile = {
   used_assets: number[]
   social_accounts: string[]
   bookmarked_solutions: any[]
-  booked_solutions: {
+  solution_bookings: {
     solution: {
       assets: any[]
       avg_rating: string | number
