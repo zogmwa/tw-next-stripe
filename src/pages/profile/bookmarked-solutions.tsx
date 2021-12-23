@@ -10,7 +10,7 @@ export default function BookmarkedSolutionsList() {
   return (
     <div className="flex flex-col w-1/2 mx-auto my-8">
       <p className="mb-2 text-lg font-bold">Bookmarked Solutions</p>
-      <div className="w-full mb-4 divide-y divide-gray-200 rounded-md">
+      <div className="w-full mb-4 rounded-md">
         {solutionsList &&
           solutionsList.map((solution, index) => {
             if (typeof solution === 'undefined') return null
