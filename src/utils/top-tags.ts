@@ -169,7 +169,7 @@ export const TopSolutionTags = [
   {
     description: '',
     name: 'Improve Application Performance',
-    slug: 'improve-application-software',
+    slug: 'improve-application-performance',
   },
   {
     description: '',
