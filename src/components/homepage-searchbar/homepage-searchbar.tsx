@@ -8,11 +8,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function SearchComponent() {
+type SearchComponentProps = {
+  search_software: number
+}
+export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   const router = useRouter()
   return (
     <div className="w-full">
-      <Tab.Group>
+      <Tab.Group defaultIndex={search_software}>
         <Tab.List className="flex p-1 space-x-1 sm:w-1/2 bg-blue-900/20 rounded-xl">
           <Tab
             className={({ selected }) =>
