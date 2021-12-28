@@ -1,13 +1,18 @@
 import React from 'react'
-import Link from 'next/link'
+import { SolutionListingCard } from '../solution-listing-card'
 
 export const BookmarkedSolutionsProfile = ({ data }) => {
+  const solutionsList = data.bookmarked_solutions
   return (
-    <Link href="profile/bookmarked-solutions">
-      <div id="bookmarked-solutions" className="mb-8 border-b border-gray-300 cursor-pointer md:flex">
-        <p className="text-base font-bold hover:text-blue-500">Bookmarked Solutions</p>
-        <span className="ml-auto">{`${data?.bookmarked_solutions.length ?? 0} Product(s)`}</span>
+    <div id="bookmarked-solutions" className="mb-8">
+      <p className="text-base font-bold">Bookmarked Solutions</p>
+      <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">
+        {solutionsList &&
+          solutionsList.map((solution, index) => {
+            if (typeof solution === 'undefined') return null
+            else return <SolutionListingCard key={`bookmarked-solution-${index}`} listingData={solution.solution} />
+          })}
       </div>
-    </Link>
+    </div>
   )
 }
