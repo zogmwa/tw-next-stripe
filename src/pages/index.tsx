@@ -8,7 +8,20 @@ import Link from 'next/link'
 import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
-export default function Home() {
+export const getServerSideProps = async (context: { query: { search_software: number } }) => {
+  const forSoftware = context.query.search_software ? context.query.search_software : 0
+
+  return {
+    props: {
+      search_software: forSoftware,
+    },
+  }
+}
+
+type HomeProps = {
+  search_software: number
+}
+export default function Home({ search_software = 0 }: HomeProps) {
   return (
     <div>
       <DynamicHeader />
@@ -63,7 +76,7 @@ export default function Home() {
             </div>
             <div className="py-2 mb-4 text-3xl font-semibold text-white">We may have a solution. Just search!</div>
             <div className="z-10 w-full mb-4">
-              <SearchComponent />
+              <SearchComponent search_software={search_software} />
             </div>
           </div>
         </div>
