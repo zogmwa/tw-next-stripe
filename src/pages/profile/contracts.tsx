@@ -3,7 +3,7 @@ import { ContractCard } from '../../components/contract-card/contract-card'
 import { useProfile } from '@taggedweb/hooks/use-profile'
 import { Profile } from '@taggedweb/types/profile'
 
-export default function BookmarkedSolutionsList() {
+export default function ContractsList() {
   const data = useProfile()
   const contractsList = data.contracts
 
