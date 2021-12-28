@@ -2,7 +2,7 @@ import React from 'react'
 
 type UserAvatarType = {
   user: {
-    avatar: string
+    avatar?: string
     username: string
     first_name: string
     last_name: string

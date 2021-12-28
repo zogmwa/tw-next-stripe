@@ -38,7 +38,7 @@ function ReviewReactionComponent({
           <Button className="!border-0 !p-0" {...bindTrigger(popupState)}>
             <>
               {avgRating > 0 && <img src="/images/happy.png" alt="happy" className="w-8 h-8" />}
-              {avgRating == 0 && <img src="/images/neutral.png" alt="neutral" className="w-8 h-8" />}
+              {avgRating === 0 && <img src="/images/neutral.png" alt="neutral" className="w-8 h-8" />}
               {avgRating < 0 && <img src="/images/sad.png" alt="sad" className="w-8 h-8" />}
             </>
           </Button>

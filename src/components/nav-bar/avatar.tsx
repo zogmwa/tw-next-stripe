@@ -2,21 +2,28 @@ import React, { Fragment } from 'react'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
 import { useUserContext } from '@taggedweb/hooks/use-user'
+import { UserAvatar } from '../user-avatar'
 
 const menuIconClassNames = (active) =>
   `${active ? 'bg-primary text-white' : 'text-gray-900'} group flex rounded-md items-center px-2 py-2 w-full text-sm`
 
 export default function Avatar() {
-  const { authVerified, first_name, last_name, logout } = useUserContext()
-
+  const { authVerified, username, first_name, last_name, logout } = useUserContext()
+  const user = { username, first_name, last_name }
   return (
     <Menu as="div" className="relative">
-      <Menu.Button
-        className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
-        style={{ boxShadow: 'none !important' }}
-      >
-        {authVerified ? <p>{first_name[0] + last_name[0]}</p> : <BsPersonFill size={22} color="gray" />}
-      </Menu.Button>
+      {authVerified ? (
+        <Menu.Button className="flex items-center justify-center w-10 h-10" style={{ boxShadow: 'none !important' }}>
+          <UserAvatar user={user} size={10} />
+        </Menu.Button>
+      ) : (
+        <Menu.Button
+          className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+          style={{ boxShadow: 'none !important' }}
+        >
+          <BsPersonFill size={22} color="gray" />
+        </Menu.Button>
+      )}
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
