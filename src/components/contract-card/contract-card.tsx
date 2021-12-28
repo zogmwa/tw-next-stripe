@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
@@ -105,7 +107,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
             })}
           </div>
           <h2 className="mt-2 text-xl">{contractData.solution.title}</h2>
-          <div className="flex flex-col md:flex-row mt-2 text-xs">
+          <div className="flex flex-col mt-2 text-xs md:flex-row">
             <span className="w-full">Started at: {openedDate}</span>
             <span className="w-full">Updated at: {updatedDate}</span>
           </div>
