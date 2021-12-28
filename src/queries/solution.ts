@@ -88,3 +88,49 @@ export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: str
     return null
   }
 }
+
+export async function toggleAddReviewSolution(solutionId: number, type: string): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/solution_review/', {
+      solution: solutionId,
+      type: type,
+    })
+
+    return data
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Failed to adding review solution.')
+    return null
+  }
+}
+
+export async function toggleUpdateReviewSolution(
+  solutionId: number,
+  type: string,
+  solutionReviewId: number,
+): Promise<any | null> {
+  try {
+    const { data } = await axios.patch(`/api/solution_review/${solutionReviewId}`, {
+      solution: solutionId,
+      type: type,
+    })
+
+    return data
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Failed to changing review solution.')
+    return null
+  }
+}
+
+export async function toggleDeleteReviewSolution(solutionReviewId: number): Promise<any | null> {
+  try {
+    const { status } = await axios.delete(`/api/solution_review/${solutionReviewId}`)
+
+    return status
+  } catch (error) {
+    // eslint-disable-next-line
+    toast.error('Failed to canceling review solution.')
+    return null
+  }
+}
