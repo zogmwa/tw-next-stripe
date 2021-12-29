@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { Asset } from '@taggedweb/types/asset'
 import {
-  fetchAttributeVotes,
   toggleUpVoteAttribute,
   toggleDownVoteAttribute,
   fetchUpvotedAttributes,
@@ -36,7 +35,7 @@ function HighlightContentComponent({
   const customerOrganizations = service?.customer_organizations ?? []
 
   useEffect(() => {
-    setAttributes(service.attributes)
+    setAttributes(service.attributes ?? [])
   }, [service.attributes])
 
   const upvoteAttribute = async (attribute) => {
