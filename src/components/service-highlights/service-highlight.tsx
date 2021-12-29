@@ -15,7 +15,6 @@ import { Modal } from '../Modal'
 import { ShowEditable } from '../editable-components'
 
 function HighlightContentComponent({
-  attributeVotesList,
   attributes,
   isLoading,
   clickedAttribute,
@@ -120,14 +119,10 @@ function HighlightContentComponent({
                     size="small"
                     className={
                       attribute.is_con
-                        ? typeof attributeVotesList.find(
-                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                          ) !== 'undefined'
+                        ? attribute.my_asset_attribute_vote
                           ? 'self-start text-background-light bg-text-error border-text-error'
                           : 'self-start text-text-error border-text-error'
-                        : typeof attributeVotesList.find(
-                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                          ) !== 'undefined'
+                        : attribute.my_asset_attribute_vote
                         ? 'self-start text-background-light bg-success border-success'
                         : 'self-start text-success border-success'
                     }
@@ -135,14 +130,10 @@ function HighlightContentComponent({
                       <HiChevronUp
                         className={
                           attribute.is_con
-                            ? typeof attributeVotesList.find(
-                                (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                              ) !== 'undefined'
+                            ? attribute.my_asset_attribute_vote
                               ? 'text-background-light'
                               : 'text-text-error'
-                            : typeof attributeVotesList.find(
-                                (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                              ) !== 'undefined'
+                            : attribute.my_asset_attribute_vote
                             ? 'text-background-light'
                             : 'text-success'
                         }
@@ -150,16 +141,12 @@ function HighlightContentComponent({
                     }
                     loading={isLoading && clickedAttribute === attribute.id}
                     loadingClassName={
-                      typeof attributeVotesList.find(
-                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                      ) !== 'undefined'
-                        ? 'text-background-light w-3 h-3'
-                        : 'text-primary w-3 h-3'
+                      attribute.my_asset_attribute_vote ? 'text-background-light w-3 h-3' : 'text-primary w-3 h-3'
                     }
                     onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
-                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 1}
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                   {editAllowed && (
@@ -179,42 +166,24 @@ function HighlightContentComponent({
                   <Button
                     size="small"
                     className={
-                      typeof attributeVotesList.find(
-                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                      ) !== 'undefined'
+                      attribute.my_asset_attribute_vote
                         ? 'self-start text-background-light bg-primary'
                         : 'self-start text-text-secondary border-text-tertiary'
                     }
-                    textClassName={
-                      typeof attributeVotesList.find(
-                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                      ) !== 'undefined'
-                        ? 'text-background-light'
-                        : 'text-text-secondary'
-                    }
+                    textClassName={attribute.my_asset_attribute_vote ? 'text-background-light' : 'text-text-secondary'}
                     icon={
                       <HiChevronUp
-                        className={
-                          typeof attributeVotesList.find(
-                            (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                          ) !== 'undefined'
-                            ? 'text-background-light'
-                            : 'text-text-secondary'
-                        }
+                        className={attribute.my_asset_attribute_vote ? 'text-background-light' : 'text-text-secondary'}
                       />
                     }
                     loading={isLoading && clickedAttribute === attribute.id}
                     loadingClassName={
-                      typeof attributeVotesList.find(
-                        (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-                      ) !== 'undefined'
-                        ? 'text-background-light w-3 h-3'
-                        : 'text-primary w-3 h-3'
+                      attribute.my_asset_attribute_vote ? 'text-background-light w-3 h-3' : 'text-primary w-3 h-3'
                     }
                     onClick={requireLoginBeforeAction(() => handleUpvoteAttribute(attribute))}
                     disabled={isLoading}
                   >
-                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 1}
+                    {Number(attribute.upvotes_count) ? Number(attribute.upvotes_count) : 0}
                   </Button>
                   <span className="ml-2 text-sm text-text-secondary">{attribute.name}</span>
                   {editAllowed && (

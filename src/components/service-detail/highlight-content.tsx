@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { Asset } from '@taggedweb/types/asset'
 import {
-  fetchAttributeVotes,
   toggleUpVoteAttribute,
   toggleDownVoteAttribute,
   fetchUpvotedAttributes,
@@ -27,7 +26,6 @@ function HighlightContentComponent({
 }: ServiceDetailFeatureProps) {
   if (typeof service === 'undefined') return null
 
-  const [attributeVotesList, setAttributeVotesList] = useState([])
   const [attributes, setAttributes] = useState(service.attributes ?? [])
   const [isLoading, setIsLoading] = useState(false)
   const [clickedAttribute, setClickedAttribute] = useState(0)
@@ -40,34 +38,17 @@ function HighlightContentComponent({
     setAttributes(service.attributes ?? [])
   }, [service.attributes])
 
-  useEffect(() => {
-    async function getVotedAttribute() {
-      const attributeVotes = await fetchAttributeVotes()
-      if (attributeVotes) {
-        const upVotedAttributes = attributeVotes.filter((item) => item.asset === service.id)
-        setAttributeVotesList(upVotedAttributes)
-      }
-    }
-
-    getVotedAttribute()
-  }, [service.id])
-
   const upvoteAttribute = async (attribute) => {
     setClickedAttribute(attribute.id)
     setIsLoading(true)
     let data = null
-    const selectedAttributeVote = attributeVotesList.find(
-      (upVotedAttribute) => upVotedAttribute.attribute === attribute.id,
-    )
 
-    if (typeof selectedAttributeVote === 'undefined') data = await toggleUpVoteAttribute(service.id, attribute.id)
-    else data = await toggleDownVoteAttribute(selectedAttributeVote.id)
+    if (attribute.my_asset_attribute_vote) data = await toggleDownVoteAttribute(attribute.my_asset_attribute_vote)
+    else data = await toggleUpVoteAttribute(service.id, attribute.id)
 
-    // TODO: Will fix in next branch.
     if (data) {
       const updatedAttributes = await fetchUpvotedAttributes(service?.slug)
       const updatedAssetAttributes = []
-      const updatedUpvotedAttributes = []
       // eslint-disable-next-line array-callback-return
       updatedAttributes.map((item) => {
         updatedAssetAttributes.push({
@@ -76,17 +57,10 @@ function HighlightContentComponent({
           name: item.name,
           upvotes_count: item.upvotes_count,
           is_con: item.is_con,
+          my_asset_attribute_vote: item.my_asset_attribute_vote,
         })
-        if (item.my_asset_attribute_vote) {
-          updatedUpvotedAttributes.push({
-            id: item.my_asset_attribute_vote,
-            attribute: item.id,
-            asset: service?.id,
-          })
-        }
       })
       setAttributes(updatedAssetAttributes)
-      setAttributeVotesList(updatedUpvotedAttributes)
     }
     setClickedAttribute(0)
     setIsLoading(false)
@@ -106,15 +80,21 @@ function HighlightContentComponent({
           addedAttribute = await linkAttributeToAsset(service.slug, addAttributeName.id)
         }
         if (addedAttribute) {
-          const updatedAttributes = attributes
-          updatedAttributes.push({
-            id: addedAttribute.id,
-            name: addedAttribute.name,
-            is_con: addedAttribute.is_con,
-            upvotes_count: addedAttribute.upvotes_count,
-          })
-          setAttributes(updatedAttributes)
-          toast.success('Added an attribute successfully.')
+          const conflictAttr = attributes.find((attribute) => attribute.id === addedAttribute.id)
+          if (typeof conflictAttr === 'undefined') {
+            const updatedAttributes = attributes
+            updatedAttributes.push({
+              id: addedAttribute.id,
+              name: addedAttribute.name,
+              is_con: addedAttribute.is_con,
+              upvotes_count: addedAttribute.upvotes_count,
+              my_asset_attribute_vote: addedAttribute.my_asset_attribute_vote,
+            })
+            setAttributes(updatedAttributes)
+            toast.success('Added an attribute successfully.')
+          } else {
+            toast.success('This attribute already exist.')
+          }
         }
         setAddAttributeNameErrorMessage('')
         setAddAttributeName(null)
@@ -126,7 +106,6 @@ function HighlightContentComponent({
   return (
     <>
       <HighlightContent
-        attributeVotesList={attributeVotesList}
         attributes={attributes}
         isLoading={isLoading}
         clickedAttribute={clickedAttribute}
