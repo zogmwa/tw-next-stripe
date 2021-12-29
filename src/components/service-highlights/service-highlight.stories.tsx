@@ -110,7 +110,6 @@ export function DefaultStarRating() {
 
   return (
     <HighlightContent
-      attributeVotesList={attributeVotesList}
       attributes={attributes}
       isLoading={false}
       clickedAttribute={0}
