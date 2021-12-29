@@ -24,7 +24,7 @@ const breadcrumbItems = [
     is_selected: true,
   },
 ]
-const copyUrl = 'https://taggedweb.com/solution/improve'
+const copyUrl = `${process.env.SITE_BASE_URL}/solution/improve`
 
 export function DefaultBreadcrumb() {
   return <Breadcrumb breadcrumbs={breadcrumbItems} copyUrl={copyUrl} />

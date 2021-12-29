@@ -79,7 +79,7 @@ export default function LoginWithLinkedin() {
               const redirectUrl =
                 process.env.NODE_ENV === 'development'
                   ? 'http://localhost:3000/linkedin-login'
-                  : 'https://taggedweb.com/linkedin-login'
+                  : `${process.env.SITE_BASE_URL}/linkedin-login`
 
               // Exchange LinkedIn auth code for LinkedIn authtoken
               const {
