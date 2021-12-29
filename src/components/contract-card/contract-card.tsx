@@ -9,10 +9,10 @@ import numeral from 'numeral'
 import { useRouter } from 'next/router'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
+import { solutionContract } from '@taggedweb/types/contracts'
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
 import { toggleAddReviewSolution, toggleUpdateReviewSolution, toggleDeleteReviewSolution } from '../../queries/solution'
-import { solutionContract } from '@taggedweb/types/contracts'
 
 type ContractCardProps = {
   contractData: solutionContract
