@@ -12,26 +12,10 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
 import { toggleAddReviewSolution, toggleUpdateReviewSolution, toggleDeleteReviewSolution } from '../../queries/solution'
+import { solutionContract } from '@taggedweb/types/contracts'
 
 type ContractCardProps = {
-  contractData: {
-    solution: {
-      id: number
-      assets: any[]
-      avg_rating: number
-      my_solution_review: string
-      my_solution_review_id: number
-      title: string
-      organization: any
-      upvotes_count: number
-      slug: string
-      pay_now_price_unit_amount: number
-    }
-    status: string
-    started_at: string | null
-    updated: string
-    price_at_booking: number
-  }
+  contractData: solutionContract
   className?: string
 }
 
@@ -169,7 +153,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           </div>
         </div>
         <div className="flex flex-col w-[6rem] mt-4 mr-2 space-y-2">
-          <div className="flex-none hidden space-x-0 md:inline-flex self-end justify-end items-center self-start">
+          <div className="items-center self-start self-end justify-end flex-none hidden space-x-0 md:inline-flex">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
               {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}
@@ -178,7 +162,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           <ReviewReaction
             avgRating={avgRating}
             statusType={reviewType}
-            className="self-end md:flex hidden"
+            className="self-end hidden md:flex"
             popupClassName="space-x-2"
             onChangeStatus={(type) => onChangeStatus(type)}
             isLoading={isLoading}
@@ -207,7 +191,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
             <IoIosArrowUp className="text-primary" />
             <span className="text-xs">{kFormater(contractData.solution?.upvotes_count ?? 0)}</span>
           </div>
-          <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden justify-center">
+          <div className="flex items-center justify-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
               {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}

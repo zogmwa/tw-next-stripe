@@ -9,8 +9,8 @@ export default function ContractsList() {
 
   contractsList &&
     contractsList.sort((contractA, contractB) => {
-      const dateA = new Date(contractA.created)
-      const dateB = new Date(contractB.created)
+      const dateA = new Date(contractA.started_at)
+      const dateB = new Date(contractB.started_at)
       return (dateA.getTime() - dateB.getTime()) * -1
     })
 
@@ -18,7 +18,7 @@ export default function ContractsList() {
     <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
       <p className="mb-2 text-lg font-bold">Contracts</p>
       <div className="w-full mb-4">
-        {contractsList && contractsList.length == 0 && <p className="text-center">No Contracts yet...</p>}
+        {contractsList && contractsList.length === 0 && <p className="text-center">No Contracts yet...</p>}
         {contractsList &&
           contractsList.map((contract, index) => {
             if (typeof contract === 'undefined') return null
