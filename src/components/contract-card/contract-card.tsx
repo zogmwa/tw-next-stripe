@@ -28,7 +28,7 @@ type ContractCardProps = {
       pay_now_price_unit_amount: number
     }
     status: string
-    created: string
+    started_at: string | null
     updated: string
     price_at_booking: number
   }
@@ -110,8 +110,8 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
-  const openedDate = new Date(contractData.created).toISOString().split('T')[0]
-  const updatedDate = new Date(contractData.updated).toISOString().split('T')[0]
+  const startedDate = contractData.started_at ? new Date(contractData.started_at).toISOString().split('T')[0] : ''
+  const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
 
   return (
     <div className={clsx('flex flex-col p-4 m-2 border border-solid rounded border-border-default', className)}>
@@ -154,8 +154,8 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
             {contractData.solution.title}
           </h2>
           <div className="flex flex-col mt-2 text-xs md:flex-row">
-            <span className="w-full">Started at: {openedDate}</span>
-            <span className="w-full">Updated at: {updatedDate}</span>
+            <span className="w-full">Started at: {startedDate}</span>
+            {startedDate ? <span className="w-full">Updated at: {updatedDate}</span> : null}
           </div>
           <div className="flex items-center pt-4 space-x-4 md:hidden">
             <div className="flex items-center space-x-1 text-xs">
