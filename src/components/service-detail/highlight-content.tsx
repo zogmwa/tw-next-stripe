@@ -113,7 +113,15 @@ function HighlightContentComponent({
             is_con: addedAttribute.is_con,
             upvotes_count: addedAttribute.upvotes_count,
           })
+          const updatedUpvotedAttributesList = attributeVotesList
+          updatedUpvotedAttributesList.push({
+            id: addedAttribute.my_asset_attribute_vote,
+            attribute: addedAttribute.id,
+            asset: service?.id,
+          })
+          console.log(addedAttribute)
           setAttributes(updatedAttributes)
+          setAttributeVotesList(updatedUpvotedAttributesList)
           toast.success('Added an attribute successfully.')
         }
         setAddAttributeNameErrorMessage('')
