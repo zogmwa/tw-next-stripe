@@ -6,7 +6,9 @@ export const BookmarkedSolutionsProfile = ({ data }) => {
     <Link href="profile/bookmarked-solutions">
       <div id="bookmarked-solutions" className="mb-8 border-b border-gray-300 cursor-pointer md:flex">
         <p className="text-base font-bold hover:text-blue-500">Bookmarked Solutions</p>
-        <span className="ml-auto">{`${data?.bookmarked_solutions.length ?? 0} Product(s)`}</span>
+        <span className="ml-auto">{`${
+          (data?.bookmarked_solutions && data?.bookmarked_solutions.length) ?? 0
+        } Product(s)`}</span>
       </div>
     </Link>
   )
