@@ -12,7 +12,7 @@ import { FilterServiceList } from '@taggedweb/components/service-list-filter/fil
 import { Button } from '@taggedweb/components/button'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
-
+import * as Sentry from '@sentry/nextjs'
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     query: { search_keywords },
@@ -33,6 +33,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     const sendUrl = `${defaultUrl}&page=1&offest=0&limit=20`
     solutionData = await fetchSolutionList(context.req.session, sendUrl)
   } catch (error) {
+    Sentry.captureException(error)
     // eslint-disable-next-line
     // TODO: Redirect to solution search page.
   }
@@ -64,6 +65,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
       setPageCount(Math.ceil(solutionData.count / pageLen))
       setSolutionList(data.results)
     } catch (error) {
+      Sentry.captureException(error)
       // eslint-disable-next-line
       console.log(error)
     }

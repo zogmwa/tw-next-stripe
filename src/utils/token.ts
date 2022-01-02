@@ -1,7 +1,7 @@
 import { Session } from 'next-iron-session'
+import * as Sentry from '@sentry/nextjs'
 import { client } from './client'
 // import { AccessTokenError } from './error'
-
 function atob(b64Encoded) {
   return Buffer.from(b64Encoded, 'base64').toString()
 }
@@ -74,6 +74,7 @@ export const getAccessToken = async (session: Session): Promise<string | void> =
       await setSessionTokens(session, { access: newAccess, refresh })
     }
   } catch (error) {
+    Sentry.captureException(error)
     // eslint-disable-next-line
     session.unset('user')
     session.unset('token')

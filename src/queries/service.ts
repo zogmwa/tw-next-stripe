@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import { Asset, AssetVote } from '@taggedweb/types/asset'
 import { AttributeVote, VotedAttribute } from '@taggedweb/types/attribute_vote'
 import { ServiceQuestion } from '@taggedweb/types/service-question'
+import * as Sentry from '@sentry/nextjs'
 
 export type CreateServiceInput = {
   name: string
@@ -29,6 +30,7 @@ export async function createService(createServiceInput: CreateServiceInput): Pro
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line no-console
     console.log('Failed to add a service', error)
@@ -41,6 +43,7 @@ export async function fetchService(slug: string): Promise<Asset | null> {
     const { data } = await axios.get<Asset>(`/api/assets/${slug}`)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line no-console
     console.log('Failed to get service detail', error)
@@ -54,6 +57,7 @@ export async function fetchVote(slug: string): Promise<Asset | null> {
     const { data } = await axios.get<Asset>(`/api/asset_reviews?asset__slug=${slug}`)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch asset votes.')
@@ -67,6 +71,7 @@ export async function toggleUsedByStatus(slug: string, usedByMeStatus: boolean):
     if (status === 201) return true
     else if (status === 204) return false
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not get used by me.')
@@ -79,6 +84,7 @@ export async function fetchAttributeVotes(): Promise<AttributeVote | null> {
     const { data } = await axios.get<AttributeVote>('/api/asset_attribute_votes/')
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch a attribute votes.')
@@ -96,6 +102,7 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not vote a attribute.')
@@ -108,6 +115,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
     const { status } = await axios.delete(`/api/asset_attribute_votes/${attributeId}/`)
     return status
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not destroy a attribute vote.')
@@ -122,6 +130,7 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not vote a asset.')
@@ -136,6 +145,7 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
     })
     return status
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not destroy a asset vote.')
@@ -148,6 +158,7 @@ export async function fetchUpvotedAttributes(slug: string): Promise<VotedAttribu
     const { data } = await axios.get(`/api/asset_attributes/${slug}/`)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not get voted attributes.')
@@ -164,6 +175,7 @@ export async function toggleAddAttribute(assetId: number, name: string, isCon: b
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not add a attribute.')
@@ -179,6 +191,7 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not add a question.')
@@ -193,6 +206,7 @@ export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQ
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not answer a question.')
@@ -205,6 +219,7 @@ export async function fetchQuestions(slug): Promise<any | null> {
     const { data } = await axios.get(`/api/asset_questions/${slug}`)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch questions.')
@@ -217,6 +232,7 @@ export async function fetchVotedQuestions(slug): Promise<any | null> {
     const { data } = await axios.get(`/api/asset_question_votes/${slug}`)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch voted questions.')
@@ -229,6 +245,7 @@ export async function toggleDownVoteQuestion(upvotedQuestionId): Promise<any | n
     const { status } = await axios.delete(`/api/asset_question_votes/${upvotedQuestionId}`)
     return status
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not destroy a question vote.')
@@ -243,6 +260,7 @@ export async function toggleUpVoteQuestion(questionId): Promise<any | null> {
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not vote a question.')
@@ -256,6 +274,7 @@ export async function fetchAssetSimilar(slug): Promise<Asset[] | null> {
     if (data.results) return data.results
     else return null
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not fetch similar services.')
@@ -268,6 +287,7 @@ export async function addAssetReview(sendData): Promise<any | null> {
     const { data } = await axios.post('/api/asset_reviews/', sendData)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Could not add an asset review.')
@@ -280,6 +300,7 @@ export async function patchAssetField(updateData, serviceSlug) {
     const { data } = await axios.patch(`/api/assets/${serviceSlug}/`, updateData)
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
 
@@ -295,6 +316,7 @@ export async function linkAttributeToAsset(slug, attributeId) {
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     toast.error('Unexpected error in submitting the highlight.')
@@ -311,6 +333,7 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
     })
     return data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
 

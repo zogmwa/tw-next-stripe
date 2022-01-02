@@ -3,9 +3,9 @@ import { User } from './user'
 
 export type UserContextType = {
   authVerified?: boolean
-  email?: string
-  pk?: number
-  username?: string
+  email: string
+  pk: number
+  username: string
   first_name?: string
   last_name?: string
   error?: any

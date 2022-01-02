@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSideProps, NextApiHandler } from 'next'
 import { GetIronServerSideProps, NextIronHandler } from '@taggedweb/types/session'
-
+import * as Sentry from '@sentry/nextjs'
 /**
  * Add basic error handling and status, error.data to res if an error occurs.
  * @param handler A handler for api route.
@@ -12,6 +12,7 @@ export function withApiErrorHandling(handler: NextIronHandler | NextApiHandler) 
     try {
       await handler(req, res)
     } catch (error) {
+      Sentry.captureException(error)
       // eslint-disable-next-line
       console.dir(error)
       const { response } = error
@@ -33,6 +34,7 @@ export function withSSRErrorHandling<
     try {
       return await handler(context)
     } catch (error) {
+      Sentry.captureException(error)
       const errorCode = error?.response?.status
       if (errorCode === 404) {
         return {

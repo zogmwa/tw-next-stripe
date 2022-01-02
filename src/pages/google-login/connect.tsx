@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Spinner } from '@taggedweb/components/spinner'
 import { useUserContext } from '@taggedweb/hooks/use-user'
-
+import * as Sentry from '@sentry/browser'
 export default function GoogleConnect() {
   const { replace } = useRouter()
   const { mutate } = useSWRConfig()
@@ -54,6 +54,7 @@ export default function GoogleConnect() {
 
         setShouldNextPageRedirect(true)
       } catch (error) {
+        Sentry.captureException(error)
         if (error?.response?.status === 401) {
           return replace(
             `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account`,

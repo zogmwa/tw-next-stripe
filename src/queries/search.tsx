@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import * as Sentry from '@sentry/nextjs'
 import { client } from '../utils/client'
 type GroupOption = {
   label: string
@@ -44,6 +45,7 @@ export async function searchSuggestions(searchInput: string): Promise<GroupOptio
         { label: 'Others', options: [{ value: searchInput, label: searchInput }] },
       ]
     } catch (error) {
+      Sentry.captureException(error)
       //  always wrap any API fetching operation within try/catch block
       // and return the default value in case of error
       return [
@@ -67,6 +69,7 @@ export async function solutionSuggestions(searchInput: string): Promise<Solution
         { label: '', options: [{ value: searchInput, label: searchInput }] },
       ]
     } catch (error) {
+      Sentry.captureException(error)
       //  always wrap any API fetching operation within try/catch block
       // and return the default value in case of error
       return [

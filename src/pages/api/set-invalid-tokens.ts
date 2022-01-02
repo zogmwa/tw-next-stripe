@@ -1,5 +1,6 @@
 import { withSessionApi } from '@taggedweb/utils/session'
 import { setSessionTokens } from '@taggedweb/utils/token'
+import { withSentry } from '@sentry/nextjs'
 
 // Add more tokens for testing.
 const access_tokens = [
@@ -19,10 +20,12 @@ const chooseRandom = (array: Array<string>): any => {
  * For testing in development only. This will set invalid tokens for the current user.
  * Remove this page when using app in production
  */
-export default withSessionApi(async (req, res) => {
-  const access = chooseRandom(access_tokens)
-  const refresh = chooseRandom(refresh_tokens)
+export default withSentry(
+  withSessionApi(async (req, res) => {
+    const access = chooseRandom(access_tokens)
+    const refresh = chooseRandom(refresh_tokens)
 
-  await setSessionTokens(req.session, { access, refresh })
-  return res.json({ message: 'Invalid tokens have been set.' })
-})
+    await setSessionTokens(req.session, { access, refresh })
+    return res.json({ message: 'Invalid tokens have been set.' })
+  }),
+)

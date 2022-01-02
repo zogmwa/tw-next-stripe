@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
+import * as Sentry from '@sentry/nextjs'
 
 import { client } from '@taggedweb/utils/client'
 export function SubscribeComponent() {
@@ -26,6 +27,7 @@ export function SubscribeComponent() {
         await client.post('/newsletter_contact/', { email: contactEmail })
         setFormDetails({ ...formDetails, isSubscribed: true })
       } catch (error) {
+        Sentry.captureException(error)
         if (parseInt(error.response.status) === 400) {
           setFormDetails({ ...formDetails, emailError: 'This email user is already subscribed!' })
         } else if (parseInt(error.response.status) === 500) {

@@ -11,7 +11,7 @@ import nProgress from 'nprogress'
 import { SWRConfig } from 'swr'
 import { FcInfo } from 'react-icons/fc'
 import { MdOutlineError } from 'react-icons/md'
-import { UserProvider } from '@taggedweb/hooks/use-user'
+import { UserProvider, useUserContext } from '@taggedweb/hooks/use-user'
 import { NavBar } from '@taggedweb/components/nav-bar'
 import { Spinner } from '@taggedweb/components/spinner'
 import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
@@ -21,6 +21,7 @@ import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags
 import * as ga from '@taggedweb/lib/ga'
 import { FooterComponent } from '@taggedweb/components/footer'
 import { FreshChat } from '@taggedweb/components/freshchat-container'
+import Sentry from '@taggedweb/components/sentry/sentry'
 
 const queryClient = new QueryClient()
 
@@ -41,6 +42,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
   const renderFooter = pathname !== '/login' && pathname !== '/signup'
   const renderMainFooter = true
+  const userInfo = useUserContext()
 
   // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
@@ -79,6 +81,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <SWRConfig value={{ fetcher, fallback }}>
           <UserProvider>
             <FreshChat />
+            <Sentry userInfo={userInfo} />
             <div suppressHydrationWarning={true}>
               {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
               <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import AsyncSelect from 'react-select/async'
 import axios from 'axios'
+import * as Sentry from '@sentry/nextjs'
 
 const convertToSlug = (txt: string): string => {
   return txt
@@ -15,6 +16,7 @@ const filterTags = async (inputValue: string) => {
     const { data } = await axios.get(`/api/autocomplete/tags/${inputValue}`)
     tagsList = data
   } catch (error) {
+    Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
     console.log('Could not get similar tags.')

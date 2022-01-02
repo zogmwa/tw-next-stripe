@@ -2,11 +2,12 @@ import { withSessionApi } from '@taggedweb/utils/session'
 import { client } from '@taggedweb/utils/client'
 import { setSessionTokens } from '@taggedweb/utils/token'
 import { User } from '@taggedweb/types/user'
+import { withSentry } from '@sentry/nextjs'
 
 /**
  * API Route for Google Login. Logs in sets the tokens and the user in session.
  */
-export default withSessionApi(async (req, res) => {
+async function handler(req, res) {
   const { access_token: google_access_token } = req.body
   const { data } = await client.post<{ access_token: string; refresh_token: string; user: User }>(
     '/dj-rest-auth/google/',
@@ -20,4 +21,6 @@ export default withSessionApi(async (req, res) => {
   req.session.set('user', user)
   await req.session.save()
   res.json({ ...user, authVerified: true })
-})
+}
+
+export default withSentry(withSessionApi(handler))
