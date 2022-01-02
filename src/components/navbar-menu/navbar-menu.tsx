@@ -19,7 +19,7 @@ export function NavbarMenu() {
             rel="noopener noreferrer"
             className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-200"
           >
-            Solution Providers
+            List your Solution
           </a>
         </Link>
         <Link href={LIST_A_SOFTWARE_PATH}>
