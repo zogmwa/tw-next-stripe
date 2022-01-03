@@ -75,10 +75,7 @@ export default function LinkedinConnect() {
         if (code && state === process.env.LINKEDIN_OAUTH_STATE) {
           try {
             if (!connectRequestSent) {
-              const redirectUrl =
-                process.env.NODE_ENV === 'development'
-                  ? 'http://localhost:3000/linkedin-login/connect'
-                  : `${process.env.SITE_BASE_URL}/linkedin-login/connect`
+              const redirectUrl = `${process.env.SITE_BASE_URL}/linkedin-login/connect`
 
               // Exchange LinkedIn auth code for LinkedIn authtoken
               const {
