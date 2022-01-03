@@ -132,7 +132,10 @@ export default function Login() {
                     Login
                   </Button>
                   <div className="text-xs lg:text-sm text-text-secondary">
-                    Don&apos;t have an account? <Link href="/signup">Create One</Link>
+                    Don&apos;t have an account?{' '}
+                    <Link href="/signup">
+                      <a className="font-bold">Create One</a>
+                    </Link>
                   </div>
                 </div>
               </form>
