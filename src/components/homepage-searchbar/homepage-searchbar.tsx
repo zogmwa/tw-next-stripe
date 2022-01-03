@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { SearchBar } from '@taggedweb/components/search-bar'
 
@@ -13,9 +13,20 @@ type SearchComponentProps = {
 }
 export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   const router = useRouter()
+  const [searchIndex, setSearchIndex] = useState(search_software)
+  useEffect(() => {
+    const index = localStorage.getItem('taggedweb-search-software') || search_software.toString()
+    setSearchIndex(parseInt(index))
+  }, [])
+
   return (
     <div className="w-full">
-      <Tab.Group defaultIndex={search_software}>
+      <Tab.Group
+        defaultIndex={searchIndex}
+        onChange={(index) => {
+          localStorage.setItem('taggedweb-search-software', JSON.stringify(index))
+        }}
+      >
         <Tab.List className="flex p-1 space-x-1 sm:w-1/2 bg-blue-900/20 rounded-xl">
           <Tab
             className={({ selected }) =>
