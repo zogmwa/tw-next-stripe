@@ -42,3 +42,7 @@ Thumbs.db
 
 # # Sentry
 # .sentryclirc
+
+# Will contain env specific enviornment variables overrides (based on where this is deployed - development/staging/production)
+# https://nextjs.org/docs/basic-features/environment-variables
+.env*.local

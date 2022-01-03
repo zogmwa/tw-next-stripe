@@ -49,3 +49,8 @@ Maintenance or “hotfix” branches are used to quickly patch production releas
 ```sh
 git flow hotfix start hotfix_branch
 ```
+
+### Environment Variables
+
+We follow practices defined in: https://nextjs.org/docs/basic-features/environment-variables
+Most of the defaults are set so you shouldn't have to do anything but if you have to override environment variables copy over .env.local.dist to .env.local in your respective environment and override the settings. .env.local has the highest override precedence.

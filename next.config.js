@@ -6,8 +6,10 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   env: {
-    API_BASE_URL: 'https://api.taggedweb.com',
-    SITE_BASE_URL: 'https://www.taggedweb.com', // This is frontend site URL.
+    API_BASE_URL: process.env.API_BASE_URL,
+
+    // Frontend Site URL (For prod this should be https://www.taggedweb.com)
+    SITE_BASE_URL: process.env.SITE_BASE_URL,
 
     ACCESS_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-access-token',
     REFRESH_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-refresh-token',
