@@ -51,6 +51,7 @@ export function DefaultStarRating() {
     },
   ]
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const attributeVotesList = [
     {
       id: 15,

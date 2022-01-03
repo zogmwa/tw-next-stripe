@@ -20,9 +20,32 @@ type SolutionListingCardProps = {
     upvotes_count: number
     avg_rating?: string | number
     organization: { name: string; logo_url: string | null }
+    type: string
   }
   className?: string
 }
+const SolutionTypes = [
+  {
+    slug: 'I',
+    value: 'INTEGRATION',
+  },
+  {
+    slug: 'C',
+    value: 'CONSULTAION',
+  },
+  {
+    slug: 'U',
+    value: 'USAGE SUPPORT',
+  },
+  {
+    slug: 'O',
+    value: 'OTHER',
+  },
+]
+const SolutionTypesMap = new Map()
+SolutionTypes.forEach((type) => {
+  SolutionTypesMap.set(type.slug, type.value)
+})
 
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const router = useRouter()
@@ -65,6 +88,11 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           <h2 className="mt-2 text-xl">{listingData.title}</h2>
           <div className="flex items-center pt-4 space-x-4 md:hidden">
             <div className="flex items-center space-x-1 text-xs">
+              <Button buttonType="tag" size="small" className="mr-1">
+                {SolutionTypesMap.get(listingData.type)}
+              </Button>
+            </div>
+            <div className="flex items-center space-x-1 text-xs">
               <AiFillStar className="self-center text-primary" />
               <span>{rating}</span>
             </div>
@@ -95,6 +123,11 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           <span className="pl-2 text-sm text-text-secondary">{listingData.organization?.name}</span>
         </div>
         <div className="flex items-center justify-between">
+          <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
+            <Button buttonType="tag" size="small" className="mr-1">
+              {SolutionTypesMap.get(listingData.type)}
+            </Button>
+          </div>
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
             <AiFillStar className="self-center text-primary" />
             <span>{rating}</span>
