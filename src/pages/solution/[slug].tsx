@@ -17,6 +17,9 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   try {
     solutionDetail = await fetchSolutionDetail(context.req.session, slug)
   } catch (error) {
+    return {
+      notFound: true,
+    }
     // eslint-disable-next-line
     // TODO: Redirect to solution search page.
   }
