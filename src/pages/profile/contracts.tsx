@@ -1,7 +1,8 @@
 import React from 'react'
-import { ContractCard } from '../../components/contract-card/contract-card'
 import { useProfile } from '@taggedweb/hooks/use-profile'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Profile } from '@taggedweb/types/profile'
+import { ContractCard } from '../../components/contract-card/contract-card'
 
 export default function ContractsList() {
   const data = useProfile()
