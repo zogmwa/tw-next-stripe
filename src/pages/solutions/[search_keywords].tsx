@@ -114,27 +114,23 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     <>
       <DynamicHeader />
       <div className="flex max-w-screen-lg px-2 mx-auto my-10">
-        {!error && (
-          <div className="flex-col hidden w-1/4 space-y-4 md:flex">
-            <div className="border rounded">
-              <SortServiceList onChange={orderingSolution} />{' '}
-            </div>
-            <div className="border rounded">
-              <FilterServiceList onChange={filterSolution} label="Consultation" />
-            </div>
+        <div className="flex-col hidden w-1/4 space-y-4 md:flex">
+          <div className="border rounded">
+            <SortServiceList onChange={orderingSolution} />{' '}
           </div>
-        )}
+          <div className="border rounded">
+            <FilterServiceList onChange={filterSolution} label="Consultation" />
+          </div>
+        </div>
         <div className="flex flex-col justify-between w-full p-2 md:w-3/4 md:ml-3">
           <h1 className="hidden text-xl font-bold text-black md:flex">All &#8220;{pageTitle}&#8221; Solutions</h1>
           <div className="flex items-center justify-between md:hidden">
             <h1 className="text-xl font-bold text-black">All &#8220;{pageTitle}&#8221; Solutions</h1>
-            {!error && (
-              <MobileViewSortAndFilterServiceList
-                onSortChange={orderingSolution}
-                onFilterChange={filterSolution}
-                filterLabel="Consultation"
-              />
-            )}
+            <MobileViewSortAndFilterServiceList
+              onSortChange={orderingSolution}
+              onFilterChange={filterSolution}
+              filterLabel="Consultation"
+            />
           </div>
           <h1 className="mt-4 text-xl font-medium text-text-primary">Tag Suggestions</h1>
           <div className="flex flex-row flex-wrap my-2">
