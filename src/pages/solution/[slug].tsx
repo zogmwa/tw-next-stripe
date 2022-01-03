@@ -79,19 +79,14 @@ export default function SolutionDetail({ solutionDetail }) {
   }
   features.push({
     id: 'capacity',
-    name: `${(solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)} / ${
+    name: `${(solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)} / ${
       solutionDetail?.capacity ?? 0
     } Available Capacity`,
-    tooltipContent: `We have ${
-      solutionDetail?.bookings_pending_fulfillment_count ?? 0
-    } solution actively being worked on and up-to ${
-      (solutionDetail?.capacity ?? 0) - (solutionDetail?.bookings_pending_fulfillment_count ?? 0)
+    tooltipContent: `We have ${solutionDetail?.capacity_used ?? 0} solution actively being worked on and up-to ${
+      (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
     } solutions that can be booked. We limit capacity to prevent overbooking a provider.`,
   })
-  if (
-    solutionDetail.capacity - solutionDetail.bookings_pending_fulfillment_count <= 0 ||
-    price.stripe_price_id === ''
-  ) {
+  if (solutionDetail.capacity - solutionDetail.capacity_used <= 0 || price.stripe_price_id === '') {
     purchaseDisableOption = true
   }
 
