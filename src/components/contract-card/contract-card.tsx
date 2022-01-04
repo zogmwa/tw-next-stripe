@@ -17,9 +17,10 @@ import { toggleAddReviewSolution, toggleUpdateReviewSolution, toggleDeleteReview
 type ContractCardProps = {
   contractData: solutionContract
   className?: string
+  redirectUrl?: string
 }
 
-function ContractCardComponent({ contractData, className }: ContractCardProps) {
+function ContractCardComponent({ contractData, className, redirectUrl }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
 
   const router = useRouter()
@@ -133,7 +134,10 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           </div>
           <h2
             className="mt-2 text-xl cursor-pointer"
-            onClick={() => router.push(`/solution/${contractData.solution.slug}`)}
+            onClick={() => {
+              if (redirectUrl) router.push(redirectUrl)
+              else router.push(`/solution/${contractData.solution.slug}`)
+            }}
           >
             {contractData.solution.title}
           </h2>
