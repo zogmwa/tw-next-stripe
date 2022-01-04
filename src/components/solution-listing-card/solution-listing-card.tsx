@@ -72,7 +72,12 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
     >
       <div className="flex flex-row">
         <div className="flex flex-col flex-grow">
-          <div className="flex flex-row flex-wrap">
+          <div
+            className="flex flex-row flex-wrap"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
             {listingData.tags.map((tag) => {
               return (
                 <Link key={tag.slug} prefetch={false} href={'../solutions/' + tag.slug}>
