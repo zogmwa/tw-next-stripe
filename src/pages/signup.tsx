@@ -137,7 +137,10 @@ export default function Signup() {
                     Sign Up
                   </Button>
                   <div className="text-xs lg:text-sm text-text-secondary">
-                    Already a member! <Link href="/login">Sign in</Link>
+                    Already a member!{' '}
+                    <Link href="/login">
+                      <a className="font-bold">Sign in</a>
+                    </Link>
                   </div>
                 </div>
               </form>

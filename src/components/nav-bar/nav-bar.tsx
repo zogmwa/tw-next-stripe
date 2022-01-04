@@ -67,7 +67,7 @@ export function NavBar({ className, style }: NavBarProps) {
             ) : (
               <Link href={`/login?next=${router.asPath}`}>
                 <a>
-                  <Button buttonType="primary"> Sign Up | Login </Button>
+                  <Button buttonType="primary">Get Started</Button>
                 </a>
               </Link>
             )}
@@ -105,7 +105,7 @@ export function NavBar({ className, style }: NavBarProps) {
                   <Link href={`/login?next=${router.asPath}`}>
                     <a>
                       <Button className="mr-2" buttonType="primary">
-                        Sign Up | Login
+                        Get Started
                       </Button>
                     </a>
                   </Link>
@@ -173,7 +173,7 @@ export function NavBar({ className, style }: NavBarProps) {
               </>
             ) : (
               <Link href={`/login?next=${router.asPath}`}>
-                <a className="w-full py-2 text-center text-white bg-primary">Sign Up | Login</a>
+                <a className="w-full py-2 text-center text-white bg-primary">Get Started</a>
               </Link>
             )}
           </div>
