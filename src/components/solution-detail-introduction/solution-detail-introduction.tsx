@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { BsBookmarkPlus, BsBookmarkCheckFill, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import Markdown from 'marked-react'
+import Lowlight from 'react-lowlight'
+import javascript from 'highlight.js/lib/languages/javascript'
 import Popover from '@mui/material/Popover'
 import ReactTooltip from 'react-tooltip'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
@@ -21,6 +22,15 @@ import { ServiceLogo } from '../service-logo'
 import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
 import { Spinner } from '../spinner'
+import style from './style.module.scss'
+
+Lowlight.registerLanguage('js', javascript)
+
+const renderer = {
+  code: (snippet, lang) => {
+    return <Lowlight language={lang} value={snippet} />
+  },
+}
 
 type SolutionDetailIntroductionProps = {
   introductionData: {
@@ -244,17 +254,17 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           <a href="#solutions-overview">
             <h4 className="font-bold text-black text-md">Overview</h4>
           </a>
-          <Markdown className="mt-3 text-sm text-text-secondary" remarkPlugins={[remarkGfm]}>
-            {introductionData.overview_description}
-          </Markdown>
+          <div className={style.unsetTailwind}>
+            <Markdown value={introductionData.overview_description} renderer={renderer} />
+          </div>
         </div>
         <div style={{ scrollMarginTop: '3rem' }} id="solutions-scope" className="flex flex-col pt-2 md:pt-6">
           <a href="#solutions-scope">
             <h4 className="font-bold text-black text-md">Scope of Work</h4>
           </a>
-          <Markdown className="mt-3 text-sm text-text-secondary" remarkPlugins={[remarkGfm]}>
-            {introductionData.scope_of_work_description}
-          </Markdown>
+          <div className={style.unsetTailwind}>
+            <Markdown value={introductionData.scope_of_work_description} renderer={renderer} />
+          </div>
         </div>
         {introductionData.questions.length > 0 && (
           <div style={{ scrollMarginTop: '3rem' }} id="solutions-faq" className="py-4">
