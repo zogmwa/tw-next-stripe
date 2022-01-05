@@ -79,9 +79,9 @@ const introductionData = {
     features: [
       {
         id: 'ready-capacity',
-        name: '9/10 Available Capacity',
+        name: 'Only 9 more slots available at this time',
         tooltipContent:
-          'We have 1 solution actively being worked on and up-to 9 solutions that can be booked. We limit capacity to prevent overbooking a provider.',
+          'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
       },
       {
         id: 'eda-days',
@@ -197,9 +197,9 @@ const introductionData_ = {
     features: [
       {
         id: 'ready-capacity',
-        name: '9/10 Available Capacity',
+        name: 'Only 9 more slots available at this time',
         tooltipContent:
-          'We have 1 solution actively being worked on and up-to 9 solutions that can be booked. We limit capacity to prevent overbooking a provider.',
+          'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
       },
       {
         id: 'eda-days',

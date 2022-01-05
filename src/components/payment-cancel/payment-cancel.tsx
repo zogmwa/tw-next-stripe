@@ -17,7 +17,11 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
       <img src="/images/danger.png" alt="cancel-image" className="w-32 h-32" />
       <h4 className="my-4 text-3xl font-bold text-text-primary">Canceling</h4>
       <div className="text-lg text-text-tertiary">Do you want to stop booking this solution?</div>
-      <Button className="mt-6 bg-primary" textClassName="!text-white" onClick={() => router.push('/')}>
+      <Button
+        className="mt-6 bg-primary"
+        textClassName="!text-white"
+        onClick={() => router.push('/?search_software=0')}
+      >
         Find other solutions.
       </Button>
       <Button className="!border-0 mt-2" onClick={() => router.push(`/solution/${solution}`)}>
