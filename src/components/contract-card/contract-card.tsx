@@ -69,13 +69,13 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
   const statuses = [
     {
       name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-[#facc15] border rounded-xl border-[#facc15]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#facc15] bg-[#facc15]',
+      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
     {
       name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-[#5eead4] border rounded-xl border-[#5eead4]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#5eead4] bg-[#5eead4]',
+      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
     {
       name: 'In Review',
@@ -84,8 +84,8 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
     },
     {
       name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-[#65a30d] rounded-xl border-[#65a30d]',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#65a30d] bg-[#65a30d]',
+      defaultClassName: 'px-2 py-1 text-sm border text-[#60a5fa] rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
   ]
 
@@ -156,7 +156,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           <div className="items-center self-start self-end justify-end flex-none hidden space-x-0 md:inline-flex">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}
+              {contractData.price_at_booking ? Number(contractData.price_at_booking) : 0}
             </h4>
           </div>
           <ReviewReaction
@@ -194,7 +194,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           <div className="flex items-center justify-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}
+              {contractData.price_at_booking ? Number(contractData.price_at_booking) : 0}
             </h4>
             <ReviewReaction
               avgRating={avgRating}
