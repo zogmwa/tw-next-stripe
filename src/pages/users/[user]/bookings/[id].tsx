@@ -1,8 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import * as Sentry from '@sentry/nextjs'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
-import { ContractCard } from '@taggedweb/components/contract-card/contract-card'
+import { ContractDetail } from '@taggedweb/components/contract-detail'
+import { Breadcrumb } from '@taggedweb/components/breadcrumb'
+import { unslugify } from '@taggedweb/utils/unslugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -16,6 +19,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
       props: { contractData },
     }
   } catch (err) {
+    Sentry.captureException(err)
     return {
       props: {},
     }
@@ -25,32 +29,32 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 export default function Contracts({ contractData }) {
   const { query } = useRouter()
   const { user } = query as { user: string }
-  const contractsList = contractData
+  const contract = contractData[0]
+  const breadcrumbData = [
+    {
+      name: 'Profile',
+      url: '/profile',
+      is_selected: false,
+    },
+    {
+      name: unslugify(String(contract.solution.slug)),
+      url: `/solution/${contract.solution.slug}`,
+      is_selected: false,
+    },
+    {
+      name: contract.id,
+      url: '#',
+      is_selected: true,
+    },
+  ]
 
-  contractsList &&
-    contractsList.sort((contractA, contractB) => {
-      const dateA = new Date(contractA.started_at)
-      const dateB = new Date(contractB.started_at)
-      return (dateA.getTime() - dateB.getTime()) * -1
-    })
-
+  console.log('contractsList:', contract)
   return (
     <div id="contracts" className="flex flex-col max-w-screen-lg px-2 mx-auto my-10">
-      <p className="mb-2 text-lg font-bold">Contract</p>
+      <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" />
+      <p className="mb-2 text-xl font-bold">Contract Detail</p>
       <div className="w-full mb-4">
-        {contractsList && contractsList.length === 0 && <p className="text-center">No Contracts yet...</p>}
-        {contractsList &&
-          contractsList.map((contract, index) => {
-            if (typeof contract === 'undefined') return null
-            else
-              return (
-                <ContractCard
-                  key={`contract-${index}`}
-                  contractData={contract}
-                  redirectUrl={`/users/${user}/bookings/${contract.id}`}
-                />
-              )
-          })}
+        <ContractDetail contractData={contract} />
       </div>
     </div>
   )
