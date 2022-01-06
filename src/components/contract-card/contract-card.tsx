@@ -142,8 +142,14 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
             {contractData.solution.title}
           </h2>
           <div className="flex flex-col mt-2 text-xs md:flex-row">
-            <span className="w-full">Started at: {startedDate}</span>
-            {startedDate ? <span className="w-full">Updated at: {updatedDate}</span> : null}
+            <span className="w-full">
+              Started at: <b>{startedDate}</b>
+            </span>
+            {startedDate ? (
+              <span className="w-full">
+                Updated at: <b>{updatedDate}</b>
+              </span>
+            ) : null}
           </div>
           <div className="flex items-center pt-4 space-x-4 md:hidden">
             <div className="flex items-center space-x-1 text-xs">
@@ -174,17 +180,38 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
         </div>
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
-        <div className="flex items-center pt-4 md:pt-0">
-          {contractData.solution.organization?.logo_url ? (
-            <img
-              className="w-[40px] h-[40px] rounded-full"
-              src={contractData.solution.organization.logo_url}
-              alt={contractData.solution.organization.name}
-            />
+        <div className="flex items-center">
+          {contractData.solution.organization ? (
+            <>
+              {contractData.solution.organization.logo_url ? (
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={contractData.solution.organization.logo_url}
+                  alt={contractData.solution.organization.name}
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+              )}
+              <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization.name}</span>
+            </>
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+                style={{ boxShadow: 'none !important' }}
+              >
+                <p>
+                  {contractData.solution.point_of_contact?.first_name[0] ??
+                    '' + contractData.solution.point_of_contact?.last_name[0] ??
+                    ''}
+                </p>
+              </div>
+              <span className="pl-2 text-sm text-text-secondary">
+                {contractData.solution.point_of_contact?.first_name ?? ''}{' '}
+                {contractData.solution.point_of_contact?.last_name ?? ''}
+              </span>
+            </>
           )}
-          <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization?.name}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
