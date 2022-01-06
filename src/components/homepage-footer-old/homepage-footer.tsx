@@ -69,11 +69,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
         <div className="justify-between hidden p-2 md:flex others">
           <div className="flex items-center">
             <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10" />
-            <a href="/">
-              <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
-                TaggedWeb
-              </div>
-            </a>
+            <Link href="/">
+              <a>
+                <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                  TaggedWeb
+                </div>
+              </a>
+            </Link>
           </div>
           <div className="flex p-2 space-x-4 other-sites">
             <a
@@ -162,11 +164,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
         <div className="flex flex-col justify-between p-2 md:hidden others">
           <div className="flex items-center">
             <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10" />
-            <a href="/">
-              <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
-                TaggedWeb
-              </div>
-            </a>
+            <Link href="/">
+              <a>
+                <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
+                  TaggedWeb
+                </div>
+              </a>
+            </Link>
           </div>
           <div className="flex justify-around mt-2 space-x-4 other-sites">
             <a
