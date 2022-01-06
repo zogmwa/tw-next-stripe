@@ -51,7 +51,7 @@ export default function Contracts({ contractData }) {
 
   return (
     <div id="contracts" className="flex flex-col max-w-screen-lg px-2 mx-auto my-10">
-      <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" />
+      <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
       <p className="mb-2 text-lg font-bold">Contracts</p>
       <div className="w-full mb-4">
         {contractsList && contractsList.length === 0 && <p className="text-center">No Contracts yet...</p>}
