@@ -74,7 +74,7 @@ export const getAccessToken = async (session: Session): Promise<string | void> =
       await setSessionTokens(session, { access: newAccess, refresh })
     }
   } catch (error) {
-    Sentry.captureException(error)
+    // Sentry.captureException(error)
     // eslint-disable-next-line
     session.unset('user')
     session.unset('token')
