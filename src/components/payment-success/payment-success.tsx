@@ -1,5 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { useRouter } from 'next/router'
 
 type PaymentSuccessComponentProps = {
   emailAddress: string
@@ -7,6 +9,11 @@ type PaymentSuccessComponentProps = {
 }
 
 function PaymentSuccessComponent({ emailAddress, className = '' }: PaymentSuccessComponentProps) {
+  const router = useRouter()
+  const { query } = useRouter()
+  const { username } = useUserContext()
+  router.push(`/users/${username}/bookings/${query.booking_id}`)
+
   return (
     <div className={clsx('flex flex-col items-center', className)}>
       <img src="/images/congratulations.png" alt="congratulation-image" className="w-32 h-32" />
