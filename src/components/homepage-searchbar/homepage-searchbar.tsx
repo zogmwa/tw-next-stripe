@@ -7,7 +7,6 @@ import { Tab } from '@headlessui/react'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
 type SearchComponentProps = {
   search_software: number
 }
@@ -15,8 +14,20 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   const router = useRouter()
   const [searchIndex, setSearchIndex] = useState(search_software)
   useEffect(() => {
-    const index = localStorage.getItem('taggedweb-search-software') || search_software.toString()
-    setSearchIndex(parseInt(index))
+    if (
+      window.location.hash &&
+      (window.location.hash === '#software-search' || window.location.hash === '#solution-search')
+    ) {
+      const hash = window.location.hash
+      if (hash === '#software-search') {
+        setSearchIndex(1)
+      } else {
+        setSearchIndex(0)
+      }
+    } else {
+      const index = localStorage.getItem('taggedweb-search-software') || search_software.toString()
+      setSearchIndex(parseInt(index))
+    }
   }, [])
 
   return (
@@ -25,6 +36,11 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
         defaultIndex={searchIndex}
         onChange={(index) => {
           localStorage.setItem('taggedweb-search-software', JSON.stringify(index))
+          if (index === 0) {
+            window.location.hash = 'solution-search'
+          } else {
+            window.location.hash = 'software-search'
+          }
         }}
       >
         <Tab.List className="flex p-1 space-x-1 sm:w-1/2 bg-blue-900/20 rounded-xl">
