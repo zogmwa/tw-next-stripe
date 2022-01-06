@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
@@ -131,12 +132,9 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
               }
             })}
           </div>
-          <h2
-            className="mt-2 text-xl cursor-pointer"
-            onClick={() => router.push(`/solution/${contractData.solution.slug}`)}
-          >
-            {contractData.solution.title}
-          </h2>
+          <Link href={`/solution/${contractData.solution.slug}`}>
+            <a className="mt-2 text-xl cursor-pointer text-text-primary">{contractData.solution.title}</a>
+          </Link>
           <div className="flex flex-col mt-2 text-xs md:flex-row">
             <span className="w-full">Started at: {startedDate}</span>
             {startedDate ? <span className="w-full">Updated at: {updatedDate}</span> : null}
@@ -210,14 +208,14 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
               contractData.solution.assets
                 .slice(0, Math.min(3, contractData.solution.assets.length))
                 .map((asset, key) => (
-                  <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                  <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
                     <ServiceLogo
                       serviceName={asset?.name}
                       serviceId={asset.id}
                       logoUrl={asset.logo_url}
                       className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
                     />
-                  </div>
+                  </Link>
                 ))}
           </div>
         </div>

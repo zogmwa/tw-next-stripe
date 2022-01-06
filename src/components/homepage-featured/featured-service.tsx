@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { MdArrowForwardIos } from 'react-icons/md'
 import { useRouter } from 'next/router'
 import { ServiceLogo } from '../service-logo'
@@ -22,18 +23,21 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
           <div
             className="flex items-center justify-between w-full px-4 py-2 cursor-pointer"
             key={`service-${service.slug}`}
-            onClick={() => router.push(`/software/${service.slug}`)}
           >
-            <div className="flex items-center">
-              <ServiceLogo
-                serviceName={service.name}
-                logoUrl={service.logo_url}
-                imageClassName="rounded-full"
-                className="w-[40px] h-[40px]"
-              />
-              <span className="ml-4 text-md text-text-secondary">{service.name}</span>
-            </div>
-            <MdArrowForwardIos />
+            <Link href={`/software/${service.slug}`} passHref>
+              <>
+                <div className="flex items-center">
+                  <ServiceLogo
+                    serviceName={service.name}
+                    logoUrl={service.logo_url}
+                    imageClassName="rounded-full"
+                    className="w-[40px] h-[40px]"
+                  />
+                  <span className="ml-4 text-md text-text-secondary">{service.name}</span>
+                </div>
+                <MdArrowForwardIos />
+              </>
+            </Link>
           </div>
         ))}
       </div>

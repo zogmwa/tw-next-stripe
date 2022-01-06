@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import slugify from 'slugify'
 
@@ -124,12 +125,13 @@ export function PopularSolutionTags() {
           <div
             key={index}
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
-            onClick={() => {
-              router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
-            }}
           >
-            <div className="text-4xl text-blue-500">{solution.icon}</div>
-            <div className="text-lg font-medium text-center">{solution.name}</div>
+            <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
+              <>
+                <div className="text-4xl text-blue-500">{solution.icon}</div>
+                <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
+              </>
+            </Link>
           </div>
         ))}
       </div>
@@ -138,12 +140,13 @@ export function PopularSolutionTags() {
           <div
             key={index}
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
-            onClick={() => {
-              router.push(`/solutions/${slugify(solution.name, { lower: true })}`)
-            }}
           >
-            <div className="text-4xl text-blue-500">{solution.icon}</div>
-            <div className="text-lg font-medium text-center">{solution.name}</div>
+            <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
+              <>
+                <div className="text-4xl text-blue-500">{solution.icon}</div>
+                <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
+              </>
+            </Link>
           </div>
         ))}
       </div>
