@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useProfile } from '@taggedweb/hooks/use-profile'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Profile } from '@taggedweb/types/profile'
@@ -15,9 +16,9 @@ export default function BookmarkedSolutionsList() {
         {solutionsList && solutionsList.length === 0 && (
           <p className="text-center">
             No Bookmarked Solutions yet... Explore some solutions{' '}
-            <a href="/" className="underline">
-              here
-            </a>
+            <Link href="/">
+              <a className="underline">here</a>
+            </Link>
           </p>
         )}
         {solutionsList &&

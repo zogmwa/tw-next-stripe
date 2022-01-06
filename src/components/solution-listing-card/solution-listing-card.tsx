@@ -3,8 +3,6 @@ import Link from 'next/link'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
-import { AiFillStar } from 'react-icons/ai'
-import numeral from 'numeral'
 import { useRouter } from 'next/router'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
@@ -31,7 +29,7 @@ const SolutionTypes = [
   },
   {
     slug: 'C',
-    value: 'CONSULTAION',
+    value: 'CONSULTATION',
   },
   {
     slug: 'U',
@@ -50,7 +48,6 @@ SolutionTypes.forEach((type) => {
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
-  const rating = numeral(Number(listingData.avg_rating ?? 0)).format('0.[0]')
 
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -98,10 +95,6 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
               </Button>
             </div>
             <div className="flex items-center space-x-1 text-xs">
-              <AiFillStar className="self-center text-primary" />
-              <span>{rating}</span>
-            </div>
-            <div className="flex items-center space-x-1 text-xs">
               <IoIosArrowUp className="text-primary" />
               <span className="text-xs ">{kFormater(listingData.upvotes_count)}</span>
             </div>
@@ -134,10 +127,6 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             </Button>
           </div>
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
-            <AiFillStar className="self-center text-primary" />
-            <span>{rating}</span>
-          </div>
-          <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
             <IoIosArrowUp className="text-primary" />
             <span className="text-xs">{kFormater(listingData.upvotes_count)}</span>
           </div>
@@ -150,14 +139,14 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
           <div className="flex self-start space-x-2">
             {listingData.assets &&
               listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
-                <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
                   <ServiceLogo
                     serviceName={asset?.name}
                     serviceId={asset.id}
                     logoUrl={asset.logo_url}
                     className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
                   />
-                </div>
+                </Link>
               ))}
           </div>
         </div>

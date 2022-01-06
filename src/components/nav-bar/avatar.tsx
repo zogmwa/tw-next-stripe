@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Link from 'next/link'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
 import { useUserContext } from '@taggedweb/hooks/use-user'
@@ -37,9 +38,11 @@ export default function Avatar() {
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
-                <a href="/profile">
-                  <button className={menuIconClassNames(active)}>Profile</button>
-                </a>
+                <Link href="/profile">
+                  <a>
+                    <button className={menuIconClassNames(active)}>Profile</button>
+                  </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>

@@ -82,12 +82,11 @@ export default function SolutionDetail({ solutionDetail }) {
   }
   features.push({
     id: 'capacity',
-    name: `${(solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)} / ${
-      solutionDetail?.capacity ?? 0
-    } Available Capacity`,
-    tooltipContent: `We have ${solutionDetail?.capacity_used ?? 0} solution actively being worked on and up-to ${
+    name: `Only ${
       (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
-    } solutions that can be booked. We limit capacity to prevent overbooking a provider.`,
+    } more slots available at this time`,
+    tooltipContent:
+      'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
   })
   if (solutionDetail.capacity - solutionDetail.capacity_used <= 0 || price.stripe_price_id === '') {
     purchaseDisableOption = true

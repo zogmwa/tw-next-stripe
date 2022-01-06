@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
@@ -70,13 +71,13 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
   const statuses = [
     {
       name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-[#facc15] border rounded-xl border-[#facc15]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#facc15] bg-[#facc15]',
+      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
     {
       name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-[#5eead4] border rounded-xl border-[#5eead4]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#5eead4] bg-[#5eead4]',
+      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
     {
       name: 'In Review',
@@ -85,8 +86,8 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
     },
     {
       name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-[#65a30d] rounded-xl border-[#65a30d]',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#65a30d] bg-[#65a30d]',
+      defaultClassName: 'px-2 py-1 text-sm border text-[#60a5fa] rounded-xl border-[#60a5fa]',
+      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#60a5fa] bg-[#60a5fa]',
     },
   ]
 
@@ -132,15 +133,9 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
               }
             })}
           </div>
-          <h2
-            className="mt-2 text-xl cursor-pointer"
-            onClick={() => {
-              if (redirectUrl) router.push(redirectUrl)
-              else router.push(`/solution/${contractData.solution.slug}`)
-            }}
-          >
-            {contractData.solution.title}
-          </h2>
+          <Link href={redirectUrl ? redirectUrl : `/solution/${contractData.solution.slug}`}>
+            <a className="mt-2 text-xl cursor-pointer text-text-primary">{contractData.solution.title}</a>
+          </Link>
           <div className="flex flex-col mt-2 text-xs md:flex-row">
             <span className="w-full">
               Started at: <b>{startedDate}</b>
@@ -166,7 +161,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
           <div className="items-center self-start self-end justify-end flex-none hidden space-x-0 md:inline-flex">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}
+              {contractData.price_at_booking ? Number(contractData.price_at_booking) : 0}
             </h4>
           </div>
           <ReviewReaction
@@ -225,7 +220,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
           <div className="flex items-center justify-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {contractData.price_at_booking ? Number(contractData.price_at_booking) / 100 : 0}
+              {contractData.price_at_booking ? Number(contractData.price_at_booking) : 0}
             </h4>
             <ReviewReaction
               avgRating={avgRating}
@@ -241,14 +236,14 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
               contractData.solution.assets
                 .slice(0, Math.min(3, contractData.solution.assets.length))
                 .map((asset, key) => (
-                  <div key={`mobileServiceLogo${key}`} onClick={() => router.push(`/software/${asset.slug}`)}>
+                  <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
                     <ServiceLogo
                       serviceName={asset?.name}
                       serviceId={asset.id}
                       logoUrl={asset.logo_url}
                       className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
                     />
-                  </div>
+                  </Link>
                 ))}
           </div>
         </div>

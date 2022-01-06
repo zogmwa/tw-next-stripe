@@ -54,3 +54,33 @@ git flow hotfix start hotfix_branch
 
 We follow practices defined in: https://nextjs.org/docs/basic-features/environment-variables
 Most of the defaults are set so you shouldn't have to do anything but if you have to override environment variables copy over .env.local.dist to .env.local in your respective environment and override the settings. .env.local has the highest override precedence.
+
+### Deploying to Staging
+
+To log into the staging node run the following:
+
+```
+ssh ubuntu@staging.taggedweb.com
+
+# After you log in, switch to the taggedweb-fronted directory with the following command:
+cd taggedweb-frontend
+```
+
+DM Pranjal or Sarthak to grant your ssh public keys access to the staging node. (We use a single node for our staging setup).
+
+We are running the staging deploys on Unix screens. To resume the screen running the frontend code run:
+
+```
+# The screen should be running for it to be resumed
+screen -r frontend
+
+# To detach from a screen without killing the process run Ctrl (pressed) + A + D
+
+# To kill screen (which will stop the process we do Ctrl + D, but avoid doing this unless you remember to start the screen back)
+
+# Let's say the frontend screen is not running we will run
+screen -S frontend
+
+# To list all the running screens
+screen -list
+```
