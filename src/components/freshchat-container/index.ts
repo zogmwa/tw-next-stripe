@@ -1,1 +1,0 @@
-export { FreshChat } from './freshchat'
