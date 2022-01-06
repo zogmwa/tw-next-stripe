@@ -1,5 +1,4 @@
 import { Session } from 'next-iron-session'
-import * as Sentry from '@sentry/nextjs'
 import { client } from './client'
 // import { AccessTokenError } from './error'
 function atob(b64Encoded) {

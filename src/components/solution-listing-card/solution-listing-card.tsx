@@ -29,7 +29,7 @@ const SolutionTypes = [
   },
   {
     slug: 'C',
-    value: 'CONSULTAION',
+    value: 'CONSULTATION',
   },
   {
     slug: 'U',
