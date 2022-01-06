@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState } from 'react'
 import { BsBookmarkPlus, BsBookmarkCheckFill, BsShare, BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs'
 import { useRouter } from 'next/router'
