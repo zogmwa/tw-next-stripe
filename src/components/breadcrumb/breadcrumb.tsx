@@ -11,9 +11,15 @@ type BreadcrumbComponentProps = {
   breadcrumbs: { name: string; url: string; is_selected: boolean }[]
   copyUrl?: string
   className?: string
+  mobileAct?: boolean
 }
 
-export default function BreadcrumbComponent({ breadcrumbs, copyUrl, className }: BreadcrumbComponentProps) {
+export default function BreadcrumbComponent({
+  breadcrumbs,
+  copyUrl,
+  className,
+  mobileAct = true,
+}: BreadcrumbComponentProps) {
   const [isCopied, setIsCopied] = useState(false)
   const router = useRouter()
 
@@ -36,8 +42,14 @@ export default function BreadcrumbComponent({ breadcrumbs, copyUrl, className }:
           if (breadcrumb.is_selected) {
             return (
               <Typography key={breadcrumb.name} sx={{ color: '#000' }}>
-                <span className="hidden md:flex">{breadcrumb.name}</span>
-                <span className="flex md:hidden">Solution</span>
+                {mobileAct ? (
+                  <>
+                    <span className="hidden md:flex">{breadcrumb.name}</span>
+                    <span className="flex md:hidden">Solution</span>
+                  </>
+                ) : (
+                  <span>{breadcrumb.name}</span>
+                )}
               </Typography>
             )
           } else {
