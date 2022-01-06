@@ -28,7 +28,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function Contracts({ contractData }) {
   const { query } = useRouter()
-  const { user } = query as { user: string }
+  const { user } = query
   const contract = contractData[0]
   const breadcrumbData = [
     {
@@ -37,8 +37,8 @@ export default function Contracts({ contractData }) {
       is_selected: false,
     },
     {
-      name: unslugify(String(contract.solution.slug)),
-      url: `/solution/${contract.solution.slug}`,
+      name: 'Bookings List',
+      url: `/users/${user}/bookings`,
       is_selected: false,
     },
     {
