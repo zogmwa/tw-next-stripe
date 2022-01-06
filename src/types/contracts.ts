@@ -10,9 +10,11 @@ export type solutionContract = {
     upvotes_count: number
     slug: string
     pay_now_price_unit_amount: number
+    point_of_contact: any
   }
   status: string
   started_at: string | null
   updated: string
   price_at_booking: number
+  provider_notes: string
 }
