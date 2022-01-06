@@ -48,7 +48,6 @@ export default function Contracts({ contractData }) {
     },
   ]
 
-  console.log('contractsList:', contract)
   return (
     <div id="contracts" className="flex flex-col max-w-screen-lg px-2 mx-auto my-10">
       <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" />
