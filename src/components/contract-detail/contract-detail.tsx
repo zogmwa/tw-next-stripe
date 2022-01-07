@@ -1,10 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
 import { BiDollar } from 'react-icons/bi'
 import Markdown from 'marked-react'
 import Lowlight from 'react-lowlight'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import javascript from 'highlight.js/lib/languages/javascript'
-import { useRouter } from 'next/router'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '../../types/contracts'
 import style from '../solution-detail-introduction/style.module.scss'
@@ -23,17 +23,16 @@ type ContractDetailProps = {
 }
 
 function ContractDetailComponent({ contractData }: ContractDetailProps) {
-  const router = useRouter()
   const statuses = [
     {
       name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-[#facc15] border rounded-xl border-[#facc15]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#facc15] bg-[#facc15]',
+      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
     },
     {
       name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-[#5eead4] border rounded-xl border-[#5eead4]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#5eead4] bg-[#5eead4]',
+      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
     },
     {
       name: 'In Review',
@@ -42,13 +41,13 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
     },
     {
       name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-[#65a30d] rounded-xl border-[#65a30d]',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#65a30d] bg-[#65a30d]',
+      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
     },
   ]
 
   let statusIndex = 1
-  statuses.map((status, index) => {
+  statuses.forEach((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
@@ -75,14 +74,9 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
         })}
       </Breadcrumbs>
       <div className="flex my-4 justify-between">
-        <h2
-          className="text-xl font-bold hover:underline cursor-pointer"
-          onClick={() => {
-            router.push(`/solution/${contractData.solution.slug}`)
-          }}
-        >
-          {contractData.solution.title}
-        </h2>
+        <Link href={`/solution/${contractData.solution.slug}`} passHref>
+          <h2 className="text-xl font-bold hover:underline cursor-pointer">{contractData.solution.title}</h2>
+        </Link>
         <div className="flex">
           <BiDollar className="text-2xl font-bold text-text-primary mt-0.5" />
           <h4 className="text-xl font-bold text-text-primary">{contractData.price_at_booking ?? 0}</h4>
@@ -128,7 +122,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
       </div>
       <div className="flex my-4">
         <span className="w-full">
-          <b className="mr-2">Started at:</b> {startedDate ? startedDate : 'Not started yet...'}
+          <b className="mr-2">Started at:</b> {startedDate || 'Not started yet...'}
         </span>
         {startedDate ? (
           <span className="w-full">
@@ -146,12 +140,10 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
         <div className="flex mt-4">
           <span className="flex flexw-full">
             <b className="mr-2">Consultation Link:</b>{' '}
-            {contractData.solution?.consultation_scheduling_link ? (
-              <a href={contractData.solution?.consultation_scheduling_link} target="_blank">
+            {contractData.solution?.consultation_scheduling_link && (
+              <a href={contractData.solution?.consultation_scheduling_link} target="_blank" rel="noreferrer">
                 {contractData.solution?.consultation_scheduling_link}
               </a>
-            ) : (
-              'No scheduled yet...'
             )}
           </span>
         </div>
@@ -173,11 +165,13 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
             <Markdown value={contractData.solution.scope_of_work} renderer={renderer} />
           </div>
         </div>
-        {contractData.solution.questions.length > 0 && (
-          <div style={{ scrollMarginTop: '3rem' }} id="solutions-faq" className="py-4">
-            <SolutionFAQ questions={contractData.solution.questions} solutionSlug={contractData.solution.slug} />
-          </div>
-        )}
+        {contractData.solution.questions
+          ? contractData.solution.questions.length > 0 && (
+              <div style={{ scrollMarginTop: '3rem' }} id="solutions-faq" className="py-4">
+                <SolutionFAQ questions={contractData.solution.questions} solutionSlug={contractData.solution.slug} />
+              </div>
+            )
+          : null}
       </div>
     </div>
   )
