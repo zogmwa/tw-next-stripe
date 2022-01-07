@@ -5,7 +5,6 @@ import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ContractDetail } from '@taggedweb/components/contract-detail'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
-import { unslugify } from '@taggedweb/utils/unslugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -14,7 +13,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
   try {
     const contractData = await fetchContract(context.req.session, user, id)
-
+    if (contractData.length < 1) {
+      return {
+        notFound: true,
+      }
+    }
     return {
       props: { contractData },
     }

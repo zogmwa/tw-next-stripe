@@ -13,7 +13,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
   try {
     const contractData = await fetchContract(context.req.session, user, '')
-
+    if (contractData.length < 1) {
+      return {
+        notFound: true,
+      }
+    }
     return {
       props: { contractData },
     }
@@ -58,7 +62,7 @@ export default function Contracts({ contractData }) {
         {contractsList &&
           contractsList.map((contract, index) => {
             if (typeof contract === 'undefined') return null
-            else
+            else {
               return (
                 <ContractCard
                   key={`contract-${index}`}
@@ -66,6 +70,7 @@ export default function Contracts({ contractData }) {
                   redirectUrl={`/users/${user}/bookings/${contract.id}`}
                 />
               )
+            }
           })}
       </div>
     </div>
