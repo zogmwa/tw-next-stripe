@@ -7,7 +7,6 @@ import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { AiFillStar } from 'react-icons/ai'
 import numeral from 'numeral'
-import { useRouter } from 'next/router'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '@taggedweb/types/contracts'
@@ -24,7 +23,6 @@ type ContractCardProps = {
 function ContractCardComponent({ contractData, className, redirectUrl }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
 
-  const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')
   const [reviewType, setReviewType] = useState(contractData.solution.my_solution_review)
@@ -71,13 +69,13 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
   const statuses = [
     {
       name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
+      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
     },
     {
       name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
+      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
     },
     {
       name: 'In Review',
@@ -86,8 +84,8 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
     },
     {
       name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-[#60a5fa] rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#60a5fa] bg-[#60a5fa]',
+      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
+      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
     },
   ]
 
@@ -133,7 +131,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
               }
             })}
           </div>
-          <Link href={redirectUrl ? redirectUrl : `/solution/${contractData.solution.slug}`}>
+          <Link href={redirectUrl || `/solution/${contractData.solution.slug}`}>
             <a className="mt-2 text-xl cursor-pointer text-text-primary">{contractData.solution.title}</a>
           </Link>
           <div className="flex flex-col mt-2 text-xs md:flex-row">
