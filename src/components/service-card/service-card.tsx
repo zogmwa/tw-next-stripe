@@ -97,7 +97,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
             </Link>
           </div>
           <div className="flex flex-row flex-wrap mb-5">
-            {service.tags.map((tag) => {
+            {service.tags.map((tag, index) => {
               return (
                 <Link
                   href={
@@ -106,6 +106,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                       : `/softwares/${tag.slug}`
                   }
                   passHref
+                  key={index}
                 >
                   <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
                     {tag.name}

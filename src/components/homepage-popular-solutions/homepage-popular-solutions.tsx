@@ -116,6 +116,7 @@ const solutionTag = [
   },
 ]
 export function PopularSolutionTags() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   return (
     <div className="max-w-screen-lg px-2 mx-auto">
