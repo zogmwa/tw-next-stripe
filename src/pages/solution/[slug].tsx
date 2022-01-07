@@ -38,7 +38,14 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name: solutionDetail.type === 'I' ? 'Integrations' : solutionDetail.type === 'U' ? 'Usage Support' : 'Other',
+      name:
+        solutionDetail.type === 'I'
+          ? 'Integrations'
+          : solutionDetail.type === 'U'
+          ? 'Usage Support'
+          : solutionDetail.type === 'C'
+          ? 'Consultation'
+          : 'Other',
       url: '#',
       is_selected: false,
     },
@@ -110,8 +117,22 @@ export default function SolutionDetail({ solutionDetail }) {
     slug: solutionDetail.slug,
     assets: solutionDetail.assets,
     tag: {
-      name: solutionDetail.type === 'I' ? 'Integrations' : solutionDetail.type === 'U' ? 'Usage Support' : 'Other',
-      slug: solutionDetail.type === 'I' ? 'integrations' : solutionDetail.type === 'U' ? 'ssage-support' : 'other',
+      name:
+        solutionDetail.type === 'I'
+          ? 'Integrations'
+          : solutionDetail.type === 'U'
+          ? 'Usage Support'
+          : solutionDetail.type === 'C'
+          ? 'Consultation'
+          : 'Other',
+      slug:
+        solutionDetail.type === 'I'
+          ? 'integrations'
+          : solutionDetail.type === 'U'
+          ? 'usage-support'
+          : solutionDetail.type === 'C'
+          ? 'consultation'
+          : 'other',
     },
     title: solutionDetail.title,
     upvoted_count: solutionDetail.upvotes_count,
