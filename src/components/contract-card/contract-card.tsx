@@ -23,6 +23,7 @@ type ContractCardProps = {
 function ContractCardComponent({ contractData, className }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')

@@ -70,6 +70,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const { asPath } = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
 
   const setToggleUpvotedByMe = async () => {

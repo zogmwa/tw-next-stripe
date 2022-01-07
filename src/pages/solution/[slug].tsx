@@ -34,7 +34,7 @@ export default function SolutionDetail({ solutionDetail }) {
   const breadcrumbData = [
     {
       name: 'Search',
-      url: '#',
+      url: `${process.env.SITE_BASE_URL}/#solution-search`,
       is_selected: false,
     },
     {

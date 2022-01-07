@@ -5,6 +5,7 @@ import { TopSaasTags } from '@taggedweb/utils/top-tags'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 export default function Software() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
 
   return (
@@ -18,7 +19,7 @@ export default function Software() {
         <h4 className="self-start my-4 text-lg font-semibold text-text-primary">TOP SOFTWARE TAGS</h4>
         <div className="flex flex-col space-y-2">
           {TopSaasTags.map((tag) => (
-            <Link href={`/softwares/${tag.slug}`} passHref>
+            <Link href={`/softwares/${tag.slug}`} passHref key={tag.slug}>
               <div
                 className="flex items-center px-4 py-2 space-x-2 border border-solid rounded-md cursor-pointer border-border-default"
                 key={tag.slug}

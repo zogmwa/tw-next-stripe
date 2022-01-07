@@ -13,6 +13,7 @@ type FeaturedServicesProp = {
 }
 
 function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesProp) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   const featured = featuredList.filter((featured) => featured.name === selected)
 
