@@ -52,6 +52,9 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   const [solutionList, setSolutionList] = useState(solutionData.results)
   const [ordering, setOrdering] = useState('')
   const [filtering, setFiltering] = useState('')
+  const [minPriceFilter, setMinPriceFilter] = useState('')
+  const [maxPriceFilter, setMaxPriceFilter] = useState('')
+
   const suggestionTags = []
   for (let i = 0; i < solutionData.results.length; i++) {
     if (solutionData.results[i].tags.length > 0) suggestionTags.push(...solutionData.results[i].tags)
@@ -71,33 +74,57 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     }
   }
 
-  const handlePagination = async (event, pageValue) => {
+  const handlePagination = (event, pageValue) => {
     setPage(pageValue)
     const offset = (pageValue - 1) * pageLen
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
+      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
 
-  const orderingSolution = async (orderValue) => {
+  const orderingSolution = (orderValue) => {
     setOrdering(orderValue)
     const offset = (page - 1) * pageLen
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (orderValue ? `&ordering=${orderValue}` : '') +
+      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
 
-  const filterSolution = async (filterValue) => {
+  const filterSolution = (filterValue) => {
     setFiltering(filterValue)
     const offset = (page - 1) * pageLen
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
+      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filterValue ? `&has_free_consultation=${filterValue}` : '')
+
+    fetchSolutionList(sendUrl)
+  }
+
+  const filterByPrice = (minPrice, maxPrice) => {
+    minPrice = minPrice ? minPrice * 100 : ''
+    maxPrice = maxPrice ? maxPrice * 100 : ''
+    setMinPriceFilter(minPrice)
+    setMaxPriceFilter(maxPrice)
+
+    const offset = (page - 1) * pageLen
+    const sendUrl =
+      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
+      (ordering ? `&ordering=${ordering}` : '') +
+      (minPrice ? `&pay_now_price__unit_amount__gte=${minPrice}` : '') +
+      (maxPrice ? `&pay_now_price__unit_amount__lte=${maxPrice}` : '') +
+      (filtering ? `&has_free_consultation=${filtering}` : '')
+
     fetchSolutionList(sendUrl)
   }
   const [error, setError] = useState('')
@@ -110,6 +137,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
       setError('')
     }
   }, [solutionList])
+
   return (
     <>
       <DynamicHeader />
@@ -119,7 +147,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
             <SortServiceList onChange={orderingSolution} />{' '}
           </div>
           <div className="border rounded">
-            <FilterServiceList onChange={filterSolution} label="Consultation" />
+            <FilterServiceList onChange={filterSolution} filterByPrice={filterByPrice} label="Consultation" />
           </div>
         </div>
         <div className="flex flex-col justify-between w-full p-2 md:w-3/4 md:ml-3">
@@ -127,6 +155,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
           <div className="flex items-center justify-between md:hidden">
             <h1 className="text-xl font-bold text-black">All &#8220;{pageTitle}&#8221; Solutions</h1>
             <MobileViewSortAndFilterServiceList
+              filterByPrice={filterByPrice}
               onSortChange={orderingSolution}
               onFilterChange={filterSolution}
               filterLabel="Consultation"

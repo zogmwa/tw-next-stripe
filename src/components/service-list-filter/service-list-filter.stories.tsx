@@ -23,6 +23,10 @@ export function SortList() {
 export function MobileViewSortList() {
   return (
     <MobileViewSortAndFilterServiceList
+      // filterByPrice={(min, max) => {
+      //   // eslint-disable-next-line no-console
+      //   console.log(min, max)
+      // }}
       onSortChange={(value) => {
         // eslint-disable-next-line no-console
         console.log(value)
@@ -38,6 +42,10 @@ export function MobileViewSortList() {
 export function FilterList() {
   return (
     <FilterServiceList
+      // filterByPrice={(min, max) => {
+      //   // eslint-disable-next-line no-console
+      //   console.log(min, max)
+      // }}
       onChange={(value) => {
         // eslint-disable-next-line no-console
         console.log(value)
