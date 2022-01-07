@@ -69,7 +69,7 @@ export function DefaultSolutionBookingDetail() {
   return (
     <>
       {contractsList.map((contract, index) => (
-        <ContractDetail contractData={contract} />
+        <ContractDetail key={index} contractData={contract} />
       ))}
     </>
   )

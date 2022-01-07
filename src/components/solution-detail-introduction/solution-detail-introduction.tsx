@@ -70,7 +70,6 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
   const { asPath } = useRouter()
-  const router = useRouter()
 
   const setToggleUpvotedByMe = async () => {
     if (!isLoadingUpvote) {

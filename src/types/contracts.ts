@@ -13,7 +13,7 @@ export type solutionContract = {
     slug: string
     pay_now_price_unit_amount: number
     point_of_contact: any
-    questions: any
+    questions: any[]
     scope_of_work: string
     primary_tag: any
     eta_days: string | number

@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { MdArrowForwardIos } from 'react-icons/md'
-import { useRouter } from 'next/router'
 import { ServiceLogo } from '../service-logo'
 
 type FeaturedServicesProp = {
@@ -13,7 +12,6 @@ type FeaturedServicesProp = {
 }
 
 function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesProp) {
-  const router = useRouter()
   const featured = featuredList.filter((featured) => featured.name === selected)
 
   return (
