@@ -47,6 +47,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
   ]
 
   let statusIndex = 1
+  console.log(contractData)
   statuses.forEach((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
@@ -133,7 +134,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
       <div className="flex">
         <span className="w-full">
           <b className="mr-2">Provider Notes:</b>{' '}
-          {contractData.provider_notes ?? `It will tasks ${contractData.solution.eta_days} business days.`}
+          {contractData.provider_notes ?? `It will takes ${contractData.solution.eta_days} business days.`}
         </span>
       </div>
       {contractData.solution.type === 'C' && (
