@@ -133,7 +133,8 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
       <div className="flex">
         <span className="w-full">
           <b className="mr-2">Provider Notes:</b>{' '}
-          {contractData.provider_notes ?? `Estimated time to completion is ${contractData.solution.eta_days} business days.`}
+          {contractData.provider_notes ??
+            `Estimated time to completion is ${contractData.solution.eta_days} business days.`}
         </span>
       </div>
       {contractData.solution.type === 'C' && (
