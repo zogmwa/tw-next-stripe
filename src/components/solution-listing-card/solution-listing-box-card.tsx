@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
@@ -26,8 +25,6 @@ type SolutionListingCardProps = {
 
 export function SolutionListingBoxCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const unitlist = ['', 'K', 'M', 'G']
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   const rating = numeral(Number(listingData.avg_rating ?? 0)).format('0.[0]')
   function kFormater(number) {
     const sign = Math.sign(number)

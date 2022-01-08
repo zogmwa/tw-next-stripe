@@ -100,13 +100,13 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
             {service.tags.map((tag, index) => {
               return (
                 <Link
+                  key={tag.slug}
                   href={
                     search_query.indexOf(tag.slug) === -1
                       ? `/softwares/${search_query},${tag.slug}`
                       : `/softwares/${tag.slug}`
                   }
                   passHref
-                  key={index}
                 >
                   <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
                     {tag.name}

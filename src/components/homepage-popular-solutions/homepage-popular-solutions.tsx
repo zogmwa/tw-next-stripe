@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import slugify from 'slugify'
 
 const solutionTag = [
@@ -116,8 +115,6 @@ const solutionTag = [
   },
 ]
 export function PopularSolutionTags() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   return (
     <div className="max-w-screen-lg px-2 mx-auto">
       <div className="mb-8 text-2xl font-bold text-center text-black">Popular Solution Tags</div>
