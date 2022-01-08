@@ -107,7 +107,6 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                       : `/softwares/${tag.slug}`
                   }
                   passHref
-                  key={index}
                 >
                   <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
                     {tag.name}
