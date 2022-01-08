@@ -47,7 +47,6 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
   ]
 
   let statusIndex = 1
-  console.log(contractData)
   statuses.forEach((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
