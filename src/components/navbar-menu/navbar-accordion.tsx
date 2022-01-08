@@ -57,11 +57,29 @@ export function NavAccordion({
             } else if (item.name === 'Careers') {
               return (
                 <Link href="https://angel.co/company/taggedweb/jobs" key={item.name}>
-                  <div
-                    className={` ${isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'}`}
-                  >
-                    <Typography>{item.name}</Typography>
-                  </div>
+                  <a target="_blank" rel="noopener noreferrer">
+                    <div
+                      className={` ${
+                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'
+                      }`}
+                    >
+                      <Typography>{item.name}</Typography>
+                    </div>
+                  </a>
+                </Link>
+              )
+            } else if (item.name === 'Blog') {
+              return (
+                <Link href={`/${item.slug}`} key={item.name}>
+                  <a target="_blank" rel="noopener noreferrer">
+                    <div
+                      className={`${isNavbar && 'py-2 hover:bg-gray-200'} ${
+                        isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline'
+                      }`}
+                    >
+                      <Typography>{item.name}</Typography>
+                    </div>
+                  </a>
                 </Link>
               )
             } else {

@@ -50,16 +50,31 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           </div>
         ))}
         <div className="flex flex-col items-center w-full">
-          <Button
-            className="mt-4 bg-primary"
-            textClassName="text-white"
-            loading={isPurchase}
-            disabled={detailInfo.purchaseDisableOption || isPurchase}
-            loadingClassName="text-background-light"
-            onClick={requireLoginBeforeAction(() => togglePurchase())}
-          >
-            Purchase Now
-          </Button>
+          <span data-for="purchase-button" data-tip>
+            <Button
+              className="mt-4 bg-primary"
+              textClassName="text-white"
+              loading={isPurchase}
+              disabled={detailInfo.purchaseDisableOption || isPurchase}
+              loadingClassName="text-background-light"
+              onClick={requireLoginBeforeAction(() => togglePurchase())}
+            >
+              Purchase Now
+            </Button>
+            {detailInfo.purchaseDisableOption && (
+              <ReactTooltip
+                id="purchase-button"
+                className="w-[200px]"
+                type="light"
+                place="top"
+                border={true}
+                borderColor="text-grey-200"
+                multiline={true}
+              >
+                Capacity currently unavailable.
+              </ReactTooltip>
+            )}
+          </span>
           <Button
             onClick={() => {
               // @ts-ignore

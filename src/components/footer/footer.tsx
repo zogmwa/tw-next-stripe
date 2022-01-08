@@ -30,7 +30,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
     title: 'COMPANY',
     content: [
       { name: 'About', slug: 'about' },
-      { name: 'Blog', slug: '' },
+      { name: 'Blog', slug: 'blog' },
       { name: 'Careers', slug: '' },
     ],
   }
@@ -87,26 +87,27 @@ export function FooterSubComponent({ service, type }) {
               )
             } else if (tag.name === 'Blog') {
               return (
-                <a href="/blog" target="_blank" rel="noopener noreferrer" key="blog">
-                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                    {tag.name}
-                  </h3>
-                </a>
-              )
-            } else {
-              return (
                 <Link href={`/${tag.slug}`} prefetch={false} key={tag.slug}>
-                  <a>
+                  <a target="_blank" rel="noopener noreferrer">
                     <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
                       {tag.name}
                     </h3>
                   </a>
                 </Link>
               )
+            } else {
+              return (
+                <Link href={`/${tag.slug}`} prefetch={false} key={tag.slug}>
+                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                    {tag.name}
+                  </h3>
+                </Link>
+              )
             }
           }
         })}
       </div>
+      {/* This is for the mobile view footer */}
       <div className="flex w-full md:hidden">
         <NavAccordion
           expanded={expanded}

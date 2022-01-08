@@ -10,6 +10,7 @@ import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { ProfileDesktop, ProfileMobile } from '@taggedweb/components/profile'
 import { Profile } from '@taggedweb/types/profile'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 
 // const asset1 = {
 //   logo_url: 'http://logo.clearbit.com/mailchimp.com',
@@ -65,6 +66,19 @@ function ProfilePage() {
   const user = useUserContext()
   const profile = useProfile()
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
+  const breadcrumbData = [
+    {
+      name: 'Search',
+      url: `${process.env.SITE_BASE_URL}/`,
+      is_selected: false,
+    },
+    {
+      name: 'Profile',
+      url: '#',
+      is_selected: true,
+    },
+  ]
+  const copyUrl = process.env.SITE_BASE_URL + '/profile/'
 
   useEffect(() => {
     const { error } = profile
@@ -89,6 +103,7 @@ function ProfilePage() {
       <DynamicHeader title="TaggedWeb | My Profile" />
       <div className="flex justify-center min-h-full pt-4 mx-auto bg-background-light">
         <div className="w-full max-w-screen-lg" id="scroll-container-outer">
+          <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
           <Element name={'personal-information'}>
             <ProfileCard data={data} />
           </Element>
