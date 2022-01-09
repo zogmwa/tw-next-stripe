@@ -43,7 +43,10 @@ export function FindingSolutions() {
               See details about the solution. If needed, ask questions with us over chat to clarify if the solution
               meets your needs. Reach out to us if anything is unclear. If you are not looking for solutions but just
               finding the best-fit SaaS options, then you may browse through our open
-              <Link href="/softwares"> software catalog </Link> or can ask us for software recommendations.
+              <Link href="/softwares">
+                <a> software catalog </a>
+              </Link>{' '}
+              or can ask us for software recommendations.
             </div>
           </div>
           <div className="items-center justify-center hidden w-2/12 md:flex">

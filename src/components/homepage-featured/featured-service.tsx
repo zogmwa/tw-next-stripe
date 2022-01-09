@@ -23,7 +23,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
             key={`service-${service.slug}`}
           >
             <Link href={`/software/${service.slug}`} passHref>
-              <>
+              <a>
                 <div className="flex items-center">
                   <ServiceLogo
                     serviceName={service.name}
@@ -34,7 +34,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
                   <span className="ml-4 text-md text-text-secondary">{service.name}</span>
                 </div>
                 <MdArrowForwardIos />
-              </>
+              </a>
             </Link>
           </div>
         ))}

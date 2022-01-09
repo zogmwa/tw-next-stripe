@@ -98,9 +98,11 @@ export function FooterSubComponent({ service, type }) {
             } else {
               return (
                 <Link href={`/${tag.slug}`} prefetch={false} key={tag.slug}>
-                  <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
-                    {tag.name}
-                  </h3>
+                  <a>
+                    <h3 className="px-3 text-center text-gray-800 cursor-pointer md:text-left hover:underline">
+                      {tag.name}
+                    </h3>
+                  </a>
                 </Link>
               )
             }

@@ -19,12 +19,16 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
       <h4 className="my-4 text-3xl font-bold text-text-primary">Canceling</h4>
       <div className="text-lg text-text-tertiary">Do you want to stop booking this solution?</div>
       <Link href={'/?search_software=0'} passHref>
-        <Button className="mt-6 bg-primary" textClassName="!text-white">
-          Find other solutions.
-        </Button>
+        <a>
+          <Button className="mt-6 bg-primary" textClassName="!text-white">
+            Find other solutions.
+          </Button>
+        </a>
       </Link>
       <Link href={`/solution/${solution}`} passHref>
-        <Button className="!border-0 mt-2">No, continue with this solution.</Button>
+        <a>
+          <Button className="!border-0 mt-2">No, continue with this solution.</Button>
+        </a>
       </Link>
     </div>
   )

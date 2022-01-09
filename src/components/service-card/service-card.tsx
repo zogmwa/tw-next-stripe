@@ -108,9 +108,11 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                   }
                   passHref
                 >
-                  <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
-                    {tag.name}
-                  </Button>
+                  <a>
+                    <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                      {tag.name}
+                    </Button>
+                  </a>
                 </Link>
               )
             })}

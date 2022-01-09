@@ -125,10 +125,10 @@ export function PopularSolutionTags() {
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
-              <>
+              <a>
                 <div className="text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
-              </>
+              </a>
             </Link>
           </div>
         ))}
@@ -140,10 +140,10 @@ export function PopularSolutionTags() {
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
-              <>
+              <a>
                 <div className="text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
-              </>
+              </a>
             </Link>
           </div>
         ))}
