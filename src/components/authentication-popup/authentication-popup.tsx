@@ -98,14 +98,16 @@ function AuthenticationPopupComponent() {
                   >
                     Login with Google
                   </Button>
-                  <Link href="/signup">
-                    <Button
-                      buttonType="primary"
-                      iconPlacement="right"
-                      className="w-full !bg-[#fff] !text-[#3b82f6] !border-[#3b82f6] !flex mb-4"
-                    >
-                      Sign Up with Business Email
-                    </Button>
+                  <Link href="/signup" passHref>
+                    <a>
+                      <Button
+                        buttonType="primary"
+                        iconPlacement="right"
+                        className="w-full !bg-[#fff] !text-[#3b82f6] !border-[#3b82f6] !flex mb-4"
+                      >
+                        Sign Up with Business Email
+                      </Button>
+                    </a>
                   </Link>
                 </div>
               </div>

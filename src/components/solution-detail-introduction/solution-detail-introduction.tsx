@@ -138,12 +138,14 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             <div className="flex min-w-[7rem] self-start justify-end space-x-2">
               {introductionData.assets.slice(0, 3).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
             </div>
@@ -152,12 +154,14 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         <div className="self-start hidden md:flex min-w-[7rem] justify-end space-x-2">
           {introductionData.assets.slice(0, 3).map((asset, key) => (
             <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-              <ServiceLogo
-                serviceName={asset?.name}
-                serviceId={asset.id}
-                logoUrl={asset.logo_url}
-                className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-              />
+              <a>
+                <ServiceLogo
+                  serviceName={asset?.name}
+                  serviceId={asset.id}
+                  logoUrl={asset.logo_url}
+                  className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                />
+              </a>
             </Link>
           ))}
         </div>

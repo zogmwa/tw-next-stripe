@@ -61,7 +61,7 @@ export default function BreadcrumbComponent({
                 href={breadcrumb.url}
                 onClick={() => handleClick(breadcrumb.url)}
               >
-                {breadcrumb.name}
+                <a>{breadcrumb.name}</a>
               </Link>
             )
           }

@@ -12,16 +12,18 @@ export default function Solution() {
         <div className="flex flex-col space-y-2">
           {TopSolutionTags.map((tag) => (
             <Link href={`/solutions/${tag.slug}`} key={tag.slug} passHref>
-              <div
-                className="flex items-center px-4 py-2 space-x-2 border border-solid rounded-md cursor-pointer border-border-default"
-                key={tag.slug}
-              >
-                <span>
-                  {tag.name}
-                  {tag.description && ':'}
-                </span>
-                <span>{tag.description}</span>
-              </div>
+              <a>
+                <div
+                  className="flex items-center px-4 py-2 space-x-2 border border-solid rounded-md cursor-pointer border-border-default"
+                  key={tag.slug}
+                >
+                  <span>
+                    {tag.name}
+                    {tag.description && ':'}
+                  </span>
+                  <span>{tag.description}</span>
+                </div>
+              </a>
             </Link>
           ))}
         </div>
