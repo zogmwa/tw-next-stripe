@@ -9,6 +9,8 @@ export default {
 
 const contractsList = [
   {
+    id: 1,
+    rating: 1,
     solution: {
       id: 3,
       slug: 'no-price',
@@ -62,6 +64,8 @@ const contractsList = [
     provider_notes: '',
   },
   {
+    id: 2,
+    rating: -1,
     solution: {
       id: 3,
       slug: 'no-price',
@@ -115,6 +119,8 @@ const contractsList = [
     provider_notes: '',
   },
   {
+    id: 3,
+    rating: 0,
     solution: {
       id: 3,
       slug: 'no-price',
@@ -168,6 +174,8 @@ const contractsList = [
     provider_notes: '',
   },
   {
+    id: 0,
+    rating: null,
     solution: {
       id: 3,
       slug: 'no-price',

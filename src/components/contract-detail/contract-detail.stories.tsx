@@ -9,6 +9,8 @@ export default {
 
 const contractsList = [
   {
+    id: 1,
+    rating: 1,
     solution: {
       id: 3,
       slug: 'no-price',
