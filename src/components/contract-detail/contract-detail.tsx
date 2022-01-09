@@ -76,7 +76,9 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
       <div className="flex my-4 justify-between">
         <Link href={`/solution/${contractData.solution.slug}`} passHref>
           <a>
-            <h2 className="text-xl font-bold hover:underline cursor-pointer">{contractData.solution.title}</h2>
+            <h2 className="text-xl font-bold hover:underline cursor-pointer text-text-primary">
+              {contractData.solution.title}
+            </h2>
           </a>
         </Link>
         <div className="flex">
