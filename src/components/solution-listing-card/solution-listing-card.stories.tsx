@@ -31,6 +31,11 @@ const listingData = {
     name: 'Solution Provider Organization',
     logo_url: null,
   },
+  point_of_contact: {
+    username: 'sarthak',
+    first_name: 'Sarthak',
+    last_name: 'Agarwal',
+  },
   assets: [
     {
       id: 1,

@@ -19,6 +19,7 @@ type SolutionListingCardProps = {
     avg_rating?: string | number
     organization: { name: string; logo_url: string | null }
     type: string
+    point_of_contact: { username: string; first_name: string; last_name: string }
   }
   className?: string
 }
@@ -109,16 +110,32 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
         <div className="flex items-center pt-4 md:pt-0">
-          {listingData.organization?.logo_url ? (
-            <img
-              className="w-[40px] h-[40px] rounded-full"
-              src={listingData.organization.logo_url}
-              alt={listingData.organization.name}
-            />
+          {listingData.organization ? (
+            <>
+              {listingData.organization.logo_url ? (
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={listingData.organization.logo_url}
+                  alt={listingData.organization.name}
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+              )}
+              <span className="pl-2 text-sm text-text-secondary">{listingData.organization.name}</span>
+            </>
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+                style={{ boxShadow: 'none !important' }}
+              >
+                <p>{listingData.point_of_contact.first_name[0] + listingData.point_of_contact.last_name[0]}</p>
+              </div>
+              <span className="pl-2 text-sm text-text-secondary">
+                {listingData.point_of_contact.first_name} {listingData.point_of_contact.last_name}
+              </span>
+            </>
           )}
-          <span className="pl-2 text-sm text-text-secondary">{listingData.organization?.name}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
