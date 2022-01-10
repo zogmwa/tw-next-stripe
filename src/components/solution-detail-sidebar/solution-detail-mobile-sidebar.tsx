@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import { BiDollar } from 'react-icons/bi'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { toggleSolutionPurchase } from '@taggedweb/queries/solution'
+import { useUserContext } from '@taggedweb/hooks/use-user'
 import { Button } from '../button'
 
 type SolutionDetailMobileSidebarComponentProps = {
@@ -27,6 +29,8 @@ function SolutionDetailMobileSidebarComponent({
   className = '',
   setIsFreshChatShow,
 }: SolutionDetailMobileSidebarComponentProps) {
+  const router = useRouter()
+  const { pk } = useUserContext()
   const [isShowMore, setIsShowMore] = useState(false)
   const defaultShowCount = 2
   const [isPurchase, setIsPurchase] = useState(false)
@@ -34,7 +38,10 @@ function SolutionDetailMobileSidebarComponent({
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    const data = await toggleSolutionPurchase(detailInfo.pay_now_price.stripe_price_id)
+    let referralUserId = (router?.query?.r as string) ?? ''
+    // If referral user is same with logged in user, we should avoid this user.
+    if (referralUserId === String(pk)) referralUserId = ''
+    const data = await toggleSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }
