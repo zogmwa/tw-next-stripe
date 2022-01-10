@@ -10,6 +10,7 @@ import numeral from 'numeral'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '@taggedweb/types/contracts'
+import { SAD_FACE_RATING, NEUTRAL_FACE_RATING, HAPPY_FACE_RATING } from '@taggedweb/utils/constants'
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
 import { toggleUpdateSolutionBookingRating } from '../../queries/solution'
@@ -22,8 +23,6 @@ type ContractCardProps = {
 
 function ContractCardComponent({ contractData, className, redirectUrl }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
-
-  console.log('===============contractData:', contractData)
 
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')
@@ -43,7 +42,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
 
   const onChangeStatus = async (rating) => {
     setIsLoading(true)
-    if (rating) {
+    if (rating === SAD_FACE_RATING || rating === NEUTRAL_FACE_RATING || rating === HAPPY_FACE_RATING) {
       const solutionBookingData = await toggleUpdateSolutionBookingRating(contractData.id, rating)
       setBookingRating(solutionBookingData.rating)
       setAvgRating(solutionBookingData.solution.avg_rating)
