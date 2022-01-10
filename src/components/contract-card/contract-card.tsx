@@ -10,9 +10,10 @@ import numeral from 'numeral'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '@taggedweb/types/contracts'
+import { SAD_FACE_RATING, NEUTRAL_FACE_RATING, HAPPY_FACE_RATING } from '@taggedweb/utils/constants'
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
-import { toggleAddReviewSolution, toggleUpdateReviewSolution, toggleDeleteReviewSolution } from '../../queries/solution'
+import { toggleUpdateSolutionBookingRating } from '../../queries/solution'
 
 type ContractCardProps = {
   contractData: solutionContract
@@ -25,10 +26,9 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
 
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')
-  const [reviewType, setReviewType] = useState(contractData.solution.my_solution_review)
+  const [bookingRating, setBookingRating] = useState(contractData.rating)
   const [avgRating, setAvgRating] = useState(contractData.solution.avg_rating)
   const [isLoading, setIsLoading] = useState(false)
-  const [reviewId, setReviewId] = useState(contractData.solution.my_solution_review_id)
 
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -40,28 +40,12 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
     return sign * number + unitlist[unit]
   }
 
-  const onChangeStatus = async (type) => {
+  const onChangeStatus = async (rating) => {
     setIsLoading(true)
-    if (reviewType) {
-      if (reviewType !== type && reviewId !== 0) {
-        const solutionReviewData = await toggleUpdateReviewSolution(contractData.solution.id, type, reviewId)
-        setReviewId(solutionReviewData.id)
-        setReviewType(solutionReviewData.type)
-        setAvgRating(solutionReviewData.solution_avg_rating)
-      } else {
-        if (reviewId !== 0) {
-          const status = await toggleDeleteReviewSolution(reviewId)
-          if (status) {
-            setReviewId(0)
-            setReviewType('')
-          }
-        }
-      }
-    } else {
-      const solutionReviewData = await toggleAddReviewSolution(contractData.solution.id, type)
-      setReviewId(solutionReviewData.id)
-      setReviewType(solutionReviewData.type)
-      setAvgRating(solutionReviewData.solution_avg_rating)
+    if (rating === SAD_FACE_RATING || rating === NEUTRAL_FACE_RATING || rating === HAPPY_FACE_RATING) {
+      const solutionBookingData = await toggleUpdateSolutionBookingRating(contractData.id, rating)
+      setBookingRating(solutionBookingData.rating)
+      setAvgRating(solutionBookingData.solution.avg_rating)
     }
     setIsLoading(false)
   }
@@ -164,7 +148,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
           </div>
           <ReviewReaction
             avgRating={avgRating}
-            statusType={reviewType}
+            statusType={bookingRating}
             className="self-end hidden md:flex"
             popupClassName="space-x-2"
             onChangeStatus={(type) => onChangeStatus(type)}
@@ -222,7 +206,7 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
             </h4>
             <ReviewReaction
               avgRating={avgRating}
-              statusType={reviewType}
+              statusType={bookingRating}
               className="self-end md:hidden flex !ml-4"
               popupClassName="space-x-2"
               onChangeStatus={(type) => onChangeStatus(type)}

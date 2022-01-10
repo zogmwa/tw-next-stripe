@@ -1,7 +1,7 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import * as Sentry from '@sentry/nextjs'
-
+import { solutionContract } from '@taggedweb/types/contracts'
 export async function fetchSolutionDetail(solutionSlug) {
   try {
     const { data } = await axios.get(`/api/solutions/detail/${solutionSlug}`)
@@ -142,6 +142,22 @@ export async function toggleDeleteReviewSolution(solutionReviewId: number): Prom
     Sentry.captureException(error)
     // eslint-disable-next-line
     toast.error('Failed to canceling review solution.')
+    return null
+  }
+}
+
+export async function toggleUpdateSolutionBookingRating(
+  solutionBookingId: number,
+  rating: number | '',
+): Promise<solutionContract | null> {
+  try {
+    const { data } = await axios.patch(`/api/solution_bookings/${solutionBookingId}`, { rating: rating })
+
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // eslint-disable-next-line
+    toast.error(`Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`)
     return null
   }
 }

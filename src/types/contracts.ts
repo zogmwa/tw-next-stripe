@@ -1,4 +1,6 @@
 export type solutionContract = {
+  id: number
+  rating: number | null
   solution: {
     id: number
     assets: any[]
