@@ -157,7 +157,7 @@ export async function toggleUpdateSolutionBookingRating(
   } catch (error) {
     Sentry.captureException(error)
     // eslint-disable-next-line
-    toast.error('Could not update solution booking review.')
+    toast.error(`Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`)
     return null
   }
 }
