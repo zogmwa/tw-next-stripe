@@ -67,13 +67,13 @@ export function NavBar({ className, style }: NavBarProps) {
             ) : (
               <>
                 <div className="hidden md:flex md:mr-4">
-                  <Link href={`/login?next=${router.asPath}`}>
+                  <Link href={`/login?next=${router.asPath}`} passHref>
                     <a>
                       <div className="">Log In</div>
                     </a>
                   </Link>
                 </div>
-                <Link href={'/signup'}>
+                <Link href={'/signup'} passHref>
                   <a>
                     <Button buttonType="primary">Get Started</Button>
                   </a>
@@ -180,13 +180,13 @@ export function NavBar({ className, style }: NavBarProps) {
               </>
             ) : (
               <>
-                <Link href={'/signup'}>
+                <Link href={'/signup'} passHref>
                   <a>
                     <Button buttonType="primary">Get Started</Button>
                   </a>
                 </Link>
                 <div className="mt-2">
-                  <Link href={`/login?next=${router.asPath}`}>
+                  <Link href={`/login?next=${router.asPath}`} passHref>
                     <a>
                       <div className="">Log In</div>
                     </a>
