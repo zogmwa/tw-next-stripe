@@ -65,11 +65,20 @@ export function NavBar({ className, style }: NavBarProps) {
                 <Avatar />
               </>
             ) : (
-              <Link href={`/login?next=${router.asPath}`}>
-                <a>
-                  <Button buttonType="primary">Get Started</Button>
-                </a>
-              </Link>
+              <>
+                <div className="hidden md:flex md:mr-4">
+                  <Link href={`/login?next=${router.asPath}`}>
+                    <a>
+                      <div className="">Log In</div>
+                    </a>
+                  </Link>
+                </div>
+                <Link href={'/signup'}>
+                  <a>
+                    <Button buttonType="primary">Get Started</Button>
+                  </a>
+                </Link>
+              </>
             )}
           </div>
         </div>
@@ -102,11 +111,9 @@ export function NavBar({ className, style }: NavBarProps) {
                     <Avatar />
                   </>
                 ) : (
-                  <Link href={`/login?next=${router.asPath}`}>
+                  <Link href={'/signup'}>
                     <a>
-                      <Button className="mr-2" buttonType="primary">
-                        Get Started
-                      </Button>
+                      <Button buttonType="primary">Get Started</Button>
                     </a>
                   </Link>
                 )}
@@ -172,9 +179,20 @@ export function NavBar({ className, style }: NavBarProps) {
                 </Link>
               </>
             ) : (
-              <Link href={`/login?next=${router.asPath}`}>
-                <a className="w-full py-2 text-center text-white bg-primary">Get Started</a>
-              </Link>
+              <>
+                <Link href={'/signup'}>
+                  <a>
+                    <Button buttonType="primary">Get Started</Button>
+                  </a>
+                </Link>
+                <div className="mt-2">
+                  <Link href={`/login?next=${router.asPath}`}>
+                    <a>
+                      <div className="">Log In</div>
+                    </a>
+                  </Link>
+                </div>
+              </>
             )}
           </div>
         </div>
