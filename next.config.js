@@ -10,6 +10,7 @@ const nextConfig = {
 
     // Frontend Site URL (For prod this should be https://www.taggedweb.com)
     SITE_BASE_URL: process.env.SITE_BASE_URL,
+    TAGGEDWEB_SUPPORT_EMAIL: process.env.TAGGEDWEB_SUPPORT_EMAIL,
 
     ACCESS_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-access-token',
     REFRESH_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-refresh-token',
