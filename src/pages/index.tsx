@@ -118,8 +118,8 @@ export default function Home({ search_software = 0 }: HomeProps) {
               />
             </div>
             <div className="z-10 flex flex-col items-start justify-center w-full pt-4 md:pt-0 md:w-1/2">
-              <div className="text-2xl font-bold text-white">Are you a solution provider or a creator?</div>
-              <div className="mb-8 text-lg font-medium text-white">Better connect with solution customers</div>
+              <div className="text-2xl font-bold text-white">Are you a software services or solutions provider?</div>
+              <div className="mb-8 text-lg font-medium text-white">Better connect with your customers</div>
               <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`} passHref>
                 <a target="_blank" rel="noreferrer">
                   <Button buttonType="homePage" className="mb-4">
