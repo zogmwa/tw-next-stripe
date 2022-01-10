@@ -66,7 +66,7 @@ export default function LinkTagsBar({ onChange }) {
       components={{ DropdownIndicator: () => null }}
       className="flex-1 mb-2 md:mb-0"
       classNamePrefix="select"
-      instanceId
+      instanceId="AssetTag"
       name="add-tag"
       menuPortalTarget={document.body}
       styles={{

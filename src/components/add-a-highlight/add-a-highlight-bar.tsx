@@ -35,7 +35,7 @@ export default function AddAHighlightBar({ onChange }) {
       components={{ DropdownIndicator: () => null }}
       className="flex-1 mb-2 md:mb-0"
       classNamePrefix="select"
-      instanceId
+      instanceId="AddAHighlight"
       name="add-highlight"
     />
   )

@@ -50,8 +50,8 @@ export default function LinkUsedByCompaniesBar({ onChange }) {
       components={{ DropdownIndicator: () => null }}
       className="flex-1 mb-2 md:mb-0"
       classNamePrefix="select"
-      instanceId
-      name="add-organiztion"
+      instanceId="AddOrganization"
+      name="add-organization"
       menuPortalTarget={document.body}
       styles={{
         // Fixes the overlapping problem of the component

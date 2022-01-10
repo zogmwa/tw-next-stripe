@@ -159,7 +159,7 @@ export function DefaultServiceReviewCard() {
         questions: [
           {
             id: 1,
-            solution: 1,
+            solution_id: 1,
             title: 'Test question 1.',
             primary_answer:
               'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.',
@@ -168,7 +168,7 @@ export function DefaultServiceReviewCard() {
           },
           {
             id: 2,
-            solution: 1,
+            solution_id: 1,
             title: 'Test question 2.',
             primary_answer:
               'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
@@ -177,7 +177,7 @@ export function DefaultServiceReviewCard() {
           },
           {
             id: 3,
-            solution: 1,
+            solution_id: 1,
             title: 'This is another one.',
             primary_answer:
               'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',

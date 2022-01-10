@@ -165,7 +165,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
           onChange={handleChange}
           loadOptions={searchSuggestions}
-          instanceId
+          instanceId="selectTags"
           className="flex-1 mb-2 sm:mb-0"
           classNamePrefix="select"
           placeholder={placeholder}
@@ -176,7 +176,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
           loadOptions={solutionSuggestions}
-          instanceId
+          instanceId="selectSolutions"
           className="flex-1 mb-2 sm:mb-0"
           classNamePrefix="select"
           placeholder={placeholder}

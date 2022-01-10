@@ -95,7 +95,7 @@ export function SearchQuestionBar({
         components={{ DropdownIndicator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
-        instanceId
+        instanceId="AddQuestions"
         className="flex-1 mb-2 md:mb-0"
         classNamePrefix="select"
         placeholder={placeholder}

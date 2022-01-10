@@ -8,9 +8,9 @@ import { Button } from '../button'
 import { Spinner } from '../spinner'
 
 type ReviewReactionProps = {
-  avgRating: number
+  avgRating: string | number
   onChangeStatus: Function
-  statusType: number | null
+  statusType?: number | string | null
   className?: string
   popupClassName?: string
   emojiClassName?: string

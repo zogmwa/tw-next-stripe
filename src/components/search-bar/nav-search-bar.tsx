@@ -98,7 +98,7 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
-        instanceId
+        instanceId="SelectTag"
         className="flex-1 mb-2 md:mb-0"
         classNamePrefix="select"
         placeholder={placeholderComponent}
