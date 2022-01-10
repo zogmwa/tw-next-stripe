@@ -54,6 +54,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   const [filtering, setFiltering] = useState('')
   const [minPriceFilter, setMinPriceFilter] = useState('')
   const [maxPriceFilter, setMaxPriceFilter] = useState('')
+  const [showClearFilter, setShowClearFilter] = useState(false)
 
   const suggestionTags = []
   for (let i = 0; i < solutionData.results.length; i++) {
@@ -127,6 +128,20 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
 
     fetchSolutionList(sendUrl)
   }
+
+  const clearAllPriceFilter = () => {
+    setMinPriceFilter('')
+    setMaxPriceFilter('')
+    setFiltering('')
+    if (minPriceFilter || maxPriceFilter || filtering) {
+      const offset = (page - 1) * pageLen
+      const sendUrl =
+        `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` + (ordering ? `&ordering=${ordering}` : '')
+      fetchSolutionList(sendUrl)
+    }
+    setShowClearFilter(false)
+  }
+
   const [error, setError] = useState('')
   useEffect(() => {
     if (solutionList.length === 0) {
@@ -138,6 +153,14 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     }
   }, [solutionList])
 
+  useEffect(() => {
+    if (minPriceFilter || maxPriceFilter || filtering === 'true') {
+      setShowClearFilter(true)
+    } else {
+      setShowClearFilter(false)
+    }
+  }, [minPriceFilter, maxPriceFilter, filtering])
+
   return (
     <>
       <DynamicHeader />
@@ -147,7 +170,13 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
             <SortServiceList onChange={orderingSolution} />{' '}
           </div>
           <div className="border rounded">
-            <FilterServiceList onChange={filterSolution} filterByPrice={filterByPrice} label="Consultation" />
+            <FilterServiceList
+              onChange={filterSolution}
+              filterByPrice={filterByPrice}
+              showClearFilter={showClearFilter}
+              clearAllPriceFilter={clearAllPriceFilter}
+              label="Consultation"
+            />
           </div>
         </div>
         <div className="flex flex-col justify-between w-full p-2 md:w-3/4 md:ml-3">
@@ -155,9 +184,11 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
           <div className="flex items-center justify-between md:hidden">
             <h1 className="text-xl font-bold text-black">All &#8220;{pageTitle}&#8221; Solutions</h1>
             <MobileViewSortAndFilterServiceList
-              filterByPrice={filterByPrice}
               onSortChange={orderingSolution}
               onFilterChange={filterSolution}
+              filterByPrice={filterByPrice}
+              showClearFilter={showClearFilter}
+              clearAllPriceFilter={clearAllPriceFilter}
               filterLabel="Consultation"
             />
           </div>
