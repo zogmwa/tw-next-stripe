@@ -39,8 +39,6 @@ function SolutionDetailMobileSidebarComponent({
   const togglePurchase = async () => {
     setIsPurchase(true)
     let referralUserId = (router?.query?.r as string) ?? ''
-    // If referral user is same with logged in user, we should avoid this user.
-    if (referralUserId === String(pk)) referralUserId = ''
     const data = await toggleSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
