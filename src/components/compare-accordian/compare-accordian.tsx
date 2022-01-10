@@ -66,7 +66,7 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
                     <div key={index} className="flex items-start justify-start w-full py-2 space-x-4">
                       <div className="font-semibold">{index + 1}.</div>
                       <div className="flex flex-row items-start justify-start flex-1 space-x-2">
-                        <img src={service.logo_url} alt="logo" width="30" className="rounded" />
+                        <img src={service.logo_url} alt="Software Logo" width="30" className="rounded" />
                         <div className="text-base font-medium">{service.name}</div>
                       </div>
                       <div

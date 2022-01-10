@@ -38,9 +38,11 @@ function ReviewReactionComponent({
         <div className={className}>
           <Button className="!border-0 !p-0" {...bindTrigger(popupState)}>
             <>
-              {avgRating > 0 && <img src="/images/happy.png" alt="happy" className="w-8 h-8" />}
-              {avgRating === 0 && <img src="/images/neutral.png" alt="neutral" className="w-8 h-8" />}
-              {avgRating < 0 && <img src="/images/sad.png" alt="sad" className="w-8 h-8" />}
+              {avgRating > 0 && <img src="/images/happy.png" alt="Happy With Solution Service" className="w-8 h-8" />}
+              {avgRating === 0 && (
+                <img src="/images/neutral.png" alt="Neutral With Solution Service" className="w-8 h-8" />
+              )}
+              {avgRating < 0 && <img src="/images/sad.png" alt="Sad With Solution Service" className="w-8 h-8" />}
             </>
           </Button>
           <Popover
@@ -62,7 +64,7 @@ function ReviewReactionComponent({
                   ) : (
                     <img
                       src="/images/sad.png"
-                      alt="sad"
+                      alt="Sad With Solution Service"
                       onClick={() => {
                         if (!isLoading) {
                           setClickedStatus(SAD_FACE_RATING)
@@ -82,7 +84,7 @@ function ReviewReactionComponent({
                   ) : (
                     <img
                       src="/images/neutral.png"
-                      alt="neutral"
+                      alt="Neutral With Solution Service"
                       onClick={() => {
                         if (!isLoading) {
                           setClickedStatus(NEUTRAL_FACE_RATING)
@@ -102,7 +104,7 @@ function ReviewReactionComponent({
                   ) : (
                     <img
                       src="/images/happy.png"
-                      alt="happy"
+                      alt="Happy With Solution Service"
                       onClick={() => {
                         if (!isLoading) {
                           setClickedStatus(HAPPY_FACE_RATING)

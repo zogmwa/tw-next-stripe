@@ -70,7 +70,7 @@ export default function BreadcrumbComponent({
       {copyUrl && (
         <div className="relative">
           <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
-            <img alt="copy-link" src="/images/copy-link.png" className="w-4 h-4 cursor-pointer" />
+            <img alt="Copy Solutions Link" src="/images/copy-link.png" className="w-4 h-4 cursor-pointer" />
           </CopyToClipboard>
           {isCopied ? <span className="absolute text-xs text-blue-600 -top-4 -right-2">Copied.</span> : null}
         </div>

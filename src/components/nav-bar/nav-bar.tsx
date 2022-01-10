@@ -39,7 +39,7 @@ export function NavBar({ className, style }: NavBarProps) {
           <div className="flex items-center">
             <Link href="/">
               <a>
-                <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+                <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10 cursor-pointer" />
               </a>
             </Link>
             <Link href="/">
@@ -94,7 +94,7 @@ export function NavBar({ className, style }: NavBarProps) {
               <div className="flex items-center">
                 <Link href="/">
                   <a>
-                    <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10 cursor-pointer" />
+                    <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10 cursor-pointer" />
                   </a>
                 </Link>
                 <Link href="/">

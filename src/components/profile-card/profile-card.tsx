@@ -16,7 +16,7 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             width={72}
             height={72}
             src={data.avatar ?? 'https://taggedweb.s3.amazonaws.com/static/images/avatars/default_person.png'}
-            alt="Profile Image"
+            alt="User Profile Image"
             className="object-cover h-[72px] w-[72px] rounded-md bg-secondary"
           />
         </div>

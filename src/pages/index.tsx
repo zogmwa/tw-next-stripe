@@ -28,27 +28,27 @@ export default function Home({ search_software = 0 }: HomeProps) {
       <div className="relative flex justify-between bg-blue-600">
         <img
           src="/images/homepage_shapes.png"
-          alt="Solution Shapes"
+          alt="Technology Solution Shapes"
           className="absolute z-0 hidden max-w-4xl md:top-0 lg:top-12 lg:left-30 lg:flex"
         />
         <img
           src="/images/homepage_icon1.png"
-          alt="Software SaaS Logo 1"
+          alt="Software SaaS Software Logo 1"
           className="absolute z-10 hidden w-24 lg:flex lg:top-64 xl:top-72 lg:right-60"
         />
         <img
           src="/images/homepage_icon2.png"
-          alt="Software SaaS Logo 2"
+          alt="Software SaaS Software Logo 2"
           className="absolute z-10 hidden w-20 lg:flex top-56 right-28"
         />
         <img
           src="/images/homepage_icon3.png"
-          alt="Software SaaS Logo 3"
+          alt="Software SaaS Software Logo 3"
           className="absolute z-10 hidden w-16 lg:flex top-28 right-44"
         />
         <img
           src="/images/homepage_icon4.png"
-          alt="Software SaaS Logo 4"
+          alt="Software SaaS Software Logo 4"
           className="absolute z-10 hidden w-12 lg:flex top-48 right-64"
         />
         <div className="flex items-center justify-center flex-1 2xl:justify-end ">
@@ -81,7 +81,7 @@ export default function Home({ search_software = 0 }: HomeProps) {
           </div>
         </div>
         <div className="z-0 justify-end hidden w-1/3 lg:flex">
-          <img src="/images/homepage_circle.png" alt="circle" className="w-full" />
+          <img src="/images/homepage_circle.png" alt="Solution Landing Page Image" className="w-full" />
         </div>
       </div>
       <div className="bg-blue-300">
@@ -100,7 +100,7 @@ export default function Home({ search_software = 0 }: HomeProps) {
       <div className="relative bg-gray-700 rounded-lg">
         <img
           src="/images/homepage_shapes.png"
-          alt="Solution Shapes"
+          alt="Find Technology Solution And Softwares"
           className="absolute z-10 hidden max-w-2xl md:top-0 lg:top-12 lg:right-44 lg:flex"
         />
         <div className="max-w-screen-lg px-2 mx-auto">
@@ -108,12 +108,12 @@ export default function Home({ search_software = 0 }: HomeProps) {
             <div className="relative hidden w-full md:flex h-80 md:w-1/2 md:mr-8">
               <img
                 src="/images/sol_provider.png"
-                alt="sol_provider"
+                alt="Solution Provider"
                 className="absolute z-0 w-3/4 transform rounded shadow bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
-                alt="finding_sol_1"
+                alt="Find Solution"
                 className="absolute bottom-0 z-0 w-3/4 transform rounded shadow right-8 skew-pic"
               />
             </div>
@@ -131,12 +131,12 @@ export default function Home({ search_software = 0 }: HomeProps) {
             <div className="relative w-full h-64 md:hidden md:w-1/2 md:mr-8 md:mt-2">
               <img
                 src="/images/sol_provider.png"
-                alt="sol_provider"
+                alt="Solution Provider"
                 className="absolute w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 bottom-8 right-20 skew-pic"
               />
               <img
                 src="/images/finding_sol_1.png"
-                alt="finding_sol_1"
+                alt="Find Solution"
                 className="absolute bottom-0 w-2/3 transform rounded shadow sm:w-7/12 md:w-3/4 right-8 skew-pic"
               />
             </div>
