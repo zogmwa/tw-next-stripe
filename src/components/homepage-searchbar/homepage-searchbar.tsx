@@ -54,6 +54,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
                   : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
               )
             }
+            title="Useful if you are looking for consultations, software integration support or related services"
           >
             Find Solutions
           </Tab>
@@ -67,6 +68,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
                   : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
               )
             }
+            title="Useful if you are finding software, SaaS options"
           >
             Find Software
           </Tab>
