@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Popover from '@mui/material/Popover'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import Typography from '@mui/material/Typography'
+import { SAD_FACE_RATING, NEUTRAL_FACE_RATING, HAPPY_FACE_RATING } from '@taggedweb/utils/constants'
 import { Button } from '../button'
 import { Spinner } from '../spinner'
 
@@ -56,7 +57,7 @@ function ReviewReactionComponent({
             <Typography sx={{ paddingY: '0.5rem', paddingX: '1rem' }}>
               <div className={clsx('flex ', popupClassName)}>
                 <div className={clsx(emojiClassName)}>
-                  {isLoading && clickedStatus === -1 ? (
+                  {isLoading && clickedStatus === SAD_FACE_RATING ? (
                     <Spinner className="!w-8 !h-8" />
                   ) : (
                     <img
@@ -64,19 +65,19 @@ function ReviewReactionComponent({
                       alt="sad"
                       onClick={() => {
                         if (!isLoading) {
-                          setClickedStatus(-1)
-                          onChangeStatus(-1)
+                          setClickedStatus(SAD_FACE_RATING)
+                          onChangeStatus(SAD_FACE_RATING)
                         }
                       }}
                       className={clsx(
-                        statusType !== -1 ? 'opacity-20 ' : null,
+                        statusType !== SAD_FACE_RATING ? 'opacity-20 ' : null,
                         'hover:opacity-70 cursor-pointer w-8 h-8',
                       )}
                     />
                   )}
                 </div>
                 <div className={clsx(emojiClassName)}>
-                  {isLoading && clickedStatus === 0 ? (
+                  {isLoading && clickedStatus === NEUTRAL_FACE_RATING ? (
                     <Spinner className="!w-8 !h-8" />
                   ) : (
                     <img
@@ -84,19 +85,19 @@ function ReviewReactionComponent({
                       alt="neutral"
                       onClick={() => {
                         if (!isLoading) {
-                          setClickedStatus(0)
-                          onChangeStatus(0)
+                          setClickedStatus(NEUTRAL_FACE_RATING)
+                          onChangeStatus(NEUTRAL_FACE_RATING)
                         }
                       }}
                       className={clsx(
-                        statusType !== 0 ? 'opacity-20 ' : null,
+                        statusType !== NEUTRAL_FACE_RATING ? 'opacity-20 ' : null,
                         'hover:opacity-70 cursor-pointer w-8 h-8',
                       )}
                     />
                   )}
                 </div>
                 <div className={clsx(emojiClassName)}>
-                  {isLoading && clickedStatus === 1 ? (
+                  {isLoading && clickedStatus === HAPPY_FACE_RATING ? (
                     <Spinner className="!w-8 !h-8" />
                   ) : (
                     <img
@@ -104,12 +105,12 @@ function ReviewReactionComponent({
                       alt="happy"
                       onClick={() => {
                         if (!isLoading) {
-                          setClickedStatus(1)
-                          onChangeStatus(1)
+                          setClickedStatus(HAPPY_FACE_RATING)
+                          onChangeStatus(HAPPY_FACE_RATING)
                         }
                       }}
                       className={clsx(
-                        statusType !== 1 ? 'opacity-20 ' : null,
+                        statusType !== HAPPY_FACE_RATING ? 'opacity-20 ' : null,
                         'hover:opacity-70 cursor-pointer w-8 h-8',
                       )}
                     />
