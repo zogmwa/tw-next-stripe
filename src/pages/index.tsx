@@ -1,5 +1,5 @@
 import React from 'react'
-import Typical from 'react-typical'
+import Typewriter from 'typewriter-effect'
 import { PopularSolutionTags } from '@taggedweb/components/homepage-popular-solutions'
 import { FindingSolutions } from '@taggedweb/components/homepage-finding-solutions'
 import { Button } from '@taggedweb/components/button'
@@ -57,19 +57,17 @@ export default function Home({ search_software = 0 }: HomeProps) {
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking to&#160;</h1>
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
                 <>
-                  <Typical
-                    steps={[
-                      'Integrate a SaaS into your stack?',
-                      400,
-                      'Improve application performance?',
-                      400,
-                      'Reduce AWS bills?',
-                      400,
-                      'Find best-fit software for your needs?',
-                      400,
-                    ]}
-                    wrapper="p"
-                    loop={Infinity}
+                  <Typewriter
+                    options={{
+                      strings: [
+                        'Integrate a SaaS into your stack?',
+                        'Improve application performance?',
+                        'Reduce AWS bills?',
+                        'Find best-fit software for your needs?',
+                      ],
+                      autoStart: true,
+                      loop: true,
+                    }}
                   />
                 </>
               </h1>
