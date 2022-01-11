@@ -26,8 +26,8 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
     content: topSolutionTags.slice(0, solutionTagsDefaultShowCount),
   }
   const showSaasTags = { title: 'TOP SOFTWARE TAGS', content: topSaasTags.slice(0, saasTagsDefaultShowCount) }
-  const companies = {
-    title: 'COMPANY',
+  const resources = {
+    title: 'RESOURCES',
     content: [
       { name: 'About', slug: 'about' },
       { name: 'Blog', slug: 'blog' },
@@ -41,7 +41,7 @@ export function FooterComponent({ topSaasTags = [], topSolutionTags = [] }: Foot
       <div className="flex flex-col items-start w-full p-1 mx-auto md:grid md:grid-cols-4 md:space-y-0 md:items-start md:px-4">
         <FooterSubComponent service={showSolutionTags} type="solutions" />
         <FooterSubComponent service={showSaasTags} type="softwares" />
-        <FooterSubComponent service={companies} type="compaines" />
+        <FooterSubComponent service={resources} type="resources" />
         <LanguageComponent languages={languages} />
       </div>
       <SubscribeComponent />
@@ -61,7 +61,7 @@ export function FooterSubComponent({ service, type }) {
       <div key={service} className="flex-col items-center hidden space-y-2 text-sm md:flex md:items-start">
         <h2 className="px-3 mb-4 font-bold text-gray-400">{service.title}</h2>
         {service.content.map((tag) => {
-          if (type !== 'compaines') {
+          if (type !== 'resources') {
             return (
               <Link href={`/${type}/${tag.slug}`} prefetch={false} key={tag.slug}>
                 <a>
