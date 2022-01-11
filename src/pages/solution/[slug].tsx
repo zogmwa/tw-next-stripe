@@ -40,7 +40,7 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name: solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other',
+      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
       url: '#',
       is_selected: false,
     },
@@ -112,7 +112,7 @@ export default function SolutionDetail({ solutionDetail }) {
     slug: solutionDetail.slug,
     assets: solutionDetail.assets,
     tag: {
-      name: solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other',
+      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
       slug: slugify(solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other').toLowerCase(),
     },
     title: solutionDetail.title,
