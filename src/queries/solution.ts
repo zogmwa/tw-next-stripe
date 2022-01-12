@@ -57,9 +57,12 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
   }
 }
 
-export async function toggleSolutionPurchase(solutionPriceId: number | string): Promise<any | null> {
+export async function checkoutSolutionPurchase(
+  solutionPriceId: number | string,
+  referralUserId: number | string,
+): Promise<any | null> {
   try {
-    const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}`, {})
+    const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}?r=${referralUserId}`, {})
     return data
   } catch (error) {
     Sentry.captureException(error)
