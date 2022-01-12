@@ -67,6 +67,7 @@ export default function Home({ search_software = 0 }: HomeProps) {
                       ],
                       autoStart: true,
                       loop: true,
+                      delay: 1,
                     }}
                   />
                 </>
