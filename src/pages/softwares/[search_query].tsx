@@ -263,10 +263,11 @@ export default function ServiceList({
               )}
             </div>
           </div>
-
-          <div className="flex justify-end">
-            <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
-          </div>
+          {!error && (
+            <div className="flex justify-end">
+              <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
+            </div>
+          )}
         </>
       </div>
     </>
