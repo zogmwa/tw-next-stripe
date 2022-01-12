@@ -23,7 +23,6 @@ type ContractCardProps = {
 
 function ContractCardComponent({ contractData, className, redirectUrl }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
-
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')
   const [bookingRating, setBookingRating] = useState(contractData.rating)
