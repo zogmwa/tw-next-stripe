@@ -1,7 +1,8 @@
 import { Session } from 'next-iron-session'
+import * as Sentry from '@sentry/nextjs'
 
 import { client } from './client'
-// import { AccessTokenError } from './error'
+
 function atob(b64Encoded) {
   return Buffer.from(b64Encoded, 'base64').toString()
 }
@@ -41,16 +42,15 @@ export const setSessionTokens = async (session: Session, { access, refresh }): P
 }
 
 /**
- * This will return the acces token from the session after validating. If access token cannot be fetched then it will logout the user silently.
+ * This will return the acces token from the session after validating if user is logged in. If access token cannot be fetched then it will logout the user silently.
  *
  * @param session
  * @returns access_token
  */
 export const getAccessToken = async (session: Session): Promise<string | void> => {
   try {
-    if (!session) {
-      throw new Error('Session not available')
-    }
+    const user = session.get('user')
+    if (!user) return null
 
     const { access, refresh, accessExp, refreshExp } = session.get('token') ?? {}
     if (!access && !refresh) {
@@ -74,12 +74,12 @@ export const getAccessToken = async (session: Session): Promise<string | void> =
       await setSessionTokens(session, { access: newAccess, refresh })
     }
   } catch (error) {
-    // Sentry.captureException(error)
+    Sentry.captureException(error)
     // eslint-disable-next-line
     session.unset('user')
     session.unset('token')
     await session.save()
   }
 
-  return session?.get('token')?.access
+  return session?.get('token')?.access || null
 }
