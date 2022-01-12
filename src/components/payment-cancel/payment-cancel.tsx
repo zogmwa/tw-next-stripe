@@ -18,13 +18,15 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
 
   return (
     <div className={clsx('flex flex-col items-center', className)}>
-      <img src="/images/danger.png" alt="cancel-image" className="w-32 h-32" />
+      <img src="/images/danger.png" alt="Cancel-Image" className="w-32 h-32" />
       <h4 className="my-4 text-3xl font-bold text-text-primary">Canceling</h4>
       <div className="text-lg text-text-tertiary">Do you want to stop booking this solution?</div>
       <Link href={'/?search_software=0'} passHref>
-        <Button className="mt-6 bg-primary" textClassName="!text-white">
-          Find other solutions.
-        </Button>
+        <a>
+          <Button className="mt-6 bg-primary" textClassName="!text-white">
+            Find other solutions.
+          </Button>
+        </a>
       </Link>
       <Link href={url} passHref>
         <Button className="!border-0 mt-2">No, continue with this solution.</Button>

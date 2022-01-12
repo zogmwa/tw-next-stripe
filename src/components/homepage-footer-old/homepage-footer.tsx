@@ -62,13 +62,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="pt-2 font-semibold text-md">We are here to help</h2>
             <div className="flex items-center mt-4 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
-              <img src="/images/contact-email.png" alt="contact" />
+              <img src="/images/contact-email.png" alt=" Taggedweb Contact" />
             </div>
           </div>
         </div>
         <div className="justify-between hidden p-2 md:flex others">
           <div className="flex items-center">
-            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10" />
+            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10" />
             <Link href="/">
               <a>
                 <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
@@ -157,13 +157,13 @@ function HomePageFooterComponent({ topTags }: footerData) {
             <h2 className="font-semibold text-md">We&apos;re here to help you</h2>
             <div className="flex items-center mt-2 email">
               <MdOutlineEmail className="p-0.5 text-2xl text-gray-100 bg-gray-900 rounded-full justify-self-start" />
-              <img src="/images/contact-email.png" alt="contact" />
+              <img src="/images/contact-email.png" alt="Taggedweb Contact" />
             </div>
           </div>
         </div>
         <div className="flex flex-col justify-between p-2 md:hidden others">
           <div className="flex items-center">
-            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb" className="w-10 h-10" />
+            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10" />
             <Link href="/">
               <a>
                 <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">

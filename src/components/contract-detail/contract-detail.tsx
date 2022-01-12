@@ -13,6 +13,7 @@ import { SolutionFAQ } from '../solution-detail-introduction'
 Lowlight.registerLanguage('js', javascript)
 
 const renderer = {
+  // eslint-disable-next-line react/display-name
   code: (snippet, lang) => {
     return <Lowlight language={lang} value={snippet} />
   },
@@ -73,9 +74,13 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           }
         })}
       </Breadcrumbs>
-      <div className="flex my-4 justify-between">
+      <div className="flex justify-between my-4">
         <Link href={`/solution/${contractData.solution.slug}`} passHref>
-          <h2 className="text-xl font-bold hover:underline cursor-pointer">{contractData.solution.title}</h2>
+          <a>
+            <h2 className="text-xl font-bold cursor-pointer hover:underline text-text-primary">
+              {contractData.solution.title}
+            </h2>
+          </a>
         </Link>
         <div className="flex">
           <BiDollar className="text-2xl font-bold text-text-primary mt-0.5" />

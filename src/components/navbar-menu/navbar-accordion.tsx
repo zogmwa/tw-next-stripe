@@ -40,7 +40,7 @@ export function NavAccordion({
         </div>
         <AccordionDetails>
           {dropdownData.map((item) => {
-            if (pathName !== 'compaines') {
+            if (pathName !== 'resources') {
               return (
                 <Link href={`/${pathName}/${item.slug}`} key={item.name}>
                   <a>
@@ -59,7 +59,7 @@ export function NavAccordion({
                 <Link href="https://angel.co/company/taggedweb/jobs" key={item.name}>
                   <a target="_blank" rel="noopener noreferrer">
                     <div
-                      className={` ${
+                      className={`${isNavbar && 'py-2 hover:bg-gray-200'}  ${
                         isFooter && 'text-sm font-sans py-2 text-gray-800 hover:underline cursor-pointer'
                       }`}
                     >

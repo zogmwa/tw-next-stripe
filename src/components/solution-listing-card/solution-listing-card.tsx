@@ -4,6 +4,7 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import { SolutionTypes } from '@taggedweb/types/solution'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
 
@@ -23,28 +24,12 @@ type SolutionListingCardProps = {
   }
   className?: string
 }
-const SolutionTypes = [
-  {
-    slug: 'I',
-    value: 'INTEGRATION',
-  },
-  {
-    slug: 'C',
-    value: 'CONSULTATION',
-  },
-  {
-    slug: 'U',
-    value: 'USAGE SUPPORT',
-  },
-  {
-    slug: 'O',
-    value: 'OTHER',
-  },
-]
-const SolutionTypesMap = new Map()
-SolutionTypes.forEach((type) => {
-  SolutionTypesMap.set(type.slug, type.value)
-})
+const SolutionTypesMap = new Map<string, string>()
+const solutionTypeKeys = Object.keys(SolutionTypes)
+// eslint-disable-next-line prefer-const
+for (let type in solutionTypeKeys) {
+  SolutionTypesMap.set(type, SolutionTypes[type])
+}
 
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const router = useRouter()
@@ -157,12 +142,14 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             {listingData.assets &&
               listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
           </div>

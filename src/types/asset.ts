@@ -3,6 +3,7 @@ import { Plan } from './price-plan'
 import { ServiceQuestion } from './service-question'
 import { CustomerOrganization } from './customer_organization'
 import { AttributeType } from './attribute'
+import { Solution } from './solution'
 
 export type Asset = {
   slug?: string
@@ -11,8 +12,8 @@ export type Asset = {
   logo?: string
   website?: string
   affiliate_link?: string
-  description: string
-  tags: Tag[]
+  description?: string
+  tags?: Tag[]
   short_description?: string
   tweb_url?: string
   promo_video?: string
@@ -33,7 +34,7 @@ export type Asset = {
   is_owned?: boolean
   edit_allowed?: boolean
   trial_days?: number | null
-  solutions?: any[]
+  solutions?: Solution[]
 }
 
 export type AssetVote = {

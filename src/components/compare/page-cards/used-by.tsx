@@ -20,7 +20,7 @@ function CompareServiceUsedByComponent({ services }: CompareServiceUsedByProps) 
               {service.customer_organizations.map((customer, index) => (
                 <div key={index} className="flex items-center">
                   <div className="flex items-center w-16 h-16 border border-solid rounded-md border-border-default">
-                    <img src={customer.logo_url} />
+                    <img src={customer.logo_url} alt="Partner Company Logo" />
                   </div>
                   <div className="pl-2 text-sm text-semibold">{customer.name}</div>
                 </div>
@@ -52,7 +52,7 @@ function CompareServiceUsedByComponent({ services }: CompareServiceUsedByProps) 
               {service.customer_organizations.map((customer, index) => (
                 <div key={index} className="flex items-center">
                   <div className="flex items-center w-16 h-16 border border-solid rounded-md border-border-default">
-                    <img src={customer.logo_url} />
+                    <img src={customer.logo_url} alt="Partner Company Logo" />
                   </div>
                   <div className="pl-2 text-sm text-semibold">{customer.name}</div>
                 </div>

@@ -26,7 +26,7 @@ const placeholderComponent = (
 )
 
 const homepagePlaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
+  <div className="flex space-x-2 items-left">
     <div className="leading-none">e.g. Improve my Python application performance</div>
   </div>
 )
@@ -165,8 +165,8 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
           onChange={handleChange}
           loadOptions={searchSuggestions}
-          instanceId
-          className="flex-1 mb-2 sm:mb-0"
+          instanceId="selectTags"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
         />
@@ -176,8 +176,8 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
           loadOptions={solutionSuggestions}
-          instanceId
-          className="flex-1 mb-2 sm:mb-0"
+          instanceId="selectSolutions"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
         />

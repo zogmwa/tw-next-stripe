@@ -8,6 +8,8 @@ import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detai
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import { SolutionTypes } from '@taggedweb/types/solution'
+import slugify from 'slugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -38,14 +40,7 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name:
-        solutionDetail.type === 'I'
-          ? 'Integrations'
-          : solutionDetail.type === 'U'
-          ? 'Usage Support'
-          : solutionDetail.type === 'C'
-          ? 'Consultation'
-          : 'Other',
+      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
       url: '#',
       is_selected: false,
     },
@@ -117,22 +112,8 @@ export default function SolutionDetail({ solutionDetail }) {
     slug: solutionDetail.slug,
     assets: solutionDetail.assets,
     tag: {
-      name:
-        solutionDetail.type === 'I'
-          ? 'Integrations'
-          : solutionDetail.type === 'U'
-          ? 'Usage Support'
-          : solutionDetail.type === 'C'
-          ? 'Consultation'
-          : 'Other',
-      slug:
-        solutionDetail.type === 'I'
-          ? 'integrations'
-          : solutionDetail.type === 'U'
-          ? 'usage-support'
-          : solutionDetail.type === 'C'
-          ? 'consultation'
-          : 'other',
+      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
+      slug: slugify(solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other').toLowerCase(),
     },
     title: solutionDetail.title,
     upvoted_count: solutionDetail.upvotes_count,

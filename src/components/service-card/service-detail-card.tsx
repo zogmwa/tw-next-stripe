@@ -113,12 +113,14 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 />
               </div>
               <Link href={`/software/${service.slug}`} passHref>
-                <Button
-                  className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
-                  textClassName="text-red-600"
-                >
-                  Switch to View mode
-                </Button>
+                <a>
+                  <Button
+                    className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                    textClassName="text-red-600"
+                  >
+                    Switch to View mode
+                  </Button>
+                </a>
               </Link>
             </>
           ) : (
@@ -137,12 +139,14 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               </a>
               {service.edit_allowed && (
                 <Link href={`/software/${service.slug}/edit`} passHref>
-                  <Button
-                    className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
-                    textClassName="text-red-600"
-                  >
-                    Edit mode
-                  </Button>
+                  <a>
+                    <Button
+                      className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                      textClassName="text-red-600"
+                    >
+                      Edit mode
+                    </Button>
+                  </a>
                 </Link>
               )}
             </>
@@ -255,9 +259,11 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 {service.tags.map((tag) => {
                   return (
                     <Link key={tag.slug} href={'../softwares/' + tag.slug}>
-                      <Button buttonType="tag" size="small" className="mr-2">
-                        {tag.name}
-                      </Button>
+                      <a>
+                        <Button buttonType="tag" size="small" className="mr-2">
+                          {tag.name}
+                        </Button>
+                      </a>
                     </Link>
                   )
                 })}
@@ -267,9 +273,11 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 {service.tags.map((tag) => {
                   return (
                     <Link key={tag.slug} href={'../softwares/' + tag.slug}>
-                      <Button buttonType="tag" size="small" className="mt-2 mr-2">
-                        {tag.name}
-                      </Button>
+                      <a>
+                        <Button buttonType="tag" size="small" className="mt-2 mr-2">
+                          {tag.name}
+                        </Button>
+                      </a>
                     </Link>
                   )
                 })}
