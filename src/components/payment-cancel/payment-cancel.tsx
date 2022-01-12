@@ -11,7 +11,10 @@ type PaymentCancelComponentProps = {
 function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps) {
   const router = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { session_id, solution } = router.query
+  const { solution } = router.query
+  let referralUserId = (router.query?.r as string) ?? ''
+  let url = `/solution/${solution}`
+  if (referralUserId) url += `?r=${referralUserId}`
 
   return (
     <div className={clsx('flex flex-col items-center', className)}>
@@ -23,7 +26,7 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
           Find other solutions.
         </Button>
       </Link>
-      <Link href={`/solution/${solution}`} passHref>
+      <Link href={url} passHref>
         <Button className="!border-0 mt-2">No, continue with this solution.</Button>
       </Link>
     </div>
