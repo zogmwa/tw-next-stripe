@@ -166,7 +166,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           onChange={handleChange}
           loadOptions={searchSuggestions}
           instanceId="selectTags"
-          className="flex-1 mb-2 sm:mb-0"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
         />
@@ -177,7 +177,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           onChange={handleSolutionChange}
           loadOptions={solutionSuggestions}
           instanceId="selectSolutions"
-          className="flex-1 mb-2 sm:mb-0"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
         />

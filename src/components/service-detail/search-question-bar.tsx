@@ -96,7 +96,7 @@ export function SearchQuestionBar({
         onChange={handleChange}
         loadOptions={searchSuggestions}
         instanceId="AddQuestions"
-        className="flex-1 mb-2 md:mb-0"
+        className="flex-1 mb-2 md:mb-0 remove-input-txt-border"
         classNamePrefix="select"
         placeholder={placeholder}
       />
