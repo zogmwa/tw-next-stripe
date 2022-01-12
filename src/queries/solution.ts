@@ -57,7 +57,7 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
   }
 }
 
-export async function toggleSolutionPurchase(
+export async function checkoutSolutionPurchase(
   solutionPriceId: number | string,
   referralUserId: number | string,
 ): Promise<any | null> {

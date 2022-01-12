@@ -4,7 +4,7 @@ import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * API Route handler for deleting solution_votes.
+ * API Route handler for solution checkout.
  */
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
