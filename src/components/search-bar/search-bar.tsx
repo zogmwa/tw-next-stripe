@@ -26,7 +26,7 @@ const placeholderComponent = (
 )
 
 const homepagePlaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
+  <div className="flex space-x-2 items-left">
     <div className="leading-none">e.g. Improve my Python application performance</div>
   </div>
 )
