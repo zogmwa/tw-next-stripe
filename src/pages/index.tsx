@@ -54,20 +54,21 @@ export default function Home({ search_software = 0 }: HomeProps) {
         <div className="flex items-center justify-center flex-1 2xl:justify-end ">
           <div className="flex flex-col items-start justify-start w-full mx-6 my-4 lg:mr-0 xl:w-4/5 2xl:w-3/4">
             <div className="xl:flex">
-              <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking to&#160;</h1>
+              <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking &#160;</h1>
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
                 <>
                   <Typewriter
                     options={{
                       strings: [
-                        'Integrate a SaaS into your stack?',
-                        'Improve application performance?',
-                        'Reduce AWS bills?',
-                        'Find best-fit software for your needs?',
+                        'for expert help on a SaaS integration?',
+                        'to reduce your cloud bills?',
+                        'for help using an open-source package?',
+                        'to improve your application performance?',
                       ],
                       autoStart: true,
                       loop: true,
-                      delay: 1,
+                      delay: 1.1,
+                      deleteSpeed: 1,
                     }}
                   />
                 </>
