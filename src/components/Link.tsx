@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import Link from 'next/link'
 import React from 'react'
 const CustomLink = ({ href, ...rest }) => {

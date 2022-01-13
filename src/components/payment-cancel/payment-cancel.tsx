@@ -12,7 +12,7 @@ function PaymentCancelComponent({ className = '' }: PaymentCancelComponentProps)
   const router = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { solution } = router.query
-  let referralUserId = (router.query?.r as string) ?? ''
+  const referralUserId = (router.query?.r as string) ?? ''
   let url = `/solution/${solution}`
   if (referralUserId) url += `?r=${referralUserId}`
 
