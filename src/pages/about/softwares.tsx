@@ -22,9 +22,9 @@ export default function Softwares() {
           <div className="mb-12 text-lg text-gray-800 dark:text-gray-200">
             Whether you work at a large enterprise, a small business, or a non-profit: our mission just does not end
             with just helping you find a good SaaS option. We want it to be the best fit for solving your problems. If
-            you aren't sure if a software or a web service will work for you and want to further evaluate it under a
-            trial or learn how to use it, then we will work together with you to evaluate it and we will find you domain
-            experts who can show you how to effectively utilize specific tools, for your use-cases.
+            you aren&apos;t sure if a software or a web service will work for you and want to further evaluate it under
+            a trial or learn how to use it, then we will work together with you to evaluate it and we will find you
+            domain experts who can show you how to effectively utilize specific tools, for your use-cases.
           </div>
           <div className="flex space-x-4">
             <Link

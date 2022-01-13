@@ -3,6 +3,7 @@ import { Asset } from '@taggedweb/types/asset'
 import { ServicePricingCard } from '../pricing-components/service-pricing-card/service-pricing-card'
 import { PricingSelectNameMobile } from '../pricing-components/service-pricing-card/pricing-select-name-mobile'
 import { PricingSelectNameDesktop } from '../pricing-components/service-pricing-card/pricing-select-name-desktop'
+import { EmptyServicePricingCard } from '../pricing-components/service-pricing-card/zero-plans-service-pricing-card'
 import { ShowEditable, EditablePricing } from '../editable-components'
 import { Modal } from '../Modal'
 
@@ -26,7 +27,7 @@ export function PricingContentComponent({
   const [showPriceEditModal, setPriceShowEditModal] = useState(false)
 
   if (typeof service === 'undefined') return null
-  const { price_plans: plans } = service
+  const { price_plans: plans, name, website } = service
 
   const handleSelectedSlideItem = (index) => {
     setSelectedItem(index)
@@ -59,6 +60,7 @@ export function PricingContentComponent({
           />
         </div>
       )}
+      {plans.length === 0 && <EmptyServicePricingCard name={name} website={website} />}
       <Modal isOpen={showPriceEditModal} setIsOpen={setPriceShowEditModal} size="5xl">
         <EditablePricing pricePlans={plans} setEditModal={setPriceShowEditModal} onSubmit={onChange} />
       </Modal>

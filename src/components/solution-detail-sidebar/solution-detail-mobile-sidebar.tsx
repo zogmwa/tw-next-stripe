@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
@@ -38,7 +39,7 @@ function SolutionDetailMobileSidebarComponent({
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    let referralUserId = (router.query?.r as string) ?? ''
+    const referralUserId = (router.query?.r as string) ?? ''
     const data = await checkoutSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
