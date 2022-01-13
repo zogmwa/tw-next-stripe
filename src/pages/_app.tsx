@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import { AppProps } from 'next/app'
 import toast, { Toaster } from 'react-hot-toast'
+import { Freshchat } from 'reactjs-freshchat'
 import Router, { useRouter } from 'next/router'
 import Error from 'next/error'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -20,7 +21,6 @@ import { HomePageFooter } from '@taggedweb/components/homepage-footer-old'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
 import * as ga from '@taggedweb/lib/ga'
 import { FooterComponent } from '@taggedweb/components/footer'
-import { FreshChat } from '@taggedweb/components/freshchat-container'
 import Sentry from '@taggedweb/components/sentry/sentry'
 
 const queryClient = new QueryClient()
@@ -36,17 +36,17 @@ const RedirectSpinner = () => (
   </div>
 )
 
-function CustomApp({ Component, pageProps }: AppProps) {
+function AppComponent({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter()
   const router = useRouter()
   const renderNavBar = pathname !== '/login' && pathname !== '/signup'
   const renderFooter = pathname !== '/login' && pathname !== '/signup'
   const renderMainFooter = true
   const userInfo = useUserContext()
+  const { authVerified, pk, email, first_name, last_name } = userInfo
 
-  // fallback is added for SSR when using useSWR.
   // errorCode is used for returning error from SSR.
-  const { fallback = {}, errorCode, errorToast, redirectTo, ...restProps } = pageProps
+  const { errorCode, errorToast, redirectTo, ...restProps } = pageProps
 
   useEffect(() => {
     if (errorToast) {
@@ -77,50 +77,69 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <SWRConfig value={{ fetcher, fallback }}>
-          <UserProvider>
-            <FreshChat />
-            <Sentry userInfo={userInfo} />
-            <div suppressHydrationWarning={true}>
-              {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
-              <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
-                {redirectTo ? (
-                  <RedirectSpinner />
-                ) : errorCode ? (
-                  // if errorCode is in pageProps then show error page.
-                  <Error statusCode={errorCode} key={router.asPath} />
-                ) : (
-                  <Component {...restProps} key={router.asPath} />
-                )}
-                {renderFooter ? (
-                  renderMainFooter ? (
-                    <FooterComponent topSaasTags={TopSaasTags} topSolutionTags={TopSolutionTags} />
-                  ) : (
-                    <HomePageFooter topTags={topTags} />
-                  )
-                ) : null}
-              </div>
-              <Toaster
-                toastOptions={{
-                  className: 'text-sm !text-text-primary',
-                  duration: 2000,
-                  error: {
-                    icon: <MdOutlineError className="text-2xl text-red-600 " />,
-                  },
-                  custom: {
-                    icon: <FcInfo className="text-2xl" />,
-                  },
-                }}
-              >
-                {ToastWithDismiss}
-              </Toaster>
-            </div>
-          </UserProvider>
-        </SWRConfig>
-      </QueryClientProvider>
+      {authVerified ? (
+        <Freshchat
+          token={process.env.FRESHCHAT_TOKEN}
+          externalId={`${pk}`}
+          firstName={first_name}
+          lastName={last_name}
+          email={email}
+        />
+      ) : (
+        <Freshchat token={process.env.FRESHCHAT_TOKEN} />
+      )}
+      <Sentry userInfo={userInfo} />
+      <div suppressHydrationWarning={true}>
+        {renderNavBar ? <NavBar className="fixed top-0 left-0 right-0 z-20" /> : null}
+        <div className={clsx('w-full h-screen', renderNavBar ? 'pt-14' : undefined)}>
+          {redirectTo ? (
+            <RedirectSpinner />
+          ) : errorCode ? (
+            // if errorCode is in pageProps then show error page.
+            <Error statusCode={errorCode} key={router.asPath} />
+          ) : (
+            <Component {...restProps} key={router.asPath} />
+          )}
+          {renderFooter ? (
+            renderMainFooter ? (
+              <FooterComponent topSaasTags={TopSaasTags} topSolutionTags={TopSolutionTags} />
+            ) : (
+              <HomePageFooter topTags={topTags} />
+            )
+          ) : null}
+        </div>
+        <Toaster
+          toastOptions={{
+            className: 'text-sm !text-text-primary',
+            duration: 2000,
+            error: {
+              icon: <MdOutlineError className="text-2xl text-red-600 " />,
+            },
+            custom: {
+              icon: <FcInfo className="text-2xl" />,
+            },
+          }}
+        >
+          {ToastWithDismiss}
+        </Toaster>
+      </div>
     </>
   )
 }
 
-export default CustomApp
+function AppContainer(appProps: AppProps) {
+  const { fallback = {} } = appProps.pageProps
+  // fallback is added for SSR when using useSWR.
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SWRConfig value={{ fetcher, fallback }}>
+        <UserProvider>
+          <AppComponent {...appProps} />
+        </UserProvider>
+      </SWRConfig>
+    </QueryClientProvider>
+  )
+}
+
+export default AppContainer

@@ -36,6 +36,7 @@ const solutionSidebarInfo = {
     },
   ],
   purchaseDisableOption: true,
+  type: 'C',
 }
 
 export function DefaultSolutionDetailSidebar() {

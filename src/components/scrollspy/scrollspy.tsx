@@ -15,7 +15,7 @@ export function ScrollSpy({ elements }) {
             duration={300}
             key={item.id}
           >
-            {item.name}
+            <a>{item.name}</a>
           </Link>
         ))}
       </nav>

@@ -4,46 +4,20 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import { Solution, SolutionTypes } from '@taggedweb/types/solution'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
 
 type SolutionListingCardProps = {
-  listingData: {
-    slug: string
-    pay_now_price_stripe_id: string
-    pay_now_price_unit_amount: string | number
-    assets: any[]
-    tags: { name: string; slug: string }[]
-    title: string
-    upvotes_count: number
-    avg_rating?: string | number
-    organization: { name: string; logo_url: string | null }
-    type: string
-  }
+  listingData: Solution
   className?: string
 }
-const SolutionTypes = [
-  {
-    slug: 'I',
-    value: 'INTEGRATION',
-  },
-  {
-    slug: 'C',
-    value: 'CONSULTATION',
-  },
-  {
-    slug: 'U',
-    value: 'USAGE SUPPORT',
-  },
-  {
-    slug: 'O',
-    value: 'OTHER',
-  },
-]
-const SolutionTypesMap = new Map()
-SolutionTypes.forEach((type) => {
-  SolutionTypesMap.set(type.slug, type.value)
-})
+const SolutionTypesMap = new Map<string, string>()
+const solutionTypeKeys = Object.keys(SolutionTypes)
+// eslint-disable-next-line prefer-const
+for (let type in solutionTypeKeys) {
+  SolutionTypesMap.set(type, SolutionTypes[type])
+}
 
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const router = useRouter()
@@ -109,16 +83,32 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
         <div className="flex items-center pt-4 md:pt-0">
-          {listingData.organization?.logo_url ? (
-            <img
-              className="w-[40px] h-[40px] rounded-full"
-              src={listingData.organization.logo_url}
-              alt={listingData.organization.name}
-            />
+          {listingData.organization ? (
+            <>
+              {listingData.organization.logo_url ? (
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={listingData.organization.logo_url}
+                  alt={listingData.organization.name}
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+              )}
+              <span className="pl-2 text-sm text-text-secondary">{listingData.organization.name}</span>
+            </>
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+                style={{ boxShadow: 'none !important' }}
+              >
+                <p>{listingData.point_of_contact.first_name[0] + listingData.point_of_contact.last_name[0]}</p>
+              </div>
+              <span className="pl-2 text-sm text-text-secondary">
+                {listingData.point_of_contact.first_name} {listingData.point_of_contact.last_name}
+              </span>
+            </>
           )}
-          <span className="pl-2 text-sm text-text-secondary">{listingData.organization?.name}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
@@ -140,12 +130,14 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
             {listingData.assets &&
               listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
           </div>

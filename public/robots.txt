@@ -4,6 +4,7 @@ Allow: /
 Disallow: /login
 Disallow: /signup
 Disallow: /profile
+Disallow: /users
 
 # Host
 Host: https://www.taggedweb.com

@@ -10,6 +10,8 @@ type MobileViewSortServiceListProps = {
   onSortChange: (value: string) => void
   onFilterChange: (value: string) => void
   filterByPrice?: (minPrice: string, maxPrice: string) => void
+  showClearFilter?: boolean
+  clearAllPriceFilter?: () => void
   filterLabel?: string
 }
 
@@ -19,6 +21,8 @@ export function MobileViewSortAndFilterServiceList({
   onSortChange,
   onFilterChange,
   filterByPrice,
+  showClearFilter,
+  clearAllPriceFilter,
   filterLabel = 'Trial',
 }: MobileViewSortServiceListProps) {
   return (
@@ -44,9 +48,11 @@ export function MobileViewSortAndFilterServiceList({
             <Menu.Item>
               {() => (
                 <FilterServiceList
-                  filterByPrice={filterByPrice}
                   defaultValue={defaultFilterValue}
                   onChange={onFilterChange}
+                  filterByPrice={filterByPrice}
+                  showClearFilter={showClearFilter}
+                  clearAllPriceFilter={clearAllPriceFilter}
                   label={filterLabel}
                 />
               )}

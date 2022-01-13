@@ -50,11 +50,12 @@ export default function Signup() {
   return (
     <>
       <DynamicHeader title="Taggedweb | Sign up" />
-      <div className="flex flex-col items-center justify-center w-screen h-full p-4">
-        <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
-          <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to Taggedweb</h1>
-          <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
-            Signup to experience a world of web services and find out best for you...
+      <div className="flex flex-col items-center justify-center p-4 md:h-full">
+        <div className="max-w-md p-0 mx-1 my-4 rounded-md md:p-6 md:border">
+          <h1 className="mb-3 text-2xl font-semibold md:text-3xl text-text-primary">Welcome to TaggedWeb!</h1>
+          <h3 className="mb-6 text-sm md:mb-8 md:text-base text-text-secondary">
+            As a registered user on TaggedWeb.com, you can submit your software for listing, add and vote on features,
+            book solutions from domain-experts to help you with integrations and so much more.
           </h3>
           <p className="text-xs text-center text-error">{linkedInError}</p>
           <Button
@@ -64,7 +65,7 @@ export default function Signup() {
             className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
             onClick={() => handleLinkedInLogin()}
           >
-            Sign in with LinkedIn
+            Sign up with LinkedIn
           </Button>
           <p className="text-xs text-center text-error">{googleError}</p>
           <Button
@@ -74,9 +75,9 @@ export default function Signup() {
             className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
             onClick={() => handleGoogleLogin()}
           >
-            Sign in with Google
+            Sign up with Google
           </Button>
-          <div className="relative flex items-center justify-center w-full mb-8 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
+          <div className="relative flex items-center justify-center w-full mb-6 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
             <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
           </div>
           <Formik
@@ -136,7 +137,7 @@ export default function Signup() {
                   <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                     Sign Up
                   </Button>
-                  <div className="text-xs lg:text-sm text-text-secondary">
+                  <div className="text-xs md:text-sm text-text-secondary">
                     Already a member!{' '}
                     <Link href="/login">
                       <a className="font-bold">Sign in</a>

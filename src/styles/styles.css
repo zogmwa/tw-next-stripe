@@ -46,6 +46,10 @@
   box-shadow: none;
 }
 
+.remove-input-txt-border input[type='text']:focus {
+  box-shadow: none;
+}
+
 /* Hide scrollbar in Tablist in mobile view */
 .tablist::-webkit-scrollbar {
   display: none;

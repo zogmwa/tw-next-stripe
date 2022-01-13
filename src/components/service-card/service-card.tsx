@@ -97,20 +97,22 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
             </Link>
           </div>
           <div className="flex flex-row flex-wrap mb-5">
-            {service.tags.map((tag, index) => {
+            {service.tags.map((tag) => {
               return (
                 <Link
+                  key={tag.slug}
                   href={
                     search_query.indexOf(tag.slug) === -1
                       ? `/softwares/${search_query},${tag.slug}`
                       : `/softwares/${tag.slug}`
                   }
                   passHref
-                  key={index}
                 >
-                  <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
-                    {tag.name}
-                  </Button>
+                  <a>
+                    <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                      {tag.name}
+                    </Button>
+                  </a>
                 </Link>
               )
             })}

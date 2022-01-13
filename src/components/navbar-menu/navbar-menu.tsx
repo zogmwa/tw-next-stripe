@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM, BLOG_SITE_PATH } from '@taggedweb/utils/constants'
 import { NavItem } from './menu-item'
 import { NavAccordion } from './navbar-accordion'
 import { TopSaasTags, TopSolutionTags } from '../../utils/top-tags'
 
-// const ResourceDropdown = [{ name: 'Blog', slug: '/' }]
+const ResourcesDropdown = [
+  { name: 'About', slug: 'about' },
+  { name: 'Blog', slug: 'blog' },
+  { name: 'Careers', slug: '' },
+]
 
 export function NavbarMenu() {
   return (
@@ -27,7 +31,16 @@ export function NavbarMenu() {
             List a Software
           </a>
         </Link>
-        {/* <NavItem dropdownData={ResourceDropdown} navItem="Resources" /> */}
+        <Link href={BLOG_SITE_PATH}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex px-4 py-2 text-sm text-base tracking-wide rounded cursor-pointer text-primary hover:bg-gray-200"
+          >
+            Blog
+          </a>
+        </Link>
+        {/* <NavItem dropdownData={ResourcesDropdown} navItem="Resources" /> */}
       </div>
     </div>
   )
@@ -58,12 +71,14 @@ export function NavbarMenuResponsive() {
         pathName="softwares"
         isNavbar={true}
       />
-      {/* <NavAccordion
+      <NavAccordion
         expanded={expanded}
         handleChange={handleChange}
-        dropdownData={ResourceDropdown}
+        dropdownData={ResourcesDropdown}
         navItem="Resources"
-      /> */}
+        pathName="resources"
+        isNavbar={true}
+      />
     </div>
   )
 }

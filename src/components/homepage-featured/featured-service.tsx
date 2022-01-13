@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { MdArrowForwardIos } from 'react-icons/md'
-import { useRouter } from 'next/router'
 import { ServiceLogo } from '../service-logo'
 
 type FeaturedServicesProp = {
@@ -13,8 +12,6 @@ type FeaturedServicesProp = {
 }
 
 function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesProp) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   const featured = featuredList.filter((featured) => featured.name === selected)
 
   return (
@@ -26,7 +23,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
             key={`service-${service.slug}`}
           >
             <Link href={`/software/${service.slug}`} passHref>
-              <>
+              <a>
                 <div className="flex items-center">
                   <ServiceLogo
                     serviceName={service.name}
@@ -37,7 +34,7 @@ function FeaturedServiceComponent({ featuredList, selected }: FeaturedServicesPr
                   <span className="ml-4 text-md text-text-secondary">{service.name}</span>
                 </div>
                 <MdArrowForwardIos />
-              </>
+              </a>
             </Link>
           </div>
         ))}

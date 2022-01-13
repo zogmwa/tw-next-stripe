@@ -18,6 +18,7 @@ import {
   toggleCancelBookmarkSolution,
 } from '@taggedweb/queries/solution'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { Solution, SolutionSidebarType } from '@taggedweb/types/solution'
 import { SolutionDetailMobileSidebar } from '../solution-detail-sidebar'
 import { SolutionFAQ } from './index'
 import { ServiceLogo } from '../service-logo'
@@ -35,43 +36,18 @@ const renderer = {
 }
 
 type SolutionDetailIntroductionProps = {
-  introductionData: {
-    id: number
-    slug: string
-    assets: any[]
-    tag: { name: string; slug: string }
-    title: string
-    upvoted_count: number
-    booked_count: number
-    provide_organization: { name: string; logo_url: string | null; website: string | null } | null
-    point_of_contact: { username: string; first_name: string; last_name: string }
-    overview_description: string
-    scope_of_work_description: string
-    sidebar_info: {
-      pay_now_price: {
-        stripe_price_id: string
-        price: string | number
-      }
-      price: number
-      features: { id: string; name: string; tooltipContent: string }[]
-      purchaseDisableOption: boolean
-    }
-    questions: { title: string; primary_answer: string }[]
-    my_solution_vote: number | null
-    my_solution_bookmark: number | null
-  }
+  introductionData: Solution
+  sidebar_info: SolutionSidebarType
 }
 
-function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetailIntroductionProps) {
+function SolutionDetailIntroductionComponent({ introductionData, sidebar_info }: SolutionDetailIntroductionProps) {
   const { requireLoginBeforeAction } = useRequireLogin()
   const [votedByMe, setVotedByMe] = useState(introductionData.my_solution_vote)
   const [bookmarkByMe, setBookmarkByMe] = useState(introductionData.my_solution_bookmark)
   const [isLoadingBookmark, setIsLoadingBookmark] = useState(false)
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
-  const [upvotesCount, setUpvotesCount] = useState(introductionData.upvoted_count)
+  const [upvotesCount, setUpvotesCount] = useState(introductionData.upvotes_count)
   const { asPath } = useRouter()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
 
   const setToggleUpvotedByMe = async () => {
     if (!isLoadingUpvote) {
@@ -117,7 +93,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         <div className="flex flex-col">
           <a className="inline-flex">
             <Button buttonType="tag" size="small">
-              {introductionData.tag.name}
+              {introductionData?.primary_tag?.name}
             </Button>
           </a>
           <h2 className="mt-2 text-3xl font-bold">{introductionData.title}</h2>
@@ -140,12 +116,14 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             <div className="flex min-w-[7rem] self-start justify-end space-x-2">
               {introductionData.assets.slice(0, 3).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
             </div>
@@ -154,30 +132,32 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
         <div className="self-start hidden md:flex min-w-[7rem] justify-end space-x-2">
           {introductionData.assets.slice(0, 3).map((asset, key) => (
             <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-              <ServiceLogo
-                serviceName={asset?.name}
-                serviceId={asset.id}
-                logoUrl={asset.logo_url}
-                className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-              />
+              <a>
+                <ServiceLogo
+                  serviceName={asset?.name}
+                  serviceId={asset.id}
+                  logoUrl={asset.logo_url}
+                  className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                />
+              </a>
             </Link>
           ))}
         </div>
       </div>
       <div className="flex items-center justify-between p-4 md:px-0">
         <div className="flex items-center">
-          {introductionData.provide_organization ? (
+          {introductionData.organization ? (
             <>
-              {introductionData.provide_organization.logo_url ? (
+              {introductionData.organization.logo_url ? (
                 <img
                   className="w-[40px] h-[40px] rounded-full"
-                  src={introductionData.provide_organization.logo_url}
-                  alt={introductionData.provide_organization.name}
+                  src={introductionData.organization.logo_url}
+                  alt={introductionData.organization.name}
                 />
               ) : (
                 <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
               )}
-              <span className="pl-2 text-sm text-text-secondary">{introductionData.provide_organization.name}</span>
+              <span className="pl-2 text-sm text-text-secondary">{introductionData.organization.name}</span>
             </>
           ) : (
             <>
@@ -249,7 +229,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
           // @ts-ignore
           window.fcWidget.open()
         }}
-        detailInfo={introductionData.sidebar_info}
+        detailInfo={sidebar_info}
         className="md:hidden"
       />
       <div className="flex flex-col p-4 md:p-0">
@@ -258,7 +238,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             <h4 className="font-bold text-black text-md">Overview</h4>
           </a>
           <div className={style.unsetTailwind}>
-            <Markdown value={introductionData.overview_description} renderer={renderer} />
+            <Markdown value={introductionData.description} renderer={renderer} />
           </div>
         </div>
         <div style={{ scrollMarginTop: '3rem' }} id="solutions-scope" className="flex flex-col pt-2 md:pt-6">
@@ -266,7 +246,7 @@ function SolutionDetailIntroductionComponent({ introductionData }: SolutionDetai
             <h4 className="font-bold text-black text-md">Scope of Work</h4>
           </a>
           <div className={style.unsetTailwind}>
-            <Markdown value={introductionData.scope_of_work_description} renderer={renderer} />
+            <Markdown value={introductionData.scope_of_work} renderer={renderer} />
           </div>
         </div>
         {introductionData.questions.length > 0 && (

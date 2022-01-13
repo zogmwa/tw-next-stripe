@@ -155,8 +155,7 @@ export default function ServiceList({
             router.push(`/softwares/${selectedTag}`)
           }}
         />
-        {error && <div className="font-medium text-center text-red-500">{error}</div>}
-        {!error && (
+        <>
           <div className="flex flex-row space-x-2">
             <div className="hidden w-1/4 space-y-4 md:flex md:flex-col">
               <div className="border rounded">
@@ -243,28 +242,33 @@ export default function ServiceList({
                   </div>
                 </div>
               </div>
-              <div className="max-w-full px-2 mb-2 border rounded-md">
-                <ul className="flex flex-col justify-start pb-8 divide-y divide">
-                  {services.map((service, index) => {
-                    const isChecked = !!checkedList.find((item) => item.slug === service.slug)
-                    return (
-                      <li
-                        key={index}
-                        className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
-                      >
-                        <ServiceCard service={service} onToggleCompare={handleChecked} isChecked={isChecked} />
-                      </li>
-                    )
-                  })}
-                </ul>
-                <CompareAccordian checkedList={checkedList} onServiceRemove={handleServiceRemove} />
-              </div>
+              {error && <div className="text-sm font-medium text-center text-red-500">{error}</div>}
+              {!error && (
+                <div className="max-w-full px-2 mb-2 border rounded-md">
+                  <ul className="flex flex-col justify-start pb-8 divide-y divide">
+                    {services.map((service, index) => {
+                      const isChecked = !!checkedList.find((item) => item.slug === service.slug)
+                      return (
+                        <li
+                          key={index}
+                          className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
+                        >
+                          <ServiceCard service={service} onToggleCompare={handleChecked} isChecked={isChecked} />
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <CompareAccordian checkedList={checkedList} onServiceRemove={handleServiceRemove} />
+                </div>
+              )}
             </div>
           </div>
-        )}
-        <div className="flex justify-end">
-          <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
-        </div>
+          {!error && (
+            <div className="flex justify-end">
+              <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
+            </div>
+          )}
+        </>
       </div>
     </>
   )

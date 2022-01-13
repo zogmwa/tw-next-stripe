@@ -85,7 +85,7 @@ export default function Home({ featuredList }) {
               </Button>
             </div>
             <div className="flex-1">
-              <img src="/images/homepage_pic.jpg" alt="homepage_pic" className="w-full mx-auto" />
+              <img src="/images/homepage_pic.jpg" alt="Taggedweb Home Picture" className="w-full mx-auto" />
             </div>
           </div>
         </div>

@@ -48,10 +48,10 @@ export default function LinkUsedByCompaniesBar({ onChange }) {
       loadOptions={promiseOptions}
       placeholder="Start typing top organizations."
       components={{ DropdownIndicator: () => null }}
-      className="flex-1 mb-2 md:mb-0"
+      className="flex-1 mb-2 md:mb-0 remove-input-txt-border"
       classNamePrefix="select"
-      instanceId
-      name="add-organiztion"
+      instanceId="AddOrganization"
+      name="add-organization"
       menuPortalTarget={document.body}
       styles={{
         // Fixes the overlapping problem of the component

@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { BiDollar } from 'react-icons/bi'
 import { Button } from '../button'
 
 type InputPriceFilterProps = {
   filterByPrice?: (minPrice: string, maxPrice: string) => void
+  onClickClearFilter?: boolean
 }
 
-export function InputPriceFilter({ filterByPrice }: InputPriceFilterProps) {
+export function InputPriceFilter({ filterByPrice, onClickClearFilter }: InputPriceFilterProps) {
   const [minPrice, setMinPrice] = useState<string>('')
   const [maxPrice, setMaxPrice] = useState<string>('')
   const [message, setMessage] = useState('')
 
+  useEffect(() => {
+    setMinPrice('')
+    setMaxPrice('')
+  }, [onClickClearFilter])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (maxPrice === '' && minPrice === '') {
-      setMessage('Please enter both minimum price limit and maximum price limit.')
-      filterByPrice(minPrice, maxPrice)
+    if (parseInt(maxPrice) < parseInt(minPrice)) {
+      const tempMinPrice = minPrice
+      setMinPrice(maxPrice)
+      setMaxPrice(tempMinPrice)
+      filterByPrice(maxPrice, minPrice)
       return
-    } else if (parseInt(maxPrice) < parseInt(minPrice)) {
-      setMessage('Please enter maximum price limit more than minimum price limit.')
-      setMaxPrice('')
-      // maxPrice is taking time to set to '', that's why we are sending '' as input, instead of maxPrice.
-      filterByPrice(minPrice, '')
-      return
-    } else if (minPrice === '') {
+    } else if (minPrice === '' && maxPrice !== '') {
       setMinPrice('0')
     }
     setMessage('')

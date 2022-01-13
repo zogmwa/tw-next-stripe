@@ -75,7 +75,12 @@ function CarouselPagingComponent({ images }: CarouselPagingProps) {
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
                 <div className="flex items-center justify-center overflow-hidden border rounded-lg border-border-default bg-background-light">
-                  <img className="w-auto max-h-[400px]" src={image.url} onClick={() => setIsOpen(true)} />
+                  <img
+                    className="w-auto max-h-[400px]"
+                    src={image.url}
+                    onClick={() => setIsOpen(true)}
+                    alt="Software Snapshots"
+                  />
                 </div>
               </div>
             ))}
@@ -94,7 +99,11 @@ function CarouselPagingComponent({ images }: CarouselPagingProps) {
             {images.map((image, index) => (
               <div key={index} className="aspect-w-16 aspect-h-9">
                 <div className="flex items-center justify-center px-2 overflow-hidden">
-                  <img className="w-full h-full border rounded-lg border-border-default" src={image.url} />
+                  <img
+                    className="w-full h-full border rounded-lg border-border-default"
+                    src={image.url}
+                    alt="Software Snapshots"
+                  />
                 </div>
               </div>
             ))}
