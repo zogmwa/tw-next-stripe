@@ -4,24 +4,12 @@ import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import { SolutionTypes } from '@taggedweb/types/solution'
+import { Solution, SolutionTypes } from '@taggedweb/types/solution'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
 
 type SolutionListingCardProps = {
-  listingData: {
-    slug: string
-    pay_now_price_stripe_id: string
-    pay_now_price_unit_amount: string | number
-    assets: any[]
-    tags: { name: string; slug: string }[]
-    title: string
-    upvotes_count: number
-    avg_rating?: string | number
-    organization: { name: string; logo_url: string | null }
-    type: string
-    point_of_contact: { username: string; first_name: string; last_name: string }
-  }
+  listingData: Solution
   className?: string
 }
 const SolutionTypesMap = new Map<string, string>()

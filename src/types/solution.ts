@@ -27,7 +27,7 @@ export type Solution = {
   point_of_contact?: Point_of_contact
   primary_tag?: Tag
   questions?: SolutionQuestion[]
-  scope_of_work: string
+  scope_of_work?: string
   slug: string
   tags?: Tag[]
   title: string
@@ -42,4 +42,15 @@ export enum SolutionTypes {
   C = 'CONSULTATION',
   U = 'USAGE SUPPORT',
   O = 'OTHER',
+}
+
+export type SolutionSidebarType = {
+  pay_now_price: {
+    stripe_price_id: string
+    price: string | number
+  }
+  price: number
+  features: { id: string; name: string; tooltipContent: string }[]
+  purchaseDisableOption: boolean
+  type: string
 }

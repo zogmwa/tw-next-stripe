@@ -7,18 +7,11 @@ import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
 import { useUserContext } from '@taggedweb/hooks/use-user'
+import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { Button } from '../button'
 
 type SolutionDetailSidebarComponentProps = {
-  detailInfo: {
-    pay_now_price: {
-      stripe_price_id: string
-      price: string | number
-    }
-    price: number
-    features: { id: string; name: string; tooltipContent: string }[]
-    purchaseDisableOption: boolean
-  }
+  detailInfo: SolutionSidebarType
   className?: string
 }
 
@@ -30,7 +23,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    let referralUserId = (router.query?.r as string) ?? ''
+    const referralUserId = (router.query?.r as string) ?? ''
     const data = await checkoutSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
@@ -64,7 +57,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
               loadingClassName="text-background-light"
               onClick={requireLoginBeforeAction(() => togglePurchase())}
             >
-              Purchase Now
+              {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
             </Button>
             {detailInfo.purchaseDisableOption && (
               <ReactTooltip

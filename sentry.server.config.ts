@@ -12,7 +12,7 @@ if (process.env.IS_SENTRY_ENABLED === 'true') {
     environment: process.env.NODE_ENV,
     enabled: process.env.NODE_ENV !== 'development',
     // Adjust this value in production, or use tracesSampler for greater control
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.25,
 
     // ...
     // Note: if you want to override the automatic release value, do not set a

@@ -9,6 +9,7 @@ export default {
 } as Meta
 
 const listingData = {
+  id: 1,
   slug: 'improve',
   tags: [
     {
@@ -32,6 +33,7 @@ const listingData = {
     logo_url: null,
   },
   point_of_contact: {
+    id: 1,
     username: 'sarthak',
     first_name: 'Sarthak',
     last_name: 'Agarwal',

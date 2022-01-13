@@ -8,14 +8,14 @@ import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detai
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
-import { SolutionTypes } from '@taggedweb/types/solution'
+import { Solution, SolutionTypes } from '@taggedweb/types/solution'
 import slugify from 'slugify'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  let solutionDetail
+  let solutionDetail: Solution
   try {
     solutionDetail = await fetchSolutionDetail(context.req.session, slug)
   } catch (error) {
@@ -99,34 +99,13 @@ export default function SolutionDetail({ solutionDetail }) {
     price: price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,
+    type: solutionDetail?.type,
   }
-  const provide_organization = solutionDetail.organization
-    ? {
-        name: solutionDetail.organization.name,
-        logo_url: solutionDetail.organization.logo_url,
-        website: solutionDetail.organization.website,
-      }
-    : null
-  const introductionData = {
-    id: solutionDetail.id,
-    slug: solutionDetail.slug,
-    assets: solutionDetail.assets,
-    tag: {
-      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
-      slug: slugify(solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other').toLowerCase(),
-    },
-    title: solutionDetail.title,
-    upvoted_count: solutionDetail.upvotes_count,
-    booked_count: solutionDetail.booked_count,
-    provide_organization,
-    point_of_contact: solutionDetail.point_of_contact,
-    overview_description: solutionDetail.description ?? '',
-    scope_of_work_description: solutionDetail.scope_of_work ?? '',
-    sidebar_info: solutionSidebarInfo,
-    questions: solutionDetail.questions,
-    my_solution_vote: solutionDetail?.my_solution_vote,
-    my_solution_bookmark: solutionDetail?.my_solution_bookmark,
-  }
+  solutionDetail.tags.push({
+    name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
+    slug: slugify(solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other').toLowerCase(),
+  })
+  const sidebar_info = solutionSidebarInfo
   const relatedProducts = solutionDetail.assets ?? []
 
   return (
@@ -140,7 +119,7 @@ export default function SolutionDetail({ solutionDetail }) {
         <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
         <div className="flex mt-6">
           <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
-            <SolutionDetailIntroduction introductionData={introductionData} />
+            <SolutionDetailIntroduction introductionData={solutionDetail} sidebar_info={sidebar_info} />
           </div>
           <SolutionDetailSidebar
             detailInfo={solutionSidebarInfo}

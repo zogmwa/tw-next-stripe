@@ -2,5 +2,5 @@
 export type Tag = {
   slug: string
   name: string
-  description: string | null
+  description?: string | null
 }
