@@ -24,6 +24,7 @@ import {
 import { Asset } from '@taggedweb/types/asset'
 import { phoneRegex } from '@taggedweb/utils/constants'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { validateLink } from '@taggedweb/utils/validateLink'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
@@ -198,7 +199,13 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               )}
             </>
             <a
-              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              href={
+                service.affiliate_link
+                  ? validateLink(service.affiliate_link)
+                  : service.website
+                  ? validateLink(service.website)
+                  : '#'
+              }
               target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center hidden md:inline-flex"
               rel="noreferrer"

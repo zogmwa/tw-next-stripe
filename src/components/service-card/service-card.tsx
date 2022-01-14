@@ -7,6 +7,7 @@ import { FiUsers } from 'react-icons/fi'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
 import { Asset } from '@taggedweb/types/asset'
+import { validateLink } from '@taggedweb/utils/validateLink'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
@@ -64,7 +65,13 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
               </a>
             </Link>
             <a
-              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              href={
+                service.affiliate_link
+                  ? validateLink(service.affiliate_link)
+                  : service.website
+                  ? validateLink(service.website)
+                  : '#'
+              }
               target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center"
               rel="noreferrer nofollow"
