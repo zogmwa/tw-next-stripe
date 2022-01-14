@@ -54,7 +54,9 @@ export function SearchQuestionBar({
     const questions = value.map((question) => question.value)
     if (questions.length > 5) {
       setError('A maximum of 5 questions are allowed.')
-      toast.error('A maximum of 5 questions are allowed.')
+      toast.error('A maximum of 5 questions are allowed.', {
+        id: 'question-limit-error',
+      })
     } else {
       setError('')
       setQuestions(questions)
@@ -71,7 +73,9 @@ export function SearchQuestionBar({
     event.preventDefault()
     if (questions.length === 0) {
       setError('Please enter a question')
-      toast.error('Please enter a question')
+      toast.error('Please enter a question', {
+        id: 'question-empty-error',
+      })
     } else {
       setError('')
       if (onSubmit) {

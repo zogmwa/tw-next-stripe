@@ -47,14 +47,18 @@ function SubmitService() {
   const queryClient = useQueryClient()
   const { isLoading, mutate } = useMutation((Asset: CreateServiceInput) => createService(Asset), {
     onSuccess: (serviceCreated: Asset) => {
-      toast.success('Product Submit Successfully. Redirecting to details page in edit mode.')
+      toast.success('Product Submit Successfully. Redirecting to details page in edit mode.', {
+        id: 'product-submit-success',
+      })
       queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
       push(`/software/${serviceCreated.slug}/edit`)
     },
     onError: (error: any) => {
       // @TODO: get error message from server
       const errorMessage = error?.data?.response?.messages?.[0]?.message ?? 'Something went wrong'
-      toast.error(errorMessage)
+      toast.error(errorMessage, {
+        id: 'product-submit-error',
+      })
     },
   })
 

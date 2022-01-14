@@ -93,7 +93,9 @@ function EditableUsedByCompaniesTableTrowComponent({
             onChange={(value) => {
               const tempData = allRowData.filter((organization) => organization.name === value.label)
               if (tempData.length > 0) {
-                toast.error('This organization is already exist')
+                toast.error('This organization is already exist', {
+                  id: 'organization-exists-error',
+                })
               } else {
                 setErrorMessage('')
                 setEditData({ name: value.label, logo_url: value.logo_url, website: value.website })

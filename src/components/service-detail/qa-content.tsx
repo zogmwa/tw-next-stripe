@@ -46,7 +46,9 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
         const questions = serviceQuestions
         questions.push(addedQuestion)
         setServiceQuestions(questions)
-        toast.success('Added a question successfully.')
+        toast.success('Added a question successfully.', {
+          id: 'question-add-success',
+        })
         setAddQuestionNameErrorMessage('')
         setAddQuestionName('')
         setIsAnswered(false)
@@ -63,11 +65,15 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
       if (data) {
         const questions = await fetchQuestions(service.slug)
         setServiceQuestions(questions)
-        toast.success('Answered successfully.')
+        toast.success('Answered successfully.', {
+          id: 'answer-add-success',
+        })
         setIsAnswered(true)
       }
     } else {
-      toast.error('Please enter your answer.')
+      toast.error('Please enter your answer.', {
+        id: 'answer-add-error',
+      })
     }
     setIsLoading(false)
     setClickedQuestionId(0)
@@ -97,7 +103,9 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
       })
       setVotedQuestions(votedQuestionList)
     } else {
-      toast.error('Please try again later.')
+      toast.error('Please try again later.', {
+        id: 'try-again-later',
+      })
     }
     setIsLoading(false)
     setClickedQuestionId(0)

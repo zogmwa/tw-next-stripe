@@ -30,9 +30,13 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
   }, [compareList])
   const handleCompare = () => {
     if (compareList.length < 2) {
-      toast.error('You should check at least 2 service.')
+      toast.error('You should check at least 2 service.', {
+        id: 'compare-list-length-error',
+      })
     } else if (compareList.length > MAX_COMPARE_COUNT) {
-      toast.error('You can compare at most 3 services.')
+      toast.error('You can compare at most 3 services.', {
+        id: 'compare-list-length-error',
+      })
     } else {
       const services = compareList.map((item) => item.slug)
       const compareParams = services.join('-vs-')

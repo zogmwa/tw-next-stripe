@@ -45,7 +45,9 @@ export default function LoginWithLinkedin() {
         })
         await mutate('/api/user')
 
-        toast.success('Login Successful and LinkedIn Account Connected')
+        toast.success('Login Successful and LinkedIn Account Connected', {
+          id: 'linkedin-account-connect-success',
+        })
 
         setShouldNextPageRedirect(true)
       } catch (error) {
@@ -93,7 +95,9 @@ export default function LoginWithLinkedin() {
                 })
                 await mutate('/api/user')
 
-                toast.success('Login Successful')
+                toast.success('Login Successful', {
+                  id: 'linkedin-login-success',
+                })
 
                 setShouldNextPageRedirect(true)
               } catch (error) {

@@ -24,13 +24,17 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
 
           setAllQuestion(searchedQuestions)
           setShowQuestions(searchedQuestions.slice(0, defaultShowCount))
-          toast.success('Loaded Questions List')
+          toast.success('Loaded Questions List', {
+            id: 'questions-load-success',
+          })
         } catch (error) {
           // eslint-disable-next-line
           console.log(error)
         }
       } else {
-        toast.error('Type at least 3 letters.')
+        toast.error('Type at least 3 letters.', {
+          id: 'search-slug-length-low',
+        })
       }
       setIsPressEnter(false)
     }

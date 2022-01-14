@@ -108,7 +108,9 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
-        toast.error('A maximum of 5 tags are allowed.')
+        toast.error('A maximum of 5 tags are allowed.', {
+          id: 'tag-limit-error',
+        })
       } else {
         setError('')
         setTags(value)
@@ -141,7 +143,9 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     if (forSoftware) {
       if (tags.length === 0) {
         setError('Please enter a tag')
-        toast.error('Please enter a tag')
+        toast.error('Please enter a tag', {
+          id: 'empty-tag-error',
+        })
       } else {
         setError('')
         if (onSubmit) {
@@ -153,7 +157,9 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     } else {
       if (solutionInput === '') {
         setError('No input given')
-        toast.error('No input given')
+        toast.error('No input given', {
+          id: 'empty-input-error',
+        })
       } else {
         setError('')
         if (onSubmit) {

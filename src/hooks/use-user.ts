@@ -24,7 +24,9 @@ export function useSessionUser(): UserContextType {
         await mutateUser(data)
         return true
       } catch (error) {
-        toast.error('Invalid username and password')
+        toast.error('Invalid username and password', {
+          id: 'incorrect-credential',
+        })
         return false
       }
     },
@@ -60,7 +62,9 @@ export function useSessionUser(): UserContextType {
       if (typeof window !== 'undefined') {
         try {
           if (!user?.authVerified) {
-            toast.error('You are not logged in')
+            toast.error('You are not logged in', {
+              id: 'invalid-logout-attempt',
+            })
             return
           }
 
@@ -71,7 +75,9 @@ export function useSessionUser(): UserContextType {
             if (error.response.status !== 401) throw error
           }
         } catch (error) {
-          toast.error('Could Not Logout')
+          toast.error('Could Not Logout', {
+            id: 'logout-failure',
+          })
         }
       }
     },

@@ -44,7 +44,9 @@ export default function Login() {
             onSubmit={async (values) => {
               const success = await forgotPasswordReset(uidb64, token, values)
               if (success) {
-                toast.success('Your password has been reset.')
+                toast.success('Your password has been reset.', {
+                  id: 'password-reset-success',
+                })
                 push('/login')
               }
             }}

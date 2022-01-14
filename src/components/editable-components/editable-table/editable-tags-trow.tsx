@@ -53,7 +53,9 @@ function EditableTagsTableTrowComponent({
             onChange={(value) => {
               const tempData = allRowData.filter((tag) => tag.name === value.label)
               if (tempData.length > 0) {
-                toast.error('This Tag is already exist')
+                toast.error('This Tag is already exist', {
+                  id: 'tag-exists-error',
+                })
               } else {
                 setErrorMessage('')
                 setEditData({ name: value.label, slug: value.slug, description: value.description })

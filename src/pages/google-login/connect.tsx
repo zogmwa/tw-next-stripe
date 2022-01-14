@@ -50,7 +50,9 @@ export default function GoogleConnect() {
         })
 
         await mutate('/api/user')
-        toast.success('Google Account Connected')
+        toast.success('Google Account Connected', {
+          id: 'google-account-connect-succes',
+        })
 
         setShouldNextPageRedirect(true)
       } catch (error) {

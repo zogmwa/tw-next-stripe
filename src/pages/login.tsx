@@ -119,10 +119,14 @@ export default function Login() {
                   onEmailSubmit={async ({ email }) => {
                     try {
                       await client.post('/dj-rest-auth/password/reset/', { email })
-                      toast.success('Sent Reset Link')
+                      toast.success('Sent Reset Link', {
+                        id: 'password-reset-initiate-success',
+                      })
                       return true
                     } catch (error) {
-                      toast.error('An error occurred')
+                      toast.error('An error occurred', {
+                        id: 'password-reset-initiate-error',
+                      })
                       return false
                     }
                   }}

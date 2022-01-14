@@ -42,7 +42,9 @@ function ReviewsContentComponent({
       rating: addData.avarageRate * 2,
     })
     if (data) {
-      toast.success('Added an asset review successfully.')
+      toast.success('Added an asset review successfully.', {
+        id: 'asset-review-add-success',
+      })
       setReviewMark(numeral(Number(data.asset_avg_rating ?? 0)).format('0.[0]'))
       setReviewsCount(data.asset_reviews_count)
     }

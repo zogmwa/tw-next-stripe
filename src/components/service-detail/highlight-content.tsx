@@ -91,9 +91,13 @@ function HighlightContentComponent({
               my_asset_attribute_vote: addedAttribute.my_asset_attribute_vote,
             })
             setAttributes(updatedAttributes)
-            toast.success('Added an attribute successfully.')
+            toast.success('Added an attribute successfully.', {
+              id: 'attribute-add-success',
+            })
           } else {
-            toast.success('This attribute already exist.')
+            toast.success('This attribute already exist.', {
+              id: 'attribute-add-error',
+            })
           }
         }
         setAddAttributeNameErrorMessage('')

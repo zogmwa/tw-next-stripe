@@ -53,7 +53,9 @@ export default function LoginWithGoogle() {
         })
 
         await mutate('/api/user')
-        toast.success('Login Successful and Google Account Connected')
+        toast.success('Login Successful and Google Account Connected', {
+          id: 'google-account-connect-success',
+        })
 
         setShouldNextPageRedirect(true)
       } catch (error) {
@@ -90,8 +92,9 @@ export default function LoginWithGoogle() {
 
               await mutate('/api/user')
               toast.success('Login Successful', {
-                id: 'login notification',
+                id: 'google-login-success',
               })
+
               setShouldNextPageRedirect(true)
             }
           } catch (error) {

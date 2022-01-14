@@ -8,8 +8,9 @@ export async function fetchSolutionDetail(solutionSlug) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Please Try Again. Could not load the data')
+    toast.error('Please Try Again. Could not load the data', {
+      id: 'solution-fetch-error',
+    })
     return null
   }
 }
@@ -21,8 +22,9 @@ export async function fetchSimilarProducts(solutionSlug) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Could not get similar software.')
+    toast.error('Could not get similar software.', {
+      id: 'similar-solutions-fetch-error',
+    })
     return null
   }
 }
@@ -35,9 +37,9 @@ export async function toggleUpVoteSolution(solutionId: number) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not vote a solution.')
+    toast.error('Could not vote a solution.', {
+      id: 'solution-upvote-toggle-error',
+    })
     return null
   }
 }
@@ -50,9 +52,9 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not destroy a solution vote.')
+    toast.error('Could not destroy a solution vote.', {
+      id: 'solution-downvote-toggle-error',
+    })
     return null
   }
 }
@@ -66,8 +68,9 @@ export async function checkoutSolutionPurchase(
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Could not purchase this solution .')
+    toast.error('Could not purchase this solution.', {
+      id: 'solution-checkout-error',
+    })
     return null
   }
 }
@@ -80,8 +83,9 @@ export async function toggleBookmarkSolution(solutionId: number): Promise<any | 
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to bookmark the solution.')
+    toast.error('Failed to bookmark the solution.', {
+      id: 'solution-bookmark-toggle-error',
+    })
     return null
   }
 }
@@ -94,8 +98,9 @@ export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: str
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to delete the bookmark.')
+    toast.error('Failed to delete the bookmark.', {
+      id: 'solution-bookmark-delete-error',
+    })
     return null
   }
 }
@@ -110,8 +115,9 @@ export async function toggleAddReviewSolution(solutionId: number, type: string):
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to adding review solution.')
+    toast.error('Failed to adding review solution.', {
+      id: 'solution-review-submit-error',
+    })
     return null
   }
 }
@@ -130,8 +136,9 @@ export async function toggleUpdateReviewSolution(
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to changing review solution.')
+    toast.error('Failed to changing review solution.', {
+      id: 'solution-review-update-error',
+    })
     return null
   }
 }
@@ -143,8 +150,9 @@ export async function toggleDeleteReviewSolution(solutionReviewId: number): Prom
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to canceling review solution.')
+    toast.error('Failed to canceling review solution.', {
+      id: 'solution-review-delete-error',
+    })
     return null
   }
 }
@@ -159,8 +167,12 @@ export async function toggleUpdateSolutionBookingRating(
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error(`Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`)
+    toast.error(
+      `Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`,
+      {
+        id: 'solution-booking-rating-update-error',
+      },
+    )
     return null
   }
 }

@@ -69,7 +69,9 @@ function EditableTagsTableComponent({
 
   const handleAdd = () => {
     if (showTags.length > 4) {
-      toast.error('Could not add more tags.')
+      toast.error('Could not add more tags.', {
+        id: 'tag-add-error',
+      })
     } else {
       setShowTags((prevState) => [...prevState, defaultTagData])
     }

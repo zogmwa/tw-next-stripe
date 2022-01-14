@@ -45,7 +45,9 @@ export default function LinkedinConnect() {
         })
         await mutate('/api/user')
 
-        toast.success('LinkedIn Account Connected')
+        toast.success('LinkedIn Account Connected', {
+          id: 'linkedin-account-connect-success',
+        })
 
         setShouldNextPageRedirect(true)
       } catch (error) {

@@ -23,7 +23,9 @@ export function DefaultServiceQuestionCard() {
   const votedQuestionList = []
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const upvoteQuestion = (questionId, status) => {
-    toast.success('Voted successfully.')
+    toast.success('Voted successfully.', {
+      id: 'question-upvote-success',
+    })
   }
 
   return (

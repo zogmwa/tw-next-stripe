@@ -43,7 +43,9 @@ export default function Service({ service }) {
     const updatedData = await patchAssetField(data, service.slug)
     if (updatedData) {
       setShowService(updatedData)
-      toast.success('Updated successfully.')
+      toast.success('Updated successfully.', {
+        id: 'service-update-success',
+      })
     }
   }
 

@@ -34,9 +34,13 @@ export function AddPorsConsBar({
     } else {
       const data = await toggleAddAttribute(asset, attribute, isCon)
       if (data) {
-        toast.success('Successfully added.')
+        toast.success('Successfully added.', {
+          id: 'attribute-add-success',
+        })
       } else {
-        toast.success('Failed.')
+        toast.success('Failed.', {
+          id: 'attribute-add-error',
+        })
       }
       setError('')
     }

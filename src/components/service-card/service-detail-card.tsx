@@ -356,7 +356,9 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
             onSubmit={async (values) => {
               const data = await claimOwnershipToAsset(service?.id, user, values)
               if (data) {
-                toast.success('Claim submitted for review.')
+                toast.success('Claim submitted for review.', {
+                  id: 'claim-submit-success',
+                })
               }
               setIsOpenOwnServiceModal(false)
             }}

@@ -55,7 +55,9 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
-        toast.error('A maximum of 5 tags are allowed.')
+        toast.error('A maximum of 5 tags are allowed.', {
+          id: 'tag-limit-error',
+        })
       } else {
         setError('')
         setTags(value)
@@ -74,7 +76,9 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     event.preventDefault()
     if (tags.length === 0) {
       setError('Please enter a tag')
-      toast.error('Please enter a tag')
+      toast.error('Please enter a tag', {
+        id: 'empty-tag-error',
+      })
     } else {
       setError('')
       if (onSubmit) {

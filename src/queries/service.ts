@@ -94,7 +94,6 @@ export async function fetchAttributeVotes(): Promise<AttributeVote | null> {
 
 export async function toggleUpVoteAttribute(assetId: number, attributeId: number): Promise<AttributeVote | null> {
   try {
-    // console.log('toggleUpVote ran')
     const { data } = await axios.post<AttributeVote>('/api/asset_attribute_votes/', {
       asset: assetId,
       attribute: attributeId,
@@ -103,9 +102,9 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not vote a attribute.')
+    toast.error('Could not vote a attribute.', {
+      id: 'attribute-upvote-toggle-error',
+    })
     return null
   }
 }
@@ -116,9 +115,9 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not destroy a attribute vote.')
+    toast.error('Could not destroy a attribute vote.', {
+      id: 'attribute-downvote-toggle-error',
+    })
     return null
   }
 }
@@ -131,9 +130,9 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not vote a asset.')
+    toast.error('Could not vote a asset.', {
+      id: 'asset-upvote-toggle-error',
+    })
     return null
   }
 }
@@ -146,9 +145,9 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not destroy a asset vote.')
+    toast.error('Could not destroy a asset vote.', {
+      id: 'asset-downvote-toggle-error',
+    })
     return null
   }
 }
@@ -176,9 +175,9 @@ export async function toggleAddAttribute(assetId: number, name: string, isCon: b
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not add a attribute.')
+    toast.error('Could not add a attribute.', {
+      id: 'attribute-add-error',
+    })
     return null
   }
 }
@@ -192,9 +191,9 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not add a question.')
+    toast.error('Could not add a question.', {
+      id: 'toggle-add-question-error',
+    })
     return null
   }
 }
@@ -207,9 +206,9 @@ export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQ
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not answer a question.')
+    toast.error('Could not answer a question.', {
+      id: 'answer-submit-error',
+    })
     return null
   }
 }
@@ -288,9 +287,9 @@ export async function addAssetReview(sendData): Promise<any | null> {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not add an asset review.')
+    toast.error('Could not add an asset review.', {
+      id: 'review-submit-error',
+    })
     return null
   }
 }
@@ -301,10 +300,9 @@ export async function patchAssetField(updateData, serviceSlug) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-
-    toast.error('Could not update this web service.')
+    toast.error('Could not update this web service.', {
+      id: 'service-update-error',
+    })
     return null
   }
 }
@@ -317,9 +315,9 @@ export async function linkAttributeToAsset(slug, attributeId) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Unexpected error in submitting the highlight.')
+    toast.error('Unexpected error in submitting the highlight.', {
+      id: 'attribute-submit-error',
+    })
     return null
   }
 }
@@ -334,10 +332,8 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-
     toast.error('Request failed. Kindly reach out to us at contact@taggedweb.com.', {
+      id: 'ownership-claim-error',
       duration: 5000,
     })
     return null

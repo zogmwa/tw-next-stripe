@@ -80,7 +80,9 @@ export function DefaultServiceQuestion() {
   }
 
   const answerQuestionAction = async (answerQuestion, questionId) => {
-    toast.success('Answered successfully.')
+    toast.success('Answered successfully.', {
+      id: 'question-answer-success',
+    })
   }
 
   const upvoteQuestion = async (id, isAddVote) => {

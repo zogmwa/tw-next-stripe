@@ -14,9 +14,13 @@ export async function forgotPasswordReset(uidb64: string, token: string, values:
   } catch (error) {
     if (error?.response.data) {
       const obj = error.response.data
-      toast.error(obj[Object.keys(obj)[0]])
+      toast.error(obj[Object.keys(obj)[0]], {
+        id: 'password-reset-error',
+      })
     } else {
-      toast.error('Could not reset password. Try again.')
+      toast.error('Could not reset password. Try again.', {
+        id: 'password-reset-error',
+      })
     }
     return false
   }
