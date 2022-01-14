@@ -19,7 +19,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  const service = await fetchServiceServer(context.req.session, slug)
+  const service = await fetchServiceServer(context.req, slug)
   const editAllowed = service?.edit_allowed ?? false
 
   if (!editAllowed) {

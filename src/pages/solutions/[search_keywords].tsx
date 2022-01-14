@@ -31,7 +31,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     keywords = SplitTheString(search_keywords)
     defaultUrl = '?q=' + keywords.join('&q=')
     const sendUrl = `${defaultUrl}&page=1&offest=0&limit=20`
-    solutionData = await fetchSolutionList(context.req.session, sendUrl)
+    solutionData = await fetchSolutionList(context.req, sendUrl)
   } catch (error) {
     Sentry.captureException(error)
     // eslint-disable-next-line

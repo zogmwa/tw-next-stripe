@@ -103,7 +103,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  const data = await fetchServiceServer(context.req.session, slug)
+  const data = await fetchServiceServer(context.req, slug)
   return {
     props: {
       fallback: {

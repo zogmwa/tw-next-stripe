@@ -17,7 +17,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   } = context
   let solutionDetail: Solution
   try {
-    solutionDetail = await fetchSolutionDetail(context.req.session, slug)
+    solutionDetail = await fetchSolutionDetail(context.req, slug)
   } catch (error) {
     return {
       notFound: true,

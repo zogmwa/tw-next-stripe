@@ -1,6 +1,6 @@
 import { withSessionApi } from '@taggedweb/utils/session'
 import { getAccessToken } from '@taggedweb/utils/token'
-import { client } from '@taggedweb/utils/client'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { withSentry } from '@sentry/nextjs'
 
 /**
@@ -10,9 +10,9 @@ export default withSentry(
   withSessionApi(async (req, res) => {
     const user = req.session.get('user')
     if (user) {
-      const access = await getAccessToken(req.session)
+      const access = await getAccessToken(req)
       if (access) {
-        await client.post(
+        await serverSideClient(req).post(
           '/dj-rest-auth/logout/',
           {},
           {

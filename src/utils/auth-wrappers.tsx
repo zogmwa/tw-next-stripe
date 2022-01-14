@@ -18,7 +18,7 @@ import { getAccessToken } from './token'
 const withApiAuthRequired: WithApiAuthRequired = (handler, options = {}) => {
   const { message = 'You need to be loggedin to access this api.' } = options
   return withSessionApi(async (req, res) => {
-    const access = await getAccessToken(req.session)
+    const access = await getAccessToken(req)
     if (access) {
       await handler(req, res)
     } else {
@@ -42,7 +42,7 @@ const withSSRAuthRequired: WithSSRAuthRequired = (
     if (!redirectTo) {
       redirectTo = `/login?next=${context.req.url}`
     }
-    const access = await getAccessToken(context.req.session)
+    const access = await getAccessToken(context.req)
     if (access) {
       if (handler) {
         const result = await handler(context)

@@ -1,21 +1,21 @@
 import { withSessionApi } from '@taggedweb/utils/session'
 import { fetchServiceServer } from '@taggedweb/server-queries/fetch-service'
 import { getAccessToken } from '@taggedweb/utils/token'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { withSentry } from '@sentry/nextjs'
 
 export default withSentry(
   withSessionApi(async (req, res) => {
     if (req.method === 'GET') {
       const slug = req.query.slug
-      const data = await fetchServiceServer(req.session, slug)
+      const data = await fetchServiceServer(req, slug)
       return res.json(data)
     }
     if (req.method === 'PATCH') {
-      const access = await getAccessToken(req.session)
+      const access = await getAccessToken(req)
       if (access) {
         const slug = req.query.slug
-        const { data } = await clientWithRetries.patch(`/assets/${slug}/`, req.body, {
+        const { data } = await serverSideClientWithRetries(req).patch(`/assets/${slug}/`, req.body, {
           headers: {
             Authorization: `Bearer ${access}`,
           },

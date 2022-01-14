@@ -7,16 +7,19 @@ import {
   MobileViewSortAndFilterServiceList,
   FilterServiceList,
 } from '@taggedweb/components/service-list-filter'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { SearchBar } from '@taggedweb/components/search-bar'
 import { Asset } from '@taggedweb/types/asset'
 import { CompareAccordian } from '@taggedweb/components/compare-accordian'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import { GetServerSidePropsContext } from 'next'
 
-export const getServerSideProps = async (context: {
-  query: { search_query: string; page: string; order: string; free_trial: string }
-}) => {
+export const getServerSideProps = async (
+  context: {
+    query: { search_query: string; page: string; order: string; free_trial: string }
+  } & GetServerSidePropsContext,
+) => {
   const tags = context.query.search_query
   const pg = context.query.page
   const order = context.query.order ? context.query.order : ''
@@ -35,7 +38,9 @@ export const getServerSideProps = async (context: {
   if (free_trial) {
     query = query + `&has_free_trial=${free_trial}`
   }
-  const { data } = await clientWithRetries.get<{ results: Asset[]; count: string }>(`/assets/?${query}`)
+  const { data } = await serverSideClientWithRetries(context.req).get<{ results: Asset[]; count: string }>(
+    `/assets/?${query}`,
+  )
   const totalCount = parseInt(data.count)
   const pageCount = totalCount % 10 === 0 ? totalCount / 10 : Math.floor(totalCount / 10) + 1
   const defaultArr = tags.split(',').map((tag) => ({ value: tag, label: tag }))

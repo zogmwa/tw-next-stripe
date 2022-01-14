@@ -1,5 +1,5 @@
 import { withSessionApi } from '@taggedweb/utils/session'
-import { client } from '@taggedweb/utils/client'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { setSessionTokens } from '@taggedweb/utils/token'
 import { User } from '@taggedweb/types/user'
 import { withSentry } from '@sentry/nextjs'
@@ -9,7 +9,7 @@ import { withSentry } from '@sentry/nextjs'
  */
 async function handler(req, res) {
   const { access_token: google_access_token } = req.body
-  const { data } = await client.post<{ access_token: string; refresh_token: string; user: User }>(
+  const { data } = await serverSideClient(req).post<{ access_token: string; refresh_token: string; user: User }>(
     '/dj-rest-auth/google/',
     {
       access_token: google_access_token,
