@@ -16,7 +16,7 @@ const SolutionTypesMap = new Map<string, string>()
 const solutionTypeKeys = Object.keys(SolutionTypes)
 // eslint-disable-next-line prefer-const
 for (let type in solutionTypeKeys) {
-  SolutionTypesMap.set(type, SolutionTypes[type])
+  SolutionTypesMap.set(solutionTypeKeys[type], SolutionTypes[solutionTypeKeys[type]])
 }
 
 export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
