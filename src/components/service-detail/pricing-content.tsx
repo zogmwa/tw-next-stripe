@@ -27,7 +27,7 @@ export function PricingContentComponent({
   const [showPriceEditModal, setPriceShowEditModal] = useState(false)
 
   if (typeof service === 'undefined') return null
-  const { price_plans: plans, name, website } = service
+  const { price_plans: plans, name, website, pricing_url } = service
 
   const handleSelectedSlideItem = (index) => {
     setSelectedItem(index)
@@ -60,7 +60,7 @@ export function PricingContentComponent({
           />
         </div>
       )}
-      {plans.length === 0 && <EmptyServicePricingCard name={name} website={website} />}
+      {plans.length === 0 && <EmptyServicePricingCard name={name} website={website} pricing_url={pricing_url} />}
       <Modal isOpen={showPriceEditModal} setIsOpen={setPriceShowEditModal} size="5xl">
         <EditablePricing pricePlans={plans} setEditModal={setPriceShowEditModal} onSubmit={onChange} />
       </Modal>
