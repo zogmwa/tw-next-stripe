@@ -27,6 +27,8 @@
     "@mui/material": "^5.1.0",
     "@nrwl/next": "12.7.2",
     "@sentry/nextjs": "^6.16.1",
+    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/stripe-js": "^1.22.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/line-clamp": "^0.2.1",
     "@tailwindcss/typography": "^0.4.1",

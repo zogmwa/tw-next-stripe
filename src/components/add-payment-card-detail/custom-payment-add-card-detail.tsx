@@ -3,12 +3,12 @@ import clsx from 'clsx'
 import { Button } from '../button'
 import { Input } from '../input'
 
-type AddCardDetailComponentProps = {
+type CustomAddCardDetailComponentProps = {
   className?: string
   addCardFunction: Function
 }
 
-function AddCardDetailComponent({ className, addCardFunction }: AddCardDetailComponentProps) {
+function CustomAddPaymentCardDetailComponent({ className, addCardFunction }: CustomAddCardDetailComponentProps) {
   const [holder, setHolder] = useState('')
   const [cardNumber, setCardNumber] = useState('')
   const [expiryDate, setExpiryDate] = useState('')
@@ -36,8 +36,8 @@ function AddCardDetailComponent({ className, addCardFunction }: AddCardDetailCom
       error = true
       setExpiryDateError('Please check your card expiry date')
     } else {
-      const stringDate = expiryDate.split('/')
-      const cardDate = new Date(Number('20' + stringDate[1]), Number(stringDate[0]) - 1, 0)
+      let stringDate = expiryDate.split('/')
+      let cardDate = new Date(Number('20' + stringDate[1]), Number(stringDate[0]) - 1, 0)
       if (cardDate < new Date()) {
         error = true
         setExpiryDateError('Please check your card expiry date')
@@ -52,7 +52,7 @@ function AddCardDetailComponent({ className, addCardFunction }: AddCardDetailCom
       setCvcError('')
     }
     if (!error) {
-      const stringDate = expiryDate.split('/')
+      let stringDate = expiryDate.split('/')
       setCardNumbeError('')
       setExpiryDateError('')
       setCvcError('')
@@ -83,10 +83,10 @@ function AddCardDetailComponent({ className, addCardFunction }: AddCardDetailCom
             placeholder="Card Number"
             value={cardNumber}
             onChange={(e) => {
-              const inputValue = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-              const matches = inputValue.match(/\d{4,16}/g)
-              const match = (matches && matches[0]) || ''
-              const parts = []
+              var inputValue = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+              var matches = inputValue.match(/\d{4,16}/g)
+              var match = (matches && matches[0]) || ''
+              var parts = []
 
               for (let i = 0, len = match.length; i < len; i += 4) {
                 parts.push(match.substring(i, i + 4))
@@ -138,4 +138,4 @@ function AddCardDetailComponent({ className, addCardFunction }: AddCardDetailCom
   )
 }
 
-export const AddCardDetail = AddCardDetailComponent
+export const CustomAddPaymentCardDetail = CustomAddPaymentCardDetailComponent
