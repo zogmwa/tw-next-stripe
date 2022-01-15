@@ -41,7 +41,6 @@ const InputField = ({ label, id, type, placeholder, required, autoComplete, valu
       autoComplete={autoComplete}
       value={value}
       onChange={onChange}
-      disabled={true}
     />
   </div>
 )
@@ -52,15 +51,14 @@ const ErrorMessage = ({ children }) => (
   </div>
 )
 
-const CheckoutForm = ({ username, email, addCard }) => {
+const CheckoutForm = ({ addCard }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [billingDetails, setBillingDetails] = useState({
-    email: email,
-    name: username,
+    name: '',
   })
 
   const handleSubmit = async (event) => {
@@ -118,18 +116,6 @@ const CheckoutForm = ({ username, email, addCard }) => {
             setBillingDetails({ ...billingDetails, name: e.target.value })
           }}
         />
-        <InputField
-          label="Email"
-          id="email"
-          type="email"
-          placeholder="janedoe@gmail.com"
-          required
-          autoComplete="email"
-          value={billingDetails.email}
-          onChange={(e) => {
-            setBillingDetails({ ...billingDetails, email: e.target.value })
-          }}
-        />
       </fieldset>
       <fieldset className="form-group">
         <CardField
@@ -158,16 +144,14 @@ const CheckoutForm = ({ username, email, addCard }) => {
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISH_KEY)
 
 type AddCardDetailComponentProps = {
-  username: string
-  email: string
   addCard: Function
 }
 
-const AddCardDetailComponent = ({ username, email, addCard }: AddCardDetailComponentProps) => {
+const AddCardDetailComponent = ({ addCard }: AddCardDetailComponentProps) => {
   return (
     <div className="AppWrapper">
       <Elements stripe={stripePromise}>
-        <CheckoutForm username={username} email={email} addCard={addCard} />
+        <CheckoutForm addCard={addCard} />
       </Elements>
     </div>
   )
