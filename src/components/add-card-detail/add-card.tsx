@@ -70,7 +70,7 @@ const CheckoutForm = (props: any) => {
   )
 }
 
-const AddCardComponent = () => {
+const AddPaymentCardComponent = () => {
   return (
     <Elements stripe={stripePromise}>
       <ElementsConsumer>{(ctx: any) => <CheckoutForm {...ctx} />}</ElementsConsumer>
@@ -78,4 +78,4 @@ const AddCardComponent = () => {
   )
 }
 
-export const AddCard = AddCardComponent
+export const AddPaymentCard = AddPaymentCardComponent

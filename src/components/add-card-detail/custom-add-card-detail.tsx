@@ -8,7 +8,7 @@ type CustomAddCardDetailComponentProps = {
   addCardFunction: Function
 }
 
-function CustomAddCardDetailComponent({ className, addCardFunction }: CustomAddCardDetailComponentProps) {
+function CustomAddPaymentCardDetailComponent({ className, addCardFunction }: CustomAddCardDetailComponentProps) {
   const [holder, setHolder] = useState('')
   const [cardNumber, setCardNumber] = useState('')
   const [expiryDate, setExpiryDate] = useState('')
@@ -138,4 +138,4 @@ function CustomAddCardDetailComponent({ className, addCardFunction }: CustomAddC
   )
 }
 
-export const CustomAddCardDetail = CustomAddCardDetailComponent
+export const CustomAddPaymentCardDetail = CustomAddPaymentCardDetailComponent

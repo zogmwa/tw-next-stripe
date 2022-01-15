@@ -1,3 +1,3 @@
-export { CustomAddCardDetail } from './custom-add-card-detail'
-export { AddCard } from './add-card'
-export { AddCardDetail } from './add-card-detail'
+export { CustomAddPaymentCardDetail } from './custom-add-card-detail'
+export { AddPaymentCard } from './add-card'
+export { AddPaymentCardDetail } from './add-card-detail'

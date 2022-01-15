@@ -143,11 +143,11 @@ const CheckoutForm = ({ addCard }) => {
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISH_KEY)
 
-type AddCardDetailComponentProps = {
+type AddPaymentCardDetailComponentProps = {
   addCard: Function
 }
 
-const AddCardDetailComponent = ({ addCard }: AddCardDetailComponentProps) => {
+const AddPaymentCardDetailComponent = ({ addCard }: AddPaymentCardDetailComponentProps) => {
   return (
     <div className="AppWrapper">
       <Elements stripe={stripePromise}>
@@ -157,4 +157,4 @@ const AddCardDetailComponent = ({ addCard }: AddCardDetailComponentProps) => {
   )
 }
 
-export const AddCardDetail = AddCardDetailComponent
+export const AddPaymentCardDetail = AddPaymentCardDetailComponent

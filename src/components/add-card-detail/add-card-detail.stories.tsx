@@ -1,15 +1,15 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { CustomAddCardDetail, AddCard, AddCardDetail } from './'
+import { CustomAddPaymentCardDetail, AddPaymentCard, AddPaymentCardDetail } from './'
 
 export default {
-  title: 'General/AddCardDetail',
-  component: CustomAddCardDetail,
+  title: 'General/AddPaymentCardDetail',
+  component: CustomAddPaymentCardDetail,
 } as Meta
 
 export function StripeAddDetail() {
   return (
-    <AddCardDetail
+    <AddPaymentCardDetail
       addCard={(paymentMethod) => {
         console.log('[paymentMethod]:', paymentMethod)
       }}
@@ -17,10 +17,10 @@ export function StripeAddDetail() {
   )
 }
 
-export function StripeAddCardDetail() {
-  return <AddCard />
+export function StripeAddPaymentCardDetail() {
+  return <AddPaymentCard />
 }
 
-export function CustomAddCard() {
-  return <CustomAddCardDetail addCardFunction={() => {}} />
+export function CustomAddPaymentCard() {
+  return <CustomAddPaymentCardDetail addCardFunction={() => {}} />
 }
