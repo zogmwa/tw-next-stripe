@@ -10,8 +10,6 @@ export default {
 export function StripeAddDetail() {
   return (
     <AddCardDetail
-      username="Pranjal Mittal"
-      email="contact@taggedweb.com"
       addCard={(paymentMethod) => {
         console.log('[paymentMethod]:', paymentMethod)
       }}
