@@ -1,7 +1,7 @@
 import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
+import { serverSideClient } from '@taggedweb/utils/client'
 
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
@@ -10,8 +10,8 @@ export default withSentry(
      */
     if (req.method === 'GET') {
       const { param } = req.query
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.get(`/question_votes/?question__asset__slug=${param}`, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClient(req).get(`/question_votes/?question__asset__slug=${param}`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -23,8 +23,8 @@ export default withSentry(
      */
     if (req.method === 'DELETE') {
       const { param } = req.query
-      const access = await getAccessToken(req.session)
-      const { status } = await clientWithRetries.delete(`/question_votes/${param}/`, {
+      const access = await getAccessToken(req)
+      const { status } = await serverSideClient(req).delete(`/question_votes/${param}/`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

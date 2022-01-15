@@ -18,6 +18,7 @@ export type Asset = {
   tweb_url?: string
   promo_video?: string
   price_plans?: Plan[]
+  pricing_url?: string
   upvotes_count?: number
   id: number
   has_free_trial?: boolean

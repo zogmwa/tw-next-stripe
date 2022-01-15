@@ -12,7 +12,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   } = context
 
   try {
-    const contractData = await fetchContract(context.req.session, user, '')
+    const contractData = await fetchContract(context.req, user, '')
     if (contractData.length < 1) {
       return {
         notFound: true,

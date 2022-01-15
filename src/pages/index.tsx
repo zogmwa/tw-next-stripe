@@ -1,4 +1,5 @@
 import React from 'react'
+import { GetServerSidePropsContext } from 'next'
 import Typewriter from 'typewriter-effect'
 import { PopularSolutionTags } from '@taggedweb/components/homepage-popular-solutions'
 import { FindingSolutions } from '@taggedweb/components/homepage-finding-solutions'
@@ -8,7 +9,9 @@ import Link from 'next/link'
 import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
-export const getServerSideProps = async (context: { query: { search_software: number } }) => {
+export const getServerSideProps = async (
+  context: { query: { search_software: number } } & GetServerSidePropsContext,
+) => {
   const forSoftware = context.query.search_software ? context.query.search_software : 0
 
   return {

@@ -1,6 +1,7 @@
 import { Session } from 'next-iron-session'
+import { SessionRequest } from '@taggedweb/types/session'
 import * as Sentry from '@sentry/nextjs'
-import { client } from './client'
+import { serverSideClient } from './client'
 
 function atob(b64Encoded) {
   return Buffer.from(b64Encoded, 'base64').toString()
@@ -46,7 +47,8 @@ export const setSessionTokens = async (session: Session, { access, refresh }): P
  * @param session
  * @returns access_token
  */
-export const getAccessToken = async (session: Session): Promise<string | void> => {
+export const getAccessToken = async (req: SessionRequest): Promise<string | void> => {
+  const session = req.session
   try {
     const user = session.get('user')
     if (!user) return null
@@ -67,7 +69,7 @@ export const getAccessToken = async (session: Session): Promise<string | void> =
     if (refresh && accessExp * 1000 - 60000 < Date.now()) {
       const {
         data: { access: newAccess },
-      } = await client.post<{ access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
+      } = await serverSideClient(req).post<{ access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
         refresh,
       })
       await setSessionTokens(session, { access: newAccess, refresh })

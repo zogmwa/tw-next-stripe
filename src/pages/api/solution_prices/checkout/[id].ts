@@ -1,4 +1,4 @@
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { withSentry } from '@sentry/nextjs'
@@ -11,10 +11,10 @@ export default withSentry(
     if (req.method === 'POST') {
       const { r } = req.query
       const { id } = req.query
-      const access = await getAccessToken(req.session)
+      const access = await getAccessToken(req)
       let url = `/solution-price-checkout/${id}`
       if (r) url += `?r=${r}`
-      const { data } = await clientWithRetries.post(url, req.body, {
+      const { data } = await serverSideClientWithRetries(req).post(url, req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

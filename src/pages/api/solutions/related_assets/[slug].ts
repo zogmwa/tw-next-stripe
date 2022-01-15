@@ -1,13 +1,13 @@
 import { withSessionApi } from '@taggedweb/utils/session'
 import { getAccessToken } from '@taggedweb/utils/token'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { withSentry } from '@sentry/nextjs'
 
 export default withSentry(
   withSessionApi(async (req, res) => {
     if (req.method === 'GET') {
       const slug = req.query.slug
-      const access = await getAccessToken(req.session)
+      const access = await getAccessToken(req)
       const config = access
         ? {
             headers: {
@@ -16,7 +16,7 @@ export default withSentry(
           }
         : null
 
-      const { data } = await clientWithRetries.get(`/solutions/related_assets/?slug=${slug}`, config)
+      const { data } = await serverSideClientWithRetries(req).get(`/solutions/related_assets/?slug=${slug}`, config)
       return res.json(data)
     }
   }),

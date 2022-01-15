@@ -1,15 +1,16 @@
 import React from 'react'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { SearchBar } from '@taggedweb/components/search-bar'
 import { Button } from '@taggedweb/components/button'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { HomepageFeatured } from '@taggedweb/components/homepage-featured'
-import { client } from '@taggedweb/utils/client'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { LIST_A_SOFTWARE_PATH } from '@taggedweb/utils/constants'
 
-export const getServerSideProps = async () => {
-  const { data: featuredList } = await client.get('/assets/featured/')
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data: featuredList } = await serverSideClient(context.req).get('/assets/featured/')
 
   return {
     props: { featuredList },

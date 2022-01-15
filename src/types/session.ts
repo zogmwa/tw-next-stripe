@@ -33,3 +33,5 @@ export type GetIronServerSideProps<
 > = (context: GetIronServerSidePropsContext<Q>) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
 
 export type WithSessionSSRHandler = (handler: GetIronServerSideProps) => GetIronServerSideProps
+
+export type SessionRequest = NextIronRequest | GetIronServerSidePropsContext['req']

@@ -1,5 +1,5 @@
 import { withSessionApi } from '@taggedweb/utils/session'
-import { client } from '@taggedweb/utils/client'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { Profile } from '@taggedweb/types/profile'
 import { withSentry } from '@sentry/nextjs'
@@ -9,10 +9,10 @@ import { withSentry } from '@sentry/nextjs'
  */
 export default withSentry(
   withSessionApi(async (req, res) => {
-    const access = await getAccessToken(req.session)
+    const access = await getAccessToken(req)
     if (access) {
       const user = req.session.get('user')
-      const { data } = await client.get<Profile>(`/users/${user.username}/`, {
+      const { data } = await serverSideClient(req).get<Profile>(`/users/${user.username}/`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
