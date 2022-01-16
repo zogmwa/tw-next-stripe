@@ -7,6 +7,7 @@ import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
+import { fetchHasPaymentMethod } from '@taggedweb/queries/user'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { Button } from '../button'
@@ -29,6 +30,14 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }
+  const toggleStartContract = async () => {
+    const payment = await fetchHasPaymentMethod()
+    if (payment.has_payment_method) {
+      console.log('Payment method attached')
+    } else {
+      router.push(`/add-card-details?slug=${detailInfo.slug}`)
+    }
+  }
 
   return (
     <div
@@ -39,7 +48,22 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     >
       <div className="flex items-center py-2">
         <BiDollar className="text-3xl font-bold text-text-primary" />
-        <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price / 100 : 0}</h4>
+        <h4 className="text-3xl font-bold text-text-primary" data-for="show-price-detail" data-tip>
+          {detailInfo.is_metered ? `${detailInfo.price}/hr` : detailInfo.price ? detailInfo.price / 100 : 0}
+        </h4>
+        {detailInfo.is_metered && (
+          <ReactTooltip
+            id="show-price-detail"
+            className="w-[200px]"
+            type="light"
+            place="top"
+            border={true}
+            borderColor="text-grey-200"
+            multiline={true}
+          >
+            Estimated price means that the solution may take longer to deliver
+          </ReactTooltip>
+        )}
       </div>
       <div className="flex flex-col p-2 space-y-2">
         {detailInfo.features.map((feature, index) => (
@@ -49,31 +73,44 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           </div>
         ))}
         <div className="flex flex-col items-center w-full">
-          <span data-for="purchase-button" data-tip>
+          {detailInfo.is_metered ? (
             <Button
               className="mt-4 bg-primary"
               textClassName="text-white"
               loading={isPurchase}
-              disabled={detailInfo.purchaseDisableOption || isPurchase}
+              disabled={isPurchase}
               loadingClassName="text-background-light"
-              onClick={requireLoginBeforeAction(() => togglePurchase())}
+              onClick={requireLoginBeforeAction(() => toggleStartContract())}
             >
-              {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
+              Start Contract
             </Button>
-            {detailInfo.purchaseDisableOption && (
-              <ReactTooltip
-                id="purchase-button"
-                className="w-[200px]"
-                type="light"
-                place="top"
-                border={true}
-                borderColor="text-grey-200"
-                multiline={true}
+          ) : (
+            <span data-for="purchase-button" data-tip>
+              <Button
+                className="mt-4 bg-primary"
+                textClassName="text-white"
+                loading={isPurchase}
+                disabled={detailInfo.purchaseDisableOption || isPurchase}
+                loadingClassName="text-background-light"
+                onClick={requireLoginBeforeAction(() => togglePurchase())}
               >
-                Capacity currently unavailable.
-              </ReactTooltip>
-            )}
-          </span>
+                {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
+              </Button>
+              {detailInfo.purchaseDisableOption && (
+                <ReactTooltip
+                  id="purchase-button"
+                  className="w-[200px]"
+                  type="light"
+                  place="top"
+                  border={true}
+                  borderColor="text-grey-200"
+                  multiline={true}
+                >
+                  Capacity currently unavailable.
+                </ReactTooltip>
+              )}
+            </span>
+          )}
           <Button
             onClick={() => {
               // @ts-ignore
