@@ -102,8 +102,8 @@ function SolutionDetailMobileSidebarComponent({
       <div className="flex flex-col items-center">
         {detailInfo.is_metered ? (
           <Button
-            className="mt-4 bg-primary"
-            textClassName="text-white"
+            className="mt-4 px-[0.5rem] bg-primary"
+            textClassName="text-white text-xs"
             loading={isPurchase}
             disabled={isPurchase}
             loadingClassName="text-background-light"
