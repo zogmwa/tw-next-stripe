@@ -72,6 +72,8 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
   const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   const [solution, setSolution] = useState<string>('')
+  const [solutionInput, setSolutionInput] = useState<string>('')
+  const [isFocusInMenuList, setIsFocusInMenuList] = useState<boolean>(false)
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   const serachBtnType = forHomepage ? 'homePage' : 'primary'
@@ -116,6 +118,11 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
 
   const handleSolutionChange = (value: { value: string; label: string }) => {
     setSolution(value.value)
+    setIsFocusInMenuList(false)
+  }
+
+  const handleSolutionInput = (value: string) => {
+    setSolutionInput(value)
   }
 
   /**
@@ -139,15 +146,40 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
         }
       }
     } else {
-      if (solution.length === 0) {
+      if (solution.length === 0 && solutionInput === '') {
         setError('No input given')
         toast.error('No input given')
       } else {
         setError('')
         if (onSubmit) {
-          onSubmit(solution)
+          if (solution) {
+            onSubmit(solution)
+          } else {
+            onSubmit(solutionInput)
+          }
         }
       }
+    }
+  }
+
+  const handleKeyPress = (event) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        if (!isFocusInMenuList) {
+          setIsFocusInMenuList(true)
+          event.preventDefault()
+        }
+        break
+
+      case 'Enter':
+        if (!isFocusInMenuList) {
+          event.preventDefault()
+          handleSubmit(event)
+        }
+        break
+
+      default:
+        break
     }
   }
 
@@ -175,11 +207,13 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           name="solutions"
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
+          onInputChange={handleSolutionInput}
           loadOptions={solutionSuggestions}
           instanceId="selectSolutions"
           className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
+          onKeyDown={handleKeyPress}
         />
       )}
       <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>

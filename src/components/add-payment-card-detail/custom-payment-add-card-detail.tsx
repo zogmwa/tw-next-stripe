@@ -36,8 +36,8 @@ function CustomAddPaymentCardDetailComponent({ className, addCardFunction }: Cus
       error = true
       setExpiryDateError('Please check your card expiry date')
     } else {
-      let stringDate = expiryDate.split('/')
-      let cardDate = new Date(Number('20' + stringDate[1]), Number(stringDate[0]) - 1, 0)
+      const stringDate = expiryDate.split('/')
+      const cardDate = new Date(Number('20' + stringDate[1]), Number(stringDate[0]) - 1, 0)
       if (cardDate < new Date()) {
         error = true
         setExpiryDateError('Please check your card expiry date')
@@ -52,7 +52,7 @@ function CustomAddPaymentCardDetailComponent({ className, addCardFunction }: Cus
       setCvcError('')
     }
     if (!error) {
-      let stringDate = expiryDate.split('/')
+      const stringDate = expiryDate.split('/')
       setCardNumbeError('')
       setExpiryDateError('')
       setCvcError('')
@@ -83,10 +83,10 @@ function CustomAddPaymentCardDetailComponent({ className, addCardFunction }: Cus
             placeholder="Card Number"
             value={cardNumber}
             onChange={(e) => {
-              var inputValue = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-              var matches = inputValue.match(/\d{4,16}/g)
-              var match = (matches && matches[0]) || ''
-              var parts = []
+              const inputValue = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+              const matches = inputValue.match(/\d{4,16}/g)
+              const match = (matches && matches[0]) || ''
+              const parts = []
 
               for (let i = 0, len = match.length; i < len; i += 4) {
                 parts.push(match.substring(i, i + 4))
