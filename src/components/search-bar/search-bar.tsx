@@ -72,6 +72,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
   const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   const [solution, setSolution] = useState<string>('')
+  const [isFocusInMenuList, setIsFocusInMenuList] = useState<boolean>(false)
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   const serachBtnType = forHomepage ? 'homePage' : 'primary'
@@ -116,6 +117,11 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
 
   const handleSolutionChange = (value: { value: string; label: string }) => {
     setSolution(value.value)
+    setIsFocusInMenuList(false)
+  }
+
+  const handleSolutionInput = (value: string) => {
+    setSolution(value)
   }
 
   /**
@@ -151,6 +157,27 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     }
   }
 
+  const handleKeyPress = (event) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        if (!isFocusInMenuList) {
+          setIsFocusInMenuList(true)
+          event.preventDefault()
+        }
+        break
+
+      case 'Enter':
+        if (!isFocusInMenuList) {
+          event.preventDefault()
+          handleSubmit(event)
+        }
+        break
+
+      default:
+        break
+    }
+  }
+
   return (
     <form
       className={clsx('flex flex-col sm:flex-row space-x-0 sm:space-x-2 w-full', className)}
@@ -175,11 +202,13 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           name="solutions"
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
+          onInputChange={handleSolutionInput}
           loadOptions={solutionSuggestions}
           instanceId="selectSolutions"
           className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
+          onKeyDown={handleKeyPress}
         />
       )}
       <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
