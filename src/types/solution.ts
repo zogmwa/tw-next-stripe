@@ -33,6 +33,11 @@ export type Solution = {
   title: string
   type: string
   upvotes_count?: number
+  is_metered: null | boolean
+  team_size: null | number
+  estimated_hours: null | number
+  blended_hourly_rate: null | number
+  billing_period: null | string
 }
 
 export type Point_of_contact = { id: number; username: string; first_name?: string; last_name?: string; email?: string }

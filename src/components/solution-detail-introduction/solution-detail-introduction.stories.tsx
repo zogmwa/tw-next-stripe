@@ -129,6 +129,11 @@ const introductionData = {
   ],
   my_solution_vote: 3,
   my_solution_bookmark: null,
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
 const sidebar_info_ = {
   pay_now_price: {
@@ -249,6 +254,11 @@ const introductionData_ = {
   ],
   my_solution_vote: 3,
   my_solution_bookmark: null,
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
 
 export function DefaultSolutionDetailIntroduction() {
