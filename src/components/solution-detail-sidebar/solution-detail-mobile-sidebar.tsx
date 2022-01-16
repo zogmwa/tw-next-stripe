@@ -8,6 +8,7 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
+import { fetchHasPaymentMethod } from '@taggedweb/queries/user'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { Button } from '../button'
@@ -37,6 +38,14 @@ function SolutionDetailMobileSidebarComponent({
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }
+  const toggleStartContract = async () => {
+    const payment = await fetchHasPaymentMethod()
+    if (payment.has_payment_method) {
+      console.log('Payment method attached')
+    } else {
+      router.push(`/add-card-details?slug=${detailInfo.slug}`)
+    }
+  }
 
   let showFeatureList = detailInfo.features
   if (!isShowMore) showFeatureList = detailInfo.features.slice(0, defaultShowCount)
@@ -46,7 +55,22 @@ function SolutionDetailMobileSidebarComponent({
       <div className="flex flex-col">
         <div className="flex items-center py-2">
           <BiDollar className="text-3xl font-bold text-text-primary" />
-          <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price / 100 : 0}</h4>
+          <h4 className="text-3xl font-bold text-text-primary">
+            {detailInfo.is_metered ? `${detailInfo.price}/hr` : detailInfo.price ? detailInfo.price / 100 : 0}
+          </h4>
+          {detailInfo.is_metered && (
+            <ReactTooltip
+              id="show-price-detail"
+              className="w-[200px]"
+              type="light"
+              place="top"
+              border={true}
+              borderColor="text-grey-200"
+              multiline={true}
+            >
+              Estimated price means that the solution may take longer to deliver
+            </ReactTooltip>
+          )}
         </div>
         <div className="flex flex-col p-2 space-y-2">
           {showFeatureList.map((feature, index) => (
@@ -76,16 +100,29 @@ function SolutionDetailMobileSidebarComponent({
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <Button
-          className="px-[0.5rem] mt-2 bg-primary"
-          textClassName="text-white text-xs"
-          loading={isPurchase}
-          disabled={detailInfo.purchaseDisableOption || isPurchase}
-          loadingClassName="text-background-light"
-          onClick={requireLoginBeforeAction(() => togglePurchase())}
-        >
-          {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
-        </Button>
+        {detailInfo.is_metered ? (
+          <Button
+            className="mt-4 px-[0.5rem] bg-primary"
+            textClassName="text-white text-xs"
+            loading={isPurchase}
+            disabled={isPurchase}
+            loadingClassName="text-background-light"
+            onClick={requireLoginBeforeAction(() => toggleStartContract())}
+          >
+            Start Contract
+          </Button>
+        ) : (
+          <Button
+            className="px-[0.5rem] mt-2 bg-primary"
+            textClassName="text-white text-xs"
+            loading={isPurchase}
+            disabled={detailInfo.purchaseDisableOption || isPurchase}
+            loadingClassName="text-background-light"
+            onClick={requireLoginBeforeAction(() => togglePurchase())}
+          >
+            {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
+          </Button>
+        )}
         <Button onClick={() => setIsFreshChatShow(true)} className="px-[0.5rem] mt-2" textClassName="text-xs">
           Ask Questions
         </Button>

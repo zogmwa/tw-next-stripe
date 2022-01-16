@@ -61,26 +61,43 @@ export default function SolutionDetail({ solutionDetail }) {
 
   const features = []
   let purchaseDisableOption = false
-  if (solutionDetail.eta_days) {
-    features.push({
-      id: 'eta-days',
-      name: `Estimated Days to Fulfill: ${solutionDetail.eta_days}`,
-      tooltipContent: 'This is an estimate on number of days it will take to deliver.',
-    })
-  }
-  if (solutionDetail.has_free_consultation) {
-    features.push({
-      id: 'free-trial',
-      name: 'Free Trial',
-      tooltipContent: 'This Solution has free trial.',
-    })
-  }
-  if (solutionDetail.follow_up_hourly_rate) {
-    features.push({
-      id: 'hourly-rate',
-      name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
-      tooltipContent: 'This is the estimated hourly rate for followup work beyond stated scope.',
-    })
+  if (solutionDetail.is_metered) {
+    if (solutionDetail.estimated_hours) {
+      features.push({
+        id: 'eta-hours',
+        name: `Estimated Hours to Fulfill: ${solutionDetail.estimated_hours}`,
+        tooltipContent: 'This is an estimate on number of hours it will take to provide.',
+      })
+    }
+    if (solutionDetail.billing_period) {
+      features.push({
+        id: 'billing_period',
+        name: `Billing Period: ${solutionDetail.billing_period}`,
+        tooltipContent: 'This is a billing period.',
+      })
+    }
+  } else {
+    if (solutionDetail.eta_days) {
+      features.push({
+        id: 'eta-days',
+        name: `Estimated Days to Fulfill: ${solutionDetail.eta_days}`,
+        tooltipContent: 'This is an estimate on number of days it will take to deliver.',
+      })
+    }
+    if (solutionDetail.has_free_consultation) {
+      features.push({
+        id: 'free-trial',
+        name: 'Free Trial',
+        tooltipContent: 'This Solution has free trial.',
+      })
+    }
+    if (solutionDetail.follow_up_hourly_rate) {
+      features.push({
+        id: 'hourly-rate',
+        name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
+        tooltipContent: 'This is the estimated hourly rate for followup work beyond scope of work.',
+      })
+    }
   }
   features.push({
     id: 'capacity',
@@ -95,8 +112,10 @@ export default function SolutionDetail({ solutionDetail }) {
   }
 
   const solutionSidebarInfo = {
+    is_metered: solutionDetail.is_metered,
+    slug: solutionDetail.slug,
     pay_now_price: price,
-    price: price?.price,
+    price: solutionDetail.is_metered ? solutionDetail.blended_hourly_rate ?? 0 : price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,
     type: solutionDetail?.type,

@@ -36,6 +36,8 @@ const sidebar_info = {
   ],
   purchaseDisableOption: true,
   type: 'I',
+  slug: 'test',
+  is_metered: false,
 }
 const introductionData = {
   id: 1,
@@ -165,6 +167,8 @@ const sidebar_info_ = {
   ],
   purchaseDisableOption: true,
   type: 'C',
+  slug: 'test',
+  is_metered: false,
 }
 const introductionData_ = {
   id: 1,

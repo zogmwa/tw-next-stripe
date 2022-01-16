@@ -37,6 +37,8 @@ const solutionSidebarInfo = {
   ],
   purchaseDisableOption: true,
   type: 'C',
+  slug: 'test',
+  is_metered: false,
 }
 
 export function DefaultSolutionDetailSidebar() {
