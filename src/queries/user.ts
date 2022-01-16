@@ -12,7 +12,7 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
     Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
-    toast.error('We could not attach card info to your account. Please try again later.')
+    toast.error('We are facing trouble attaching your card info to your account. Please try in sometime.')
     return null
   }
 }
