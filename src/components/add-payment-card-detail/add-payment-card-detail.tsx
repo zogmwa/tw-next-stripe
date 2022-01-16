@@ -127,8 +127,8 @@ const CheckoutForm = ({ addCard }) => {
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <Button
-        className={clsx('mt-2 self-end ', error ? 'border-red-600 !text-red-600' : '')}
-        loadingClassName="text-primary"
+        className={clsx('mt-6 bg-primary ', error ? 'border-red-600 !text-red-600' : '')}
+        textClassName="text-text-on-surface"
         type="submit"
         loading={processing}
         disabled={processing || !stripe || error}
@@ -145,11 +145,12 @@ const stripePromise = loadStripe(process.env.STRIPE_PUBLISH_KEY)
 
 type AddPaymentCardDetailComponentProps = {
   addCard: Function
+  className?: string
 }
 
-const AddPaymentCardDetailComponent = ({ addCard }: AddPaymentCardDetailComponentProps) => {
+const AddPaymentCardDetailComponent = ({ addCard, className }: AddPaymentCardDetailComponentProps) => {
   return (
-    <div className="AppWrapper">
+    <div className={clsx('AppWrapper ', className)}>
       <Elements stripe={stripePromise}>
         <CheckoutForm addCard={addCard} />
       </Elements>
