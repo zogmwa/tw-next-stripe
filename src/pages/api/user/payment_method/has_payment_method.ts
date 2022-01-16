@@ -10,7 +10,7 @@ export default withSentry(
   withApiAuthRequired(async (req, res) => {
     if (req.method === 'GET') {
       const access = await getAccessToken(req)
-      const { data } = await clientWithRetries.get('/users/get_has_payment_method/', {
+      const { data } = await clientWithRetries.get('/users/has_payment_method/', {
         headers: {
           Authorization: `Bearer ${access}`,
         },
