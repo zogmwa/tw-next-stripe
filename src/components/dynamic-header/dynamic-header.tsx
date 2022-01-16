@@ -9,8 +9,8 @@ type DynamicHeaderComponentProps = {
 
 // TODO: We should change this title and description before final launch.
 function DynamicHeaderComponent({
-  title = 'Shop around for SaaS Solutions, Software, Integrations, Consultations',
-  description = 'Shop for the best SaaS Solutions and Cloud Software. Unblock your team with SaaS Integrations, Consultations, Usage Support and more from top engineers and domain experts.',
+  title = 'Software, SaaS Experts, Consultations, Solutions - TaggedWeb',
+  description = 'Find Consultations, Solutions, Support and Integrations from the best software engineers, developers, certified specialists, marketers and SaaS experts. Find, integrate and utilize software tools that best fits your needs, tailored to your technology stack and needs.',
 }: DynamicHeaderComponentProps) {
   const { asPath } = useRouter()
   return (

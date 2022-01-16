@@ -243,7 +243,7 @@ function SolutionDetailIntroductionComponent({ introductionData, sidebar_info }:
         </div>
         <div style={{ scrollMarginTop: '3rem' }} id="solutions-scope" className="flex flex-col pt-2 md:pt-6">
           <a href="#solutions-scope">
-            <h4 className="font-bold text-black text-md">Scope of Work</h4>
+            <h4 className="font-bold text-black text-md">Scope</h4>
           </a>
           <div className={style.unsetTailwind}>
             <Markdown value={introductionData.scope_of_work} renderer={renderer} />

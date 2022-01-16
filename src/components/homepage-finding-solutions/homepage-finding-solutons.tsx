@@ -7,7 +7,7 @@ export function FindingSolutions() {
   return (
     <div className="py-8 bg-gray-50">
       <div className="relative max-w-screen-lg px-2 mx-auto">
-        <div className="mb-20 text-2xl font-bold text-center">Finding Solutions: How it Works</div>
+        <div className="mb-20 text-2xl font-bold text-center">Finding Solutions & Consultations: How it Works</div>
         <div className="flex flex-col mb-16 md:flex-row">
           <div className="w-full md:w-5/12">
             <img src="/images/step_1.png" alt="Search Solution and Software" className="w-full mx-auto" />
@@ -21,11 +21,13 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <AiOutlineSearch />
             </div>
-            <div className="text-2xl font-bold">Find software solutions provided by domain experts</div>
+            <h3 className="text-2xl font-bold">
+              Find Time with and Solutions from the Best: Certified Specialists, Engineers and Domain-Experts{' '}
+            </h3>
             <div className="text-lg text-text-tertiary">
               Micro-Solutions are well defined in scope and can range from SaaS Integration Solutions to a consultation
-              on how to effectively utilize a piece of software. Check description and scope of work to see if a
-              solution fits your needs.
+              on how to effectively utilize a piece of software. Check description and scope to see if a solution fits
+              your needs.
             </div>
           </div>
         </div>
@@ -38,7 +40,7 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <HiClipboardList />
             </div>
-            <div className="text-2xl font-bold">See Solution details, Scope of Work, FAQs, Ask Questions</div>
+            <div className="text-2xl font-bold">See Solution details, Scope, FAQs, Ask Questions</div>
             <div className="text-lg text-text-tertiary">
               See details about the solution. If needed, ask questions with us over chat to clarify if the solution
               meets your needs. Reach out to us if anything is unclear. If you are not looking for solutions but just
@@ -72,10 +74,11 @@ export function FindingSolutions() {
             <div className="text-4xl text-blue-500">
               <HiClipboardList />
             </div>
-            <div className="text-2xl font-bold">Book the solution and let us take care of the rest</div>
+            <div className="text-2xl font-bold">Book the Solution and let us take care of the rest!</div>
             <div className="text-lg text-text-tertiary">
-              We will match you with the top 10 percent solution providers who will “solve” it for you. We will
-              communicate with you during the process of fulfilling the solution.
+              Once you book a solution, we will connect you with the provider for a consultation or for fulfilling your
+              solution. You can communicate with them about the specifics of the problem that you are looking to solve.
+              We coordinate with our providers to ensure a timely fulfillment.
             </div>
           </div>
         </div>

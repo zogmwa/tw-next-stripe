@@ -60,7 +60,7 @@ export function SubscribeComponent() {
                 type="text"
                 name="contact"
                 placeholder="Enter your email"
-                className="w-full py-3 pl-2 text-sm text-gray-700 border-none rounded-md "
+                className="w-full py-3 pl-2 ml-1 text-sm text-gray-700 border-none rounded-md "
                 value={contactEmail}
                 onChange={(e) => {
                   setContactEmail(e.target.value)
