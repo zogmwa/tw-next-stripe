@@ -56,6 +56,11 @@ const contractsList = [
       scope_of_work:
         'This consultation will be an hour long centered as a discussion to help you answer questions like:\r\n\r\n- Evaluation of current modalities of 2FA/MFA in use by the customer from lenses of security, risk adaptations and usability.\r\n\r\n- What are the best possible ways to nullify identified vulnerabilities with contextualised adoptions and modifications with minimizing friction?\r\n\r\n- What are the upcoming methods and practices of MFA and identity which business should be aware of?\r\n\r\nUnder this solution, we will sit together on a call to discuss your authentication related issues and problems and we will try to figure out the best possible solutions for it. We at Silence Labs are also open to the possibility of a follow-up longer-term engagement if needed to update your organization with state of the art MFA security. Once you book this solution you should receive an email with a scheduling link.',
       type: 'C',
+      is_metered: null,
+      team_size: null,
+      estimated_hours: null,
+      blended_hourly_rate: null,
+      billing_period: null,
     },
     booked_by: 3,
     manager: null,

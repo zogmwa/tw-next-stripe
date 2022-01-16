@@ -73,6 +73,11 @@ const listingData = {
       website: null,
     },
   ],
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
 
 export function DefaultSolutionListingCard() {
