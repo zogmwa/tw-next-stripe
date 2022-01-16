@@ -19,7 +19,7 @@ type SearchByTagsProps = {
 }
 
 const placeholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
+  <div className="flex space-x-2">
     <div className="hidden leading-none md:flex">Type feature tags of interest e.g. email-marketing, landing-pages</div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>
@@ -27,7 +27,7 @@ const placeholderComponent = (
 
 const homepagePlaceholderComponent = (
   <div className="flex space-x-2 items-left">
-    <div className="leading-none">e.g. Improve my Python application performance</div>
+    <div className="leading-none">e.g. Help with HTTPS setup (SSL Certificates) for my website </div>
   </div>
 )
 

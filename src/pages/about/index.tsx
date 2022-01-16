@@ -7,7 +7,7 @@ import { TiMail, TiSocialFacebook, TiSocialTwitter, TiSocialLinkedin } from 'rea
 const servicesCategoryData = [
   {
     title: 'Solutions',
-    description: 'Find software solutions provided by domain experts',
+    description: 'Find solutions or consult with domain experts',
     imgSrc: '/images/step_1.png',
     href: '/about/solutions',
   },

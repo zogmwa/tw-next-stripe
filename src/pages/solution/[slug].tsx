@@ -79,14 +79,14 @@ export default function SolutionDetail({ solutionDetail }) {
     features.push({
       id: 'hourly-rate',
       name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
-      tooltipContent: 'This is the estimated hourly rate for followup work beyond scope of work.',
+      tooltipContent: 'This is the estimated hourly rate for followup work beyond stated scope.',
     })
   }
   features.push({
     id: 'capacity',
     name: `Only ${
       (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
-    } more slots available at this time`,
+    } more slot(s) available at this time`,
     tooltipContent:
       'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
   })

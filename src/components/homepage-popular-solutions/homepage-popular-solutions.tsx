@@ -60,7 +60,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Cloud Migration Solutions',
+    name: 'Cloud Migration Consultations',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -79,7 +79,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Software Architecture Audit',
+    name: 'Software Architecture Review',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -101,7 +101,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Security Audit',
+    name: 'Kubernetes Deployment Consultation',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path

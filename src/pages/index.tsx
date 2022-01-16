@@ -63,21 +63,23 @@ export default function Home({ search_software = 0 }: HomeProps) {
                   <Typewriter
                     options={{
                       strings: [
-                        'for expert help on a SaaS integration?',
-                        'to reduce your cloud bills?',
+                        'for help on a SaaS integration?',
+                        'to migrate to the cloud?',
                         'for help using an open-source package?',
                         'to improve your application performance?',
                       ],
                       autoStart: true,
                       loop: true,
-                      delay: 1.1,
+                      delay: 50,
                       deleteSpeed: 1,
                     }}
                   />
                 </>
               </h1>
             </div>
-            <div className="py-2 mb-4 text-3xl font-semibold text-white">We may have a solution. Just search!</div>
+            <h2 className="py-2 mb-4 text-3xl font-medium text-white">
+              Consult with the best Software Engineers, Architects, Researchers, Marketers and SaaS Specialists
+            </h2>
             <div className="z-10 w-full mb-4">
               <SearchComponent search_software={search_software} />
             </div>
@@ -89,9 +91,9 @@ export default function Home({ search_software = 0 }: HomeProps) {
       </div>
       <div className="bg-blue-300">
         <div className="max-w-screen-lg py-4 mx-auto text-center">
-          <div className="mx-2 text-sm font-medium text-black md:text-base lg:text-lg">
-            Our mission is to help you find and utilize SaaS solutions and software that best fits your needs
-          </div>
+          <h3 className="mx-2 text-sm font-medium text-black md:text-base lg:text-lg">
+            Our mission is to help you find, integrate and utilize SaaS and software tools that best-fit your needs.
+          </h3>
         </div>
       </div>
       <div className="my-12">
@@ -121,8 +123,12 @@ export default function Home({ search_software = 0 }: HomeProps) {
               />
             </div>
             <div className="z-10 flex flex-col items-start justify-center w-full pt-4 md:pt-0 md:w-1/2">
-              <div className="text-2xl font-bold text-white">Are you a software services or solutions provider?</div>
-              <div className="mb-8 text-lg font-medium text-white">Better connect with your customers</div>
+              <div className="text-2xl font-bold text-white">
+                Are you a certified SaaS specialist, engineer or IT services provider?
+              </div>
+              <div className="mb-8 text-lg font-medium text-white">
+                Better connect with your customers with a TaggedWeb listing.
+              </div>
               <Link href={`${SOLUTIONS_CONTACT_GOOGLE_FORM}`} passHref>
                 <a target="_blank" rel="noreferrer">
                   <Button buttonType="homePage" className="mb-4">
