@@ -16,3 +16,15 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
     return null
   }
 }
+
+export async function fetchHasPaymentMethod(): Promise<null | any> {
+  try {
+    const { data } = await axios.get('/api/user/payment_method/has_payment_method/')
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
