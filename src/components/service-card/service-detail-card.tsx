@@ -368,7 +368,7 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                     Email Id
                   </label>
                   <Input
-                    placeholder="Enter email"
+                    placeholder="Enter your email"
                     id="email"
                     className="mb-4"
                     onChange={handleChange('email')}

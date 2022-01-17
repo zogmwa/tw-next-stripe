@@ -165,7 +165,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   useEffect(() => {
     if (solutionList.length === 0) {
       setError(
-        'No Results Found. Try again or reach us out directly at contact@taggedweb.com with your problem statement.',
+        'No results found. Please describe your problem below. (If you would like to partner with us on offering a solution, kindly reach out to us at contact@taggedweb.com)',
       )
     } else {
       setError('')
@@ -239,14 +239,16 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
             </div>
           )}
           <div className="flex flex-col p-4 m-2 border border-solid rounded cursor-pointer border-border-default">
-            <p>Didn&apos;t find any solution to your needs?</p>
+            <p>
+              Couldn&apos;t find a listed solution for your problem? Please tell us about it. We&apos;d love to help.
+            </p>
             <a
               href="#"
               id="userProblem"
               onClick={() => setIsOpenUserProblemModal(!isOpenUserProblemModal)}
               className="md:items-center md:cursor-pointer md:space-x-2"
             >
-              <Button size="small">Post your solution request</Button>
+              <Button size="small">Describe your Problem</Button>
             </a>
           </div>
         </div>
@@ -271,7 +273,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
                     Email Id
                   </label>
                   <Input
-                    placeholder="Enter email"
+                    placeholder="Enter your email"
                     id="email"
                     className="mb-4"
                     onChange={handleChange('email')}
@@ -294,10 +296,10 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
                     success={touched.budget && !errors.budget}
                   /> */}
                   <label className="block mb-2 text-sm text-text-primary" htmlFor="description">
-                    Describe the solution you&apos;re looking - please be as detailed as possible:
+                    What is the problem that you&apos;re looking to solve. Kindly be as descriptive as possible:
                   </label>
                   <Textarea
-                    placeholder="I'm looking for..."
+                    placeholder="I'm looking for a consultation with someone experienced with integrating and using XYZ Software, or setting up an email-marketing tool on my AWS account"
                     id=""
                     className="mb-4"
                     onChange={handleChange('description')}
