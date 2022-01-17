@@ -63,9 +63,27 @@ export async function solutionSuggestions(searchInput: string): Promise<Solution
   if (searchInput.length >= 3) {
     try {
       const { data } = await client.get(`/autocomplete-solutions/?q=${searchInput}`)
-      const soltuionResults = data.results.map((option) => ({ value: option.slug, label: option.title }))
+      const IntegrationResults = data.results
+        .filter((option) => option.type === 'I')
+        .map((option) => ({ value: option.slug, label: option.title }))
+
+      const ConsultaionResults = data.results
+        .filter((option) => option.type === 'C')
+        .map((option) => ({ value: option.slug, label: option.title }))
+
+      const UsageSupportResults = data.results
+        .filter((option) => option.type === 'U')
+        .map((option) => ({ value: option.slug, label: option.title }))
+
+      const OtherResults = data.results
+        .filter((option) => option.type === 'O')
+        .map((option) => ({ value: option.slug, label: option.title }))
+
       return [
-        { label: 'Solutions', options: soltuionResults },
+        { label: 'Integration', options: IntegrationResults },
+        { label: 'Consultaion', options: ConsultaionResults },
+        { label: 'Usage Support', options: UsageSupportResults },
+        { label: 'Other Solutions', options: OtherResults },
         { label: '', options: [{ value: searchInput, label: searchInput }] },
       ]
     } catch (error) {

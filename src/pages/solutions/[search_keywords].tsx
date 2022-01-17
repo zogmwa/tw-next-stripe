@@ -239,7 +239,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
             </div>
           )}
           <div className="flex flex-col p-4 m-2 border border-solid rounded cursor-pointer border-border-default">
-            <p>Didn't find any solution to your needs?</p>
+            <p>Didn&apos;t find any solution to your needs?</p>
             <a
               href="#"
               id="userProblem"
@@ -294,7 +294,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
                     success={touched.budget && !errors.budget}
                   /> */}
                   <label className="block mb-2 text-sm text-text-primary" htmlFor="description">
-                    Describe the solution you're looking - please be as detailed as possible:
+                    Describe the solution you&apos;re looking - please be as detailed as possible:
                   </label>
                   <Textarea
                     placeholder="I'm looking for..."
