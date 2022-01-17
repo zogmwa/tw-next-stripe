@@ -112,6 +112,7 @@ export default function SolutionDetail({ solutionDetail }) {
   }
 
   const solutionSidebarInfo = {
+    title: solutionDetail.title,
     is_metered: solutionDetail.is_metered,
     slug: solutionDetail.slug,
     pay_now_price: price,
