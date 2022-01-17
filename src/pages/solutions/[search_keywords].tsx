@@ -71,7 +71,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   const [showClearFilter, setShowClearFilter] = useState(false)
   const [isOpenUserProblemModal, setIsOpenUserProblemModal] = useState(false)
   const user = useUserContext()
-
+  const { isLoggedIn } = useUserContext()
   const router = useRouter()
   const { search_keywords } = router?.query
 
@@ -256,10 +256,12 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
       <Modal isOpen={isOpenUserProblemModal} setIsOpen={setIsOpenUserProblemModal}>
         <>
           <Formik
-            initialValues={{ email: '', description: '' }}
+            initialValues={{ email: user?.email, description: '' }}
             validationSchema={UserProblemFormSchema}
             onSubmit={async (values) => {
-              const data = await submitUserProblems(String(search_keywords), user, values.description, values.email)
+              const data = isLoggedIn
+                ? await submitUserProblems(String(search_keywords), user, values.description, values.email)
+                : await submitUserProblems(String(search_keywords), null, values.description, values.email)
               if (data) {
                 toast.success('Claim submitted for review.')
               }

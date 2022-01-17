@@ -89,8 +89,9 @@ export default function LoginWithGoogle() {
               })
 
               await mutate('/api/user')
-              toast.success('Login Successful')
-
+              toast.success('Login Successful', {
+                id: 'login notification',
+              })
               setShouldNextPageRedirect(true)
             }
           } catch (error) {

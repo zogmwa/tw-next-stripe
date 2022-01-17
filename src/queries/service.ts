@@ -344,7 +344,7 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
   }
 }
 
-export async function submitUserProblems(Search_query: string, User, description: string, email = null) {
+export async function submitUserProblems(Search_query: string, User = null, description: string, email = null) {
   try {
     const { data } = await axios.post('/api/submit_user_problem/', {
       searched_term: Search_query,

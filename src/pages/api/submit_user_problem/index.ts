@@ -9,12 +9,16 @@ import { withSentry } from '@sentry/nextjs'
 export default withSentry(
   withSessionApi(async (req, res) => {
     if (req.method === 'POST') {
-      const access = await getAccessToken(req)
-      const { data } = await serverSideClientWithRetries(req).post('/user_problems/', req.body, {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      })
+      const accessToken = await getAccessToken(req)
+      let config = null
+      if (accessToken) {
+        config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      }
+      const { data } = await serverSideClientWithRetries(req).post('/user_problems/', req.body, config)
       res.json(data)
     }
   }),
