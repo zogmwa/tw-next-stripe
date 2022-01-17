@@ -13,6 +13,20 @@ import { Button } from '@taggedweb/components/button'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
 import * as Sentry from '@sentry/nextjs'
+import { Modal } from '@taggedweb/components/Modal/modal'
+import { Formik } from 'formik'
+import { Textarea } from '@taggedweb/components/textarea'
+import * as yup from 'yup'
+import { Input } from '@taggedweb/components/input'
+import toast from 'react-hot-toast'
+import { submitUserProblems } from '@taggedweb/queries/service'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { useRouter } from 'next/router'
+
+const UserProblemFormSchema = yup.object().shape({
+  email: yup.string().email().required('Please enter a valid email'),
+  description: yup.string().required('Please share some details'),
+})
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     query: { search_keywords },
@@ -55,6 +69,11 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   const [minPriceFilter, setMinPriceFilter] = useState('')
   const [maxPriceFilter, setMaxPriceFilter] = useState('')
   const [showClearFilter, setShowClearFilter] = useState(false)
+  const [isOpenUserProblemModal, setIsOpenUserProblemModal] = useState(false)
+  const user = useUserContext()
+
+  const router = useRouter()
+  const { search_keywords } = router?.query
 
   const suggestionTags = []
   for (let i = 0; i < solutionData.results.length; i++) {
@@ -219,8 +238,85 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
               </div>
             </div>
           )}
+          <div className="flex flex-col p-4 m-2 border border-solid rounded cursor-pointer border-border-default">
+            <p>Didn't find any solution to your needs?</p>
+            <a
+              href="#"
+              id="userProblem"
+              onClick={() => setIsOpenUserProblemModal(!isOpenUserProblemModal)}
+              className="md:items-center md:cursor-pointer md:space-x-2"
+            >
+              <Button size="small">Post your solution request</Button>
+            </a>
+          </div>
         </div>
       </div>
+      <Modal isOpen={isOpenUserProblemModal} setIsOpen={setIsOpenUserProblemModal}>
+        <>
+          <Formik
+            initialValues={{ email: '', description: '' }}
+            validationSchema={UserProblemFormSchema}
+            onSubmit={async (values) => {
+              const data = await submitUserProblems(String(search_keywords), user, values.description, values.email)
+              if (data) {
+                toast.success('Claim submitted for review.')
+              }
+              setIsOpenUserProblemModal(false)
+            }}
+          >
+            {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
+              <>
+                <form onSubmit={handleSubmit}>
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                    Email Id
+                  </label>
+                  <Input
+                    placeholder="Enter email"
+                    id="email"
+                    className="mb-4"
+                    onChange={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    errorMessage={touched.email ? errors.email : undefined}
+                    success={touched.email && !errors.email}
+                  />
+                  {/* Keeping it for form Design reference */}
+                  {/* <label className="block mb-2 text-sm text-text-primary" htmlFor="budget">
+                    What is your budget for this service?
+                  </label>
+                  <Input
+                    id="budget"
+                    className="mb-4"
+                    onChange={handleChange('budget')}
+                    onBlur={handleBlur('budget')}
+                    value={values.budget}
+                    errorMessage={touched.budget ? errors.budget : undefined}
+                    success={touched.budget && !errors.budget}
+                  /> */}
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="description">
+                    Describe the solution you're looking - please be as detailed as possible:
+                  </label>
+                  <Textarea
+                    placeholder="I'm looking for..."
+                    id=""
+                    className="mb-4"
+                    onChange={handleChange('description')}
+                    onBlur={handleBlur('description')}
+                    value={values.description}
+                    errorMessage={touched.description ? errors.description : undefined}
+                    success={touched.description && !errors.description}
+                  />
+                  <div className="flex items-center space-x-4">
+                    <Button type="submit" buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
+                      Submit
+                    </Button>
+                  </div>
+                </form>
+              </>
+            )}
+          </Formik>
+        </>
+      </Modal>
     </>
   )
 }
