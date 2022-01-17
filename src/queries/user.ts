@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/nextjs'
 
 export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | null> {
   try {
-    const { data } = await axios.post(`/api/user/payment_method/attach/`, {
+    const { data } = await axios.post('/api/user/payment_method/attach/', {
       payment_method: paymentMethodId,
     })
     return data
