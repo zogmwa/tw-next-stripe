@@ -13,6 +13,7 @@ type MeteredPaymentMethodConfirmComponentProps = {
   paymentMethods: any[]
   setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   toggleSubScribe: Function
+  isSubscribe: boolean
 }
 
 function MeteredPaymentMethodConfirmComponent({
@@ -20,15 +21,16 @@ function MeteredPaymentMethodConfirmComponent({
   setConfirmModalOpen,
   paymentMethods,
   toggleSubScribe,
+  isSubscribe,
 }: MeteredPaymentMethodConfirmComponentProps) {
   const router = useRouter()
-  const [agreeTerms, setAgreeTerms] = useState(false)
+  const [agreeCard, setAgreeCard] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState(
     paymentMethods.filter((payment) => payment.default_payment_method)[0].id,
   )
 
   const subScribe = () => {
-    if (!agreeTerms) {
+    if (agreeCard) {
       toggleSubScribe(paymentMethod)
     }
   }
@@ -73,8 +75,8 @@ function MeteredPaymentMethodConfirmComponent({
       </div>
       <div className="flex items-center space-x-1.5 my-6">
         <Checkbox
-          checked={agreeTerms}
-          onChange={(e) => setAgreeTerms(e.target.checked)}
+          checked={agreeCard}
+          onChange={(e) => setAgreeCard(e.target.checked)}
           size="md"
           id="terms-of-service"
         />
@@ -87,7 +89,8 @@ function MeteredPaymentMethodConfirmComponent({
         <Button
           className="bg-primary"
           textClassName="!text-text-on-surface"
-          disabled={!agreeTerms}
+          disabled={!agreeCard}
+          loading={isSubscribe}
           onClick={() => subScribe()}
         >
           Subscribe
