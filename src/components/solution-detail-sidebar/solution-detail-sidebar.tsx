@@ -21,8 +21,9 @@ type SolutionDetailSidebarComponentProps = {
 
 function SolutionDetailSidebarComponent({ detailInfo, className = '' }: SolutionDetailSidebarComponentProps) {
   const router = useRouter()
-  const { pk } = useUserContext()
+  const { username } = useUserContext()
   const [isPurchase, setIsPurchase] = useState(false)
+  const [isSubscribe, setIsSubscribe] = useState(false)
   const [isshowConfirmModal, setIsShowConfrimModal] = useState(false)
   const [paymentMethods, setPaymentMethods] = useState([])
   const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(false)
@@ -48,8 +49,11 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
   }
 
   const toggleSubscribe = async (paymentMethodId) => {
-    const referralUserId = (router.query?.r as string) ?? ''
-    const data = togglePaymentSubscribe(paymentMethodId, detailInfo.slug, referralUserId)
+    setIsSubscribe(true)
+    const referralUserId = (router.query?.r as string) ?? null
+    const data = await togglePaymentSubscribe(paymentMethodId, detailInfo.slug, referralUserId)
+    router.push(`/users/${username}/bookings/${data.solution_booking_id}`)
+    setIsSubscribe(false)
   }
 
   return (
@@ -155,6 +159,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
             setConfirmModalOpen={setIsShowConfrimModal}
             paymentMethods={paymentMethods}
             toggleSubScribe={toggleSubscribe}
+            isSubscribe={isSubscribe}
           />
         </Modal>
       )}
