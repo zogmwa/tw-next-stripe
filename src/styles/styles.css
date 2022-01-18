@@ -104,3 +104,7 @@ a:focus,
 button:focus {
   box-shadow: none !important;
 }
+
+#searchSolutionInput {
+  opacity: 1 !important;
+}

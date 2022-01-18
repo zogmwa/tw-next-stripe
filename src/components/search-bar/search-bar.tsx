@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { searchSuggestions, solutionSuggestions } from '@taggedweb/queries/search'
 import { components } from 'react-select'
 import { GrShare } from 'react-icons/gr'
+import slugify from 'slugify'
 import { Button } from '../button'
 
 type SearchByTagsProps = {
@@ -71,7 +72,7 @@ const OptionComponent = (props) => {
 export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
-  const [solution, setSolution] = useState<string>('')
+  const [solutionLabel, setSolutionLabel] = useState<string>('')
   const [solutionInput, setSolutionInput] = useState<string>('')
   const [isFocusInMenuList, setIsFocusInMenuList] = useState<boolean>(false)
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
@@ -117,12 +118,16 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
   }
 
   const handleSolutionChange = (value: { value: string; label: string }) => {
-    setSolution(value.value)
+    setSolutionInput(value.value)
+    setSolutionLabel(value.label)
     setIsFocusInMenuList(false)
   }
 
-  const handleSolutionInput = (value: string) => {
-    setSolutionInput(value)
+  const handleSolutionInput = (value: string, action) => {
+    if (action.action !== 'menu-close' && action.action !== 'input-blur' && action.action !== 'set-value') {
+      setSolutionInput(slugify(value))
+      setSolutionLabel(value)
+    }
   }
 
   /**
@@ -146,17 +151,13 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
         }
       }
     } else {
-      if (solution.length === 0 && solutionInput === '') {
+      if (solutionInput === '') {
         setError('No input given')
         toast.error('No input given')
       } else {
         setError('')
         if (onSubmit) {
-          if (solution) {
-            onSubmit(solution)
-          } else {
-            onSubmit(solutionInput)
-          }
+          onSubmit(solutionInput)
         }
       }
     }
@@ -205,8 +206,11 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
       ) : (
         <AsyncSelect
           name="solutions"
+          value={null}
+          inputId={'searchSolutionInput'}
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
+          inputValue={solutionLabel}
           onInputChange={handleSolutionInput}
           loadOptions={solutionSuggestions}
           instanceId="selectSolutions"
