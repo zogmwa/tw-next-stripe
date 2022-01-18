@@ -7,10 +7,12 @@ import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
-import { fetchHasPaymentMethod } from '@taggedweb/queries/user'
+import { fetchPaymentMethodList, togglePaymentSubscribe } from '@taggedweb/queries/user'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { SolutionSidebarType } from '@taggedweb/types/solution'
+import { MeteredPaymentMethodConfirm } from '../metered-payment-confirm'
 import { Button } from '../button'
+import { Modal } from '../Modal'
 
 type SolutionDetailSidebarComponentProps = {
   detailInfo: SolutionSidebarType
@@ -21,6 +23,9 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
   const router = useRouter()
   const { pk } = useUserContext()
   const [isPurchase, setIsPurchase] = useState(false)
+  const [isshowConfirmModal, setIsShowConfrimModal] = useState(false)
+  const [paymentMethods, setPaymentMethods] = useState([])
+  const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(false)
   const { requireLoginBeforeAction } = useRequireLogin()
 
   const togglePurchase = async () => {
@@ -31,12 +36,20 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     setIsPurchase(false)
   }
   const toggleStartContract = async () => {
-    const payment = await fetchHasPaymentMethod()
+    setLoadingPaymentMethods(true)
+    const payment = await fetchPaymentMethodList()
     if (payment.has_payment_method) {
-      console.log('Payment method attached')
+      setPaymentMethods(payment.payment_methods)
+      setIsShowConfrimModal(true)
     } else {
       router.push(`/add-card-details?slug=${detailInfo.slug}`)
     }
+    setLoadingPaymentMethods(false)
+  }
+
+  const toggleSubscribe = async (paymentMethodId) => {
+    const referralUserId = (router.query?.r as string) ?? ''
+    const data = togglePaymentSubscribe(paymentMethodId, detailInfo.slug, referralUserId)
   }
 
   return (
@@ -77,8 +90,8 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
             <Button
               className="mt-4 bg-primary"
               textClassName="text-white"
-              loading={isPurchase}
-              disabled={isPurchase}
+              loading={isPurchase || loadingPaymentMethods}
+              disabled={isPurchase || loadingPaymentMethods}
               loadingClassName="text-background-light"
               onClick={requireLoginBeforeAction(() => toggleStartContract())}
             >
@@ -136,6 +149,15 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           {feature.tooltipContent}
         </ReactTooltip>
       ))}
+      {detailInfo.is_metered && (
+        <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
+          <MeteredPaymentMethodConfirm
+            setConfirmModalOpen={setIsShowConfrimModal}
+            paymentMethods={paymentMethods}
+            toggleSubScribe={toggleSubscribe}
+          />
+        </Modal>
+      )}
     </div>
   )
 }
