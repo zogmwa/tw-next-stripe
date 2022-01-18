@@ -1,43 +1,76 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { BsCreditCard2Back } from 'react-icons/bs'
 import clsx from 'clsx'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 
 type MeteredPaymentMethodConfirmComponentProps = {
   className?: string
-  title: string
-  slug?: string
+  paymentMethods: any[]
   setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   toggleSubScribe: Function
 }
 
 function MeteredPaymentMethodConfirmComponent({
-  title,
-  slug,
   className,
   setConfirmModalOpen,
+  paymentMethods,
   toggleSubScribe,
 }: MeteredPaymentMethodConfirmComponentProps) {
   const router = useRouter()
   const [agreeTerms, setAgreeTerms] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState(
+    paymentMethods.filter((payment) => payment.default_payment_method)[0].id,
+  )
 
   const subScribe = () => {
     if (!agreeTerms) {
-      toggleSubScribe()
+      toggleSubScribe(paymentMethod)
     }
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPaymentMethod((event.target as HTMLInputElement).value)
   }
 
   return (
     <div className={clsx('flex flex-col ', className)}>
-      <h2
-        className="text-md text-text-primary font-semibold my-4"
-        onClick={() => {
-          if (slug) router.push(`/solution/${slug}`)
-        }}
-      >
-        {title}
-      </h2>
+      <div className="my-4">
+        <RadioGroup
+          aria-label="Sort By"
+          defaultValue={paymentMethod}
+          name="radio-buttons-group"
+          value={paymentMethod}
+          onChange={handleChange}
+        >
+          {paymentMethods.map((payment) => {
+            const expireDate = new Date(payment.exp_year, Number(payment.exp_month) - 1)
+
+            if (expireDate > new Date()) {
+              return (
+                <FormControlLabel
+                  value={payment.id}
+                  key={payment.id}
+                  control={<Radio />}
+                  label={
+                    <div className="flex flex-row items-center" key={payment.id}>
+                      <div className="flex flex-row text-text-primary items-center">
+                        <BsCreditCard2Back className="text-lg text-text-primary" />
+                        <span className="ml-2">**** **** **** {payment.last4}</span>
+                      </div>
+                      <span className="ml-4 text-text-primary">{`${payment.exp_year}/${payment.exp_month}`} exp</span>
+                    </div>
+                  }
+                />
+              )
+            }
+          })}
+        </RadioGroup>
+      </div>
       <div className="flex items-center space-x-1.5 my-6">
         <Checkbox
           checked={agreeTerms}
@@ -46,11 +79,7 @@ function MeteredPaymentMethodConfirmComponent({
           id="terms-of-service"
         />
         <label htmlFor="terms-of-service" className="text-sm text-text-secondary">
-          I agree with
-          {/* We should add terms of service url to below anchor tag. */}
-          <a href="#" className="ml-1 underline">
-            terms of service
-          </a>
+          I will pay using this payment.
         </label>
       </div>
       <div className="flex flex-row justify-end space-x-2">
