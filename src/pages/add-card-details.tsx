@@ -45,7 +45,6 @@ export default function AddCardDetailsPage({ solutionDetail }) {
 
   const addCard = async (paymentMethod) => {
     const data = await PaymentMethodAttachToUser(paymentMethod.id)
-    console.log(data)
   }
 
   if (!authVerified) return null
