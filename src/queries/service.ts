@@ -343,3 +343,24 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
     return null
   }
 }
+
+export async function submitUserProblems(Search_query: string, User = null, description: string, email = null) {
+  try {
+    const { data } = await axios.post('/api/submit_user_problem/', {
+      searched_term: Search_query,
+      user: User,
+      email: email,
+      description: description,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+
+    toast.error('Request failed. Kindly reach out to us at contact@taggedweb.com.', {
+      duration: 5000,
+    })
+    return null
+  }
+}

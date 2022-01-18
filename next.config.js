@@ -43,13 +43,8 @@ const nextConfig = {
         {
           // For next two redirects refer ISSUE#775 or PR#782
           // This redirect is used because otherwise /[sitemap_url].tsx will be needed instead of /sitemap/[sitemap_url].tsx. This is used to show 404 pages on /abc like pages. Even if we could return 404 page from /[sitemap_url].tsx for /abc, it would be slower.
-          source: '/:sitemap_url(sitemap_\\d{1,}\\.xml)',
+          source: '/:sitemap_url(sitemap_.*)',
           destination: '/sitemap/:sitemap_url',
-        },
-        {
-          // This redirect is used to show sitemaps such as sitemap_1.xml only on sitemap_1.xml and not on /sitemap/sitemap_1.xml due to direct match of dynamic route of /sitemap/[sitemap_url].tsx
-          source: '/sitemap/:anything',
-          destination: '/404',
         },
       ],
     }

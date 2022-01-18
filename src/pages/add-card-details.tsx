@@ -50,37 +50,37 @@ export default function AddCardDetailsPage({ solutionDetail }) {
   if (!authVerified) return null
 
   return (
-    <div className="flex md:flex-row flex-col max-w-screen-lg px-4 mx-auto my-6 divide md:divide-x divide-border-default md:my-24">
+    <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6 md:flex-row divide md:divide-x divide-border-default md:my-24">
       <div className="flex flex-col w-full">
         <div
-          className="flex space-x-2 items-center hover:underline cursor-pointer"
+          className="flex items-center space-x-2 cursor-pointer hover:underline"
           onClick={() => {
             router.push(`/solution/${solutionDetail.slug}`)
           }}
         >
-          <BsArrowLeftCircle className="border border-border-default rounded-full text-text-primary text-lg" />
+          <BsArrowLeftCircle className="text-lg border rounded-full border-border-default text-text-primary" />
           <span className="text-sm text-text-primary">Go back</span>
         </div>
-        <h2 className="text-lg text-text-primary font-semibold md:p-2 py-4">{solutionDetail.title}</h2>
-        <div className="flex md:p-2 py-2">
+        <h2 className="py-4 text-lg font-semibold text-text-primary md:p-2">{solutionDetail.title}</h2>
+        <div className="flex py-2 md:p-2">
           <span className="ml-2 text-sm text-text-primary">Team size: </span>
           <span className="ml-2 text-sm font-semibold">{solutionDetail.team_size}</span>
         </div>
-        <div className="flex md:p-2 py-2">
+        <div className="flex py-2 md:p-2">
           <span className="ml-2 text-sm text-text-primary">Estimated hours: </span>
           <span className="ml-2 text-sm font-semibold">{solutionDetail.estimated_hours}</span>
         </div>
-        <div className="flex md:p-2 py-2">
+        <div className="flex py-2 md:p-2">
           <span className="ml-2 text-sm text-text-primary">Blended hourly rate: </span>
           <span className="ml-2 text-sm font-semibold">{`$ ${solutionDetail.blended_hourly_rate}`}</span>
         </div>
-        <div className="flex md:p-2 py-2">
+        <div className="flex py-2 md:p-2">
           <span className="ml-2 text-sm text-text-primary">Billing period: </span>
           <span className="ml-2 text-sm font-semibold">{solutionDetail.billing_period}</span>
         </div>
       </div>
-      <div className="flex flex-col w-full md:px-4 py-10 md:py-0 border-t border-border-default md:border-0 justify-center">
-        <span className="text-text-primary text-md font-semibold">Add Card Info</span>
+      <div className="flex flex-col justify-center w-full py-10 border-t md:px-4 md:py-0 border-border-default md:border-0">
+        <span className="font-semibold text-text-primary text-md">Add Card Info</span>
         <AddPaymentCardDetail addCard={addCard} />
       </div>
     </div>

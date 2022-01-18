@@ -55,7 +55,7 @@ export function FilterServiceList({
       {filterByPrice && <InputPriceFilter onClickClearFilter={onClickClearFilter} filterByPrice={filterByPrice} />}
       <div className="flex items-center space-x-2">
         <Checkbox size="md" onChange={(e) => handleChange(e)} checked={checked} />
-        <div className="text-sm text-text-primary">Free {label}</div>
+        <div className="text-sm text-text-primary">Offers Free {label}</div>
       </div>
     </div>
   )

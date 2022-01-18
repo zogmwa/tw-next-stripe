@@ -59,7 +59,7 @@ export function InputPriceFilter({ filterByPrice, onClickClearFilter }: InputPri
           </div>
         </div>
         {message && <p className="text-xs text-red-500">{message}</p>}
-        <Button className="w-11/12 place-self-center" buttonType="primary" type="submit">
+        <Button className="w-11/12 place-self-center" buttonType="default" type="submit">
           Filter
         </Button>
       </form>

@@ -96,7 +96,7 @@ export default function Signup() {
                   Email
                 </label>
                 <Input
-                  placeholder="Enter email"
+                  placeholder="Enter your email"
                   id="email"
                   className="mb-8"
                   onChange={handleChange('email')}
