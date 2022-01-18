@@ -8,7 +8,7 @@ import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
-import { fetchHasPaymentMethod } from '@taggedweb/queries/user'
+import { fetchPaymentMethodList } from '@taggedweb/queries/user'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { Button } from '../button'
@@ -39,7 +39,7 @@ function SolutionDetailMobileSidebarComponent({
     setIsPurchase(false)
   }
   const toggleStartContract = async () => {
-    const payment = await fetchHasPaymentMethod()
+    const payment = await fetchPaymentMethodList()
     if (payment.has_payment_method) {
       console.log('Payment method attached')
     } else {
