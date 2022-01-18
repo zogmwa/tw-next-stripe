@@ -50,7 +50,6 @@ export enum SolutionTypes {
 }
 
 export type SolutionSidebarType = {
-  title: string
   is_metered: null | boolean
   slug: string
   pay_now_price: {

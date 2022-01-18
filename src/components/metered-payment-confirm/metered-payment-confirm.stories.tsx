@@ -28,6 +28,7 @@ export function DefaultReviewModal() {
           paymentMethods={[]}
           setConfirmModalOpen={setIsShowConfrimModal}
           toggleSubScribe={() => {}}
+          isSubscribe={false}
         />
       </Modal>
     </>

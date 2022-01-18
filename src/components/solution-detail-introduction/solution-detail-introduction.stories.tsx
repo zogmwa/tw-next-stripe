@@ -7,7 +7,6 @@ export default {
   component: SolutionDetailIntroduction,
 } as Meta
 const sidebar_info = {
-  title: 'Test',
   pay_now_price: {
     id: 1,
     solution: 1,
@@ -139,7 +138,6 @@ const introductionData = {
   billing_period: null,
 }
 const sidebar_info_ = {
-  title: 'Test',
   pay_now_price: {
     id: 1,
     solution: 1,
