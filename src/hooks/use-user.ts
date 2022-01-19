@@ -38,7 +38,7 @@ export function useSessionUser(): UserContextType {
       email: string,
       password1: string,
       password2: string,
-     ): Promise<{ success: boolean; errorMessage?: any }> => {
+    ): Promise<{ success: boolean; errorMessage?: any }> => {
       try {
         const { data } = await axios.post('/api/signup/', { first_name, last_name, email, password1, password2 })
         await mutateUser(data)

@@ -89,7 +89,13 @@ export default function Signup() {
             initialValues={{ first_name: '', last_name: '', email: '', password1: '', password2: '' }}
             validationSchema={validationSchema}
             onSubmit={async ({ first_name, last_name, email, password1, password2 }) => {
-              const { success, errorMessage } = await signUpWithEmailAndPassword(first_name, last_name, email, password1, password2)
+              const { success, errorMessage } = await signUpWithEmailAndPassword(
+                first_name,
+                last_name,
+                email,
+                password1,
+                password2,
+              )
               setErrorMessage(errorMessage)
               if (success) {
                 nextPageRedirect()
