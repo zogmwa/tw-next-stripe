@@ -50,7 +50,7 @@ export default function AddCardDetailsPage({ solutionDetail }) {
 
   const addCard = async (paymentMethod) => {
     const data = await PaymentMethodAttachToUser(paymentMethod.id)
-    if (data) {
+    if (data.status === 'payment method attached successfully') {
       const payment = await fetchPaymentMethodList()
       if (payment.has_payment_method) {
         setPaymentMethods(payment.payment_methods)
@@ -105,6 +105,7 @@ export default function AddCardDetailsPage({ solutionDetail }) {
       </div>
       <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
         <MeteredPaymentMethodConfirm
+          slug=""
           setConfirmModalOpen={setIsShowConfrimModal}
           paymentMethods={paymentMethods}
           toggleSubScribe={toggleSubscribe}
