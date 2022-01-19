@@ -32,9 +32,15 @@ export function useSessionUser(): UserContextType {
   )
 
   const signUpWithEmailAndPassword = useCallback(
-    async (email: string, password1: string, password2: string): Promise<boolean> => {
+    async (
+      first_name: string,
+      last_name: string,
+      email: string,
+      password1: string,
+      password2: string,
+    ): Promise<boolean> => {
       try {
-        const { data } = await axios.post('/api/signup/', { email, password1, password2 })
+        const { data } = await axios.post('/api/signup/', { first_name, last_name, email, password1, password2 })
         await mutateUser(data)
         return true
       } catch (error) {
