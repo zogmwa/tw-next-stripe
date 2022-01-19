@@ -13,6 +13,8 @@ export type UserContextType = {
   isLoggedIn: () => boolean
   signInWithEmailAndPassword: (email: string, password: string) => Promise<boolean>
   signUpWithEmailAndPassword: (
+    first_name: string,
+    last_name: string,
     email: string,
     password1: string,
     password2: string,
