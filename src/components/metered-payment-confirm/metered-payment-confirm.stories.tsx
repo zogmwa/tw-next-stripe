@@ -25,6 +25,7 @@ export function DefaultReviewModal() {
       </div>
       <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
         <MeteredPaymentMethodConfirm
+          slug="test"
           paymentMethods={[]}
           setConfirmModalOpen={setIsShowConfrimModal}
           toggleSubScribe={() => {}}

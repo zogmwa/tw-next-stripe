@@ -10,6 +10,7 @@ import { Checkbox } from '../checkbox'
 
 type MeteredPaymentMethodConfirmComponentProps = {
   className?: string
+  slug: string
   paymentMethods: any[]
   setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   toggleSubScribe: Function
@@ -18,6 +19,7 @@ type MeteredPaymentMethodConfirmComponentProps = {
 
 function MeteredPaymentMethodConfirmComponent({
   className,
+  slug,
   setConfirmModalOpen,
   paymentMethods,
   toggleSubScribe,
@@ -73,6 +75,11 @@ function MeteredPaymentMethodConfirmComponent({
           })}
         </RadioGroup>
       </div>
+      {slug && (
+        <a href={`/add-card-details?slug=${slug}`} className="text-primary text-sm">
+          Add a new card
+        </a>
+      )}
       <div className="flex items-center space-x-1.5 my-6">
         <Checkbox
           checked={agreeCard}

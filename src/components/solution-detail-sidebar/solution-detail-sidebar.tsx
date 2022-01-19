@@ -156,6 +156,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
       {detailInfo.is_metered && (
         <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
           <MeteredPaymentMethodConfirm
+            slug={detailInfo.slug}
             setConfirmModalOpen={setIsShowConfrimModal}
             paymentMethods={paymentMethods}
             toggleSubScribe={toggleSubscribe}
