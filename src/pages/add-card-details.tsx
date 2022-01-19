@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { BsArrowLeftCircle } from 'react-icons/bs'
 import { useUserContext } from '@taggedweb/hooks/use-user'
@@ -6,7 +6,9 @@ import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
 import { AddPaymentCardDetail } from '@taggedweb/components/add-payment-card-detail'
 import { Solution } from '@taggedweb/types/solution'
-import { PaymentMethodAttachToUser } from '@taggedweb/queries/user'
+import { fetchPaymentMethodList, PaymentMethodAttachToUser, togglePaymentSubscribe } from '@taggedweb/queries/user'
+import { MeteredPaymentMethodConfirm } from '@taggedweb/components/metered-payment-confirm'
+import { Modal } from '@taggedweb/components/Modal'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const { query } = context
@@ -40,11 +42,29 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function AddCardDetailsPage({ solutionDetail }) {
   const router = useRouter()
-  const { authVerified } = useUserContext()
+  const { authVerified, username } = useUserContext()
+  const [isSubscribe, setIsSubscribe] = useState(false)
+  const [isshowConfirmModal, setIsShowConfrimModal] = useState(false)
+  const [paymentMethods, setPaymentMethods] = useState([])
   if (!solutionDetail || typeof solutionDetail === 'undefined' || !solutionDetail.is_metered) return null
 
   const addCard = async (paymentMethod) => {
     const data = await PaymentMethodAttachToUser(paymentMethod.id)
+    if (data) {
+      const payment = await fetchPaymentMethodList()
+      if (payment.has_payment_method) {
+        setPaymentMethods(payment.payment_methods)
+        setIsShowConfrimModal(true)
+      }
+    }
+  }
+
+  const toggleSubscribe = async (paymentMethodId) => {
+    setIsSubscribe(true)
+    const referralUserId = (router.query?.r as string) ?? null
+    const data = await togglePaymentSubscribe(paymentMethodId, solutionDetail.slug, referralUserId)
+    router.push(`/users/${username}/bookings/${data.solution_booking_id}`)
+    setIsSubscribe(false)
   }
 
   if (!authVerified) return null
@@ -83,6 +103,14 @@ export default function AddCardDetailsPage({ solutionDetail }) {
         <span className="font-semibold text-text-primary text-md">Add Card Info</span>
         <AddPaymentCardDetail addCard={addCard} />
       </div>
+      <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
+        <MeteredPaymentMethodConfirm
+          setConfirmModalOpen={setIsShowConfrimModal}
+          paymentMethods={paymentMethods}
+          toggleSubScribe={toggleSubscribe}
+          isSubscribe={isSubscribe}
+        />
+      </Modal>
     </div>
   )
 }
