@@ -50,7 +50,7 @@ export default function AddCardDetailsPage({ solutionDetail }) {
 
   const addCard = async (paymentMethod) => {
     const data = await PaymentMethodAttachToUser(paymentMethod.id)
-    if (data.status === 'payment method attached successfully') {
+    if (data.status === 'payment method associated successfully') {
       const payment = await fetchPaymentMethodList()
       if (payment.has_payment_method) {
         setPaymentMethods(payment.payment_methods)
