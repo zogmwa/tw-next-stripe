@@ -121,8 +121,8 @@ function SolutionDetailMobileSidebarComponent({
           <Button
             className="mt-4 px-[0.5rem] bg-primary"
             textClassName="text-white text-xs"
-            loading={isPurchase}
-            disabled={isPurchase}
+            loading={isPurchase || loadingPaymentMethods}
+            disabled={isPurchase || loadingPaymentMethods}
             loadingClassName="text-background-light"
             onClick={requireLoginBeforeAction(() => toggleStartContract())}
           >
@@ -161,6 +161,7 @@ function SolutionDetailMobileSidebarComponent({
       {detailInfo.is_metered && (
         <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
           <MeteredPaymentMethodConfirm
+            slug={detailInfo.slug}
             setConfirmModalOpen={setIsShowConfrimModal}
             paymentMethods={paymentMethods}
             toggleSubScribe={toggleSubscribe}
