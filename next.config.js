@@ -36,6 +36,8 @@ const nextConfig = {
     FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
     SENTRY_DSN: 'https://0b1c30a4f7ac46a98e8345b97526ad1d@o1064580.ingest.sentry.io/6125907',
     IS_SENTRY_ENABLED: 'true',
+    googleAnalytics: 'G-CJ16362SSH',
+    googleTagManager: 'GTM-NCJBMVP',
   },
   async rewrites() {
     return {
