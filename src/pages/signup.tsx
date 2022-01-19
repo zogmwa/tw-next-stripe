@@ -11,6 +11,8 @@ import { handleGoogleLogin, handleLinkedInLogin } from '@taggedweb/utils/login'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 const validationSchema = yup.object().shape({
+  first_name: yup.string(),
+  last_name: yup.string(),
   email: yup.string().email().required('Please enter a valid email'),
   password1: yup
     .string()
@@ -81,10 +83,10 @@ export default function Signup() {
             <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
           </div>
           <Formik
-            initialValues={{ email: '', password1: '', password2: '' }}
+            initialValues={{ first_name: '', last_name: '', email: '', password1: '', password2: '' }}
             validationSchema={validationSchema}
-            onSubmit={async ({ email, password1, password2 }) => {
-              const success = await signUpWithEmailAndPassword(email, password1, password2)
+            onSubmit={async ({ first_name, last_name, email, password1, password2 }) => {
+              const success = await signUpWithEmailAndPassword(first_name, last_name, email, password1, password2)
               if (success) {
                 nextPageRedirect()
               }
@@ -92,26 +94,52 @@ export default function Signup() {
           >
             {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="first_name">
+                  First Name
+                </label>
+                <Input
+                  placeholder="Enter your first name"
+                  id="first_name"
+                  className="mb-4"
+                  onChange={handleChange('first_name')}
+                  onBlur={handleBlur('first_name')}
+                  value={values.first_name}
+                  errorMessage={touched.first_name ? errors.first_name : undefined}
+                  success={touched.first_name && !errors.first_name}
+                />
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="last_name">
+                  Last Name
+                </label>
+                <Input
+                  placeholder="Enter your first name"
+                  id="last_name"
+                  className="mb-4"
+                  onChange={handleChange('last_name')}
+                  onBlur={handleBlur('last_name')}
+                  value={values.last_name}
+                  errorMessage={touched.last_name ? errors.last_name : undefined}
+                  success={touched.last_name && !errors.last_name}
+                />
                 <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
                   Email
                 </label>
                 <Input
                   placeholder="Enter your email"
                   id="email"
-                  className="mb-8"
+                  className="mb-4"
                   onChange={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
                   errorMessage={touched.email ? errors.email : undefined}
                   success={touched.email && !errors.email}
                 />
-                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="password1">
                   Password
                 </label>
                 <Input
                   placeholder="Enter password"
                   id="password1"
-                  className="mb-8"
+                  className="mb-4"
                   type="password"
                   onChange={handleChange('password1')}
                   onBlur={handleBlur('password1')}
@@ -119,13 +147,13 @@ export default function Signup() {
                   errorMessage={touched.password1 ? errors.password1 : undefined}
                   success={touched.password1 && !errors.password1}
                 />
-                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="password2">
                   Confirm Password
                 </label>
                 <Input
                   placeholder="Re-enter password"
                   id="password2"
-                  className="mb-8"
+                  className="mb-4"
                   type="password"
                   onChange={handleChange('password2')}
                   onBlur={handleBlur('password2')}
