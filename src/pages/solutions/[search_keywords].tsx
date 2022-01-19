@@ -100,8 +100,8 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
+      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
@@ -112,8 +112,8 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (orderValue ? `&ordering=${orderValue}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
+      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filtering ? `&has_free_consultation=${filtering}` : '')
     fetchSolutionList(sendUrl)
   }
@@ -124,8 +124,8 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
+      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
       (filterValue ? `&has_free_consultation=${filterValue}` : '')
 
     fetchSolutionList(sendUrl)
@@ -141,8 +141,8 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     const sendUrl =
       `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
       (ordering ? `&ordering=${ordering}` : '') +
-      (minPrice ? `&pay_now_price__unit_amount__gte=${minPrice}` : '') +
-      (maxPrice ? `&pay_now_price__unit_amount__lte=${maxPrice}` : '') +
+      (minPrice ? `&stripe_primary_price__unit_amount__gte=${minPrice}` : '') +
+      (maxPrice ? `&stripe_primary_price__unit_amount__lte=${maxPrice}` : '') +
       (filtering ? `&has_free_consultation=${filtering}` : '')
 
     fetchSolutionList(sendUrl)
