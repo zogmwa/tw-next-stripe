@@ -17,9 +17,25 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
   }
 }
 
-export async function fetchHasPaymentMethod(): Promise<null | any> {
+export async function fetchPaymentMethodList(): Promise<null | any> {
   try {
-    const { data } = await axios.get('/api/user/payment_method/has_payment_method/')
+    const { data } = await axios.get('/api/user/payment_method/payment_method_list/')
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
+
+export async function togglePaymentSubscribe(paymentMethodId, solutionSlug, referringUserId): Promise<null | any> {
+  try {
+    const { data } = await axios.post('/api/user/payment_method/subscribe_payment/', {
+      payment_method: paymentMethodId,
+      slug: solutionSlug,
+      referring_user: referringUserId,
+    })
     return data
   } catch (error) {
     Sentry.captureException(error)

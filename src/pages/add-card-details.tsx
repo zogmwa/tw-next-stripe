@@ -40,14 +40,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function AddCardDetailsPage({ solutionDetail }) {
   const router = useRouter()
-  if (!solutionDetail || typeof solutionDetail === 'undefined' || !solutionDetail.is_metered) return null
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { authVerified } = useUserContext()
+  if (!solutionDetail || typeof solutionDetail === 'undefined' || !solutionDetail.is_metered) return null
 
   const addCard = async (paymentMethod) => {
     const data = await PaymentMethodAttachToUser(paymentMethod.id)
-    console.log(data)
   }
 
   if (!authVerified) return null

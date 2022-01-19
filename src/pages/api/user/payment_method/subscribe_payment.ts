@@ -4,13 +4,13 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * API Route handler for get has_payment_method field of user.
+ * API Route handler for subscribe payment for metered billing solution.
  */
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
       const access = await getAccessToken(req)
-      const { data } = await clientWithRetries.get('/users/has_payment_method/', {
+      const { data } = await clientWithRetries.post('/users/subscribe_payment/', req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
