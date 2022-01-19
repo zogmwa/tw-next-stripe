@@ -18,7 +18,7 @@ export type UserContextType = {
     email: string,
     password1: string,
     password2: string,
-  ) => Promise<boolean>
+  ) => Promise<{ success: boolean; errorMessage?: any }>
   logout: () => Promise<void>
   setNextPageUrl: (url: string) => void
   nextPageRedirect: () => Promise<boolean>

@@ -16,7 +16,8 @@ export function withApiErrorHandling(handler: NextIronHandler | NextApiHandler) 
       // eslint-disable-next-line
       console.dir(error)
       const { response } = error
-      res.status(response?.status || 500).json(error.data)
+      // Previously data from axios errors occuring on api handler functions were not forwarded to the frontend calls to api handler routes.
+      res.status(response?.status || 500).json(error.data || response?.data)
     }
   }
 }

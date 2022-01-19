@@ -38,17 +38,18 @@ export function useSessionUser(): UserContextType {
       email: string,
       password1: string,
       password2: string,
-    ): Promise<boolean> => {
+    ): Promise<{ success: boolean; errorMessage?: any }> => {
       try {
         const { data } = await axios.post('/api/signup/', { first_name, last_name, email, password1, password2 })
         await mutateUser(data)
-        return true
+        return { success: true }
       } catch (error) {
         if (error.response.data) {
           const obj = error.response.data
-          toast.error(obj[Object.keys(obj)[0]])
+          // toast.error(obj[Object.keys(obj)[0]])
+          return { success: false, errorMessage: obj[Object.keys(obj)[0]] }
         }
-        return false
+        return { success: false, errorMessage: 'Something went wrong!' }
       }
     },
     [mutateUser],
