@@ -6,6 +6,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { MdExpandMore } from 'react-icons/md'
+import { TOAST_SERVICE_COMPARE_LIST_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 import { MAX_COMPARE_COUNT } from '../../utils/constants'
 
@@ -31,11 +32,11 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
   const handleCompare = () => {
     if (compareList.length < 2) {
       toast.error('You should check at least 2 service.', {
-        id: 'compare-list-length-error',
+        id: TOAST_SERVICE_COMPARE_LIST_ERROR,
       })
     } else if (compareList.length > MAX_COMPARE_COUNT) {
       toast.error('You can compare at most 3 services.', {
-        id: 'compare-list-length-error',
+        id: TOAST_SERVICE_COMPARE_LIST_ERROR,
       })
     } else {
       const services = compareList.map((item) => item.slug)

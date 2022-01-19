@@ -5,6 +5,7 @@ import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { searchSuggestions } from '@taggedweb/queries/search'
+import { TOAST_TAG_EMPTY_ERROR, TOAST_TAG_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 
 type SearchByTagsProps = {
   onSubmit?: (query: string) => void
@@ -56,7 +57,7 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
         toast.error('A maximum of 5 tags are allowed.', {
-          id: 'tag-limit-error',
+          id: TOAST_TAG_LIMIT_ERROR,
         })
       } else {
         setError('')
@@ -77,7 +78,7 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     if (tags.length === 0) {
       setError('Please enter a tag')
       toast.error('Please enter a tag', {
-        id: 'empty-tag-error',
+        id: TOAST_TAG_EMPTY_ERROR,
       })
     } else {
       setError('')

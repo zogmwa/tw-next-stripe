@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
 import { toggleAddAttribute } from '@taggedweb/queries/service'
+import { TOAST_ATTRIBUTE_ADD_ERROR, TOAST_ATTRIBUTE_ADD_SUCCESS } from '@taggedweb/utils/token-id'
 import { Input } from '../../../input'
 import { Button } from '../../../button'
 
@@ -35,11 +36,11 @@ export function AddPorsConsBar({
       const data = await toggleAddAttribute(asset, attribute, isCon)
       if (data) {
         toast.success('Successfully added.', {
-          id: 'attribute-add-success',
+          id: TOAST_ATTRIBUTE_ADD_SUCCESS,
         })
       } else {
         toast.success('Failed.', {
-          id: 'attribute-add-error',
+          id: TOAST_ATTRIBUTE_ADD_ERROR,
         })
       }
       setError('')

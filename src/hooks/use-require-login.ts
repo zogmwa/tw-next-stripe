@@ -1,3 +1,4 @@
+import { TOAST_AUTH_WINDOW_LOADING, TOAST_LOGIN_FAILED } from '@taggedweb/utils/token-id'
 import { useEffect, useState, useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { useSWRConfig } from 'swr'
@@ -27,7 +28,7 @@ export function useRequireLogin(): UseRequireLogin {
         if (popupWindow.closed) {
           clearInterval(popupTick)
           toast.error('Login Failed', {
-            id: 'login-failed',
+            id: TOAST_LOGIN_FAILED,
             duration: 1000,
           })
           setPopupWindow(null)
@@ -60,7 +61,7 @@ export function useRequireLogin(): UseRequireLogin {
       popupOptions += `, width=${screen.width}, height=${screen.height}`
     }
     toast.loading('Loading window for Login', {
-      id: 'loading-auth-window',
+      id: TOAST_AUTH_WINDOW_LOADING,
     })
     const popup = window.open('/login?next=login', 'login_auth_popup', popupOptions)
     setPopupWindow(popup)

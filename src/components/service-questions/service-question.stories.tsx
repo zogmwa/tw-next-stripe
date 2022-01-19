@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import toast from 'react-hot-toast'
+import { TOAST_QUESTION_ANSWER_SUCCESS, TOAST_QUESTION_UPVOTE_SUCCESS } from '@taggedweb/utils/token-id'
 import { ServiceQuestion } from './service-question'
 
 export default {
@@ -81,12 +82,14 @@ export function DefaultServiceQuestion() {
 
   const answerQuestionAction = async (answerQuestion, questionId) => {
     toast.success('Answered successfully.', {
-      id: 'question-answer-success',
+      id: TOAST_QUESTION_ANSWER_SUCCESS,
     })
   }
 
   const upvoteQuestion = async (id, isAddVote) => {
-    toast.success('Voted successfully.')
+    toast.success('Voted successfully.', {
+      id: TOAST_QUESTION_UPVOTE_SUCCESS,
+    })
   }
 
   return (

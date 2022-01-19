@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip'
 import toast from 'react-hot-toast'
 import { RiMenuAddFill } from 'react-icons/ri'
 import { Tag } from '@taggedweb/types/tag'
+import { TOAST_TAG_ADD_ERROR } from '@taggedweb/utils/token-id'
 import { EditableTableHead, EditableTagsTableTrow } from './index'
 
 type EditableTagsTableComponentProps = {
@@ -70,7 +71,7 @@ function EditableTagsTableComponent({
   const handleAdd = () => {
     if (showTags.length > 4) {
       toast.error('Could not add more tags.', {
-        id: 'tag-add-error',
+        id: TOAST_TAG_ADD_ERROR,
       })
     } else {
       setShowTags((prevState) => [...prevState, defaultTagData])

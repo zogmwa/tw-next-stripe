@@ -8,6 +8,7 @@ import { searchSuggestions, solutionSuggestions } from '@taggedweb/queries/searc
 import { components } from 'react-select'
 import { GrShare } from 'react-icons/gr'
 import slugify from 'slugify'
+import { TOAST_INPUT_EMPTY_ERROR, TOAST_TAG_EMPTY_ERROR, TOAST_TAG_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 
 type SearchByTagsProps = {
@@ -109,7 +110,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
         toast.error('A maximum of 5 tags are allowed.', {
-          id: 'tag-limit-error',
+          id: TOAST_TAG_LIMIT_ERROR,
         })
       } else {
         setError('')
@@ -144,7 +145,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
       if (tags.length === 0) {
         setError('Please enter a tag')
         toast.error('Please enter a tag', {
-          id: 'empty-tag-error',
+          id: TOAST_TAG_EMPTY_ERROR,
         })
       } else {
         setError('')
@@ -158,7 +159,7 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
       if (solutionInput === '') {
         setError('No input given')
         toast.error('No input given', {
-          id: 'empty-input-error',
+          id: TOAST_INPUT_EMPTY_ERROR,
         })
       } else {
         setError('')

@@ -12,6 +12,7 @@ import { useUserContext } from '@taggedweb/hooks/use-user'
 import { PasswordReset } from '@taggedweb/components/password-reset'
 import { client } from '@taggedweb/utils/client'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { TOAST_PASSWORD_RESET_INITIATE_ERROR, TOAST_PASSWORD_RESET_INITIATE_SUCCESS } from '@taggedweb/utils/token-id'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required('Please enter a valid email'),
@@ -120,12 +121,12 @@ export default function Login() {
                     try {
                       await client.post('/dj-rest-auth/password/reset/', { email })
                       toast.success('Sent Reset Link', {
-                        id: 'password-reset-initiate-success',
+                        id: TOAST_PASSWORD_RESET_INITIATE_SUCCESS,
                       })
                       return true
                     } catch (error) {
                       toast.error('An error occurred', {
-                        id: 'password-reset-initiate-error',
+                        id: TOAST_PASSWORD_RESET_INITIATE_ERROR,
                       })
                       return false
                     }

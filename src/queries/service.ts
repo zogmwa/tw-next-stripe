@@ -4,6 +4,19 @@ import { Asset, AssetVote } from '@taggedweb/types/asset'
 import { AttributeVote, VotedAttribute } from '@taggedweb/types/attribute_vote'
 import { ServiceQuestion } from '@taggedweb/types/service-question'
 import * as Sentry from '@sentry/nextjs'
+import {
+  TOAST_ANSWER_SUBMIT_ERROR,
+  TOAST_ASSET_DOWNVOTE_TOGGLE_ERROR,
+  TOAST_ASSET_EDIT_ERROR,
+  TOAST_ASSET_REVIEW_ADD_ERROR,
+  TOAST_ASSET_UPVOTE_TOGGLE_ERROR,
+  TOAST_ATTRIBUTE_ADD_ERROR,
+  TOAST_ATTRIBUTE_DOWNVOTE_TOGGLE_ERROR,
+  TOAST_ATTRIBUTE_SUBMIT_ERROR,
+  TOAST_ATTRIBUTE_UPVOTE_TOGGLE_ERROR,
+  TOAST_CLAIM_SUBMIT_ERROR,
+  TOAST_QUESTION_ADD_ERROR,
+} from '@taggedweb/utils/token-id'
 
 export type CreateServiceInput = {
   name: string
@@ -103,7 +116,7 @@ export async function toggleUpVoteAttribute(assetId: number, attributeId: number
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not vote a attribute.', {
-      id: 'attribute-upvote-toggle-error',
+      id: TOAST_ATTRIBUTE_UPVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -116,7 +129,7 @@ export async function toggleDownVoteAttribute(attributeId: number): Promise<numb
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not destroy a attribute vote.', {
-      id: 'attribute-downvote-toggle-error',
+      id: TOAST_ATTRIBUTE_DOWNVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -131,7 +144,7 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not vote a asset.', {
-      id: 'asset-upvote-toggle-error',
+      id: TOAST_ASSET_UPVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -146,7 +159,7 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not destroy a asset vote.', {
-      id: 'asset-downvote-toggle-error',
+      id: TOAST_ASSET_DOWNVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -176,7 +189,7 @@ export async function toggleAddAttribute(assetId: number, name: string, isCon: b
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not add a attribute.', {
-      id: 'attribute-add-error',
+      id: TOAST_ATTRIBUTE_ADD_ERROR,
     })
     return null
   }
@@ -192,7 +205,7 @@ export async function toggleAddQuestion(assetId: number, title: string): Promise
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not add a question.', {
-      id: 'toggle-add-question-error',
+      id: TOAST_QUESTION_ADD_ERROR,
     })
     return null
   }
@@ -207,7 +220,7 @@ export async function toggleAnswerQuestion(questionId, answer): Promise<ServiceQ
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not answer a question.', {
-      id: 'answer-submit-error',
+      id: TOAST_ANSWER_SUBMIT_ERROR,
     })
     return null
   }
@@ -288,7 +301,7 @@ export async function addAssetReview(sendData): Promise<any | null> {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not add an asset review.', {
-      id: 'review-submit-error',
+      id: TOAST_ASSET_REVIEW_ADD_ERROR,
     })
     return null
   }
@@ -301,7 +314,7 @@ export async function patchAssetField(updateData, serviceSlug) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not update this web service.', {
-      id: 'service-update-error',
+      id: TOAST_ASSET_EDIT_ERROR,
     })
     return null
   }
@@ -316,7 +329,7 @@ export async function linkAttributeToAsset(slug, attributeId) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Unexpected error in submitting the highlight.', {
-      id: 'attribute-submit-error',
+      id: TOAST_ATTRIBUTE_SUBMIT_ERROR,
     })
     return null
   }
@@ -333,7 +346,7 @@ export async function claimOwnershipToAsset(assetId: number, User, Value) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Request failed. Kindly reach out to us at contact@taggedweb.com.', {
-      id: 'ownership-claim-error',
+      id: TOAST_CLAIM_SUBMIT_ERROR,
       duration: 5000,
     })
     return null

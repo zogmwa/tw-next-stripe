@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import { AiOutlineSearch } from 'react-icons/ai'
 import axios from 'axios'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
+import { TOAST_INPUT_LENGTH_ERROR, TOAST_QUESTIONS_LOAD_SUCCESS } from '@taggedweb/utils/token-id'
 import { TruncatedDescription } from '../truncated-description'
 
 function SolutionFAQComponent({ questions, solutionSlug }) {
@@ -25,7 +26,7 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
           setAllQuestion(searchedQuestions)
           setShowQuestions(searchedQuestions.slice(0, defaultShowCount))
           toast.success('Loaded Questions List', {
-            id: 'questions-load-success',
+            id: TOAST_QUESTIONS_LOAD_SUCCESS,
           })
         } catch (error) {
           // eslint-disable-next-line
@@ -33,7 +34,7 @@ function SolutionFAQComponent({ questions, solutionSlug }) {
         }
       } else {
         toast.error('Type at least 3 letters.', {
-          id: 'search-slug-length-low',
+          id: TOAST_INPUT_LENGTH_ERROR,
         })
       }
       setIsPressEnter(false)

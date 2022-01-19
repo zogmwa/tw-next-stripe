@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 import toast from 'react-hot-toast'
+import { TOAST_QUESTION_UPVOTE_SUCCESS } from '@taggedweb/utils/token-id'
 import { ServiceQuestionCard } from './service-question-card'
 
 export default {
@@ -24,7 +25,7 @@ export function DefaultServiceQuestionCard() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const upvoteQuestion = (questionId, status) => {
     toast.success('Voted successfully.', {
-      id: 'question-upvote-success',
+      id: TOAST_QUESTION_UPVOTE_SUCCESS,
     })
   }
 

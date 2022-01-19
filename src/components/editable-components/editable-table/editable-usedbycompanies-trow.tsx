@@ -6,6 +6,7 @@ import { TiImageOutline } from 'react-icons/ti'
 import toast from 'react-hot-toast'
 import ReactTooltip from 'react-tooltip'
 import { CustomerOrganization } from '@taggedweb/types/customer_organization'
+import { TOAST_ORGANIZATION_EXISTS_ERROR } from '@taggedweb/utils/token-id'
 import LinkUsedByCompaniesBar from '../editable-usedbycompanies/link-usedbycompanies-bar'
 
 type EditableUsedByCompaniesTableTrowComponentProps = {
@@ -94,7 +95,7 @@ function EditableUsedByCompaniesTableTrowComponent({
               const tempData = allRowData.filter((organization) => organization.name === value.label)
               if (tempData.length > 0) {
                 toast.error('This organization is already exist', {
-                  id: 'organization-exists-error',
+                  id: TOAST_ORGANIZATION_EXISTS_ERROR,
                 })
               } else {
                 setErrorMessage('')

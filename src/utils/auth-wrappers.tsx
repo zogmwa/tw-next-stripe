@@ -7,6 +7,7 @@ import { GetIronServerSideProps } from '@taggedweb/types/session'
 import { WithApiAuthRequired, WithPageAuthRequired, WithSSRAuthRequired } from '@taggedweb/types/auth-wrappers'
 import { withSessionApi, withSessionSSR } from './session'
 import { getAccessToken } from './token'
+import { TOAST_INVALID_PAGE_AUTH } from './token-id'
 
 // Future implementations of this function might pass an extra argument 'authClient' to handler which would be an AxiosInstance with Authorization Header and refresh interceptor set.
 /**
@@ -91,7 +92,7 @@ const withPageAuthRequired: WithPageAuthRequired = (Component, options = {}) => 
       if (!user.isLoggedIn()) {
         router.replace(redirectTo)
         toast.error(message, {
-          id: 'invalid-page-auth-error',
+          id: TOAST_INVALID_PAGE_AUTH,
         })
       }
     }, [user, router])

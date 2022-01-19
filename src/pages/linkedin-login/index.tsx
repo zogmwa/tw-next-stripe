@@ -6,6 +6,7 @@ import axios from 'axios'
 import { client } from '@taggedweb/utils/client'
 import { Spinner } from '@taggedweb/components/spinner'
 import { useUserContext } from '@taggedweb/hooks/use-user'
+import { TOAST_LINKEDIN_CONNECT_SUCCESS, TOAST_LOGIN_SUCCESS } from '@taggedweb/utils/token-id'
 
 /**
  * This is a basic component that handles the callback from LinkedIn, after a login.
@@ -46,7 +47,7 @@ export default function LoginWithLinkedin() {
         await mutate('/api/user')
 
         toast.success('Login Successful and LinkedIn Account Connected', {
-          id: 'linkedin-account-connect-success',
+          id: TOAST_LINKEDIN_CONNECT_SUCCESS,
         })
 
         setShouldNextPageRedirect(true)
@@ -96,7 +97,7 @@ export default function LoginWithLinkedin() {
                 await mutate('/api/user')
 
                 toast.success('Login Successful', {
-                  id: 'linkedin-login-success',
+                  id: TOAST_LOGIN_SUCCESS,
                 })
 
                 setShouldNextPageRedirect(true)

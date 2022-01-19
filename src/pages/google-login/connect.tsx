@@ -6,6 +6,7 @@ import axios from 'axios'
 import { Spinner } from '@taggedweb/components/spinner'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import * as Sentry from '@sentry/browser'
+import { TOAST_GOOGLE_CONNECT_SUCCESS } from '@taggedweb/utils/token-id'
 export default function GoogleConnect() {
   const { replace } = useRouter()
   const { mutate } = useSWRConfig()
@@ -51,7 +52,7 @@ export default function GoogleConnect() {
 
         await mutate('/api/user')
         toast.success('Google Account Connected', {
-          id: 'google-account-connect-succes',
+          id: TOAST_GOOGLE_CONNECT_SUCCESS,
         })
 
         setShouldNextPageRedirect(true)

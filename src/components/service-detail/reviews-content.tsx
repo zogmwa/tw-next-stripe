@@ -5,6 +5,7 @@ import numeral from 'numeral'
 import toast from 'react-hot-toast'
 import { ServiceReview } from '@taggedweb/types/service-review'
 import { addAssetReview } from '@taggedweb/queries/service'
+import { TOAST_ASSET_REVIEW_ADD_SUCCESS } from '@taggedweb/utils/token-id'
 import { StyledStarRating } from '../styled-star-rating'
 // import { MarkProgress } from '../styled-mark-progress'
 import { ReviewInput } from '../review-input'
@@ -43,7 +44,7 @@ function ReviewsContentComponent({
     })
     if (data) {
       toast.success('Added an asset review successfully.', {
-        id: 'asset-review-add-success',
+        id: TOAST_ASSET_REVIEW_ADD_SUCCESS,
       })
       setReviewMark(numeral(Number(data.asset_avg_rating ?? 0)).format('0.[0]'))
       setReviewsCount(data.asset_reviews_count)

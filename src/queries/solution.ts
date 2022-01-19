@@ -2,6 +2,19 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import * as Sentry from '@sentry/nextjs'
 import { solutionContract } from '@taggedweb/types/contracts'
+import {
+  TOAST_SIMILAR_SOLUTIONS_FETCH_ERROR,
+  TOAST_SOLUTION_BOOKING_RATING_EDIT_ERROR,
+  TOAST_SOLUTION_BOOKMARK_DELETE_ERROR,
+  TOAST_SOLUTION_BOOKMARK_TOGGLE_ERROR,
+  TOAST_SOLUTION_CHECKOUT_ERROR,
+  TOAST_SOLUTION_DOWNVOTE_TOGGLE_ERROR,
+  TOAST_SOLUTION_FETCH_ERROR,
+  TOAST_SOLUTION_REVIEW_ADD_ERROR,
+  TOAST_SOLUTION_REVIEW_DELETE_ERROR,
+  TOAST_SOLUTION_REVIEW_EDIT_ERROR,
+  TOAST_SOLUTION_UPVOTE_TOGGLE_ERROR,
+} from '@taggedweb/utils/token-id'
 export async function fetchSolutionDetail(solutionSlug) {
   try {
     const { data } = await axios.get(`/api/solutions/detail/${solutionSlug}`)
@@ -9,7 +22,7 @@ export async function fetchSolutionDetail(solutionSlug) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Please Try Again. Could not load the data', {
-      id: 'solution-fetch-error',
+      id: TOAST_SOLUTION_FETCH_ERROR,
     })
     return null
   }
@@ -23,7 +36,7 @@ export async function fetchSimilarProducts(solutionSlug) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not get similar software.', {
-      id: 'similar-solutions-fetch-error',
+      id: TOAST_SIMILAR_SOLUTIONS_FETCH_ERROR,
     })
     return null
   }
@@ -38,7 +51,7 @@ export async function toggleUpVoteSolution(solutionId: number) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not vote a solution.', {
-      id: 'solution-upvote-toggle-error',
+      id: TOAST_SOLUTION_UPVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -53,7 +66,7 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not destroy a solution vote.', {
-      id: 'solution-downvote-toggle-error',
+      id: TOAST_SOLUTION_DOWNVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -69,7 +82,7 @@ export async function checkoutSolutionPurchase(
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not purchase this solution.', {
-      id: 'solution-checkout-error',
+      id: TOAST_SOLUTION_CHECKOUT_ERROR,
     })
     return null
   }
@@ -84,7 +97,7 @@ export async function toggleBookmarkSolution(solutionId: number): Promise<any | 
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Failed to bookmark the solution.', {
-      id: 'solution-bookmark-toggle-error',
+      id: TOAST_SOLUTION_BOOKMARK_TOGGLE_ERROR,
     })
     return null
   }
@@ -99,7 +112,7 @@ export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: str
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Failed to delete the bookmark.', {
-      id: 'solution-bookmark-delete-error',
+      id: TOAST_SOLUTION_BOOKMARK_DELETE_ERROR,
     })
     return null
   }
@@ -116,7 +129,7 @@ export async function toggleAddReviewSolution(solutionId: number, type: string):
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Failed to adding review solution.', {
-      id: 'solution-review-submit-error',
+      id: TOAST_SOLUTION_REVIEW_ADD_ERROR,
     })
     return null
   }
@@ -137,7 +150,7 @@ export async function toggleUpdateReviewSolution(
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Failed to changing review solution.', {
-      id: 'solution-review-update-error',
+      id: TOAST_SOLUTION_REVIEW_EDIT_ERROR,
     })
     return null
   }
@@ -151,7 +164,7 @@ export async function toggleDeleteReviewSolution(solutionReviewId: number): Prom
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Failed to canceling review solution.', {
-      id: 'solution-review-delete-error',
+      id: TOAST_SOLUTION_REVIEW_DELETE_ERROR,
     })
     return null
   }
@@ -170,7 +183,7 @@ export async function toggleUpdateSolutionBookingRating(
     toast.error(
       `Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`,
       {
-        id: 'solution-booking-rating-update-error',
+        id: TOAST_SOLUTION_BOOKING_RATING_EDIT_ERROR,
       },
     )
     return null

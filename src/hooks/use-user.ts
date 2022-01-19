@@ -6,6 +6,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { UserContextType } from '@taggedweb/types/user-context-type'
 import { User } from '@taggedweb/types/user'
+import { TOAST_LOGIN_FAILED, TOAST_LOGOUT_FAILED, TOAST_SIGNUP_FAILED } from '@taggedweb/utils/token-id'
 
 /**
  * Fetches user details from /api/user. Provides user details and essential methods such as isLoggedIn, logout, mutateUser.
@@ -25,7 +26,7 @@ export function useSessionUser(): UserContextType {
         return true
       } catch (error) {
         toast.error('Invalid username and password', {
-          id: 'incorrect-credential',
+          id: TOAST_LOGIN_FAILED,
         })
         return false
       }
@@ -63,7 +64,7 @@ export function useSessionUser(): UserContextType {
         try {
           if (!user?.authVerified) {
             toast.error('You are not logged in', {
-              id: 'invalid-logout-attempt',
+              id: TOAST_LOGOUT_FAILED,
             })
             return
           }
@@ -76,7 +77,7 @@ export function useSessionUser(): UserContextType {
           }
         } catch (error) {
           toast.error('Could Not Logout', {
-            id: 'logout-failure',
+            id: TOAST_LOGOUT_FAILED,
           })
         }
       }

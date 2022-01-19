@@ -14,6 +14,7 @@ import { ProductContent } from '@taggedweb/components/service-detail/product-con
 // import { ReviewsContainer } from '@taggedweb/components/service-detail/get-reviews'
 import { Asset } from '@taggedweb/types/asset'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { TOAST_ASSET_EDIT_SUCCESS } from '@taggedweb/utils/token-id'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -44,7 +45,7 @@ export default function Service({ service }) {
     if (updatedData) {
       setShowService(updatedData)
       toast.success('Updated successfully.', {
-        id: 'service-update-success',
+        id: TOAST_ASSET_EDIT_SUCCESS,
       })
     }
   }

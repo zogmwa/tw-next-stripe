@@ -10,6 +10,12 @@ import {
   toggleUpVoteQuestion,
   toggleDownVoteQuestion,
 } from '@taggedweb/queries/service'
+import {
+  TOAST_ANSWER_ADD_ERROR,
+  TOAST_ANSWER_ADD_SUCCESS,
+  TOAST_QUESTION_ADD_SUCCESS,
+  TOAST_TRY_AGAIN_LATER,
+} from '@taggedweb/utils/token-id'
 import { ServiceQuestion } from '../service-questions'
 
 type ServiceDetailQAProps = {
@@ -47,7 +53,7 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
         questions.push(addedQuestion)
         setServiceQuestions(questions)
         toast.success('Added a question successfully.', {
-          id: 'question-add-success',
+          id: TOAST_QUESTION_ADD_SUCCESS,
         })
         setAddQuestionNameErrorMessage('')
         setAddQuestionName('')
@@ -66,13 +72,13 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
         const questions = await fetchQuestions(service.slug)
         setServiceQuestions(questions)
         toast.success('Answered successfully.', {
-          id: 'answer-add-success',
+          id: TOAST_ANSWER_ADD_SUCCESS,
         })
         setIsAnswered(true)
       }
     } else {
       toast.error('Please enter your answer.', {
-        id: 'answer-add-error',
+        id: TOAST_ANSWER_ADD_ERROR,
       })
     }
     setIsLoading(false)
@@ -104,7 +110,7 @@ function QaContentComponent({ service, id }: ServiceDetailQAProps) {
       setVotedQuestions(votedQuestionList)
     } else {
       toast.error('Please try again later.', {
-        id: 'try-again-later',
+        id: TOAST_TRY_AGAIN_LATER,
       })
     }
     setIsLoading(false)

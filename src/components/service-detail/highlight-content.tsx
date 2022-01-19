@@ -9,6 +9,7 @@ import {
   toggleAddAttribute,
   linkAttributeToAsset,
 } from '@taggedweb/queries/service'
+import { TOAST_ATTRIBUTE_ADD_ERROR, TOAST_ATTRIBUTE_ADD_SUCCESS } from '@taggedweb/utils/token-id'
 import { HighlightContent } from '../service-highlights'
 
 type ServiceDetailFeatureProps = {
@@ -92,11 +93,11 @@ function HighlightContentComponent({
             })
             setAttributes(updatedAttributes)
             toast.success('Added an attribute successfully.', {
-              id: 'attribute-add-success',
+              id: TOAST_ATTRIBUTE_ADD_SUCCESS,
             })
           } else {
             toast.success('This attribute already exist.', {
-              id: 'attribute-add-error',
+              id: TOAST_ATTRIBUTE_ADD_ERROR,
             })
           }
         }

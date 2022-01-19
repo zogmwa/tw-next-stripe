@@ -25,6 +25,7 @@ import { Asset } from '@taggedweb/types/asset'
 import { phoneRegex } from '@taggedweb/utils/constants'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
 import { validateLink } from '@taggedweb/utils/validateLink'
+import { TOAST_CLAIM_SUBMIT_SUCCESS } from '@taggedweb/utils/token-id'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
@@ -357,7 +358,7 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               const data = await claimOwnershipToAsset(service?.id, user, values)
               if (data) {
                 toast.success('Claim submitted for review.', {
-                  id: 'claim-submit-success',
+                  id: TOAST_CLAIM_SUBMIT_SUCCESS,
                 })
               }
               setIsOpenOwnServiceModal(false)

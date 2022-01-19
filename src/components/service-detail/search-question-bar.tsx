@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { searchSuggestions } from '@taggedweb/queries/question'
+import { TOAST_QUESTION_EMPTY_ERROR, TOAST_QUESTION_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 
 type SearchByQuestionsProps = {
@@ -55,7 +56,7 @@ export function SearchQuestionBar({
     if (questions.length > 5) {
       setError('A maximum of 5 questions are allowed.')
       toast.error('A maximum of 5 questions are allowed.', {
-        id: 'question-limit-error',
+        id: TOAST_QUESTION_LIMIT_ERROR,
       })
     } else {
       setError('')
@@ -74,7 +75,7 @@ export function SearchQuestionBar({
     if (questions.length === 0) {
       setError('Please enter a question')
       toast.error('Please enter a question', {
-        id: 'question-empty-error',
+        id: TOAST_QUESTION_EMPTY_ERROR,
       })
     } else {
       setError('')
