@@ -40,7 +40,14 @@ export type Solution = {
   billing_period: null | string
 }
 
-export type Point_of_contact = { id: number; username: string; first_name?: string; last_name?: string; email?: string }
+export type Point_of_contact = {
+  id: number
+  username: string
+  first_name?: string
+  last_name?: string
+  email?: string
+  avatar?: string
+}
 
 export enum SolutionTypes {
   I = 'INTEGRATIONS',

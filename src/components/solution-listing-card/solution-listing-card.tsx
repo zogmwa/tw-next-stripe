@@ -100,7 +100,15 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
                   className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
                   style={{ boxShadow: 'none !important' }}
                 >
-                  <p>{listingData.point_of_contact.first_name[0] + listingData.point_of_contact.last_name[0]}</p>
+                  {listingData.point_of_contact.avatar ? (
+                    <img
+                      className="w-[40px] h-[40px] rounded-full"
+                      src={listingData.point_of_contact.avatar}
+                      alt={listingData.point_of_contact.first_name}
+                    />
+                  ) : (
+                    <p>{listingData.point_of_contact.first_name[0] + listingData.point_of_contact.last_name[0]}</p>
+                  )}
                 </div>
                 <span className="pl-2 text-sm text-text-secondary">
                   {listingData.point_of_contact.first_name} {listingData.point_of_contact.last_name}
