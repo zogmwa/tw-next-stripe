@@ -40,7 +40,7 @@ export function useSessionUser(): UserContextType {
       } catch (error) {
         if (error.response.data) {
           const obj = error.response.data
-          toast.error(obj[Object.keys(obj)[0]])
+          // toast.error(obj[Object.keys(obj)[0]])
           return { success: false, errorMessage: obj[Object.keys(obj)[0]] }
         }
         return { success: false, errorMessage: 'Something went wrong!' }
