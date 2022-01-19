@@ -19,7 +19,7 @@ import { ToastWithDismiss } from '@taggedweb/components/toast-with-dismiss'
 import { fetcher } from '@taggedweb/queries/fetchJson'
 import { HomePageFooter } from '@taggedweb/components/homepage-footer-old'
 import { topTags, TopSaasTags, TopSolutionTags } from '@taggedweb/utils/top-tags'
-import * as ga from '@taggedweb/lib/ga'
+import * as ga from '@taggedweb/lib/gtag'
 import { FooterComponent } from '@taggedweb/components/footer'
 import Sentry from '@taggedweb/components/sentry/sentry'
 
@@ -61,7 +61,7 @@ function AppComponent({ Component, pageProps }: AppProps) {
   }, [redirectTo])
 
   useEffect(() => {
-    const handleRouteChange = (url) => {
+    const handleRouteChange = (url: URL) => {
       ga.pageview(url)
     }
     // When the component is mounted, subscribe to router changes

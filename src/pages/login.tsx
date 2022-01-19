@@ -51,7 +51,7 @@ export default function Login() {
         <div className="max-w-md p-0 mx-1 my-4 rounded-md md:p-6 md:border">
           <h1 className="mb-3 text-2xl font-semibold md:text-3xl text-text-primary">Welcome to TaggedWeb!</h1>
           <h3 className="mb-6 text-sm md:mb-8 md:text-base text-text-secondary">
-            Login to continue surfing among the ocean of web services
+            Login to continue surfing among the ocean of web solutions from experts
           </h3>
           <p className="text-xs text-center text-error">{linkedInError}</p>
           <Button

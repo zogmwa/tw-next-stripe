@@ -1,7 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import Analytics from '@taggedweb/components/Analytics'
 import Script from 'next/script'
+import Analytics from '@taggedweb/components/Analytics'
 
 export default class MyDocument extends Document {
   render() {

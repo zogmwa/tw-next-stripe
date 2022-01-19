@@ -28,15 +28,18 @@ const Analytics = ({ googleAnalytics, googleTagManager }: Props) => {
             src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
           />
 
-          <Script strategy="afterInteractive" id="ga2">
-            {`
+          <Script
+            strategy="afterInteractive"
+            id="ga2"
+            dangerouslySetInnerHTML={{
+              __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', '${googleAnalytics}', {
-                page_path: window.location.pathname,}); 
-        `}
-          </Script>
+                page_path: window.location.pathname,}); `,
+            }}
+          />
         </>
       )}
     </>

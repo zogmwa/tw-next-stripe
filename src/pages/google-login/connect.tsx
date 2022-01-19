@@ -57,7 +57,7 @@ export default function GoogleConnect() {
         Sentry.captureException(error)
         if (error?.response?.status === 401) {
           return replace(
-            `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account`,
+            `${failureRedirect}?googleError=Your email already has an associated account. Login in via email/password first to be able to connect your Google account through profile`,
           )
         }
         replace(`${failureRedirect}?googleError=${error.response.data.detail}`)
