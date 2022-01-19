@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Radio from '@mui/material/Radio'
@@ -25,6 +26,7 @@ function MeteredPaymentMethodConfirmComponent({
   toggleSubScribe,
   isSubscribe,
 }: MeteredPaymentMethodConfirmComponentProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   const [agreeCard, setAgreeCard] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState(
@@ -62,7 +64,7 @@ function MeteredPaymentMethodConfirmComponent({
                   control={<Radio />}
                   label={
                     <div className="flex flex-row items-center" key={payment.id}>
-                      <div className="flex flex-row text-text-primary items-center">
+                      <div className="flex flex-row items-center text-text-primary">
                         <BsCreditCard2Back className="text-lg text-text-primary" />
                         <span className="ml-2">**** **** **** {payment.last4}</span>
                       </div>
@@ -76,7 +78,7 @@ function MeteredPaymentMethodConfirmComponent({
         </RadioGroup>
       </div>
       {slug && (
-        <a href={`/add-card-details?slug=${slug}`} className="text-primary text-sm">
+        <a href={`/add-card-details?slug=${slug}`} className="text-sm text-primary">
           Add a new card
         </a>
       )}
