@@ -78,7 +78,8 @@ export default function Home({ search_software = 0 }: HomeProps) {
               </h1>
             </div>
             <h2 className="py-2 mb-4 text-3xl font-medium text-white">
-              Consult with the best Software Engineers, Architects, Researchers, Marketers and SaaS Specialists
+              Consult with the best Software Engineers, Researchers, Solution Architects, Tech-Marketers and SaaS
+              Support Teams
             </h2>
             <div className="z-10 w-full mb-4">
               <SearchComponent search_software={search_software} />
@@ -86,13 +87,13 @@ export default function Home({ search_software = 0 }: HomeProps) {
           </div>
         </div>
         <div className="z-0 justify-end hidden w-1/3 lg:flex">
-          <img src="/images/homepage_circle.png" alt="Solution Landing Page Image" className="w-full" />
+          <img src="/images/homepage_circle.png" alt="TaggedWeb Solutions Background" className="w-full" />
         </div>
       </div>
       <div className="bg-blue-300">
         <div className="max-w-screen-lg py-4 mx-auto text-center">
           <h3 className="mx-2 text-sm font-medium text-black md:text-base lg:text-lg">
-            Our mission is to help you find, integrate and utilize SaaS and software tools that best-fit your needs.
+            Our mission is to help you find, integrate and utilize software tools that best-fit your needs
           </h3>
         </div>
       </div>

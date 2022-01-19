@@ -19,7 +19,7 @@ describe('Homepage', () => {
     render(mockRouter())
     await waitFor(() => {
       const myNode = screen.getByText(
-        /Consult with the best Software Engineers, Architects, Researchers, Marketers and SaaS Specialists/i,
+        /Consult with the best Software Engineers, Researchers, Solution Architects, Tech-Marketers and SaaS Support Teams/i,
       )
       expect(myNode).toBeInTheDocument()
     })
