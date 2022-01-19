@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
@@ -47,6 +47,7 @@ export default function Signup() {
     }
   }, [isLoading, isLoggedIn])
 
+  const [errorMessage, setErrorMessage] = useState('')
   return (
     <>
       <DynamicHeader title="Taggedweb | Sign up" />
@@ -80,11 +81,14 @@ export default function Signup() {
           <div className="relative flex items-center justify-center w-full mb-6 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
             <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
           </div>
+          {errorMessage && <p className="text-sm text-center text-red-500">{errorMessage}</p>}
+
           <Formik
             initialValues={{ email: '', password1: '', password2: '' }}
             validationSchema={validationSchema}
             onSubmit={async ({ email, password1, password2 }) => {
-              const success = await signUpWithEmailAndPassword(email, password1, password2)
+              const { success, errorMessage } = await signUpWithEmailAndPassword(email, password1, password2)
+              setErrorMessage(errorMessage)
               if (success) {
                 nextPageRedirect()
               }
@@ -134,7 +138,7 @@ export default function Signup() {
                   success={touched.password2 && !errors.password2}
                 />
                 <div className="flex items-center space-x-4">
-                  <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
+                  <Button type="submit" buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                     Sign Up
                   </Button>
                   <div className="text-xs md:text-sm text-text-secondary">
