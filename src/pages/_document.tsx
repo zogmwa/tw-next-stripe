@@ -1,6 +1,5 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import Analytics from '@taggedweb/components/Analytics'
 
 export default class MyDocument extends Document {
@@ -20,9 +19,7 @@ export default class MyDocument extends Document {
             id="gtm2"
             dangerouslySetInnerHTML={{
               __html: `
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCJBMVP"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        `,
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCJBMVP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`,
             }}
           />
           {/* <!-- End Google Tag Manager (noscript) --> */}
