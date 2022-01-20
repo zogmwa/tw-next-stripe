@@ -104,14 +104,14 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
           ) : (
             <span data-for="purchase-button" data-tip>
               <Button
-                className="mt-4 bg-primary"
+                className="w-32 mt-4 bg-primary"
                 textClassName="text-white"
                 loading={isPurchase}
                 disabled={detailInfo.purchaseDisableOption || isPurchase}
                 loadingClassName="text-background-light"
                 onClick={requireLoginBeforeAction(() => togglePurchase())}
               >
-                {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
+                Book Now
               </Button>
               {detailInfo.purchaseDisableOption && (
                 <ReactTooltip

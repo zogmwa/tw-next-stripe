@@ -130,14 +130,14 @@ function SolutionDetailMobileSidebarComponent({
           </Button>
         ) : (
           <Button
-            className="px-[0.5rem] mt-2 bg-primary"
+            className="px-[0.5rem] mt-2 bg-primary w-full"
             textClassName="text-white text-xs"
             loading={isPurchase}
             disabled={detailInfo.purchaseDisableOption || isPurchase}
             loadingClassName="text-background-light"
             onClick={requireLoginBeforeAction(() => togglePurchase())}
           >
-            {detailInfo.type && detailInfo.type === 'C' ? 'Book Now' : 'Purchase Now'}
+            Book Now
           </Button>
         )}
         <Button onClick={() => setIsFreshChatShow(true)} className="px-[0.5rem] mt-2" textClassName="text-xs">
