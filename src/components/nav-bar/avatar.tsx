@@ -47,9 +47,31 @@ export default function Avatar() {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <button onClick={() => logout()} className={menuIconClassNames(active)}>
-                  Logout
-                </button>
+                <Link href="/profile/contracts">
+                  <a>
+                    <button className={menuIconClassNames(active)}>Contracts</button>
+                  </a>
+                </Link>
+              )}
+            </Menu.Item>
+            {/* <Menu.Item>
+              {({ active }) => (
+                <Link href="/profile">
+                  <a>
+                    <button className={menuIconClassNames(active)}>Softwares Claimed</button>
+                  </a>
+                </Link>
+              )}
+            </Menu.Item> */}
+            <Menu.Item>
+              {({ active }) => (
+                <Link href="/">
+                  <a>
+                    <button onClick={() => logout()} className={menuIconClassNames(active)}>
+                      Logout
+                    </button>
+                  </a>
+                </Link>
               )}
             </Menu.Item>
           </div>
