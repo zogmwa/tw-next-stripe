@@ -15,12 +15,16 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           {/* <-- Google Tag Manager (noscript) --> */}
-          <Script async id="gtm2" strategy="afterInteractive">
-            {`
+          <script
+            async
+            id="gtm2"
+            dangerouslySetInnerHTML={{
+              __html: `
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCJBMVP"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        `}
-          </Script>
+        `,
+            }}
+          />
           {/* <!-- End Google Tag Manager (noscript) --> */}
           <Main />
           <NextScript />
