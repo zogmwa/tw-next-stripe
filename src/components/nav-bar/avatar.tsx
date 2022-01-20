@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
+import Link from './../Link'
 import { BsPersonFill } from 'react-icons/bs'
 import { Menu, Transition } from '@headlessui/react'
 import { useUserContext } from '@taggedweb/hooks/use-user'
