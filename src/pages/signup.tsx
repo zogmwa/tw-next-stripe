@@ -11,7 +11,7 @@ import { handleGoogleLogin, handleLinkedInLogin } from '@taggedweb/utils/login'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 const validationSchema = yup.object().shape({
-  first_name: yup.string(),
+  first_name: yup.string().required('First name field is required'),
   last_name: yup.string(),
   email: yup.string().email().required('Please enter a valid email'),
   password1: yup
