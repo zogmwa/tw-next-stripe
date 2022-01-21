@@ -7,10 +7,11 @@ import { useUserContext } from '@taggedweb/hooks/use-user'
 import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineClose } from 'react-icons/md'
+import { BsSearch, BsFillXCircleFill } from 'react-icons/bs'
 import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { Button } from '../button'
 import Avatar from './avatar'
-import { NavSearchBar } from '../search-bar'
+import { NavSearchBar, SearchBar } from '../search-bar'
 import { NavbarMenu, NavbarMenuResponsive } from '../navbar-menu/navbar-menu'
 
 type NavBarProps = {
@@ -20,6 +21,7 @@ type NavBarProps = {
 
 export function NavBar({ className, style }: NavBarProps) {
   const [mobileTopShow, setMobileTopShow] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
   const session = useUserContext()
   const { pathname } = useRouter()
   const router = useRouter()
@@ -58,7 +60,37 @@ export function NavBar({ className, style }: NavBarProps) {
               }}
             />
           ) : null}
-          <NavbarMenu />
+          {showSearch && (
+            <div className="flex-1 px-6">
+              <SearchBar
+                forNavbar={true}
+                onSubmit={(selectedTag) => {
+                  router.push(`/solutions/${selectedTag}`)
+                }}
+              />
+            </div>
+          )}
+          {!showSearch && <NavbarMenu />}
+          {!showSearch && (
+            <div
+              onClick={() => {
+                setShowSearch(!showSearch)
+              }}
+              className="px-2 py-2 text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+            >
+              <BsSearch />
+            </div>
+          )}
+          {showSearch && (
+            <div
+              onClick={() => {
+                setShowSearch(!showSearch)
+              }}
+              className="px-2 py-2 mr-4 text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+            >
+              <BsFillXCircleFill />
+            </div>
+          )}
           <div className="flex flex-row items-center justify-around ">
             {isLoggedIn() ? (
               <>
@@ -105,23 +137,55 @@ export function NavBar({ className, style }: NavBarProps) {
                   </a>
                 </Link>
               </div>
-              <div className="flex items-center justify-between">
-                {isLoggedIn() ? (
-                  <>
-                    <Avatar />
-                  </>
-                ) : (
-                  <Link href={'/signup'}>
-                    <a>
-                      <Button buttonType="primary">Get Started</Button>
-                    </a>
-                  </Link>
-                )}
-                <GiHamburgerMenu
-                  className="p-1 text-3xl cursor-pointer text-primary"
-                  onClick={() => setMobileTopShow(true)}
-                />
-              </div>
+              {showSearch && (
+                <div className="flex-1 px-2 pt-1">
+                  <SearchBar
+                    forNavbar={true}
+                    onSubmit={(selectedTag) => {
+                      router.push(`/solutions/${selectedTag}`)
+                    }}
+                  />
+                </div>
+              )}
+              {showSearch && (
+                <div
+                  onClick={() => {
+                    setShowSearch(!showSearch)
+                  }}
+                  className="px-2 py-2 mb-0.5 text-xl text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+                >
+                  <BsFillXCircleFill />
+                </div>
+              )}
+              {!showSearch && (
+                <div className="flex items-center justify-between">
+                  <div
+                    onClick={() => {
+                      setShowSearch(!showSearch)
+                    }}
+                    className="px-2 py-2 text-xl text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+                  >
+                    <BsSearch />
+                  </div>
+                  {isLoggedIn() ? (
+                    <>
+                      <Avatar />
+                    </>
+                  ) : (
+                    <Link href={'/signup'}>
+                      <a>
+                        <Button buttonType="primary" className="mx-2">
+                          Get Started
+                        </Button>
+                      </a>
+                    </Link>
+                  )}
+                  <GiHamburgerMenu
+                    className="p-1 text-3xl cursor-pointer text-primary"
+                    onClick={() => setMobileTopShow(true)}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

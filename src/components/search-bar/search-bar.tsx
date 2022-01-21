@@ -18,6 +18,7 @@ type SearchByTagsProps = {
   tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
   forHomepage?: boolean
   forSoftware?: boolean
+  forNavbar?: boolean
 }
 
 const placeholderComponent = (
@@ -70,7 +71,14 @@ const OptionComponent = (props) => {
   )
 }
 
-export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
+export function SearchBar({
+  onSubmit,
+  className,
+  style,
+  forHomepage = false,
+  forSoftware = false,
+  forNavbar = false,
+}: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
   const [solutionLabel, setSolutionLabel] = useState<string>('')
@@ -227,9 +235,11 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           onKeyDown={handleKeyPress}
         />
       )}
-      <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
-        {searchBtnText}
-      </Button>
+      {!forNavbar && (
+        <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
+          {searchBtnText}
+        </Button>
+      )}
     </form>
   )
 }
