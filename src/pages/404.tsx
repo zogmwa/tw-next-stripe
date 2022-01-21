@@ -1,11 +1,7 @@
 import React from 'react'
-import Link from 'next/link'
-import { topTags } from '@taggedweb/utils/top-tags'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 function Page404() {
-  const length = topTags.length
-
   return (
     <>
       <DynamicHeader />
