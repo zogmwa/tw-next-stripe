@@ -30,7 +30,7 @@ export default function BookmarkedSolutionsList() {
 
   return (
     <div className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
-      <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
+      <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" copyUrl={copyUrl} />
       <p className="my-2 text-lg font-bold">Bookmarked Solutions</p>
       <div className="w-full mb-4">
         {solutionsList && solutionsList.length === 0 && (
