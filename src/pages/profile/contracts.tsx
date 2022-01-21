@@ -17,7 +17,7 @@ export default function ContractsList() {
     })
   const breadcrumbData = [
     {
-      name: 'Search',
+      name: 'Home',
       url: `${process.env.SITE_BASE_URL}/`,
       is_selected: false,
     },

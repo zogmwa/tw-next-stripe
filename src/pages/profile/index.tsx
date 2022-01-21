@@ -68,7 +68,7 @@ function ProfilePage() {
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
   const breadcrumbData = [
     {
-      name: 'Search',
+      name: 'Home',
       url: `${process.env.SITE_BASE_URL}/`,
       is_selected: false,
     },
