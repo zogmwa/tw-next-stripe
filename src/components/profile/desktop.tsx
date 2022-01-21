@@ -52,7 +52,7 @@ const elements = [
 ]
 
 export const ProfileDesktop = ({ profile }: { profile: Profile }) => {
-  console.log('profile:', profile)
+  // console.log('profile:', profile)
   return (
     <div className="hidden w-full h-full md:flex">
       <ScrollSpy elements={elements} />

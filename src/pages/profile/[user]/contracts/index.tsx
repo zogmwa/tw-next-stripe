@@ -29,18 +29,23 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   }
 })
 
-export default function Contracts({ contractData }) {
+export default function ContractsList({ contractData }) {
   const { query } = useRouter()
   const { user } = query as { user: string }
   const contractsList = contractData
   const breadcrumbData = [
+    {
+      name: 'Home',
+      url: `${process.env.SITE_BASE_URL}/`,
+      is_selected: false,
+    },
     {
       name: 'Profile',
       url: '/profile',
       is_selected: false,
     },
     {
-      name: 'Bookings List',
+      name: 'Contracts',
       url: '#',
       is_selected: true,
     },
@@ -52,11 +57,10 @@ export default function Contracts({ contractData }) {
       const dateB = new Date(contractB.started_at)
       return (dateA.getTime() - dateB.getTime()) * -1
     })
-
   return (
-    <div id="contracts" className="flex flex-col max-w-screen-lg px-2 mx-auto my-10">
+    <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
       <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
-      <p className="mb-2 text-lg font-bold">Contracts</p>
+      <p className="my-2 text-lg font-bold">Contracts</p>
       <div className="w-full mb-4">
         {contractsList && contractsList.length === 0 && <p className="text-center">No Contracts yet...</p>}
         {contractsList &&
@@ -67,7 +71,7 @@ export default function Contracts({ contractData }) {
                 <ContractCard
                   key={`contract-${index}`}
                   contractData={contract}
-                  redirectUrl={`/users/${user}/bookings/${contract.id}`}
+                  redirectUrl={`/profile/${user}/contracts/${contract.id}`}
                 />
               )
             }
