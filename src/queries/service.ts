@@ -6,10 +6,10 @@ import { ServiceQuestion } from '@taggedweb/types/service-question'
 import * as Sentry from '@sentry/nextjs'
 import {
   TOAST_ANSWER_SUBMIT_ERROR,
-  TOAST_ASSET_DOWNVOTE_TOGGLE_ERROR,
-  TOAST_ASSET_EDIT_ERROR,
-  TOAST_ASSET_REVIEW_ADD_ERROR,
-  TOAST_ASSET_UPVOTE_TOGGLE_ERROR,
+  TOAST_SOFTWARE_DOWNVOTE_TOGGLE_ERROR,
+  TOAST_SOFTWARE_EDIT_ERROR,
+  TOAST_SOFTWARE_REVIEW_ADD_ERROR,
+  TOAST_SOFTWARE_UPVOTE_TOGGLE_ERROR,
   TOAST_ATTRIBUTE_ADD_ERROR,
   TOAST_ATTRIBUTE_DOWNVOTE_TOGGLE_ERROR,
   TOAST_ATTRIBUTE_SUBMIT_ERROR,
@@ -144,7 +144,7 @@ export async function toggleUpVoteAsset(assetId: number): Promise<AssetVote | nu
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not vote a asset.', {
-      id: TOAST_ASSET_UPVOTE_TOGGLE_ERROR,
+      id: TOAST_SOFTWARE_UPVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -159,7 +159,7 @@ export async function toggleDownVoteAsset(voteId: number, slug: string): Promise
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not destroy a asset vote.', {
-      id: TOAST_ASSET_DOWNVOTE_TOGGLE_ERROR,
+      id: TOAST_SOFTWARE_DOWNVOTE_TOGGLE_ERROR,
     })
     return null
   }
@@ -301,7 +301,7 @@ export async function addAssetReview(sendData): Promise<any | null> {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not add an asset review.', {
-      id: TOAST_ASSET_REVIEW_ADD_ERROR,
+      id: TOAST_SOFTWARE_REVIEW_ADD_ERROR,
     })
     return null
   }
@@ -314,7 +314,7 @@ export async function patchAssetField(updateData, serviceSlug) {
   } catch (error) {
     Sentry.captureException(error)
     toast.error('Could not update this web service.', {
-      id: TOAST_ASSET_EDIT_ERROR,
+      id: TOAST_SOFTWARE_EDIT_ERROR,
     })
     return null
   }

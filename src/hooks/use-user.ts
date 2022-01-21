@@ -6,7 +6,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { UserContextType } from '@taggedweb/types/user-context-type'
 import { User } from '@taggedweb/types/user'
-import { TOAST_LOGIN_FAILED, TOAST_LOGOUT_FAILED, TOAST_SIGNUP_FAILED } from '@taggedweb/utils/token-id'
+import { TOAST_LOGIN_FAILED, TOAST_LOGOUT_FAILED } from '@taggedweb/utils/token-id'
 
 /**
  * Fetches user details from /api/user. Provides user details and essential methods such as isLoggedIn, logout, mutateUser.

@@ -13,7 +13,7 @@ import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { Asset } from '@taggedweb/types/asset'
 import { Button } from '@taggedweb/components/button'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
-import { TOAST_ASSET_SUBMIT_ERROR, TOAST_ASSET_SUBMIT_SUCCESS } from '@taggedweb/utils/token-id'
+import { TOAST_SOFTWARE_SUBMIT_ERROR, TOAST_SOFTWARE_SUBMIT_SUCCESS } from '@taggedweb/utils/token-id'
 
 type FormValues = BasicInformationFormValues
 
@@ -49,7 +49,7 @@ function SubmitService() {
   const { isLoading, mutate } = useMutation((Asset: CreateServiceInput) => createService(Asset), {
     onSuccess: (serviceCreated: Asset) => {
       toast.success('Product Submit Successfully. Redirecting to details page in edit mode.', {
-        id: TOAST_ASSET_SUBMIT_SUCCESS,
+        id: TOAST_SOFTWARE_SUBMIT_SUCCESS,
       })
       queryClient.setQueryData(['services', serviceCreated.slug], serviceCreated)
       push(`/software/${serviceCreated.slug}/edit`)
@@ -58,7 +58,7 @@ function SubmitService() {
       // @TODO: get error message from server
       const errorMessage = error?.data?.response?.messages?.[0]?.message ?? 'Something went wrong'
       toast.error(errorMessage, {
-        id: TOAST_ASSET_SUBMIT_ERROR,
+        id: TOAST_SOFTWARE_SUBMIT_ERROR,
       })
     },
   })
