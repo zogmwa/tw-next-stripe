@@ -40,6 +40,7 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
     setLoadingPaymentMethods(true)
     const payment = await fetchPaymentMethodList()
     if (payment.has_payment_method) {
+      if (payment.payment_methods.length === 0) router.push(`/add-card-details?slug=${detailInfo.slug}`)
       setPaymentMethods(payment.payment_methods)
       setIsShowConfrimModal(true)
     } else {

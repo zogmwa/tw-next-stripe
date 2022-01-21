@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { BsArrowLeftCircle } from 'react-icons/bs'
+import toast from 'react-hot-toast'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchSolutionDetail } from '@taggedweb/solution-queries/fetch-solution-detail'
@@ -55,6 +56,9 @@ export default function AddCardDetailsPage({ solutionDetail }) {
       if (payment.has_payment_method) {
         setPaymentMethods(payment.payment_methods)
         setIsShowConfrimModal(true)
+      } else {
+        // Show alert message.
+        toast.error(data.status)
       }
     }
   }
