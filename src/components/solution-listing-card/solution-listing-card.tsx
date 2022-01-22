@@ -10,6 +10,7 @@ import { ServiceLogo } from '../service-logo'
 type SolutionListingCardProps = {
   listingData: Solution
   className?: string
+  show_price?: boolean
 }
 const SolutionTypesMap = new Map<string, string>()
 const solutionTypeKeys = Object.keys(SolutionTypes)
@@ -18,7 +19,11 @@ for (let type in solutionTypeKeys) {
   SolutionTypesMap.set(solutionTypeKeys[type], SolutionTypes[solutionTypeKeys[type]])
 }
 
-export function SolutionListingCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
+export function SolutionListingCardComponent({
+  listingData,
+  className = '',
+  show_price = true,
+}: SolutionListingCardProps) {
   const unitlist = ['', 'K', 'M', 'G']
 
   function kFormater(number) {
@@ -72,12 +77,14 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
               </div>
             </div>
           </div>
-          <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
-            <BiDollar className="text-xl font-bold text-text-primary" />
-            <h4 className="text-xl font-bold text-text-primary">
-              {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
-            </h4>
-          </div>
+          {show_price && (
+            <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
+              <BiDollar className="text-xl font-bold text-text-primary" />
+              <h4 className="text-xl font-bold text-text-primary">
+                {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+              </h4>
+            </div>
+          )}
         </div>
         <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
           <div className="flex items-center pt-4 md:pt-0">
@@ -126,12 +133,14 @@ export function SolutionListingCardComponent({ listingData, className = '' }: So
               <IoIosArrowUp className="text-primary" />
               <span className="text-xs">{kFormater(listingData.upvotes_count)}</span>
             </div>
-            <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
-              <BiDollar className="text-xl font-bold text-text-primary" />
-              <h4 className="text-xl font-bold text-text-primary">
-                {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
-              </h4>
-            </div>
+            {show_price && (
+              <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
+                <BiDollar className="text-xl font-bold text-text-primary" />
+                <h4 className="text-xl font-bold text-text-primary">
+                  {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+                </h4>
+              </div>
+            )}
             <div className="flex self-start space-x-2">
               {listingData.assets &&
                 listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (

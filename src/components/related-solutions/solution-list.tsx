@@ -12,7 +12,7 @@ function SolutionListComponent({ solutions }) {
   return (
     <>
       {showSolutionsList.map((solution, key) => (
-        <SolutionListingCard key={`desktopSeviceList${key}`} listingData={solution} />
+        <SolutionListingCard key={`desktopSeviceList${key}`} listingData={solution} show_price={false} />
       ))}
       {solutions.length > defaultShowCount &&
         (isShowMore ? (
