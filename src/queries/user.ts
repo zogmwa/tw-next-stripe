@@ -44,3 +44,17 @@ export async function togglePaymentSubscribe(paymentMethodId, solutionSlug, refe
     return null
   }
 }
+
+export async function toggleDetachPaymentMethod(paymentMethodId): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/payment_method/detach/', {
+      payment_method: paymentMethodId,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
