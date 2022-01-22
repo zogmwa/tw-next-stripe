@@ -61,7 +61,7 @@ function SolutionDetailMobileSidebarComponent({
     setIsSubscribe(true)
     const referralUserId = (router.query?.r as string) ?? null
     const data = await togglePaymentSubscribe(paymentMethodId, detailInfo.slug, referralUserId)
-    router.push(`/users/${username}/bookings/${data.solution_booking_id}`)
+    router.push(`/profile/${username}/contracts/${data.solution_booking_id}`)
     setIsSubscribe(false)
   }
 

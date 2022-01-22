@@ -103,7 +103,7 @@ function ProfilePage() {
       <DynamicHeader title="TaggedWeb | My Profile" />
       <div className="flex justify-center min-h-full pt-4 mx-auto bg-background-light">
         <div className="w-full max-w-screen-lg" id="scroll-container-outer">
-          <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
+          <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" copyUrl={copyUrl} />
           <Element name={'personal-information'}>
             <ProfileCard data={data} />
           </Element>
