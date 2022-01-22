@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const BookmarkedSolutionsProfile = ({ data }) => {
   return (
-    <Link href="profile/bookmarked-solutions">
+    <Link href="/profile/bookmarked-solutions">
       <a>
         <div id="bookmarked-solutions" className="mb-8 border-b border-gray-300 cursor-pointer md:flex">
           <p className="text-base font-bold hover:text-blue-500">Bookmarked Solutions</p>
