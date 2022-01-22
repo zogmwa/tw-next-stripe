@@ -5,9 +5,12 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import { BsCreditCard2Back } from 'react-icons/bs'
+import { MdDelete } from 'react-icons/md'
 import clsx from 'clsx'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
+import { Modal } from '../Modal'
+import { toggleDetachPaymentMethod } from '@taggedweb/queries/user'
 
 type MeteredPaymentMethodConfirmComponentProps = {
   className?: string
@@ -26,16 +29,38 @@ function MeteredPaymentMethodConfirmComponent({
   toggleSubScribe,
   isSubscribe,
 }: MeteredPaymentMethodConfirmComponentProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   const [agreeCard, setAgreeCard] = useState(false)
+  const [showPaymentMethods, setShowPaymentMethods] = useState(paymentMethods)
   const [paymentMethod, setPaymentMethod] = useState(
-    paymentMethods.filter((payment) => payment.default_payment_method)[0].id,
+    paymentMethods.filter((payment) => payment.default_payment_method)[0]?.id,
   )
+  const [confirmDetach, setConfrimDetach] = useState(false)
+  const [isDetachLoading, setIsDetachLoading] = useState(false)
+  const [detachPaymentMethodId, setDetachPaymentMethodId] = useState('')
 
   const subScribe = () => {
     if (agreeCard) {
       toggleSubScribe(paymentMethod)
+    }
+  }
+
+  const detachPayment = async () => {
+    if (detachPaymentMethodId) {
+      setIsDetachLoading(true)
+      const data = await toggleDetachPaymentMethod(detachPaymentMethodId)
+      if (data.has_payment_method) {
+        const updatedPaymentMethods = data.data
+        if (updatedPaymentMethods.length !== 0) {
+          setShowPaymentMethods(updatedPaymentMethods)
+          setPaymentMethod(updatedPaymentMethods.filter((payment) => payment.default_payment_method)[0]?.id)
+        } else {
+          if (slug) router.push(`/add-card-details?slug=${slug}`)
+          setConfirmModalOpen(false)
+        }
+      }
+      setConfrimDetach(false)
+      setIsDetachLoading(false)
     }
   }
 
@@ -53,25 +78,34 @@ function MeteredPaymentMethodConfirmComponent({
           value={paymentMethod}
           onChange={handleChange}
         >
-          {paymentMethods.map((payment) => {
+          {showPaymentMethods.map((payment) => {
             const expireDate = new Date(payment.exp_year, Number(payment.exp_month) - 1)
 
             if (expireDate > new Date()) {
               return (
-                <FormControlLabel
-                  value={payment.id}
-                  key={payment.id}
-                  control={<Radio />}
-                  label={
-                    <div className="flex flex-row items-center" key={payment.id}>
-                      <div className="flex flex-row items-center text-text-primary">
-                        <BsCreditCard2Back className="text-lg text-text-primary" />
-                        <span className="ml-2">**** **** **** {payment.last4}</span>
+                <div className="flex flex-row justify-between items-center px-4" key={payment.id}>
+                  <FormControlLabel
+                    value={payment.id}
+                    control={<Radio />}
+                    label={
+                      <div className="flex flex-row items-center">
+                        <div className="flex flex-row items-center text-text-primary">
+                          <BsCreditCard2Back className="text-lg text-text-primary" />
+                          <span className="ml-2 hidden md:flex">**** **** **** {payment.last4}</span>
+                          <span className="ml-2 flex md:hidden">**** {payment.last4}</span>
+                        </div>
+                        <span className="ml-4 text-text-primary">{`${payment.exp_year}/${payment.exp_month}`} exp</span>
                       </div>
-                      <span className="ml-4 text-text-primary">{`${payment.exp_year}/${payment.exp_month}`} exp</span>
-                    </div>
-                  }
-                />
+                    }
+                  />
+                  <MdDelete
+                    className="text-text-primary text-md hover:cursor-pointer"
+                    onClick={() => {
+                      setDetachPaymentMethodId(payment.id)
+                      setConfrimDetach(true)
+                    }}
+                  />
+                </div>
               )
             }
           })}
@@ -105,6 +139,26 @@ function MeteredPaymentMethodConfirmComponent({
           Subscribe
         </Button>
       </div>
+      <Modal
+        isOpen={confirmDetach}
+        setIsOpen={setConfrimDetach}
+        size="lg"
+        dialogTitle="Delete Card"
+        modalDescription="Are you sure delete this card?"
+      >
+        <div className="flex flex-row justify-end space-x-2">
+          <Button onClick={() => setConfrimDetach(false)}>Cancel</Button>
+          <Button
+            className="!bg-red-600 !border-red-600"
+            textClassName="!text-text-on-surface"
+            disabled={!confirmDetach || isDetachLoading}
+            loading={isDetachLoading}
+            onClick={() => detachPayment()}
+          >
+            Delete Card
+          </Button>
+        </div>
+      </Modal>
     </div>
   )
 }
