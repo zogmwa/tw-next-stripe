@@ -67,6 +67,7 @@ const contractsList = [
     updated: '2021-12-20T19:06:05.616142Z',
     price_at_booking: 10.0,
     provider_notes: '',
+    metered_booking_info: null,
   },
   {
     id: 2,
@@ -127,6 +128,7 @@ const contractsList = [
     started_at: '2021-12-20T19:06:05.616142Z',
     updated: '2021-12-20T19:06:05.616142Z',
     provider_notes: '',
+    metered_booking_info: null,
   },
   {
     id: 3,
@@ -187,6 +189,7 @@ const contractsList = [
     started_at: '2021-12-20T19:06:05.616142Z',
     updated: '2021-12-20T19:06:05.616142Z',
     provider_notes: '',
+    metered_booking_info: null,
   },
   {
     id: 0,
@@ -247,6 +250,7 @@ const contractsList = [
     started_at: null,
     updated: '2021-12-20T19:06:05.616142Z',
     provider_notes: '',
+    metered_booking_info: null,
   },
 ]
 

@@ -14,6 +14,7 @@ import { SAD_FACE_RATING, NEUTRAL_FACE_RATING, HAPPY_FACE_RATING } from '@tagged
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
 import { toggleUpdateSolutionBookingRating } from '../../queries/solution'
+import { contractStatus, makeTitle } from '../contract-detail/status'
 
 type ContractCardProps = {
   contractData: solutionContract
@@ -49,35 +50,20 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
     setIsLoading(false)
   }
 
-  const statuses = [
-    {
-      name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'In Review',
-      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
-    },
-  ]
+  const statuses = contractStatus(contractData.solution.is_metered)
 
   let statusIndex = 1
   statuses.map((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
-  const startedDate = contractData.started_at ? new Date(contractData.started_at).toISOString().split('T')[0] : ''
+  const startedDate = contractData.solution.is_metered
+    ? contractData.metered_booking_info?.start_date
+      ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
+      : ''
+    : contractData.started_at
+    ? new Date(contractData.started_at).toISOString().split('T')[0]
+    : ''
   const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
 
   return (
@@ -85,23 +71,35 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
       <div className="flex flex-row">
         <div className="flex flex-col flex-grow">
           <div className="items-center hidden space-x-2 md:flex">
-            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-              {statuses.map((status, index) => {
-                if (index <= statusIndex - 1) {
+            {contractData.solution.is_metered ? (
+              statuses.map((status, index) => {
+                if (index === statusIndex - 1) {
                   return (
-                    <span className={status.selectedClassName} key={index}>
-                      {status.name}
-                    </span>
-                  )
-                } else {
-                  return (
-                    <span className={status.defaultClassName} key={index}>
-                      {status.name}
+                    <span className={clsx(status.selectedClassName, ' self-start')} key={`status${index}`}>
+                      {makeTitle(status.name)}
                     </span>
                   )
                 }
-              })}
-            </Breadcrumbs>
+              })
+            ) : (
+              <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+                {statuses.map((status, index) => {
+                  if (index <= statusIndex - 1) {
+                    return (
+                      <span className={status.selectedClassName} key={index}>
+                        {makeTitle(status.name)}
+                      </span>
+                    )
+                  } else {
+                    return (
+                      <span className={status.defaultClassName} key={index}>
+                        {makeTitle(status.name)}
+                      </span>
+                    )
+                  }
+                })}
+              </Breadcrumbs>
+            )}
           </div>
           <div className="flex items-center space-x-2 md:hidden">
             {statuses.map((status, index) => {
