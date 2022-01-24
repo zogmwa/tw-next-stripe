@@ -69,6 +69,7 @@ const contractsList = [
     updated: '2021-12-20T19:06:05.616142Z',
     price_at_booking: 10,
     provider_notes: 'This is solution provider note.',
+    metered_booking_info: null,
   },
 ]
 
