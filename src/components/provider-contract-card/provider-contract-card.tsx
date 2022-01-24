@@ -131,32 +131,15 @@ function ProviderContractCardComponent({ contractData, className, redirectUrl }:
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
         <div className="flex items-center">
-          {contractData.solution.organization ? (
-            <>
-              {contractData.solution.organization.logo_url ? (
-                <img
-                  className="w-[40px] h-[40px] rounded-full"
-                  src={contractData.solution.organization.logo_url}
-                  alt={contractData.solution.organization.name}
-                />
-              ) : (
-                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
-              )}
-              <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization.name}</span>
-            </>
-          ) : (
-            <>
-              <div
-                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
-                style={{ boxShadow: 'none !important' }}
-              >
-                <p>{contractData.booked_by?.first_name[0] ?? '' + contractData.booked_by?.last_name[0] ?? ''}</p>
-              </div>
-              <span className="pl-2 text-sm text-text-secondary">
-                {contractData.booked_by?.first_name ?? ''} {contractData.booked_by?.last_name ?? ''}
-              </span>
-            </>
-          )}
+          <div
+            className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+            style={{ boxShadow: 'none !important' }}
+          >
+            <p>{contractData.booked_by?.first_name[0] ?? '' + contractData.booked_by?.last_name[0] ?? ''}</p>
+          </div>
+          <span className="pl-2 text-sm text-text-secondary">
+            {contractData.booked_by?.first_name ?? ''} {contractData.booked_by?.last_name ?? ''}
+          </span>
         </div>
         <div className="flex items-center justify-between">
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
