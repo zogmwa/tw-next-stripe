@@ -1,13 +1,12 @@
 import { ParsedUrlQuery } from 'querystring'
-import { GetServerSideProps, NextApiHandler } from 'next'
-import { GetIronServerSideProps, NextIronHandler } from '@taggedweb/types/session'
+import { GetServerSideProps, NextApiHandler, GetServerSidePropsResult, GetServerSidePropsContext } from 'next'
 import * as Sentry from '@sentry/nextjs'
 /**
  * Add basic error handling and status, error.data to res if an error occurs.
  * @param handler A handler for api route.
  * @returns handlerWithErrorHandling
  */
-export function withApiErrorHandling(handler: NextIronHandler | NextApiHandler) {
+export function withApiErrorHandling(handler: NextApiHandler): NextApiHandler {
   return async function handlerWithErrorHandling(req, res) {
     try {
       await handler(req, res)
@@ -28,10 +27,12 @@ export function withApiErrorHandling(handler: NextIronHandler | NextApiHandler) 
  * @returns handlerWithErrorHandling
  */
 export function withSSRErrorHandling<
-  P extends { [key: string]: any } = { [key: string]: any },
+  P extends { errorCode?: Number; [key: string]: any } = { errorCode?: Number; [key: string]: any },
   Q extends ParsedUrlQuery = ParsedUrlQuery,
->(handler: GetIronServerSideProps<P, Q> | GetServerSideProps<P, Q>) {
-  return async function handlerWithErrorHandling(context) {
+>(handler: GetServerSideProps<P, Q>) {
+  return async function handlerWithErrorHandling(
+    context: GetServerSidePropsContext<Q>,
+  ): Promise<GetServerSidePropsResult<P>> {
     try {
       return await handler(context)
     } catch (error) {
@@ -40,13 +41,12 @@ export function withSSRErrorHandling<
       if (errorCode === 404) {
         return {
           notFound: true,
-          props: null,
         }
       } else {
         return {
           props: {
             errorCode: errorCode ?? 503,
-          },
+          } as P,
         }
       }
     }

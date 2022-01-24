@@ -11,7 +11,7 @@ export default withSentry(
   withSessionApi(async (req, res) => {
     const access = await getAccessToken(req)
     if (access) {
-      const user = req.session.get('user')
+      const user = req.session.user
       const { data } = await serverSideClient(req).get<Profile>(`/users/${user.username}/`, {
         headers: {
           Authorization: `Bearer ${access}`,

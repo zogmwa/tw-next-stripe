@@ -18,7 +18,7 @@ async function handler(req, res) {
   )
   const { access_token: access, refresh_token: refresh, user } = data
   await setSessionTokens(req.session, { access, refresh })
-  req.session.set('user', user)
+  req.session.user = user
   await req.session.save()
   res.json({ ...user, authVerified: true })
 }

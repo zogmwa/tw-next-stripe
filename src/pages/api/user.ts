@@ -9,7 +9,7 @@ export default withSentry(
   withSessionApi(async (req, res) => {
     const access = await getAccessToken(req)
     if (access) {
-      const user = req.session.get('user')
+      const user = req.session.user
       res.json({
         ...user,
         authVerified: true,

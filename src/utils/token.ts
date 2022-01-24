@@ -1,6 +1,6 @@
-import { Session } from 'next-iron-session'
-import { SessionRequest } from '@taggedweb/types/session'
 import * as Sentry from '@sentry/nextjs'
+import { SessionRequest } from '@taggedweb/types/session'
+import { IronSession } from 'iron-session'
 import { serverSideClient } from './client'
 
 function atob(b64Encoded) {
@@ -31,13 +31,13 @@ export function parseJwt(token) {
  * @param session
  * @param tokens
  */
-export const setSessionTokens = async (session: Session, { access, refresh }): Promise<void> => {
+export const setSessionTokens = async (session: IronSession, { access, refresh }): Promise<void> => {
   const decodedAccessToken = parseJwt(access)
   const decodedRefreshToken = parseJwt(refresh)
 
   const { exp: accessExp } = decodedAccessToken
   const { exp: refreshExp } = decodedRefreshToken
-  session.set('token', { access, refresh, accessExp, refreshExp })
+  session.token = { access, refresh, accessExp, refreshExp }
   await session.save()
 }
 
@@ -50,10 +50,10 @@ export const setSessionTokens = async (session: Session, { access, refresh }): P
 export const getAccessToken = async (req: SessionRequest): Promise<string | void> => {
   const session = req.session
   try {
-    const user = session.get('user')
+    const user = session.user
     if (!user) return null
 
-    const { access, refresh, accessExp, refreshExp } = session.get('token') ?? {}
+    const { access, refresh, accessExp, refreshExp } = session.token ?? {}
     if (!access && !refresh) {
       throw new Error('Tokens not in session')
     }
@@ -77,10 +77,10 @@ export const getAccessToken = async (req: SessionRequest): Promise<string | void
   } catch (error) {
     Sentry.captureException(error)
     // eslint-disable-next-line
-    session.unset('user')
-    session.unset('token')
+    delete session.user
+    delete session.token
     await session.save()
   }
 
-  return session?.get('token')?.access || null
+  return session?.token?.access || null
 }

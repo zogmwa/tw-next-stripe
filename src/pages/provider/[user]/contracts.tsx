@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import * as Sentry from '@sentry/nextjs'
 import { fetchProviderContract } from '@taggedweb/solution-queries/fetch-provider-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ProviderContractCard } from '@taggedweb/components/provider-contract-card'
@@ -11,19 +10,10 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     query: { user },
   } = context
 
-  try {
-    const contractData = (await fetchProviderContract(context.req, user, '')) ?? []
+  const contractData = (await fetchProviderContract(context.req, user, '')) ?? []
 
-    return {
-      props: { contractData },
-    }
-  } catch (err) {
-    Sentry.captureException(err)
-    return {
-      props: {
-        contractData: [],
-      },
-    }
+  return {
+    props: { contractData },
   }
 })
 
