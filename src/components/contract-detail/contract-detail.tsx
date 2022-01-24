@@ -124,7 +124,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </>
         )}
       </div>
-      <div className="inline md:flex my-4">
+      <div className="inline my-4 md:flex">
         <span className="w-full">
           <b className="mr-2">Started at:</b> {startedDate || 'Not started yet...'}
         </span>
@@ -134,16 +134,16 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </span>
         ) : null}
       </div>
-      <div className="inline md:flex my-4">
+      <div className="inline my-4 md:flex">
         <b className="mr-2">Next Payment Date:</b>{' '}
         {contractData.solution.is_metered &&
-          (contractData.metered_booking_info.current_period_end
-            ? new Date(contractData.metered_booking_info.current_period_end).toISOString().split('T')[0]
+          (contractData?.metered_booking_info?.current_period_end
+            ? new Date(contractData?.metered_booking_info?.current_period_end).toISOString().split('T')[0]
             : '')}
-        {contractData.metered_booking_info.billing_cycle_anchor ? (
-          contractData.metered_booking_info.collection_method ? (
+        {contractData?.metered_booking_info?.billing_cycle_anchor ? (
+          contractData?.metered_booking_info?.collection_method ? (
             <span className="ml-2">
-              {contractData.metered_booking_info.collection_method === 'charge_automatically'
+              {contractData?.metered_booking_info?.collection_method === 'charge_automatically'
                 ? 'We will charge your payment automatically.'
                 : 'We will send an invoice'}
             </span>
@@ -158,7 +158,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
         </span>
       </div>
       {contractData.solution.type === 'C' && (
-        <div className="inline md:flex mt-4">
+        <div className="inline mt-4 md:flex">
           <span className="inline md:flex flexw-full">
             <b className="mr-2">Consultation Link:</b>{' '}
             {contractData.solution?.consultation_scheduling_link && (
