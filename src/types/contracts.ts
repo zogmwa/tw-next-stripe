@@ -1,4 +1,5 @@
 import { Solution } from './solution'
+import { UserInfo } from './user'
 
 export type solutionContract = {
   id: number
@@ -16,4 +17,5 @@ export type solutionContract = {
     collection_method: null | string
     current_period_end: null | string
   }
+  booked_by: UserInfo
 }

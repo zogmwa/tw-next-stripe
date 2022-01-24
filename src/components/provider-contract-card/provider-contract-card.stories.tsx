@@ -1,10 +1,10 @@
 import React from 'react'
 import { Meta } from '@storybook/react/types-6-0'
-import { ContractCard } from '.'
+import { ProviderContractCard } from '.'
 
 export default {
-  title: 'General/SolutionBookingCard',
-  component: ContractCard,
+  title: 'General/ProviderSolutionBookingCard',
+  component: ProviderContractCard,
 } as Meta
 
 const contractsList = [
@@ -54,20 +54,33 @@ const contractsList = [
       consultation_scheduling_link: null,
       is_searchable: false,
       capacity_used: 0,
-      is_metered: null,
+      is_metered: true,
       team_size: null,
       estimated_hours: null,
       blended_hourly_rate: null,
       billing_period: null,
     },
-    booked_by: null,
+    booked_by: {
+      id: 3,
+      username: 'Booked User',
+      first_name: 'Booked',
+      last_name: 'User',
+      avatar: null,
+      email: 'admin@admin.com',
+    },
     manager: null,
-    status: 'Pending',
+    status: 'active',
     started_at: '2021-12-20T19:06:05.616142Z',
     updated: '2021-12-20T19:06:05.616142Z',
     price_at_booking: 10.0,
     provider_notes: '',
-    metered_booking_info: null,
+    metered_booking_info: {
+      metered_status: 'active',
+      start_date: '2022-01-23T17:16:34Z',
+      billing_cycle_anchor: '2022-01-23T17:16:34Z',
+      collection_method: 'charge_automatically',
+      current_period_end: '2022-01-30T17:16:34Z',
+    },
   },
   {
     id: 2,
@@ -121,7 +134,14 @@ const contractsList = [
       blended_hourly_rate: null,
       billing_period: null,
     },
-    booked_by: null,
+    booked_by: {
+      id: 3,
+      username: 'Booked User',
+      first_name: 'Booked',
+      last_name: 'User',
+      avatar: null,
+      email: 'admin@admin.com',
+    },
     manager: null,
     status: 'In Progress',
     price_at_booking: 10.0,
@@ -182,7 +202,14 @@ const contractsList = [
       blended_hourly_rate: null,
       billing_period: null,
     },
-    booked_by: null,
+    booked_by: {
+      id: 3,
+      username: 'Booked User',
+      first_name: 'Booked',
+      last_name: 'User',
+      avatar: null,
+      email: 'admin@admin.com',
+    },
     manager: null,
     status: 'In Review',
     price_at_booking: 10.0,
@@ -243,7 +270,14 @@ const contractsList = [
       blended_hourly_rate: null,
       billing_period: null,
     },
-    booked_by: null,
+    booked_by: {
+      id: 3,
+      username: 'Booked User',
+      first_name: 'Booked',
+      last_name: 'User',
+      avatar: null,
+      email: 'admin@admin.com',
+    },
     manager: null,
     status: 'Completed',
     price_at_booking: 10.0,
@@ -258,7 +292,7 @@ export function DefaultSolutionListingCard() {
   return (
     <>
       {contractsList.map((contract, index) => (
-        <ContractCard key={`${index}contract`} contractData={contract} />
+        <ProviderContractCard key={`${index}contract`} contractData={contract} />
       ))}
     </>
   )
