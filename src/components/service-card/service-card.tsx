@@ -26,9 +26,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
     }
   }
   const router = useRouter()
-  const { search_query } = router
-    ? (router.query as { search_query: string })
-    : ('' as unknown as { search_query: string })
+  const { search_query = null } = router.query
 
   const rating = useMemo(() => {
     let _rating = service.avg_rating
@@ -109,7 +107,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                 <Link
                   key={tag.slug}
                   href={
-                    search_query.indexOf(tag.slug) === -1
+                    search_query?.indexOf(tag.slug) === -1
                       ? `/softwares/${search_query},${tag.slug}`
                       : `/softwares/${tag.slug}`
                   }
