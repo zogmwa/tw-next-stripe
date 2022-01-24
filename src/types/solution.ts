@@ -2,6 +2,7 @@ import { Asset } from './asset'
 import { CustomerOrganization } from './customer_organization'
 import { SolutionQuestion } from './solution-question'
 import { Tag } from './tag'
+import { UserInfo } from './user'
 export type Solution = {
   assets?: Asset[]
   avg_rating?: string | number
@@ -24,7 +25,7 @@ export type Solution = {
   organization?: CustomerOrganization
   pay_now_price_stripe_id?: string
   pay_now_price_unit_amount?: number
-  point_of_contact?: Point_of_contact
+  point_of_contact?: UserInfo
   primary_tag?: Tag
   questions?: SolutionQuestion[]
   scope_of_work?: string
@@ -38,15 +39,6 @@ export type Solution = {
   estimated_hours: null | number
   blended_hourly_rate: null | number
   billing_period: null | string
-}
-
-export type Point_of_contact = {
-  id: number
-  username: string
-  first_name?: string
-  last_name?: string
-  email?: string
-  avatar?: string
 }
 
 export enum SolutionTypes {
