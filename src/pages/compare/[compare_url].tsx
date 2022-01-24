@@ -99,7 +99,7 @@ export default function CompareList({ services }: CompareServiceCardProps) {
         description={`Trying to choose between ${services[0]?.name ?? ''} and ${services[1]?.name ?? ''}${
           services[2] ? ' and ' + services[2].name : ''
         }? Want to compare across features, pricing, customer organisations? Look no further. We’ve compared these ${
-          services[0].tags[0].name ? services[0]?.tags[0].name + ' ' : '' ?? ''
+          services[0]?.tags[0]?.name ? services[0]?.tags[0]?.name + ' ' : '' ?? ''
         }tools to help you make the best choice for your business.`}
       />
       <div className="min-h-full p-4 bg-background-light">
