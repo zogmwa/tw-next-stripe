@@ -62,7 +62,7 @@ const contractsList = [
       blended_hourly_rate: null,
       billing_period: null,
     },
-    booked_by: 3,
+    booked_by: null,
     manager: null,
     status: 'Pending',
     started_at: '2021-12-20T19:06:05.616142Z',
