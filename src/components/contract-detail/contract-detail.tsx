@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { BiDollar } from 'react-icons/bi'
 import Markdown from 'marked-react'
 import Lowlight from 'react-lowlight'
+import clsx from 'clsx'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '../../types/contracts'
 import style from '../solution-detail-introduction/style.module.scss'
 import { SolutionFAQ } from '../solution-detail-introduction'
+import { contractStatus, makeTitle } from './status'
 
 Lowlight.registerLanguage('js', javascript)
 
@@ -24,56 +26,53 @@ type ContractDetailProps = {
 }
 
 function ContractDetailComponent({ contractData }: ContractDetailProps) {
-  const statuses = [
-    {
-      name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-primary border rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'In Review',
-      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
-    },
-  ]
+  const statuses = contractStatus(contractData.solution.is_metered)
 
   let statusIndex = 1
   statuses.forEach((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
-  const startedDate = contractData.started_at ? new Date(contractData.started_at).toISOString().split('T')[0] : ''
+  const startedDate = contractData.solution.is_metered
+    ? contractData.metered_booking_info?.start_date
+      ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
+      : ''
+    : contractData.started_at
+    ? new Date(contractData.started_at).toISOString().split('T')[0]
+    : ''
   const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
 
   return (
     <div className="flex flex-col mt-6">
-      <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-        {statuses.map((status, index) => {
-          if (index <= statusIndex - 1) {
+      {contractData.solution.is_metered ? (
+        statuses.map((status, index) => {
+          if (index === statusIndex - 1) {
             return (
-              <span className={status.selectedClassName} key={index}>
-                {status.name}
-              </span>
-            )
-          } else {
-            return (
-              <span className={status.defaultClassName} key={index}>
-                {status.name}
+              <span className={clsx(status.selectedClassName, ' self-start')} key={`status${index}`}>
+                {makeTitle(status.name)}
               </span>
             )
           }
-        })}
-      </Breadcrumbs>
+        })
+      ) : (
+        <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+          {statuses.map((status, index) => {
+            if (index <= statusIndex - 1) {
+              return (
+                <span className={status.selectedClassName} key={index}>
+                  {makeTitle(status.name)}
+                </span>
+              )
+            } else {
+              return (
+                <span className={status.defaultClassName} key={index}>
+                  {makeTitle(status.name)}
+                </span>
+              )
+            }
+          })}
+        </Breadcrumbs>
+      )}
       <div className="flex justify-between my-4">
         <Link href={`/solution/${contractData.solution.slug}`} passHref>
           <a>
@@ -125,17 +124,33 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </>
         )}
       </div>
-      <div className="flex my-4">
+      <div className="inline md:flex my-4">
         <span className="w-full">
           <b className="mr-2">Started at:</b> {startedDate || 'Not started yet...'}
         </span>
         {startedDate ? (
-          <span className="w-full">
+          <span className="w-full ml-2">
             <b className="mr-2">Updated at:</b> {updatedDate}
           </span>
         ) : null}
       </div>
-      <div className="flex">
+      <div className="inline md:flex my-4">
+        <b className="mr-2">Next Payment Date:</b>{' '}
+        {contractData.solution.is_metered &&
+          (contractData.metered_booking_info.current_period_end
+            ? new Date(contractData.metered_booking_info.current_period_end).toISOString().split('T')[0]
+            : '')}
+        {contractData.metered_booking_info.billing_cycle_anchor ? (
+          contractData.metered_booking_info.collection_method ? (
+            <span className="ml-2">
+              {contractData.metered_booking_info.collection_method === 'charge_automatically'
+                ? 'We will charge your payment automatically.'
+                : 'We will send an invoice'}
+            </span>
+          ) : null
+        ) : null}
+      </div>
+      <div className="inline md:flex">
         <span className="w-full">
           <b className="mr-2">Provider Notes:</b>{' '}
           {contractData.provider_notes ??
@@ -143,8 +158,8 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
         </span>
       </div>
       {contractData.solution.type === 'C' && (
-        <div className="flex mt-4">
-          <span className="flex flexw-full">
+        <div className="inline md:flex mt-4">
+          <span className="inline md:flex flexw-full">
             <b className="mr-2">Consultation Link:</b>{' '}
             {contractData.solution?.consultation_scheduling_link && (
               <a href={contractData.solution?.consultation_scheduling_link} target="_blank" rel="noreferrer">
