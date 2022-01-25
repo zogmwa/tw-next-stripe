@@ -45,6 +45,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
   return (
     <div className="flex flex-col mt-6">
       {contractData.solution.is_metered ? (
+        // eslint-disable-next-line array-callback-return
         statuses.map((status, index) => {
           if (index === statusIndex - 1) {
             return (

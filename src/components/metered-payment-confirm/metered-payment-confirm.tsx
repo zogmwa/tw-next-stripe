@@ -8,10 +8,10 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import { BsCreditCard2Back } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
 import clsx from 'clsx'
+import { toggleDetachPaymentMethod } from '@taggedweb/queries/user'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 import { Modal } from '../Modal'
-import { toggleDetachPaymentMethod } from '@taggedweb/queries/user'
 
 type MeteredPaymentMethodConfirmComponentProps = {
   className?: string

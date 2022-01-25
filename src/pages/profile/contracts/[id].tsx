@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useRouter } from 'next/router'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
