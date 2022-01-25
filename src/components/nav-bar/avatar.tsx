@@ -49,7 +49,7 @@ export default function Avatar() {
               {({ active }) => (
                 <Link href="/profile/contracts">
                   <a>
-                    <button className={menuIconClassNames(active)}>Contracts</button>
+                    <button className={menuIconClassNames(active)}>Bookings</button>
                   </a>
                 </Link>
               )}
