@@ -155,13 +155,13 @@ function UsageReportComponent({
           <Input value={googleSheetUrl} onChange={(e) => setGoogleSheetUrl(e.target.value)} />
           <div className="flex flex-row justify-between">
             <a
-              className="text-sm hover:underline hover:cursor-pointer self-center"
+              className="self-center text-sm hover:underline hover:cursor-pointer"
               href="https://docs.google.com/spreadsheets/d/1PRikgG0gB1xqGCV7wrEg_89DsNjCnXtNPltXxaUbfoU/edit#gid=0"
               target="_blank"
             >
               Template Link
             </a>
-            <div className="flex flex-row justify-end space-x-2 mt-2">
+            <div className="flex flex-row justify-end mt-2 space-x-2">
               <Button onClick={() => setIsGoogleImport(false)}>Cancel</Button>
               <Button className="!bg-primary" textClassName="!text-text-on-surface" onClick={() => readGoogleSheet()}>
                 Import
