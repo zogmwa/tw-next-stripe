@@ -31,13 +31,16 @@ export default function ContractsList({ contractData }) {
       is_selected: true,
     },
   ]
-
-  contractsList &&
-    contractsList.sort((contractA, contractB) => {
-      const dateA = new Date(contractA.started_at)
-      const dateB = new Date(contractB.started_at)
-      return (dateA.getTime() - dateB.getTime()) * -1
-    })
+  // contractsList.sort((contractA, contractB) => {
+  //   const dateA = new Date(contractA.started_at)
+  //   const dateB = new Date(contractB.started_at)
+  //   return (dateA.getTime() - dateB.getTime()) * -1
+  // })
+  contractsList.sort((contractA, contractB) => {
+    const dateA = new Date(contractA.created)
+    const dateB = new Date(contractB.created)
+    return (dateA.getTime() - dateB.getTime()) * -1
+  })
 
   return (
     <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
