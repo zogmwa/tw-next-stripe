@@ -15,9 +15,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const { query } = context
   if (!query?.slug) {
     return {
-      props: {
-        notFound: true,
-      },
+      notFound: true,
     }
   }
 
@@ -27,9 +25,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     solutionDetail = await fetchSolutionDetail(context.req, slug)
   } catch (error) {
     return {
-      props: {
-        notFound: true,
-      },
+      notFound: true,
     }
     // eslint-disable-next-line
     // TODO: Redirect to solution search page.

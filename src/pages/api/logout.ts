@@ -8,7 +8,7 @@ import { withSentry } from '@sentry/nextjs'
  */
 export default withSentry(
   withSessionApi(async (req, res) => {
-    const user = req.session.get('user')
+    const user = req.session.user
     if (user) {
       const access = await getAccessToken(req)
       if (access) {

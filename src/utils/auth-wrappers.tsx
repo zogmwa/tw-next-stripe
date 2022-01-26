@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { Spinner } from '@taggedweb/components/spinner'
-import { GetIronServerSideProps } from '@taggedweb/types/session'
 import { WithApiAuthRequired, WithPageAuthRequired, WithSSRAuthRequired } from '@taggedweb/types/auth-wrappers'
 import { withSessionApi, withSessionSSR } from './session'
 import { getAccessToken } from './token'
@@ -35,7 +35,7 @@ const withApiAuthRequired: WithApiAuthRequired = (handler, options = {}) => {
  * @returns newApiHandler
  */
 const withSSRAuthRequired: WithSSRAuthRequired = (
-  handler?: GetIronServerSideProps,
+  handler?: GetServerSideProps,
   options: { redirectTo?: string; message?: string; showMessage?: boolean } = {},
 ) => {
   let { redirectTo, message = 'You need to login to view this page.', showMessage = true } = options
