@@ -13,7 +13,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     const trackingData = await fetchProviderContract(context.req, user, id)
     if (trackingData.length < 1) {
       return {
-        notFound: true,
+        props: {},
       }
     }
     return {
