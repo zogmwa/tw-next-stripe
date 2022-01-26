@@ -12,19 +12,17 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   } = context
 
   try {
-    const contractData = await fetchProviderContract(context.req, user, '')
-    if (contractData.length < 1) {
-      return {
-        notFound: true,
-      }
-    }
+    const contractData = (await fetchProviderContract(context.req, user, '')) ?? []
+
     return {
       props: { contractData },
     }
   } catch (err) {
     Sentry.captureException(err)
     return {
-      props: {},
+      props: {
+        contractData: [],
+      },
     }
   }
 })

@@ -12,25 +12,24 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   } = context
 
   try {
-    const contractData = await fetchContract(context.req, user, id)
-    if (contractData.length < 1) {
-      return {
-        notFound: true,
-      }
-    }
+    const contractData = (await fetchContract(context.req, user, id)) ?? []
+
     return {
       props: { contractData },
     }
   } catch (err) {
     Sentry.captureException(err)
     return {
-      props: {},
+      props: {
+        contractData: [],
+      },
     }
   }
 })
 
 export default function Contracts({ contractData }) {
   const { query } = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user } = query
   const contract = contractData[0]
   // const breadcrumbData = [
