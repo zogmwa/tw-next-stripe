@@ -4,13 +4,24 @@ import { UsageReportColumn } from './'
 import { Button } from '../button'
 import { Modal } from '../Modal'
 import { Input } from '../input'
+import { TrackingTimeReport } from '@taggedweb/queries/user'
+// import { fetchingGoogleSheet } from '@taggedweb/queries/user'
 
 type UsageReportComponentProps = {
   usage_reports: any[]
   className?: string
+  current_period_start?: string | null
+  current_period_end?: string | null
+  bookingId: string
 }
 
-function UsageReportComponent({ usage_reports, className }: UsageReportComponentProps) {
+function UsageReportComponent({
+  usage_reports,
+  className,
+  current_period_start,
+  current_period_end,
+  bookingId,
+}: UsageReportComponentProps) {
   const [usageReports, setUsageReports] = useState([])
   const [isClickedSave, setIsClickedSave] = useState(false)
   const [isGoogleImport, setIsGoogleImport] = useState(false)
@@ -34,21 +45,34 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
     }
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsClickedSave(true)
     let isSubmit = false
     usageReports.map((report) => {
-      if (report.date && report.time) isSubmit = true
+      if (
+        report.date &&
+        new Date(current_period_start) <= report.date &&
+        report.date <= new Date(current_period_end) &&
+        report.time
+      )
+        isSubmit = true
       else isSubmit = false
     })
 
     if (isSubmit) {
       // TODO: handle submit.
       console.log('submit')
+      const data = await TrackingTimeReport(usageReports, bookingId)
+      console.log(data)
     } else {
       console.log('valid check')
     }
     setTimeout(() => setIsClickedSave(false), 100)
+  }
+
+  const readGoogleSheet = async () => {
+    // TODO: Read Google sheet cell values.
+    // const data = await fetchingGoogleSheet(googleSheetUrl)
   }
 
   useEffect(() => {
@@ -83,6 +107,8 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
           deleteReport={DeleteReport}
           isSave={isClickedSave}
           setUsageReports={setUsageReports}
+          currentPeriodStart={current_period_start}
+          currentPeriodEnd={current_period_end}
         />
       ))}
       <div className="flex flex-row space-x-2 items-center self-end">
@@ -109,11 +135,20 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
       <Modal isOpen={isGoogleImport} setIsOpen={setIsGoogleImport} size="2xl" dialogTitle="Choose Google Sheet">
         <div className="flex flex-col">
           <Input value={googleSheetUrl} onChange={(e) => setGoogleSheetUrl(e.target.value)} />
-          <div className="flex flex-row justify-end space-x-2 mt-2">
-            <Button onClick={() => setIsGoogleImport(false)}>Cancel</Button>
-            <Button className="!bg-primary" textClassName="!text-text-on-surface" onClick={() => {}}>
-              Import
-            </Button>
+          <div className="flex flex-row justify-between">
+            <a
+              className="text-sm hover:underline hover:cursor-pointer self-center"
+              href="https://docs.google.com/spreadsheets/d/1PRikgG0gB1xqGCV7wrEg_89DsNjCnXtNPltXxaUbfoU/edit#gid=0"
+              target="_blank"
+            >
+              Template Link
+            </a>
+            <div className="flex flex-row justify-end space-x-2 mt-2">
+              <Button onClick={() => setIsGoogleImport(false)}>Cancel</Button>
+              <Button className="!bg-primary" textClassName="!text-text-on-surface" onClick={() => readGoogleSheet()}>
+                Import
+              </Button>
+            </div>
           </div>
         </div>
       </Modal>
