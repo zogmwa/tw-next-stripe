@@ -14,6 +14,8 @@ type UsageReportColumnComponentProps = {
   deleteReport: Function
   isSave: boolean
   setUsageReports: React.Dispatch<React.SetStateAction<any[]>>
+  currentPeriodStart?: string | null
+  currentPeriodEnd?: string | null
 }
 
 function UsageReportColumnComponent({
@@ -25,6 +27,8 @@ function UsageReportColumnComponent({
   deleteReport,
   isSave,
   setUsageReports,
+  currentPeriodStart,
+  currentPeriodEnd,
 }: UsageReportColumnComponentProps) {
   const [usageDate, setUsageDate] = useState(usageReport.date)
   const [logTime, setLogTime] = useState(usageReport.usageTime)
@@ -58,6 +62,9 @@ function UsageReportColumnComponent({
               )}
               dateFormat="yyyy/MM/dd"
               selected={usageDate}
+              selectsRange={false}
+              startDate={new Date(currentPeriodStart)}
+              endDate={new Date(currentPeriodEnd)}
               onChange={(date) => {
                 setUsageDate(date)
                 setUsageReports([
