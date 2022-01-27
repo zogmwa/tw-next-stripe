@@ -26,9 +26,10 @@ type ProviderContractDetailProps = {
     current_period_end: string
     tracking_times: any[]
   }
+  bookingId: string
 }
 
-function ProviderContractDetailComponent({ trackingData }: ProviderContractDetailProps) {
+function ProviderContractDetailComponent({ trackingData, bookingId }: ProviderContractDetailProps) {
   const contractData = trackingData.booking_data
   const statuses = contractStatus(contractData.solution.is_metered)
 
@@ -130,7 +131,13 @@ function ProviderContractDetailComponent({ trackingData }: ProviderContractDetai
               </span>
             ) : null}
           </div>
-          <UsageReport usage_reports={trackingData.tracking_times} className="mt-4" />
+          <UsageReport
+            usage_reports={trackingData.tracking_times}
+            current_period_start={trackingData.current_period_start}
+            current_period_end={trackingData.current_period_end}
+            bookingId={bookingId}
+            className="mt-4"
+          />
         </>
       )}
     </div>
