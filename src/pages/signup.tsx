@@ -12,7 +12,7 @@ import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 const validationSchema = yup.object().shape({
   first_name: yup.string().required('First name field is required'),
-  last_name: yup.string(),
+  last_name: yup.string().required('Last name field is required'),
   email: yup.string().email().required('Please enter a valid email'),
   password1: yup
     .string()
