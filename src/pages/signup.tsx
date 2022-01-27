@@ -12,7 +12,7 @@ import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 const validationSchema = yup.object().shape({
   first_name: yup.string().required('First name field is required'),
-  last_name: yup.string().required('Last name field is required'),
+  last_name: yup.string(),
   email: yup.string().email().required('Please enter a valid email'),
   password1: yup
     .string()
@@ -105,7 +105,7 @@ export default function Signup() {
             {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
                 <label className="block mb-2 text-sm text-text-primary" htmlFor="first_name">
-                  First Name
+                  First Name *
                 </label>
                 <Input
                   placeholder="Enter your first name"
@@ -131,7 +131,7 @@ export default function Signup() {
                   success={touched.last_name && !errors.last_name}
                 />
                 <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
-                  Email
+                  Email *
                 </label>
                 <Input
                   placeholder="Enter your email"
@@ -144,7 +144,7 @@ export default function Signup() {
                   success={touched.email && !errors.email}
                 />
                 <label className="block mb-2 text-sm text-text-primary" htmlFor="password1">
-                  Password
+                  Password *
                 </label>
                 <Input
                   placeholder="Enter password"
@@ -158,7 +158,7 @@ export default function Signup() {
                   success={touched.password1 && !errors.password1}
                 />
                 <label className="block mb-2 text-sm text-text-primary" htmlFor="password2">
-                  Confirm Password
+                  Confirm Password *
                 </label>
                 <Input
                   placeholder="Re-enter password"
