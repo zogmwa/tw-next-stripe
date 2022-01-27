@@ -8,5 +8,5 @@ export default {
 }
 
 export function defaultUsageReport() {
-  return <UsageReport usage_reports={[]} />
+  return <UsageReport usage_reports={[]} bookingId="12" />
 }

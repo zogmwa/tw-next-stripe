@@ -85,7 +85,7 @@ const trackingData = {
 export function DefaultSolutionListingCard() {
   return (
     <>
-      <ProviderContractDetail trackingData={trackingData} />
+      <ProviderContractDetail trackingData={trackingData} bookingId="12" />
     </>
   )
 }
