@@ -9,10 +9,12 @@ import { withSentry } from '@sentry/nextjs'
  */
 export default withSentry(
   withSessionApi(async (req, res) => {
-    const { email, password1, password2 } = req.body
+    const { first_name, last_name, email, password1, password2 } = req.body
     const { data } = await serverSideClient(req).post<{ access_token: string; refresh_token: string; user: User }>(
       '/dj-rest-auth/registration/',
       {
+        first_name,
+        last_name,
         email,
         password1,
         password2,
