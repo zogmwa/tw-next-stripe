@@ -1,5 +1,6 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/router'
 import { ProviderContractDetail } from '@taggedweb/components/provider-contract-detail'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchProviderContract } from '@taggedweb/solution-queries/fetch-provider-contract'
@@ -29,9 +30,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function TrackingTime({ trackingData }) {
   console.log('trackingData:', trackingData)
+  const { query } = useRouter()
+  const { id } = query as { id: string }
   return (
     <div id="contracts" className="flex flex-col max-w-screen-lg mx-auto min-h-[50%]">
-      <ProviderContractDetail trackingData={trackingData} />
+      <ProviderContractDetail trackingData={trackingData} bookingId={id} />
     </div>
   )
 }
