@@ -58,3 +58,18 @@ export async function toggleDetachPaymentMethod(paymentMethodId): Promise<any | 
     return null
   }
 }
+
+export async function TrackingTimeReport(trackingData, bookingId): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/tracking_time_report/', {
+      tracking_time: trackingData,
+      booking_id: bookingId,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
