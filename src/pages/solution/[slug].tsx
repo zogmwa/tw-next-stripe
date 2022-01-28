@@ -41,7 +41,9 @@ export default function SolutionDetail({ solutionDetail }) {
     },
     {
       name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
-      url: '#',
+      url: `${process.env.SITE_BASE_URL}/solutions/${
+        solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : ''
+      }`,
       is_selected: false,
     },
     {
