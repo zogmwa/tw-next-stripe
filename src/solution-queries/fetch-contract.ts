@@ -8,10 +8,10 @@ import { getAccessToken } from '../utils/token'
  * @param username: string, id(solution_booking_id): number | string
  * @returns Contracts list
  */
-export async function fetchContract(req: SessionRequest, username, id) {
+export async function fetchContract(req: SessionRequest, id) {
   const access = await getAccessToken(req)
   if (access) {
-    let url = `/users/${username}/bookings/`
+    let url = `/users/bookings/`
     if (id) url += `?id=${id}`
     const { data } = await serverSideClient(req).get(url, {
       headers: {
