@@ -1,16 +1,11 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ContractCard } from '@taggedweb/components/contract-card/contract-card'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
-  const {
-    query: { user },
-  } = context
-
-  const contractData = (await fetchContract(context.req, user, '')) ?? []
+  const contractData = (await fetchContract(context.req, '')) ?? []
 
   return {
     props: { contractData },
@@ -18,8 +13,6 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function ContractsList({ contractData }) {
-  const { query } = useRouter()
-  const { user } = query as { user: string }
   const contractsList = contractData
   const breadcrumbData = [
     {
@@ -59,7 +52,7 @@ export default function ContractsList({ contractData }) {
                 <ContractCard
                   key={`contract-${index}`}
                   contractData={contract}
-                  redirectUrl={`/profile/${user}/contracts/${contract.id}`}
+                  redirectUrl={`/profile/contracts/${contract.id}`}
                 />
               )
             }
