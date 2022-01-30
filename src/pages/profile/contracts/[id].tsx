@@ -7,10 +7,9 @@ import { ContractDetail } from '@taggedweb/components/contract-detail'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
-    query: { user, id },
+    query: { id },
   } = context
-
-  const contractData = (await fetchContract(context.req, user, id)) ?? []
+  const contractData = (await fetchContract(context.req, id)) ?? []
 
   return {
     props: { contractData },
