@@ -89,8 +89,8 @@ export default function SolutionDetail({ solutionDetail }) {
     if (solutionDetail.has_free_consultation) {
       features.push({
         id: 'free-trial',
-        name: 'Free Trial',
-        tooltipContent: 'This Solution has free trial.',
+        name: 'Free Consultation',
+        tooltipContent: 'This Solution has free consultation.',
       })
     }
     if (solutionDetail.follow_up_hourly_rate) {
