@@ -54,15 +54,6 @@ export default function Avatar() {
                 </Link>
               )}
             </Menu.Item>
-            {/* <Menu.Item>
-              {({ active }) => (
-                <Link href="/profile">
-                  <a>
-                    <button className={menuIconClassNames(active)}>Softwares Claimed</button>
-                  </a>
-                </Link>
-              )}
-            </Menu.Item> */}
             <Menu.Item>
               {({ active }) => (
                 <Link href="/">

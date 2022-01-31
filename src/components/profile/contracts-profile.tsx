@@ -5,7 +5,7 @@ function ContractsProfileComponent({ data }) {
   const contractsList = data.contracts
 
   return (
-    <Link href={`/profile/${data.username}/contracts`}>
+    <Link href={`/profile/contracts`}>
       <a>
         <div id="contracts" className="mb-8 border-b border-gray-300 cursor-pointer md:flex">
           <p className="text-base font-bold hover:text-blue-500">Contracts</p>
