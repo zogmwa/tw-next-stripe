@@ -11,7 +11,7 @@ import { getAccessToken } from '../utils/token'
 export async function fetchContract(req: SessionRequest, id) {
   const access = await getAccessToken(req)
   if (access) {
-    let url = `/users/bookings/`
+    let url = '/users/bookings/'
     if (id) url += `?id=${id}`
     const { data } = await serverSideClient(req).get(url, {
       headers: {

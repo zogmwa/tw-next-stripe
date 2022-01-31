@@ -37,6 +37,7 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
   const handleSave = () => {
     setIsClickedSave(true)
     let isSubmit = false
+    // eslint-disable-next-line array-callback-return
     usageReports.map((report) => {
       if (report.date && report.time) isSubmit = true
       else isSubmit = false
@@ -56,6 +57,7 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
       setUsageReports([{ id: new Date().getTime(), date: new Date(), time: 0 }])
     } else {
       const initUsageReports = []
+      // eslint-disable-next-line array-callback-return
       usage_reports.map((report) => {
         initUsageReports.push({
           id: new Date(report.date).getTime(),
@@ -85,15 +87,15 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
           setUsageReports={setUsageReports}
         />
       ))}
-      <div className="flex flex-row space-x-2 items-center self-end">
+      <div className="flex flex-row items-center self-end space-x-2">
         <span
-          className="text-primary text-sm hover:underline hover:cursor-pointer"
+          className="text-sm text-primary hover:underline hover:cursor-pointer"
           onClick={() => setIsGoogleImport(true)}
         >
           Import Google Sheet
         </span>
         <span
-          className="text-primary text-sm hover:underline hover:cursor-pointer"
+          className="text-sm text-primary hover:underline hover:cursor-pointer"
           onClick={() => {
             setFileUploadOpen(true)
             setTimeout(() => setFileUploadOpen(false), 100)
@@ -109,7 +111,7 @@ function UsageReportComponent({ usage_reports, className }: UsageReportComponent
       <Modal isOpen={isGoogleImport} setIsOpen={setIsGoogleImport} size="2xl" dialogTitle="Choose Google Sheet">
         <div className="flex flex-col">
           <Input value={googleSheetUrl} onChange={(e) => setGoogleSheetUrl(e.target.value)} />
-          <div className="flex flex-row justify-end space-x-2 mt-2">
+          <div className="flex flex-row justify-end mt-2 space-x-2">
             <Button onClick={() => setIsGoogleImport(false)}>Cancel</Button>
             <Button className="!bg-primary" textClassName="!text-text-on-surface" onClick={() => {}}>
               Import

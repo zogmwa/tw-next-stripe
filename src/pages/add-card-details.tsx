@@ -39,7 +39,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 
 export default function AddCardDetailsPage({ solutionDetail }) {
   const router = useRouter()
-  const { authVerified, username } = useUserContext()
+  const { authVerified } = useUserContext()
   const [isSubscribe, setIsSubscribe] = useState(false)
   const [isshowConfirmModal, setIsShowConfrimModal] = useState(false)
   const [paymentMethods, setPaymentMethods] = useState([])
