@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { Button } from '../button'
 import { BiDollar } from 'react-icons/bi'
 import Markdown from 'marked-react'
 import Lowlight from 'react-lowlight'
@@ -190,21 +191,6 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
             </span>
           </div>
         )}
-        {contractData.solution.type === 'C' && contractData.solution?.consultation_scheduling_link && (
-          <div className="inline mt-4 md:flex">
-            <span className="flex w-full md:flex">
-              <b className="mr-2">Consultation Link :</b>
-              <a
-                className="hover:underline"
-                href={contractData.solution?.consultation_scheduling_link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {contractData.solution?.consultation_scheduling_link}
-              </a>
-            </span>
-          </div>
-        )}
         {contractData.solution.description && (
           <div id="solutions-overview" className="flex flex-col">
             <a href="#solutions-overview">
@@ -232,6 +218,16 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
               </div>
             )
           : null}
+
+        {contractData.solution.type === 'C' && contractData.solution?.consultation_scheduling_link && (
+          <div className="flex w-full md:flex">
+            <a className="" href={contractData.solution?.consultation_scheduling_link} target="_blank" rel="noreferrer">
+              <Button buttonType="primary" className="my-2 md:h-12">
+                Book your consultation slot
+              </Button>
+            </a>
+          </div>
+        )}
       </div>
     </div>
   )
