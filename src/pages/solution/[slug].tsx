@@ -134,6 +134,7 @@ export default function SolutionDetail({ solutionDetail }) {
       <DynamicHeader
         title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
         description={solutionDetail.description}
+        image={solutionDetail.cover_image}
       />
       {/* Can also use scope_of_work field on solutionDetail for description */}
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">

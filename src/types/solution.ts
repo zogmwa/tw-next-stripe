@@ -12,6 +12,7 @@ export type Solution = {
   capacity_used?: string | number
   consultation_scheduling_link?: string | null
   description?: string
+  cover_image?: string
   eta_days?: string | number
   follow_up_hourly_rate?: string | number
   has_free_consultation?: boolean
