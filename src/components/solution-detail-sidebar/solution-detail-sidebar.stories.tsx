@@ -31,8 +31,8 @@ const solutionSidebarInfo = {
     },
     {
       id: 'free-trial',
-      name: 'Free Trial',
-      tooltipContent: 'This solution has free trial.',
+      name: 'Free Consultation',
+      tooltipContent: 'This solution has free consultation.',
     },
   ],
   purchaseDisableOption: true,
