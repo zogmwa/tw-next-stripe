@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
+import toast from 'react-hot-toast'
 import { UsageReportColumn } from './'
 import { Button } from '../button'
 import { Modal } from '../Modal'
@@ -32,7 +33,7 @@ function UsageReportComponent({
   const AddNewReport = (index) => {
     setUsageReports((prevState) => [
       ...prevState.slice(0, index + 1),
-      { id: new Date().getTime(), date: new Date(), time: 0 },
+      { id: new Date().getTime(), date: new Date(), tracked_hours: 0.0 },
       ...prevState.slice(index + 1),
     ])
   }
@@ -41,7 +42,7 @@ function UsageReportComponent({
     if (usageReports.length > 1) {
       setUsageReports((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
     } else {
-      setUsageReports([{ date: new Date(), time: 0 }])
+      setUsageReports([{ date: new Date(), tracked_hours: 0.0 }])
     }
   }
 
@@ -51,9 +52,9 @@ function UsageReportComponent({
     usageReports.map((report) => {
       if (
         report.date &&
-        new Date(current_period_start) <= report.date &&
-        report.date <= new Date(current_period_end) &&
-        report.time
+        new Date(current_period_start) <= new Date(report.date) &&
+        new Date(report.date) <= new Date(current_period_end) &&
+        report.tracked_hours
       )
         isSubmit = true
       else isSubmit = false
@@ -61,13 +62,21 @@ function UsageReportComponent({
 
     if (isSubmit) {
       // TODO: handle submit.
-      console.log('submit')
       const data = await TrackingTimeReport(usageReports, bookingId)
-      console.log(data)
+      const initUsageReports = []
+      data.tracking_times.map((report) => {
+        initUsageReports.push({
+          id: new Date(report.date).getTime(),
+          date: report.date,
+          tracked_hours: report.tracked_hours,
+        })
+      })
+      setUsageReports(initUsageReports)
+      toast.success('Successfully Tracked')
     } else {
-      console.log('valid check')
+      console.log('Chech your data validation again.')
     }
-    setTimeout(() => setIsClickedSave(false), 100)
+    setIsClickedSave(false)
   }
 
   const readGoogleSheet = async () => {
@@ -77,14 +86,14 @@ function UsageReportComponent({
 
   useEffect(() => {
     if (usage_reports.length === 0) {
-      setUsageReports([{ id: new Date().getTime(), date: new Date(), time: 0 }])
+      setUsageReports([{ id: new Date().getTime(), date: new Date(), tracked_hours: 0.0 }])
     } else {
       const initUsageReports = []
       usage_reports.map((report) => {
         initUsageReports.push({
           id: new Date(report.date).getTime(),
           date: report.date,
-          time: report.time,
+          tracked_hours: report.tracked_hours,
         })
       })
       setUsageReports(initUsageReports)
@@ -96,7 +105,7 @@ function UsageReportComponent({
   }, [fileUploadOpen])
 
   return (
-    <div className={clsx('flex flex-col space-y-2 ', className)}>
+    <div className={clsx('flex flex-col space-y-4 ', className)}>
       {usageReports.map((usageReport, index) => (
         <UsageReportColumn
           usageReports={usageReports}
@@ -127,7 +136,13 @@ function UsageReportComponent({
         >
           Upload Excel File
         </span>
-        <Button className="self-end" onClick={handleSave}>
+        <Button
+          className="self-end"
+          onClick={handleSave}
+          disabled={isClickedSave}
+          loading={isClickedSave}
+          loadingClassName="text-primary"
+        >
           Save
         </Button>
       </div>
