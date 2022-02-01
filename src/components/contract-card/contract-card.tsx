@@ -57,14 +57,15 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
-  const startedDate = contractData.solution.is_metered
-    ? contractData.metered_booking_info?.start_date
-      ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
-      : ''
-    : contractData.started_at
-    ? new Date(contractData.started_at).toISOString().split('T')[0]
-    : ''
-  const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
+  // const startedDate = contractData.solution.is_metered
+  //   ? contractData.metered_booking_info?.start_date
+  //     ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
+  //     : ''
+  //   : contractData.started_at
+  //   ? new Date(contractData.started_at).toISOString().split('T')[0]
+  //   : ''
+  const createdDate = new Date(contractData.created ?? '').toISOString().split('T')[0]
+  // const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
 
   return (
     <div className={clsx('flex flex-col p-4 m-2 border border-solid rounded border-border-default', className)}>
@@ -115,15 +116,13 @@ function ContractCardComponent({ contractData, className, redirectUrl }: Contrac
           <Link href={redirectUrl || `/solution/${contractData.solution.slug}`}>
             <a className="mt-2 text-xl cursor-pointer text-text-primary">{contractData.solution.title}</a>
           </Link>
-          <div className="flex flex-col mt-2 text-xs md:flex-row">
-            <span className="w-full">
-              Started at: <b>{startedDate}</b>
-            </span>
-            {startedDate ? (
+          <div className="flex flex-col mt-2 text-sm md:flex-row">
+            <span className="w-full">Booked date: {createdDate}</span>
+            {/* {createdDate && updatedDate ? (
               <span className="w-full">
                 Updated at: <b>{updatedDate}</b>
               </span>
-            ) : null}
+            ) : null} */}
           </div>
           <div className="flex items-center pt-4 space-x-4 md:hidden">
             <div className="flex items-center space-x-1 text-xs">

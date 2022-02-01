@@ -7,6 +7,7 @@ export type solutionContract = {
   solution: Solution
   status: string
   started_at: string | null
+  created: string
   updated: string
   price_at_booking: number
   provider_notes: string

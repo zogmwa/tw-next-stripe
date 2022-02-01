@@ -31,31 +31,35 @@ export default function ContractsList({ contractData }) {
       is_selected: true,
     },
   ]
+  // contractsList.sort((contractA, contractB) => {
+  //   const dateA = new Date(contractA.started_at)
+  //   const dateB = new Date(contractB.started_at)
+  //   return (dateA.getTime() - dateB.getTime()) * -1
+  // })
+  contractsList.sort((contractA, contractB) => {
+    const dateA = new Date(contractA.created)
+    const dateB = new Date(contractB.created)
+    return (dateA.getTime() - dateB.getTime()) * -1
+  })
 
-  contractsList &&
-    contractsList.sort((contractA, contractB) => {
-      const dateA = new Date(contractA.started_at)
-      const dateB = new Date(contractB.started_at)
-      return (dateA.getTime() - dateB.getTime()) * -1
-    })
   return (
     <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
       <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
       <p className="my-2 text-lg font-bold">Contracts</p>
       <div className="w-full mb-4">
-        {contractsList && contractsList.length === 0 && <p className="text-center">No Contracts yet...</p>}
+        {((contractsList && contractsList.length === 0) || typeof contractsList === 'undefined') && (
+          <p className="text-center">No Contracts yet...</p>
+        )}
+
         {contractsList &&
           contractsList.map((contract, index) => {
-            if (typeof contract === 'undefined') return null
-            else {
-              return (
-                <ContractCard
-                  key={`contract-${index}`}
-                  contractData={contract}
-                  redirectUrl={`/profile/contracts/${contract.id}`}
-                />
-              )
-            }
+            return (
+              <ContractCard
+                key={`contract-${index}`}
+                contractData={contract}
+                redirectUrl={`/profile/contracts/${contract.id}`}
+              />
+            )
           })}
       </div>
     </div>
