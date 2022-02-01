@@ -11,7 +11,6 @@ import { contractStatus, makeTitle } from '../contract-detail/status'
 import { UsageReport } from '../usage-report'
 
 Lowlight.registerLanguage('js', javascript)
-
 type ProviderContractDetailProps = {
   trackingData: {
     booking_data: solutionContract
