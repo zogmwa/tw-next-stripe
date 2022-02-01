@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import { UsageReportColumn } from './'
