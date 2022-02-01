@@ -30,8 +30,8 @@ function UsageReportColumnComponent({
   currentPeriodStart,
   currentPeriodEnd,
 }: UsageReportColumnComponentProps) {
-  const [usageDate, setUsageDate] = useState(usageReport.date)
-  const [logTime, setLogTime] = useState(usageReport.usageTime)
+  const [usageDate, setUsageDate] = useState(new Date(usageReport.date))
+  const [logTime, setLogTime] = useState(usageReport.tracked_hours)
   const [errorDate, setErrorDate] = useState('')
   const [errorLogTime, setErrorLogTime] = useState('')
 
@@ -66,10 +66,10 @@ function UsageReportColumnComponent({
               startDate={new Date(currentPeriodStart)}
               endDate={new Date(currentPeriodEnd)}
               onChange={(date) => {
-                setUsageDate(date)
+                setUsageDate(date.setHours(23, 59, 59))
                 setUsageReports([
                   ...usageReports.slice(0, index),
-                  { id: usageReport.id, date: date, time: usageReport.time },
+                  { id: usageReport.id, date: date, tracked_hours: usageReport.tracked_hours },
                   ...usageReports.slice(index + 1),
                 ])
               }}
@@ -83,13 +83,14 @@ function UsageReportColumnComponent({
             className="w-full"
             errorMessage={errorLogTime}
             type="number"
+            defaultValue={0}
             min={0}
-            value={logTime}
+            value={Number(logTime)}
             onChange={(e) => {
               setLogTime(e.target.value)
               setUsageReports([
                 ...usageReports.slice(0, index),
-                { id: usageReport.id, date: usageReport.date, time: e.target.value },
+                { id: usageReport.id, date: usageReport.date, tracked_hours: e.target.value },
                 ...usageReports.slice(index + 1),
               ])
             }}
