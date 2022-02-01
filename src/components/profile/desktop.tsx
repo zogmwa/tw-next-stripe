@@ -8,7 +8,7 @@ import { ContractsProfile } from './contracts-profile'
 
 function ScrollSpy({ elements }) {
   return (
-    <div className="flex-shrink w-50">
+    <div className="flex-shrink hidden w-50 md:inline-block">
       <nav className="sticky left-0 right-0 p-2 bg-white border border-solid rounded-md shadow top-16 border-grey-200">
         {elements.map((item) => (
           <Link
@@ -54,7 +54,7 @@ const elements = [
 export const ProfileDesktop = ({ profile }: { profile: Profile }) => {
   // console.log('profile:', profile)
   return (
-    <div className="hidden w-full h-full md:flex">
+    <div className="w-full h-full md:flex">
       <ScrollSpy elements={elements} />
       <div id="scroll-container-inner" className="flex-grow ml-6">
         <PendingAssetsProfile data={profile} />

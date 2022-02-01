@@ -10,7 +10,7 @@ export const PendingAssetsProfile = ({ data }: { data: Profile }) => {
 
   return (
     <div id="pending-assets" className="mb-8">
-      <div className="hidden mb-2 md:flex">
+      <div className="mb-2 md:flex">
         <p className="text-base font-bold">Pending Web Services</p>
         <span className="ml-auto">{`${pendingAssets?.length ?? 0} Product(s)`}</span>
       </div>

@@ -9,7 +9,7 @@ type ProfileCardProps = { data: Partial<User & Profile> }
 
 function ProfileCardComponent({ data }: ProfileCardProps) {
   return (
-    <div className="flex flex-col items-center justify-start w-full py-4 space-x-4 sm:items-start sm:px-2 md:px-4 md:space-x-8 sm:flex-row">
+    <div className="flex flex-col items-center justify-start w-full px-4 py- sm:items-start sm:px-2 md:px-4 md:space-x-8 sm:flex-row">
       <div className="flex space-x-2 sm:mr-auto sm:space-x-4 md:space-x-8">
         <div className="flex flex-col items-center justify-start space-y-3">
           <img
@@ -21,8 +21,8 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-sm font-bold sm:text-base text-text-primary">{`${data.first_name} ${data.last_name}`}</h1>
-          <p className="mb-2 text-xs font-light sm:text-sm">{data.email} </p>
+          <h1 className="text-base font-bold text-text-primary">{`${data.first_name} ${data.last_name}`}</h1>
+          <p className="mb-2 text-sm font-light">{data.email} </p>
           <div className="flex flex-row flex-wrap mb-5 space-x-2">
             {data.organization ? (
               <Button buttonType="tag" size="small">
@@ -32,10 +32,10 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-start space-x-0 space-y-2">
+      <div className="flex items-center justify-between w-full mb-6 space-x-2 sm:w-3/4 sm:items-end sm:space-y-2 sm:flex-col">
         {(data.social_accounts ?? []).includes('linkedin_oauth2') ? (
-          <span className="w-full !border-[#0077B5] !flex px-4 py-2 rounded-md space-x-4 text-sm border inline-flex items-center justify-center text-[#0077B5] border-primary">
-            <span className="font-medium">Connected to Linkedin</span>
+          <span className="sm:w-7/12 md-lg:w-5/12 !border-[#0077B5] !flex px-4 py-2 rounded-md space-x-4 text-sm border items-center justify-center text-[#0077B5] border-primary h-12">
+            <span className="text-xs font-medium sm:text-sm">Connected to Linkedin</span>
             <AiFillCheckCircle size={20} className="text-[#00ee00]" />
           </span>
         ) : (
@@ -43,7 +43,7 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             icon={<AiFillLinkedin size={20} />}
             buttonType="primary"
             iconPlacement="right"
-            className="w-full !bg-[#0077B5] !border-[#0077B5] !flex"
+            className="sm:w-7/12 md-lg:w-5/12 !bg-[#0077B5] !border-[#0077B5] !flex"
             onClick={() => handleLinkedInConnect()}
           >
             Add your LinkedIn
@@ -51,8 +51,8 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
         )}
 
         {(data.social_accounts ?? []).includes('google') ? (
-          <span className="w-full !border-[#DB4437] !flex px-4 py-2 rounded-md space-x-4 text-sm border inline-flex items-center justify-center text-[#DB4437] border-primary">
-            <span className="font-medium">Connected to Google</span>
+          <span className="sm:w-7/12 md-lg:w-5/12 !border-[#DB4437] !flex px-4 py-2 rounded-md space-x-4 text-sm border items-center justify-center text-[#DB4437] border-primary h-12">
+            <span className="text-xs font-medium sm:text-sm">Connected to Google</span>
             <AiFillCheckCircle size={20} className="text-[#00ee00]" />
           </span>
         ) : (
@@ -60,7 +60,7 @@ function ProfileCardComponent({ data }: ProfileCardProps) {
             icon={<AiFillGoogleSquare size={20} />}
             buttonType="primary"
             iconPlacement="right"
-            className="w-full !bg-[#DB4437] !border-[#DB4437] !flex"
+            className="sm:w-7/12 md-lg:w-5/12 !bg-[#DB4437] !border-[#DB4437] !flex"
             onClick={() => handleGoogleConnect()}
           >
             Add your Google
