@@ -4,20 +4,10 @@ import { BiDollar } from 'react-icons/bi'
 import Lowlight from 'react-lowlight'
 import clsx from 'clsx'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
-import javascript from 'highlight.js/lib/languages/javascript'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '../../types/contracts'
 import { contractStatus, makeTitle } from '../contract-detail/status'
 import { UsageReport } from '../usage-report'
-
-Lowlight.registerLanguage('js', javascript)
-
-const renderer = {
-  // eslint-disable-next-line react/display-name
-  code: (snippet, lang) => {
-    return <Lowlight language={lang} value={snippet} />
-  },
-}
 
 type ProviderContractDetailProps = {
   trackingData: {
@@ -46,8 +36,12 @@ function ProviderContractDetailComponent({ trackingData, bookingId }: ProviderCo
     ? new Date(contractData.started_at).toISOString().split('T')[0]
     : ''
   const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
-  const periodStartDate = new Date(trackingData.current_period_start).toISOString().split('T')[0]
-  const periodEndDate = new Date(trackingData.current_period_end).toISOString().split('T')[0]
+  let periodStartDate = ''
+  let periodEndDate = ''
+  if (contractData.solution.is_metered) {
+    periodStartDate = new Date(trackingData.current_period_start).toISOString().split('T')[0]
+    periodEndDate = new Date(trackingData.current_period_end).toISOString().split('T')[0]
+  }
 
   return (
     <div className="flex flex-col mt-6">
