@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import DatePicker from 'react-datepicker'
@@ -44,6 +45,7 @@ function UsageReportColumnComponent({
       }
       if (!logTime) {
         setErrorLogTime('This field is invalid.')
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         hasError = true
       }
     }
@@ -51,9 +53,9 @@ function UsageReportColumnComponent({
 
   return (
     <div className={clsx('flex flex-row space-x-2 items-center relative pr-10', className)}>
-      <div className="flex flex-col md:flex-row w-full">
-        <div className="flex flex-row w-full items-center">
-          <span className="text-sm font-semibold text-text-primary mr-2">Date: </span>
+      <div className="flex flex-col w-full md:flex-row">
+        <div className="flex flex-row items-center w-full">
+          <span className="mr-2 text-sm font-semibold text-text-primary">Date: </span>
           <div className="flex flex-col w-full">
             <DatePicker
               className={clsx(
@@ -77,8 +79,8 @@ function UsageReportColumnComponent({
             {errorDate && <span className="mt-1 text-xs text-error">{errorDate}</span>}
           </div>
         </div>
-        <div className="flex flex-row w-full items-center mt-2 md:mt-0 md:ml-2">
-          <span className="text-sm font-semibold text-text-primary mr-2">Hours: </span>
+        <div className="flex flex-row items-center w-full mt-2 md:mt-0 md:ml-2">
+          <span className="mr-2 text-sm font-semibold text-text-primary">Hours: </span>
           <Input
             className="w-full"
             errorMessage={errorLogTime}
@@ -99,11 +101,11 @@ function UsageReportColumnComponent({
       </div>
       <div className="absolute right-0 flex flex-row">
         <AiOutlinePlus
-          className="text-md font-semibold text-green-600 cursor-pointer"
+          className="font-semibold text-green-600 cursor-pointer text-md"
           onClick={() => addNewReport(index)}
         />
         <AiOutlineClose
-          className="text-md font-semibold text-red-600 cursor-pointer"
+          className="font-semibold text-red-600 cursor-pointer text-md"
           onClick={() => deleteReport(index)}
         />
       </div>

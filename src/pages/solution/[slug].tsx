@@ -89,8 +89,8 @@ export default function SolutionDetail({ solutionDetail }) {
     if (solutionDetail.has_free_consultation) {
       features.push({
         id: 'free-trial',
-        name: 'Free Trial',
-        tooltipContent: 'This Solution has free trial.',
+        name: 'Free Consultation',
+        tooltipContent: 'This Solution has free consultation.',
       })
     }
     if (solutionDetail.follow_up_hourly_rate) {
@@ -134,6 +134,7 @@ export default function SolutionDetail({ solutionDetail }) {
       <DynamicHeader
         title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
         description={solutionDetail.description}
+        image={solutionDetail.cover_image}
       />
       {/* Can also use scope_of_work field on solutionDetail for description */}
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">

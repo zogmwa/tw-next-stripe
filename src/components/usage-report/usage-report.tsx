@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
@@ -49,6 +50,7 @@ function UsageReportComponent({
   const handleSave = async () => {
     setIsClickedSave(true)
     let isSubmit = false
+    // eslint-disable-next-line array-callback-return
     usageReports.map((report) => {
       if (
         report.date &&
@@ -89,6 +91,7 @@ function UsageReportComponent({
       setUsageReports([{ id: new Date().getTime(), date: new Date(), tracked_hours: 0.0 }])
     } else {
       const initUsageReports = []
+      // eslint-disable-next-line array-callback-return
       usage_reports.map((report) => {
         initUsageReports.push({
           id: new Date(report.date).getTime(),
@@ -120,15 +123,15 @@ function UsageReportComponent({
           currentPeriodEnd={current_period_end}
         />
       ))}
-      <div className="flex flex-row space-x-2 items-center self-end">
+      <div className="flex flex-row items-center self-end space-x-2">
         <span
-          className="text-primary text-sm hover:underline hover:cursor-pointer"
+          className="text-sm text-primary hover:underline hover:cursor-pointer"
           onClick={() => setIsGoogleImport(true)}
         >
           Import Google Sheet
         </span>
         <span
-          className="text-primary text-sm hover:underline hover:cursor-pointer"
+          className="text-sm text-primary hover:underline hover:cursor-pointer"
           onClick={() => {
             setFileUploadOpen(true)
             setTimeout(() => setFileUploadOpen(false), 100)

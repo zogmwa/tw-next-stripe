@@ -54,6 +54,7 @@ function ProviderContractDetailComponent({ trackingData, bookingId }: ProviderCo
               </span>
             )
           }
+          return <></>
         })
       ) : (
         <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">

@@ -29,31 +29,6 @@ export default function Home({ search_software = 0 }: HomeProps) {
     <div>
       <DynamicHeader />
       <div className="relative flex justify-between bg-blue-600">
-        <img
-          src="/images/homepage_shapes.png"
-          alt="Technology Solution Shapes"
-          className="absolute z-0 hidden max-w-4xl md:top-0 lg:top-12 lg:left-30 lg:flex"
-        />
-        <img
-          src="/images/homepage_icon1.png"
-          alt="Software SaaS Software Logo 1"
-          className="absolute z-10 hidden w-24 lg:flex lg:top-64 xl:top-72 lg:right-60"
-        />
-        <img
-          src="/images/homepage_icon2.png"
-          alt="Software SaaS Software Logo 2"
-          className="absolute z-10 hidden w-20 lg:flex top-56 right-28"
-        />
-        <img
-          src="/images/homepage_icon3.png"
-          alt="Software SaaS Software Logo 3"
-          className="absolute z-10 hidden w-16 lg:flex top-28 right-44"
-        />
-        <img
-          src="/images/homepage_icon4.png"
-          alt="Software SaaS Software Logo 4"
-          className="absolute z-10 hidden w-12 lg:flex top-48 right-64"
-        />
         <div className="flex items-center justify-center flex-1 2xl:justify-end ">
           <div className="flex flex-col items-start justify-start w-full mx-6 my-4 lg:mr-0 xl:w-4/5 2xl:w-3/4">
             <div className="xl:flex">
@@ -87,7 +62,7 @@ export default function Home({ search_software = 0 }: HomeProps) {
           </div>
         </div>
         <div className="z-0 justify-end hidden w-1/3 lg:flex">
-          <img src="/images/homepage_circle.png" alt="TaggedWeb Solutions Background" className="w-full" />
+          <img src="/images/homepage_circle1.png" alt="TaggedWeb Solutions Background" className="w-full" />
         </div>
       </div>
       <div className="bg-blue-300">
