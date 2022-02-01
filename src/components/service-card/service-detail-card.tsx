@@ -62,7 +62,9 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
   const [votedByMe, setVotedByMe] = useState(service?.my_asset_vote)
-  const [upvotesCount, setUpvotesCount] = useState(service?.upvotes_count)
+  const [upvotesCount, setUpvotesCount] = useState(
+    service.upvotes_count && service.upvotes_count >= 0 ? service.upvotes_count : 0,
+  )
   const [isTagsEdit, setIsTagsEdit] = useState(false)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })

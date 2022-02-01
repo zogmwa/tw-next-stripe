@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
