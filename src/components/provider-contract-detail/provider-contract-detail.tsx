@@ -12,13 +12,6 @@ import { UsageReport } from '../usage-report'
 
 Lowlight.registerLanguage('js', javascript)
 
-const renderer = {
-  // eslint-disable-next-line react/display-name
-  code: (snippet, lang) => {
-    return <Lowlight language={lang} value={snippet} />
-  },
-}
-
 type ProviderContractDetailProps = {
   trackingData: {
     booking_data: solutionContract
@@ -59,6 +52,7 @@ function ProviderContractDetailComponent({ trackingData }: ProviderContractDetai
               </span>
             )
           }
+          return <></>
         })
       ) : (
         <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
