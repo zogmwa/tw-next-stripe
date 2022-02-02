@@ -2,7 +2,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { BiDollar } from 'react-icons/bi'
-import Lowlight from 'react-lowlight'
 import clsx from 'clsx'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'

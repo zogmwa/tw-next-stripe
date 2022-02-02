@@ -2,11 +2,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
+import { TrackingTimeReport } from '@taggedweb/queries/user'
 import { UsageReportColumn } from './'
 import { Button } from '../button'
 import { Modal } from '../Modal'
 import { Input } from '../input'
-import { TrackingTimeReport } from '@taggedweb/queries/user'
 // import { fetchingGoogleSheet } from '@taggedweb/queries/user'
 
 type UsageReportComponentProps = {
@@ -57,9 +57,9 @@ function UsageReportComponent({
         new Date(current_period_start) <= new Date(report.date) &&
         new Date(report.date) <= new Date(current_period_end) &&
         report.tracked_hours
-      )
+      ) {
         isSubmit = true
-      else isSubmit = false
+      } else isSubmit = false
     })
 
     if (isSubmit) {
@@ -158,6 +158,7 @@ function UsageReportComponent({
               className="self-center text-sm hover:underline hover:cursor-pointer"
               href="https://docs.google.com/spreadsheets/d/1PRikgG0gB1xqGCV7wrEg_89DsNjCnXtNPltXxaUbfoU/edit#gid=0"
               target="_blank"
+              rel="noreferrer"
             >
               Template Link
             </a>

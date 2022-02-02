@@ -121,7 +121,7 @@ export default function Signup() {
                   Last Name
                 </label>
                 <Input
-                  placeholder="Enter your first name"
+                  placeholder="Enter your last name"
                   id="last_name"
                   className="mb-4"
                   onChange={handleChange('last_name')}
