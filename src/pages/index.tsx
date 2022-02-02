@@ -5,6 +5,7 @@ import { PopularSolutionTags } from '@taggedweb/components/homepage-popular-solu
 import { FindingSolutions } from '@taggedweb/components/homepage-finding-solutions'
 import { Button } from '@taggedweb/components/button'
 import { SearchComponent } from '@taggedweb/components/homepage-searchbar'
+import { HomepageBlog } from '@taggedweb/components/homepage-blog'
 import Link from 'next/link'
 import { SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
@@ -127,6 +128,9 @@ export default function Home({ search_software = 0 }: HomeProps) {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <HomepageBlog />
       </div>
     </div>
   )
