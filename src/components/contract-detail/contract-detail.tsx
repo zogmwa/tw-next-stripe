@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '../button'

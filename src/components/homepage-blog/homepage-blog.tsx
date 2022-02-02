@@ -43,7 +43,7 @@ export function HomepageBlog() {
       <div className="relative max-w-screen-lg px-2 mx-auto">
         <div className="mt-4 mb-10 text-2xl font-bold text-center">
           <Link href={`${process.env.SITE_BASE_URL}/blog`}>
-            <span className="text-black">Blog</span>
+            <span className="text-black">Learn more from our Experts</span>
           </Link>
         </div>
         <div className="flex flex-col space-y-4 md:hidden">
