@@ -64,7 +64,7 @@ export function SolutionListingCardComponent({
                 )
               })}
             </div>
-            <h2 className="mt-2 text-xl text-gray-900">{listingData.title}</h2>
+            <h2 className="mt-2 text-xl text-gray-900 hover:text-primary">{listingData.title}</h2>
             <div className="flex items-center pt-4 space-x-4 md:hidden">
               <div className="flex items-center space-x-1 text-xs">
                 <Button buttonType="tag" size="small" className="mr-1">

@@ -132,6 +132,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
                   </span>
                 )
               }
+              return <></>
             })
           ) : (
             <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
