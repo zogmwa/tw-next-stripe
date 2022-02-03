@@ -10,9 +10,9 @@ export const PendingAssetsProfile = ({ data }: { data: Profile }) => {
 
   return (
     <div id="pending-assets" className="mb-8">
-      <div className="mb-2 md:flex">
-        <p className="text-base font-bold">Pending Web Services</p>
-        <span className="ml-auto">{`${pendingAssets?.length ?? 0} Product(s)`}</span>
+      <div className="flex mb-2">
+        <p className="text-sm font-bold sm:text-base">Pending Web Services</p>
+        <span className="ml-auto text-sm sm:text-base">{`${pendingAssets?.length ?? 0} Product(s)`}</span>
       </div>
       <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">
         {pendingAssets.map((asset) => (

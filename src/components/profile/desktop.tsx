@@ -54,9 +54,9 @@ const elements = [
 export const ProfileDesktop = ({ profile }: { profile: Profile }) => {
   // console.log('profile:', profile)
   return (
-    <div className="w-full h-full md:flex">
+    <div className="h-full mx-6 md:mx-8 md:flex">
       <ScrollSpy elements={elements} />
-      <div id="scroll-container-inner" className="flex-grow ml-6">
+      <div id="scroll-container-inner" className="flex-grow md:ml-6">
         <PendingAssetsProfile data={profile} />
         <PublishedAssetsProfile data={profile} />
         <BookmarkedSolutionsProfile data={profile} />
