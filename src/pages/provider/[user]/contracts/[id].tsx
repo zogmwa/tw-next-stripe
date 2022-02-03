@@ -29,7 +29,6 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function TrackingTime({ trackingData }) {
-  console.log('trackingData:', trackingData)
   const { query } = useRouter()
   const { id } = query as { id: string }
   return (
