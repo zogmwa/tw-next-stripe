@@ -15,6 +15,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
+  const prevURL = context.req.headers.referer || null
   let solutionDetail: Solution
   try {
     solutionDetail = await fetchSolutionDetail(context.req, slug)
@@ -26,13 +27,17 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     // TODO: Redirect to solution search page.
   }
   return {
-    props: { solutionDetail },
+    props: { solutionDetail, prevURL },
   }
 })
 
-export default function SolutionDetail({ solutionDetail }) {
+export default function SolutionDetail({ solutionDetail, prevURL }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
-
+  const prevUrlArr = prevURL ? prevURL.split('/') : []
+  const prevUrlSlug =
+    prevUrlArr.length >= 2 && prevUrlArr[prevUrlArr.length - 2] === 'solutions'
+      ? prevUrlArr[prevUrlArr.length - 1]
+      : solutionDetail.slug
   const breadcrumbData = [
     {
       name: 'Search',
@@ -40,10 +45,8 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
-      url: `${process.env.SITE_BASE_URL}/solutions/${
-        solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : ''
-      }`,
+      name: 'Solutions',
+      url: `${process.env.SITE_BASE_URL}/solutions/${prevUrlSlug}`,
       is_selected: false,
     },
     {
