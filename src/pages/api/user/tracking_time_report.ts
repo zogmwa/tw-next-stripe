@@ -4,7 +4,7 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * .
+ * This API for the reporting tracked time to stripe.
  */
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
