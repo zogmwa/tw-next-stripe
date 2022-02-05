@@ -76,7 +76,7 @@ const contractsList = [
     price_at_booking: 10.0,
     provider_notes: '',
     metered_booking_info: {
-      metered_status: 'active',
+      payment_status: 'active',
       start_date: '2022-01-23T17:16:34Z',
       billing_cycle_anchor: '2022-01-23T17:16:34Z',
       collection_method: 'charge_automatically',

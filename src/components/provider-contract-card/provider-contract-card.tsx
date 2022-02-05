@@ -34,10 +34,10 @@ function ProviderContractCardComponent({ contractData, className, redirectUrl }:
     return sign * number + unitlist[unit]
   }
 
-  const statuses = contractStatus(contractData.solution.is_metered)
+  const contractStatuses = contractStatus(false)
 
   let statusIndex = 1
-  statuses.map((status, index) => {
+  contractStatuses.map((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
@@ -55,38 +55,26 @@ function ProviderContractCardComponent({ contractData, className, redirectUrl }:
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col flex-grow">
           <div className="items-center hidden space-x-2 md:flex">
-            {contractData.solution.is_metered ? (
-              statuses.map((status, index) => {
-                if (index === statusIndex - 1) {
+            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+              {contractStatuses.map((status, index) => {
+                if (index <= statusIndex - 1) {
                   return (
-                    <span className={clsx(status.selectedClassName, ' self-start')} key={`status${index}`}>
+                    <span className={status.selectedClassName} key={index}>
+                      {makeTitle(status.name)}
+                    </span>
+                  )
+                } else {
+                  return (
+                    <span className={status.defaultClassName} key={index}>
                       {makeTitle(status.name)}
                     </span>
                   )
                 }
-              })
-            ) : (
-              <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-                {statuses.map((status, index) => {
-                  if (index <= statusIndex - 1) {
-                    return (
-                      <span className={status.selectedClassName} key={index}>
-                        {makeTitle(status.name)}
-                      </span>
-                    )
-                  } else {
-                    return (
-                      <span className={status.defaultClassName} key={index}>
-                        {makeTitle(status.name)}
-                      </span>
-                    )
-                  }
-                })}
-              </Breadcrumbs>
-            )}
+              })}
+            </Breadcrumbs>
           </div>
           <div className="flex items-center space-x-2 md:hidden">
-            {statuses.map((status, index) => {
+            {contractStatuses.map((status, index) => {
               if (index === statusIndex - 1) {
                 return (
                   <span className={status.selectedClassName} key={`status${index}`}>
