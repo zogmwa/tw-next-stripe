@@ -112,7 +112,7 @@ function ProviderContractDetailComponent({ trackingData, bookingId, username }: 
             loading={isStartContract}
             loadingClassName="text-primary"
           >
-            Provide Contract
+            Begin Working
           </Button>
         )}
       </div>
