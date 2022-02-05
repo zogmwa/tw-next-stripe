@@ -73,7 +73,7 @@ const trackingData = {
     stripe_session_id: null,
     rating: null,
     metered_booking_info: {
-      metered_status: 'active',
+      payment_status: 'active',
       start_date: '2022-01-25T02:23:39Z',
       billing_cycle_anchor: '2022-01-25T02:23:39Z',
       collection_method: 'charge_automatically',
@@ -85,7 +85,7 @@ const trackingData = {
 export function DefaultSolutionListingCard() {
   return (
     <>
-      <ProviderContractDetail trackingData={trackingData} bookingId="12" />
+      <ProviderContractDetail trackingData={trackingData} bookingId="12" username="" />
     </>
   )
 }
