@@ -31,10 +31,10 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 export default function TrackingTime({ trackingData }) {
   console.log('trackingData:', trackingData)
   const { query } = useRouter()
-  const { id } = query as { id: string }
+  const { id, user } = query as { id: string; user: string }
   return (
-    <div id="contracts" className="flex flex-col max-w-screen-lg mx-auto min-h-[50%]">
-      <ProviderContractDetail trackingData={trackingData} bookingId={id} />
+    <div id="contracts" className="flex flex-col max-w-screen-lg mx-auto min-h-[50%] p-4 md:p-0">
+      <ProviderContractDetail trackingData={trackingData} bookingId={id} username={user} />
     </div>
   )
 }

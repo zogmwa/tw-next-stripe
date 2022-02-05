@@ -12,7 +12,7 @@ export type solutionContract = {
   price_at_booking: number
   provider_notes: string
   metered_booking_info: null | {
-    metered_status: null | string
+    payment_status: null | string
     start_date: null | string
     billing_cycle_anchor: null | string
     collection_method: null | string
