@@ -26,7 +26,7 @@ type ContractDetailProps = {
 }
 
 function ContractDetailComponent({ contractData }: ContractDetailProps) {
-  const statuses = contractStatus(contractData.solution.is_metered)
+  const statuses = contractStatus(false)
 
   let statusIndex = 1
   statuses.forEach((status, index) => {
@@ -123,36 +123,23 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </div>
         </div>
         <div className="items-center hidden space-x-2 sm:flex">
-          {contractData.solution.is_metered ? (
-            statuses.map((status, index) => {
-              if (index === statusIndex - 1) {
+          <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+            {statuses.map((status, index) => {
+              if (index <= statusIndex - 1) {
                 return (
-                  <span className={clsx(status.selectedClassName, ' self-start')} key={`status${index}`}>
+                  <span className={status.selectedClassName} key={index}>
+                    {makeTitle(status.name)}
+                  </span>
+                )
+              } else {
+                return (
+                  <span className={status.defaultClassName} key={index}>
                     {makeTitle(status.name)}
                   </span>
                 )
               }
-              return <></>
-            })
-          ) : (
-            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-              {statuses.map((status, index) => {
-                if (index <= statusIndex - 1) {
-                  return (
-                    <span className={status.selectedClassName} key={index}>
-                      {makeTitle(status.name)}
-                    </span>
-                  )
-                } else {
-                  return (
-                    <span className={status.defaultClassName} key={index}>
-                      {makeTitle(status.name)}
-                    </span>
-                  )
-                }
-              })}
-            </Breadcrumbs>
-          )}
+            })}
+          </Breadcrumbs>
         </div>
       </div>
       <div className="flex flex-col p-2 space-y-3 sm:p-4">
