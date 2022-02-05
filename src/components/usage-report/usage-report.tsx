@@ -7,7 +7,7 @@ import { UsageReportColumn } from './'
 import { Button } from '../button'
 import { Modal } from '../Modal'
 import { Input } from '../input'
-// import { fetchingGoogleSheet } from '@taggedweb/queries/user'
+import { fetchingGoogleSheet } from '@taggedweb/queries/user'
 
 type UsageReportComponentProps = {
   usage_reports: any[]
@@ -29,6 +29,7 @@ function UsageReportComponent({
   const [isGoogleImport, setIsGoogleImport] = useState(false)
   const [googleSheetUrl, setGoogleSheetUrl] = useState('')
   const [fileUploadOpen, setFileUploadOpen] = useState(false)
+  const [importSheetFile, setImportSheetFile] = useState(false)
   const fileUploadInput = useRef(null)
 
   const AddNewReport = (index) => {
@@ -44,6 +45,23 @@ function UsageReportComponent({
       setUsageReports((prevState) => [...prevState.slice(0, index), ...prevState.slice(index + 1)])
     } else {
       setUsageReports([{ date: new Date(), tracked_hours: 0.0 }])
+    }
+  }
+
+  const returnDataHandler = (data) => {
+    if (data?.error) {
+      toast.error(data.error)
+    } else {
+      const initUsageReports = []
+      data.tracking_times.map((report) => {
+        initUsageReports.push({
+          id: new Date(report.date).getTime(),
+          date: report.date,
+          tracked_hours: report.tracked_hours,
+        })
+      })
+      setUsageReports(initUsageReports)
+      toast.success('Successfully Tracked')
     }
   }
 
@@ -65,25 +83,19 @@ function UsageReportComponent({
     if (isSubmit) {
       // TODO: handle submit.
       const data = await TrackingTimeReport(usageReports, bookingId)
-      const initUsageReports = []
-      data.tracking_times.map((report) => {
-        initUsageReports.push({
-          id: new Date(report.date).getTime(),
-          date: report.date,
-          tracked_hours: report.tracked_hours,
-        })
-      })
-      setUsageReports(initUsageReports)
-      toast.success('Successfully Tracked')
+      returnDataHandler(data)
     } else {
-      console.log('Chech your data validation again.')
+      toast.error('Check your data validation again.')
     }
     setIsClickedSave(false)
   }
 
   const readGoogleSheet = async () => {
-    // TODO: Read Google sheet cell values.
-    // const data = await fetchingGoogleSheet(googleSheetUrl)
+    setImportSheetFile(true)
+    const data = await fetchingGoogleSheet(googleSheetUrl, bookingId)
+    returnDataHandler(data)
+    setImportSheetFile(false)
+    setIsGoogleImport(false)
   }
 
   useEffect(() => {
@@ -113,7 +125,7 @@ function UsageReportComponent({
         <UsageReportColumn
           usageReports={usageReports}
           usageReport={usageReport}
-          key={`usageReport${usageReport.id}`}
+          key={`usageReport${usageReport.tracked_hours}${usageReport.id}`}
           index={index}
           addNewReport={AddNewReport}
           deleteReport={DeleteReport}
@@ -164,7 +176,13 @@ function UsageReportComponent({
             </a>
             <div className="flex flex-row justify-end mt-2 space-x-2">
               <Button onClick={() => setIsGoogleImport(false)}>Cancel</Button>
-              <Button className="!bg-primary" textClassName="!text-text-on-surface" onClick={() => readGoogleSheet()}>
+              <Button
+                className="!bg-primary"
+                textClassName="!text-text-on-surface"
+                onClick={() => readGoogleSheet()}
+                disabled={importSheetFile}
+                loading={importSheetFile}
+              >
                 Import
               </Button>
             </div>

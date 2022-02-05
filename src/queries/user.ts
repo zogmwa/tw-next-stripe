@@ -73,3 +73,18 @@ export async function TrackingTimeReport(trackingData, bookingId): Promise<any |
     return null
   }
 }
+
+export async function fetchingGoogleSheet(url, bookingId): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/fetch_google_sheet/', {
+      google_sheet: url,
+      booking_id: bookingId,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
