@@ -79,6 +79,7 @@ const trackingData = {
       collection_method: 'charge_automatically',
       current_period_end: '2022-02-01T02:23:39Z',
     },
+    pause_status: null,
   },
 }
 
