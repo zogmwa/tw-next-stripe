@@ -6,7 +6,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '../../types/contracts'
 import { contractStatus, makeTitle } from '../contract-detail/status'
-import { toggleStartContract } from '../../queries/user'
+import { toggleStartContract, toggleContractPauseOrResume } from '../../queries/user'
 import { UsageReport } from '../usage-report'
 import { Button } from '../button'
 
@@ -30,6 +30,7 @@ function ProviderContractDetailComponent({ trackingData, bookingId, username }: 
   const [periodEndDate, setPeriodEndDate] = useState('')
   const [statusIndex, setStatusIndex] = useState(1)
   const [paymentStatusIndex, setPaymentStatusIndex] = useState(1)
+  const [isPauseOrResuem, setIsPauseOrResume] = useState(false)
 
   const contractStatuses = contractStatus(false)
   const paymentStatuses = contractStatus(trackingData.booking_data.solution.is_metered)
@@ -72,27 +73,40 @@ function ProviderContractDetailComponent({ trackingData, bookingId, username }: 
     setIsStartContract(false)
   }
 
+  const PauseOrResumecontractController = async (pauseStatus) => {
+    setIsPauseOrResume(true)
+    const data = await toggleContractPauseOrResume(trackingData.booking_data.id, username, pauseStatus, 'provider')
+    setShowTrackingData(data)
+    setIsPauseOrResume(false)
+  }
+
   return (
     <div className="flex flex-col mt-6">
       <div className="flex flex-row justify-between">
         <div className="items-center hidden space-x-2 md:flex">
-          <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-            {contractStatuses.map((status, index) => {
-              if (index <= statusIndex - 1) {
-                return (
-                  <span className={status.selectedClassName} key={index}>
-                    {makeTitle(status.name)}
-                  </span>
-                )
-              } else {
-                return (
-                  <span className={status.defaultClassName} key={index}>
-                    {makeTitle(status.name)}
-                  </span>
-                )
-              }
-            })}
-          </Breadcrumbs>
+          {showTrackingData.booking_data.status === 'Paused' ? (
+            <span className="px-2 py-1 text-sm text-white border rounded-xl border-yellow-600 bg-yellow-600">
+              {makeTitle(showTrackingData.booking_data.status)}
+            </span>
+          ) : (
+            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+              {contractStatuses.map((status, index) => {
+                if (index <= statusIndex - 1) {
+                  return (
+                    <span className={status.selectedClassName} key={index}>
+                      {makeTitle(status.name)}
+                    </span>
+                  )
+                } else {
+                  return (
+                    <span className={status.defaultClassName} key={index}>
+                      {makeTitle(status.name)}
+                    </span>
+                  )
+                }
+              })}
+            </Breadcrumbs>
+          )}
         </div>
         <div className="flex items-center space-x-2 md:hidden">
           {contractStatuses.map((status, index) => {
@@ -115,6 +129,30 @@ function ProviderContractDetailComponent({ trackingData, bookingId, username }: 
             Begin Working
           </Button>
         )}
+        {showTrackingData.booking_data.solution.is_metered &&
+          showTrackingData.booking_data.status === 'In Progress' &&
+          showTrackingData.booking_data.pause_status === null && (
+            <Button
+              disabled={isPauseOrResuem}
+              loading={isPauseOrResuem}
+              onClick={() => PauseOrResumecontractController('PROVIDER_PAUSED')}
+              loadingClassName="text-primary"
+            >
+              Pause Contract
+            </Button>
+          )}
+        {showTrackingData.booking_data.solution.is_metered &&
+          showTrackingData.booking_data.status === 'Paused' &&
+          showTrackingData.booking_data.pause_status === 'PROVIDER_PAUSED' && (
+            <Button
+              disabled={isPauseOrResuem}
+              loading={isPauseOrResuem}
+              onClick={() => PauseOrResumecontractController(null)}
+              loadingClassName="text-primary"
+            >
+              Resume Contract
+            </Button>
+          )}
       </div>
       <div className="flex justify-between my-4">
         <Link href={`/solution/${showTrackingData.booking_data.solution.slug}`} passHref>
