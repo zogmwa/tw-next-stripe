@@ -103,3 +103,20 @@ export async function toggleStartContract(bookingId, username): Promise<any | nu
     return null
   }
 }
+
+export async function toggleContractPauseOrResume(bookingId, username, pauseStatus, pageType): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/pause_or_resume_contract/', {
+      booking_id: bookingId,
+      username: username,
+      pause_status: pauseStatus,
+      page_type: pageType,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
