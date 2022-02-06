@@ -202,14 +202,14 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </div>
         ) : null}
         {(showContractData?.metered_booking_info?.collection_method || nextPaymentDate) && (
-          <div className="bg-red-400 md:flex">
+          <div className="md:flex">
             {nextPaymentDate && <b className="mr-2">Next Payment Date:</b>}
 
             {showContractData?.metered_booking_info?.billing_cycle_anchor ? (
               showContractData?.metered_booking_info?.collection_method ? (
                 <span className="ml-2">
                   {showContractData?.metered_booking_info?.collection_method === 'charge_automatically'
-                    ? 'We will charge your payment automatically.'
+                    ? 'Your card will be charged automatically at the end of the billing period, for provider logged hours only.'
                     : 'We will send an invoice'}
                 </span>
               ) : null
