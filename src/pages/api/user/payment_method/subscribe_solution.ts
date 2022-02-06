@@ -10,7 +10,7 @@ export default withSentry(
   withApiAuthRequired(async (req, res) => {
     if (req.method === 'POST') {
       const access = await getAccessToken(req)
-      const { data } = await clientWithRetries.post('/users/subscribe_payment/', req.body, {
+      const { data } = await clientWithRetries.post('/users/subscribe_solution/', req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

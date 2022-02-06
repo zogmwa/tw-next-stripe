@@ -31,7 +31,7 @@ export async function fetchPaymentMethodList(): Promise<null | any> {
 
 export async function togglePaymentSubscribe(paymentMethodId, solutionSlug, referringUserId): Promise<null | any> {
   try {
-    const { data } = await axios.post('/api/user/payment_method/subscribe_payment/', {
+    const { data } = await axios.post('/api/user/payment_method/subscribe_solution/', {
       payment_method: paymentMethodId,
       slug: solutionSlug,
       referring_user: referringUserId,
@@ -79,6 +79,21 @@ export async function fetchingGoogleSheet(url, bookingId): Promise<any | null> {
     const { data } = await axios.post('/api/user/fetch_google_sheet/', {
       google_sheet: url,
       booking_id: bookingId,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
+
+export async function toggleStartContract(bookingId, username): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/start_contract/', {
+      booking_id: bookingId,
+      username: username,
     })
     return data
   } catch (error) {

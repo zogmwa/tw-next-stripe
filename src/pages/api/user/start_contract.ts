@@ -4,13 +4,13 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * This API for the reporting tracked time to stripe.
+ * This API is for change contract status and create stripe subscrition.
  */
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
     if (req.method === 'POST') {
       const access = await getAccessToken(req)
-      const { data } = await clientWithRetries.post('/users/tracking_time_report/', req.body, {
+      const { data } = await clientWithRetries.post('/users/start_contract/', req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
