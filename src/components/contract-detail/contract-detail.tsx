@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { BiDollar } from 'react-icons/bi'
 import Markdown from 'marked-react'
@@ -11,6 +11,7 @@ import { Button } from '../button'
 import { solutionContract } from '../../types/contracts'
 import { SolutionFAQ } from '../solution-detail-introduction'
 import { contractStatus, makeTitle } from './status'
+import { toggleContractPauseOrResume } from '../../queries/user'
 
 Lowlight.registerLanguage('js', javascript)
 
@@ -26,72 +27,111 @@ type ContractDetailProps = {
 }
 
 function ContractDetailComponent({ contractData }: ContractDetailProps) {
+  const [showContractData, setShowContractData] = useState(contractData)
+  const [isPauseOrResuem, setIsPauseOrResume] = useState(false)
   const statuses = contractStatus(false)
 
   let statusIndex = 1
   statuses.forEach((status, index) => {
-    if (status.name === contractData.status) statusIndex = index + 1
+    if (status.name === showContractData.status) statusIndex = index + 1
   })
 
-  // const startedDate = contractData.solution.is_metered
-  //   ? contractData.metered_booking_info?.start_date
-  //     ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
+  const PauseOrResumecontractController = async (pauseStatus) => {
+    setIsPauseOrResume(true)
+    const data = await toggleContractPauseOrResume(showContractData.id, '', pauseStatus, 'customer')
+    setShowContractData(data[0])
+    setIsPauseOrResume(false)
+  }
+
+  // const startedDate = showContractData.solution.is_metered
+  //   ? showContractData.metered_booking_info?.start_date
+  //     ? new Date(showContractData.metered_booking_info.start_date).toISOString().split('T')[0]
   //     : ''
-  //   : contractData.started_at
-  //   ? new Date(contractData.started_at).toISOString().split('T')[0]
+  //   : showContractData.started_at
+  //   ? new Date(showContractData.started_at).toISOString().split('T')[0]
   //   : ''
-  const createdDate = new Date(contractData.created ?? '').toISOString().split('T')[0]
-  // const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
+  const createdDate = new Date(showContractData.created ?? '').toISOString().split('T')[0]
+  // const updatedDate = new Date(showContractData.updated ?? '').toISOString().split('T')[0]
 
   const nextPaymentDate =
-    contractData.solution.is_metered &&
-    (contractData?.metered_booking_info?.current_period_end
-      ? new Date(contractData?.metered_booking_info?.current_period_end).toISOString().split('T')[0]
+    showContractData.solution.is_metered &&
+    (showContractData?.metered_booking_info?.current_period_end
+      ? new Date(showContractData?.metered_booking_info?.current_period_end).toISOString().split('T')[0]
       : '')
   return (
     <div className="flex flex-col mx-4 md:mt-6">
       <div className="flex items-center my-2 space-x-2 sm:hidden">
-        {statuses.map((status, index) => {
-          if (index === statusIndex - 1) {
-            return (
-              <span className={status.selectedClassName} key={`status${index}`}>
-                {status.name}
-              </span>
-            )
-          }
-          return <></>
-        })}
+        {showContractData.status === 'Paused' ? (
+          <span className="px-2 py-1 text-sm text-white border rounded-xl border-yellow-600 bg-yellow-600">
+            {makeTitle(showContractData.status)}
+          </span>
+        ) : (
+          statuses.map((status, index) => {
+            if (index === statusIndex - 1) {
+              return (
+                <span className={status.selectedClassName} key={`status${index}`}>
+                  {status.name}
+                </span>
+              )
+            }
+            return <></>
+          })
+        )}
       </div>
-      <div className="flex flex-col justify-between sm:flex-row">
-        <Link href={`/solution/${contractData.solution.slug}`} passHref>
+      <div className="flex justify-between flex-col md:flex-row md:items-center">
+        <Link href={`/solution/${showContractData.solution.slug}`} passHref>
           <a className="sm:w-5/6 md:w-3/4">
             <h2 className="text-base font-bold cursor-pointer sm:text-lg md:text-xl hover:underline text-text-primary">
-              {contractData.solution.title}
+              {showContractData.solution.title}
             </h2>
           </a>
         </Link>
-        <div className="justify-center justify-end hidden w-1/6 md:w-1/4 sm:flex">
-          <BiDollar className="text-xl md:text-2xl font-bold text-text-primary mt-1  md:mt-0.5" />
+        <div className="mt-4 md:mt-0">
+          {/* <BiDollar className="text-xl md:text-2xl font-bold text-text-primary mt-1  md:mt-0.5" />
           <h4 className="text-base font-bold sm:text-lg md:text-xl text-text-primary">
-            {contractData.price_at_booking ?? 0}
-          </h4>
+            {showContractData.price_at_booking ?? 0}
+          </h4> */}
+          {showContractData.solution.is_metered &&
+            showContractData.status === 'In Progress' &&
+            showContractData.pause_status === null && (
+              <Button
+                disabled={isPauseOrResuem}
+                loading={isPauseOrResuem}
+                onClick={() => PauseOrResumecontractController('CUSTOMER_PAUSED')}
+                loadingClassName="text-primary"
+              >
+                Pause Contract
+              </Button>
+            )}
+          {showContractData.solution.is_metered &&
+            showContractData.status === 'Paused' &&
+            showContractData.pause_status === 'CUSTOMER_PAUSED' && (
+              <Button
+                disabled={isPauseOrResuem}
+                loading={isPauseOrResuem}
+                onClick={() => PauseOrResumecontractController(null)}
+                loadingClassName="text-primary"
+              >
+                Resume Contract
+              </Button>
+            )}
         </div>
       </div>
       <div className="flex flex-col my-4 space-y-3 sm:flex-row sm:justify-between sm:items-center">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            {contractData.solution.organization ? (
+            {showContractData.solution.organization ? (
               <>
-                {contractData.solution.organization.logo_url ? (
+                {showContractData.solution.organization.logo_url ? (
                   <img
                     className="w-[40px] h-[40px] rounded-full"
-                    src={contractData.solution.organization.logo_url}
-                    alt={contractData.solution.organization.name}
+                    src={showContractData.solution.organization.logo_url}
+                    alt={showContractData.solution.organization.name}
                   />
                 ) : (
                   <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
                 )}
-                <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization.name}</span>
+                <span className="pl-2 text-sm text-text-secondary">{showContractData.solution.organization.name}</span>
               </>
             ) : (
               <>
@@ -100,16 +140,16 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
                   style={{ boxShadow: 'none !important' }}
                 >
                   <p>
-                    {contractData.solution.point_of_contact?.first_name[0] ??
-                      '' + contractData.solution.point_of_contact?.last_name[0] ??
+                    {showContractData.solution.point_of_contact?.first_name[0] ??
+                      '' + showContractData.solution.point_of_contact?.last_name[0] ??
                       ''}
                   </p>
                 </div>
                 <span className="pl-2 text-sm text-text-secondary">
-                  {contractData.solution.point_of_contact?.first_name ?? ''}{' '}
-                  {contractData.solution.point_of_contact?.last_name ?? ''}
-                  {contractData.solution.point_of_contact?.email ? (
-                    <span className="ml-2">{`Contact email: ${contractData.solution.point_of_contact?.email}`}</span>
+                  {showContractData.solution.point_of_contact?.first_name ?? ''}{' '}
+                  {showContractData.solution.point_of_contact?.last_name ?? ''}
+                  {showContractData.solution.point_of_contact?.email ? (
+                    <span className="ml-2">{`Contact email: ${showContractData.solution.point_of_contact?.email}`}</span>
                   ) : (
                     ''
                   )}
@@ -117,29 +157,35 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
               </>
             )}
           </div>
-          <div className="flex sm:hidden">
+          {/* <div className="flex sm:hidden">
             <BiDollar className="text-xl font-bold text-text-primary mt-0.5" />
-            <h4 className="text-base font-bold sm:text-xl text-text-primary">{contractData.price_at_booking ?? 0}</h4>
-          </div>
+            <h4 className="text-base font-bold sm:text-xl text-text-primary">{showContractData.price_at_booking ?? 0}</h4>
+          </div> */}
         </div>
         <div className="items-center hidden space-x-2 sm:flex">
-          <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-            {statuses.map((status, index) => {
-              if (index <= statusIndex - 1) {
-                return (
-                  <span className={status.selectedClassName} key={index}>
-                    {makeTitle(status.name)}
-                  </span>
-                )
-              } else {
-                return (
-                  <span className={status.defaultClassName} key={index}>
-                    {makeTitle(status.name)}
-                  </span>
-                )
-              }
-            })}
-          </Breadcrumbs>
+          {showContractData.status === 'Paused' ? (
+            <span className="px-2 py-1 text-sm text-white border rounded-xl border-yellow-600 bg-yellow-600">
+              {makeTitle(showContractData.status)}
+            </span>
+          ) : (
+            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+              {statuses.map((status, index) => {
+                if (index <= statusIndex - 1) {
+                  return (
+                    <span className={status.selectedClassName} key={index}>
+                      {makeTitle(status.name)}
+                    </span>
+                  )
+                } else {
+                  return (
+                    <span className={status.defaultClassName} key={index}>
+                      {makeTitle(status.name)}
+                    </span>
+                  )
+                }
+              })}
+            </Breadcrumbs>
+          )}
         </div>
       </div>
       <div className="flex flex-col p-2 space-y-3 sm:p-4">
@@ -155,14 +201,14 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           ) : null} */}
           </div>
         ) : null}
-        {(contractData?.metered_booking_info?.collection_method || nextPaymentDate) && (
+        {(showContractData?.metered_booking_info?.collection_method || nextPaymentDate) && (
           <div className="bg-red-400 md:flex">
             {nextPaymentDate && <b className="mr-2">Next Payment Date:</b>}
 
-            {contractData?.metered_booking_info?.billing_cycle_anchor ? (
-              contractData?.metered_booking_info?.collection_method ? (
+            {showContractData?.metered_booking_info?.billing_cycle_anchor ? (
+              showContractData?.metered_booking_info?.collection_method ? (
                 <span className="ml-2">
-                  {contractData?.metered_booking_info?.collection_method === 'charge_automatically'
+                  {showContractData?.metered_booking_info?.collection_method === 'charge_automatically'
                     ? 'We will charge your payment automatically.'
                     : 'We will send an invoice'}
                 </span>
@@ -170,46 +216,54 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
             ) : null}
           </div>
         )}
-        {contractData.solution.eta_days && (
+        {showContractData.solution.eta_days && (
           <div className="inline md:flex">
             <span className="w-full">
               <b className="mr-2">Provider Notes :</b>
-              {contractData.provider_notes ??
-                `Estimated time for completion is ${contractData.solution.eta_days} business days.`}
+              {showContractData.provider_notes ??
+                `Estimated time for completion is ${showContractData.solution.eta_days} business days.`}
             </span>
           </div>
         )}
-        {contractData.solution.description && (
+        {showContractData.solution.description && (
           <div id="solutions-overview" className="flex flex-col">
             <a href="#solutions-overview">
               <h4 className="pb-2 font-bold text-black text-md">Overview :</h4>
             </a>
             <div>
-              <Markdown value={contractData.solution.description} renderer={renderer} />
+              <Markdown value={showContractData.solution.description} renderer={renderer} />
             </div>
           </div>
         )}
-        {contractData.solution.scope_of_work && (
+        {showContractData.solution.scope_of_work && (
           <div style={{ scrollMarginTop: '3rem' }} id="solutions-scope" className="flex flex-col">
             <a href="#solutions-scope">
               <h4 className="pb-2 font-bold text-black text-md">Scope of Contract :</h4>
             </a>
             <div>
-              <Markdown value={contractData.solution.scope_of_work} renderer={renderer} />
+              <Markdown value={showContractData.solution.scope_of_work} renderer={renderer} />
             </div>
           </div>
         )}
-        {contractData.solution.questions
-          ? contractData.solution.questions.length > 0 && (
+        {showContractData.solution.questions
+          ? showContractData.solution.questions.length > 0 && (
               <div style={{ scrollMarginTop: '3rem' }} id="solutions-faq" className="py-4">
-                <SolutionFAQ questions={contractData.solution.questions} solutionSlug={contractData.solution.slug} />
+                <SolutionFAQ
+                  questions={showContractData.solution.questions}
+                  solutionSlug={showContractData.solution.slug}
+                />
               </div>
             )
           : null}
 
-        {contractData.solution.type === 'C' && contractData.solution?.consultation_scheduling_link && (
+        {showContractData.solution.type === 'C' && showContractData.solution?.consultation_scheduling_link && (
           <div className="flex w-full md:flex">
-            <a className="" href={contractData.solution?.consultation_scheduling_link} target="_blank" rel="noreferrer">
+            <a
+              className=""
+              href={showContractData.solution?.consultation_scheduling_link}
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button buttonType="primary" className="my-2 md:h-12">
                 Book your consultation slot
               </Button>
