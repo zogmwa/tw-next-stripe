@@ -71,6 +71,7 @@ const contractsList = [
     price_at_booking: 10,
     provider_notes: 'This is solution provider note.',
     metered_booking_info: null,
+    pause_status: null,
   },
 ]
 

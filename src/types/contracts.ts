@@ -11,6 +11,7 @@ export type solutionContract = {
   updated: string
   price_at_booking: number
   provider_notes: string
+  pause_status: string | null
   metered_booking_info: null | {
     payment_status: null | string
     start_date: null | string
