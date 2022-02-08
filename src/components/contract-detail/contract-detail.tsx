@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { BiDollar } from 'react-icons/bi'
 import Markdown from 'marked-react'
 import Lowlight from 'react-lowlight'
-import clsx from 'clsx'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
@@ -62,7 +60,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
     <div className="flex flex-col mx-4 md:mt-6">
       <div className="flex items-center my-2 space-x-2 sm:hidden">
         {showContractData.status === 'Paused' ? (
-          <span className="px-2 py-1 text-sm text-white border rounded-xl border-yellow-600 bg-yellow-600">
+          <span className="px-2 py-1 text-sm text-white bg-yellow-600 border border-yellow-600 rounded-xl">
             {makeTitle(showContractData.status)}
           </span>
         ) : (
@@ -78,7 +76,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           })
         )}
       </div>
-      <div className="flex justify-between flex-col md:flex-row md:items-center">
+      <div className="flex flex-col justify-between md:flex-row md:items-center">
         <Link href={`/solution/${showContractData.solution.slug}`} passHref>
           <a className="sm:w-5/6 md:w-3/4">
             <h2 className="text-base font-bold cursor-pointer sm:text-lg md:text-xl hover:underline text-text-primary">
@@ -164,7 +162,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
         </div>
         <div className="items-center hidden space-x-2 sm:flex">
           {showContractData.status === 'Paused' ? (
-            <span className="px-2 py-1 text-sm text-white border rounded-xl border-yellow-600 bg-yellow-600">
+            <span className="px-2 py-1 text-sm text-white bg-yellow-600 border border-yellow-600 rounded-xl">
               {makeTitle(showContractData.status)}
             </span>
           ) : (
