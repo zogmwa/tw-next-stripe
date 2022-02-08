@@ -91,11 +91,13 @@ function SolutionDetailIntroductionComponent({ introductionData, sidebar_info }:
     <div className="flex flex-col w-full divide-y flex-fol divide-solid divide-border-default">
       <div className="flex justify-between p-4 md:px-0">
         <div className="flex flex-col">
-          <a className="inline-flex">
-            <Button buttonType="tag" size="small">
-              {introductionData?.primary_tag?.name}
-            </Button>
-          </a>
+          {introductionData.primary_tag && (
+            <a className="inline-flex">
+              <Button buttonType="tag" size="small">
+                {introductionData.primary_tag?.name}
+              </Button>
+            </a>
+          )}
           <h2 className="mt-2 text-3xl font-bold">{introductionData.title}</h2>
           <UpvoteUser
             isLoading={isLoadingUpvote}
