@@ -2,12 +2,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
-import { TrackingTimeReport } from '@taggedweb/queries/user'
+import { TrackingTimeReport, fetchingGoogleSheet } from '@taggedweb/queries/user'
 import { UsageReportColumn } from './'
 import { Button } from '../button'
 import { Modal } from '../Modal'
 import { Input } from '../input'
-import { fetchingGoogleSheet } from '@taggedweb/queries/user'
 
 type UsageReportComponentProps = {
   usage_reports: any[]
