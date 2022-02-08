@@ -8,6 +8,7 @@ import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
 import { Asset } from '@taggedweb/types/asset'
 import { validateLink } from '@taggedweb/utils/validateLink'
+import { formatConsideringPlurality } from '@taggedweb/utils/formatConsideringPlurality'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
@@ -27,7 +28,6 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
   }
   const router = useRouter()
   const { search_query = null } = router.query
-
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -136,7 +136,9 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                 </div>
                 <div className="flex items-center space-x-2">
                   <FiUsers className="text-primary" />
-                  <p className="text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</p>
+                  <p className="text-text-secondary">
+                    {formatConsideringPlurality(numeral(service.users_count).format('0.[0]a'), 'User')}
+                  </p>
                 </div>
                 {service.has_free_trial === true && (
                   <>
