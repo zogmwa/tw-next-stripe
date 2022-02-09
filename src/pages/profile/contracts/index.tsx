@@ -1,11 +1,19 @@
 import React from 'react'
+import { useState } from 'react'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ContractCard } from '@taggedweb/components/contract-card/contract-card'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
+import Pagination from '@mui/material/Pagination'
+import * as Sentry from '@sentry/nextjs'
+import axios from 'axios'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
-  const contractData = (await fetchContract(context.req, '')) ?? []
+  const {
+    query: { user },
+  } = context
+  const sendUrl = `&offest=0&limit=5`
+  const contractData = (await fetchContract(context.req, sendUrl)) ?? []
 
   return {
     props: { contractData },
@@ -13,7 +21,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function ContractsList({ contractData }) {
-  const contractsList = contractData
+  const [contractsList, setContractsList] = useState(contractData)
+  const [page, setPage] = useState(1)
+  const [pageLen, setPageLen] = useState(5)
+  const [pageCount, setPageCount] = useState(Math.ceil(contractsList.count / pageLen))
+
   const breadcrumbData = [
     {
       name: 'Home',
@@ -36,23 +48,43 @@ export default function ContractsList({ contractData }) {
   //   const dateB = new Date(contractB.started_at)
   //   return (dateA.getTime() - dateB.getTime()) * -1
   // })
-  contractsList.sort((contractA, contractB) => {
-    const dateA = new Date(contractA.created)
-    const dateB = new Date(contractB.created)
-    return (dateA.getTime() - dateB.getTime()) * -1
-  })
+
+  contractsList.results &&
+    contractsList.results.sort((contractA, contractB) => {
+      const dateA = new Date(contractA.created)
+      const dateB = new Date(contractB.created)
+      return (dateA.getTime() - dateB.getTime()) * -1
+    })
+  const fetchContractsList = async (sendUrl) => {
+    try {
+      const { data } = await axios.get(`/api/contracts/${sendUrl}`)
+      setPageCount(Math.ceil(contractsList.count / pageLen))
+      setContractsList(data)
+    } catch (error) {
+      Sentry.captureException(error)
+      // eslint-disable-next-line
+      console.log(error)
+    }
+  }
+
+  const handlePagination = (event, pageValue) => {
+    setPage(pageValue)
+    const offset = (pageValue - 1) * pageLen
+    const sendUrl = `offset=${offset}&limit=${pageLen}`
+    fetchContractsList(sendUrl)
+  }
 
   return (
     <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
       <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
       <p className="my-2 text-lg font-bold">Contracts</p>
       <div className="w-full mb-4">
-        {((contractsList && contractsList.length === 0) || typeof contractsList === 'undefined') && (
+        {((contractsList && contractsList.length === 0) || typeof contractsList?.results === 'undefined') && (
           <p className="text-center">No Contracts yet...</p>
         )}
 
         {contractsList &&
-          contractsList.map((contract, index) => {
+          contractsList.results.map((contract, index) => {
             return (
               <ContractCard
                 key={`contract-${index}`}
@@ -61,6 +93,10 @@ export default function ContractsList({ contractData }) {
               />
             )
           })}
+
+        <div className="flex justify-end p-2">
+          <Pagination page={page} count={pageCount} onChange={handlePagination} />
+        </div>
       </div>
     </div>
   )
