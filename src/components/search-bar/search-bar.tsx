@@ -220,6 +220,7 @@ export function SearchBar({
         />
       ) : (
         <AsyncSelect
+          autoFocus
           name="solutions"
           value={null}
           inputId={'searchSolutionInput'}
