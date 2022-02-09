@@ -9,6 +9,8 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdOutlineClose } from 'react-icons/md'
 import { BsSearch, BsFillXCircleFill } from 'react-icons/bs'
 import { LIST_A_SOFTWARE_PATH, SOLUTIONS_CONTACT_GOOGLE_FORM } from '@taggedweb/utils/constants'
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
+import { styled } from '@mui/material/styles'
 import { Button } from '../button'
 import Avatar from './avatar'
 import { NavSearchBar, SearchBar } from '../search-bar'
@@ -18,6 +20,17 @@ type NavBarProps = {
   className?: string
   style?: React.CSSProperties
 }
+
+const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))
 
 export function NavBar({ className, style }: NavBarProps) {
   const [mobileTopShow, setMobileTopShow] = useState(false)
@@ -72,14 +85,16 @@ export function NavBar({ className, style }: NavBarProps) {
           )}
           {!showSearch && <NavbarMenu />}
           {!showSearch && (
-            <div
-              onClick={() => {
-                setShowSearch(!showSearch)
-              }}
-              className="px-2 py-2 text-blue-500 rounded cursor-pointer hover:bg-blue-100"
-            >
-              <BsSearch />
-            </div>
+            <LightTooltip title="Find Solutions" placement="bottom" arrow>
+              <div
+                onClick={() => {
+                  setShowSearch(!showSearch)
+                }}
+                className="px-2 py-2 text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+              >
+                <BsSearch />
+              </div>
+            </LightTooltip>
           )}
           {showSearch && (
             <div
@@ -159,14 +174,16 @@ export function NavBar({ className, style }: NavBarProps) {
               )}
               {!showSearch && (
                 <div className="flex items-center justify-between">
-                  <div
-                    onClick={() => {
-                      setShowSearch(!showSearch)
-                    }}
-                    className="px-2 py-2 text-xl text-blue-500 rounded cursor-pointer hover:bg-blue-100"
-                  >
-                    <BsSearch />
-                  </div>
+                  <LightTooltip title="Find Solutions" placement="bottom" arrow>
+                    <div
+                      onClick={() => {
+                        setShowSearch(!showSearch)
+                      }}
+                      className="px-2 py-2 text-xl text-blue-500 rounded cursor-pointer hover:bg-blue-100"
+                    >
+                      <BsSearch />
+                    </div>
+                  </LightTooltip>
                   {isLoggedIn() ? (
                     <>
                       <Avatar />
