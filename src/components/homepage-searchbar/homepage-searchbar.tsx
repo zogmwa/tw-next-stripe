@@ -43,7 +43,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   }, [])
 
   return (
-    <div className="w-full">
+    <div className="w-full pt-4 sm:pt-0">
       <Tab.Group
         defaultIndex={searchIndex}
         onChange={(index) => {
@@ -72,7 +72,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
               placement="top"
               arrow
             >
-              <div>Find Solutions</div>
+              <div className="text-sm sm:text-base">Find Solutions</div>
             </LightTooltip>
           </Tab>
           <Tab
@@ -87,7 +87,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
             }
           >
             <LightTooltip title="Useful if you are finding software, SaaS options" placement="top" arrow>
-              <div>Find Software</div>
+              <div className="text-sm sm:text-base">Find Software</div>
             </LightTooltip>
           </Tab>
         </Tab.List>

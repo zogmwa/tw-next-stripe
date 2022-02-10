@@ -29,11 +29,11 @@ export default function Home({ search_software = 0 }: HomeProps) {
   return (
     <div>
       <DynamicHeader />
-      <div className="relative flex justify-between bg-blue-600">
+      <div className="flex justify-between bg-blue-600">
         <div className="flex items-center justify-center flex-1 2xl:justify-end ">
           <div className="flex flex-col items-start justify-start w-full mx-6 my-4 lg:mr-0 xl:w-4/5 2xl:w-3/4">
-            <div className="xl:flex">
-              <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-white">Are you looking &#160;</h1>
+            <div className="xl:flex w-full homepage">
+              <h1 className="flex-shrink-0 pt-2 text-3xl font-semibold text-white">Are you looking &#160;</h1>
               <h1 className="flex-shrink-0 py-2 text-3xl font-semibold text-green-400">
                 <>
                   <Typewriter
@@ -53,7 +53,7 @@ export default function Home({ search_software = 0 }: HomeProps) {
                 </>
               </h1>
             </div>
-            <h2 className="py-2 mb-4 text-3xl font-medium text-white">
+            <h2 className="hidden sm:block py-2 mb-4 text-3xl font-medium text-white">
               Consult with the best Software Engineers, Researchers, Solution Architects, Tech-Marketers and SaaS
               Support Teams
             </h2>

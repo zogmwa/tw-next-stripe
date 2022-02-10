@@ -119,3 +119,18 @@ button:focus {
   top: -8px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
+/* Tailwind only support heights till 24rem and
+  we needed heights greater than that.
+  These heights will not be used anywhere else,
+  that's why I'm not adding this in tailwind.config.js */
+@media only screen and (max-width: 500px) {
+  .homepage {
+    height: 10em;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 700px) {
+  .homepage {
+    height: 8.125em;
+  }
+}
