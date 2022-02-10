@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ContractCard } from '@taggedweb/components/contract-card/contract-card'
@@ -7,7 +7,9 @@ import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import Pagination from '@mui/material/Pagination'
 import * as Sentry from '@sentry/nextjs'
 import axios from 'axios'
-
+import Router from 'next/router'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import Page404 from '@taggedweb/pages/404'
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     query: { user },
@@ -21,6 +23,9 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function ContractsList({ contractData }) {
+  const router = useRouter()
+  const session = useUserContext()
+  const { isLoggedIn, logout } = session
   const [contractsList, setContractsList] = useState(contractData)
   const [page, setPage] = useState(1)
   const [pageLen, setPageLen] = useState(5)
@@ -73,31 +78,40 @@ export default function ContractsList({ contractData }) {
     const sendUrl = `offset=${offset}&limit=${pageLen}`
     fetchContractsList(sendUrl)
   }
+  useEffect(() => {
+    const { pathname } = Router
+    if (!session.isLoggedIn() && pathname == '/profile/contracts') {
+      router.replace('/login')
+    }
+  }, [session, router])
 
-  return (
-    <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
-      <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
-      <p className="my-2 text-lg font-bold">Contracts</p>
-      <div className="w-full mb-4">
-        {((contractsList && contractsList.length === 0) || typeof contractsList?.results === 'undefined') && (
-          <p className="text-center">No Contracts yet...</p>
-        )}
+  if (isLoggedIn()) {
+    return (
+      <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
+        <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
+        <p className="my-2 text-lg font-bold">Contracts</p>
+        <div className="w-full mb-4">
+          {((contractsList?.results && contractsList.results.length === 0) ||
+            typeof contractsList?.results === 'undefined') && <p className="text-center">No Contracts yet...</p>}
 
-        {contractsList &&
-          contractsList.results.map((contract, index) => {
-            return (
-              <ContractCard
-                key={`contract-${index}`}
-                contractData={contract}
-                redirectUrl={`/profile/contracts/${contract.id}`}
-              />
-            )
-          })}
+          {contractsList.results &&
+            contractsList.results.map((contract, index) => {
+              return (
+                <ContractCard
+                  key={`contract-${index}`}
+                  contractData={contract}
+                  redirectUrl={`/profile/contracts/${contract.id}`}
+                />
+              )
+            })}
 
-        <div className="flex justify-end p-2">
-          <Pagination page={page} count={pageCount} onChange={handlePagination} />
+          <div className="flex justify-end p-2">
+            {pageCount > 1 && <Pagination page={page} count={pageCount} onChange={handlePagination} />}
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return <Page404 />
+  }
 }
