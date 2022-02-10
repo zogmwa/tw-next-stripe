@@ -10,6 +10,7 @@ import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
 import { Solution, SolutionTypes } from '@taggedweb/types/solution'
 import slugify from 'slugify'
+import { formatConsideringPlurality } from '@taggedweb/utils/formatConsideringPlurality'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
@@ -101,11 +102,15 @@ export default function SolutionDetail({ solutionDetail }) {
       })
     }
   }
+  let currCapacity = (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
+  const getFeatureName = () => {
+    const capacity = formatConsideringPlurality(currCapacity, 'more slot')
+    if (currCapacity == 0) return 'No slots available at this time'
+    return `Only ${capacity} available at this time`
+  }
   features.push({
     id: 'capacity',
-    name: `Only ${
-      (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
-    } more slot(s) available at this time`,
+    name: getFeatureName(),
     tooltipContent:
       'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
   })
