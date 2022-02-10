@@ -17,9 +17,9 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
   }
 }
 
-export async function fetchPaymentMethodList(): Promise<null | any> {
+export async function fetchPaymentMethodList(customerId = ''): Promise<null | any> {
   try {
-    const { data } = await axios.get('/api/user/payment_method/payment_method_list/')
+    const { data } = await axios.get(`/api/user/payment_method/payment_method_list?customer_id=${customerId}`)
     return data
   } catch (error) {
     Sentry.captureException(error)
@@ -45,10 +45,11 @@ export async function togglePaymentSubscribe(paymentMethodId, solutionSlug, refe
   }
 }
 
-export async function toggleDetachPaymentMethod(paymentMethodId): Promise<any | null> {
+export async function toggleDetachPaymentMethod(paymentMethodId, partner_customer_id = ''): Promise<any | null> {
   try {
     const { data } = await axios.post('/api/user/payment_method/detach/', {
       payment_method: paymentMethodId,
+      partner_customer_id: partner_customer_id,
     })
     return data
   } catch (error) {
@@ -117,6 +118,22 @@ export async function toggleContractPauseOrResume(bookingId, username, pauseStat
     Sentry.captureException(error)
     // TODO: error handling
     // eslint-disable-next-line
+    return null
+  }
+}
+
+export async function attachPaymentMethodForPartner(paymentMethod, customer_id): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/user/payment_method/attach_for_partner/', {
+      payment_method: paymentMethod,
+      customer_id: customer_id,
+    })
+    console.log(data)
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-lione
     return null
   }
 }
