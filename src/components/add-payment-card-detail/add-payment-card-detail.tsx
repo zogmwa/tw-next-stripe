@@ -51,13 +51,14 @@ const ErrorMessage = ({ children }) => (
   </div>
 )
 
-const CheckoutForm = ({ addCard }) => {
+const CheckoutForm = ({ addCard, isShowEmail }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [billingDetails, setBillingDetails] = useState({
+    email: '',
     name: '',
   })
 
@@ -103,6 +104,22 @@ const CheckoutForm = ({ addCard }) => {
 
   return (
     <form className="form flex flex-col" onSubmit={handleSubmit}>
+      {isShowEmail && (
+        <fieldset className="form-group">
+          <InputField
+            label="Email"
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+            autoComplete="name"
+            value={billingDetails.email}
+            onChange={(e) => {
+              setBillingDetails({ ...billingDetails, email: e.target.value })
+            }}
+          />
+        </fieldset>
+      )}
       <fieldset className="form-group">
         <InputField
           label="Name"
@@ -146,13 +163,18 @@ const stripePromise = loadStripe(process.env.STRIPE_PUBLISH_KEY)
 type AddPaymentCardDetailComponentProps = {
   addCard: Function
   className?: string
+  isShowEmail?: boolean
 }
 
-const AddPaymentCardDetailComponent = ({ addCard, className }: AddPaymentCardDetailComponentProps) => {
+const AddPaymentCardDetailComponent = ({
+  addCard,
+  className,
+  isShowEmail = false,
+}: AddPaymentCardDetailComponentProps) => {
   return (
     <div className={clsx('AppWrapper ', className)}>
       <Elements stripe={stripePromise}>
-        <CheckoutForm addCard={addCard} />
+        <CheckoutForm addCard={addCard} isShowEmail={isShowEmail} />
       </Elements>
     </div>
   )
