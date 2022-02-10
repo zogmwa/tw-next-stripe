@@ -1,5 +1,5 @@
-import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { withSessionApi } from '@taggedweb/utils/session'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
@@ -7,14 +7,17 @@ import { withSentry } from '@sentry/nextjs'
  * API Route handler for detach stripe card info to user account.
  */
 export default withSentry(
-  withApiAuthRequired(async (req, res) => {
+  withSessionApi(async (req, res) => {
     if (req.method === 'POST') {
       const access = await getAccessToken(req)
-      const { data } = await clientWithRetries.post('/users/detach_payment_method/', req.body, {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      })
+      const config = access
+        ? {
+            headers: {
+              Authorization: `Bearer ${access}`,
+            },
+          }
+        : null
+      const { data } = await serverSideClient(req).post('/users/detach_payment_method/', req.body, config)
       res.json(data)
     }
   }),
