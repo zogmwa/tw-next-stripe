@@ -57,11 +57,11 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
             }
           />
           <FormControlLabel
-            value="-upvotes_count"
+            value="-stripe_primary_price__unit_amount"
             control={<Radio />}
             label={
               <div className="flex text-sm text-text-primary">
-                Upvotes{' '}
+                Price{' '}
                 <span className="ml-1 text-lg font-bold">
                   <AiOutlineArrowDown />
                 </span>
@@ -69,11 +69,11 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
             }
           />
           <FormControlLabel
-            value="upvotes_count"
+            value="stripe_primary_price__unit_amount"
             control={<Radio />}
             label={
               <div className="flex text-sm text-text-primary">
-                Upvotes{' '}
+                Price{' '}
                 <span className="ml-1 text-lg font-bold">
                   <AiOutlineArrowUp />
                 </span>
