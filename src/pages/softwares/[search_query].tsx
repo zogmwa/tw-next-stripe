@@ -270,7 +270,7 @@ export default function ServiceList({
           </div>
           {!error && (
             <div className="flex justify-end">
-              <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
+              {pageCount > 1 && <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />}
             </div>
           )}
         </>

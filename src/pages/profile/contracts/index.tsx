@@ -8,7 +8,6 @@ import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import Pagination from '@mui/material/Pagination'
 import * as Sentry from '@sentry/nextjs'
 import axios from 'axios'
-
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import Page404 from '@taggedweb/pages/404'
 export const getServerSideProps = withSessionSSR(async (context) => {
