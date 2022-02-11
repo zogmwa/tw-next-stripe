@@ -24,8 +24,10 @@ export type Solution = {
   my_solution_review_id?: number
   my_solution_vote?: number | null
   organization?: CustomerOrganization
-  pay_now_price_stripe_id?: string
-  pay_now_price_unit_amount?: number
+  stripe_primary_price_stripe_id?: string
+  stripe_primary_price_unit_amount?: number
+  // pay_now_price_stripe_id?: string
+  // pay_now_price_unit_amount?: number
   point_of_contact?: UserInfo
   primary_tag?: Tag
   questions?: SolutionQuestion[]
