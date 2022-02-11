@@ -17,7 +17,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
 })
 
 export default function Contracts({ contractData }) {
-  const contract = contractData[0]
+  const contract = contractData.results[0]
 
   return (
     <div id="contracts" className="flex flex-col max-w-screen-lg mx-auto my-4 md:my-10">
