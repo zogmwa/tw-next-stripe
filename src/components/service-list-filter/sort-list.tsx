@@ -33,30 +33,6 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
           onChange={handleChange}
         >
           <FormControlLabel
-            value="-avg_rating"
-            control={<Radio />}
-            label={
-              <div className="flex text-sm text-text-primary">
-                Avg. Rating{' '}
-                <span className="ml-1 text-lg font-bold">
-                  <AiOutlineArrowDown />
-                </span>
-              </div>
-            }
-          />
-          <FormControlLabel
-            value="avg_rating"
-            control={<Radio />}
-            label={
-              <div className="flex text-sm text-text-primary">
-                Avg. Rating{' '}
-                <span className="ml-1 text-lg font-bold">
-                  <AiOutlineArrowUp />
-                </span>
-              </div>
-            }
-          />
-          <FormControlLabel
             value="-stripe_primary_price__unit_amount"
             control={<Radio />}
             label={
@@ -74,6 +50,30 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
             label={
               <div className="flex text-sm text-text-primary">
                 Price{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowUp />
+                </span>
+              </div>
+            }
+          />
+          <FormControlLabel
+            value="-upvotes_count"
+            control={<Radio />}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Upvotes{' '}
+                <span className="ml-1 text-lg font-bold">
+                  <AiOutlineArrowDown />
+                </span>
+              </div>
+            }
+          />
+          <FormControlLabel
+            value="upvotes_count"
+            control={<Radio />}
+            label={
+              <div className="flex text-sm text-text-primary">
+                Upvotes{' '}
                 <span className="ml-1 text-lg font-bold">
                   <AiOutlineArrowUp />
                 </span>
