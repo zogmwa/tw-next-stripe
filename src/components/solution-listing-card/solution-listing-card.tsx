@@ -156,7 +156,9 @@ export function SolutionListingCardComponent({
               <div className="flex items-center space-x-0 text-xs md:self-start md:mt-4 md:hidden">
                 <BiDollar className="text-xl font-bold text-text-primary" />
                 <h4 className="text-xl font-bold text-text-primary">
-                  {listingData.stripe_primary_price_unit_amount ? Number(listingData.stripe_primary_price_unit_amount) / 100 : 0}
+                  {listingData.stripe_primary_price_unit_amount
+                    ? Number(listingData.stripe_primary_price_unit_amount) / 100
+                    : 0}
                 </h4>
               </div>
             )}
