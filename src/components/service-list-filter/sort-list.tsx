@@ -33,11 +33,11 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
           onChange={handleChange}
         >
           <FormControlLabel
-            value="-avg_rating"
+            value="-stripe_primary_price__unit_amount"
             control={<Radio />}
             label={
               <div className="flex text-sm text-text-primary">
-                Avg. Rating{' '}
+                Price{' '}
                 <span className="ml-1 text-lg font-bold">
                   <AiOutlineArrowDown />
                 </span>
@@ -45,11 +45,11 @@ export function SortServiceList({ defaultValue = '', onChange }: SortServiceList
             }
           />
           <FormControlLabel
-            value="avg_rating"
+            value="stripe_primary_price__unit_amount"
             control={<Radio />}
             label={
               <div className="flex text-sm text-text-primary">
-                Avg. Rating{' '}
+                Price{' '}
                 <span className="ml-1 text-lg font-bold">
                   <AiOutlineArrowUp />
                 </span>
