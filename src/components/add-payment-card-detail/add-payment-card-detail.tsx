@@ -92,14 +92,13 @@ const CheckoutForm = ({ addCard, isShowEmail }) => {
       billing_details: billingDetails,
     })
 
-    setProcessing(false)
-
     if (payload.error) {
       setError(payload.error)
     } else {
       // ... SEND to your API server to process payment intent
-      addCard(payload.paymentMethod)
+      await addCard(payload.paymentMethod)
     }
+    setProcessing(false)
   }
 
   return (
