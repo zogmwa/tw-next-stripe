@@ -20,6 +20,7 @@ type MeteredPaymentMethodConfirmComponentProps = {
   setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   toggleSubScribe: Function
   isSubscribe: boolean
+  partner_customer_id?: string
 }
 
 function MeteredPaymentMethodConfirmComponent({
@@ -29,6 +30,7 @@ function MeteredPaymentMethodConfirmComponent({
   paymentMethods,
   toggleSubScribe,
   isSubscribe,
+  partner_customer_id = '',
 }: MeteredPaymentMethodConfirmComponentProps) {
   const router = useRouter()
   const [agreeCard, setAgreeCard] = useState(false)
@@ -49,7 +51,7 @@ function MeteredPaymentMethodConfirmComponent({
   const detachPayment = async () => {
     if (detachPaymentMethodId) {
       setIsDetachLoading(true)
-      const data = await toggleDetachPaymentMethod(detachPaymentMethodId)
+      const data = await toggleDetachPaymentMethod(detachPaymentMethodId, partner_customer_id)
       if (data.has_payment_method) {
         const updatedPaymentMethods = data.data
         if (updatedPaymentMethods.length !== 0) {
