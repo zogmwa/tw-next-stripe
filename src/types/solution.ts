@@ -50,6 +50,7 @@ export enum SolutionTypes {
 }
 
 export type SolutionSidebarType = {
+  id: number
   is_metered: null | boolean
   slug: string
   pay_now_price: {
@@ -60,4 +61,6 @@ export type SolutionSidebarType = {
   features: { id: string; name: string; tooltipContent: string }[]
   purchaseDisableOption: boolean
   type: string
+  has_free_consultation?: boolean
+  consultation_scheduling_link?: string | null
 }

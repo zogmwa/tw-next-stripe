@@ -14,6 +14,7 @@ import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { MeteredPaymentMethodConfirm } from '../metered-payment-confirm'
 import { Button } from '../button'
 import { Modal } from '../Modal'
+import { RequestConsultation } from '../request-consultation'
 
 type SolutionDetailMobileSidebarComponentProps = {
   detailInfo: SolutionSidebarType
@@ -141,6 +142,10 @@ function SolutionDetailMobileSidebarComponent({
             Book Now
           </Button>
         )}
+
+        {detailInfo.has_free_consultation && detailInfo.consultation_scheduling_link ? (
+          <RequestConsultation detailInfo={detailInfo} />
+        ) : null}
         <Button onClick={() => setIsFreshChatShow(true)} className="px-[0.5rem] mt-2" textClassName="text-xs">
           Ask Questions
         </Button>

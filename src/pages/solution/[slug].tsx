@@ -122,6 +122,7 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
   }
 
   const solutionSidebarInfo = {
+    id: solutionDetail.id,
     is_metered: solutionDetail.is_metered,
     slug: solutionDetail.slug,
     pay_now_price: price,
@@ -129,6 +130,8 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
     features: features,
     purchaseDisableOption: purchaseDisableOption,
     type: solutionDetail?.type,
+    has_free_consultation: solutionDetail.has_free_consultation,
+    consultation_scheduling_link: solutionDetail.consultation_scheduling_link,
   }
   solutionDetail.tags.push({
     name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',

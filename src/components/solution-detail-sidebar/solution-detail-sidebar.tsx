@@ -13,6 +13,7 @@ import { SolutionSidebarType } from '@taggedweb/types/solution'
 import { MeteredPaymentMethodConfirm } from '../metered-payment-confirm'
 import { Button } from '../button'
 import { Modal } from '../Modal'
+import { RequestConsultation } from '../request-consultation'
 
 type SolutionDetailSidebarComponentProps = {
   detailInfo: SolutionSidebarType
@@ -129,6 +130,9 @@ function SolutionDetailSidebarComponent({ detailInfo, className = '' }: Solution
               )}
             </span>
           )}
+          {detailInfo.has_free_consultation && detailInfo.consultation_scheduling_link ? (
+            <RequestConsultation detailInfo={detailInfo} />
+          ) : null}
           <Button
             onClick={() => {
               // @ts-ignore
