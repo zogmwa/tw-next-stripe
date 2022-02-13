@@ -4,12 +4,12 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * API Route handler for get payment_methods of user.
+ * Our Partner's customers could subscribe asset price.
  */
+
 export default withSentry(
   withSessionApi(async (req, res) => {
-    if (req.method === 'GET') {
-      const { customer_uid } = req.query
+    if (req.method === 'POST') {
       const access = await getAccessToken(req)
       const config = access
         ? {
@@ -18,11 +18,8 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).get(
-        customer_uid ? `/users/payment_methods?customer_uid=${customer_uid}` : '/users/payment_methods/',
-        config,
-      )
-      res.json(data)
+      const { data } = await serverSideClient(req).post(`/users/subscribe_asset_price_plan/`, req.body, config)
+      return res.json(data)
     }
   }),
 )
