@@ -18,7 +18,7 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).post(`/users/attach_card_for_partners/`, req.body, config)
+      const { data } = await serverSideClient(req).post('/users/attach_card_for_partners/', req.body, config)
       return res.json(data)
     }
   }),

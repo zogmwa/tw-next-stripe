@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { fetchContract } from '@taggedweb/solution-queries/fetch-contract'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import { ContractCard } from '@taggedweb/components/contract-card/contract-card'
@@ -7,14 +8,14 @@ import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import Pagination from '@mui/material/Pagination'
 import * as Sentry from '@sentry/nextjs'
 import axios from 'axios'
-import Router from 'next/router'
+
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import Page404 from '@taggedweb/pages/404'
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     query: { user },
   } = context
-  const sendUrl = `&offest=0&limit=5`
+  const sendUrl = '&offest=0&limit=5'
   const contractData = (await fetchContract(context.req, sendUrl)) ?? []
 
   return {
@@ -80,7 +81,7 @@ export default function ContractsList({ contractData }) {
   }
   useEffect(() => {
     const { pathname } = Router
-    if (!session.isLoggedIn() && pathname == '/profile/contracts') {
+    if (!session.isLoggedIn() && pathname === '/profile/contracts') {
       router.replace('/login')
     }
   }, [session, router])
