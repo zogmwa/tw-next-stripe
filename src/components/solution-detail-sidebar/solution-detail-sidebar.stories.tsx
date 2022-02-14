@@ -8,6 +8,7 @@ export default {
 } as Meta
 
 const solutionSidebarInfo = {
+  id: 3,
   price: 120,
   pay_now_price: {
     id: 1,

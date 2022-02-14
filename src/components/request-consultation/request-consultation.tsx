@@ -51,6 +51,7 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
   const bookRequestOnBackend = useCallback(
     async (values) => {
       try {
+        console.log({ solution: detailInfo.id, ...values })
         await client.post('/consultation_request/', { solution: detailInfo.id, ...values })
         setConsultationBooked(true)
       } catch (e) {
@@ -62,11 +63,13 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
     [setConsultationBooked, detailInfo.id],
   )
 
-  const bookRequestButtonClicked = useCallback(() => {
+  const bookRequestButtonClicked = useCallback(async () => {
     if (user.isLoggedIn()) {
       // if (!consultationBooked && values.customer_email && values.customer_first_name) {
       if (!consultationBooked) {
         bookRequestOnBackend(values)
+      } else {
+        openModal()
       }
     } else {
       openModal()
@@ -113,7 +116,7 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
             >
               <div className="relative inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title as="h3" className="mb-3 text-lg font-medium leading-6 text-text-primary">
-                  Forgot Password
+                  Free Consultation Request
                 </Dialog.Title>
                 <button
                   className="absolute p-1 mb-6 ml-auto rounded-md focus:ring-white right-5 top-5 hover:bg-secondary"
