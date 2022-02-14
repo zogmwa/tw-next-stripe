@@ -105,10 +105,10 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
       })
     }
   }
-  let currCapacity = (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
+  const currCapacity = (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
   const getFeatureName = () => {
     const capacity = formatConsideringPlurality(currCapacity, 'more slot')
-    if (currCapacity == 0) return 'No slots available at this time'
+    if (currCapacity === 0) return 'No slots available at this time'
     return `Only ${capacity} available at this time`
   }
   features.push({
