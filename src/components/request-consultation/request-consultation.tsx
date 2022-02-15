@@ -51,7 +51,6 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
   const bookRequestOnBackend = useCallback(
     async (values) => {
       try {
-        console.log({ solution: detailInfo.id, ...values })
         await client.post('/consultation_request/', { solution: detailInfo.id, ...values })
         setConsultationBooked(true)
       } catch (e) {
@@ -65,9 +64,9 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
 
   const bookRequestButtonClicked = useCallback(async () => {
     if (user.isLoggedIn()) {
-      // if (!consultationBooked && values.customer_email && values.customer_first_name) {
-      if (!consultationBooked) {
-        bookRequestOnBackend(values)
+      if (!consultationBooked && values.customer_email && values.customer_first_name && values.customer_last_name) {
+        await bookRequestOnBackend(values)
+        openModal()
       } else {
         openModal()
       }
@@ -79,11 +78,9 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
   return (
     <>
       <div className="mb-6 text-xs lg:text-sm text-text-secondary">
-        <a href="#" onClick={bookRequestButtonClicked}>
-          <Button className="w-32 mt-4 bg-primary" textClassName="text-white">
-            Request Free Consultation
-          </Button>
-        </a>
+        <Button onClick={bookRequestButtonClicked} className="w-32 mt-4 bg-primary" textClassName="text-white">
+          Request Free Consultation
+        </Button>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -126,9 +123,8 @@ export function RequestConsultation({ detailInfo }: RequestConsultationProps) {
                 </button>
                 <Dialog.Description as="div">
                   <Formik
-                    initialValues={{ customer_email: '', customer_first_name: '', customer_last_name: '' }}
+                    initialValues={values}
                     validationSchema={emailSchema}
-                    // eslint-disable-next-line
                     onSubmit={async (values) => {
                       return bookRequestOnBackend(values)
                     }}
