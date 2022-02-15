@@ -10,7 +10,7 @@ export default {
 const solutionSidebarInfo = {
   id: 3,
   price: 120,
-  pay_now_price: {
+  stripe_primary_price: {
     id: 1,
     solution: 1,
     stripe_price_id: 'price_1JyKvjJYlLsCg3G3ZwhcIrw8',

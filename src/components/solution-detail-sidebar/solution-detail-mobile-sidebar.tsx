@@ -41,7 +41,7 @@ function SolutionDetailMobileSidebarComponent({
   const togglePurchase = async () => {
     setIsPurchase(true)
     const referralUserId = (router.query?.r as string) ?? ''
-    const data = await checkoutSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
+    const data = await checkoutSolutionPurchase(detailInfo.stripe_primary_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
   }

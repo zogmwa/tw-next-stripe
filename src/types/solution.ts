@@ -53,7 +53,7 @@ export type SolutionSidebarType = {
   id: number
   is_metered: null | boolean
   slug: string
-  pay_now_price: {
+  stripe_primary_price: {
     stripe_price_id: string
     price: string | number
   }

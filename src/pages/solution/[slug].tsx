@@ -125,7 +125,7 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
     id: solutionDetail.id,
     is_metered: solutionDetail.is_metered,
     slug: solutionDetail.slug,
-    pay_now_price: price,
+    stripe_primary_price: price,
     price: solutionDetail.is_metered ? solutionDetail.blended_hourly_rate ?? 0 : price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,
