@@ -14,12 +14,7 @@ type BreadcrumbComponentProps = {
   mobileAct?: boolean
 }
 
-export default function BreadcrumbComponent({
-  breadcrumbs,
-  copyUrl,
-  className,
-  mobileAct = true,
-}: BreadcrumbComponentProps) {
+export default function BreadcrumbComponent({ breadcrumbs, copyUrl, className }: BreadcrumbComponentProps) {
   const [isCopied, setIsCopied] = useState(false)
   const router = useRouter()
 
@@ -42,14 +37,21 @@ export default function BreadcrumbComponent({
           if (breadcrumb.is_selected) {
             return (
               <Typography key={breadcrumb.name} sx={{ color: '#000' }}>
-                {mobileAct ? (
-                  <>
-                    <span className="hidden md:flex">{breadcrumb.name}</span>
-                    <span className="flex md:hidden">Solution</span>
-                  </>
-                ) : (
-                  <span>{breadcrumb.name}</span>
-                )}
+                <div>
+                  {breadcrumb.name}
+                  <span className="inline-flex px-2">
+                    {copyUrl && (
+                      <div className="relative">
+                        <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
+                          <img alt="Copy Link" src="/images/copy-link.png" className="w-4 h-4 cursor-pointer" />
+                        </CopyToClipboard>
+                        {isCopied ? (
+                          <span className="absolute text-xs text-blue-600 -bottom-4 -right-2">Copied.</span>
+                        ) : null}
+                      </div>
+                    )}
+                  </span>
+                </div>
               </Typography>
             )
           } else {
@@ -67,14 +69,6 @@ export default function BreadcrumbComponent({
           }
         })}
       </Breadcrumbs>
-      {copyUrl && (
-        <div className="relative">
-          <CopyToClipboard text={copyUrl} onCopy={() => setIsCopied(true)}>
-            <img alt="Copy Solutions Link" src="/images/copy-link.png" className="w-4 h-4 cursor-pointer" />
-          </CopyToClipboard>
-          {isCopied ? <span className="absolute text-xs text-blue-600 -top-4 -right-2">Copied.</span> : null}
-        </div>
-      )}
     </div>
   )
 }
