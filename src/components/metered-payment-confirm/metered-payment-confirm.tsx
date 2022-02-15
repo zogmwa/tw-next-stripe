@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import { BsCreditCard2Back } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
 import clsx from 'clsx'
-import { toggleDetachPaymentMethod } from '@taggedweb/queries/user'
+import { toggleDetachPaymentMethod, toggleDetachPaymentMethodForPartner } from '@taggedweb/queries/user'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
 import { Modal } from '../Modal'
@@ -21,6 +21,7 @@ type MeteredPaymentMethodConfirmComponentProps = {
   toggleSubScribe: Function
   isSubscribe: boolean
   partner_customer_uid?: string
+  session_id?: string
 }
 
 function MeteredPaymentMethodConfirmComponent({
@@ -31,6 +32,7 @@ function MeteredPaymentMethodConfirmComponent({
   toggleSubScribe,
   isSubscribe,
   partner_customer_uid = '',
+  session_id = '',
 }: MeteredPaymentMethodConfirmComponentProps) {
   const router = useRouter()
   const [agreeCard, setAgreeCard] = useState(false)
@@ -51,7 +53,10 @@ function MeteredPaymentMethodConfirmComponent({
   const detachPayment = async () => {
     if (detachPaymentMethodId) {
       setIsDetachLoading(true)
-      const data = await toggleDetachPaymentMethod(detachPaymentMethodId, partner_customer_uid)
+      let data
+      if (partner_customer_uid)
+        data = await toggleDetachPaymentMethodForPartner(detachPaymentMethodId, partner_customer_uid, session_id)
+      else data = await toggleDetachPaymentMethod(detachPaymentMethodId)
       if (data.has_payment_method) {
         const updatedPaymentMethods = data.data
         if (updatedPaymentMethods.length !== 0) {
