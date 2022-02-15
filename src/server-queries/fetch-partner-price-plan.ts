@@ -8,21 +8,26 @@ import { getAccessToken } from '../utils/token'
  * @param price_id: Asset price plan id
  * @returns partner's organization and price plan data
  */
-export async function fetchPartnerPricePlanData(req: SessionRequest, customer_uid, price_id) {
+export async function fetchPartnerPricePlanData(req: SessionRequest, customer_uid, price_id, session_id) {
   const access = await getAccessToken(req)
   const requsetBody = {
     customer_uid: customer_uid,
     price_id: price_id,
+    session_id: session_id,
   }
   if (access) {
-    const { data } = await serverSideClient(req).post('/users/partner_price_plan/', requsetBody, {
-      headers: {
-        Authorization: `Bearer ${access}`,
+    const { data } = await serverSideClient(req).post(
+      '/third_party_customer_sessions/partner_price_plan/',
+      requsetBody,
+      {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
       },
-    })
+    )
     return data
   } else {
-    const { data } = await serverSideClient(req).post('/users/partner_price_plan/', requsetBody)
+    const { data } = await serverSideClient(req).post('/third_party_customer_sessions/partner_price_plan/', requsetBody)
     return data
   }
 }

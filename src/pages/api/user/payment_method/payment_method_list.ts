@@ -9,7 +9,6 @@ import { withSentry } from '@sentry/nextjs'
 export default withSentry(
   withSessionApi(async (req, res) => {
     if (req.method === 'GET') {
-      const { customer_uid } = req.query
       const access = await getAccessToken(req)
       const config = access
         ? {
@@ -18,10 +17,7 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).get(
-        customer_uid ? `/users/payment_methods?customer_uid=${customer_uid}` : '/users/payment_methods/',
-        config,
-      )
+      const { data } = await serverSideClient(req).get('/users/payment_methods/', config)
       res.json(data)
     }
   }),
