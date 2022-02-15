@@ -18,7 +18,11 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).post(`/users/subscribe_asset_price_plan/`, req.body, config)
+      const { data } = await serverSideClient(req).post(
+        `/third_party_customer_sessions/subscribe_asset_price_plan/`,
+        req.body,
+        config,
+      )
       return res.json(data)
     }
   }),
