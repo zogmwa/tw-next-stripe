@@ -234,7 +234,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
                 ))}
               </div>
               <div className="flex justify-end p-2">
-                <Pagination page={page} count={pageCount} onChange={handlePagination} />
+                {pageCount > 1 && <Pagination page={page} count={pageCount} onChange={handlePagination} />}
               </div>
             </div>
           )}

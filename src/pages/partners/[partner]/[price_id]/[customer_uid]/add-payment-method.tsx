@@ -48,7 +48,7 @@ export default function AddCardDetailsPage({ pageData }) {
     console.log(data)
     if (
       data.status === 'payment method associated successfully' ||
-      data.status == 'You have already attached this payment.'
+      data.status === 'You have already attached this payment.'
     ) {
       const payment = await fetchPaymentMethodListForPartner(query.customer_uid as string, query.session_id as string)
       if (payment.has_payment_method) {
@@ -79,21 +79,21 @@ export default function AddCardDetailsPage({ pageData }) {
           <span className="text-lg font-semibold">{pageData.organization.name}</span>
         </div>
         <div className="flex p-4 space-x-2">
-          <span className="text-md font-semibold">Software: </span>
+          <span className="font-semibold text-md">Software: </span>
           <a href={`/software/${pageData.price_plan.asset.slug}`} className="text-md text-text-primary hover:underline">
             {pageData.price_plan.asset.name}
           </a>
         </div>
         <div className="flex p-4 space-x-2">
-          <span className="text-md font-semibold">Price: </span>
+          <span className="font-semibold text-md">Price: </span>
           <span className="text-md text-text-primary">{pageData.price_plan.name}</span>
         </div>
         <div className="flex p-4 space-x-2">
-          <span className="text-md font-semibold">Currency: </span>
+          <span className="font-semibold text-md">Currency: </span>
           <span className="text-md text-text-primary">{pageData.price_plan.currency}</span>
         </div>
         <div className="flex p-4 space-x-2">
-          <span className="text-md font-semibold">Price: </span>
+          <span className="font-semibold text-md">Price: </span>
           <span className="text-md text-text-primary">{`$${pageData.price_plan.price} / ${pageData.price_plan.per}`}</span>
         </div>
       </div>

@@ -19,7 +19,7 @@ export default withSentry(
           }
         : null
       const { data } = await serverSideClient(req).post(
-        `/third_party_customer_sessions/attach_card_for_partners/`,
+        '/third_party_customer_sessions/attach_card_for_partners/',
         req.body,
         config,
       )

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useProfile } from '@taggedweb/hooks/use-profile'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -8,12 +8,11 @@ import { Breadcrumb } from '@taggedweb/components/breadcrumb'
 import { SolutionListingCard } from '@taggedweb/components/solution-listing-card'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import Page404 from '@taggedweb/pages/404'
-import Router from 'next/router'
 
 export default function BookmarkedSolutionsList() {
   const router = useRouter()
   const session = useUserContext()
-  const { isLoggedIn, logout } = session
+  const { isLoggedIn } = session
   const profile = useProfile()
   const solutionsList = profile && profile.bookmarked_solutions
   const breadcrumbData = [
@@ -36,7 +35,7 @@ export default function BookmarkedSolutionsList() {
   const copyUrl = process.env.SITE_BASE_URL + '/profile/bookmarked-solutions'
   useEffect(() => {
     const { pathname } = Router
-    if (!session.isLoggedIn() && pathname == '/profile/bookmarked-solutions') {
+    if (!session.isLoggedIn() && pathname === '/profile/bookmarked-solutions') {
       router.replace('/login')
     }
   }, [session, router])

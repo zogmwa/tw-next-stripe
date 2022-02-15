@@ -126,7 +126,7 @@ export function PopularSolutionTags() {
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
               <a>
-                <div className="text-4xl text-blue-500">{solution.icon}</div>
+                <div className="flex justify-center text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
               </a>
             </Link>
@@ -141,7 +141,7 @@ export function PopularSolutionTags() {
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
               <a>
-                <div className="text-4xl text-blue-500">{solution.icon}</div>
+                <div className="flex justify-center text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
               </a>
             </Link>
