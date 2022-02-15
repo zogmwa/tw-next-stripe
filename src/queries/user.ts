@@ -17,9 +17,24 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
   }
 }
 
-export async function fetchPaymentMethodList(customerId = ''): Promise<null | any> {
+export async function fetchPaymentMethodList(): Promise<null | any> {
   try {
-    const { data } = await axios.get(`/api/user/payment_method/payment_method_list?customer_uid=${customerId}`)
+    const { data } = await axios.get(`/api/user/payment_method/payment_method_list`)
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
+
+export async function fetchPaymentMethodListForPartner(customerUid, sessionId): Promise<null | any> {
+  try {
+    const { data } = await axios.post(`/api/partners_customer/payment_method_list`, {
+      customer_uid: customerUid,
+      session_id: sessionId,
+    })
     return data
   } catch (error) {
     Sentry.captureException(error)
@@ -45,11 +60,30 @@ export async function togglePaymentSubscribe(paymentMethodId, solutionSlug, refe
   }
 }
 
-export async function toggleDetachPaymentMethod(paymentMethodId, partner_customer_id = ''): Promise<any | null> {
+export async function toggleDetachPaymentMethod(paymentMethodId): Promise<any | null> {
   try {
     const { data } = await axios.post('/api/user/payment_method/detach/', {
       payment_method: paymentMethodId,
-      partner_customer_uid: partner_customer_id,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
+
+export async function toggleDetachPaymentMethodForPartner(
+  paymentMethodId,
+  customerUid,
+  sessionId,
+): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/partners_customer/detach_payment_method/', {
+      payment_method: paymentMethodId,
+      customer_uid: customerUid,
+      session_id: sessionId,
     })
     return data
   } catch (error) {
@@ -122,12 +156,18 @@ export async function toggleContractPauseOrResume(bookingId, username, pauseStat
   }
 }
 
-export async function attachPaymentMethodForPartner(paymentMethod, customerUid, partnerName): Promise<any | null> {
+export async function attachPaymentMethodForPartner(
+  paymentMethod,
+  customerUid,
+  partnerName,
+  sessionId,
+): Promise<any | null> {
   try {
-    const { data } = await axios.post('/api/user/payment_method/attach_for_partner/', {
+    const { data } = await axios.post('/api/partners_customer/attach_payment_method/', {
       payment_method: paymentMethod,
       customer_uid: customerUid,
       partner_name: partnerName,
+      session_id: sessionId,
     })
     return data
   } catch (error) {
@@ -140,7 +180,7 @@ export async function attachPaymentMethodForPartner(paymentMethod, customerUid, 
 
 export async function toggleAssetPriceSubscribe(customerUid, priceId): Promise<any | null> {
   try {
-    const { data } = await axios.post('/api/user/payment_method/subscribe_asset_price/', {
+    const { data } = await axios.post('/api/partners_customer/subscribe_asset_price/', {
       customer_uid: customerUid,
       price_plan_id: priceId,
     })
