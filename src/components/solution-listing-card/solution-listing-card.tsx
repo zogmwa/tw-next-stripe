@@ -46,7 +46,7 @@ export function SolutionListingCardComponent({
         )}
       >
         <div className="flex flex-row">
-          <div className="flex flex-col flex-grow">
+          <div className="flex flex-col w-full md:w-10/12">
             <div
               className="flex flex-row flex-wrap"
               onClick={(e) => {
@@ -87,18 +87,23 @@ export function SolutionListingCardComponent({
             </div>
           </div>
           {show_price && (
-            <div className="items-center self-start flex-none hidden mt-4 mr-2 space-x-0 text-xs md:inline-flex w-[6rem] justify-end">
-              <BiDollar className="text-xl font-bold text-text-primary" />
-              <h4 className="text-xl font-bold text-text-primary">
-                {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
-              </h4>
+            <div className="items-end justify-start hidden mt-2 space-y-4 text-xs md:flex md:flex-col md:flex-1">
+              <Button buttonType="primary" size="small" className="hover:bg-blue-600">
+                Learn More
+              </Button>
+              <div className="inline-flex items-center">
+                <BiDollar className="text-xl font-bold text-text-primary" />
+                <h4 className="text-xl font-bold text-text-primary">
+                  {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+                </h4>
+              </div>
             </div>
           )}
         </div>
         <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
-          <div className="flex items-center pt-4 md:pt-0">
+          <div className="flex flex-row items-center justify-between pt-4 md:pt-0">
             {listingData.organization ? (
-              <>
+              <div className="inline-flex items-center">
                 {listingData.organization.logo_url ? (
                   <img
                     className="w-[40px] h-[40px] rounded-full"
@@ -109,9 +114,9 @@ export function SolutionListingCardComponent({
                   <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
                 )}
                 <span className="pl-2 text-sm text-text-secondary">{listingData.organization.name}</span>
-              </>
+              </div>
             ) : (
-              <>
+              <div className="inline-flex items-center">
                 <div
                   className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
                   style={{ boxShadow: 'none !important' }}
@@ -129,8 +134,13 @@ export function SolutionListingCardComponent({
                 <span className="pl-2 text-sm text-text-secondary">
                   {listingData.point_of_contact.first_name} {listingData.point_of_contact.last_name}
                 </span>
-              </>
+              </div>
             )}
+            <div className="md:hidden">
+              <Button buttonType="primary" size="small" className="hover:border">
+                Learn More
+              </Button>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
