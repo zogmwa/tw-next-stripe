@@ -4,7 +4,7 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * Our Partner's customers could attach payment method.
+ * Our Partner's customers could subscribe asset price.
  */
 
 export default withSentry(
@@ -18,7 +18,11 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).post('/users/attach_card_for_partners/', req.body, config)
+      const { data } = await serverSideClient(req).post(
+        '/third_party_customer_sessions/subscribe_customer_to_price_plan/',
+        req.body,
+        config,
+      )
       return res.json(data)
     }
   }),

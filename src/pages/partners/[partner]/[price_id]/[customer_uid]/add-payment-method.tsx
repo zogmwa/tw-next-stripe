@@ -5,7 +5,7 @@ import { withSessionSSR } from '@taggedweb/utils/session'
 import { fetchPartnerPricePlanData } from '@taggedweb/server-queries/fetch-partner-price-plan'
 import {
   attachPaymentMethodForPartner,
-  fetchPaymentMethodList,
+  fetchPaymentMethodListForPartner,
   toggleAssetPriceSubscribe,
 } from '@taggedweb/queries/user'
 import { AddPaymentCardDetail } from '@taggedweb/components/add-payment-card-detail'
@@ -16,10 +16,15 @@ import { Modal } from '@taggedweb/components/Modal'
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { price_id, customer_uid },
+    query: { session_id },
   } = context
   let pageData
   try {
-    pageData = await fetchPartnerPricePlanData(context.req, customer_uid, price_id)
+    pageData = await fetchPartnerPricePlanData(context.req, customer_uid, price_id, session_id)
+    if (pageData?.status === 'None data')
+      return {
+        notFound: true,
+      }
   } catch (error) {
     return {
       notFound: true,
@@ -39,14 +44,13 @@ export default function AddCardDetailsPage({ pageData }) {
   const [paymentMethods, setPaymentMethods] = useState([])
 
   const addCard = async (paymentMethod) => {
-    const data = await attachPaymentMethodForPartner(paymentMethod, query.customer_uid, query.partner)
+    const data = await attachPaymentMethodForPartner(paymentMethod, query.customer_uid, query.partner, query.session_id)
     console.log(data)
     if (
       data.status === 'payment method associated successfully' ||
       data.status === 'You have already attached this payment.'
     ) {
-      const payment = await fetchPaymentMethodList(query.customer_uid as string)
-      console.log(payment)
+      const payment = await fetchPaymentMethodListForPartner(query.customer_uid as string, query.session_id as string)
       if (payment.has_payment_method) {
         setPaymentMethods(payment.payment_methods)
         setIsShowConfrimModal(true)
@@ -59,7 +63,7 @@ export default function AddCardDetailsPage({ pageData }) {
 
   const toggleSubscribe = async () => {
     setIsSubscribe(true)
-    const data = await toggleAssetPriceSubscribe(query.customer_uid, query.price_id)
+    const data = await toggleAssetPriceSubscribe(query.customer_uid, query.price_id, query.session_id as string)
     if (data.status === 'Successfully subscribed') {
       toast.success(data.status)
       window.location.href = pageData.organization.website
@@ -104,6 +108,7 @@ export default function AddCardDetailsPage({ pageData }) {
           toggleSubScribe={toggleSubscribe}
           isSubscribe={isSubscribe}
           partner_customer_uid={query.customer_uid as string}
+          session_id={query.session_id as string}
         />
       </Modal>
     </div>

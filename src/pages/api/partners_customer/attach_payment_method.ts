@@ -4,11 +4,12 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * API Route handler for get payment_methods of user.
+ * Our Partner's customers could attach payment method.
  */
+
 export default withSentry(
   withSessionApi(async (req, res) => {
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
       const access = await getAccessToken(req)
       const config = access
         ? {
@@ -17,8 +18,12 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).get('/users/payment_methods/', config)
-      res.json(data)
+      const { data } = await serverSideClient(req).post(
+        '/third_party_customer_sessions/attach_card_for_partners/',
+        req.body,
+        config,
+      )
+      return res.json(data)
     }
   }),
 )

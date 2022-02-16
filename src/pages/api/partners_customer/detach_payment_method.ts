@@ -4,9 +4,8 @@ import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
 /**
- * Our Partner's customers could subscribe asset price.
+ * API Route handler for detach stripe card info to partner's customer.
  */
-
 export default withSentry(
   withSessionApi(async (req, res) => {
     if (req.method === 'POST') {
@@ -18,8 +17,12 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await serverSideClient(req).post('/users/subscribe_asset_price_plan/', req.body, config)
-      return res.json(data)
+      const { data } = await serverSideClient(req).post(
+        '/third_party_customer_sessions/detach_payment_method/',
+        req.body,
+        config,
+      )
+      res.json(data)
     }
   }),
 )
