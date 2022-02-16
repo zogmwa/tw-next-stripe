@@ -19,7 +19,7 @@ export async function PaymentMethodAttachToUser(paymentMethodId): Promise<any | 
 
 export async function fetchPaymentMethodList(): Promise<null | any> {
   try {
-    const { data } = await axios.get(`/api/user/payment_method/payment_method_list`)
+    const { data } = await axios.get('/api/user/payment_method/payment_method_list')
     return data
   } catch (error) {
     Sentry.captureException(error)
@@ -31,7 +31,7 @@ export async function fetchPaymentMethodList(): Promise<null | any> {
 
 export async function fetchPaymentMethodListForPartner(customerUid, sessionId): Promise<null | any> {
   try {
-    const { data } = await axios.post(`/api/partners_customer/payment_method_list`, {
+    const { data } = await axios.post('/api/partners_customer/payment_method_list', {
       customer_uid: customerUid,
       session_id: sessionId,
     })

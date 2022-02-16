@@ -87,26 +87,28 @@ export default function ContractsList({ contractData }) {
 
   if (isLoggedIn()) {
     return (
-      <div id="contracts" className="flex flex-col w-3/4 mx-auto xl:w-1/2 my-4 lg:my-8 min-h-[50%]">
-        <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
-        <p className="my-2 text-lg font-bold">Contracts</p>
-        <div className="w-full mb-4">
-          {((contractsList?.results && contractsList.results.length === 0) ||
-            typeof contractsList?.results === 'undefined') && <p className="text-center">No Contracts yet...</p>}
+      <div className="max-w-screen-lg px-2 py-10 mx-auto">
+        <div id="contracts" className="flex flex-col">
+          <Breadcrumb breadcrumbs={breadcrumbData} className="mb-4" mobileAct={false} />
+          <p className="my-2 text-lg font-bold">Contracts</p>
+          <div className="w-full mb-4">
+            {((contractsList?.results && contractsList.results.length === 0) ||
+              typeof contractsList?.results === 'undefined') && <p className="text-center">No Contracts yet...</p>}
 
-          {contractsList.results &&
-            contractsList.results.map((contract, index) => {
-              return (
-                <ContractCard
-                  key={`contract-${index}`}
-                  contractData={contract}
-                  redirectUrl={`/profile/contracts/${contract.id}`}
-                />
-              )
-            })}
+            {contractsList.results &&
+              contractsList.results.map((contract, index) => {
+                return (
+                  <ContractCard
+                    key={`contract-${index}`}
+                    contractData={contract}
+                    redirectUrl={`/profile/contracts/${contract.id}`}
+                  />
+                )
+              })}
 
-          <div className="flex justify-end p-2">
-            {pageCount > 1 && <Pagination page={page} count={pageCount} onChange={handlePagination} />}
+            <div className="flex justify-end p-2">
+              {pageCount > 1 && <Pagination page={page} count={pageCount} onChange={handlePagination} />}
+            </div>
           </div>
         </div>
       </div>

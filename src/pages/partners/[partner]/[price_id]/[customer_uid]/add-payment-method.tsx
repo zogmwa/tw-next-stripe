@@ -21,10 +21,11 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   let pageData
   try {
     pageData = await fetchPartnerPricePlanData(context.req, customer_uid, price_id, session_id)
-    if (pageData?.status === 'None data')
+    if (pageData?.status === 'None data') {
       return {
         notFound: true,
       }
+    }
   } catch (error) {
     return {
       notFound: true,
