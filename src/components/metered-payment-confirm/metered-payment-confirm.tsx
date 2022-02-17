@@ -22,6 +22,7 @@ type MeteredPaymentMethodConfirmComponentProps = {
   isSubscribe: boolean
   partner_customer_uid?: string
   session_id?: string
+  partner_url?: string
 }
 
 function MeteredPaymentMethodConfirmComponent({
@@ -33,6 +34,7 @@ function MeteredPaymentMethodConfirmComponent({
   isSubscribe,
   partner_customer_uid = '',
   session_id = '',
+  partner_url = '',
 }: MeteredPaymentMethodConfirmComponentProps) {
   const router = useRouter()
   const [agreeCard, setAgreeCard] = useState(false)
@@ -54,9 +56,9 @@ function MeteredPaymentMethodConfirmComponent({
     if (detachPaymentMethodId) {
       setIsDetachLoading(true)
       let data
-      if (partner_customer_uid) {
+      if (partner_customer_uid)
         data = await toggleDetachPaymentMethodForPartner(detachPaymentMethodId, partner_customer_uid, session_id)
-      } else data = await toggleDetachPaymentMethod(detachPaymentMethodId)
+      else data = await toggleDetachPaymentMethod(detachPaymentMethodId)
       if (data.has_payment_method) {
         const updatedPaymentMethods = data.data
         if (updatedPaymentMethods.length !== 0) {
@@ -64,6 +66,7 @@ function MeteredPaymentMethodConfirmComponent({
           setPaymentMethod(updatedPaymentMethods.filter((payment) => payment.default_payment_method)[0]?.id)
         } else {
           if (slug) router.push(`/add-card-details?slug=${slug}`)
+          if (partner_url) router.push(partner_url)
           setConfirmModalOpen(false)
         }
       }
@@ -121,6 +124,11 @@ function MeteredPaymentMethodConfirmComponent({
       </div>
       {slug && (
         <a href={`/add-card-details?slug=${slug}`} className="text-sm text-primary">
+          Add a new card
+        </a>
+      )}
+      {partner_url && (
+        <a href={partner_url} className="text-sm text-primary">
           Add a new card
         </a>
       )}
