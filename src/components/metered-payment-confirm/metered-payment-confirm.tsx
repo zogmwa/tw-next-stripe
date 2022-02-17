@@ -54,9 +54,9 @@ function MeteredPaymentMethodConfirmComponent({
     if (detachPaymentMethodId) {
       setIsDetachLoading(true)
       let data
-      if (partner_customer_uid)
+      if (partner_customer_uid) {
         data = await toggleDetachPaymentMethodForPartner(detachPaymentMethodId, partner_customer_uid, session_id)
-      else data = await toggleDetachPaymentMethod(detachPaymentMethodId)
+      } else data = await toggleDetachPaymentMethod(detachPaymentMethodId)
       if (data.has_payment_method) {
         const updatedPaymentMethods = data.data
         if (updatedPaymentMethods.length !== 0) {
