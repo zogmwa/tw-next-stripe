@@ -16,7 +16,7 @@ function PricingFeaturesListComponent({ pricePlans, selected }: ServicePricingFe
       <h1 className="mt-2 ml-2 text-base font-medium text-text-primary">Selected Plan Features</h1>
       <div className="grid mt-4 md:grid-cols-2">
         {features
-          .filter((feature) => feature !== '')
+          .filter((feature) => feature !== '' && feature !== '\r')
           .map((feature) => (
             <div className="items-center my-2 ml-2 text-sm text-md" key={feature}>
               <AiFillCheckCircle className="inline mr-2 text-primary" />
