@@ -1,3 +1,4 @@
+import { TOAST_PASSWORD_RESET_ERROR } from '@taggedweb/utils/token-id'
 import toast from 'react-hot-toast'
 import { client } from '../utils/client'
 
@@ -14,9 +15,13 @@ export async function forgotPasswordReset(uidb64: string, token: string, values:
   } catch (error) {
     if (error?.response.data) {
       const obj = error.response.data
-      toast.error(obj[Object.keys(obj)[0]])
+      toast.error(obj[Object.keys(obj)[0]], {
+        id: TOAST_PASSWORD_RESET_ERROR,
+      })
     } else {
-      toast.error('Could not reset password. Try again.')
+      toast.error('Could not reset password. Try again.', {
+        id: TOAST_PASSWORD_RESET_ERROR,
+      })
     }
     return false
   }

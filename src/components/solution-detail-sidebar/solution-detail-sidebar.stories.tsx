@@ -8,6 +8,7 @@ export default {
 } as Meta
 
 const solutionSidebarInfo = {
+  id: 3,
   price: 120,
   pay_now_price: {
     id: 1,
@@ -31,11 +32,14 @@ const solutionSidebarInfo = {
     },
     {
       id: 'free-trial',
-      name: 'Free Trial',
-      tooltipContent: 'This solution has free trial.',
+      name: 'Free Consultation',
+      tooltipContent: 'This solution has free consultation.',
     },
   ],
   purchaseDisableOption: true,
+  type: 'C',
+  slug: 'test',
+  is_metered: false,
 }
 
 export function DefaultSolutionDetailSidebar() {

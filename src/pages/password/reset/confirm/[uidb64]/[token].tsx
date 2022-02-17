@@ -7,6 +7,7 @@ import { Button } from '@taggedweb/components/button'
 import { Input } from '@taggedweb/components/input'
 import { forgotPasswordReset } from '@taggedweb/queries/forgot-password'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { TOAST_PASSWORD_RESET_SUCCESS } from '@taggedweb/utils/token-id'
 
 const validationSchema = yup.object().shape({
   new_password1: yup
@@ -44,7 +45,9 @@ export default function Login() {
             onSubmit={async (values) => {
               const success = await forgotPasswordReset(uidb64, token, values)
               if (success) {
-                toast.success('Your password has been reset.')
+                toast.success('Your password has been reset.', {
+                  id: TOAST_PASSWORD_RESET_SUCCESS,
+                })
                 push('/login')
               }
             }}

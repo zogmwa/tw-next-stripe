@@ -1,23 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import { BiDollar } from 'react-icons/bi'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import ReactTooltip from 'react-tooltip'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
-import { toggleSolutionPurchase } from '@taggedweb/queries/solution'
+import { checkoutSolutionPurchase } from '@taggedweb/queries/solution'
+import { fetchPaymentMethodList, togglePaymentSubscribe } from '@taggedweb/queries/user'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { SolutionSidebarType } from '@taggedweb/types/solution'
+import { MeteredPaymentMethodConfirm } from '../metered-payment-confirm'
 import { Button } from '../button'
+import { Modal } from '../Modal'
+import { RequestConsultation } from '../request-consultation'
 
 type SolutionDetailMobileSidebarComponentProps = {
-  detailInfo: {
-    pay_now_price: {
-      stripe_price_id: string
-      price: string | number
-    }
-    price: number
-    features: { id: string; name: string; tooltipContent: string }[]
-    purchaseDisableOption: boolean
-  }
+  detailInfo: SolutionSidebarType
   className?: string
   setIsFreshChatShow: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -27,16 +27,43 @@ function SolutionDetailMobileSidebarComponent({
   className = '',
   setIsFreshChatShow,
 }: SolutionDetailMobileSidebarComponentProps) {
+  const router = useRouter()
+  const { username } = useUserContext()
   const [isShowMore, setIsShowMore] = useState(false)
+  const [isshowConfirmModal, setIsShowConfrimModal] = useState(false)
+  const [isSubscribe, setIsSubscribe] = useState(false)
+  const [paymentMethods, setPaymentMethods] = useState([])
+  const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(false)
   const defaultShowCount = 2
   const [isPurchase, setIsPurchase] = useState(false)
   const { requireLoginBeforeAction } = useRequireLogin()
 
   const togglePurchase = async () => {
     setIsPurchase(true)
-    const data = await toggleSolutionPurchase(detailInfo.pay_now_price.stripe_price_id)
+    const referralUserId = (router.query?.r as string) ?? ''
+    const data = await checkoutSolutionPurchase(detailInfo.pay_now_price.stripe_price_id, referralUserId)
     if (data) window.location = data.checkout_page_url
     setIsPurchase(false)
+  }
+  const toggleStartContract = async () => {
+    setLoadingPaymentMethods(true)
+    const payment = await fetchPaymentMethodList()
+    if (payment.has_payment_method) {
+      if (payment.payment_methods.length === 0) router.push(`/add-card-details?slug=${detailInfo.slug}`)
+      setPaymentMethods(payment.payment_methods)
+      setIsShowConfrimModal(true)
+    } else {
+      router.push(`/add-card-details?slug=${detailInfo.slug}`)
+    }
+    setLoadingPaymentMethods(false)
+  }
+
+  const toggleSubscribe = async (paymentMethodId) => {
+    setIsSubscribe(true)
+    const referralUserId = (router.query?.r as string) ?? null
+    const data = await togglePaymentSubscribe(paymentMethodId, detailInfo.slug, referralUserId)
+    router.push(`/profile/contracts/${data.solution_booking_id}`)
+    setIsSubscribe(false)
   }
 
   let showFeatureList = detailInfo.features
@@ -47,7 +74,22 @@ function SolutionDetailMobileSidebarComponent({
       <div className="flex flex-col">
         <div className="flex items-center py-2">
           <BiDollar className="text-3xl font-bold text-text-primary" />
-          <h4 className="text-3xl font-bold text-text-primary">{detailInfo.price ? detailInfo.price / 100 : 0}</h4>
+          <h4 className="text-3xl font-bold text-text-primary">
+            {detailInfo.is_metered ? `${detailInfo.price}/hr` : detailInfo.price ? detailInfo.price / 100 : 0}
+          </h4>
+          {detailInfo.is_metered && (
+            <ReactTooltip
+              id="show-price-detail"
+              className="w-[200px]"
+              type="light"
+              place="top"
+              border={true}
+              borderColor="text-grey-200"
+              multiline={true}
+            >
+              Estimated price means that the solution may take longer to deliver
+            </ReactTooltip>
+          )}
         </div>
         <div className="flex flex-col p-2 space-y-2">
           {showFeatureList.map((feature, index) => (
@@ -77,16 +119,33 @@ function SolutionDetailMobileSidebarComponent({
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <Button
-          className="px-[0.5rem] mt-2 bg-primary"
-          textClassName="text-white text-xs"
-          loading={isPurchase}
-          disabled={detailInfo.purchaseDisableOption || isPurchase}
-          loadingClassName="text-background-light"
-          onClick={requireLoginBeforeAction(() => togglePurchase())}
-        >
-          Purchase Now
-        </Button>
+        {detailInfo.is_metered ? (
+          <Button
+            className="mt-4 px-[0.5rem] bg-primary"
+            textClassName="text-white text-xs"
+            loading={isPurchase || loadingPaymentMethods}
+            disabled={isPurchase || loadingPaymentMethods}
+            loadingClassName="text-background-light"
+            onClick={requireLoginBeforeAction(() => toggleStartContract())}
+          >
+            Start Contract
+          </Button>
+        ) : (
+          <Button
+            className="px-[0.5rem] mt-2 bg-primary w-full"
+            textClassName="text-white text-xs"
+            loading={isPurchase}
+            disabled={detailInfo.purchaseDisableOption || isPurchase}
+            loadingClassName="text-background-light"
+            onClick={requireLoginBeforeAction(() => togglePurchase())}
+          >
+            Book Now
+          </Button>
+        )}
+
+        {detailInfo.has_free_consultation && detailInfo.consultation_scheduling_link ? (
+          <RequestConsultation detailInfo={detailInfo} />
+        ) : null}
         <Button onClick={() => setIsFreshChatShow(true)} className="px-[0.5rem] mt-2" textClassName="text-xs">
           Ask Questions
         </Button>
@@ -105,6 +164,17 @@ function SolutionDetailMobileSidebarComponent({
           {feature.tooltipContent}
         </ReactTooltip>
       ))}
+      {detailInfo.is_metered && (
+        <Modal isOpen={isshowConfirmModal} setIsOpen={setIsShowConfrimModal} size="2xl" dialogTitle="Terms of service">
+          <MeteredPaymentMethodConfirm
+            slug={detailInfo.slug}
+            setConfirmModalOpen={setIsShowConfrimModal}
+            paymentMethods={paymentMethods}
+            toggleSubScribe={toggleSubscribe}
+            isSubscribe={isSubscribe}
+          />
+        </Modal>
+      )}
     </div>
   )
 }

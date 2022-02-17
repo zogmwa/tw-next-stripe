@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillLinkedin, AiFillGoogleSquare } from 'react-icons/ai'
 import Link from 'next/link'
 import { Formik } from 'formik'
@@ -11,6 +11,8 @@ import { handleGoogleLogin, handleLinkedInLogin } from '@taggedweb/utils/login'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 
 const validationSchema = yup.object().shape({
+  first_name: yup.string().required('First name field is required'),
+  last_name: yup.string(),
   email: yup.string().email().required('Please enter a valid email'),
   password1: yup
     .string()
@@ -47,14 +49,16 @@ export default function Signup() {
     }
   }, [isLoading, isLoggedIn])
 
+  const [errorMessage, setErrorMessage] = useState('')
   return (
     <>
       <DynamicHeader title="Taggedweb | Sign up" />
-      <div className="flex flex-col items-center justify-center w-screen h-full p-4">
-        <div className="max-w-md p-0 rounded-md lg:p-6 lg:border">
-          <h1 className="mb-3 text-2xl font-semibold lg:text-3xl text-text-primary">Welcome to Taggedweb</h1>
-          <h3 className="mb-8 text-sm lg:text-base text-text-secondary">
-            Signup to experience a world of web services and find out best for you...
+      <div className="flex flex-col items-center justify-center p-4">
+        <div className="max-w-md p-0 mx-1 my-4 rounded-md md:p-6 md:border">
+          <h1 className="mb-3 text-2xl font-semibold md:text-3xl text-text-primary">Welcome to TaggedWeb!</h1>
+          <h3 className="mb-6 text-sm md:mb-8 md:text-base text-text-secondary">
+            As a registered user on TaggedWeb.com, you can submit your software for listing, add and vote on features,
+            book solutions from domain-experts to help you with integrations and so much more.
           </h3>
           <p className="text-xs text-center text-error">{linkedInError}</p>
           <Button
@@ -64,7 +68,7 @@ export default function Signup() {
             className="w-full !bg-[#0077B5] !border-[#0077B5] !flex mb-4"
             onClick={() => handleLinkedInLogin()}
           >
-            Sign in with LinkedIn
+            Sign up with LinkedIn
           </Button>
           <p className="text-xs text-center text-error">{googleError}</p>
           <Button
@@ -74,16 +78,25 @@ export default function Signup() {
             className="w-full !bg-[#DB4437] !border-[#DB4437] !flex mb-8"
             onClick={() => handleGoogleLogin()}
           >
-            Sign in with Google
+            Sign up with Google
           </Button>
-          <div className="relative flex items-center justify-center w-full mb-8 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
+          <div className="relative flex items-center justify-center w-full mb-6 text-xs text-text-secondary before:w-full before:absolute before:border-b before:border-border-default">
             <div className="relative inline-block px-4 mx-auto bg-background-surface z-1">OR</div>
           </div>
+          {errorMessage && <p className="text-sm text-center text-red-500">{errorMessage}</p>}
+
           <Formik
-            initialValues={{ email: '', password1: '', password2: '' }}
+            initialValues={{ first_name: '', last_name: '', email: '', password1: '', password2: '' }}
             validationSchema={validationSchema}
-            onSubmit={async ({ email, password1, password2 }) => {
-              const success = await signUpWithEmailAndPassword(email, password1, password2)
+            onSubmit={async ({ first_name, last_name, email, password1, password2 }) => {
+              const { success, errorMessage } = await signUpWithEmailAndPassword(
+                first_name,
+                last_name,
+                email,
+                password1,
+                password2,
+              )
+              setErrorMessage(errorMessage)
               if (success) {
                 nextPageRedirect()
               }
@@ -91,26 +104,52 @@ export default function Signup() {
           >
             {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
-                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
-                  Email
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="first_name">
+                  First Name *
                 </label>
                 <Input
-                  placeholder="Enter email"
+                  placeholder="Enter your first name"
+                  id="first_name"
+                  className="mb-4"
+                  onChange={handleChange('first_name')}
+                  onBlur={handleBlur('first_name')}
+                  value={values.first_name}
+                  errorMessage={touched.first_name ? errors.first_name : undefined}
+                  success={touched.first_name && !errors.first_name}
+                />
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="last_name">
+                  Last Name
+                </label>
+                <Input
+                  placeholder="Enter your last name"
+                  id="last_name"
+                  className="mb-4"
+                  onChange={handleChange('last_name')}
+                  onBlur={handleBlur('last_name')}
+                  value={values.last_name}
+                  errorMessage={touched.last_name ? errors.last_name : undefined}
+                  success={touched.last_name && !errors.last_name}
+                />
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                  Email *
+                </label>
+                <Input
+                  placeholder="Enter your email"
                   id="email"
-                  className="mb-8"
+                  className="mb-4"
                   onChange={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
                   errorMessage={touched.email ? errors.email : undefined}
                   success={touched.email && !errors.email}
                 />
-                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
-                  Password
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="password1">
+                  Password *
                 </label>
                 <Input
                   placeholder="Enter password"
                   id="password1"
-                  className="mb-8"
+                  className="mb-4"
                   type="password"
                   onChange={handleChange('password1')}
                   onBlur={handleBlur('password1')}
@@ -118,13 +157,13 @@ export default function Signup() {
                   errorMessage={touched.password1 ? errors.password1 : undefined}
                   success={touched.password1 && !errors.password1}
                 />
-                <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
-                  Confirm Password
+                <label className="block mb-2 text-sm text-text-primary" htmlFor="password2">
+                  Confirm Password *
                 </label>
                 <Input
                   placeholder="Re-enter password"
                   id="password2"
-                  className="mb-8"
+                  className="mb-4"
                   type="password"
                   onChange={handleChange('password2')}
                   onBlur={handleBlur('password2')}
@@ -133,10 +172,10 @@ export default function Signup() {
                   success={touched.password2 && !errors.password2}
                 />
                 <div className="flex items-center space-x-4">
-                  <Button buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
+                  <Button type="submit" buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
                     Sign Up
                   </Button>
-                  <div className="text-xs lg:text-sm text-text-secondary">
+                  <div className="text-xs md:text-sm text-text-secondary">
                     Already a member!{' '}
                     <Link href="/login">
                       <a className="font-bold">Sign in</a>

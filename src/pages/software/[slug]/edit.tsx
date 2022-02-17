@@ -14,12 +14,13 @@ import { ProductContent } from '@taggedweb/components/service-detail/product-con
 // import { ReviewsContainer } from '@taggedweb/components/service-detail/get-reviews'
 import { Asset } from '@taggedweb/types/asset'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
+import { TOAST_SOFTWARE_EDIT_SUCCESS } from '@taggedweb/utils/token-id'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  const service = await fetchServiceServer(context.req.session, slug)
+  const service = await fetchServiceServer(context.req, slug)
   const editAllowed = service?.edit_allowed ?? false
 
   if (!editAllowed) {
@@ -43,7 +44,9 @@ export default function Service({ service }) {
     const updatedData = await patchAssetField(data, service.slug)
     if (updatedData) {
       setShowService(updatedData)
-      toast.success('Updated successfully.')
+      toast.success('Updated successfully.', {
+        id: TOAST_SOFTWARE_EDIT_SUCCESS,
+      })
     }
   }
 

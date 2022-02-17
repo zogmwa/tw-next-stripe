@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { searchSuggestions } from '@taggedweb/queries/question'
+import { TOAST_QUESTION_EMPTY_ERROR, TOAST_QUESTION_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 
 type SearchByQuestionsProps = {
@@ -54,7 +55,9 @@ export function SearchQuestionBar({
     const questions = value.map((question) => question.value)
     if (questions.length > 5) {
       setError('A maximum of 5 questions are allowed.')
-      toast.error('A maximum of 5 questions are allowed.')
+      toast.error('A maximum of 5 questions are allowed.', {
+        id: TOAST_QUESTION_LIMIT_ERROR,
+      })
     } else {
       setError('')
       setQuestions(questions)
@@ -71,7 +74,9 @@ export function SearchQuestionBar({
     event.preventDefault()
     if (questions.length === 0) {
       setError('Please enter a question')
-      toast.error('Please enter a question')
+      toast.error('Please enter a question', {
+        id: TOAST_QUESTION_EMPTY_ERROR,
+      })
     } else {
       setError('')
       if (onSubmit) {
@@ -95,8 +100,8 @@ export function SearchQuestionBar({
         components={{ DropdownIndicator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
-        instanceId
-        className="flex-1 mb-2 md:mb-0"
+        instanceId="AddQuestions"
+        className="flex-1 mb-2 md:mb-0 remove-input-txt-border"
         classNamePrefix="select"
         placeholder={placeholder}
       />

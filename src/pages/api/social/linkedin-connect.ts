@@ -1,5 +1,5 @@
 import { withSessionApi } from '@taggedweb/utils/session'
-import { client } from '@taggedweb/utils/client'
+import { serverSideClient } from '@taggedweb/utils/client'
 import { getAccessToken, setSessionTokens } from '@taggedweb/utils/token'
 import { User } from '@taggedweb/types/user'
 import { withSentry } from '@sentry/nextjs'
@@ -9,9 +9,9 @@ import { withSentry } from '@sentry/nextjs'
  */
 export default withSentry(
   withSessionApi(async (req, res) => {
-    const curr_access = await getAccessToken(req.session)
+    const curr_access = await getAccessToken(req)
     const { access_token: linkedin_access_token, code } = req.body
-    const { data } = await client.post<{ access_token: string; refresh_token: string; user: User }>(
+    const { data } = await serverSideClient(req).post<{ access_token: string; refresh_token: string; user: User }>(
       '/dj-rest-auth/linkedin/connect/',
       {
         access_token: linkedin_access_token,
@@ -26,7 +26,7 @@ export default withSentry(
     )
     const { access_token: access, refresh_token: refresh, user } = data
     await setSessionTokens(req.session, { access, refresh })
-    req.session.set('user', user)
+    req.session.user = user
     await req.session.save()
     res.json({ ...user, authVerified: true })
   }),

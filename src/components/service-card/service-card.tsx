@@ -7,6 +7,8 @@ import { FiUsers } from 'react-icons/fi'
 import { GrShare } from 'react-icons/gr'
 import numeral from 'numeral'
 import { Asset } from '@taggedweb/types/asset'
+import { validateLink } from '@taggedweb/utils/validateLink'
+import { formatConsideringPlurality } from '@taggedweb/utils/formatConsideringPlurality'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { Checkbox } from '../checkbox'
@@ -25,10 +27,7 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
     }
   }
   const router = useRouter()
-  const { search_query } = router
-    ? (router.query as { search_query: string })
-    : ('' as unknown as { search_query: string })
-
+  const { search_query = null } = router.query
   const rating = useMemo(() => {
     let _rating = service.avg_rating
     if (typeof _rating === 'string') {
@@ -64,7 +63,13 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
               </a>
             </Link>
             <a
-              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              href={
+                service.affiliate_link
+                  ? validateLink(service.affiliate_link)
+                  : service.website
+                  ? validateLink(service.website)
+                  : '#'
+              }
               target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center"
               rel="noreferrer nofollow"
@@ -97,20 +102,22 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
             </Link>
           </div>
           <div className="flex flex-row flex-wrap mb-5">
-            {service.tags.map((tag, index) => {
+            {service.tags.map((tag) => {
               return (
                 <Link
+                  key={tag.slug}
                   href={
-                    search_query.indexOf(tag.slug) === -1
+                    search_query?.indexOf(tag.slug) === -1
                       ? `/softwares/${search_query},${tag.slug}`
                       : `/softwares/${tag.slug}`
                   }
                   passHref
-                  key={index}
                 >
-                  <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
-                    {tag.name}
-                  </Button>
+                  <a>
+                    <Button key={tag.slug} buttonType="tag" size="small" className="mt-2 mr-2">
+                      {tag.name}
+                    </Button>
+                  </a>
                 </Link>
               )
             })}
@@ -129,7 +136,9 @@ function ServiceCardComponent({ service, onToggleCompare, isChecked }: ServiceCa
                 </div>
                 <div className="flex items-center space-x-2">
                   <FiUsers className="text-primary" />
-                  <p className="text-text-secondary">{numeral(service.users_count).format('0.[0]a')} Users</p>
+                  <p className="text-text-secondary">
+                    {formatConsideringPlurality(numeral(service.users_count).format('0.[0]a'), 'User')}
+                  </p>
                 </div>
                 {service.has_free_trial === true && (
                   <>

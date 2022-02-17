@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react/types-6-0'
 import { ServicePricingCard } from './service-pricing-card'
 import { PricingSelectNameMobile } from './pricing-select-name-mobile'
 import { PricingSelectNameDesktop } from './pricing-select-name-desktop'
+import { EmptyServicePricingCard } from './zero-plans-service-pricing-card'
 
 const plans = [
   {
@@ -63,4 +64,8 @@ export function DefaultPricingCard() {
       />
     </div>
   )
+}
+
+export function EmptyPricingCard() {
+  return <EmptyServicePricingCard name={'MailChimp'} website={'https://mailchimp.com/'} />
 }

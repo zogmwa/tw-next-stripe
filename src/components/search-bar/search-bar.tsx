@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { searchSuggestions, solutionSuggestions } from '@taggedweb/queries/search'
 import { components } from 'react-select'
 import { GrShare } from 'react-icons/gr'
+import slugify from 'slugify'
+import { TOAST_INPUT_EMPTY_ERROR, TOAST_TAG_EMPTY_ERROR, TOAST_TAG_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 
 type SearchByTagsProps = {
@@ -16,18 +18,19 @@ type SearchByTagsProps = {
   tagsArr?: { value: string; label: ReactElement; isWebService?: boolean }[]
   forHomepage?: boolean
   forSoftware?: boolean
+  forNavbar?: boolean
 }
 
 const placeholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
+  <div className="flex space-x-2">
     <div className="hidden leading-none md:flex">Type feature tags of interest e.g. email-marketing, landing-pages</div>
     <div className="md:hidden">Type feature tags of interest</div>
   </div>
 )
 
 const homepagePlaceholderComponent = (
-  <div className="flex items-center justify-center space-x-2">
-    <div className="leading-none">e.g. Improve my Python application performance</div>
+  <div className="flex space-x-2 items-left">
+    <div className="leading-none">e.g. Help with HTTPS setup (SSL Certificates) for my website </div>
   </div>
 )
 
@@ -68,10 +71,19 @@ const OptionComponent = (props) => {
   )
 }
 
-export function SearchBar({ onSubmit, className, style, forHomepage = false, forSoftware = false }: SearchByTagsProps) {
+export function SearchBar({
+  onSubmit,
+  className,
+  style,
+  forHomepage = false,
+  forSoftware = false,
+  forNavbar = false,
+}: SearchByTagsProps) {
   const [tags, setTags] = useState<{ value: string; label: string; isWebService?: boolean }[]>([])
   const [, setError] = useState<string>('')
-  const [solution, setSolution] = useState<string>('')
+  const [solutionLabel, setSolutionLabel] = useState<string>('')
+  const [solutionInput, setSolutionInput] = useState<string>('')
+  const [isFocusInMenuList, setIsFocusInMenuList] = useState<boolean>(false)
   // const [defaultTags, setDefaultTags] = useState<{ value: string; label: string }[]>(tagsArr)
   const router = useRouter()
   const serachBtnType = forHomepage ? 'homePage' : 'primary'
@@ -105,7 +117,9 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
-        toast.error('A maximum of 5 tags are allowed.')
+        toast.error('A maximum of 5 tags are allowed.', {
+          id: TOAST_TAG_LIMIT_ERROR,
+        })
       } else {
         setError('')
         setTags(value)
@@ -115,7 +129,16 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
   }
 
   const handleSolutionChange = (value: { value: string; label: string }) => {
-    setSolution(value.value)
+    setSolutionInput(value.value)
+    setSolutionLabel(value.label)
+    setIsFocusInMenuList(false)
+  }
+
+  const handleSolutionInput = (value: string, action) => {
+    if (action.action !== 'menu-close' && action.action !== 'input-blur' && action.action !== 'set-value') {
+      setSolutionInput(slugify(value))
+      setSolutionLabel(value)
+    }
   }
 
   /**
@@ -129,7 +152,9 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
     if (forSoftware) {
       if (tags.length === 0) {
         setError('Please enter a tag')
-        toast.error('Please enter a tag')
+        toast.error('Please enter a tag', {
+          id: TOAST_TAG_EMPTY_ERROR,
+        })
       } else {
         setError('')
         if (onSubmit) {
@@ -139,15 +164,38 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
         }
       }
     } else {
-      if (solution.length === 0) {
+      if (solutionInput === '') {
         setError('No input given')
-        toast.error('No input given')
+        toast.error('No input given', {
+          id: TOAST_INPUT_EMPTY_ERROR,
+        })
       } else {
         setError('')
         if (onSubmit) {
-          onSubmit(solution)
+          onSubmit(solutionInput)
         }
       }
+    }
+  }
+
+  const handleKeyPress = (event) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        if (!isFocusInMenuList) {
+          setIsFocusInMenuList(true)
+          event.preventDefault()
+        }
+        break
+
+      case 'Enter':
+        if (!isFocusInMenuList) {
+          event.preventDefault()
+          handleSubmit(event)
+        }
+        break
+
+      default:
+        break
     }
   }
 
@@ -165,26 +213,34 @@ export function SearchBar({ onSubmit, className, style, forHomepage = false, for
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null, Option: OptionComponent }}
           onChange={handleChange}
           loadOptions={searchSuggestions}
-          instanceId
-          className="flex-1 mb-2 sm:mb-0"
+          instanceId="selectTags"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
         />
       ) : (
         <AsyncSelect
+          autoFocus
           name="solutions"
+          value={null}
+          inputId={'searchSolutionInput'}
           components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
           onChange={handleSolutionChange}
+          inputValue={solutionLabel}
+          onInputChange={handleSolutionInput}
           loadOptions={solutionSuggestions}
-          instanceId
-          className="flex-1 mb-2 sm:mb-0"
+          instanceId="selectSolutions"
+          className="flex-1 mb-2 sm:mb-0 remove-input-txt-border"
           classNamePrefix="select"
           placeholder={placeholder}
+          onKeyDown={handleKeyPress}
         />
       )}
-      <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
-        {searchBtnText}
-      </Button>
+      {!forNavbar && (
+        <Button type="submit" buttonType={serachBtnType} icon={<AiOutlineSearch />}>
+          {searchBtnText}
+        </Button>
+      )}
     </form>
   )
 }

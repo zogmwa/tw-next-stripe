@@ -1,4 +1,4 @@
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { Asset } from '@taggedweb/types/asset'
 import { withSessionApi } from '@taggedweb/utils/session'
@@ -11,7 +11,7 @@ export default withSentry(
      */
     if (req.method === 'GET') {
       const { asset__slug } = req.query
-      const access = await getAccessToken(req.session)
+      const access = await getAccessToken(req)
       const config = access
         ? {
             headers: {
@@ -19,15 +19,18 @@ export default withSentry(
             },
           }
         : null
-      const { data } = await clientWithRetries.get<Asset>(`/asset_reviews?asset__slug=${asset__slug}`, config)
+      const { data } = await serverSideClientWithRetries(req).get<Asset>(
+        `/asset_reviews?asset__slug=${asset__slug}`,
+        config,
+      )
       res.json(data)
     }
     /**
      * API Route handler for adding asset_review
      */
     if (req.method === 'POST') {
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.post('/asset_reviews/', req.body, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClientWithRetries(req).post('/asset_reviews/', req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

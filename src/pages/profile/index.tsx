@@ -7,7 +7,7 @@ import { ProfileCard } from '@taggedweb/components/profile-card'
 import { UserContextType } from '@taggedweb/types/user-context-type'
 import { ProfileContextType } from '@taggedweb/types/profile-context-type'
 import { withPageAuthRequired } from '@taggedweb/utils/auth-wrappers'
-import { ProfileDesktop, ProfileMobile } from '@taggedweb/components/profile'
+import { ProfileDesktop } from '@taggedweb/components/profile'
 import { Profile } from '@taggedweb/types/profile'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { Breadcrumb } from '@taggedweb/components/breadcrumb'
@@ -68,7 +68,7 @@ function ProfilePage() {
   const data = useMemo((): UserContextType & ProfileContextType => ({ ...user, ...profile }), [user, profile])
   const breadcrumbData = [
     {
-      name: 'Search',
+      name: 'Home',
       url: `${process.env.SITE_BASE_URL}/`,
       is_selected: false,
     },
@@ -103,12 +103,13 @@ function ProfilePage() {
       <DynamicHeader title="TaggedWeb | My Profile" />
       <div className="flex justify-center min-h-full pt-4 mx-auto bg-background-light">
         <div className="w-full max-w-screen-lg" id="scroll-container-outer">
-          <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
+          <Breadcrumb breadcrumbs={breadcrumbData} className="px-3 mb-4" copyUrl={copyUrl} />
           <Element name={'personal-information'}>
             <ProfileCard data={data} />
           </Element>
           <ProfileDesktop profile={profile as Profile} />
-          <ProfileMobile profile={profile as Profile} />
+          {/* We don't want tabs in mobile view for now */}
+          {/* <ProfileMobile profile={profile as Profile} /> */}
         </div>
       </div>
     </>

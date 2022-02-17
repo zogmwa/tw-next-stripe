@@ -1,17 +1,20 @@
 // this file is a wrapper with defaults to be used in both API routes and `getServerSideProps` functions
-import { applySession } from 'next-iron-session'
+import { User } from '@taggedweb/types/user'
+import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
 import { WithSessionApiHandler, WithSessionSSRHandler } from '@taggedweb/types/session'
 import { withApiErrorHandling, withSSRErrorHandling } from './error-handling'
 
-const applySessionDefaults = (req, res) => {
-  return applySession(req, res, {
-    ttl: 1 * 24 * 3600,
-    password: process.env.SECRET_COOKIE_PASSWORD,
-    cookieName: 'taggedweb-iron-session',
-    cookieOptions: {
-      secure: process.env.NODE_ENV === 'production',
-    },
-  })
+declare module 'iron-session' {
+  interface IronSessionData {
+    user?: User
+    token?: { access: any; refresh: any; accessExp: any; refreshExp: any }
+  }
+}
+
+const sessionDefaults = {
+  ttl: 30 * 24 * 3600, // This means that users will remain logged in for 30 days.
+  password: process.env.SECRET_COOKIE_PASSWORD,
+  cookieName: 'taggedweb-iron-session',
 }
 
 /**
@@ -19,36 +22,27 @@ const applySessionDefaults = (req, res) => {
  * @param handler ApiHandler
  * @returns wrappedHandler
  */
-const withSessionApi: WithSessionApiHandler = (handler) => {
-  return async function withIronSessionHandler(req, res) {
-    await applySessionDefaults(req, res)
-    await withApiErrorHandling(handler)(req, res)
-  }
-}
+const withSessionApi: WithSessionApiHandler = (handler) =>
+  withApiErrorHandling(withIronSessionApiRoute(handler, sessionDefaults))
 
 /**
  * Adds session to request object in context and adds error handling for ssr handler.
  * @param handler SSRHandler
  * @returns wrappedHandler
  */
-const withSessionSSR: WithSessionSSRHandler = (handler) => {
-  return async function withIronSessionHandler(context) {
-    const req = context.req
-    const res = context.res
-    await applySessionDefaults(req, res)
-    const result = await withSSRErrorHandling(handler)(context)
-    const user = await context.req.session.get('user')
-    if ((result as any).props) {
-      return {
-        ...result,
-        props: {
-          ...((result as any)?.props ?? {}),
-          fallback: { ...((result as any)?.props?.fallback ?? {}), '/api/user': user ?? null },
-        },
-      }
-    } else {
-      return result
+const withSessionSSR: WithSessionSSRHandler = (handler) => async (context) => {
+  const result = await withSSRErrorHandling(withIronSessionSsr(handler, sessionDefaults))(context)
+  const user = await context.req.session.user
+  if ((result as any).props) {
+    return {
+      ...result,
+      props: {
+        ...((result as any)?.props ?? {}),
+        fallback: { ...((result as any)?.props?.fallback ?? {}), '/api/user': user ?? null },
+      },
     }
+  } else {
+    return result
   }
 }
 

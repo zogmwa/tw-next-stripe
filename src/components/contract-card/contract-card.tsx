@@ -7,30 +7,28 @@ import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
 import { AiFillStar } from 'react-icons/ai'
 import numeral from 'numeral'
-import { useRouter } from 'next/router'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { solutionContract } from '@taggedweb/types/contracts'
+import { SAD_FACE_RATING, NEUTRAL_FACE_RATING, HAPPY_FACE_RATING } from '@taggedweb/utils/constants'
 import { ServiceLogo } from '../service-logo'
 import { ReviewReaction } from '../review-reaction'
-import { toggleAddReviewSolution, toggleUpdateReviewSolution, toggleDeleteReviewSolution } from '../../queries/solution'
+import { toggleUpdateSolutionBookingRating } from '../../queries/solution'
+import { contractStatus, makeTitle } from '../contract-detail/status'
 
 type ContractCardProps = {
   contractData: solutionContract
   className?: string
+  redirectUrl?: string
 }
 
-function ContractCardComponent({ contractData, className }: ContractCardProps) {
+function ContractCardComponent({ contractData, className, redirectUrl }: ContractCardProps) {
   if (typeof contractData.solution?.title === 'undefined') return null
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   const unitlist = ['', 'K', 'M', 'G']
   const rating = numeral(Number(contractData.solution?.avg_rating ?? 0) / 3).format('0.[0]')
-  const [reviewType, setReviewType] = useState(contractData.solution.my_solution_review)
+  const [bookingRating, setBookingRating] = useState(contractData.rating)
   const [avgRating, setAvgRating] = useState(contractData.solution.avg_rating)
   const [isLoading, setIsLoading] = useState(false)
-  const [reviewId, setReviewId] = useState(contractData.solution.my_solution_review_id)
 
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -42,85 +40,67 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
     return sign * number + unitlist[unit]
   }
 
-  const onChangeStatus = async (type) => {
+  const onChangeStatus = async (rating) => {
     setIsLoading(true)
-    if (reviewType) {
-      if (reviewType !== type && reviewId !== 0) {
-        const solutionReviewData = await toggleUpdateReviewSolution(contractData.solution.id, type, reviewId)
-        setReviewId(solutionReviewData.id)
-        setReviewType(solutionReviewData.type)
-        setAvgRating(solutionReviewData.solution_avg_rating)
-      } else {
-        if (reviewId !== 0) {
-          const status = await toggleDeleteReviewSolution(reviewId)
-          if (status) {
-            setReviewId(0)
-            setReviewType('')
-          }
-        }
-      }
-    } else {
-      const solutionReviewData = await toggleAddReviewSolution(contractData.solution.id, type)
-      setReviewId(solutionReviewData.id)
-      setReviewType(solutionReviewData.type)
-      setAvgRating(solutionReviewData.solution_avg_rating)
+    if (rating === SAD_FACE_RATING || rating === NEUTRAL_FACE_RATING || rating === HAPPY_FACE_RATING) {
+      const solutionBookingData = await toggleUpdateSolutionBookingRating(contractData.id, rating)
+      setBookingRating(solutionBookingData.rating)
+      setAvgRating(solutionBookingData.solution.avg_rating)
     }
     setIsLoading(false)
   }
 
-  const statuses = [
-    {
-      name: 'Pending',
-      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
-    },
-    {
-      name: 'In Progress',
-      defaultClassName: 'px-2 py-1 text-sm text-[#60a5fa] border rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm text-white border rounded-xl border-[#60a5fa] bg-[#60a5fa]',
-    },
-    {
-      name: 'In Review',
-      defaultClassName: 'px-2 py-1 text-sm border text-primary rounded-xl border-primary',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-primary bg-primary',
-    },
-    {
-      name: 'Completed',
-      defaultClassName: 'px-2 py-1 text-sm border text-[#60a5fa] rounded-xl border-[#60a5fa]',
-      selectedClassName: 'px-2 py-1 text-sm border text-white rounded-xl border-[#60a5fa] bg-[#60a5fa]',
-    },
-  ]
+  const statuses = contractStatus(contractData.solution.is_metered)
 
   let statusIndex = 1
   statuses.map((status, index) => {
     if (status.name === contractData.status) statusIndex = index + 1
   })
 
-  const startedDate = contractData.started_at ? new Date(contractData.started_at).toISOString().split('T')[0] : ''
-  const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
+  // const startedDate = contractData.solution.is_metered
+  //   ? contractData.metered_booking_info?.start_date
+  //     ? new Date(contractData.metered_booking_info.start_date).toISOString().split('T')[0]
+  //     : ''
+  //   : contractData.started_at
+  //   ? new Date(contractData.started_at).toISOString().split('T')[0]
+  //   : ''
+  const createdDate = new Date(contractData.created ?? '').toISOString().split('T')[0]
+  // const updatedDate = new Date(contractData.updated ?? '').toISOString().split('T')[0]
 
   return (
     <div className={clsx('flex flex-col p-4 m-2 border border-solid rounded border-border-default', className)}>
       <div className="flex flex-row">
         <div className="flex flex-col flex-grow">
           <div className="items-center hidden space-x-2 md:flex">
-            <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
-              {statuses.map((status, index) => {
-                if (index <= statusIndex - 1) {
+            {contractData.solution.is_metered ? (
+              statuses.map((status, index) => {
+                if (index === statusIndex - 1) {
                   return (
-                    <span className={status.selectedClassName} key={index}>
-                      {status.name}
-                    </span>
-                  )
-                } else {
-                  return (
-                    <span className={status.defaultClassName} key={index}>
-                      {status.name}
+                    <span className={clsx(status.selectedClassName, ' self-start')} key={`status${index}`}>
+                      {makeTitle(status.name)}
                     </span>
                   )
                 }
-              })}
-            </Breadcrumbs>
+              })
+            ) : (
+              <Breadcrumbs separator={<MdOutlineKeyboardArrowRight className="text-sm" />} aria-label="breadcrumb">
+                {statuses.map((status, index) => {
+                  if (index <= statusIndex - 1) {
+                    return (
+                      <span className={status.selectedClassName} key={index}>
+                        {makeTitle(status.name)}
+                      </span>
+                    )
+                  } else {
+                    return (
+                      <span className={status.defaultClassName} key={index}>
+                        {makeTitle(status.name)}
+                      </span>
+                    )
+                  }
+                })}
+              </Breadcrumbs>
+            )}
           </div>
           <div className="flex items-center space-x-2 md:hidden">
             {statuses.map((status, index) => {
@@ -133,12 +113,16 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
               }
             })}
           </div>
-          <Link href={`/solution/${contractData.solution.slug}`}>
+          <Link href={redirectUrl || `/solution/${contractData.solution.slug}`}>
             <a className="mt-2 text-xl cursor-pointer text-text-primary">{contractData.solution.title}</a>
           </Link>
-          <div className="flex flex-col mt-2 text-xs md:flex-row">
-            <span className="w-full">Started at: {startedDate}</span>
-            {startedDate ? <span className="w-full">Updated at: {updatedDate}</span> : null}
+          <div className="flex flex-col mt-2 text-sm md:flex-row">
+            <span className="w-full">Booked date: {createdDate}</span>
+            {/* {createdDate && updatedDate ? (
+              <span className="w-full">
+                Updated at: <b>{updatedDate}</b>
+              </span>
+            ) : null} */}
           </div>
           <div className="flex items-center pt-4 space-x-4 md:hidden">
             <div className="flex items-center space-x-1 text-xs">
@@ -160,7 +144,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
           </div>
           <ReviewReaction
             avgRating={avgRating}
-            statusType={reviewType}
+            statusType={bookingRating}
             className="self-end hidden md:flex"
             popupClassName="space-x-2"
             onChangeStatus={(type) => onChangeStatus(type)}
@@ -169,17 +153,38 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
         </div>
       </div>
       <div className="flex flex-col-reverse pt-4 md:items-center md:flex-row md:justify-between">
-        <div className="flex items-center pt-4 md:pt-0">
-          {contractData.solution.organization?.logo_url ? (
-            <img
-              className="w-[40px] h-[40px] rounded-full"
-              src={contractData.solution.organization.logo_url}
-              alt={contractData.solution.organization.name}
-            />
+        <div className="flex items-center">
+          {contractData.solution.organization ? (
+            <>
+              {contractData.solution.organization.logo_url ? (
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={contractData.solution.organization.logo_url}
+                  alt={contractData.solution.organization.name}
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+              )}
+              <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization.name}</span>
+            </>
           ) : (
-            <div className="w-[40px] h-[40px] bg-text-secondary rounded-full" />
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75"
+                style={{ boxShadow: 'none !important' }}
+              >
+                <p>
+                  {contractData.solution.point_of_contact?.first_name[0] ??
+                    '' + contractData.solution.point_of_contact?.last_name[0] ??
+                    ''}
+                </p>
+              </div>
+              <span className="pl-2 text-sm text-text-secondary">
+                {contractData.solution.point_of_contact?.first_name ?? ''}{' '}
+                {contractData.solution.point_of_contact?.last_name ?? ''}
+              </span>
+            </>
           )}
-          <span className="pl-2 text-sm text-text-secondary">{contractData.solution.organization?.name}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="hidden md:pr-4 md:text-xs md:items-center md:space-x-1 md:inline-flex">
@@ -197,7 +202,7 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
             </h4>
             <ReviewReaction
               avgRating={avgRating}
-              statusType={reviewType}
+              statusType={bookingRating}
               className="self-end md:hidden flex !ml-4"
               popupClassName="space-x-2"
               onChangeStatus={(type) => onChangeStatus(type)}
@@ -210,12 +215,14 @@ function ContractCardComponent({ contractData, className }: ContractCardProps) {
                 .slice(0, Math.min(3, contractData.solution.assets.length))
                 .map((asset, key) => (
                   <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                    <ServiceLogo
-                      serviceName={asset?.name}
-                      serviceId={asset.id}
-                      logoUrl={asset.logo_url}
-                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                    />
+                    <a>
+                      <ServiceLogo
+                        serviceName={asset?.name}
+                        serviceId={asset.id}
+                        logoUrl={asset.logo_url}
+                        className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                      />
+                    </a>
                   </Link>
                 ))}
           </div>

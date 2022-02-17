@@ -1,5 +1,5 @@
 import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withSentry } from '@sentry/nextjs'
 
@@ -9,8 +9,8 @@ import { withSentry } from '@sentry/nextjs'
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
     if (req.method === 'GET') {
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.get('/solution_bookmarks/', {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClientWithRetries(req).get('/solution_bookmarks/', {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -18,8 +18,8 @@ export default withSentry(
       res.json(data)
     }
     if (req.method === 'POST') {
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.post('/solution_bookmarks/', req.body, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClientWithRetries(req).post('/solution_bookmarks/', req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

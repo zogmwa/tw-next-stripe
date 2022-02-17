@@ -1,11 +1,10 @@
 import { ComponentType, FunctionComponent } from 'react'
-import { NextApiResponse } from 'next'
-import { GetIronServerSideProps, NextIronHandler, NextIronRequest } from './session'
+import { GetServerSideProps, NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 
 export type WithApiAuthRequired = (
-  handler: NextIronHandler,
+  handler: NextApiHandler,
   options?: { message?: string },
-) => (req: NextIronRequest, res: NextApiResponse) => void | Promise<void>
+) => (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>
 
 export type WithPageAuthRequired = <P extends { [key: string]: any }>(
   Component: ComponentType<P>,
@@ -13,6 +12,6 @@ export type WithPageAuthRequired = <P extends { [key: string]: any }>(
 ) => FunctionComponent<P>
 
 export type WithSSRAuthRequired = (
-  handler?: GetIronServerSideProps,
+  handler?: GetServerSideProps,
   options?: { message?: string; redirectTo?: string; showMessage?: boolean },
-) => GetIronServerSideProps
+) => GetServerSideProps

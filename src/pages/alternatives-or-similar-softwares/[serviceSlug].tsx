@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import Pagination from '@mui/material/Pagination'
 import { ServiceCard } from '@taggedweb/components/service-card'
@@ -7,15 +8,17 @@ import {
   MobileViewSortAndFilterServiceList,
   FilterServiceList,
 } from '@taggedweb/components/service-list-filter'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { SearchBar } from '@taggedweb/components/search-bar'
 import { Asset } from '@taggedweb/types/asset'
 import { unslugify } from '@taggedweb/utils/unslugify'
 import { CompareAccordian } from '@taggedweb/components/compare-accordian'
 
-export const getServerSideProps = async (context: {
-  query: { serviceSlug: string; page: string; order: string; free_trial: string }
-}) => {
+export const getServerSideProps = async (
+  context: {
+    query: { serviceSlug: string; page: string; order: string; free_trial: string }
+  } & GetServerSidePropsContext,
+) => {
   const slug = context.query.serviceSlug
   const name = unslugify(slug)
   const pg = context.query.page
@@ -35,7 +38,9 @@ export const getServerSideProps = async (context: {
   if (free_trial) {
     query = query + `&has_free_trial=${free_trial}`
   }
-  const { data } = await clientWithRetries.get<{ results: Asset[]; count: string }>(`/assets/similar/?${query}`)
+  const { data } = await serverSideClientWithRetries(context.req).get<{ results: Asset[]; count: string }>(
+    `/assets/similar/?${query}`,
+  )
   const totalCount = parseInt(data.count)
   const pageCount = totalCount % 10 === 0 ? totalCount / 10 : Math.floor(totalCount / 10) + 1
   const defaultArr = []
@@ -255,7 +260,7 @@ export default function ServiceList({
         </div>
       )}
       <div className="flex justify-end">
-        <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
+        {pageCount > 1 && <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />}
       </div>
     </div>
   )

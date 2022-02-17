@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import slugify from 'slugify'
 
 const solutionTag = [
@@ -42,7 +41,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Reduce Cloud Costs',
+    name: 'AWS/GCP/Azure Cost Optimization',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -61,7 +60,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Cloud Migration Solutions',
+    name: 'Cloud Migration Consultations',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -80,7 +79,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Software Architecture Audit',
+    name: 'Software Architecture Review',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -102,7 +101,7 @@ const solutionTag = [
     ),
   },
   {
-    name: 'Security Audit',
+    name: 'Kubernetes Deployment Consultation',
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -116,8 +115,6 @@ const solutionTag = [
   },
 ]
 export function PopularSolutionTags() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   return (
     <div className="max-w-screen-lg px-2 mx-auto">
       <div className="mb-8 text-2xl font-bold text-center text-black">Popular Solution Tags</div>
@@ -128,10 +125,10 @@ export function PopularSolutionTags() {
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
-              <>
-                <div className="text-4xl text-blue-500">{solution.icon}</div>
+              <a>
+                <div className="flex justify-center text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
-              </>
+              </a>
             </Link>
           </div>
         ))}
@@ -143,10 +140,10 @@ export function PopularSolutionTags() {
             className="flex flex-col items-center justify-center px-10 py-16 space-y-2 transition duration-500 ease-in-out border-2 rounded cursor-pointer hover:bg-gray-200 hover:border-blue-500"
           >
             <Link href={`/solutions/${slugify(solution.name, { lower: true })}`}>
-              <>
-                <div className="text-4xl text-blue-500">{solution.icon}</div>
+              <a>
+                <div className="flex justify-center text-4xl text-blue-500">{solution.icon}</div>
                 <div className="text-lg font-medium text-center text-text-primary">{solution.name}</div>
-              </>
+              </a>
             </Link>
           </div>
         ))}

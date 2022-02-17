@@ -9,6 +9,6 @@ export default {
 
 export function DefaultReviewReaction() {
   return (
-    <ReviewReaction avgRating={1} statusType="H" className="space-x-2" isLoading={false} onChangeStatus={() => {}} />
+    <ReviewReaction avgRating={1} statusType={1} className="space-x-2" isLoading={false} onChangeStatus={() => {}} />
   )
 }

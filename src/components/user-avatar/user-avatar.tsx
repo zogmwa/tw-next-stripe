@@ -15,7 +15,7 @@ function UserAvatarComponent({ user, size }: UserAvatarType) {
     <>
       {user?.avatar ? (
         <img src={user.avatar} alt={user.username} className={`object-cover rounded-md w-${size} h-${size}`} />
-      ) : user.first_name[0] ? (
+      ) : user.first_name[0] && user.last_name[0] ? (
         <div
           className={`flex items-center justify-center w-${size} h-${size} bg-gray-200 rounded-full focus-visible:ring-2 !focus:outline-none !shadow-none focus-visible:ring-white focus-visible:ring-opacity-75`}
         >

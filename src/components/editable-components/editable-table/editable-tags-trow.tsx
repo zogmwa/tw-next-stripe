@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import toast from 'react-hot-toast'
 import { Tag } from '@taggedweb/types/tag'
+import { TOAST_TAG_ADD_ERROR } from '@taggedweb/utils/token-id'
 import LinkTagsBar from '../editable-tags/link-tags-bar'
 
 type EditableTagsTableTrowComponentProps = {
@@ -53,7 +54,9 @@ function EditableTagsTableTrowComponent({
             onChange={(value) => {
               const tempData = allRowData.filter((tag) => tag.name === value.label)
               if (tempData.length > 0) {
-                toast.error('This Tag is already exist')
+                toast.error('This Tag is already exist', {
+                  id: TOAST_TAG_ADD_ERROR,
+                })
               } else {
                 setErrorMessage('')
                 setEditData({ name: value.label, slug: value.slug, description: value.description })

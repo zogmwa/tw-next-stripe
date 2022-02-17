@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
@@ -26,8 +25,6 @@ type SolutionListingCardProps = {
 
 export function SolutionListingBoxCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const unitlist = ['', 'K', 'M', 'G']
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   const rating = numeral(Number(listingData.avg_rating ?? 0)).format('0.[0]')
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -47,12 +44,14 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
             {listingData.assets &&
               listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
           </div>

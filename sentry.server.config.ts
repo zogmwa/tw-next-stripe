@@ -4,7 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs'
 
-const SENTRY_DSN: string = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
+const SENTRY_DSN: string = (process.env.SENTRY_DSN as string) || (process.env.NEXT_PUBLIC_SENTRY_DSN as string)
 
 if (process.env.IS_SENTRY_ENABLED === 'true') {
   Sentry.init({
@@ -12,7 +12,7 @@ if (process.env.IS_SENTRY_ENABLED === 'true') {
     environment: process.env.NODE_ENV,
     enabled: process.env.NODE_ENV !== 'development',
     // Adjust this value in production, or use tracesSampler for greater control
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.25,
 
     // ...
     // Note: if you want to override the automatic release value, do not set a
