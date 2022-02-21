@@ -89,19 +89,19 @@ function SubmitService() {
 
                   <div className="sm:bg-background-surface sm:rounded-lg sm:border sm:border-border-default sm:p-6">
                     <Form className="md:max-w-lg" {...formik} onUploading={setUploadingImages} />
+                    <div className="flex items-center md:justify-end py-2 md:py-0 md:static sm:bg-transparent ">
+                      <div className="mt-2 py-2" />
+                      <Button
+                        buttonType="primary"
+                        onClick={formik.submitForm}
+                        type="submit"
+                        loading={isLoading}
+                        disabled={uploadingImages}
+                      >
+                        Submit
+                      </Button>
+                    </div>
                   </div>
-                </div>
-                <div className="fixed bottom-0 left-0 right-0 flex items-center px-4 py-2 space-x-4 border-t md:px-0 md:py-0 md:static bg-background-surface border-border-default sm:bg-transparent sm:border-none">
-                  <div className="flex-1" />
-                  <Button
-                    buttonType="primary"
-                    onClick={formik.submitForm}
-                    type="submit"
-                    loading={isLoading}
-                    disabled={uploadingImages}
-                  >
-                    Submit
-                  </Button>
                 </div>
               </div>
             )}
