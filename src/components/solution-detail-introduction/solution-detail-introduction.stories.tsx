@@ -8,7 +8,7 @@ export default {
 } as Meta
 const sidebar_info = {
   id: 1,
-  pay_now_price: {
+  stripe_primary_price: {
     id: 1,
     solution: 1,
     stripe_price_id: 'randomString',
@@ -140,7 +140,7 @@ const introductionData = {
 }
 const sidebar_info_ = {
   id: 2,
-  pay_now_price: {
+  stripe_primary_price: {
     id: 1,
     solution: 1,
     stripe_price_id: 'randomString',

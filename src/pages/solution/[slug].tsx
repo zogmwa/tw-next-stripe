@@ -58,8 +58,8 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
   ]
   const copyUrl = process.env.SITE_BASE_URL + `/solution/${solutionDetail.slug}`
   const price = {
-    stripe_price_id: solutionDetail.pay_now_price_stripe_id ?? '',
-    price: solutionDetail.pay_now_price_unit_amount ?? 0,
+    stripe_price_id: solutionDetail.stripe_primary_price_stripe_id ?? '',
+    price: solutionDetail.stripe_primary_price_unit_amount ?? 0,
   }
 
   let primary_tag = solutionDetail.primary_tag
@@ -125,7 +125,7 @@ export default function SolutionDetail({ solutionDetail, prevURL }) {
     id: solutionDetail.id,
     is_metered: solutionDetail.is_metered,
     slug: solutionDetail.slug,
-    pay_now_price: price,
+    stripe_primary_price: price,
     price: solutionDetail.is_metered ? solutionDetail.blended_hourly_rate ?? 0 : price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,
