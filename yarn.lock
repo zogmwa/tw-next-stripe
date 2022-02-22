@@ -15614,7 +15614,7 @@ prop-types@^15.0.0, prop-types@^15.6.1, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -16250,6 +16250,13 @@ react-textarea-autosize@^8.3.0:
     "@babel/runtime" "^7.10.2"
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
+
+react-to-print@^2.14.4:
+  version "2.14.4"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.4.tgz#9d1390b3f192fe55e8ccadca7bda1edb409fd1bf"
+  integrity sha512-lpKKsmkZz1m4G1mBbJtK5qATfYzJRrgLgJ3m0LyF17Ojq22ifxw2AIgH3BROpFDNj0c057Q1dDP53kDIPLVtmw==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-tooltip@^4.2.21:
   version "4.2.21"

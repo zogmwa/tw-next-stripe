@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Link from 'next/link'
 import Markdown from 'marked-react'
 import Lowlight from 'react-lowlight'
@@ -10,6 +10,8 @@ import { solutionContract } from '../../types/contracts'
 import { SolutionFAQ } from '../solution-detail-introduction'
 import { contractStatus, makeTitle } from './status'
 import { toggleContractPauseOrResume } from '../../queries/user'
+import { Invoice } from '../contract-invoice/invoice'
+import ReactToPrint from 'react-to-print'
 
 Lowlight.registerLanguage('js', javascript)
 
@@ -25,6 +27,7 @@ type ContractDetailProps = {
 }
 
 function ContractDetailComponent({ contractData }: ContractDetailProps) {
+  const childRef = useRef()
   const [showContractData, setShowContractData] = useState(contractData)
   const [isPauseOrResuem, setIsPauseOrResume] = useState(false)
   const statuses = contractStatus(false)
@@ -41,15 +44,7 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
     setIsPauseOrResume(false)
   }
 
-  // const startedDate = showContractData.solution.is_metered
-  //   ? showContractData.metered_booking_info?.start_date
-  //     ? new Date(showContractData.metered_booking_info.start_date).toISOString().split('T')[0]
-  //     : ''
-  //   : showContractData.started_at
-  //   ? new Date(showContractData.started_at).toISOString().split('T')[0]
-  //   : ''
   const createdDate = new Date(showContractData.created ?? '').toISOString().split('T')[0]
-  // const updatedDate = new Date(showContractData.updated ?? '').toISOString().split('T')[0]
 
   const nextPaymentDate =
     showContractData.solution.is_metered &&
@@ -269,6 +264,19 @@ function ContractDetailComponent({ contractData }: ContractDetailProps) {
           </div>
         )}
       </div>
+
+      <div className="hidden flex flex-col items-center justify-center bg-bg_invoice h-screen">
+        <Invoice ref={childRef} contractData={showContractData} />
+      </div>
+      {showContractData.is_payment_completed && (
+        <div className="ml-4 text-left my-3">
+          <ReactToPrint
+            documentTitle={`taggedweb-invoice`}
+            content={() => childRef.current}
+            trigger={() => <Button buttonType="primary"> Print Invoice</Button>}
+          />
+        </div>
+      )}
     </div>
   )
 }

@@ -68,9 +68,9 @@ function HomePageFooterComponent({ topTags }: footerData) {
         </div>
         <div className="justify-between hidden p-2 md:flex others">
           <div className="flex items-center">
-            <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10" />
             <Link href="/">
               <a>
+                <img src="/images/taggedweb-logo.svg" alt="TaggedWeb Logo" className="w-10 h-10 cursor-pointer" />
                 <div className="text-base font-medium tracking-wide text-opacity-100 cursor-pointer text-primary">
                   TaggedWeb
                 </div>

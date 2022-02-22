@@ -56,6 +56,7 @@ module.exports = {
         skew: {
           24: '24deg',
         },
+        bg_invoice: '#D2C7BA',
       },
     },
   },

@@ -20,4 +20,5 @@ export type solutionContract = {
     current_period_end: null | string
   }
   booked_by: UserInfo
+  is_payment_completed?: boolean
 }
