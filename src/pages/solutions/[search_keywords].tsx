@@ -96,39 +96,14 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
 
   const handlePagination = (event, pageValue) => {
     setPage(pageValue)
-    const offset = (pageValue - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-    fetchSolutionList(sendUrl)
   }
 
   const orderingSolution = (orderValue) => {
     setOrdering(orderValue)
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (orderValue ? `&ordering=${orderValue}` : '') +
-      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-    fetchSolutionList(sendUrl)
   }
 
   const filterSolution = (filterValue) => {
     setFiltering(filterValue)
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filterValue ? `&has_free_consultation=${filterValue}` : '')
-
-    fetchSolutionList(sendUrl)
   }
 
   const filterByPrice = (minPrice, maxPrice) => {
@@ -136,16 +111,6 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     maxPrice = maxPrice ? maxPrice * 100 : ''
     setMinPriceFilter(minPrice)
     setMaxPriceFilter(maxPrice)
-
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPrice ? `&stripe_primary_price__unit_amount__gte=${minPrice}` : '') +
-      (maxPrice ? `&stripe_primary_price__unit_amount__lte=${maxPrice}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-
-    fetchSolutionList(sendUrl)
   }
 
   const clearAllPriceFilter = () => {
@@ -179,6 +144,19 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
       setShowClearFilter(false)
     }
   }, [minPriceFilter, maxPriceFilter, filtering])
+
+  useEffect(() => {
+    const offset = (page - 1) * pageLen
+
+    const sendUrl =
+      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
+      (ordering ? `&ordering=${ordering}` : '') +
+      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
+      (filtering ? `&has_free_consultation=${filtering}` : '')
+
+    fetchSolutionList(sendUrl)
+  }, [page, ordering, minPriceFilter, maxPriceFilter, filtering])
 
   return (
     <>
