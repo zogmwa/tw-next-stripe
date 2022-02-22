@@ -15,4 +15,5 @@ export type Profile = {
   social_accounts: string[]
   bookmarked_solutions: any[]
   contracts: solutionContract[]
+  has_payment_method: null | boolean
 }

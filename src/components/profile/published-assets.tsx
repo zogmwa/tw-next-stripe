@@ -10,9 +10,9 @@ export const PublishedAssetsProfile = ({ data }: { data: Profile }) => {
 
   return (
     <div id="published-assets" className="mb-8">
-      <div className="hidden mb-2 md:flex">
-        <p className="text-base font-bold">Published Web Services</p>
-        <span className="ml-auto">{`${publishedAssets?.length ?? 0} Product(s)`}</span>
+      <div className="flex mb-2">
+        <p className="text-sm font-bold sm:text-base">Published Web Services</p>
+        <span className="ml-auto text-sm sm:text-base">{`${publishedAssets?.length ?? 0} Product(s)`}</span>
       </div>
       <div className="border border-gray-200 divide-y divide-gray-200 rounded-md">
         {publishedAssets.map((asset) => (

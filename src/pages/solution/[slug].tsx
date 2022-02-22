@@ -8,14 +8,18 @@ import { SolutionDetailIntroduction } from '@taggedweb/components/solution-detai
 import { SolutionDetailRelatedProduct } from '@taggedweb/components/solution-detail-related-product'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import { Solution, SolutionTypes } from '@taggedweb/types/solution'
+import slugify from 'slugify'
+import { formatConsideringPlurality } from '@taggedweb/utils/formatConsideringPlurality'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  let solutionDetail
+  const prevURL = context.req.headers.referer || null
+  let solutionDetail: Solution
   try {
-    solutionDetail = await fetchSolutionDetail(context.req.session, slug)
+    solutionDetail = await fetchSolutionDetail(context.req, slug)
   } catch (error) {
     return {
       notFound: true,
@@ -24,13 +28,17 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     // TODO: Redirect to solution search page.
   }
   return {
-    props: { solutionDetail },
+    props: { solutionDetail, prevURL },
   }
 })
 
-export default function SolutionDetail({ solutionDetail }) {
+export default function SolutionDetail({ solutionDetail, prevURL }) {
   if (!solutionDetail || typeof solutionDetail === 'undefined') return null
-
+  const prevUrlArr = prevURL ? prevURL.split('/') : []
+  const prevUrlSlug =
+    prevUrlArr.length >= 2 && prevUrlArr[prevUrlArr.length - 2] === 'solutions'
+      ? prevUrlArr[prevUrlArr.length - 1]
+      : solutionDetail.slug
   const breadcrumbData = [
     {
       name: 'Search',
@@ -38,15 +46,8 @@ export default function SolutionDetail({ solutionDetail }) {
       is_selected: false,
     },
     {
-      name:
-        solutionDetail.type === 'I'
-          ? 'Integrations'
-          : solutionDetail.type === 'U'
-          ? 'Usage Support'
-          : solutionDetail.type === 'C'
-          ? 'Consultation'
-          : 'Other',
-      url: '#',
+      name: 'Solutions',
+      url: `${process.env.SITE_BASE_URL}/solutions/${prevUrlSlug}`,
       is_selected: false,
     },
     {
@@ -57,8 +58,8 @@ export default function SolutionDetail({ solutionDetail }) {
   ]
   const copyUrl = process.env.SITE_BASE_URL + `/solution/${solutionDetail.slug}`
   const price = {
-    stripe_price_id: solutionDetail.pay_now_price_stripe_id ?? '',
-    price: solutionDetail.pay_now_price_unit_amount ?? 0,
+    stripe_price_id: solutionDetail.stripe_primary_price_stripe_id ?? '',
+    price: solutionDetail.stripe_primary_price_unit_amount ?? 0,
   }
 
   let primary_tag = solutionDetail.primary_tag
@@ -66,32 +67,53 @@ export default function SolutionDetail({ solutionDetail }) {
 
   const features = []
   let purchaseDisableOption = false
-  if (solutionDetail.eta_days) {
-    features.push({
-      id: 'eta-days',
-      name: `Estimated Days to Fulfill: ${solutionDetail.eta_days}`,
-      tooltipContent: 'This is an estimate on number of days it will take to deliver.',
-    })
+  if (solutionDetail.is_metered) {
+    if (solutionDetail.estimated_hours) {
+      features.push({
+        id: 'eta-hours',
+        name: `Estimated Hours to Fulfill: ${solutionDetail.estimated_hours}`,
+        tooltipContent: 'This is an estimate on number of hours it will take to provide.',
+      })
+    }
+    if (solutionDetail.billing_period) {
+      features.push({
+        id: 'billing_period',
+        name: `Billing Period: ${solutionDetail.billing_period}`,
+        tooltipContent: 'This is a billing period.',
+      })
+    }
+  } else {
+    if (solutionDetail.eta_days) {
+      features.push({
+        id: 'eta-days',
+        name: `Estimated Days to Fulfill: ${solutionDetail.eta_days}`,
+        tooltipContent: 'This is an estimate on number of days it will take to deliver.',
+      })
+    }
+    if (solutionDetail.has_free_consultation) {
+      features.push({
+        id: 'free-trial',
+        name: 'Free Consultation',
+        tooltipContent: 'This Solution has free consultation.',
+      })
+    }
+    if (solutionDetail.follow_up_hourly_rate) {
+      features.push({
+        id: 'hourly-rate',
+        name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
+        tooltipContent: 'This is the estimated hourly rate for followup work beyond scope of work.',
+      })
+    }
   }
-  if (solutionDetail.has_free_consultation) {
-    features.push({
-      id: 'free-trial',
-      name: 'Free Trial',
-      tooltipContent: 'This Solution has free trial.',
-    })
-  }
-  if (solutionDetail.follow_up_hourly_rate) {
-    features.push({
-      id: 'hourly-rate',
-      name: `$${solutionDetail.follow_up_hourly_rate} per/hour for follow-ups beyond SoW`,
-      tooltipContent: 'This is the estimated hourly rate for followup work beyond scope of work.',
-    })
+  const currCapacity = (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
+  const getFeatureName = () => {
+    const capacity = formatConsideringPlurality(currCapacity, 'more slot')
+    if (currCapacity === 0) return 'No slots available at this time'
+    return `Only ${capacity} available at this time`
   }
   features.push({
     id: 'capacity',
-    name: `Only ${
-      (solutionDetail?.capacity ?? 0) - (solutionDetail?.capacity_used ?? 0)
-    } more slots available at this time`,
+    name: getFeatureName(),
     tooltipContent:
       'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
   })
@@ -100,52 +122,22 @@ export default function SolutionDetail({ solutionDetail }) {
   }
 
   const solutionSidebarInfo = {
-    pay_now_price: price,
-    price: price?.price,
+    id: solutionDetail.id,
+    is_metered: solutionDetail.is_metered,
+    slug: solutionDetail.slug,
+    stripe_primary_price: price,
+    price: solutionDetail.is_metered ? solutionDetail.blended_hourly_rate ?? 0 : price?.price,
     features: features,
     purchaseDisableOption: purchaseDisableOption,
+    type: solutionDetail?.type,
+    has_free_consultation: solutionDetail.has_free_consultation,
+    consultation_scheduling_link: solutionDetail.consultation_scheduling_link,
   }
-  const provide_organization = solutionDetail.organization
-    ? {
-        name: solutionDetail.organization.name,
-        logo_url: solutionDetail.organization.logo_url,
-        website: solutionDetail.organization.website,
-      }
-    : null
-  const introductionData = {
-    id: solutionDetail.id,
-    slug: solutionDetail.slug,
-    assets: solutionDetail.assets,
-    tag: {
-      name:
-        solutionDetail.type === 'I'
-          ? 'Integrations'
-          : solutionDetail.type === 'U'
-          ? 'Usage Support'
-          : solutionDetail.type === 'C'
-          ? 'Consultation'
-          : 'Other',
-      slug:
-        solutionDetail.type === 'I'
-          ? 'integrations'
-          : solutionDetail.type === 'U'
-          ? 'usage-support'
-          : solutionDetail.type === 'C'
-          ? 'consultation'
-          : 'other',
-    },
-    title: solutionDetail.title,
-    upvoted_count: solutionDetail.upvotes_count,
-    booked_count: solutionDetail.booked_count,
-    provide_organization,
-    point_of_contact: solutionDetail.point_of_contact,
-    overview_description: solutionDetail.description ?? '',
-    scope_of_work_description: solutionDetail.scope_of_work ?? '',
-    sidebar_info: solutionSidebarInfo,
-    questions: solutionDetail.questions,
-    my_solution_vote: solutionDetail?.my_solution_vote,
-    my_solution_bookmark: solutionDetail?.my_solution_bookmark,
-  }
+  solutionDetail.tags.push({
+    name: solutionDetail.type ? unslugify(String(SolutionTypes[solutionDetail.type])) : 'Other',
+    slug: slugify(solutionDetail.type ? SolutionTypes[solutionDetail.type] : 'Other').toLowerCase(),
+  })
+  const sidebar_info = solutionSidebarInfo
   const relatedProducts = solutionDetail.assets ?? []
 
   return (
@@ -153,13 +145,14 @@ export default function SolutionDetail({ solutionDetail }) {
       <DynamicHeader
         title={`${solutionDetail.title} | ${primary_tag?.name} Solution`}
         description={solutionDetail.description}
+        image={solutionDetail.cover_image}
       />
       {/* Can also use scope_of_work field on solutionDetail for description */}
       <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6">
         <Breadcrumb breadcrumbs={breadcrumbData} copyUrl={copyUrl} />
         <div className="flex mt-6">
           <div className="flex w-full border border-solid rounded-md md:p-4 md:mr-4 border-border-default">
-            <SolutionDetailIntroduction introductionData={introductionData} />
+            <SolutionDetailIntroduction introductionData={solutionDetail} sidebar_info={sidebar_info} />
           </div>
           <SolutionDetailSidebar
             detailInfo={solutionSidebarInfo}

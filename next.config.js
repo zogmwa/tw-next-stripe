@@ -10,6 +10,8 @@ const nextConfig = {
 
     // Frontend Site URL (For prod this should be https://www.taggedweb.com)
     SITE_BASE_URL: process.env.SITE_BASE_URL,
+    TAGGEDWEB_SUPPORT_EMAIL: process.env.TAGGEDWEB_SUPPORT_EMAIL,
+    STRIPE_PUBLISH_KEY: process.env.STRIPE_PUBLISH_KEY,
 
     ACCESS_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-access-token',
     REFRESH_TOKEN_LOCAL_STORAGE_KEY: 'taggedweb-refresh-token',
@@ -34,6 +36,8 @@ const nextConfig = {
     FAILURE_PAGE_URL_LOCAL_STORAGE_KEY: 'taggedweb-failure-redirect',
     SENTRY_DSN: 'https://0b1c30a4f7ac46a98e8345b97526ad1d@o1064580.ingest.sentry.io/6125907',
     IS_SENTRY_ENABLED: 'true',
+    googleAnalytics: 'G-CJ16362SSH',
+    googleTagManager: 'GTM-NCJBMVP',
   },
   async rewrites() {
     return {
@@ -41,13 +45,8 @@ const nextConfig = {
         {
           // For next two redirects refer ISSUE#775 or PR#782
           // This redirect is used because otherwise /[sitemap_url].tsx will be needed instead of /sitemap/[sitemap_url].tsx. This is used to show 404 pages on /abc like pages. Even if we could return 404 page from /[sitemap_url].tsx for /abc, it would be slower.
-          source: '/:sitemap_url(sitemap_\\d{1,}\\.xml)',
+          source: '/:sitemap_url(sitemap_.*)',
           destination: '/sitemap/:sitemap_url',
-        },
-        {
-          // This redirect is used to show sitemaps such as sitemap_1.xml only on sitemap_1.xml and not on /sitemap/sitemap_1.xml due to direct match of dynamic route of /sitemap/[sitemap_url].tsx
-          source: '/sitemap/:anything',
-          destination: '/404',
         },
       ],
     }

@@ -60,7 +60,7 @@ export function SubscribeComponent() {
                 type="text"
                 name="contact"
                 placeholder="Enter your email"
-                className="w-full py-3 pl-2 text-sm text-gray-700 border-none rounded-md "
+                className="w-full py-3 pl-2 ml-1 text-sm text-gray-700 border-none rounded-md "
                 value={contactEmail}
                 onChange={(e) => {
                   setContactEmail(e.target.value)
@@ -77,12 +77,12 @@ export function SubscribeComponent() {
           </form>
         )}
       </div>
-      <div className="flex flex-col items-center justify-between w-full py-3 sm:flex-row sm:px-4">
-        <div className="flex items-center pt-2 copyright">
+      <div className="flex flex-col items-center justify-center w-full py-3 sm:flex-row sm:px-4">
+        <div className="flex items-center copyright">
           <AiOutlineCopyrightCircle className="text-sm text-white" />
-          <span className="text-white ext-sm ">2021 TaggedWeb All rights reserved.</span>
+          <span className="text-white ext-sm ">{new Date().getFullYear()} TaggedWeb All rights reserved.</span>
         </div>
-        <div className="flex justify-around py-1 space-x-4 other-sites">
+        <div className="flex justify-around py-1 ml-4 space-x-4 other-sites">
           <a
             href="https://twitter.com/TheTaggedWeb"
             target="_blank"

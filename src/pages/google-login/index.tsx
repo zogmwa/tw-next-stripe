@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Spinner } from '@taggedweb/components/spinner'
 import { useUserContext } from '@taggedweb/hooks/use-user'
+import { TOAST_GOOGLE_CONNECT_SUCCESS, TOAST_LOGIN_SUCCESS } from '@taggedweb/utils/token-id'
 
 /**
  * This is a component to handle the callback from Google for OAuth flow.
@@ -53,7 +54,9 @@ export default function LoginWithGoogle() {
         })
 
         await mutate('/api/user')
-        toast.success('Login Successful and Google Account Connected')
+        toast.success('Login Successful and Google Account Connected', {
+          id: TOAST_GOOGLE_CONNECT_SUCCESS,
+        })
 
         setShouldNextPageRedirect(true)
       } catch (error) {
@@ -89,7 +92,9 @@ export default function LoginWithGoogle() {
               })
 
               await mutate('/api/user')
-              toast.success('Login Successful')
+              toast.success('Login Successful', {
+                id: TOAST_LOGIN_SUCCESS,
+              })
 
               setShouldNextPageRedirect(true)
             }

@@ -26,28 +26,32 @@ function ReviewCardComponent({ className, review }: ReviewCardProps) {
 
   return (
     <div className={`flex flex-col w-full ${className}`}>
-      <div className="flex items-center justify-start mb-2 space-x-4">
-        <UserAvatar user={review.user} size={10} />
-        <div className="text-md">
-          <h3 className="font-medium text-text-primary">
-            {review.user.username}
-            <span className="px-2 text-xs text-text-secondary">
-              {review.user.organization ? (review.user.organization.name ? '@' : '') : ''}
-            </span>
-            <span className="text-xs text-text-secondary">
-              {review.user.organization ? review.user.organization.name ?? '' : ''}
-            </span>
-          </h3>
-          <StyledStarRating
-            name="totalMark"
-            className="mt-1 space-x-1"
-            defaultValue={Math.ceil(Number(review.rating)) / 2}
-            precision={0.5}
-            size="1rem"
-            readOnly={true}
-          />
+      {review.user && (
+        <div className="flex items-center justify-start mb-2 space-x-4">
+          <UserAvatar user={review.user} size={10} />
+          <div className="text-md">
+            <h3 className="font-medium text-text-primary">
+              {review.user.username}
+              <span className="px-2 text-xs text-text-secondary">
+                {review.user.organization ? (review.user.organization.name ? '@' : '') : ''}
+              </span>
+              <span className="text-xs text-text-secondary">
+                {review.user.organization ? review.user.organization.name ?? '' : ''}
+              </span>
+            </h3>
+            <StyledStarRating
+              name="totalMark"
+              className="mt-1 space-x-1"
+              defaultValue={Math.ceil(Number(review.rating)) / 2}
+              precision={0.5}
+              size="1rem"
+              readOnly={true}
+            />
+          </div>
         </div>
-      </div>
+      )}
+      {!review.user && <p className="mx-auto mb-4 text-base text-gray-500">No Reviews yet!</p>}
+
       {isUrlHealthy(review.video_url) && (
         <iframe
           className="w-auto mb-4 rounded"

@@ -36,7 +36,7 @@ export function SimpleImageCarousel() {
     <Carousel>
       {images.map((url) => (
         <Carousel.Item key={url}>
-          <img className="object-contain" src={url} />
+          <img className="object-contain" src={url} alt="Software Snapshot" />
         </Carousel.Item>
       ))}
     </Carousel>

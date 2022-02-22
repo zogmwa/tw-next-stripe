@@ -173,8 +173,8 @@ export const TopSolutionTags = [
   },
   {
     description: '',
-    name: 'Integrate Datadog APM',
-    slug: 'integrate-datadog-apm',
+    name: 'HTTP to HTTPS Migration',
+    slug: 'http-to-https',
   },
   {
     description: '',
@@ -182,13 +182,34 @@ export const TopSolutionTags = [
     slug: 'integrate-social-authentication',
   },
   {
-    description: '',
-    name: 'Reduce AWS Costs',
-    slug: 'reduce-aws-tools',
+    description:
+      'If you use several AWS services like EC2, S3, RDS, Load Balancers, ECS and are unsure how to reduce or optimize your costs. Our AWS Cost Optimization focused solutions can help you',
+    name: 'AWS Resources and Cost Optimization',
+    slug: 'aws-resources-cost-optimization',
   },
   {
     description: '',
     name: 'Send SMS from your Application',
-    slug: 'integrate-twilio-sms',
+    slug: 'integrate-sms-api',
+  },
+  {
+    description: '',
+    name: 'Artificial Intelligence Solutions',
+    slug: 'artificial-intelligence',
+  },
+  {
+    description: '',
+    name: 'DevOps Solutions',
+    slug: 'devops',
+  },
+  {
+    description: '',
+    name: 'Blockchain Solutions',
+    slug: 'blockchain',
+  },
+  {
+    description: '',
+    name: 'Frontend and React',
+    slug: 'react-frontend',
   },
 ]

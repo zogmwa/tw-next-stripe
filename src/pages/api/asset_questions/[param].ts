@@ -1,7 +1,7 @@
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { withSentry } from '@sentry/nextjs'
+import { serverSideClient } from '@taggedweb/utils/client'
 
 export default withSentry(
   withApiAuthRequired(async (req, res) => {
@@ -10,8 +10,8 @@ export default withSentry(
      */
     if (req.method === 'PATCH') {
       const { param } = req.query
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.patch(`/questions/${param}/`, req.body, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClient(req).patch(`/questions/${param}/`, req.body, {
         headers: {
           Authorization: `Bearer ${access}`,
         },
@@ -24,8 +24,8 @@ export default withSentry(
      */
     if (req.method === 'GET') {
       const { param } = req.query
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.get(`/questions/?asset__slug=${param}`, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClient(req).get(`/questions/?asset__slug=${param}`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

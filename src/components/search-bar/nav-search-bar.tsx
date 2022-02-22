@@ -5,6 +5,7 @@ import AsyncSelect from 'react-select/async'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { searchSuggestions } from '@taggedweb/queries/search'
+import { TOAST_TAG_EMPTY_ERROR, TOAST_TAG_LIMIT_ERROR } from '@taggedweb/utils/token-id'
 
 type SearchByTagsProps = {
   onSubmit?: (query: string) => void
@@ -55,7 +56,9 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     } else {
       if (value.length > 5) {
         setError('A maximum of 5 tags are allowed.')
-        toast.error('A maximum of 5 tags are allowed.')
+        toast.error('A maximum of 5 tags are allowed.', {
+          id: TOAST_TAG_LIMIT_ERROR,
+        })
       } else {
         setError('')
         setTags(value)
@@ -74,7 +77,9 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
     event.preventDefault()
     if (tags.length === 0) {
       setError('Please enter a tag')
-      toast.error('Please enter a tag')
+      toast.error('Please enter a tag', {
+        id: TOAST_TAG_EMPTY_ERROR,
+      })
     } else {
       setError('')
       if (onSubmit) {
@@ -98,8 +103,8 @@ export function NavSearchBar({ onSubmit, className, style }: SearchByTagsProps) 
         components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
         onChange={handleChange}
         loadOptions={searchSuggestions}
-        instanceId
-        className="flex-1 mb-2 md:mb-0"
+        instanceId="SelectTag"
+        className="flex-1 mb-2 md:mb-0 remove-input-txt-border"
         classNamePrefix="select"
         placeholder={placeholderComponent}
       />

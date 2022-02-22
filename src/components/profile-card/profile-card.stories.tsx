@@ -27,6 +27,7 @@ const profileContextValue: Profile = {
   first_name: 'Pranjal',
   last_name: 'Mittal',
   avatar: null,
+  has_payment_method: null,
   organization: {
     name: 'TaggedWeb',
     website: null,

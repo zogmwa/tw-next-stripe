@@ -6,6 +6,7 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { MdExpandMore } from 'react-icons/md'
+import { TOAST_SERVICE_COMPARE_LIST_ERROR } from '@taggedweb/utils/token-id'
 import { Button } from '../button'
 import { MAX_COMPARE_COUNT } from '../../utils/constants'
 
@@ -30,9 +31,13 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
   }, [compareList])
   const handleCompare = () => {
     if (compareList.length < 2) {
-      toast.error('You should check at least 2 service.')
+      toast.error('You should check at least 2 service.', {
+        id: TOAST_SERVICE_COMPARE_LIST_ERROR,
+      })
     } else if (compareList.length > MAX_COMPARE_COUNT) {
-      toast.error('You can compare at most 3 services.')
+      toast.error('You can compare at most 3 services.', {
+        id: TOAST_SERVICE_COMPARE_LIST_ERROR,
+      })
     } else {
       const services = compareList.map((item) => item.slug)
       const compareParams = services.join('-vs-')
@@ -66,7 +71,7 @@ function CompareAccordianComponent({ checkedList = [], onServiceRemove }: Compar
                     <div key={index} className="flex items-start justify-start w-full py-2 space-x-4">
                       <div className="font-semibold">{index + 1}.</div>
                       <div className="flex flex-row items-start justify-start flex-1 space-x-2">
-                        <img src={service.logo_url} alt="logo" width="30" className="rounded" />
+                        <img src={service.logo_url} alt="Software Logo" width="30" className="rounded" />
                         <div className="text-base font-medium">{service.name}</div>
                       </div>
                       <div

@@ -23,7 +23,7 @@ export function ProductContentCarousel({ promo_video, images }: ProductContentCa
           )}
           {images.map((image) => (
             <Carousel.Item key={image.url}>
-              <img className="object-contain" src={image.url} />
+              <img className="object-contain" src={image.url} alt="Snapshots Of Software" />
             </Carousel.Item>
           ))}
         </Carousel>

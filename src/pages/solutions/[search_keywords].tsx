@@ -13,6 +13,20 @@ import { Button } from '@taggedweb/components/button'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
 import * as Sentry from '@sentry/nextjs'
+import { Modal } from '@taggedweb/components/Modal/modal'
+import { Formik } from 'formik'
+import { Textarea } from '@taggedweb/components/textarea'
+import * as yup from 'yup'
+import { Input } from '@taggedweb/components/input'
+import toast from 'react-hot-toast'
+import { submitUserProblems } from '@taggedweb/queries/service'
+import { useUserContext } from '@taggedweb/hooks/use-user'
+import { useRouter } from 'next/router'
+
+const UserProblemFormSchema = yup.object().shape({
+  email: yup.string().email().required('Please enter a valid email'),
+  description: yup.string().required('Please share some details'),
+})
 export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     query: { search_keywords },
@@ -31,7 +45,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
     keywords = SplitTheString(search_keywords)
     defaultUrl = '?q=' + keywords.join('&q=')
     const sendUrl = `${defaultUrl}&page=1&offest=0&limit=20`
-    solutionData = await fetchSolutionList(context.req.session, sendUrl)
+    solutionData = await fetchSolutionList(context.req, sendUrl)
   } catch (error) {
     Sentry.captureException(error)
     // eslint-disable-next-line
@@ -54,6 +68,12 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
   const [filtering, setFiltering] = useState('')
   const [minPriceFilter, setMinPriceFilter] = useState('')
   const [maxPriceFilter, setMaxPriceFilter] = useState('')
+  const [showClearFilter, setShowClearFilter] = useState(false)
+  const [isOpenUserProblemModal, setIsOpenUserProblemModal] = useState(false)
+  const user = useUserContext()
+  const { isLoggedIn } = useUserContext()
+  const router = useRouter()
+  const { search_keywords } = router?.query
 
   const suggestionTags = []
   for (let i = 0; i < solutionData.results.length; i++) {
@@ -76,39 +96,14 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
 
   const handlePagination = (event, pageValue) => {
     setPage(pageValue)
-    const offset = (pageValue - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-    fetchSolutionList(sendUrl)
   }
 
   const orderingSolution = (orderValue) => {
     setOrdering(orderValue)
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (orderValue ? `&ordering=${orderValue}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-    fetchSolutionList(sendUrl)
   }
 
   const filterSolution = (filterValue) => {
     setFiltering(filterValue)
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPriceFilter ? `&pay_now_price__unit_amount__gte=${minPriceFilter}` : '') +
-      (maxPriceFilter ? `&pay_now_price__unit_amount__lte=${maxPriceFilter}` : '') +
-      (filterValue ? `&has_free_consultation=${filterValue}` : '')
-
-    fetchSolutionList(sendUrl)
   }
 
   const filterByPrice = (minPrice, maxPrice) => {
@@ -116,27 +111,52 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     maxPrice = maxPrice ? maxPrice * 100 : ''
     setMinPriceFilter(minPrice)
     setMaxPriceFilter(maxPrice)
-
-    const offset = (page - 1) * pageLen
-    const sendUrl =
-      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
-      (ordering ? `&ordering=${ordering}` : '') +
-      (minPrice ? `&pay_now_price__unit_amount__gte=${minPrice}` : '') +
-      (maxPrice ? `&pay_now_price__unit_amount__lte=${maxPrice}` : '') +
-      (filtering ? `&has_free_consultation=${filtering}` : '')
-
-    fetchSolutionList(sendUrl)
   }
+
+  const clearAllPriceFilter = () => {
+    setMinPriceFilter('')
+    setMaxPriceFilter('')
+    setFiltering('')
+    if (minPriceFilter || maxPriceFilter || filtering) {
+      const offset = (page - 1) * pageLen
+      const sendUrl =
+        `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` + (ordering ? `&ordering=${ordering}` : '')
+      fetchSolutionList(sendUrl)
+    }
+    setShowClearFilter(false)
+  }
+
   const [error, setError] = useState('')
   useEffect(() => {
     if (solutionList.length === 0) {
       setError(
-        'No Results Found. Try again or reach us out directly at contact@taggedweb.com with your problem statement.',
+        'No results found. Please describe your problem below. (If you would like to partner with us on offering a solution, kindly reach out to us at contact@taggedweb.com)',
       )
     } else {
       setError('')
     }
   }, [solutionList])
+
+  useEffect(() => {
+    if (minPriceFilter || maxPriceFilter || filtering === 'true') {
+      setShowClearFilter(true)
+    } else {
+      setShowClearFilter(false)
+    }
+  }, [minPriceFilter, maxPriceFilter, filtering])
+
+  useEffect(() => {
+    const offset = (page - 1) * pageLen
+
+    const sendUrl =
+      `${defaultUrl}&page=${page}&offset=${offset}&limit=${pageLen}` +
+      (ordering ? `&ordering=${ordering}` : '') +
+      (minPriceFilter ? `&stripe_primary_price__unit_amount__gte=${minPriceFilter}` : '') +
+      (maxPriceFilter ? `&stripe_primary_price__unit_amount__lte=${maxPriceFilter}` : '') +
+      (filtering ? `&has_free_consultation=${filtering}` : '')
+
+    fetchSolutionList(sendUrl)
+  }, [page, ordering, minPriceFilter, maxPriceFilter, filtering])
 
   return (
     <>
@@ -147,7 +167,13 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
             <SortServiceList onChange={orderingSolution} />{' '}
           </div>
           <div className="border rounded">
-            <FilterServiceList onChange={filterSolution} filterByPrice={filterByPrice} label="Consultation" />
+            <FilterServiceList
+              onChange={filterSolution}
+              filterByPrice={filterByPrice}
+              showClearFilter={showClearFilter}
+              clearAllPriceFilter={clearAllPriceFilter}
+              label="Consultation"
+            />
           </div>
         </div>
         <div className="flex flex-col justify-between w-full p-2 md:w-3/4 md:ml-3">
@@ -155,9 +181,11 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
           <div className="flex items-center justify-between md:hidden">
             <h1 className="text-xl font-bold text-black">All &#8220;{pageTitle}&#8221; Solutions</h1>
             <MobileViewSortAndFilterServiceList
-              filterByPrice={filterByPrice}
               onSortChange={orderingSolution}
               onFilterChange={filterSolution}
+              filterByPrice={filterByPrice}
+              showClearFilter={showClearFilter}
+              clearAllPriceFilter={clearAllPriceFilter}
               filterLabel="Consultation"
             />
           </div>
@@ -184,12 +212,93 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
                 ))}
               </div>
               <div className="flex justify-end p-2">
-                <Pagination page={page} count={pageCount} onChange={handlePagination} />
+                {pageCount > 1 && <Pagination page={page} count={pageCount} onChange={handlePagination} />}
               </div>
             </div>
           )}
+          <div className="flex flex-col p-4 m-2 border border-solid rounded cursor-pointer border-border-default">
+            <p>
+              Couldn&apos;t find a listed solution for your problem? Please tell us about it. We&apos;d love to help.
+            </p>
+            <a
+              href="#"
+              id="userProblem"
+              onClick={() => setIsOpenUserProblemModal(!isOpenUserProblemModal)}
+              className="md:items-center md:cursor-pointer md:space-x-2"
+            >
+              <Button size="small">Describe your Problem</Button>
+            </a>
+          </div>
         </div>
       </div>
+      <Modal isOpen={isOpenUserProblemModal} setIsOpen={setIsOpenUserProblemModal}>
+        <>
+          <Formik
+            initialValues={{ email: user?.email, description: '' }}
+            validationSchema={UserProblemFormSchema}
+            onSubmit={async (values) => {
+              const data = isLoggedIn
+                ? await submitUserProblems(String(search_keywords), user, values.description, values.email)
+                : await submitUserProblems(String(search_keywords), null, values.description, values.email)
+              if (data) {
+                toast.success('Claim submitted for review.')
+              }
+              setIsOpenUserProblemModal(false)
+            }}
+          >
+            {({ handleSubmit, values, handleChange, handleBlur, touched, errors, isSubmitting }) => (
+              <>
+                <form onSubmit={handleSubmit}>
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="email">
+                    Email Id
+                  </label>
+                  <Input
+                    placeholder="Enter your email"
+                    id="email"
+                    className="mb-4"
+                    onChange={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    errorMessage={touched.email ? errors.email : undefined}
+                    success={touched.email && !errors.email}
+                  />
+                  {/* Keeping it for form Design reference */}
+                  {/* <label className="block mb-2 text-sm text-text-primary" htmlFor="budget">
+                    What is your budget for this service?
+                  </label>
+                  <Input
+                    id="budget"
+                    className="mb-4"
+                    onChange={handleChange('budget')}
+                    onBlur={handleBlur('budget')}
+                    value={values.budget}
+                    errorMessage={touched.budget ? errors.budget : undefined}
+                    success={touched.budget && !errors.budget}
+                  /> */}
+                  <label className="block mb-2 text-sm text-text-primary" htmlFor="description">
+                    What is the problem that you&apos;re looking to solve. Kindly be as descriptive as possible:
+                  </label>
+                  <Textarea
+                    placeholder="I'm looking for a consultation with someone experienced with integrating and using XYZ Software, or setting up an email-marketing tool on my AWS account"
+                    id=""
+                    className="mb-4"
+                    onChange={handleChange('description')}
+                    onBlur={handleBlur('description')}
+                    value={values.description}
+                    errorMessage={touched.description ? errors.description : undefined}
+                    success={touched.description && !errors.description}
+                  />
+                  <div className="flex items-center space-x-4">
+                    <Button type="submit" buttonType="primary" loading={isSubmitting} disabled={isSubmitting}>
+                      Submit
+                    </Button>
+                  </div>
+                </form>
+              </>
+            )}
+          </Formik>
+        </>
+      </Modal>
     </>
   )
 }

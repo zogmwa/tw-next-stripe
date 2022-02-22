@@ -1,4 +1,4 @@
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { getAccessToken } from '@taggedweb/utils/token'
 import { withApiAuthRequired } from '@taggedweb/utils/auth-wrappers'
 import { withSentry } from '@sentry/nextjs'
@@ -10,8 +10,8 @@ export default withSentry(
   withApiAuthRequired(async (req, res) => {
     if (req.method === 'DELETE') {
       const { id } = req.query
-      const access = await getAccessToken(req.session)
-      const { data } = await clientWithRetries.delete(`/solution_votes/${id}`, {
+      const access = await getAccessToken(req)
+      const { data } = await serverSideClientWithRetries(req).delete(`/solution_votes/${id}`, {
         headers: {
           Authorization: `Bearer ${access}`,
         },

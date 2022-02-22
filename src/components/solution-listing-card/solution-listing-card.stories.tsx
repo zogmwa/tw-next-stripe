@@ -9,6 +9,7 @@ export default {
 } as Meta
 
 const listingData = {
+  id: 1,
   slug: 'improve',
   tags: [
     {
@@ -24,12 +25,18 @@ const listingData = {
     'Improve the performance of your Python application instrumenting it with Datadog APM, Uncover performance bottlenecks',
   type: 'U',
   upvotes_count: 324,
-  pay_now_price_stripe_id: 'price_1K6JX7CD3MPWHCo8oL6VpZD1',
-  pay_now_price_unit_amount: 1000,
+  stripe_primary_price_stripe_id: 'price_1K6JX7CD3MPWHCo8oL6VpZD1',
+  stripe_primary_price_unit_amount: 1000,
   avg_rating: '4.700',
   organization: {
     name: 'Solution Provider Organization',
     logo_url: null,
+  },
+  point_of_contact: {
+    id: 1,
+    username: 'sarthak',
+    first_name: 'Sarthak',
+    last_name: 'Agarwal',
   },
   assets: [
     {
@@ -66,6 +73,11 @@ const listingData = {
       website: null,
     },
   ],
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
 
 export function DefaultSolutionListingCard() {

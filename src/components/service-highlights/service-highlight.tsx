@@ -261,7 +261,7 @@ function HighlightContentComponent({
         {editAllowed ? (
           <div className="flex items-center">
             <ShowEditable onEdit={() => setIsOrganizationOpen(true)}>
-              <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
+              <h1 className="text-base font-medium text-text-primary">Used by Companies like</h1>
             </ShowEditable>
             <Modal isOpen={isOrganizationOpen} setIsOpen={setIsOrganizationOpen} isModalOverflow={true} size="4xl">
               <LinkUsedByCompanies
@@ -272,7 +272,7 @@ function HighlightContentComponent({
             </Modal>
           </div>
         ) : (
-          <h1 className="text-base font-medium text-text-primary">Used by Compaines like</h1>
+          <h1 className="text-base font-medium text-text-primary">Used by Companies like</h1>
         )}
         <Carousel buttonsShown={false} className="mt-2" itemsContainerClassName="border-none">
           {showCustomers.map((showCustomer, index) => (

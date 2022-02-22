@@ -1,18 +1,24 @@
+import { Solution } from './solution'
+import { UserInfo } from './user'
+
 export type solutionContract = {
-  solution: {
-    id: number
-    assets: any[]
-    avg_rating: number
-    my_solution_review: string
-    my_solution_review_id: number
-    title: string
-    organization: any
-    upvotes_count: number
-    slug: string
-    pay_now_price_unit_amount: number
-  }
+  id: number
+  rating?: number | string
+  solution: Solution
   status: string
   started_at: string | null
+  created: string
   updated: string
   price_at_booking: number
+  provider_notes: string
+  pause_status: string | null
+  metered_booking_info: null | {
+    payment_status: null | string
+    start_date: null | string
+    billing_cycle_anchor: null | string
+    collection_method: null | string
+    current_period_end: null | string
+  }
+  booked_by: UserInfo
+  is_payment_completed?: boolean
 }

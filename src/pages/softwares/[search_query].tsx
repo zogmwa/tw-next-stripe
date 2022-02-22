@@ -7,16 +7,19 @@ import {
   MobileViewSortAndFilterServiceList,
   FilterServiceList,
 } from '@taggedweb/components/service-list-filter'
-import { clientWithRetries } from '@taggedweb/utils/clientWithRetries'
+import { serverSideClientWithRetries } from '@taggedweb/utils/clientWithRetries'
 import { SearchBar } from '@taggedweb/components/search-bar'
 import { Asset } from '@taggedweb/types/asset'
 import { CompareAccordian } from '@taggedweb/components/compare-accordian'
 import { DynamicHeader } from '@taggedweb/components/dynamic-header'
 import { unslugify } from '@taggedweb/utils/unslugify'
+import { GetServerSidePropsContext } from 'next'
 
-export const getServerSideProps = async (context: {
-  query: { search_query: string; page: string; order: string; free_trial: string }
-}) => {
+export const getServerSideProps = async (
+  context: {
+    query: { search_query: string; page: string; order: string; free_trial: string }
+  } & GetServerSidePropsContext,
+) => {
   const tags = context.query.search_query
   const pg = context.query.page
   const order = context.query.order ? context.query.order : ''
@@ -35,7 +38,9 @@ export const getServerSideProps = async (context: {
   if (free_trial) {
     query = query + `&has_free_trial=${free_trial}`
   }
-  const { data } = await clientWithRetries.get<{ results: Asset[]; count: string }>(`/assets/?${query}`)
+  const { data } = await serverSideClientWithRetries(context.req).get<{ results: Asset[]; count: string }>(
+    `/assets/?${query}`,
+  )
   const totalCount = parseInt(data.count)
   const pageCount = totalCount % 10 === 0 ? totalCount / 10 : Math.floor(totalCount / 10) + 1
   const defaultArr = tags.split(',').map((tag) => ({ value: tag, label: tag }))
@@ -155,8 +160,7 @@ export default function ServiceList({
             router.push(`/softwares/${selectedTag}`)
           }}
         />
-        {error && <div className="font-medium text-center text-red-500">{error}</div>}
-        {!error && (
+        <>
           <div className="flex flex-row space-x-2">
             <div className="hidden w-1/4 space-y-4 md:flex md:flex-col">
               <div className="border rounded">
@@ -243,28 +247,33 @@ export default function ServiceList({
                   </div>
                 </div>
               </div>
-              <div className="max-w-full px-2 mb-2 border rounded-md">
-                <ul className="flex flex-col justify-start pb-8 divide-y divide">
-                  {services.map((service, index) => {
-                    const isChecked = !!checkedList.find((item) => item.slug === service.slug)
-                    return (
-                      <li
-                        key={index}
-                        className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
-                      >
-                        <ServiceCard service={service} onToggleCompare={handleChecked} isChecked={isChecked} />
-                      </li>
-                    )
-                  })}
-                </ul>
-                <CompareAccordian checkedList={checkedList} onServiceRemove={handleServiceRemove} />
-              </div>
+              {error && <div className="text-sm font-medium text-center text-red-500">{error}</div>}
+              {!error && (
+                <div className="max-w-full px-2 mb-2 border rounded-md">
+                  <ul className="flex flex-col justify-start pb-8 divide-y divide">
+                    {services.map((service, index) => {
+                      const isChecked = !!checkedList.find((item) => item.slug === service.slug)
+                      return (
+                        <li
+                          key={index}
+                          className="max-w-full mt-2 transition duration-500 ease-in-out bg-background-surface hover:bg-background-light"
+                        >
+                          <ServiceCard service={service} onToggleCompare={handleChecked} isChecked={isChecked} />
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <CompareAccordian checkedList={checkedList} onServiceRemove={handleServiceRemove} />
+                </div>
+              )}
             </div>
           </div>
-        )}
-        <div className="flex justify-end">
-          <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />
-        </div>
+          {!error && (
+            <div className="flex justify-end">
+              {pageCount > 1 && <Pagination page={currentPage} count={pageCount} onChange={handlePagination} />}
+            </div>
+          )}
+        </>
       </div>
     </>
   )

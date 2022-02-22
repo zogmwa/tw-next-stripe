@@ -6,6 +6,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { UserContextType } from '@taggedweb/types/user-context-type'
 import { User } from '@taggedweb/types/user'
+import { TOAST_LOGIN_FAILED, TOAST_LOGOUT_FAILED } from '@taggedweb/utils/token-id'
 
 /**
  * Fetches user details from /api/user. Provides user details and essential methods such as isLoggedIn, logout, mutateUser.
@@ -24,7 +25,9 @@ export function useSessionUser(): UserContextType {
         await mutateUser(data)
         return true
       } catch (error) {
-        toast.error('Invalid username and password')
+        toast.error('Invalid username and password', {
+          id: TOAST_LOGIN_FAILED,
+        })
         return false
       }
     },
@@ -32,17 +35,24 @@ export function useSessionUser(): UserContextType {
   )
 
   const signUpWithEmailAndPassword = useCallback(
-    async (email: string, password1: string, password2: string): Promise<boolean> => {
+    async (
+      first_name: string,
+      last_name: string,
+      email: string,
+      password1: string,
+      password2: string,
+    ): Promise<{ success: boolean; errorMessage?: any }> => {
       try {
-        const { data } = await axios.post('/api/signup/', { email, password1, password2 })
+        const { data } = await axios.post('/api/signup/', { first_name, last_name, email, password1, password2 })
         await mutateUser(data)
-        return true
+        return { success: true }
       } catch (error) {
         if (error.response.data) {
           const obj = error.response.data
-          toast.error(obj[Object.keys(obj)[0]])
+          // toast.error(obj[Object.keys(obj)[0]])
+          return { success: false, errorMessage: obj[Object.keys(obj)[0]] }
         }
-        return false
+        return { success: false, errorMessage: 'Something went wrong!' }
       }
     },
     [mutateUser],
@@ -53,7 +63,9 @@ export function useSessionUser(): UserContextType {
       if (typeof window !== 'undefined') {
         try {
           if (!user?.authVerified) {
-            toast.error('You are not logged in')
+            toast.error('You are not logged in', {
+              id: TOAST_LOGOUT_FAILED,
+            })
             return
           }
 
@@ -64,7 +76,9 @@ export function useSessionUser(): UserContextType {
             if (error.response.status !== 401) throw error
           }
         } catch (error) {
-          toast.error('Could Not Logout')
+          toast.error('Could Not Logout', {
+            id: TOAST_LOGOUT_FAILED,
+          })
         }
       }
     },

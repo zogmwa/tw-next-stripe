@@ -18,7 +18,9 @@ describe('Homepage', () => {
   it('renders homepage banner text', async () => {
     render(mockRouter())
     await waitFor(() => {
-      const myNode = screen.getByText(/We may have a solution. Just search!/i)
+      const myNode = screen.getByText(
+        /Consult with the best Software Engineers, Researchers, Solution Architects, Tech-Marketers and SaaS Support Teams/i,
+      )
       expect(myNode).toBeInTheDocument()
     })
   })

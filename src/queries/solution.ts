@@ -1,15 +1,29 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import * as Sentry from '@sentry/nextjs'
-
+import { solutionContract } from '@taggedweb/types/contracts'
+import {
+  TOAST_SIMILAR_SOLUTIONS_FETCH_ERROR,
+  TOAST_SOLUTION_BOOKING_RATING_EDIT_ERROR,
+  TOAST_SOLUTION_BOOKMARK_DELETE_ERROR,
+  TOAST_SOLUTION_BOOKMARK_TOGGLE_ERROR,
+  TOAST_SOLUTION_CHECKOUT_ERROR,
+  TOAST_SOLUTION_DOWNVOTE_TOGGLE_ERROR,
+  TOAST_SOLUTION_FETCH_ERROR,
+  TOAST_SOLUTION_REVIEW_ADD_ERROR,
+  TOAST_SOLUTION_REVIEW_DELETE_ERROR,
+  TOAST_SOLUTION_REVIEW_EDIT_ERROR,
+  TOAST_SOLUTION_UPVOTE_TOGGLE_ERROR,
+} from '@taggedweb/utils/token-id'
 export async function fetchSolutionDetail(solutionSlug) {
   try {
     const { data } = await axios.get(`/api/solutions/detail/${solutionSlug}`)
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Please Try Again. Could not load the data')
+    toast.error('Please Try Again. Could not load the data', {
+      id: TOAST_SOLUTION_FETCH_ERROR,
+    })
     return null
   }
 }
@@ -21,8 +35,9 @@ export async function fetchSimilarProducts(solutionSlug) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Could not get similar software.')
+    toast.error('Could not get similar software.', {
+      id: TOAST_SIMILAR_SOLUTIONS_FETCH_ERROR,
+    })
     return null
   }
 }
@@ -35,9 +50,9 @@ export async function toggleUpVoteSolution(solutionId: number) {
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not vote a solution.')
+    toast.error('Could not vote a solution.', {
+      id: TOAST_SOLUTION_UPVOTE_TOGGLE_ERROR,
+    })
     return null
   }
 }
@@ -50,21 +65,25 @@ export async function toggleDownVoteSolution(voteId: number, slug: string): Prom
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // TODO: error handling
-    // eslint-disable-next-line
-    toast.error('Could not destroy a solution vote.')
+    toast.error('Could not destroy a solution vote.', {
+      id: TOAST_SOLUTION_DOWNVOTE_TOGGLE_ERROR,
+    })
     return null
   }
 }
 
-export async function toggleSolutionPurchase(solutionPriceId: number | string): Promise<any | null> {
+export async function checkoutSolutionPurchase(
+  solutionPriceId: number | string,
+  referralUserId: number | string,
+): Promise<any | null> {
   try {
-    const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}`, {})
+    const { data } = await axios.post(`/api/solution_prices/checkout/${solutionPriceId}?r=${referralUserId}`, {})
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Could not purchase this solution .')
+    toast.error('Could not purchase this solution.', {
+      id: TOAST_SOLUTION_CHECKOUT_ERROR,
+    })
     return null
   }
 }
@@ -77,8 +96,9 @@ export async function toggleBookmarkSolution(solutionId: number): Promise<any | 
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to bookmark the solution.')
+    toast.error('Failed to bookmark the solution.', {
+      id: TOAST_SOLUTION_BOOKMARK_TOGGLE_ERROR,
+    })
     return null
   }
 }
@@ -91,8 +111,9 @@ export async function toggleCancelBookmarkSolution(bookmarkId: number, slug: str
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to delete the bookmark.')
+    toast.error('Failed to delete the bookmark.', {
+      id: TOAST_SOLUTION_BOOKMARK_DELETE_ERROR,
+    })
     return null
   }
 }
@@ -107,8 +128,9 @@ export async function toggleAddReviewSolution(solutionId: number, type: string):
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to adding review solution.')
+    toast.error('Failed to adding review solution.', {
+      id: TOAST_SOLUTION_REVIEW_ADD_ERROR,
+    })
     return null
   }
 }
@@ -127,8 +149,9 @@ export async function toggleUpdateReviewSolution(
     return data
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to changing review solution.')
+    toast.error('Failed to changing review solution.', {
+      id: TOAST_SOLUTION_REVIEW_EDIT_ERROR,
+    })
     return null
   }
 }
@@ -140,8 +163,29 @@ export async function toggleDeleteReviewSolution(solutionReviewId: number): Prom
     return status
   } catch (error) {
     Sentry.captureException(error)
-    // eslint-disable-next-line
-    toast.error('Failed to canceling review solution.')
+    toast.error('Failed to canceling review solution.', {
+      id: TOAST_SOLUTION_REVIEW_DELETE_ERROR,
+    })
+    return null
+  }
+}
+
+export async function toggleUpdateSolutionBookingRating(
+  solutionBookingId: number,
+  rating: number | '',
+): Promise<solutionContract | null> {
+  try {
+    const { data } = await axios.patch(`/api/solution_bookings/${solutionBookingId}`, { rating: rating })
+
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    toast.error(
+      `Unexpected error. Please reach out to us at ${process.env.TAGGEDWEB_SUPPORT_EMAIL} if this persists.`,
+      {
+        id: TOAST_SOLUTION_BOOKING_RATING_EDIT_ERROR,
+      },
+    )
     return null
   }
 }

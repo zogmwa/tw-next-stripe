@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { IoIosArrowUp } from 'react-icons/io'
 import { BiDollar } from 'react-icons/bi'
 import clsx from 'clsx'
@@ -14,8 +13,8 @@ type SolutionListingCardProps = {
   listingData: {
     assets: any[]
     tags: { name: string; slug: string }[]
-    pay_now_price_stripe_id: string
-    pay_now_price_unit_amount: string | number
+    stripe_primary_price_stripe_id: string
+    stripe_primary_price_unit_amount: string | number
     title: string
     upvotes_count: number
     avg_rating?: string | number
@@ -26,8 +25,6 @@ type SolutionListingCardProps = {
 
 export function SolutionListingBoxCardComponent({ listingData, className = '' }: SolutionListingCardProps) {
   const unitlist = ['', 'K', 'M', 'G']
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   const rating = numeral(Number(listingData.avg_rating ?? 0)).format('0.[0]')
   function kFormater(number) {
     const sign = Math.sign(number)
@@ -47,19 +44,23 @@ export function SolutionListingBoxCardComponent({ listingData, className = '' }:
             {listingData.assets &&
               listingData.assets.slice(0, Math.min(3, listingData.assets.length)).map((asset, key) => (
                 <Link key={`mobileServiceLogo${key}`} href={`/software/${asset.slug}`} passHref>
-                  <ServiceLogo
-                    serviceName={asset?.name}
-                    serviceId={asset.id}
-                    logoUrl={asset.logo_url}
-                    className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
-                  />
+                  <a>
+                    <ServiceLogo
+                      serviceName={asset?.name}
+                      serviceId={asset.id}
+                      logoUrl={asset.logo_url}
+                      className="!w-[2rem] !h-[2rem] p-1 border border-solid rounded-md border-border-default cursor-pointer"
+                    />
+                  </a>
                 </Link>
               ))}
           </div>
           <div className="flex items-center py-2">
             <BiDollar className="text-xl font-bold text-text-primary" />
             <h4 className="text-xl font-bold text-text-primary">
-              {listingData.pay_now_price_unit_amount ? Number(listingData.pay_now_price_unit_amount) / 100 : 0}
+              {listingData.stripe_primary_price_unit_amount
+                ? Number(listingData.stripe_primary_price_unit_amount) / 100
+                : 0}
             </h4>
           </div>
         </div>

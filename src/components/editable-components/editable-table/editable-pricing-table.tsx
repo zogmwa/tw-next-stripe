@@ -57,7 +57,7 @@ const headCells = [
     id: 'mostPopular',
     numeric: false,
     disablePadding: false,
-    label: 'Most Poplar',
+    label: 'Most Popular',
   },
   {
     id: 'function',

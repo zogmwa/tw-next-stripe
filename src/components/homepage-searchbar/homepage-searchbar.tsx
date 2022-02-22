@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { SearchBar } from '@taggedweb/components/search-bar'
-
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
+import { styled } from '@mui/material/styles'
 import { Tab } from '@headlessui/react'
 
 function classNames(...classes) {
@@ -10,6 +11,17 @@ function classNames(...classes) {
 type SearchComponentProps = {
   search_software: number
 }
+
+const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))
 export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   const router = useRouter()
   const [searchIndex, setSearchIndex] = useState(search_software)
@@ -31,7 +43,7 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
   }, [])
 
   return (
-    <div className="w-full">
+    <div className="w-full pt-4 sm:pt-0">
       <Tab.Group
         defaultIndex={searchIndex}
         onChange={(index) => {
@@ -55,7 +67,13 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
               )
             }
           >
-            Find Solutions
+            <LightTooltip
+              title="Useful if you are looking for consultations, software integration support or related services"
+              placement="top"
+              arrow
+            >
+              <div className="text-sm sm:text-base">Find Solutions</div>
+            </LightTooltip>
           </Tab>
           <Tab
             className={({ selected }) =>
@@ -68,7 +86,9 @@ export function SearchComponent({ search_software = 0 }: SearchComponentProps) {
               )
             }
           >
-            Find Software
+            <LightTooltip title="Useful if you are finding software, SaaS options" placement="top" arrow>
+              <div className="text-sm sm:text-base">Find Software</div>
+            </LightTooltip>
           </Tab>
         </Tab.List>
         <Tab.Panels className="mt-2">

@@ -41,6 +41,11 @@ export default function Service() {
       name: 'Pricing',
       content: <PricingContent service={data as Asset} id="pricing" />,
     },
+    data.solutions.length > 0 && {
+      id: 'related-solutions',
+      name: 'Related Solutions',
+      content: <RelatedSolutions service={data as Asset} desktopClassName="mt-10" />,
+    },
     {
       id: 'qa',
       name: 'Q & A',
@@ -65,14 +70,6 @@ export default function Service() {
       content: <RelatedContent name={data.name} slug={data.slug} logo={data.logo_url} id="related-products" />,
     },
   ]
-
-  if (data.solutions.length > 0) {
-    elements.push({
-      id: 'related-solutions',
-      name: 'Related Solutions',
-      content: <RelatedSolutions service={data as Asset} desktopClassName="mt-10" />,
-    })
-  }
 
   const tag_names = data.tags
     .map((tag) => {
@@ -103,7 +100,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   const {
     params: { slug },
   } = context
-  const data = await fetchServiceServer(context.req.session, slug)
+  const data = await fetchServiceServer(context.req, slug)
   return {
     props: {
       fallback: {

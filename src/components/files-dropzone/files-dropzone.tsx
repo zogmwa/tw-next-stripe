@@ -109,7 +109,13 @@ function FilesDropzoneComponent(
                 >
                   <HiX />
                 </button>
-                {preview && <img className="object-cover w-full h-full rounded-[inherit]" src={preview} />}
+                {preview && (
+                  <img
+                    className="object-cover w-full h-full rounded-[inherit]"
+                    src={preview}
+                    alt="Upload Software Snapshots"
+                  />
+                )}
                 {preview === null && (
                   <div className="flex items-center w-full h-full border-2 text-xs text-text-tertiary border-border-light rounded-[inherit] p-2 justify-center">
                     <span className="line-clamp-5">{file.name}</span>

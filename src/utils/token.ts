@@ -1,7 +1,8 @@
-import { Session } from 'next-iron-session'
+import * as Sentry from '@sentry/nextjs'
+import { SessionRequest } from '@taggedweb/types/session'
+import { IronSession } from 'iron-session'
+import { serverSideClient } from './client'
 
-import { client } from './client'
-// import { AccessTokenError } from './error'
 function atob(b64Encoded) {
   return Buffer.from(b64Encoded, 'base64').toString()
 }
@@ -30,29 +31,29 @@ export function parseJwt(token) {
  * @param session
  * @param tokens
  */
-export const setSessionTokens = async (session: Session, { access, refresh }): Promise<void> => {
+export const setSessionTokens = async (session: IronSession, { access, refresh }): Promise<void> => {
   const decodedAccessToken = parseJwt(access)
   const decodedRefreshToken = parseJwt(refresh)
 
   const { exp: accessExp } = decodedAccessToken
   const { exp: refreshExp } = decodedRefreshToken
-  session.set('token', { access, refresh, accessExp, refreshExp })
+  session.token = { access, refresh, accessExp, refreshExp }
   await session.save()
 }
 
 /**
- * This will return the acces token from the session after validating. If access token cannot be fetched then it will logout the user silently.
+ * This will return the acces token from the session after validating if user is logged in. If access token cannot be fetched then it will logout the user silently.
  *
  * @param session
  * @returns access_token
  */
-export const getAccessToken = async (session: Session): Promise<string | void> => {
+export const getAccessToken = async (req: SessionRequest): Promise<string | void> => {
+  const session = req.session
   try {
-    if (!session) {
-      throw new Error('Session not available')
-    }
+    const user = session.user
+    if (!user) return null
 
-    const { access, refresh, accessExp, refreshExp } = session.get('token') ?? {}
+    const { access, refresh, accessExp, refreshExp } = session.token ?? {}
     if (!access && !refresh) {
       throw new Error('Tokens not in session')
     }
@@ -68,18 +69,18 @@ export const getAccessToken = async (session: Session): Promise<string | void> =
     if (refresh && accessExp * 1000 - 60000 < Date.now()) {
       const {
         data: { access: newAccess },
-      } = await client.post<{ access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
+      } = await serverSideClient(req).post<{ access: string }>(`${process.env.API_BASE_URL}/api/token/refresh/`, {
         refresh,
       })
       await setSessionTokens(session, { access: newAccess, refresh })
     }
   } catch (error) {
-    // Sentry.captureException(error)
+    Sentry.captureException(error)
     // eslint-disable-next-line
-    session.unset('user')
-    session.unset('token')
+    delete session.user
+    delete session.token
     await session.save()
   }
 
-  return session?.get('token')?.access
+  return session?.token?.access || null
 }

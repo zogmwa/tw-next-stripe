@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import { useUserContext } from '@taggedweb/hooks/use-user'
 import { Spinner } from '@taggedweb/components/spinner'
-import { GetIronServerSideProps } from '@taggedweb/types/session'
 import { WithApiAuthRequired, WithPageAuthRequired, WithSSRAuthRequired } from '@taggedweb/types/auth-wrappers'
 import { withSessionApi, withSessionSSR } from './session'
 import { getAccessToken } from './token'
+import { TOAST_INVALID_PAGE_AUTH } from './token-id'
 
 // Future implementations of this function might pass an extra argument 'authClient' to handler which would be an AxiosInstance with Authorization Header and refresh interceptor set.
 /**
@@ -18,7 +19,7 @@ import { getAccessToken } from './token'
 const withApiAuthRequired: WithApiAuthRequired = (handler, options = {}) => {
   const { message = 'You need to be loggedin to access this api.' } = options
   return withSessionApi(async (req, res) => {
-    const access = await getAccessToken(req.session)
+    const access = await getAccessToken(req)
     if (access) {
       await handler(req, res)
     } else {
@@ -34,7 +35,7 @@ const withApiAuthRequired: WithApiAuthRequired = (handler, options = {}) => {
  * @returns newApiHandler
  */
 const withSSRAuthRequired: WithSSRAuthRequired = (
-  handler?: GetIronServerSideProps,
+  handler?: GetServerSideProps,
   options: { redirectTo?: string; message?: string; showMessage?: boolean } = {},
 ) => {
   let { redirectTo, message = 'You need to login to view this page.', showMessage = true } = options
@@ -42,7 +43,7 @@ const withSSRAuthRequired: WithSSRAuthRequired = (
     if (!redirectTo) {
       redirectTo = `/login?next=${context.req.url}`
     }
-    const access = await getAccessToken(context.req.session)
+    const access = await getAccessToken(context.req)
     if (access) {
       if (handler) {
         const result = await handler(context)
@@ -90,7 +91,9 @@ const withPageAuthRequired: WithPageAuthRequired = (Component, options = {}) => 
     useEffect(() => {
       if (!user.isLoggedIn()) {
         router.replace(redirectTo)
-        toast.error(message)
+        toast.error(message, {
+          id: TOAST_INVALID_PAGE_AUTH,
+        })
       }
     }, [user, router])
 

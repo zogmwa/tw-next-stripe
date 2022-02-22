@@ -6,7 +6,40 @@ export default {
   title: 'General/SolutionDetailIntroduction',
   component: SolutionDetailIntroduction,
 } as Meta
-
+const sidebar_info = {
+  id: 1,
+  stripe_primary_price: {
+    id: 1,
+    solution: 1,
+    stripe_price_id: 'randomString',
+    price: 10,
+    currency: 'USD',
+    is_primary: true,
+  },
+  price: 120,
+  features: [
+    {
+      id: 'ready-capacity',
+      name: 'Only 9 more slots available at this time',
+      tooltipContent:
+        'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
+    },
+    {
+      id: 'eda-days',
+      name: 'Estimated Days to Fulfill: 1',
+      tooltipContent: 'This is an estimate on number of days it will take to deliver.',
+    },
+    {
+      id: 'free-trial',
+      name: 'Free Consultation',
+      tooltipContent: 'This solution has free consultation.',
+    },
+  ],
+  purchaseDisableOption: true,
+  type: 'I',
+  slug: 'test',
+  is_metered: false,
+}
 const introductionData = {
   id: 1,
   slug: 'test',
@@ -45,11 +78,12 @@ const introductionData = {
       website: null,
     },
   ],
-  tag: {
+  primary_tag: {
     name: 'Integrations',
     slug: 'integrations',
   },
   title: 'Improving application performance with APM, metrics and monitoring',
+  type: 'I',
   upvoted_count: 324,
   booked_count: 1100,
   provide_organization: {
@@ -58,48 +92,19 @@ const introductionData = {
     website: null,
   },
   point_of_contact: {
+    id: 1,
     username: 'pranjal',
     first_name: 'Pranjal',
     last_name: 'Mittal',
   },
-  overview_description:
+  description:
     'Indented code\r\n\r\n    // Some comments\r\n    line 1 of code\r\n    line 2 of code\r\n    line 3 of code\r\n\r\n\r\n## Typographic replacements',
-  scope_of_work_description:
+  scope_of_work:
     '---\r\n__Advertisement :)__\r\n\r\n- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image\r\n  resize in browser.\r\n- __[babelfish](https://github.com/nodeca/babelfish/)__',
-  sidebar_info: {
-    pay_now_price: {
-      id: 1,
-      solution: 1,
-      stripe_price_id: 'randomString',
-      price: 10,
-      currency: 'USD',
-      is_primary: true,
-    },
-    price: 120,
-    features: [
-      {
-        id: 'ready-capacity',
-        name: 'Only 9 more slots available at this time',
-        tooltipContent:
-          'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
-      },
-      {
-        id: 'eda-days',
-        name: 'Estimated Days to Fulfill: 1',
-        tooltipContent: 'This is an estimate on number of days it will take to deliver.',
-      },
-      {
-        id: 'free-trial',
-        name: 'Free Trial',
-        tooltipContent: 'This solution has free trial.',
-      },
-    ],
-    purchaseDisableOption: true,
-  },
   questions: [
     {
       id: 1,
-      solution: 1,
+      solution_id: 1,
       title: '123123123',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.',
@@ -108,7 +113,7 @@ const introductionData = {
     },
     {
       id: 2,
-      solution: 1,
+      solution_id: 1,
       title: '1231231231',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
@@ -117,7 +122,7 @@ const introductionData = {
     },
     {
       id: 3,
-      solution: 1,
+      solution_id: 1,
       title: '222222222222',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
@@ -127,8 +132,46 @@ const introductionData = {
   ],
   my_solution_vote: 3,
   my_solution_bookmark: null,
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
-
+const sidebar_info_ = {
+  id: 2,
+  stripe_primary_price: {
+    id: 1,
+    solution: 1,
+    stripe_price_id: 'randomString',
+    price: 10,
+    currency: 'USD',
+    is_primary: true,
+  },
+  price: 120,
+  features: [
+    {
+      id: 'ready-capacity',
+      name: 'Only 9 more slots available at this time',
+      tooltipContent:
+        'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
+    },
+    {
+      id: 'eda-days',
+      name: 'Estimated Days to Fulfill: 1',
+      tooltipContent: 'This is an estimate on number of days it will take to deliver.',
+    },
+    {
+      id: 'free-trial',
+      name: 'Free Consultation',
+      tooltipContent: 'This solution has free consultation.',
+    },
+  ],
+  purchaseDisableOption: true,
+  type: 'C',
+  slug: 'test',
+  is_metered: false,
+}
 const introductionData_ = {
   id: 1,
   slug: 'test',
@@ -167,57 +210,29 @@ const introductionData_ = {
       website: null,
     },
   ],
-  tag: {
+  primary_tag: {
     name: 'Integrations',
     slug: 'integrations',
   },
   title: 'Improving application performance with APM, metrics and monitoring',
+  type: 'C',
   upvoted_count: 324,
   booked_count: 1100,
   provide_organization: null,
   point_of_contact: {
+    id: 1,
     username: 'pranjal',
     first_name: 'Pranjal',
     last_name: 'Mittal',
   },
-  overview_description:
+  description:
     'Indented code\r\n\r\n    // Some comments\r\n    line 1 of code\r\n    line 2 of code\r\n    line 3 of code\r\n\r\n\r\n## Typographic replacements',
-  scope_of_work_description:
+  scope_of_work:
     '---\r\n__Advertisement :)__\r\n\r\n- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image\r\n  resize in browser.\r\n- __[babelfish](https://github.com/nodeca/babelfish/)__',
-  sidebar_info: {
-    pay_now_price: {
-      id: 1,
-      solution: 1,
-      stripe_price_id: 'randomString',
-      price: 10,
-      currency: 'USD',
-      is_primary: true,
-    },
-    price: 120,
-    features: [
-      {
-        id: 'ready-capacity',
-        name: 'Only 9 more slots available at this time',
-        tooltipContent:
-          'To prevent overwhelming of the provider we limit the number of active bookings per available capacity.',
-      },
-      {
-        id: 'eda-days',
-        name: 'Estimated Days to Fulfill: 1',
-        tooltipContent: 'This is an estimate on number of days it will take to deliver.',
-      },
-      {
-        id: 'free-trial',
-        name: 'Free Trial',
-        tooltipContent: 'This solution has free trial.',
-      },
-    ],
-    purchaseDisableOption: true,
-  },
   questions: [
     {
       id: 1,
-      solution: 1,
+      solution_id: 1,
       title: '123123123',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.',
@@ -226,7 +241,7 @@ const introductionData_ = {
     },
     {
       id: 2,
-      solution: 1,
+      solution_id: 1,
       title: '1231231231',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
@@ -235,7 +250,7 @@ const introductionData_ = {
     },
     {
       id: 3,
-      solution: 1,
+      solution_id: 1,
       title: '222222222222',
       primary_answer:
         'This is test answer. This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test answer.This is test an',
@@ -245,12 +260,17 @@ const introductionData_ = {
   ],
   my_solution_vote: 3,
   my_solution_bookmark: null,
+  is_metered: null,
+  team_size: null,
+  estimated_hours: null,
+  blended_hourly_rate: null,
+  billing_period: null,
 }
 
 export function DefaultSolutionDetailIntroduction() {
-  return <SolutionDetailIntroduction introductionData={introductionData} />
+  return <SolutionDetailIntroduction introductionData={introductionData} sidebar_info={sidebar_info} />
 }
 
 export function PointOfContactSolutionDetailIntroduction() {
-  return <SolutionDetailIntroduction introductionData={introductionData_} />
+  return <SolutionDetailIntroduction introductionData={introductionData_} sidebar_info={sidebar_info_} />
 }

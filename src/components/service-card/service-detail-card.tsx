@@ -24,6 +24,8 @@ import {
 import { Asset } from '@taggedweb/types/asset'
 import { phoneRegex } from '@taggedweb/utils/constants'
 import { useRequireLogin } from '@taggedweb/hooks/use-require-login'
+import { validateLink } from '@taggedweb/utils/validateLink'
+import { TOAST_CLAIM_SUBMIT_SUCCESS } from '@taggedweb/utils/token-id'
 import { TruncatedDescription } from '../truncated-description'
 import { Button } from '../button'
 import { ServiceLogo } from '../service-logo'
@@ -60,7 +62,9 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
   const [isLoadingUpvote, setIsLoadingUpvote] = useState(false)
   const [usedByMe, setUsedByMe] = useState(service?.used_by_me ?? false)
   const [votedByMe, setVotedByMe] = useState(service?.my_asset_vote)
-  const [upvotesCount, setUpvotesCount] = useState(service?.upvotes_count)
+  const [upvotesCount, setUpvotesCount] = useState(
+    service.upvotes_count && service.upvotes_count >= 0 ? service.upvotes_count : 0,
+  )
   const [isTagsEdit, setIsTagsEdit] = useState(false)
   const router = useRouter()
   const { slug } = router?.query ? (router.query as { slug: string }) : ('' as unknown as { slug: string })
@@ -113,12 +117,14 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 />
               </div>
               <Link href={`/software/${service.slug}`} passHref>
-                <Button
-                  className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
-                  textClassName="text-red-600"
-                >
-                  Switch to View mode
-                </Button>
+                <a>
+                  <Button
+                    className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                    textClassName="text-red-600"
+                  >
+                    Switch to View mode
+                  </Button>
+                </a>
               </Link>
             </>
           ) : (
@@ -137,12 +143,14 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               </a>
               {service.edit_allowed && (
                 <Link href={`/software/${service.slug}/edit`} passHref>
-                  <Button
-                    className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
-                    textClassName="text-red-600"
-                  >
-                    Edit mode
-                  </Button>
+                  <a>
+                    <Button
+                      className="px-1 py-0.5 rounded-md text-xs border border-red-600 max-w-[72px]"
+                      textClassName="text-red-600"
+                    >
+                      Edit mode
+                    </Button>
+                  </a>
                 </Link>
               )}
             </>
@@ -194,7 +202,13 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
               )}
             </>
             <a
-              href={service.affiliate_link ? service.affiliate_link : service.website ?? '#'}
+              href={
+                service.affiliate_link
+                  ? validateLink(service.affiliate_link)
+                  : service.website
+                  ? validateLink(service.website)
+                  : '#'
+              }
               target={service.affiliate_link || service.website ? '_blank' : ''}
               className="self-center hidden md:inline-flex"
               rel="noreferrer"
@@ -255,9 +269,11 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 {service.tags.map((tag) => {
                   return (
                     <Link key={tag.slug} href={'../softwares/' + tag.slug}>
-                      <Button buttonType="tag" size="small" className="mr-2">
-                        {tag.name}
-                      </Button>
+                      <a>
+                        <Button buttonType="tag" size="small" className="mr-2">
+                          {tag.name}
+                        </Button>
+                      </a>
                     </Link>
                   )
                 })}
@@ -267,9 +283,11 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                 {service.tags.map((tag) => {
                   return (
                     <Link key={tag.slug} href={'../softwares/' + tag.slug}>
-                      <Button buttonType="tag" size="small" className="mt-2 mr-2">
-                        {tag.name}
-                      </Button>
+                      <a>
+                        <Button buttonType="tag" size="small" className="mt-2 mr-2">
+                          {tag.name}
+                        </Button>
+                      </a>
                     </Link>
                   )
                 })}
@@ -341,7 +359,9 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
             onSubmit={async (values) => {
               const data = await claimOwnershipToAsset(service?.id, user, values)
               if (data) {
-                toast.success('Claim submitted for review.')
+                toast.success('Claim submitted for review.', {
+                  id: TOAST_CLAIM_SUBMIT_SUCCESS,
+                })
               }
               setIsOpenOwnServiceModal(false)
             }}
@@ -353,7 +373,7 @@ function ServiceDetailCardComponent({ service, editAllowed = false, onChange }: 
                     Email Id
                   </label>
                   <Input
-                    placeholder="Enter email"
+                    placeholder="Enter your email"
                     id="email"
                     className="mb-4"
                     onChange={handleChange('email')}

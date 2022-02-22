@@ -1,0 +1,1 @@
+export { formatConsideringPlurality } from './formatConsideringPlurality'

@@ -93,7 +93,7 @@ export function PasswordReset({ onEmailSubmit }: PasswordResetProps) {
                               Email
                             </label>
                             <Input
-                              placeholder="Enter email"
+                              placeholder="Enter your email"
                               id="email"
                               className="mb-4"
                               onChange={handleChange('email')}
