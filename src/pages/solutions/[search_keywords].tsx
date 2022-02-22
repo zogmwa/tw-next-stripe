@@ -94,7 +94,7 @@ export default function SolutionList({ solutionData, defaultUrl, pageTitle }) {
     }
   }
 
-  const handlePagination = (pageValue) => {
+  const handlePagination = (event, pageValue) => {
     setPage(pageValue)
   }
 
