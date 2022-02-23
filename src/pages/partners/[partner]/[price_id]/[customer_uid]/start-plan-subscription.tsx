@@ -56,6 +56,8 @@ export default function AddCardDetailsPage({ pageData, paymentList }) {
     if (data.status === 'Successfully subscribed') {
       toast.success(data.status)
       window.location.href = pageData.organization.website
+    } else {
+      toast.error(data.status)
     }
     setIsSubscribe(false)
   }

@@ -46,7 +46,6 @@ export default function AddCardDetailsPage({ pageData }) {
 
   const addCard = async (paymentMethod) => {
     const data = await attachPaymentMethodForPartner(paymentMethod, query.customer_uid, query.partner, query.session_id)
-    console.log(data)
     if (
       data.status === 'payment method associated successfully' ||
       data.status === 'You have already attached this payment.'
@@ -68,6 +67,8 @@ export default function AddCardDetailsPage({ pageData }) {
     if (data.status === 'Successfully subscribed') {
       toast.success(data.status)
       window.location.href = pageData.organization.website
+    } else {
+      toast.error(data.status)
     }
     setIsSubscribe(false)
   }
