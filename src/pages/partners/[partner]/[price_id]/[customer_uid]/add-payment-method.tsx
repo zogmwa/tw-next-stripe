@@ -63,7 +63,12 @@ export default function AddCardDetailsPage({ pageData }) {
 
   const toggleSubscribe = async (paymentMethod) => {
     setIsSubscribe(true)
-    const data = await toggleAssetPriceSubscribe(paymentMethod, query.customer_uid, query.price_id, query.session_id as string)
+    const data = await toggleAssetPriceSubscribe(
+      paymentMethod,
+      query.customer_uid,
+      query.price_id,
+      query.session_id as string,
+    )
     if (data.status === 'Successfully subscribed') {
       toast.success(data.status)
       window.location.href = pageData.organization.website
