@@ -34,6 +34,7 @@ export type Solution = {
   tags?: Tag[]
   title: string
   type: string
+  promo_video?: string
   upvotes_count?: number
   is_metered: null | boolean
   team_size: null | number
