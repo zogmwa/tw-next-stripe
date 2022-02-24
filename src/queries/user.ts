@@ -178,9 +178,10 @@ export async function attachPaymentMethodForPartner(
   }
 }
 
-export async function toggleAssetPriceSubscribe(customerUid, priceId, sessionId): Promise<any | null> {
+export async function toggleAssetPriceSubscribe(paymentMethodId, customerUid, priceId, sessionId): Promise<any | null> {
   try {
     const { data } = await axios.post('/api/partners_customer/subscribe_asset_price/', {
+      payment_method: paymentMethodId,
       customer_uid: customerUid,
       price_plan_id: priceId,
       session_id: sessionId,
