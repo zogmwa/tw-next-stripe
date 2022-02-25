@@ -35,7 +35,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
       notFound: true,
     }
     // eslint-disable-next-line
-    // TODO: Redirect to solution search page.
+    // TODO: Redirect to add card page.
   }
   return {
     props: { pageData, paymentList },
@@ -50,9 +50,14 @@ export default function AddCardDetailsPage({ pageData, paymentList }) {
 
   const addPaymentMethodUrl = `/partners/${query.partner}/${query.price_id}/${query.customer_uid}/add-payment-method?session_id=${query.session_id}`
 
-  const toggleSubscribe = async () => {
+  const toggleSubscribe = async (paymentMethodId) => {
     setIsSubscribe(true)
-    const data = await toggleAssetPriceSubscribe(query.customer_uid, query.price_id, query.session_id as string)
+    const data = await toggleAssetPriceSubscribe(
+      paymentMethodId,
+      query.customer_uid,
+      query.price_id,
+      query.session_id as string,
+    )
     if (data.status === 'Successfully subscribed') {
       toast.success(data.status)
       window.location.href = pageData.organization.website
