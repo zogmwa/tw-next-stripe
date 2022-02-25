@@ -4,7 +4,7 @@ import { Carousel } from '../carousel/carousel'
 
 export type ProductContentCarouselPropsType = {
   promo_video: string
-  images: {
+  images?: {
     asset: number
     url: string
   }[]
@@ -12,7 +12,7 @@ export type ProductContentCarouselPropsType = {
 export function ProductContentCarousel({ promo_video, images }: ProductContentCarouselPropsType) {
   return (
     <>
-      {(promo_video !== '' || images.length > 0) && (
+      {(promo_video !== '' || images?.length > 0) && (
         <Carousel className="mt-2">
           {promo_video !== '' && (
             <Carousel.Item>
@@ -21,7 +21,7 @@ export function ProductContentCarousel({ promo_video, images }: ProductContentCa
               </div>
             </Carousel.Item>
           )}
-          {images.map((image) => (
+          {images?.map((image) => (
             <Carousel.Item key={image.url}>
               <img className="object-contain" src={image.url} alt="Snapshots Of Software" />
             </Carousel.Item>
