@@ -152,7 +152,7 @@ export default function ServiceList({
         title={`Best ${capTags.join(', ')} Software Services in ${new Date().getFullYear()} | TaggedWeb`}
         description={`Top ${capTags.join(', ')} Software Services in ${new Date().getFullYear()}`}
       />
-      <div className="max-w-screen-lg px-2 mx-auto my-20" ref={pageRef}>
+      <div className="max-w-screen-lg px-2 mx-auto mb-10 mt-5" ref={pageRef}>
         <SearchBar
           className="mb-8"
           forSoftware={true}
@@ -203,11 +203,11 @@ export default function ServiceList({
               </div>
             </div>
             <div className="md:w-3/4">
-              <div className="flex justify-between mb-2">
+              <div className="flex flex-col md:flex-row justify-center md:justify-between space-y-3 mb-3">
                 <h1 className="text-xl font-medium text-text-primary">
                   Software tagged with {tags.split(',').join(', ')}
                 </h1>
-                <div className="flex items-center justify-center space-x-4">
+                <div className="flex items-center justify-between space-x-4">
                   <div className="text-sm text-text-secondary">
                     {totalCount} {totalCount === 1 ? 'software' : 'software options'}
                   </div>

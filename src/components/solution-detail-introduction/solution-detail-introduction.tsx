@@ -26,6 +26,7 @@ import { UpvoteUser } from '../upvote-user'
 import { Button } from '../button'
 import { Spinner } from '../spinner'
 import style from './style.module.scss'
+import { ProductContentCarousel } from '@taggedweb/components/service-detail/product-content-carousel'
 
 Lowlight.registerLanguage('js', javascript)
 
@@ -243,6 +244,9 @@ function SolutionDetailIntroductionComponent({ introductionData, sidebar_info }:
         className="md:hidden"
       />
       <div className="flex flex-col p-4 md:p-0">
+        <div className={!introductionData.promo_video && 'hidden'}>
+          <ProductContentCarousel promo_video={introductionData.promo_video} />
+        </div>
         <div style={{ scrollMarginTop: '3rem' }} id="solutions-overview" className="flex flex-col pt-2 md:pt-6">
           <a href="#solutions-overview">
             <h4 className="font-bold text-black text-md">Overview</h4>
