@@ -94,7 +94,9 @@ export default function ManageSubscription({ pageData }) {
                 disabled={isPauseOrResume}
                 loading={isPauseOrResume}
                 onClick={() => PauseOrResumecontractController('resume')}
-                loadingClassName="text-primary"
+                className="bg-primary"
+                textClassName="!text-white"
+                loadingClassName="!text-white"
               >
                 Resume Contract
               </Button>
