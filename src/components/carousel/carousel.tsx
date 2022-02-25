@@ -52,6 +52,9 @@ function CarouselComponent({
     setCurrentIndex((prevIndex) => (prevIndex - 1 < 0 ? items.length - 1 : prevIndex - 1))
   }
 
+  if (items.length == 1) buttonsShown = false
+  if (items.length == 1) indicatorShown = false
+
   return (
     <div className={clsx('space-y-6 w-full text-text-secondary', className)}>
       <div className="flex items-center space-x-4">
