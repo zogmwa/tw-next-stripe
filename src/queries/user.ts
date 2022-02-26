@@ -194,3 +194,25 @@ export async function toggleAssetPriceSubscribe(paymentMethodId, customerUid, pr
     return null
   }
 }
+
+export async function toggleAssetSubscriptionPauseOrResume(
+  sessionId,
+  assetPricePlanId,
+  customerUid,
+  pauseStatus,
+): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/partners_customer/pause_or_resume_subscription/', {
+      session_id: sessionId,
+      price_plan_id: assetPricePlanId,
+      customer_uid: customerUid,
+      pause_status: pauseStatus,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}

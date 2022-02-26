@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import Card from '@taggedweb/components/card/card'
 import { Button } from '@taggedweb/components/button'
+import { toggleAssetSubscriptionPauseOrResume } from '@taggedweb/queries/user'
 import { fetchAssetSubscriptionData } from '@taggedweb/server-queries/fetch-asset-subscription-data'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
@@ -46,10 +48,26 @@ function timeConverter(UNIX_timestamp) {
 export default function ManageSubscription({ pageData }) {
   const { query } = useRouter()
   const [isPauseOrResume, setIsPauseOrResume] = useState(false)
+  const [isPaused, setIsPaused] = useState(pageData.is_pause)
 
   const PauseOrResumecontractController = async (pauseStatus) => {
     setIsPauseOrResume(true)
-    // TODO: Integrate API for Pause or Resume Subscription
+    const data = await toggleAssetSubscriptionPauseOrResume(
+      query.session_id,
+      query.price_id,
+      query.customer_uid,
+      pauseStatus,
+    )
+    if (data.status === 'subscription paused' || data.status === 'subscription resumed') {
+      if (data.status === 'subscription paused') {
+        setIsPaused(true)
+      } else {
+        setIsPaused(false)
+      }
+      toast.success(data.status)
+    } else {
+      toast.error(data.status)
+    }
     setIsPauseOrResume(false)
   }
 
@@ -71,11 +89,11 @@ export default function ManageSubscription({ pageData }) {
         />
         <div className="flex flex-col p-4">
           <div className="flex flex-col">
-            {pageData.is_pause ? (
+            {isPaused ? (
               <Button
                 disabled={isPauseOrResume}
                 loading={isPauseOrResume}
-                onClick={() => PauseOrResumecontractController('pause')}
+                onClick={() => PauseOrResumecontractController('resume')}
                 loadingClassName="text-primary"
               >
                 Resume Contract
@@ -84,7 +102,7 @@ export default function ManageSubscription({ pageData }) {
               <Button
                 disabled={isPauseOrResume}
                 loading={isPauseOrResume}
-                onClick={() => PauseOrResumecontractController('resume')}
+                onClick={() => PauseOrResumecontractController('pause')}
                 loadingClassName="text-primary"
               >
                 Pause Contract
