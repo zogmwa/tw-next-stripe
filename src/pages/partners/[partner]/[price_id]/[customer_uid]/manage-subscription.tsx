@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { withSessionSSR } from '@taggedweb/utils/session'
 import Card from '@taggedweb/components/card/card'
 import { Button } from '@taggedweb/components/button'
-import { toggleAssetSubscriptionPauseOrResume } from '@taggedweb/queries/user'
+import { toggleAssetSubscriptionPauseOrResume, toggleCancelAssetSubscription } from '@taggedweb/queries/user'
 import { fetchAssetSubscriptionData } from '@taggedweb/server-queries/fetch-asset-subscription-data'
 
 export const getServerSideProps = withSessionSSR(async (context) => {
@@ -15,7 +15,7 @@ export const getServerSideProps = withSessionSSR(async (context) => {
   let pageData
   try {
     pageData = await fetchAssetSubscriptionData(context.req, customer_uid, price_id, session_id)
-    if (!pageData.is_subscribe)
+    if (pageData.is_subscribe == 0)
       return {
         redirect: {
           destination: `/partners/${partner}/${price_id}/${customer_uid}/start-plan-subscription?session_id=${session_id}`,
@@ -49,6 +49,7 @@ export default function ManageSubscription({ pageData }) {
   const { query } = useRouter()
   const [isPauseOrResume, setIsPauseOrResume] = useState(false)
   const [isPaused, setIsPaused] = useState(pageData.is_pause)
+  const [isCanceled, setIsCanceled] = useState(false)
 
   const PauseOrResumecontractController = async (pauseStatus) => {
     setIsPauseOrResume(true)
@@ -71,6 +72,13 @@ export default function ManageSubscription({ pageData }) {
     setIsPauseOrResume(false)
   }
 
+  const CancelContractController = async () => {
+    setIsCanceled(true)
+    const data = await toggleCancelAssetSubscription(query.session_id, query.price_id, query.customer_uid)
+    if (data.status == 'successfully canceled.') toast.success('Subscription successfully canceled.')
+    setIsCanceled(false)
+  }
+
   return (
     <div className="flex flex-col max-w-screen-lg px-4 mx-auto my-6 md:my-16">
       <div className="flex flex-col md:flex-row">
@@ -81,37 +89,51 @@ export default function ManageSubscription({ pageData }) {
           href={`/partners/${query.partner}/${query.price_id}/${query.customer_uid}/add-payment-method?session_id=${query.session_id}`}
         />
         <Card
-          subTitle="Next Billing Date"
+          subTitle={
+            pageData.is_subscribe == 1 ? 'Subscription ends on' : pageData.is_subscribe == 2 && 'Next Billing Date'
+          }
           title={timeConverter(pageData.current_period_end)}
-          description={`Current Period: ${timeConverter(pageData.current_period_start)} - ${timeConverter(
-            pageData.current_period_end,
-          )}`}
+          description={`${
+            pageData.is_subscribe == 1
+              ? 'Your subscription will end at the end of this billing cycle on '
+              : pageData.is_subscribe == 2 && 'Current Period: '
+          } ${timeConverter(pageData.current_period_start)} - ${timeConverter(pageData.current_period_end)}`}
         />
-        <div className="flex flex-col p-4">
-          <div className="flex flex-col">
-            {isPaused ? (
+        <div className="flex flex-col p-4 min-w-[150px]">
+          {pageData.is_subscribe == 2 && (
+            <div className="flex flex-col">
+              {isPaused ? (
+                <Button
+                  disabled={isPauseOrResume}
+                  loading={isPauseOrResume}
+                  onClick={() => PauseOrResumecontractController('resume')}
+                  className="bg-primary"
+                  textClassName="!text-white"
+                  loadingClassName="!text-white"
+                >
+                  Resume Contract
+                </Button>
+              ) : (
+                <Button
+                  disabled={isPauseOrResume}
+                  loading={isPauseOrResume}
+                  onClick={() => PauseOrResumecontractController('pause')}
+                  loadingClassName="text-primary"
+                >
+                  Pause Contract
+                </Button>
+              )}
               <Button
-                disabled={isPauseOrResume}
-                loading={isPauseOrResume}
-                onClick={() => PauseOrResumecontractController('resume')}
-                loadingClassName="text-primary"
+                disabled={isCanceled}
+                loading={isCanceled}
+                className="mt-2 !border-red-600"
+                textClassName="!text-red-600"
+                onClick={() => CancelContractController()}
               >
-                Resume Contract
+                Cancel Contract
               </Button>
-            ) : (
-              <Button
-                disabled={isPauseOrResume}
-                loading={isPauseOrResume}
-                onClick={() => PauseOrResumecontractController('pause')}
-                loadingClassName="text-primary"
-              >
-                Pause Contract
-              </Button>
-            )}
-            <Button className="mt-2 !border-red-600" textClassName="!text-red-600">
-              Cancel Contract
-            </Button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="d-flex shadow-sm mt-4">
@@ -126,7 +148,7 @@ export default function ManageSubscription({ pageData }) {
           </thead>
           <tbody>
             {pageData.invoices.map((invoice, index) => (
-              <tr>
+              <tr key={`subscription-invoice-${index}`}>
                 <td className="border px-4 py-2">{timeConverter(invoice.created)}</td>
                 <td className="border px-4 py-2">${invoice.total / 100}</td>
                 <td className="border px-4 py-2">{invoice.status}</td>
