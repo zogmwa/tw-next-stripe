@@ -216,3 +216,19 @@ export async function toggleAssetSubscriptionPauseOrResume(
     return null
   }
 }
+
+export async function toggleCancelAssetSubscription(sessionId, assetPricePlanId, customerUid): Promise<any | null> {
+  try {
+    const { data } = await axios.post('/api/partners_customer/cancel_subscription/', {
+      session_id: sessionId,
+      price_plan_id: assetPricePlanId,
+      customer_uid: customerUid,
+    })
+    return data
+  } catch (error) {
+    Sentry.captureException(error)
+    // TODO: error handling
+    // eslint-disable-next-line
+    return null
+  }
+}
